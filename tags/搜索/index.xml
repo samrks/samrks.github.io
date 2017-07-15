@@ -120,9 +120,9 @@
 </li>
 <li>
 <p>上传索引的命令
-你可以本地执行 <code>npm run algolia</code> 查看运行效果：
-<a href="https://i.loli.net/2020/02/23/C6u38blAWG7Xnke.png" target="_blank" rel="noopener noreffer"></a>
-可以看到我们成功添加了记录。</p>
+你可以本地执行 <code>npm run algolia</code> 查看运行效果：</p>
+<p></p>
+<p>可以看到我们成功添加了记录。</p>
 </li>
 <li>
 <p>后续，可以把下面的命令加到你的部署脚本中：</p>

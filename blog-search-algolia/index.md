@@ -19,7 +19,7 @@ hugo 搜索功能 Algolia  <!--more-->
 
 4.  选择 Indices，添加一个新的索引，我这里命名为`blog`，创建成功后，我们可以看到提示中还没有任何记录。
 
-    <img src="https://i.loli.net/2020/09/08/zJXo4yl8RYpWLm1.png" alt="image-20200908231415773" style="zoom:50%;" />
+     <img src="https://i.loli.net/2020/09/08/zJXo4yl8RYpWLm1.png" alt="image-20200908231415773" style="zoom:50%;" />
 
 5.  Algolia 为我们提供了三种方式来增加记录：手动添加、上传 json 文件、API。
 
@@ -49,7 +49,7 @@ hugo 搜索功能 Algolia  <!--more-->
 
 上传成功之后，我们就可以马上尝试搜索了： 
 
-<img src="https://i.loli.net/2020/02/23/yGsPjqCQBeZVA8U.png" alt="img" style="zoom: 33%;" />
+ <img src="https://i.loli.net/2020/02/23/yGsPjqCQBeZVA8U.png" alt="img" style="zoom: 33%;" />
 
 可以看到搜索的关键词有相应的匹配结果，说明我们生成的索引文件是正确的。
 
@@ -94,19 +94,23 @@ hugo 搜索功能 Algolia  <!--more-->
 
 -   上传索引的命令
     你可以本地执行 `npm run algolia` 查看运行效果：
-    [![img](https://i.loli.net/2020/02/23/C6u38blAWG7Xnke.png)](https://i.loli.net/2020/02/23/C6u38blAWG7Xnke.png)
-    可以看到我们成功添加了记录。
+    
+     <img src="https://i.loli.net/2020/09/11/siHyxn9G6E7SwOz.png" alt="img" style="zoom:50%;" />
 
+    可以看到我们成功添加了记录。
+    
 -   后续，可以把下面的命令加到你的部署脚本中：
 
     ```js
     npm run algolia // 在hugo命令后面执行
     ```
     
-    <img src="https://i.loli.net/2020/09/09/W7uLBFGHP2d1Oae.png" alt="image-20200909172756935" style="zoom:50%;" />
+     <img src="https://i.loli.net/2020/09/09/W7uLBFGHP2d1Oae.png" alt="image-20200909172756935" style="zoom:50%;" />
 
 ## 参考资料
 
 1.  [Hugo添加Algolia搜索支持](https://edward852.github.io/post/hugo%E6%B7%BB%E5%8A%A0algolia%E6%90%9C%E7%B4%A2%E6%94%AF%E6%8C%81/#%E4%B8%8A%E4%BC%A0%E7%B4%A2%E5%BC%95%E6%96%87%E4%BB%B6)
 2.  [atomic-algolia 插件](https://github.com/chrisdmacrae/atomic-algolia)
 3.  [Hugo 集成 Algolia 搜索](https://www.qikqiak.com/post/hugo-integrated-algolia-search/)
+
+

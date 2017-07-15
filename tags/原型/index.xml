@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>原型&#34; - 标签 - Sam&#39;s Garage</title>
+        <title>原型 - 标签 - Sam&#39;s Garage</title>
         <link>http://samrks.github.io/tags/%E5%8E%9F%E5%9E%8B/</link>
-        <description>原型&#34; - 标签 - Sam&#39;s Garage</description>
+        <description>原型 - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
             <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Mon, 07 Sep 2020 23:08:13 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/%E5%8E%9F%E5%9E%8B/" rel="self" type="application/rss+xml" /><item>
     <title>JS 对象分类——原型 &amp; 类</title>
