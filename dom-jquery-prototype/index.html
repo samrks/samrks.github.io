@@ -33,7 +33,7 @@
                             "url": "https:\/\/liubingxuan.xyz\/dom-jquery-prototype\/featured-image-preview.jpg",
                             "width":  1280 ,
                             "height":  384 
-                        }],"genre": "posts","keywords": "jQuery, 设计思想","wordcount":  4480 ,
+                        }],"genre": "posts","keywords": "jQuery, 设计思想","wordcount":  4434 ,
         "url": "https:\/\/liubingxuan.xyz\/dom-jquery-prototype\/","datePublished": "2020-10-25T14:20:02+08:00","dateModified": "2020-10-25T19:07:09+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -50,7 +50,7 @@
             <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa fa-home fa-fw'></i> 主页 </a><a class="menu-item" href="/posts/"><i class='fas fa-edit'></i> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="https://github.com/samrks" rel="noopener noreffer" target="_blank"><i class='fab fa-github'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa fa-home fa-fw'></i> 主页 </a><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="https://github.com/samrks" rel="noopener noreffer" target="_blank"><i class='fab fa-github'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
                         <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
                         <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
                             <i class="fas fa-search fa-fw"></i>
@@ -93,7 +93,7 @@
                     <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
                         取消
                     </a>
-                </div><a class="menu-item" href="/" title=""><i class='fa fa-home fa-fw'></i>主页</a><a class="menu-item" href="/posts/" title=""><i class='fas fa-edit'></i>文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="https://github.com/samrks" title="" rel="noopener noreffer" target="_blank"><i class='fab fa-github'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                </div><a class="menu-item" href="/" title=""><i class='fa fa-home fa-fw'></i>主页</a><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="https://github.com/samrks" title="" rel="noopener noreffer" target="_blank"><i class='fab fa-github'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
                 <i class="fas fa-adjust fa-fw"></i>
             </a></div>
     </div>
@@ -110,7 +110,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">jQuery 的设计思想（下）</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://liubingxuan.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Sam</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/js%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3/"><i class="far fa-folder fa-fw"></i>JS编程接口</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-25">2020-10-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4480 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-25">2020-10-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4434 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;<span id="/dom-jquery-prototype/" class="leancloud_visitors" data-flag-title="jQuery 的设计思想（下）">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
@@ -151,7 +151,7 @@
             </li>
           </ul>
         </li>
-        <li><a href="#使用原型-改造-jquery-">使用原型 改造 jQuery ⭕️</a>
+        <li><a href="#使用原型改造-jquery-">使用原型改造 jQuery ⭕️</a>
           <ul>
             <li><a href="#第一版-jquery-代码">第一版 jQuery 代码</a></li>
             <li><a href="#使用原型进行改造-">使用原型进行改造 ⭕️</a>
@@ -173,7 +173,6 @@
         <li><a href="#库封装完成">库封装完成</a></li>
         <li><a href="#jquery-有多牛-x">jQuery 有多牛 X</a>
           <ul>
-            <li><a href="#设计模式">设计模式？</a></li>
             <li><a href="#jquery-用到了哪些设计模式">jQuery 用到了哪些设计模式</a></li>
             <li><a href="#设计模式到底是啥">设计模式到底是啥</a></li>
             <li><a href="#我应该学习设计模式吗">我应该学习设计模式吗？</a>
@@ -271,7 +270,6 @@
 <li>这是约定，除非特殊说明</li>
 </ul>
 </blockquote>
-<p>​</p>
 <p>​</p>
 <p>​</p>
 <h2 id="jquery-代码">jQuery 代码</h2>
@@ -507,7 +505,7 @@
 </div>
 </div><p>​</p>
 <p>​</p>
-<h2 id="使用原型-改造-jquery-">使用原型 改造 jQuery ⭕️</h2>
+<h2 id="使用原型改造-jquery-">使用原型改造 jQuery ⭕️</h2>
 <h3 id="第一版-jquery-代码">第一版 jQuery 代码</h3>
 <blockquote>
 <p>先看看之前的版本</p>
@@ -563,7 +561,7 @@
 <p>别忘了 constructor</p>
 </blockquote>
 <ul>
-<li>这里是直接给 jQuery.prototype 赋新值，这样写很方便，但是会导致原本原型上的 <a href="" rel="">constructor</a> 被覆盖丢失，所以要手动加回去 <a href="" rel="">constructor</a></li>
+<li>这里是直接给 jQuery.prototype 赋新值，这样写很方便，但是会导致原本原型上的 <a href="" rel="">constructor</a> 被覆盖丢失，所以要手动加回去 <strong><code>constructor</code></strong></li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -688,7 +686,7 @@
 <p>那就在 api 上添加一个属性 elements，用来保存  jQuery 创建的 elements</p>
 </li>
 <li>
-<p>在原型里的函数中，通过 <a href="" rel="">this.elements</a>，就可以访问到这个【目标元素的数组】，加以操作</p>
+<p>在原型里的函数中，通过 <strong><code>this.elements</code></strong>，就可以访问到这个【目标元素的数组】，加以操作</p>
 </li>
 </ul>
 <blockquote>
@@ -718,7 +716,7 @@
 </span><span class="c1"></span><span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p><a href="D:%5cJirengu%5c%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c4-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8b%ef%bc%89%5cdom-2-github-prototype%5csrc" rel="">完整代码</a></p>
+</div><p><a href="%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c4-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8b%ef%bc%89%5cdom-2-github-prototype%5csrc" rel="">完整代码</a></p>
 <ul>
 <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/assign" target="_blank" rel="noopener noreffer">Object.assign</a>：把后面对象的属性，复制到前面的对象上（注意是浅复制，JS 本身没有深复制）</li>
 </ul>
@@ -827,7 +825,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><ul>
-<li><a href="D:%5cJirengu%5c%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c4-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8b%ef%bc%89%5cdom-2-github-prototype%5csrc" rel="">完整代码</a></li>
+<li><a href="%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c4-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8b%ef%bc%89%5cdom-2-github-prototype%5csrc" rel="">完整代码</a></li>
 </ul>
 <h3 id="补充-jqueryfn">补充： jQuery.fn</h3>
 <div class="highlight"><div class="chroma">
@@ -1131,8 +1129,8 @@
 <blockquote>
 <p>它是目前前端<strong>最长寿</strong>的库，2006年发布 （已经14岁了）</p>
 <ul>
-<li>vue 、react 也才四五岁</li>
-<li>在前端历史上，有数以万计的库，最终能够活下来并一直被使用的库，很少很少。</li>
+<li>Vue 、React 也才五六岁</li>
+<li>在前端历史上，有数以万计的库，最终能够活下来并一直被使用的库，很少很少</li>
 <li>jQuery 是目前最长寿的一个</li>
 </ul>
 </blockquote>
@@ -1143,7 +1141,6 @@
 <li>但是老牌大公司，像是阿里巴巴、淘宝，一直都在用 jQuery</li>
 </ul>
 </blockquote>
-<h3 id="设计模式">设计模式？</h3>
 <blockquote>
 <p>为什么 jQuery 这么牛 X   ？</p>
 <ul>
@@ -1155,13 +1152,13 @@
 <h3 id="jquery-用到了哪些设计模式">jQuery 用到了哪些设计模式</h3>
 <ul>
 <li>
-<p><strong>不用 new 的构造函数</strong>（jQuery做到了），这个模式没有专门的名字</p>
+<p><strong>不用 new 的构造函数</strong>（jQuery 做到了），这个模式没有专门的名字</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">JQuery</span><span class="p">(</span><span class="s1">&#39;.test&#39;</span><span class="p">)</span>   <span class="p">=&gt;</span>   <span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.test&#39;</span><span class="p">)</span>  <span class="c1">//在jQuery之前没人想到可以这样
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">JQuery</span><span class="p">(</span><span class="s1">&#39;.test&#39;</span><span class="p">)</span>  <span class="p">=&gt;</span>  <span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.test&#39;</span><span class="p">)</span>  <span class="c1">// 在jQuery之前没人想到可以这样
 </span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -1203,7 +1200,7 @@
 <li>
 <p>jQuery <strong>针对不同环境使用不同代码</strong>，这叫<strong>适配器</strong></p>
 <ul>
-<li>电源适配器：你在日本，就调整成 110v，在中国，就调整成220v</li>
+<li>如电源适配器：你在日本，就调整成 110v，在中国，就调整成 220v</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1224,22 +1221,20 @@
 </div></li>
 </ul>
 <p>​</p>
-<p>​</p>
 <h3 id="设计模式到底是啥">设计模式到底是啥</h3>
 <ul>
-<li>老子这个代码写得太漂亮了，别人肯定也用得到（去掉 new、重载、闭包、getter/setter、别名、适配器…）</li>
+<li>老子这个代码写得太漂亮了，别人肯定也用得到</li>
 <li>那就给这种写法取个名字吧，比如：适配器模式（if else）</li>
 <li>设计模式，就是对通用代码取个名字而已
 <ul>
-<li>实际上就是程序员的黑话、行话</li>
+<li>实际上相当于程序员的黑话、行话</li>
 </ul>
 </li>
 </ul>
-<p>​</p>
 <blockquote>
 <ul>
 <li><strong>适配器</strong>：就是针对不同环境使用不同代码</li>
-<li><strong>别名</strong>：让一个名字等于另外一个名字、</li>
+<li><strong>别名</strong>：让一个名字等于另外一个名字</li>
 <li><strong>getter/setter</strong>：一个函数，既可以get 、也可以 set （可读可写）</li>
 <li><strong>闭包隐藏细节</strong>：生成一个变量（elements），一个函数（addClass）去读这个变量</li>
 <li><strong>重载</strong>：一个函数支持多种形式的参数</li>
@@ -1267,8 +1262,7 @@
 <p>总结你的代码，把写得好的地方抽象出来</p>
 <ul>
 <li>
-<p>看看符合哪个设计模式</p>
-<p>（并不是知道设计模式才这么写的，而是写完后发现，居然用到了设计模式）</p>
+<p>看看符合哪个设计模式（并不是知道设计模式才这么写的，而是写完后发现，居然用到了设计模式）</p>
 </li>
 <li>
 <p>你就可以告诉别人你用到了这几个设计模式</p>
@@ -1280,14 +1274,13 @@
 </li>
 </ul>
 <p>​</p>
-<p>​</p>
 <h3 id="有人说不用学-jquery">有人说不用学 jQuery</h3>
 <h4 id="真相">真相</h4>
 <ul>
-<li>jQuery 这么简单、经典的库，为什么不学？</li>
-<li>通过 jQuery 可以学会很多封装技巧，为什么不学？
+<li>jQuery 这么简单又经典的库，为什么不学 ？</li>
+<li>通过 jQuery 可以学会很多封装技巧，为什么不学 ？
 <ul>
-<li>把一个变量放到函数里面、暴露出 api，api 可以操作变量，这就是 封装</li>
+<li>把一个变量放到函数里面、暴露出 api，api 可以操作变量，这就是「封装」</li>
 </ul>
 </li>
 <li>连 jQuery 都理解不了，Vue / React 肯定学不好</li>

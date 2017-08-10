@@ -24,34 +24,38 @@
 <p>make IT :)</p>
 </blockquote>]]></description>
 </item><item>
-    <title>Vue 中的 .sync 修饰符有什么用</title>
+    <title>Vue 组件传值：自定义事件 🆚 修饰符 .sync</title>
     <link>https://liubingxuan.xyz/vue-props-sync/</link>
     <pubDate>Wed, 06 Jan 2021 00:28:18 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://liubingxuan.xyz/vue-props-sync/</guid>
-    <description><![CDATA[<h2 id="vue-中的-sync-修饰符有什么用">Vue 中的 .sync 修饰符有什么用</h2>
+    <description><![CDATA[<h2 id="前言">前言</h2>
 <blockquote>
-<p><a href="https://cn.vuejs.org/v2/guide/components-custom-events.html#sync-%E4%BF%AE%E9%A5%B0%E7%AC%A6" target="_blank" rel="noopener noreffer">官方文档</a></p>
+<p><a href="https://cn.vuejs.org/v2/guide/components-custom-events.html#sync-%E4%BF%AE%E9%A5%B0%E7%AC%A6" target="_blank" rel="noopener noreffer">sync 官方文档</a></p>
 </blockquote>
+<p>.sync 是「实现 Vue 组件间传值」的一个语法糖</p>
 <ul>
-<li>.sync 是「实现 Vue 组件间传值」的一个语法糖</li>
+<li>先说「实现组件传值的通用方案 —— 自定义事件」</li>
+<li>再说「如果用 .sync 来简化组件传值」</li>
 </ul>
-<p>​</p>
-<h3 id="组件间传值的实现">组件间传值的实现</h3>
+<h2 id="通过自定义事件实现组件间传值">通过「自定义事件」实现组件间传值</h2>
 <blockquote>
 <p>props 传值遵循<a href="https://cn.vuejs.org/v2/guide/components-props.html#%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81" target="_blank" rel="noopener noreffer">单向数据流</a>原则：父级 prop 的更新会向下流动到子组件中，但是反过来则不行。这样可以防止子组件意外变更父组件的数据，从而导致你的应用的数据流向难以理解。</p>
 </blockquote>
-<h4 id="思路">思路</h4>
+<h3 id="思路">思路</h3>
 <ul>
-<li>数据从父组件传入子组件，我们无法在子组件中直接修改 props 传入的外部数据，只能在父组件中进行修改，而更新后的数据会自动流向子组件</li>
-<li><a href="https://cn.vuejs.org/v2/guide/components-props.html#ad" target="_blank" rel="noopener noreffer">props</a> 加 <a href="https://cn.vuejs.org/v2/api/#vm-emit" target="_blank" rel="noopener noreffer">vm.$emit</a> 实现组件传值
+<li>
+<p>数据从父组件传入子组件，我们无法在子组件中直接修改 props 传入的外部数据，只能在父组件中进行修改，而更新后的数据会自动流向子组件</p>
+</li>
+<li>
+<h1 id="propshttpscnvuejsorgv2guidecomponents-propshtmlad-加-vmemithttpscnvuejsorgv2apivm-emit-实现组件传值"><a href="https://cn.vuejs.org/v2/guide/components-props.html#ad" target="_blank" rel="noopener noreffer">props</a> 加 <a href="https://cn.vuejs.org/v2/api/#vm-emit" target="_blank" rel="noopener noreffer">vm.$emit</a> 实现组件传值</h1>
 <ul>
 <li>props 用于接收父组件的数据</li>
 <li>vm.$emit（自定义事件）用于触发父组件事件，并传参</li>
 </ul>
 </li>
 </ul>
-<h4 id="具体实现">具体实现</h4>
+<h3 id="具体实现">具体实现</h3>
 <blockquote>
 <p>事件的发布、订阅</p>
 </blockquote>
@@ -81,26 +85,26 @@
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-vue" data-lang="vue"><span class="c">&lt;!--</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">vue</span> <span class="o">--&gt;</span>
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="c">&lt;!-- Parent.vue --&gt;</span>
 <span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;app&#34;</span><span class="p">&gt;</span>
-    <span class="nx">Parent</span><span class="p">.</span><span class="nx">vue</span> <span class="nx">现在有</span> <span class="p">{{</span> <span class="nx">total</span> <span class="p">}}</span>
+    Parent.vue 现在有 {{ total }}
     <span class="p">&lt;</span><span class="nt">hr</span> <span class="p">/&gt;</span>
-    <span class="c">&lt;!--</span> <span class="nx">向</span> <span class="nx">Child</span> <span class="nx">组件传递</span> <span class="nx">money</span> <span class="nx">属性</span> <span class="o">--&gt;</span>
-    <span class="p">&lt;</span><span class="nt">Child</span> <span class="nt">:money</span><span class="s">=&#34;total&#34;</span> <span class="err">@</span><span class="na">update</span><span class="o">:</span><span class="na">money</span><span class="o">=</span><span class="s">&#34;total = $event&#34;</span> <span class="p">/&gt;</span>
+    <span class="c">&lt;!-- 向 Child 组件传递 money 属性 --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Child</span> <span class="na">:money</span><span class="o">=</span><span class="s">&#34;total&#34;</span> <span class="err">@</span><span class="na">update:money</span><span class="o">=</span><span class="s">&#34;total = $event&#34;</span> <span class="p">/&gt;</span>
   <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
 
 <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="kr">import</span> <span class="nx">Child</span> <span class="nx">from</span> <span class="s2">&#34;./Child.vue&#34;</span>
-<span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
-  <span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="p">{</span>
-      <span class="nx">total</span><span class="o">:</span> <span class="mi">10000</span><span class="p">,</span>
-    <span class="p">}</span>
-  <span class="p">},</span>
-  <span class="nx">components</span><span class="o">:</span> <span class="p">{</span> <span class="nx">Child</span> <span class="p">},</span> 
-<span class="p">}</span>
+  <span class="kr">import</span> <span class="nx">Child</span> <span class="nx">from</span> <span class="s2">&#34;./Child.vue&#34;</span>
+  <span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+    <span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="nx">total</span><span class="o">:</span> <span class="mi">10000</span><span class="p">,</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nx">components</span><span class="o">:</span> <span class="p">{</span> <span class="nx">Child</span> <span class="p">},</span> 
+  <span class="p">}</span>
 <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </code></pre></td></tr></table>
 </div>
@@ -121,36 +125,36 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-vue" data-lang="vue"><span class="c">&lt;!--</span> <span class="nx">Child</span><span class="p">.</span><span class="nx">vue</span> <span class="o">--&gt;</span>
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="c">&lt;!-- Child.vue --&gt;</span>
 <span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;child&#34;</span><span class="p">&gt;</span>
-    <span class="nx">Child</span><span class="p">.</span><span class="nx">vue</span> <span class="nx">现在有</span> <span class="p">{{</span> <span class="nx">money</span> <span class="p">}}</span>
-    <span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&#34;$emit(&#39;update:money&#39;, money-100)&#34;</span><span class="p">&gt;</span><span class="nx">花钱</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    Child.vue 现在有 {{ money }}
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&#34;$emit(&#39;update:money&#39;, money-100)&#34;</span><span class="p">&gt;</span>花钱<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
   <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
 
 <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
-  <span class="nx">props</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;money&#34;</span><span class="p">],</span> <span class="c1">// 接收到 money 属性
-</span><span class="c1"></span><span class="p">}</span>
+  <span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+    <span class="nx">props</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;money&#34;</span><span class="p">],</span> <span class="c1">// 接收到 money 属性
+</span><span class="c1"></span>  <span class="p">}</span>
 <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p></p>
 <p>​</p>
 <p>​</p>
-<h3 id="sync-的使用">.sync 的使用</h3>
+<h2 id="通过sync实现组件传值">通过「.sync」实现组件传值</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-vue" data-lang="vue"><span class="c">&lt;!--</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">vue</span> <span class="o">--&gt;</span>
-<span class="p">&lt;</span><span class="nt">Child</span> <span class="nt">:属性名.sync</span><span class="s">=&#34;数据&#34;</span> <span class="p">/&gt;</span>
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="c">&lt;!-- Parent.vue --&gt;</span>
+<span class="p">&lt;</span><span class="nt">Child</span> <span class="na">:属性名</span><span class="err">.</span><span class="na">sync</span><span class="o">=</span><span class="s">&#34;数据&#34;</span> <span class="p">/&gt;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="示例">示例</h4>
+</div><h3 id="示例">示例</h3>
 <blockquote>
 <p><a href="https://codesandbox.io/s/sweet-pine-pij57?file=/src/Parent.vue" target="_blank" rel="noopener noreffer">在线演示</a></p>
 </blockquote>
@@ -160,8 +164,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-vue" data-lang="vue"><span class="c">&lt;!--</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">vue</span> <span class="o">--&gt;</span>
-<span class="p">&lt;</span><span class="nt">Child</span> <span class="nt">:money.sync</span><span class="s">=&#34;total&#34;</span> <span class="p">/&gt;</span>
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="c">&lt;!-- Parent.vue --&gt;</span>
+<span class="p">&lt;</span><span class="nt">Child</span> <span class="na">:money</span><span class="err">.</span><span class="na">sync</span><span class="o">=</span><span class="s">&#34;total&#34;</span> <span class="p">/&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>👆 会扩展出一个完整的事件绑定 👇</p>
@@ -171,8 +175,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-vue" data-lang="vue"><span class="c">&lt;!--</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">vue</span> <span class="o">--&gt;</span>
-<span class="p">&lt;</span><span class="nt">Child</span> <span class="nt">:money</span><span class="s">=&#34;total&#34;</span>  <span class="err">@</span><span class="na">update</span><span class="o">:</span><span class="na">money</span><span class="o">=</span><span class="s">&#34;total = $event&#34;</span> <span class="p">/&gt;</span>
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="c">&lt;!-- Parent.vue --&gt;</span>
+<span class="p">&lt;</span><span class="nt">Child</span> <span class="na">:money</span><span class="o">=</span><span class="s">&#34;total&#34;</span>  <span class="err">@</span><span class="na">update:money</span><span class="o">=</span><span class="s">&#34;total = $event&#34;</span> <span class="p">/&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><blockquote>
@@ -186,17 +190,16 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">// Child.vue
+<pre class="chroma"><code class="language-html" data-lang="html">// Child.vue
 this.$emit(&#39;update:属性名&#39;, 更新数据)
 👇
-&lt;button @click=&#34;$emit(&#39;update:money&#39;, money-100)&#34;&gt;花钱&lt;/button&gt;
+<span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&#34;$emit(&#39;update:money&#39;, money-100)&#34;</span><span class="p">&gt;</span>花钱<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>​</p>
-<p>​</p>
-<h2 id="参考">参考</h2>
-<p><a href="https://www.jianshu.com/p/6b062af8cf01">https://www.jianshu.com/p/6b062af8cf01</a></p>
-<p><a href="https://segmentfault.com/a/1190000010700521">https://segmentfault.com/a/1190000010700521</a></p>]]></description>
+<h2 id="相关文章">相关文章</h2>
+<p><a href="https://www.jianshu.com/p/6b062af8cf01" target="_blank" rel="noopener noreffer">深入理解 Vue 修饰符 .sync</a></p>
+<p><a href="https://segmentfault.com/a/1190000010700521" target="_blank" rel="noopener noreffer">如何理解 Vue 的 .sync 修饰符</a></p>]]></description>
 </item><item>
     <title>深入理解 Vue 数据响应式</title>
     <link>https://liubingxuan.xyz/vue-reactivity/</link>
@@ -230,7 +233,7 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 <li>拓展：该特性依靠「代理 proxy」实现</li>
 </ul>
 <p>​</p>
-<h2 id="浅析vue-响应式原理">浅析「Vue 响应式原理」</h2>
+<h2 id="浅析-vue-响应式原理">浅析 Vue 响应式原理</h2>
 <blockquote>
 <p>Vue 是通过 Object.defineProperty 来实现数据响应式</p>
 </blockquote>
@@ -245,7 +248,7 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 <li>每个组件实例都对应一个 watcher 实例，它会在组件渲染的过程中把“接触”过的数据 property 记录为依赖。之后当依赖项的 setter 触发时，会通知 watcher，从而使它关联的组件重新渲染。</li>
 </ul>
 </blockquote>
-<h2 id="深入响应式原理">深入响应式原理</h2>
+<h2 id="深入-vue-响应式原理">深入 Vue 响应式原理</h2>
 <h3 id="普通对象--传入-vue-的普通对象">普通对象 🆚 传入 Vue 的普通对象</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1551,15 +1554,15 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 </div>
 </div><p></p>
 <p>​</p>
-<h2 id="总结-1">总结</h2>
-<h3 id="对象中新增的-key">对象中新增的 key</h3>
+<h3 id="总结-1">总结</h3>
+<h4 id="对象中新增的-key">对象中新增的 key</h4>
 <ul>
 <li>Vue 没有办法事先监听和代理（导致 key 的变化完全不会影响 UI）</li>
 <li>要<strong>使用 set</strong> 来新增 key，创建监听和代理，更新 UI</li>
 <li>最好提前把属性都写出来，不要新增 key</li>
 <li>注意：数组做不到「提前把 key 属性写好」</li>
 </ul>
-<h3 id="数组中新增的-key">数组中新增的 key</h3>
+<h4 id="数组中新增的-key">数组中新增的 key</h4>
 <ul>
 <li>数组可用 set 来新增 key，更新 UI
 <ul>
@@ -1608,7 +1611,7 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 <tbody>
 <tr>
 <td>特点</td>
-<td>有 compiler</td>
+<td>有 compiler(编译器)</td>
 <td>没有 compiler</td>
 <td>compiler 占 40% 体积</td>
 </tr>
@@ -1889,7 +1892,7 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 <p>但不登录可以创建无限个（注意清理 cookie），所以不要登录（Do Not Sign In）😉</p>
 </blockquote>]]></description>
 </item><item>
-    <title>浅析 MVC</title>
+    <title>浅析 MVC 架构</title>
     <link>https://liubingxuan.xyz/mvc-what-is-mvc/</link>
     <pubDate>Sat, 12 Dec 2020 21:03:26 &#43;0800</pubDate>
     <author>作者</author>
@@ -5086,7 +5089,6 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 </blockquote>
 <p>​</p>
 <p>​</p>
-<p>​</p>
 <h2 id="jquery-代码">jQuery 代码</h2>
 <blockquote>
 <p>当前已经实现的代码</p>
@@ -5313,7 +5315,7 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 </div>
 </div><p>​</p>
 <p>​</p>
-<h2 id="使用原型-改造-jquery-">使用原型 改造 jQuery ⭕️</h2>
+<h2 id="使用原型改造-jquery-">使用原型改造 jQuery ⭕️</h2>
 <h3 id="第一版-jquery-代码">第一版 jQuery 代码</h3>
 <blockquote>
 <p>先看看之前的版本</p>
@@ -5369,7 +5371,7 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 <p>别忘了 constructor</p>
 </blockquote>
 <ul>
-<li>这里是直接给 jQuery.prototype 赋新值，这样写很方便，但是会导致原本原型上的 <a href="" rel="">constructor</a> 被覆盖丢失，所以要手动加回去 <a href="" rel="">constructor</a></li>
+<li>这里是直接给 jQuery.prototype 赋新值，这样写很方便，但是会导致原本原型上的 <a href="" rel="">constructor</a> 被覆盖丢失，所以要手动加回去 <strong><code>constructor</code></strong></li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -5494,7 +5496,7 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 <p>那就在 api 上添加一个属性 elements，用来保存  jQuery 创建的 elements</p>
 </li>
 <li>
-<p>在原型里的函数中，通过 <a href="" rel="">this.elements</a>，就可以访问到这个【目标元素的数组】，加以操作</p>
+<p>在原型里的函数中，通过 <strong><code>this.elements</code></strong>，就可以访问到这个【目标元素的数组】，加以操作</p>
 </li>
 </ul>
 <blockquote>
@@ -5524,7 +5526,7 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 </span><span class="c1"></span><span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p><a href="D:%5cJirengu%5c%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c4-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8b%ef%bc%89%5cdom-2-github-prototype%5csrc" rel="">完整代码</a></p>
+</div><p><a href="%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c4-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8b%ef%bc%89%5cdom-2-github-prototype%5csrc" rel="">完整代码</a></p>
 <ul>
 <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/assign" target="_blank" rel="noopener noreffer">Object.assign</a>：把后面对象的属性，复制到前面的对象上（注意是浅复制，JS 本身没有深复制）</li>
 </ul>
@@ -5633,7 +5635,7 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 </code></pre></td></tr></table>
 </div>
 </div><ul>
-<li><a href="D:%5cJirengu%5c%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c4-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8b%ef%bc%89%5cdom-2-github-prototype%5csrc" rel="">完整代码</a></li>
+<li><a href="%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c4-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8b%ef%bc%89%5cdom-2-github-prototype%5csrc" rel="">完整代码</a></li>
 </ul>
 <h3 id="补充-jqueryfn">补充： jQuery.fn</h3>
 <div class="highlight"><div class="chroma">
@@ -5937,8 +5939,8 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 <blockquote>
 <p>它是目前前端<strong>最长寿</strong>的库，2006年发布 （已经14岁了）</p>
 <ul>
-<li>vue 、react 也才四五岁</li>
-<li>在前端历史上，有数以万计的库，最终能够活下来并一直被使用的库，很少很少。</li>
+<li>Vue 、React 也才五六岁</li>
+<li>在前端历史上，有数以万计的库，最终能够活下来并一直被使用的库，很少很少</li>
 <li>jQuery 是目前最长寿的一个</li>
 </ul>
 </blockquote>
@@ -5949,7 +5951,6 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 <li>但是老牌大公司，像是阿里巴巴、淘宝，一直都在用 jQuery</li>
 </ul>
 </blockquote>
-<h3 id="设计模式">设计模式？</h3>
 <blockquote>
 <p>为什么 jQuery 这么牛 X   ？</p>
 <ul>
@@ -5961,13 +5962,13 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 <h3 id="jquery-用到了哪些设计模式">jQuery 用到了哪些设计模式</h3>
 <ul>
 <li>
-<p><strong>不用 new 的构造函数</strong>（jQuery做到了），这个模式没有专门的名字</p>
+<p><strong>不用 new 的构造函数</strong>（jQuery 做到了），这个模式没有专门的名字</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">JQuery</span><span class="p">(</span><span class="s1">&#39;.test&#39;</span><span class="p">)</span>   <span class="p">=&gt;</span>   <span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.test&#39;</span><span class="p">)</span>  <span class="c1">//在jQuery之前没人想到可以这样
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">JQuery</span><span class="p">(</span><span class="s1">&#39;.test&#39;</span><span class="p">)</span>  <span class="p">=&gt;</span>  <span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.test&#39;</span><span class="p">)</span>  <span class="c1">// 在jQuery之前没人想到可以这样
 </span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -6009,7 +6010,7 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 <li>
 <p>jQuery <strong>针对不同环境使用不同代码</strong>，这叫<strong>适配器</strong></p>
 <ul>
-<li>电源适配器：你在日本，就调整成 110v，在中国，就调整成220v</li>
+<li>如电源适配器：你在日本，就调整成 110v，在中国，就调整成 220v</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -6030,22 +6031,20 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 </div></li>
 </ul>
 <p>​</p>
-<p>​</p>
 <h3 id="设计模式到底是啥">设计模式到底是啥</h3>
 <ul>
-<li>老子这个代码写得太漂亮了，别人肯定也用得到（去掉 new、重载、闭包、getter/setter、别名、适配器…）</li>
+<li>老子这个代码写得太漂亮了，别人肯定也用得到</li>
 <li>那就给这种写法取个名字吧，比如：适配器模式（if else）</li>
 <li>设计模式，就是对通用代码取个名字而已
 <ul>
-<li>实际上就是程序员的黑话、行话</li>
+<li>实际上相当于程序员的黑话、行话</li>
 </ul>
 </li>
 </ul>
-<p>​</p>
 <blockquote>
 <ul>
 <li><strong>适配器</strong>：就是针对不同环境使用不同代码</li>
-<li><strong>别名</strong>：让一个名字等于另外一个名字、</li>
+<li><strong>别名</strong>：让一个名字等于另外一个名字</li>
 <li><strong>getter/setter</strong>：一个函数，既可以get 、也可以 set （可读可写）</li>
 <li><strong>闭包隐藏细节</strong>：生成一个变量（elements），一个函数（addClass）去读这个变量</li>
 <li><strong>重载</strong>：一个函数支持多种形式的参数</li>
@@ -6073,8 +6072,7 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 <p>总结你的代码，把写得好的地方抽象出来</p>
 <ul>
 <li>
-<p>看看符合哪个设计模式</p>
-<p>（并不是知道设计模式才这么写的，而是写完后发现，居然用到了设计模式）</p>
+<p>看看符合哪个设计模式（并不是知道设计模式才这么写的，而是写完后发现，居然用到了设计模式）</p>
 </li>
 <li>
 <p>你就可以告诉别人你用到了这几个设计模式</p>
@@ -6086,14 +6084,13 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 </li>
 </ul>
 <p>​</p>
-<p>​</p>
 <h3 id="有人说不用学-jquery">有人说不用学 jQuery</h3>
 <h4 id="真相">真相</h4>
 <ul>
-<li>jQuery 这么简单、经典的库，为什么不学？</li>
-<li>通过 jQuery 可以学会很多封装技巧，为什么不学？
+<li>jQuery 这么简单又经典的库，为什么不学 ？</li>
+<li>通过 jQuery 可以学会很多封装技巧，为什么不学 ？
 <ul>
-<li>把一个变量放到函数里面、暴露出 api，api 可以操作变量，这就是 封装</li>
+<li>把一个变量放到函数里面、暴露出 api，api 可以操作变量，这就是「封装」</li>
 </ul>
 </li>
 <li>连 jQuery 都理解不了，Vue / React 肯定学不好</li>
@@ -6123,7 +6120,7 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 <blockquote>
 <p>每节的准备工作都差不多，溜溜的用起来</p>
 </blockquote>
-<p>新建项目目录 <a href="D:%5cJirengu%5c%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c3-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8a%ef%bc%89" rel="">dom-2</a>   &gt;    src    &gt;    index.html 、 main.js 、 jquery.js</p>
+<p>新建项目目录 dom-2 &gt;    src    &gt;    index.html 、 main.js 、 jquery.js</p>
 <h3 id="indexhtml">index.html</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -6210,10 +6207,10 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 <ul>
 <li><code>jQuery(选择器) </code> 用于获取对应的元素</li>
 <li>但它却不返回这些元素</li>
-<li>相反，它返回一个对象，称为 <strong>jQuery 构造出来的对象</strong>    <a href="" rel="">（ 也就是最初代码中的那个 api ）</a></li>
+<li>相反，它返回一个对象，称为 <strong>jQuery 构造出来的对象</strong> （也就是上节手写DOM中的那个 api）</li>
 <li>这个对象可以操作对应的元素</li>
-<li>听不懂？直接写代码！</li>
-<li><a href="D:%5cJirengu%5c%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c3-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8a%ef%bc%89" rel="">本地项目dom-2</a></li>
+<li>听不懂？直接看代码！</li>
+<li><a href="%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c3-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8a%ef%bc%89" rel="">本地项目dom-2</a></li>
 </ul>
 <p>​</p>
 <h3 id="代码-">代码 ⭕️</h3>
@@ -6283,10 +6280,10 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
       <span class="c1">// elements 是 addClass 这个函数外部的变量
 </span><span class="c1"></span>      <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">elements</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 遍历所有获取到的元素，添加类名
 </span><span class="c1"></span>        <span class="nx">elements</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">className</span><span class="p">)</span>
-        
       <span class="p">}</span>
       <span class="c1">// return null
-</span><span class="c1"></span>      <span class="k">return</span> <span class="nx">api</span>  <span class="c1">// 返回值是 api，而 api 里有很多方法，所以可以通过返回值继续调用.addClass 形成一个链条
+</span><span class="c1"></span>      <span class="k">return</span> <span class="nx">api</span> <span class="c1">// 方法仍返回 api，api里又包含很多方法，可通过返回值继续调用.addClass 形成一个链条📌
+</span><span class="c1"></span>      <span class="c1">// 这就是链式风格 📌
 </span><span class="c1"></span>    <span class="p">}</span>
   <span class="p">}</span>
   <span class="k">return</span> <span class="nx">api</span>
@@ -6301,13 +6298,15 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">(</span><span class="s2">&#34;.test&#34;</span><span class="p">)</span> <span class="c1">// 通过选择器获取到元素，但不返回该元素，返回 api 对象 (api对象里有很多方法)
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">(</span><span class="s2">&#34;.test&#34;</span><span class="p">)</span> <span class="c1">// 通过选择器获取到元素，但返回的不是该元素
+</span><span class="c1">// 而是返回一个 api 对象，api 里包含很多可以控制该元素的方法
 </span><span class="c1">// console.log(api.addClass)
 </span><span class="c1">// 遍历所有获取到的元素，添加 .red 类名
 </span><span class="c1"></span><span class="nx">api</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&#34;red&#34;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
-<span class="c1">// api.addClass 返回值是 api，而 api 里有很多方法，所以可以通过返回值继续调用.addClass 形成一个链条
+<span class="c1">// api.addClass 方法的返回值仍是 api，所以可以通过返回值继续调用.addClass 形成一个链条
 </span></code></pre></td></tr></table>
 </div>
 </div><p></p>
@@ -6343,7 +6342,6 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 </span><span class="lnt">19
 </span><span class="lnt">20
 </span><span class="lnt">21
-</span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
@@ -6352,7 +6350,6 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
     <span class="nx">addClass</span><span class="p">(</span><span class="nx">className</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">elements</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> 
         <span class="nx">elements</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">className</span><span class="p">)</span>
-        
       <span class="p">}</span>
       <span class="c1">// return api
 </span><span class="c1"></span>      <span class="k">return</span> <span class="k">this</span>  
@@ -6499,8 +6496,8 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 <h3 id="小总结">小总结</h3>
 <ul>
 <li>所谓高级的前端代码，就是把中间过程全部省掉了</li>
-<li>把所有多次一举、无关紧要的东西，都尽量删掉。</li>
-<li>最后只留下一个最少信息的、最精炼的代码。</li>
+<li>把所有多次一举、无关紧要的东西，都尽量删掉</li>
+<li>最后只留下一个最少信息的、最精炼的代码</li>
 <li>虽然代码特别简洁、优雅，但对于学习者来说，就是看不懂。（说明「源码」真的不适合学习者）</li>
 </ul>
 <p>​</p>
@@ -6510,7 +6507,7 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 <p>讲到这里可能会有这个疑问 👆</p>
 </blockquote>
 <blockquote>
-<p>构造函数的特点：① 前面有 new      ② 构造出对象</p>
+<p>构造函数的特点：① 前面有 new、 ② 构造出对象</p>
 <ul>
 <li>结合这两个特点，可以认为  jQuery 是构造函数，也可以认为不是构造函数</li>
 </ul>
@@ -6535,11 +6532,11 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 <h2 id="术语">术语</h2>
 <h3 id="口头约定-">口头约定 👄</h3>
 <blockquote>
-<p>[前面](# 特殊函数 jQuery)提到：jQuery 函数，返回一个对象，称为 **jQuery 构造出来的对象 ** <a href="" rel="">（ 也就是最初代码中的那个 api ）</a></p>
+<p>[前面](# 特殊函数 jQuery)提到：jQuery 函数，返回一个对象，称为 **jQuery 构造出来的对象 **  <strong>（ 也就是最初代码中的那个 api ）</strong></p>
 </blockquote>
 <p>口头约定：</p>
 <ul>
-<li>以后说到 <strong>jQuery对象</strong> 就代指 <a href="" rel="">jQuery函数 构造出来的对象</a>   （为了省事，少说几个字）</li>
+<li>以后说到 <strong>jQuery对象</strong> 就代指 <strong>jQuery 函数构造出来的对象</strong>  （为了省事，少说几个字）</li>
 <li>不是说 「 jQuery 这个对象 」</li>
 <li>一定要记清楚</li>
 </ul>
@@ -6560,7 +6557,7 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 <p>链式风格</p>
 </blockquote>
 <blockquote>
-<p>📌📌📌📌📌📌📌📌更多代码实现、解析、注释，请查看<a href="D:%5cJirengu%5c%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c3-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8a%ef%bc%89" rel="">本地项目dom-2</a> 📌📌📌📌📌📌📌📌</p>
+<p>📌📌📌📌📌📌📌📌更多代码实现、解析、注释，请查看<a href="%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c3-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8a%ef%bc%89" rel="">本地项目 dom-2</a> 📌📌📌📌📌📌📌📌</p>
 </blockquote>
 <h3 id="查">查</h3>
 <div class="highlight"><div class="chroma">
@@ -6588,7 +6585,7 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
 </span></code></pre></td></tr></table>
 </div>
 </div><h4 id="代码">代码</h4>
-<p><a href="D:%5cJirengu%5c%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c3-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8a%ef%bc%89" rel="">本地项目dom-2</a></p>
+<p><a href="%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c3-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8a%ef%bc%89" rel="">本地项目dom-2</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -6720,7 +6717,7 @@ this.$emit(&#39;update:属性名&#39;, 更新数据)
       <span class="nx">array</span><span class="p">.</span><span class="nx">oldApi</span> <span class="o">=</span> <span class="k">this</span>
       <span class="k">return</span> <span class="nx">jQuery</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span>
     <span class="p">},</span>
-    <span class="cm">/********************* 下面的课上未讲 *********************/</span>
+    <span class="cm">/********************* 下面是前面没提到的 *********************/</span>
     <span class="cm">/*
 </span><span class="cm">    siblings()
 </span><span class="cm">    index()

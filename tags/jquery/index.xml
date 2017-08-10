@@ -1214,7 +1214,6 @@
 </blockquote>
 <p>​</p>
 <p>​</p>
-<p>​</p>
 <h2 id="jquery-代码">jQuery 代码</h2>
 <blockquote>
 <p>当前已经实现的代码</p>
@@ -1441,7 +1440,7 @@
 </div>
 </div><p>​</p>
 <p>​</p>
-<h2 id="使用原型-改造-jquery-">使用原型 改造 jQuery ⭕️</h2>
+<h2 id="使用原型改造-jquery-">使用原型改造 jQuery ⭕️</h2>
 <h3 id="第一版-jquery-代码">第一版 jQuery 代码</h3>
 <blockquote>
 <p>先看看之前的版本</p>
@@ -1497,7 +1496,7 @@
 <p>别忘了 constructor</p>
 </blockquote>
 <ul>
-<li>这里是直接给 jQuery.prototype 赋新值，这样写很方便，但是会导致原本原型上的 <a href="" rel="">constructor</a> 被覆盖丢失，所以要手动加回去 <a href="" rel="">constructor</a></li>
+<li>这里是直接给 jQuery.prototype 赋新值，这样写很方便，但是会导致原本原型上的 <a href="" rel="">constructor</a> 被覆盖丢失，所以要手动加回去 <strong><code>constructor</code></strong></li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1622,7 +1621,7 @@
 <p>那就在 api 上添加一个属性 elements，用来保存  jQuery 创建的 elements</p>
 </li>
 <li>
-<p>在原型里的函数中，通过 <a href="" rel="">this.elements</a>，就可以访问到这个【目标元素的数组】，加以操作</p>
+<p>在原型里的函数中，通过 <strong><code>this.elements</code></strong>，就可以访问到这个【目标元素的数组】，加以操作</p>
 </li>
 </ul>
 <blockquote>
@@ -1652,7 +1651,7 @@
 </span><span class="c1"></span><span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p><a href="D:%5cJirengu%5c%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c4-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8b%ef%bc%89%5cdom-2-github-prototype%5csrc" rel="">完整代码</a></p>
+</div><p><a href="%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c4-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8b%ef%bc%89%5cdom-2-github-prototype%5csrc" rel="">完整代码</a></p>
 <ul>
 <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/assign" target="_blank" rel="noopener noreffer">Object.assign</a>：把后面对象的属性，复制到前面的对象上（注意是浅复制，JS 本身没有深复制）</li>
 </ul>
@@ -1761,7 +1760,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><ul>
-<li><a href="D:%5cJirengu%5c%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c4-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8b%ef%bc%89%5cdom-2-github-prototype%5csrc" rel="">完整代码</a></li>
+<li><a href="%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c4-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8b%ef%bc%89%5cdom-2-github-prototype%5csrc" rel="">完整代码</a></li>
 </ul>
 <h3 id="补充-jqueryfn">补充： jQuery.fn</h3>
 <div class="highlight"><div class="chroma">
@@ -2065,8 +2064,8 @@
 <blockquote>
 <p>它是目前前端<strong>最长寿</strong>的库，2006年发布 （已经14岁了）</p>
 <ul>
-<li>vue 、react 也才四五岁</li>
-<li>在前端历史上，有数以万计的库，最终能够活下来并一直被使用的库，很少很少。</li>
+<li>Vue 、React 也才五六岁</li>
+<li>在前端历史上，有数以万计的库，最终能够活下来并一直被使用的库，很少很少</li>
 <li>jQuery 是目前最长寿的一个</li>
 </ul>
 </blockquote>
@@ -2077,7 +2076,6 @@
 <li>但是老牌大公司，像是阿里巴巴、淘宝，一直都在用 jQuery</li>
 </ul>
 </blockquote>
-<h3 id="设计模式">设计模式？</h3>
 <blockquote>
 <p>为什么 jQuery 这么牛 X   ？</p>
 <ul>
@@ -2089,13 +2087,13 @@
 <h3 id="jquery-用到了哪些设计模式">jQuery 用到了哪些设计模式</h3>
 <ul>
 <li>
-<p><strong>不用 new 的构造函数</strong>（jQuery做到了），这个模式没有专门的名字</p>
+<p><strong>不用 new 的构造函数</strong>（jQuery 做到了），这个模式没有专门的名字</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">JQuery</span><span class="p">(</span><span class="s1">&#39;.test&#39;</span><span class="p">)</span>   <span class="p">=&gt;</span>   <span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.test&#39;</span><span class="p">)</span>  <span class="c1">//在jQuery之前没人想到可以这样
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">JQuery</span><span class="p">(</span><span class="s1">&#39;.test&#39;</span><span class="p">)</span>  <span class="p">=&gt;</span>  <span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.test&#39;</span><span class="p">)</span>  <span class="c1">// 在jQuery之前没人想到可以这样
 </span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -2137,7 +2135,7 @@
 <li>
 <p>jQuery <strong>针对不同环境使用不同代码</strong>，这叫<strong>适配器</strong></p>
 <ul>
-<li>电源适配器：你在日本，就调整成 110v，在中国，就调整成220v</li>
+<li>如电源适配器：你在日本，就调整成 110v，在中国，就调整成 220v</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2158,22 +2156,20 @@
 </div></li>
 </ul>
 <p>​</p>
-<p>​</p>
 <h3 id="设计模式到底是啥">设计模式到底是啥</h3>
 <ul>
-<li>老子这个代码写得太漂亮了，别人肯定也用得到（去掉 new、重载、闭包、getter/setter、别名、适配器…）</li>
+<li>老子这个代码写得太漂亮了，别人肯定也用得到</li>
 <li>那就给这种写法取个名字吧，比如：适配器模式（if else）</li>
 <li>设计模式，就是对通用代码取个名字而已
 <ul>
-<li>实际上就是程序员的黑话、行话</li>
+<li>实际上相当于程序员的黑话、行话</li>
 </ul>
 </li>
 </ul>
-<p>​</p>
 <blockquote>
 <ul>
 <li><strong>适配器</strong>：就是针对不同环境使用不同代码</li>
-<li><strong>别名</strong>：让一个名字等于另外一个名字、</li>
+<li><strong>别名</strong>：让一个名字等于另外一个名字</li>
 <li><strong>getter/setter</strong>：一个函数，既可以get 、也可以 set （可读可写）</li>
 <li><strong>闭包隐藏细节</strong>：生成一个变量（elements），一个函数（addClass）去读这个变量</li>
 <li><strong>重载</strong>：一个函数支持多种形式的参数</li>
@@ -2201,8 +2197,7 @@
 <p>总结你的代码，把写得好的地方抽象出来</p>
 <ul>
 <li>
-<p>看看符合哪个设计模式</p>
-<p>（并不是知道设计模式才这么写的，而是写完后发现，居然用到了设计模式）</p>
+<p>看看符合哪个设计模式（并不是知道设计模式才这么写的，而是写完后发现，居然用到了设计模式）</p>
 </li>
 <li>
 <p>你就可以告诉别人你用到了这几个设计模式</p>
@@ -2214,14 +2209,13 @@
 </li>
 </ul>
 <p>​</p>
-<p>​</p>
 <h3 id="有人说不用学-jquery">有人说不用学 jQuery</h3>
 <h4 id="真相">真相</h4>
 <ul>
-<li>jQuery 这么简单、经典的库，为什么不学？</li>
-<li>通过 jQuery 可以学会很多封装技巧，为什么不学？
+<li>jQuery 这么简单又经典的库，为什么不学 ？</li>
+<li>通过 jQuery 可以学会很多封装技巧，为什么不学 ？
 <ul>
-<li>把一个变量放到函数里面、暴露出 api，api 可以操作变量，这就是 封装</li>
+<li>把一个变量放到函数里面、暴露出 api，api 可以操作变量，这就是「封装」</li>
 </ul>
 </li>
 <li>连 jQuery 都理解不了，Vue / React 肯定学不好</li>
@@ -2251,7 +2245,7 @@
 <blockquote>
 <p>每节的准备工作都差不多，溜溜的用起来</p>
 </blockquote>
-<p>新建项目目录 <a href="D:%5cJirengu%5c%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c3-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8a%ef%bc%89" rel="">dom-2</a>   &gt;    src    &gt;    index.html 、 main.js 、 jquery.js</p>
+<p>新建项目目录 dom-2 &gt;    src    &gt;    index.html 、 main.js 、 jquery.js</p>
 <h3 id="indexhtml">index.html</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2338,10 +2332,10 @@
 <ul>
 <li><code>jQuery(选择器) </code> 用于获取对应的元素</li>
 <li>但它却不返回这些元素</li>
-<li>相反，它返回一个对象，称为 <strong>jQuery 构造出来的对象</strong>    <a href="" rel="">（ 也就是最初代码中的那个 api ）</a></li>
+<li>相反，它返回一个对象，称为 <strong>jQuery 构造出来的对象</strong> （也就是上节手写DOM中的那个 api）</li>
 <li>这个对象可以操作对应的元素</li>
-<li>听不懂？直接写代码！</li>
-<li><a href="D:%5cJirengu%5c%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c3-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8a%ef%bc%89" rel="">本地项目dom-2</a></li>
+<li>听不懂？直接看代码！</li>
+<li><a href="%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c3-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8a%ef%bc%89" rel="">本地项目dom-2</a></li>
 </ul>
 <p>​</p>
 <h3 id="代码-">代码 ⭕️</h3>
@@ -2411,10 +2405,10 @@
       <span class="c1">// elements 是 addClass 这个函数外部的变量
 </span><span class="c1"></span>      <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">elements</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 遍历所有获取到的元素，添加类名
 </span><span class="c1"></span>        <span class="nx">elements</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">className</span><span class="p">)</span>
-        
       <span class="p">}</span>
       <span class="c1">// return null
-</span><span class="c1"></span>      <span class="k">return</span> <span class="nx">api</span>  <span class="c1">// 返回值是 api，而 api 里有很多方法，所以可以通过返回值继续调用.addClass 形成一个链条
+</span><span class="c1"></span>      <span class="k">return</span> <span class="nx">api</span> <span class="c1">// 方法仍返回 api，api里又包含很多方法，可通过返回值继续调用.addClass 形成一个链条📌
+</span><span class="c1"></span>      <span class="c1">// 这就是链式风格 📌
 </span><span class="c1"></span>    <span class="p">}</span>
   <span class="p">}</span>
   <span class="k">return</span> <span class="nx">api</span>
@@ -2429,13 +2423,15 @@
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">(</span><span class="s2">&#34;.test&#34;</span><span class="p">)</span> <span class="c1">// 通过选择器获取到元素，但不返回该元素，返回 api 对象 (api对象里有很多方法)
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">(</span><span class="s2">&#34;.test&#34;</span><span class="p">)</span> <span class="c1">// 通过选择器获取到元素，但返回的不是该元素
+</span><span class="c1">// 而是返回一个 api 对象，api 里包含很多可以控制该元素的方法
 </span><span class="c1">// console.log(api.addClass)
 </span><span class="c1">// 遍历所有获取到的元素，添加 .red 类名
 </span><span class="c1"></span><span class="nx">api</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&#34;red&#34;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
-<span class="c1">// api.addClass 返回值是 api，而 api 里有很多方法，所以可以通过返回值继续调用.addClass 形成一个链条
+<span class="c1">// api.addClass 方法的返回值仍是 api，所以可以通过返回值继续调用.addClass 形成一个链条
 </span></code></pre></td></tr></table>
 </div>
 </div><p></p>
@@ -2471,7 +2467,6 @@
 </span><span class="lnt">19
 </span><span class="lnt">20
 </span><span class="lnt">21
-</span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
@@ -2480,7 +2475,6 @@
     <span class="nx">addClass</span><span class="p">(</span><span class="nx">className</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">elements</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> 
         <span class="nx">elements</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">className</span><span class="p">)</span>
-        
       <span class="p">}</span>
       <span class="c1">// return api
 </span><span class="c1"></span>      <span class="k">return</span> <span class="k">this</span>  
@@ -2627,8 +2621,8 @@
 <h3 id="小总结">小总结</h3>
 <ul>
 <li>所谓高级的前端代码，就是把中间过程全部省掉了</li>
-<li>把所有多次一举、无关紧要的东西，都尽量删掉。</li>
-<li>最后只留下一个最少信息的、最精炼的代码。</li>
+<li>把所有多次一举、无关紧要的东西，都尽量删掉</li>
+<li>最后只留下一个最少信息的、最精炼的代码</li>
 <li>虽然代码特别简洁、优雅，但对于学习者来说，就是看不懂。（说明「源码」真的不适合学习者）</li>
 </ul>
 <p>​</p>
@@ -2638,7 +2632,7 @@
 <p>讲到这里可能会有这个疑问 👆</p>
 </blockquote>
 <blockquote>
-<p>构造函数的特点：① 前面有 new      ② 构造出对象</p>
+<p>构造函数的特点：① 前面有 new、 ② 构造出对象</p>
 <ul>
 <li>结合这两个特点，可以认为  jQuery 是构造函数，也可以认为不是构造函数</li>
 </ul>
@@ -2663,11 +2657,11 @@
 <h2 id="术语">术语</h2>
 <h3 id="口头约定-">口头约定 👄</h3>
 <blockquote>
-<p>[前面](# 特殊函数 jQuery)提到：jQuery 函数，返回一个对象，称为 **jQuery 构造出来的对象 ** <a href="" rel="">（ 也就是最初代码中的那个 api ）</a></p>
+<p>[前面](# 特殊函数 jQuery)提到：jQuery 函数，返回一个对象，称为 **jQuery 构造出来的对象 **  <strong>（ 也就是最初代码中的那个 api ）</strong></p>
 </blockquote>
 <p>口头约定：</p>
 <ul>
-<li>以后说到 <strong>jQuery对象</strong> 就代指 <a href="" rel="">jQuery函数 构造出来的对象</a>   （为了省事，少说几个字）</li>
+<li>以后说到 <strong>jQuery对象</strong> 就代指 <strong>jQuery 函数构造出来的对象</strong>  （为了省事，少说几个字）</li>
 <li>不是说 「 jQuery 这个对象 」</li>
 <li>一定要记清楚</li>
 </ul>
@@ -2688,7 +2682,7 @@
 <p>链式风格</p>
 </blockquote>
 <blockquote>
-<p>📌📌📌📌📌📌📌📌更多代码实现、解析、注释，请查看<a href="D:%5cJirengu%5c%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c3-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8a%ef%bc%89" rel="">本地项目dom-2</a> 📌📌📌📌📌📌📌📌</p>
+<p>📌📌📌📌📌📌📌📌更多代码实现、解析、注释，请查看<a href="%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c3-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8a%ef%bc%89" rel="">本地项目 dom-2</a> 📌📌📌📌📌📌📌📌</p>
 </blockquote>
 <h3 id="查">查</h3>
 <div class="highlight"><div class="chroma">
@@ -2716,7 +2710,7 @@
 </span></code></pre></td></tr></table>
 </div>
 </div><h4 id="代码">代码</h4>
-<p><a href="D:%5cJirengu%5c%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c3-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8a%ef%bc%89" rel="">本地项目dom-2</a></p>
+<p><a href="%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c3-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8a%ef%bc%89" rel="">本地项目dom-2</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -2848,7 +2842,7 @@
       <span class="nx">array</span><span class="p">.</span><span class="nx">oldApi</span> <span class="o">=</span> <span class="k">this</span>
       <span class="k">return</span> <span class="nx">jQuery</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span>
     <span class="p">},</span>
-    <span class="cm">/********************* 下面的课上未讲 *********************/</span>
+    <span class="cm">/********************* 下面是前面没提到的 *********************/</span>
     <span class="cm">/*
 </span><span class="cm">    siblings()
 </span><span class="cm">    index()
@@ -3134,15 +3128,15 @@
     <guid>https://liubingxuan.xyz/dom-dom-vs-jquery/</guid>
     <description><![CDATA[<p>对比 DOM 和 jQuery</p>
 <p>​</p>
-<h2 id="javascript-的组成">JavaScript 的组成</h2>
+<h1 id="javascript-的组成">JavaScript 的组成</h1>
 <ul>
 <li>ECMAScript：JavaScript 的语法标准。包括变量、表达式、运算符、函数、if 语句、for 语句等。</li>
 <li><strong>DOM</strong>：文档对象模型，操作<strong>网页上的元素</strong>的 API。比如让盒子移动、变色、轮播图等。</li>
 <li><strong>BOM</strong>：浏览器对象模型，操作<strong>浏览器部分功能</strong>的 API。比如让浏览器自动滚动。</li>
 </ul>
 <p>​</p>
-<h2 id="事件的三要素">事件的三要素</h2>
-<h3 id="事件源事件事件驱动程序">事件源、事件、事件驱动程序</h3>
+<h1 id="事件的三要素">事件的三要素</h1>
+<h2 id="事件源事件事件驱动程序">事件源、事件、事件驱动程序</h2>
 <p>比如，我用手去按开关，灯亮了。这件事情里，事件源是：开关。事件是：按开关。事件驱动程序是：灯的开和关。</p>
 <p>再比如，网页上弹出一个广告，我点击右上角的<code>X</code>，广告就关闭了。这件事情里，事件源是：<code>X</code>。事件是：onclick。事件驱动程序是：广告关闭了。</p>
 <p>于是我们可以总结出：谁引发的后续事件，谁就是事件源。</p>
@@ -3294,14 +3288,14 @@
 <p>​</p>
 <p>​</p>
 <p>​</p>
-<h2 id="什么是-dom">什么是 DOM</h2>
+<h1 id="什么是-dom">什么是 DOM</h1>
 <p>DOM：Document Object Model，文档对象模型。DOM 为文档提供了结构化表示，并定义了如何通过脚本来访问文档结构。目的其实就是为了能让 js 操作 html 元素而制定的一个规范。</p>
 <p>DOM 就是由节点组成的。</p>
 <p>​</p>
-<h3 id="解析过程">解析过程</h3>
+<h2 id="解析过程">解析过程</h2>
 <p>HTML 加载完毕，渲染引擎会在内存中把 HTML 文档，生成一个 DOM 树，getElementById 是获取内中 DOM 上的元素节点。然后操作的时候修改的是该元素的<strong>属性</strong>。</p>
 <p>​</p>
-<h3 id="dom-树一切都是节点">DOM 树（一切都是节点）</h3>
+<h2 id="dom-树一切都是节点">DOM 树（一切都是节点）</h2>
 <p>DOM 的数据结构如下：</p>
 <p></p>
 <p>上图可知，<strong>在 HTML 当中，一切都是节点</strong>：（非常重要）</p>
@@ -3311,7 +3305,7 @@
 <li><strong>属性节点</strong>：：标签的属性。</li>
 </ul>
 <p>整个 html 文档就是一个文档节点。所有的节点都是 Object。</p>
-<h3 id="dom-可以做什么">DOM 可以做什么</h3>
+<h2 id="dom-可以做什么">DOM 可以做什么</h2>
 <ul>
 <li>找对象（元素节点）</li>
 <li>设置元素的属性值</li>
@@ -3322,17 +3316,17 @@
 <p>​</p>
 <p>​</p>
 <p>​</p>
-<h2 id="什么是-jquery">什么是 jQuery</h2>
-<h3 id="为什么要学-jquery">为什么要学 jQuery</h3>
+<h1 id="什么是-jquery">什么是 jQuery</h1>
+<h2 id="为什么要学-jquery">为什么要学 jQuery</h2>
 <p>究其原因是因为原生 js 在进行 dom 操作时代码量多而且容错性差，不够简练。那么 jQuery 就是为了解决这些问题而出现的。</p>
-<h3 id="jquery-是什么">jQuery 是什么</h3>
+<h2 id="jquery-是什么">jQuery 是什么</h2>
 <ul>
 <li>jQuery 是一个快速、简洁的 JavaScript 框架，是继 Prototype 之后又一个优秀的 JavaScript 代码库（或 JavaScript 框架）。</li>
 <li>jQuery 设计的宗旨是“write Less，Do More”，即倡导写更少的代码，做更多的事情。</li>
 <li>jQuery 的作用：**它封装 JavaScript 常用的功能代码，提供一种简便的 JavaScript 设计模式，优化 HTML 文档操作、事件处理、动画设计和 Ajax 交互。 **</li>
 <li>目前这个阶段，主要介绍如何来使用 jQuery 操作 DOM，其实就是学习 jQuery 封装好的那些功能方法，这些方法叫做 API（Application Programming Interface 应用程序编程接口）。</li>
 </ul>
-<h3 id="对-javascript-进行封装">对 JavaScript 进行封装</h3>
+<h2 id="对-javascript-进行封装">对 JavaScript 进行封装</h2>
 <p><strong>jQuery 对 JavaScript 的哪些方面进行了封装 ？</strong></p>
 <p>比如说 ：</p>
 <ul>
@@ -3359,9 +3353,7 @@
 <p>那我们需要学习它的使用方法(语法/规则)</p>
 </li>
 </ul>
-<hr>
-<hr>
-<h2 id="dom-和-jquery-的基本使用区别">DOM 和 jQuery 的基本使用区别</h2>
+<h1 id="dom-和-jquery-的基本使用区别">DOM 和 jQuery 的基本使用区别</h1>
 <ul>
 <li>这里是网上找的一个，别人总结出来的两者区别，可以阅读一下
 <ul>
@@ -3370,7 +3362,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="事件处理的区别">事件处理的区别</h3>
+<h2 id="事件处理的区别">事件处理的区别</h2>
 <ul>
 <li><strong>事件源</strong>
 <ol>
@@ -3517,7 +3509,7 @@
 <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="dom对象-和-jquery对象">DOM对象 和 jQuery对象</h3>
+</div><h2 id="dom-对象和-jquery-对象">DOM 对象和 jQuery 对象</h2>
 <ul>
 <li>
 <p>DOM对象，即是我们用传统的方法（javascript）获得的对象</p>
@@ -3625,7 +3617,7 @@
 </span><span class="c1"></span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="入口函数">入口函数</h3>
+</div><h2 id="入口函数">入口函数</h2>
 <h4 id="入口函数的功能">入口函数的功能</h4>
 <blockquote>
 <p>入口函数的作用是 页面加载完成后，再执行 function（）{ 里面的代码 } ，有了入口函数，就可以实现将 js代码 写在页面基本结构的 标签 之前</p>
@@ -6604,9 +6596,7 @@
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><hr>
-<hr>
-<h1 id="jquery-补充">jQuery 补充</h1>
+</div><h1 id="jquery-补充">jQuery 补充</h1>
 <h2 id="mouseover-和-mouseout-区别">mouseover 和 mouseout 区别</h2>
 <p></p>
 <div class="highlight"><div class="chroma">

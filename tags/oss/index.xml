@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>“OSS” - 标签 - Sam&#39;s Garage</title>
+        <title>OSS - 标签 - Sam&#39;s Garage</title>
         <link>https://liubingxuan.xyz/tags/oss/</link>
-        <description>“OSS” - 标签 - Sam&#39;s Garage</description>
+        <description>OSS - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
             <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Tue, 27 Oct 2020 19:40:05 &#43;0800</lastBuildDate><atom:link href="https://liubingxuan.xyz/tags/oss/" rel="self" type="application/rss+xml" /><item>
     <title>Typora 如何上传图片？（最新超详细图解）</title>

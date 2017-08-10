@@ -27,7 +27,7 @@
 <tbody>
 <tr>
 <td>特点</td>
-<td>有 compiler</td>
+<td>有 compiler(编译器)</td>
 <td>没有 compiler</td>
 <td>compiler 占 40% 体积</td>
 </tr>

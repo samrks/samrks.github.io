@@ -5,7 +5,7 @@
         <description>类 - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
             <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Sat, 12 Dec 2020 21:03:26 &#43;0800</lastBuildDate><atom:link href="https://liubingxuan.xyz/tags/%E7%B1%BB/" rel="self" type="application/rss+xml" /><item>
-    <title>浅析 MVC</title>
+    <title>浅析 MVC 架构</title>
     <link>https://liubingxuan.xyz/mvc-what-is-mvc/</link>
     <pubDate>Sat, 12 Dec 2020 21:03:26 &#43;0800</pubDate>
     <author>作者</author>
@@ -1014,15 +1014,8 @@
 </div>
 </div><p></p>
 <p></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://i.loli.net/2020/09/03/kQiTnhXL92HNabF.jpg&#34;</span> <span class="nx">alt</span><span class="o">=</span><span class="s2">&#34;内存图-循环过程&#34;</span> <span class="o">/&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><blockquote>
+<p></p>
+<blockquote>
 <p>会画内存图的人， 比其他人理解的更好</p>
 <ul>
 <li>内存中，一共创建了 24 个函数，其中 22 个都是多余重复的</li>

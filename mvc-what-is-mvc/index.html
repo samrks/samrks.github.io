@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>浅析 MVC - Sam&#39;s Garage</title><meta name="Description" content="MVC 是啥、模块化、EventBus、类与继承、表驱动编程、view = render(data)思维"><meta property="og:title" content="浅析 MVC" />
+        <title>浅析 MVC 架构 - Sam&#39;s Garage</title><meta name="Description" content="MVC 是啥、模块化、EventBus、类与继承、表驱动编程、view = render(data)思维"><meta property="og:title" content="浅析 MVC 架构" />
 <meta property="og:description" content="MVC 是啥、模块化、EventBus、类与继承、表驱动编程、view = render(data)思维" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://liubingxuan.xyz/mvc-what-is-mvc/" />
@@ -14,7 +14,7 @@
 <meta property="article:modified_time" content="2020-12-12T21:03:26+08:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://liubingxuan.xyz/mvc-what-is-mvc/featured-image.jpg"/>
-<meta name="twitter:title" content="浅析 MVC"/>
+<meta name="twitter:title" content="浅析 MVC 架构"/>
 <meta name="twitter:description" content="MVC 是啥、模块化、EventBus、类与继承、表驱动编程、view = render(data)思维"/>
 <meta name="application-name" content="Sam&#39;s Garage">
 <meta name="apple-mobile-web-app-title" content="Sam&#39;s Garage"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -23,7 +23,7 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "浅析 MVC",
+        "headline": "浅析 MVC 架构",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
@@ -50,7 +50,7 @@
             <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa fa-home fa-fw'></i> 主页 </a><a class="menu-item" href="/posts/"><i class='fas fa-edit'></i> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="https://github.com/samrks" rel="noopener noreffer" target="_blank"><i class='fab fa-github'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa fa-home fa-fw'></i> 主页 </a><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="https://github.com/samrks" rel="noopener noreffer" target="_blank"><i class='fab fa-github'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
                         <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
                         <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
                             <i class="fas fa-search fa-fw"></i>
@@ -93,7 +93,7 @@
                     <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
                         取消
                     </a>
-                </div><a class="menu-item" href="/" title=""><i class='fa fa-home fa-fw'></i>主页</a><a class="menu-item" href="/posts/" title=""><i class='fas fa-edit'></i>文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="https://github.com/samrks" title="" rel="noopener noreffer" target="_blank"><i class='fab fa-github'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                </div><a class="menu-item" href="/" title=""><i class='fa fa-home fa-fw'></i>主页</a><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="https://github.com/samrks" title="" rel="noopener noreffer" target="_blank"><i class='fab fa-github'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
                 <i class="fas fa-adjust fa-fw"></i>
             </a></div>
     </div>
@@ -108,10 +108,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">浅析 MVC</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">浅析 MVC 架构</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://liubingxuan.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Sam</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/mvc/"><i class="far fa-folder fa-fw"></i>MVC</a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-12-12">2020-12-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4122 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;<span id="/mvc-what-is-mvc/" class="leancloud_visitors" data-flag-title="浅析 MVC">
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;<span id="/mvc-what-is-mvc/" class="leancloud_visitors" data-flag-title="浅析 MVC 架构">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
         </div><div class="featured-image"><img
@@ -1004,7 +1004,7 @@
                             <a class="link-to-markdown" href="/mvc-what-is-mvc/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://liubingxuan.xyz/mvc-what-is-mvc/" data-title="浅析 MVC" data-via="ryuukousen2" data-hashtags="MVC,模块化,类,继承"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://liubingxuan.xyz/mvc-what-is-mvc/" data-hashtag="MVC"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://liubingxuan.xyz/mvc-what-is-mvc/" data-title="浅析 MVC"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://liubingxuan.xyz/mvc-what-is-mvc/" data-title="浅析 MVC"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://liubingxuan.xyz/mvc-what-is-mvc/" data-title="浅析 MVC"><i class="fab fa-weibo fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://liubingxuan.xyz/mvc-what-is-mvc/" data-title="浅析 MVC 架构" data-via="ryuukousen2" data-hashtags="MVC,模块化,类,继承"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://liubingxuan.xyz/mvc-what-is-mvc/" data-hashtag="MVC"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://liubingxuan.xyz/mvc-what-is-mvc/" data-title="浅析 MVC 架构"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://liubingxuan.xyz/mvc-what-is-mvc/" data-title="浅析 MVC 架构"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://liubingxuan.xyz/mvc-what-is-mvc/" data-title="浅析 MVC 架构"><i class="fab fa-weibo fa-fw"></i></a></span>
             </div>
         </div>
     </div>

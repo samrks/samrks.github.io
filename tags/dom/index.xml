@@ -1776,7 +1776,7 @@
 </blockquote>
 <p>​</p>]]></description>
 </item><item>
-    <title>DOM 编程 </title>
+    <title>DOM 编程</title>
     <link>https://liubingxuan.xyz/dom-dom-manipulate/</link>
     <pubDate>Wed, 21 Oct 2020 00:41:12 &#43;0800</pubDate>
     <author>作者</author>
@@ -3604,15 +3604,15 @@ querySelectorAll 不会实时根据元素变化，去改变自己。获取过一
     <guid>https://liubingxuan.xyz/dom-dom-vs-jquery/</guid>
     <description><![CDATA[<p>对比 DOM 和 jQuery</p>
 <p>​</p>
-<h2 id="javascript-的组成">JavaScript 的组成</h2>
+<h1 id="javascript-的组成">JavaScript 的组成</h1>
 <ul>
 <li>ECMAScript：JavaScript 的语法标准。包括变量、表达式、运算符、函数、if 语句、for 语句等。</li>
 <li><strong>DOM</strong>：文档对象模型，操作<strong>网页上的元素</strong>的 API。比如让盒子移动、变色、轮播图等。</li>
 <li><strong>BOM</strong>：浏览器对象模型，操作<strong>浏览器部分功能</strong>的 API。比如让浏览器自动滚动。</li>
 </ul>
 <p>​</p>
-<h2 id="事件的三要素">事件的三要素</h2>
-<h3 id="事件源事件事件驱动程序">事件源、事件、事件驱动程序</h3>
+<h1 id="事件的三要素">事件的三要素</h1>
+<h2 id="事件源事件事件驱动程序">事件源、事件、事件驱动程序</h2>
 <p>比如，我用手去按开关，灯亮了。这件事情里，事件源是：开关。事件是：按开关。事件驱动程序是：灯的开和关。</p>
 <p>再比如，网页上弹出一个广告，我点击右上角的<code>X</code>，广告就关闭了。这件事情里，事件源是：<code>X</code>。事件是：onclick。事件驱动程序是：广告关闭了。</p>
 <p>于是我们可以总结出：谁引发的后续事件，谁就是事件源。</p>
@@ -3764,14 +3764,14 @@ querySelectorAll 不会实时根据元素变化，去改变自己。获取过一
 <p>​</p>
 <p>​</p>
 <p>​</p>
-<h2 id="什么是-dom">什么是 DOM</h2>
+<h1 id="什么是-dom">什么是 DOM</h1>
 <p>DOM：Document Object Model，文档对象模型。DOM 为文档提供了结构化表示，并定义了如何通过脚本来访问文档结构。目的其实就是为了能让 js 操作 html 元素而制定的一个规范。</p>
 <p>DOM 就是由节点组成的。</p>
 <p>​</p>
-<h3 id="解析过程">解析过程</h3>
+<h2 id="解析过程">解析过程</h2>
 <p>HTML 加载完毕，渲染引擎会在内存中把 HTML 文档，生成一个 DOM 树，getElementById 是获取内中 DOM 上的元素节点。然后操作的时候修改的是该元素的<strong>属性</strong>。</p>
 <p>​</p>
-<h3 id="dom-树一切都是节点">DOM 树（一切都是节点）</h3>
+<h2 id="dom-树一切都是节点">DOM 树（一切都是节点）</h2>
 <p>DOM 的数据结构如下：</p>
 <p></p>
 <p>上图可知，<strong>在 HTML 当中，一切都是节点</strong>：（非常重要）</p>
@@ -3781,7 +3781,7 @@ querySelectorAll 不会实时根据元素变化，去改变自己。获取过一
 <li><strong>属性节点</strong>：：标签的属性。</li>
 </ul>
 <p>整个 html 文档就是一个文档节点。所有的节点都是 Object。</p>
-<h3 id="dom-可以做什么">DOM 可以做什么</h3>
+<h2 id="dom-可以做什么">DOM 可以做什么</h2>
 <ul>
 <li>找对象（元素节点）</li>
 <li>设置元素的属性值</li>
@@ -3792,17 +3792,17 @@ querySelectorAll 不会实时根据元素变化，去改变自己。获取过一
 <p>​</p>
 <p>​</p>
 <p>​</p>
-<h2 id="什么是-jquery">什么是 jQuery</h2>
-<h3 id="为什么要学-jquery">为什么要学 jQuery</h3>
+<h1 id="什么是-jquery">什么是 jQuery</h1>
+<h2 id="为什么要学-jquery">为什么要学 jQuery</h2>
 <p>究其原因是因为原生 js 在进行 dom 操作时代码量多而且容错性差，不够简练。那么 jQuery 就是为了解决这些问题而出现的。</p>
-<h3 id="jquery-是什么">jQuery 是什么</h3>
+<h2 id="jquery-是什么">jQuery 是什么</h2>
 <ul>
 <li>jQuery 是一个快速、简洁的 JavaScript 框架，是继 Prototype 之后又一个优秀的 JavaScript 代码库（或 JavaScript 框架）。</li>
 <li>jQuery 设计的宗旨是“write Less，Do More”，即倡导写更少的代码，做更多的事情。</li>
 <li>jQuery 的作用：**它封装 JavaScript 常用的功能代码，提供一种简便的 JavaScript 设计模式，优化 HTML 文档操作、事件处理、动画设计和 Ajax 交互。 **</li>
 <li>目前这个阶段，主要介绍如何来使用 jQuery 操作 DOM，其实就是学习 jQuery 封装好的那些功能方法，这些方法叫做 API（Application Programming Interface 应用程序编程接口）。</li>
 </ul>
-<h3 id="对-javascript-进行封装">对 JavaScript 进行封装</h3>
+<h2 id="对-javascript-进行封装">对 JavaScript 进行封装</h2>
 <p><strong>jQuery 对 JavaScript 的哪些方面进行了封装 ？</strong></p>
 <p>比如说 ：</p>
 <ul>
@@ -3829,9 +3829,7 @@ querySelectorAll 不会实时根据元素变化，去改变自己。获取过一
 <p>那我们需要学习它的使用方法(语法/规则)</p>
 </li>
 </ul>
-<hr>
-<hr>
-<h2 id="dom-和-jquery-的基本使用区别">DOM 和 jQuery 的基本使用区别</h2>
+<h1 id="dom-和-jquery-的基本使用区别">DOM 和 jQuery 的基本使用区别</h1>
 <ul>
 <li>这里是网上找的一个，别人总结出来的两者区别，可以阅读一下
 <ul>
@@ -3840,7 +3838,7 @@ querySelectorAll 不会实时根据元素变化，去改变自己。获取过一
 </ul>
 </li>
 </ul>
-<h3 id="事件处理的区别">事件处理的区别</h3>
+<h2 id="事件处理的区别">事件处理的区别</h2>
 <ul>
 <li><strong>事件源</strong>
 <ol>
@@ -3987,7 +3985,7 @@ querySelectorAll 不会实时根据元素变化，去改变自己。获取过一
 <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="dom对象-和-jquery对象">DOM对象 和 jQuery对象</h3>
+</div><h2 id="dom-对象和-jquery-对象">DOM 对象和 jQuery 对象</h2>
 <ul>
 <li>
 <p>DOM对象，即是我们用传统的方法（javascript）获得的对象</p>
@@ -4095,7 +4093,7 @@ querySelectorAll 不会实时根据元素变化，去改变自己。获取过一
 </span><span class="c1"></span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="入口函数">入口函数</h3>
+</div><h2 id="入口函数">入口函数</h2>
 <h4 id="入口函数的功能">入口函数的功能</h4>
 <blockquote>
 <p>入口函数的作用是 页面加载完成后，再执行 function（）{ 里面的代码 } ，有了入口函数，就可以实现将 js代码 写在页面基本结构的 标签 之前</p>
@@ -7074,9 +7072,7 @@ querySelectorAll 不会实时根据元素变化，去改变自己。获取过一
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><hr>
-<hr>
-<h1 id="jquery-补充">jQuery 补充</h1>
+</div><h1 id="jquery-补充">jQuery 补充</h1>
 <h2 id="mouseover-和-mouseout-区别">mouseover 和 mouseout 区别</h2>
 <p></p>
 <div class="highlight"><div class="chroma">

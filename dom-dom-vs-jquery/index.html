@@ -9,12 +9,11 @@
 <meta property="og:description" content="区分 DOM 和 jQuery 的 API" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://liubingxuan.xyz/dom-dom-vs-jquery/" />
-<meta property="og:image" content="https://liubingxuan.xyz/favicon-32x32.png"/>
+<meta property="og:image" content="https://liubingxuan.xyz/dom-dom-vs-jquery/featured-image-preview.jpg"/>
 <meta property="article:published_time" content="2020-05-26T09:26:03+08:00" />
 <meta property="article:modified_time" content="2020-05-26T15:04:34+08:00" />
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://liubingxuan.xyz/favicon-32x32.png"/>
-
+<meta name="twitter:image" content="https://liubingxuan.xyz/dom-dom-vs-jquery/featured-image-preview.jpg"/>
 <meta name="twitter:title" content="DOM vs jQuery（API篇）"/>
 <meta name="twitter:description" content="区分 DOM 和 jQuery 的 API"/>
 <meta name="application-name" content="Sam&#39;s Garage">
@@ -29,7 +28,12 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/liubingxuan.xyz\/dom-dom-vs-jquery\/"
-        },"genre": "posts","keywords": "DOM, jQuery, API","wordcount":  23113 ,
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/liubingxuan.xyz\/dom-dom-vs-jquery\/featured-image-preview.jpg",
+                            "width":  1280 ,
+                            "height":  384 
+                        }],"genre": "posts","keywords": "DOM, jQuery, API","wordcount":  23106 ,
         "url": "https:\/\/liubingxuan.xyz\/dom-dom-vs-jquery\/","datePublished": "2020-05-26T09:26:03+08:00","dateModified": "2020-05-26T15:04:34+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -46,7 +50,7 @@
             <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa fa-home fa-fw'></i> 主页 </a><a class="menu-item" href="/posts/"><i class='fas fa-edit'></i> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="https://github.com/samrks" rel="noopener noreffer" target="_blank"><i class='fab fa-github'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa fa-home fa-fw'></i> 主页 </a><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="https://github.com/samrks" rel="noopener noreffer" target="_blank"><i class='fab fa-github'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
                         <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
                         <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
                             <i class="fas fa-search fa-fw"></i>
@@ -89,7 +93,7 @@
                     <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
                         取消
                     </a>
-                </div><a class="menu-item" href="/" title=""><i class='fa fa-home fa-fw'></i>主页</a><a class="menu-item" href="/posts/" title=""><i class='fas fa-edit'></i>文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="https://github.com/samrks" title="" rel="noopener noreffer" target="_blank"><i class='fab fa-github'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                </div><a class="menu-item" href="/" title=""><i class='fa fa-home fa-fw'></i>主页</a><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="https://github.com/samrks" title="" rel="noopener noreffer" target="_blank"><i class='fab fa-github'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
                 <i class="fas fa-adjust fa-fw"></i>
             </a></div>
     </div>
@@ -106,50 +110,60 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">DOM vs jQuery（API篇）</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://liubingxuan.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Sam</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/js%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3/"><i class="far fa-folder fa-fw"></i>JS编程接口</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-05-26">2020-05-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 23113 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-05-26">2020-05-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 23106 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 47 分钟&nbsp;<span id="/dom-dom-vs-jquery/" class="leancloud_visitors" data-flag-title="DOM vs jQuery（API篇）">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
-        </div><div class="details toc" id="toc-static"  kept="">
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/dom-dom-vs-jquery/featured-image-preview.jpg"
+        data-srcset="/dom-dom-vs-jquery/featured-image-preview.jpg, /dom-dom-vs-jquery/featured-image-preview.jpg 1.5x, /dom-dom-vs-jquery/featured-image-preview.jpg 2x"
+        data-sizes="auto"
+        alt="/dom-dom-vs-jquery/featured-image-preview.jpg"
+        title="区分 DOM 和 jQuery 的 API" /></div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#javascript-的组成">JavaScript 的组成</a></li>
+    <li><a href="#事件的三要素">事件的三要素</a>
       <ul>
-        <li><a href="#javascript-的组成">JavaScript 的组成</a></li>
-        <li><a href="#事件的三要素">事件的三要素</a>
+        <li><a href="#事件源事件事件驱动程序">事件源、事件、事件驱动程序</a></li>
+      </ul>
+    </li>
+    <li><a href="#什么是-dom">什么是 DOM</a>
+      <ul>
+        <li><a href="#解析过程">解析过程</a></li>
+        <li><a href="#dom-树一切都是节点">DOM 树（一切都是节点）</a></li>
+        <li><a href="#dom-可以做什么">DOM 可以做什么</a></li>
+      </ul>
+    </li>
+    <li><a href="#什么是-jquery">什么是 jQuery</a>
+      <ul>
+        <li><a href="#为什么要学-jquery">为什么要学 jQuery</a></li>
+        <li><a href="#jquery-是什么">jQuery 是什么</a></li>
+        <li><a href="#对-javascript-进行封装">对 JavaScript 进行封装</a></li>
+      </ul>
+    </li>
+    <li><a href="#dom-和-jquery-的基本使用区别">DOM 和 jQuery 的基本使用区别</a>
+      <ul>
+        <li><a href="#事件处理的区别">事件处理的区别</a>
           <ul>
-            <li><a href="#事件源事件事件驱动程序">事件源、事件、事件驱动程序</a></li>
-          </ul>
-        </li>
-        <li><a href="#什么是-dom">什么是 DOM</a>
-          <ul>
-            <li><a href="#解析过程">解析过程</a></li>
-            <li><a href="#dom-树一切都是节点">DOM 树（一切都是节点）</a></li>
-            <li><a href="#dom-可以做什么">DOM 可以做什么</a></li>
-          </ul>
-        </li>
-        <li><a href="#什么是-jquery">什么是 jQuery</a>
-          <ul>
-            <li><a href="#为什么要学-jquery">为什么要学 jQuery</a></li>
-            <li><a href="#jquery-是什么">jQuery 是什么</a></li>
-            <li><a href="#对-javascript-进行封装">对 JavaScript 进行封装</a></li>
-          </ul>
-        </li>
-        <li><a href="#dom-和-jquery-的基本使用区别">DOM 和 jQuery 的基本使用区别</a>
-          <ul>
-            <li><a href="#事件处理的区别">事件处理的区别</a></li>
             <li><a href="#完整代码书写步骤">完整代码书写步骤</a>
               <ul>
                 <li><a href="#dom书写格式">DOM书写格式</a></li>
                 <li><a href="#jquery书写格式">jQuery书写格式</a></li>
               </ul>
             </li>
-            <li><a href="#dom对象-和-jquery对象">DOM对象 和 jQuery对象</a></li>
-            <li><a href="#入口函数">入口函数</a>
+          </ul>
+        </li>
+        <li><a href="#dom-对象和-jquery-对象">DOM 对象和 jQuery 对象</a></li>
+        <li><a href="#入口函数">入口函数</a>
+          <ul>
+            <li>
               <ul>
                 <li><a href="#入口函数的功能">入口函数的功能</a></li>
                 <li><a href="#原生-js-中的入口函数的写法">原生 JS 中的入口函数的写法</a></li>
@@ -394,15 +408,15 @@
 </nav></div>
             </div><div class="content" id="content"><p>对比 DOM 和 jQuery</p>
 <p>​</p>
-<h2 id="javascript-的组成">JavaScript 的组成</h2>
+<h1 id="javascript-的组成">JavaScript 的组成</h1>
 <ul>
 <li>ECMAScript：JavaScript 的语法标准。包括变量、表达式、运算符、函数、if 语句、for 语句等。</li>
 <li><strong>DOM</strong>：文档对象模型，操作<strong>网页上的元素</strong>的 API。比如让盒子移动、变色、轮播图等。</li>
 <li><strong>BOM</strong>：浏览器对象模型，操作<strong>浏览器部分功能</strong>的 API。比如让浏览器自动滚动。</li>
 </ul>
 <p>​</p>
-<h2 id="事件的三要素">事件的三要素</h2>
-<h3 id="事件源事件事件驱动程序">事件源、事件、事件驱动程序</h3>
+<h1 id="事件的三要素">事件的三要素</h1>
+<h2 id="事件源事件事件驱动程序">事件源、事件、事件驱动程序</h2>
 <p>比如，我用手去按开关，灯亮了。这件事情里，事件源是：开关。事件是：按开关。事件驱动程序是：灯的开和关。</p>
 <p>再比如，网页上弹出一个广告，我点击右上角的<code>X</code>，广告就关闭了。这件事情里，事件源是：<code>X</code>。事件是：onclick。事件驱动程序是：广告关闭了。</p>
 <p>于是我们可以总结出：谁引发的后续事件，谁就是事件源。</p>
@@ -554,14 +568,14 @@
 <p>​</p>
 <p>​</p>
 <p>​</p>
-<h2 id="什么是-dom">什么是 DOM</h2>
+<h1 id="什么是-dom">什么是 DOM</h1>
 <p>DOM：Document Object Model，文档对象模型。DOM 为文档提供了结构化表示，并定义了如何通过脚本来访问文档结构。目的其实就是为了能让 js 操作 html 元素而制定的一个规范。</p>
 <p>DOM 就是由节点组成的。</p>
 <p>​</p>
-<h3 id="解析过程">解析过程</h3>
+<h2 id="解析过程">解析过程</h2>
 <p>HTML 加载完毕，渲染引擎会在内存中把 HTML 文档，生成一个 DOM 树，getElementById 是获取内中 DOM 上的元素节点。然后操作的时候修改的是该元素的<strong>属性</strong>。</p>
 <p>​</p>
-<h3 id="dom-树一切都是节点">DOM 树（一切都是节点）</h3>
+<h2 id="dom-树一切都是节点">DOM 树（一切都是节点）</h2>
 <p>DOM 的数据结构如下：</p>
 <p><img src="https://i.loli.net/2020/10/26/jiv6FJKgPLk4nNh.png" alt="image-20201026123934479" style="zoom:80%;" /></p>
 <p>上图可知，<strong>在 HTML 当中，一切都是节点</strong>：（非常重要）</p>
@@ -571,7 +585,7 @@
 <li><strong>属性节点</strong>：：标签的属性。</li>
 </ul>
 <p>整个 html 文档就是一个文档节点。所有的节点都是 Object。</p>
-<h3 id="dom-可以做什么">DOM 可以做什么</h3>
+<h2 id="dom-可以做什么">DOM 可以做什么</h2>
 <ul>
 <li>找对象（元素节点）</li>
 <li>设置元素的属性值</li>
@@ -582,17 +596,17 @@
 <p>​</p>
 <p>​</p>
 <p>​</p>
-<h2 id="什么是-jquery">什么是 jQuery</h2>
-<h3 id="为什么要学-jquery">为什么要学 jQuery</h3>
+<h1 id="什么是-jquery">什么是 jQuery</h1>
+<h2 id="为什么要学-jquery">为什么要学 jQuery</h2>
 <p>究其原因是因为原生 js 在进行 dom 操作时代码量多而且容错性差，不够简练。那么 jQuery 就是为了解决这些问题而出现的。</p>
-<h3 id="jquery-是什么">jQuery 是什么</h3>
+<h2 id="jquery-是什么">jQuery 是什么</h2>
 <ul>
 <li>jQuery 是一个快速、简洁的 JavaScript 框架，是继 Prototype 之后又一个优秀的 JavaScript 代码库（或 JavaScript 框架）。</li>
 <li>jQuery 设计的宗旨是“write Less，Do More”，即倡导写更少的代码，做更多的事情。</li>
 <li>jQuery 的作用：**它封装 JavaScript 常用的功能代码，提供一种简便的 JavaScript 设计模式，优化 HTML 文档操作、事件处理、动画设计和 Ajax 交互。 **</li>
 <li>目前这个阶段，主要介绍如何来使用 jQuery 操作 DOM，其实就是学习 jQuery 封装好的那些功能方法，这些方法叫做 API（Application Programming Interface 应用程序编程接口）。</li>
 </ul>
-<h3 id="对-javascript-进行封装">对 JavaScript 进行封装</h3>
+<h2 id="对-javascript-进行封装">对 JavaScript 进行封装</h2>
 <p><strong>jQuery 对 JavaScript 的哪些方面进行了封装 ？</strong></p>
 <p>比如说 ：</p>
 <ul>
@@ -619,9 +633,7 @@
 <p>那我们需要学习它的使用方法(语法/规则)</p>
 </li>
 </ul>
-<hr>
-<hr>
-<h2 id="dom-和-jquery-的基本使用区别">DOM 和 jQuery 的基本使用区别</h2>
+<h1 id="dom-和-jquery-的基本使用区别">DOM 和 jQuery 的基本使用区别</h1>
 <ul>
 <li>这里是网上找的一个，别人总结出来的两者区别，可以阅读一下
 <ul>
@@ -630,7 +642,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="事件处理的区别">事件处理的区别</h3>
+<h2 id="事件处理的区别">事件处理的区别</h2>
 <ul>
 <li><strong>事件源</strong>
 <ol>
@@ -777,7 +789,7 @@
 <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="dom对象-和-jquery对象">DOM对象 和 jQuery对象</h3>
+</div><h2 id="dom-对象和-jquery-对象">DOM 对象和 jQuery 对象</h2>
 <ul>
 <li>
 <p>DOM对象，即是我们用传统的方法（javascript）获得的对象</p>
@@ -885,7 +897,7 @@
 </span><span class="c1"></span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="入口函数">入口函数</h3>
+</div><h2 id="入口函数">入口函数</h2>
 <h4 id="入口函数的功能">入口函数的功能</h4>
 <blockquote>
 <p>入口函数的作用是 页面加载完成后，再执行 function（）{ 里面的代码 } ，有了入口函数，就可以实现将 js代码 写在页面基本结构的 标签 之前</p>
@@ -3941,9 +3953,7 @@
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><hr>
-<hr>
-<h1 id="jquery-补充">jQuery 补充</h1>
+</div><h1 id="jquery-补充">jQuery 补充</h1>
 <h2 id="mouseover-和-mouseout-区别">mouseover 和 mouseout 区别</h2>
 <p><img
         class="lazyload"

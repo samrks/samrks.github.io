@@ -126,9 +126,9 @@ squareList[0].getArea === squareList[1].getArea   // false
 
 <img src="https://i.loli.net/2020/09/03/CIS2vNQlDfA5KMi.png" alt="内存图-循环结束后" style="zoom:80%;" />
 
-```js
 <img src="https://i.loli.net/2020/09/03/kQiTnhXL92HNabF.jpg" alt="内存图-循环过程" />
-```
+
+
 
 >   会画内存图的人， 比其他人理解的更好
 >

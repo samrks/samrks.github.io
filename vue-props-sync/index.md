@@ -1,37 +1,38 @@
-# Vue 中的 .sync 修饰符有什么用
+# Vue 组件传值：自定义事件 🆚 修饰符 .sync
 
 
 <!--more-->
 
+## 前言
+
+>   [sync 官方文档](https://cn.vuejs.org/v2/guide/components-custom-events.html#sync-%E4%BF%AE%E9%A5%B0%E7%AC%A6)
+
+.sync 是「实现 Vue 组件间传值」的一个语法糖
+
++   先说「实现组件传值的通用方案 —— 自定义事件」
++   再说「如果用 .sync 来简化组件传值」
 
 
-## Vue 中的 .sync 修饰符有什么用
 
->   [官方文档](https://cn.vuejs.org/v2/guide/components-custom-events.html#sync-%E4%BF%AE%E9%A5%B0%E7%AC%A6)
-
-+   .sync 是「实现 Vue 组件间传值」的一个语法糖
-
-
-​	
-
-### 组件间传值的实现
+## 通过「自定义事件」实现组件间传值
 
 >   props 传值遵循[单向数据流](https://cn.vuejs.org/v2/guide/components-props.html#%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81)原则：父级 prop 的更新会向下流动到子组件中，但是反过来则不行。这样可以防止子组件意外变更父组件的数据，从而导致你的应用的数据流向难以理解。
 
-#### 思路
+### 思路
 
 +   数据从父组件传入子组件，我们无法在子组件中直接修改 props 传入的外部数据，只能在父组件中进行修改，而更新后的数据会自动流向子组件
-+   [props](https://cn.vuejs.org/v2/guide/components-props.html#ad) 加 [vm.$emit](https://cn.vuejs.org/v2/api/#vm-emit) 实现组件传值
++   # [props](https://cn.vuejs.org/v2/guide/components-props.html#ad) 加 [vm.$emit](https://cn.vuejs.org/v2/api/#vm-emit) 实现组件传值
+    
     +   props 用于接收父组件的数据
     +   vm.$emit（自定义事件）用于触发父组件事件，并传参
 
-#### 具体实现
+### 具体实现
 
 >   事件的发布、订阅
 
 [在线演示](https://codesandbox.io/s/objective-cloud-qnzvy?file=/src/Parent.vue)
 
-```vue
+```html
 <!-- Parent.vue -->
 <template>
   <div class="app">
@@ -43,19 +44,19 @@
 </template>
 
 <script>
-import Child from "./Child.vue"
-export default {
-  data() {
-    return {
-      total: 10000,
-    }
-  },
-  components: { Child }, 
-}
+  import Child from "./Child.vue"
+  export default {
+    data() {
+      return {
+        total: 10000,
+      }
+    },
+    components: { Child }, 
+  }
 </script>
 ```
 
-```vue
+```html
 <!-- Child.vue -->
 <template>
   <div class="child">
@@ -65,9 +66,9 @@ export default {
 </template>
 
 <script>
-export default {
-  props: ["money"], // 接收到 money 属性
-}
+  export default {
+    props: ["money"], // 接收到 money 属性
+  }
 </script>
 ```
 
@@ -77,32 +78,32 @@ export default {
 
 ​	
 
-### .sync 的使用
+## 通过「.sync」实现组件传值
 
-```vue
+```html
 <!-- Parent.vue -->
 <Child :属性名.sync="数据" />
 ```
 
-#### 示例
+### 示例
 
 >   [在线演示](https://codesandbox.io/s/sweet-pine-pij57?file=/src/Parent.vue)
 
-```vue
+```html
 <!-- Parent.vue -->
 <Child :money.sync="total" />
 ```
 
 👆 会扩展出一个完整的事件绑定 👇
 
-```vue
+```html
 <!-- Parent.vue -->
 <Child :money="total"  @update:money="total = $event" />
 ```
 
 >   当子组件需要更新「数据 total 」时，它需要显式的触发一个更新事件「`update:属性名`」
 
-```
+```html
 // Child.vue
 this.$emit('update:属性名', 更新数据)
 👇
@@ -111,10 +112,8 @@ this.$emit('update:属性名', 更新数据)
 
 ​	
 
-​	
+## 相关文章
 
-## 参考
+[深入理解 Vue 修饰符 .sync](https://www.jianshu.com/p/6b062af8cf01)
 
-https://www.jianshu.com/p/6b062af8cf01
-
-https://segmentfault.com/a/1190000010700521
+[如何理解 Vue 的 .sync 修饰符](https://segmentfault.com/a/1190000010700521)

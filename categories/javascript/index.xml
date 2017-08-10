@@ -7158,15 +7158,8 @@ forEach 只是个普通函数，而 for 是个 关键字，关键字的功能可
 </div>
 </div><p></p>
 <p></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://i.loli.net/2020/09/03/kQiTnhXL92HNabF.jpg&#34;</span> <span class="nx">alt</span><span class="o">=</span><span class="s2">&#34;内存图-循环过程&#34;</span> <span class="o">/&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><blockquote>
+<p></p>
+<blockquote>
 <p>会画内存图的人， 比其他人理解的更好</p>
 <ul>
 <li>内存中，一共创建了 24 个函数，其中 22 个都是多余重复的</li>

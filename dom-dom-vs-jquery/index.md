@@ -5,7 +5,7 @@
 
 ​		
 
-## JavaScript 的组成
+# JavaScript 的组成
 
 - ECMAScript：JavaScript 的语法标准。包括变量、表达式、运算符、函数、if 语句、for 语句等。
 - **DOM**：文档对象模型，操作**网页上的元素**的 API。比如让盒子移动、变色、轮播图等。
@@ -15,9 +15,9 @@
 
 ​	
 
-## 事件的三要素
+# 事件的三要素
 
-### 事件源、事件、事件驱动程序
+## 事件源、事件、事件驱动程序
 
 比如，我用手去按开关，灯亮了。这件事情里，事件源是：开关。事件是：按开关。事件驱动程序是：灯的开和关。
 
@@ -72,7 +72,7 @@
 
 ​	
 
-## 什么是 DOM
+# 什么是 DOM
 
 DOM：Document Object Model，文档对象模型。DOM 为文档提供了结构化表示，并定义了如何通过脚本来访问文档结构。目的其实就是为了能让 js 操作 html 元素而制定的一个规范。
 
@@ -80,13 +80,13 @@ DOM 就是由节点组成的。
 
 ​	
 
-### 解析过程
+## 解析过程
 
 HTML 加载完毕，渲染引擎会在内存中把 HTML 文档，生成一个 DOM 树，getElementById 是获取内中 DOM 上的元素节点。然后操作的时候修改的是该元素的**属性**。
 
 ​	
 
-### DOM 树（一切都是节点）
+## DOM 树（一切都是节点）
 
 DOM 的数据结构如下：
 
@@ -102,7 +102,7 @@ DOM 的数据结构如下：
 
 
 
-### DOM 可以做什么
+## DOM 可以做什么
 
 - 找对象（元素节点）
 - 设置元素的属性值
@@ -116,24 +116,20 @@ DOM 的数据结构如下：
 
 ​	
 
-## 什么是 jQuery
+# 什么是 jQuery
 
-### 为什么要学 jQuery
+## 为什么要学 jQuery
 
 究其原因是因为原生 js 在进行 dom 操作时代码量多而且容错性差，不够简练。那么 jQuery 就是为了解决这些问题而出现的。
 
-
-
-### jQuery 是什么
+## jQuery 是什么
 
 + jQuery 是一个快速、简洁的 JavaScript 框架，是继 Prototype 之后又一个优秀的 JavaScript 代码库（或 JavaScript 框架）。
 + jQuery 设计的宗旨是“write Less，Do More”，即倡导写更少的代码，做更多的事情。
 + jQuery 的作用：**它封装 JavaScript 常用的功能代码，提供一种简便的 JavaScript 设计模式，优化 HTML 文档操作、事件处理、动画设计和 Ajax 交互。 **
 + 目前这个阶段，主要介绍如何来使用 jQuery 操作 DOM，其实就是学习 jQuery 封装好的那些功能方法，这些方法叫做 API（Application Programming Interface 应用程序编程接口）。
 
-
-
-### 对 JavaScript 进行封装
+## 对 JavaScript 进行封装
 
 **jQuery 对 JavaScript 的哪些方面进行了封装 ？**
 
@@ -159,15 +155,7 @@ DOM 的数据结构如下：
 
 
 
----
-
----
-
-
-
-
-
-## DOM 和 jQuery 的基本使用区别
+# DOM 和 jQuery 的基本使用区别
 
 + 这里是网上找的一个，别人总结出来的两者区别，可以阅读一下
     + [jQuery与DOM的区别](https://blog.csdn.net/u012060033/article/details/90295613)
@@ -175,7 +163,7 @@ DOM 的数据结构如下：
 
 
 
-### 事件处理的区别
+## 事件处理的区别
 
 - **事件源**
     1. 触发事件的对象
@@ -270,7 +258,7 @@ Uncaught ReferenceError: $ is not defined -->
 
 
 
-### DOM对象 和 jQuery对象
+## DOM 对象和 jQuery 对象
 
 + DOM对象，即是我们用传统的方法（javascript）获得的对象
 
@@ -333,7 +321,7 @@ Uncaught ReferenceError: $ is not defined -->
 
 
 
-### 入口函数
+## 入口函数
 
 #### 入口函数的功能
 
@@ -2433,19 +2421,7 @@ for (var i = 0; i < lis.length; i++) {
 
 
 
----
-
----
-
-
-
-
-
-
-
 # jQuery 补充
-
-
 
 ## mouseover 和 mouseout 区别
 

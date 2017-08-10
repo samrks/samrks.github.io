@@ -20,7 +20,7 @@
 
 >   每节的准备工作都差不多，溜溜的用起来
 
-新建项目目录 [dom-2](D:\Jirengu\第1阶段\7-JS编程接口\3-jQuery中的设计模型（上）)   >    src    >    index.html 、 main.js 、 jquery.js
+新建项目目录 dom-2 >    src    >    index.html 、 main.js 、 jquery.js
 
 ### index.html
 
@@ -80,10 +80,10 @@ parcel src/index.html
 
 -   `jQuery(选择器) ` 用于获取对应的元素
 -   但它却不返回这些元素
--   相反，它返回一个对象，称为 **jQuery 构造出来的对象**    [（ 也就是最初代码中的那个 api ）]()
+-   相反，它返回一个对象，称为 **jQuery 构造出来的对象** （也就是上节手写DOM中的那个 api）
 -   这个对象可以操作对应的元素
--   听不懂？直接写代码！
--   [本地项目dom-2](D:\Jirengu\第1阶段\7-JS编程接口\3-jQuery中的设计模型（上）)
+-   听不懂？直接看代码！
+-   [本地项目dom-2](第1阶段\7-JS编程接口\3-jQuery中的设计模型（上）)
 
 ​	
 
@@ -120,10 +120,10 @@ window.jQuery = function (selector) {
       // elements 是 addClass 这个函数外部的变量
       for (let i = 0; i < elements.length; i++) { // 遍历所有获取到的元素，添加类名
         elements[i].classList.add(className)
-        
       }
       // return null
-      return api  // 返回值是 api，而 api 里有很多方法，所以可以通过返回值继续调用.addClass 形成一个链条
+      return api // 方法仍返回 api，api里又包含很多方法，可通过返回值继续调用.addClass 形成一个链条📌
+      // 这就是链式风格 📌
     }
   }
   return api
@@ -133,11 +133,12 @@ window.jQuery = function (selector) {
 #### main.js
 
 ```js
-const api = jQuery(".test") // 通过选择器获取到元素，但不返回该元素，返回 api 对象 (api对象里有很多方法)
+const api = jQuery(".test") // 通过选择器获取到元素，但返回的不是该元素
+// 而是返回一个 api 对象，api 里包含很多可以控制该元素的方法
 // console.log(api.addClass)
 // 遍历所有获取到的元素，添加 .red 类名
 api.addClass("red").addClass('blue')
-// api.addClass 返回值是 api，而 api 里有很多方法，所以可以通过返回值继续调用.addClass 形成一个链条
+// api.addClass 方法的返回值仍是 api，所以可以通过返回值继续调用.addClass 形成一个链条
 ```
 
 <img src="https://i.loli.net/2020/10/24/cHqnrKFDk2jbIsi.png" alt="image-20201024184318522" style="zoom: 80%;" />
@@ -159,7 +160,6 @@ window.jQuery = function (selector) {
     addClass(className) {
       for (let i = 0; i < elements.length; i++) { 
         elements[i].classList.add(className)
-        
       }
       // return api
       return this  
@@ -264,8 +264,8 @@ jQuery(".test").addClass("red").addClass('blue').addClass('green')
 ### 小总结
 
 +   所谓高级的前端代码，就是把中间过程全部省掉了
-+   把所有多次一举、无关紧要的东西，都尽量删掉。
-+   最后只留下一个最少信息的、最精炼的代码。
++   把所有多次一举、无关紧要的东西，都尽量删掉
++   最后只留下一个最少信息的、最精炼的代码
 +   虽然代码特别简洁、优雅，但对于学习者来说，就是看不懂。（说明「源码」真的不适合学习者）
 
 ​	
@@ -276,7 +276,7 @@ jQuery(".test").addClass("red").addClass('blue').addClass('green')
 
 >   讲到这里可能会有这个疑问 👆
 
->   构造函数的特点：① 前面有 new      ② 构造出对象
+>   构造函数的特点：① 前面有 new、 ② 构造出对象
 >
 >   +   结合这两个特点，可以认为  jQuery 是构造函数，也可以认为不是构造函数
 
@@ -303,11 +303,11 @@ jQuery(".test").addClass("red").addClass('blue').addClass('green')
 
 ### 口头约定 👄
 
->   [前面](# 特殊函数 jQuery)提到：jQuery 函数，返回一个对象，称为 **jQuery 构造出来的对象 ** [（ 也就是最初代码中的那个 api ）]()
+>   [前面](# 特殊函数 jQuery)提到：jQuery 函数，返回一个对象，称为 **jQuery 构造出来的对象 **  **（ 也就是最初代码中的那个 api ）**
 
 口头约定：
 
-+   以后说到 **jQuery对象** 就代指 [jQuery函数 构造出来的对象]()   （为了省事，少说几个字）
++   以后说到 **jQuery对象** 就代指 **jQuery 函数构造出来的对象**  （为了省事，少说几个字）
 +   不是说 「 jQuery 这个对象 」
 +   一定要记清楚
 
@@ -330,7 +330,7 @@ jQuery(".test").addClass("red").addClass('blue').addClass('green')
 
 >   链式风格
 
->   📌📌📌📌📌📌📌📌更多代码实现、解析、注释，请查看[本地项目dom-2](D:\Jirengu\第1阶段\7-JS编程接口\3-jQuery中的设计模型（上）) 📌📌📌📌📌📌📌📌
+>   📌📌📌📌📌📌📌📌更多代码实现、解析、注释，请查看[本地项目 dom-2](第1阶段\7-JS编程接口\3-jQuery中的设计模型（上）) 📌📌📌📌📌📌📌📌
 
 ### 查
 
@@ -348,7 +348,7 @@ jQuery('.red').each(fn)       // 遍历并对每个元素执行fn
 
 #### 代码
 
-[本地项目dom-2](D:\Jirengu\第1阶段\7-JS编程接口\3-jQuery中的设计模型（上）)
+[本地项目dom-2](第1阶段\7-JS编程接口\3-jQuery中的设计模型（上）)
 
 ```js
 window.jQuery = function (selectorOrArray) {
@@ -410,7 +410,7 @@ window.jQuery = function (selectorOrArray) {
       array.oldApi = this
       return jQuery(array)
     },
-    /********************* 下面的课上未讲 *********************/
+    /********************* 下面是前面没提到的 *********************/
     /*
     siblings()
     index()

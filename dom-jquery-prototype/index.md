@@ -58,10 +58,6 @@ const $div = $('div#test')
 
 ​	
 
-​	
-
-
-
 ## jQuery 代码
 
 >   当前已经实现的代码
@@ -193,7 +189,7 @@ api2.__proto__ === jQuery.prototype
 
 ​	
 
-## 使用原型 改造 jQuery ⭕️
+## 使用原型改造 jQuery ⭕️
 
 ### 第一版 jQuery 代码
 
@@ -229,7 +225,7 @@ window.$ = window.jQuery = function (selectorOrArray) {
 >
 >   别忘了 constructor
 
-+   这里是直接给 jQuery.prototype 赋新值，这样写很方便，但是会导致原本原型上的 [constructor]() 被覆盖丢失，所以要手动加回去 [constructor]()
++   这里是直接给 jQuery.prototype 赋新值，这样写很方便，但是会导致原本原型上的 [constructor]() 被覆盖丢失，所以要手动加回去 **`constructor`**
 
 ```js
 jQuery.prototype = {
@@ -299,7 +295,7 @@ jQuery.prototype = {
 
 +   那就在 api 上添加一个属性 elements，用来保存  jQuery 创建的 elements
 
-+   在原型里的函数中，通过 [this.elements]()，就可以访问到这个【目标元素的数组】，加以操作
++   在原型里的函数中，通过 **`this.elements`**，就可以访问到这个【目标元素的数组】，加以操作
 
 >   综上：
 >
@@ -316,7 +312,7 @@ end(){
 }
 ```
 
-[完整代码](D:\Jirengu\第1阶段\7-JS编程接口\4-jQuery中的设计模型（下）\dom-2-github-prototype\src)
+[完整代码](第1阶段\7-JS编程接口\4-jQuery中的设计模型（下）\dom-2-github-prototype\src)
 
 +   [Object.assign](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)：把后面对象的属性，复制到前面的对象上（注意是浅复制，JS 本身没有深复制）
 
@@ -372,7 +368,7 @@ jQuery.prototype = {  // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 函数在这里
 }
 ```
 
-+   [完整代码](D:\Jirengu\第1阶段\7-JS编程接口\4-jQuery中的设计模型（下）\dom-2-github-prototype\src)
++   [完整代码](第1阶段\7-JS编程接口\4-jQuery中的设计模型（下）\dom-2-github-prototype\src)
 
 	
 
@@ -558,22 +554,18 @@ jQuery.fn = jQuery.prototype = {
 
 ​		
 
-## jQuery 有多牛 X 
+## jQuery 有多牛 X
 
 >   它是目前前端**最长寿**的库，2006年发布 （已经14岁了）
 >
->   +    vue 、react 也才四五岁
->   +    在前端历史上，有数以万计的库，最终能够活下来并一直被使用的库，很少很少。
+>   +    Vue 、React 也才五六岁
+>   +    在前端历史上，有数以万计的库，最终能够活下来并一直被使用的库，很少很少
 >   +    jQuery 是目前最长寿的一个
 
 >   它是世界上使用**最广泛**的库，[全球80%的网站](https://trends.builtwith.com/javascript/jQuery)在用
 >
 >   +   可能现在新的科技公司不会再用 jQuery
 >   +   但是老牌大公司，像是阿里巴巴、淘宝，一直都在用 jQuery
-
-
-
-### 设计模式？
 
 >   为什么 jQuery 这么牛 X   ？
 >
@@ -583,10 +575,10 @@ jQuery.fn = jQuery.prototype = {
 
 ### jQuery 用到了哪些设计模式
 
--   **不用 new 的构造函数**（jQuery做到了），这个模式没有专门的名字
+-   **不用 new 的构造函数**（jQuery 做到了），这个模式没有专门的名字
 
     ```js
-    const api = new JQuery('.test')   =>   const api = $('.test')  //在jQuery之前没人想到可以这样
+    const api = new JQuery('.test')  =>  const api = $('.test')  // 在jQuery之前没人想到可以这样
     ```
 
 -   \$(**支持多种参数**)，这个模式叫做**重载**
@@ -613,7 +605,7 @@ jQuery.fn = jQuery.prototype = {
 
 -   jQuery **针对不同环境使用不同代码**，这叫**适配器**
 
-    -   电源适配器：你在日本，就调整成 110v，在中国，就调整成220v
+    -   如电源适配器：你在日本，就调整成 110v，在中国，就调整成 220v
 
     ```js
     if(){
@@ -626,20 +618,15 @@ jQuery.fn = jQuery.prototype = {
 
 ​	
 
-​	
-
 ### 设计模式到底是啥
 
--   老子这个代码写得太漂亮了，别人肯定也用得到（去掉 new、重载、闭包、getter/setter、别名、适配器…）
+-   老子这个代码写得太漂亮了，别人肯定也用得到
 -   那就给这种写法取个名字吧，比如：适配器模式（if else）
 -   设计模式，就是对通用代码取个名字而已
-    -   实际上就是程序员的黑话、行话
-
-
-​	
+    -   实际上相当于程序员的黑话、行话
 
 >   -   **适配器**：就是针对不同环境使用不同代码
->   -   **别名**：让一个名字等于另外一个名字、
+>   -   **别名**：让一个名字等于另外一个名字
 >   -   **getter/setter**：一个函数，既可以get 、也可以 set （可读可写）
 >   -   **闭包隐藏细节**：生成一个变量（elements），一个函数（addClass）去读这个变量
 >   -   **重载**：一个函数支持多种形式的参数
@@ -665,9 +652,7 @@ jQuery.fn = jQuery.prototype = {
 
 -   总结你的代码，把写得好的地方抽象出来
 
-    -   看看符合哪个设计模式
-
-        （并不是知道设计模式才这么写的，而是写完后发现，居然用到了设计模式）
+    -   看看符合哪个设计模式（并不是知道设计模式才这么写的，而是写完后发现，居然用到了设计模式）
 
     -   你就可以告诉别人你用到了这几个设计模式
 
@@ -675,17 +660,15 @@ jQuery.fn = jQuery.prototype = {
 
 
 
-​		
-
 ​	
 
 ### 有人说不用学 jQuery
 
 #### 真相
 
--   jQuery 这么简单、经典的库，为什么不学？
--   通过 jQuery 可以学会很多封装技巧，为什么不学？
-    -   把一个变量放到函数里面、暴露出 api，api 可以操作变量，这就是 封装
+-   jQuery 这么简单又经典的库，为什么不学 ？
+-   通过 jQuery 可以学会很多封装技巧，为什么不学 ？
+    -   把一个变量放到函数里面、暴露出 api，api 可以操作变量，这就是「封装」
 -   连 jQuery 都理解不了，Vue / React 肯定学不好
 
 #### 推荐文章

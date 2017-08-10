@@ -8,7 +8,7 @@ html {
   font-display: swap;
   font-size: 16px;
   line-height: 1.5rem;
-  width: 100%
+  width: 100%;
 }
 
 ::-webkit-scrollbar {
@@ -53,7 +53,7 @@ a,
 a::before,
 a::after {
   text-decoration: none;
-  color: #161209
+  color: #161209;
 }
 
 [theme=dark] a,
@@ -288,7 +288,13 @@ img {
   list-style: none;
   overflow-y: scroll;
 }
-
+/* 自定义文章右侧目录：二级目录作为顶级目录时的符号标识 */
+.toc .toc-content #TableOfContents > ul > li.has-active > ul > li > a:first-child::before {
+  content: "#";
+  font-weight: bolder;
+  margin-right: .5rem;
+  color: #09a7e0;
+}
 .toc .toc-content ul a:first-child::before {
   content: "|";
   font-weight: bolder;
@@ -318,7 +324,7 @@ img {
 }
 
 [theme=dark] .toc ruby {
-  background: #272C34
+  background: #272c34
 }
 
 [theme=dark] .toc ruby rt {
@@ -369,7 +375,7 @@ img {
   overflow: hidden;
 }
 
-#toc-auto .toc-content>nav>ul {
+#toc-auto .toc-content > nav > ul {
   margin: .625rem 0
 }
 
@@ -377,10 +383,10 @@ img {
   display: none
 }
 
-#toc-auto .toc-content ul .has-active>ul {
+#toc-auto .toc-content ul .has-active > ul {
   display: block;
   /* 自定义：目录 */
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 #toc-auto .toc-content a.active {
@@ -426,13 +432,13 @@ img {
   background-color: #f5f5f5
 }
 
-#toc-static .toc-content>nav>ul {
+#toc-static .toc-content > nav > ul {
   margin: 0;
   padding: .4rem 1rem .4rem 1.8rem
 }
 
 [theme=dark] #toc-static .toc-content {
-  background-color: #272C34
+  background-color: #272c34
 }
 
 #toc-static.open .toc-title {
@@ -445,9 +451,9 @@ img {
 
 .single .single-title {
   margin: 1rem 0 .5rem;
-  font-size: 1.6rem;
+  font-size: 2rem;
   font-weight: bold;
-  line-height: 140%
+  line-height: 140%;
 }
 
 .single .single-subtitle {
@@ -455,7 +461,7 @@ img {
   font-size: 1.2rem;
   font-weight: normal;
   font-style: italic;
-  line-height: 100%
+  line-height: 100%;
 }
 
 .single .post-meta {
@@ -476,7 +482,7 @@ img {
 .single .post-meta a::before,
 .single .post-meta a::after {
   text-decoration: none;
-  color: #2d96bd
+  color: #00a6e2;
 }
 
 [theme=dark] .single .post-meta a,
@@ -519,7 +525,7 @@ img {
 
 
 /* 可自定义：文章标题 */
-.single .content>h2 {
+.single .content > h2 {
   /* font-size: 1.65rem */
   /* text-align: center; */
   font-size: 1.8rem;
@@ -528,35 +534,35 @@ img {
 }
 
 /* 文章第一个标题，无需上边距 */
-.single .content>h2:first-of-type {
+.single .content > h2:first-of-type {
   margin-top: 2rem !important;
 }
 
-.single .content>h2 code {
+.single .content > h2 code {
   font-size: 1.25rem
 }
 
-.single .content>h3 {
+.single .content > h3 {
   font-size: 1.6rem
 }
 
-.single .content>h3 code {
+.single .content > h3 code {
   font-size: 1.125rem
 }
 
-.single .content>h4 {
+.single .content > h4 {
   font-size: 1.3rem
 }
 
-.single .content>h4 code {
+.single .content > h4 code {
   font-size: 1rem
 }
 
-.single .content>h5 {
+.single .content > h5 {
   font-size: 1.125rem
 }
 
-.single .content>h6 {
+.single .content > h6 {
   font-size: 1rem
 }
 
@@ -587,28 +593,28 @@ img {
 }
 
 /* 自定义：title标题 */
-.single .content>h2>.header-mark::before,
-.single .content>h3>.header-mark::before,
-.single .content>h4>.header-mark::before,
-.single .content>h5>.header-mark::before,
-.single .content>h6>.header-mark::before {
+.single .content > h2 > .header-mark::before,
+.single .content > h3 > .header-mark::before,
+.single .content > h4 > .header-mark::before,
+.single .content > h5 > .header-mark::before,
+.single .content > h6 > .header-mark::before {
   content: "|";
   margin-right: .3125rem;
-  /* color: #2d96bd; */
-  color: #00a6e2;
+  /* 标题中#的颜色 */
+  color: #00b4f1;
   position: absolute;
 }
 
-[theme=dark] .single .content>h2>.header-mark::before,
-[theme=dark] .single .content>h3>.header-mark::before,
-[theme=dark] .single .content>h4>.header-mark::before,
-[theme=dark] .single .content>h5>.header-mark::before,
-[theme=dark] .single .content>h6>.header-mark::before {
+[theme=dark] .single .content > h2 > .header-mark::before,
+[theme=dark] .single .content > h3 > .header-mark::before,
+[theme=dark] .single .content > h4 > .header-mark::before,
+[theme=dark] .single .content > h5 > .header-mark::before,
+[theme=dark] .single .content > h6 > .header-mark::before {
   color: #55bde2;
   /* margin-left: -20px; */
 }
 
-.single .content>h2>.header-mark::before {
+.single .content > h2 > .header-mark::before {
   content: "#";
   left: -1.7rem;
   line-height: 1.9rem;
@@ -626,14 +632,14 @@ img {
   color: #55bde2;
 } */
 
-.single .content>h3>.header-mark::before {
+.single .content > h3 > .header-mark::before {
   content: "##";
   left: -2.5rem;
   font-size: 1.5rem;
   line-height: 1.9rem;
 }
 
-.single .content>h4>.header-mark::before {
+.single .content > h4 > .header-mark::before {
   content: "###";
   left: -2.6rem;
   font-size: 1.1rem;
@@ -641,13 +647,13 @@ img {
   letter-spacing: -1px;
 }
 
-.single .content>h5>.header-mark::before {
-  content: "|";
+.single .content > h5 > .header-mark::before {
+  content: "";
   left: -1rem;
 }
 
-.single .content>h6>.header-mark::before {
-  content: "|";
+.single .content > h6 > .header-mark::before {
+  content: "";
   font-size: .9rem;
   left: -1rem;
 }
@@ -688,8 +694,10 @@ img {
 .single .content a::before,
 .single .content a::after {
   text-decoration: none;
-  color: #09b2f0;
-  font-weight: bolder;
+  color: #1AA9F2;
+  font-weight: bold;
+  /*letter-spacing: 1px;*/
+  margin: 0 3px;
 }
 
 [theme=dark] .single .content a,
@@ -742,7 +750,7 @@ img {
 }
 
 [theme=dark] .single .content ruby {
-  background: #272C34
+  background: #272c34
 }
 
 [theme=dark] .single .content ruby rt {
@@ -761,7 +769,7 @@ img {
   background-color: #272c34
 }
 
-.single .content .table-wrapper>table {
+.single .content .table-wrapper > table {
   width: 100%;
   max-width: 100%;
   margin: .625rem 0;
@@ -770,26 +778,26 @@ img {
   border-collapse: collapse
 }
 
-[theme=dark] .single .content .table-wrapper>table {
+[theme=dark] .single .content .table-wrapper > table {
   background: #272c34
 }
 
-.single .content .table-wrapper>table thead {
+.single .content .table-wrapper > table thead {
   background: #ededed
 }
 
-[theme=dark] .single .content .table-wrapper>table thead {
+[theme=dark] .single .content .table-wrapper > table thead {
   background-color: #20252b
 }
 
-.single .content .table-wrapper>table th,
-.single .content .table-wrapper>table td {
+.single .content .table-wrapper > table th,
+.single .content .table-wrapper > table td {
   padding: .3rem 1rem;
   border: 1px solid #e8e8e8
 }
 
-[theme=dark] .single .content .table-wrapper>table th,
-[theme=dark] .single .content .table-wrapper>table td {
+[theme=dark] .single .content .table-wrapper > table th,
+[theme=dark] .single .content .table-wrapper > table td {
   border-color: #1c2025
 }
 
@@ -829,8 +837,8 @@ img {
 /* 可自定义：引用块*/
 .single .content blockquote {
   display: block;
-  /* border-left: 0.5rem solid #6bd6fd; */
-  border-left: 0.5rem solid #13b7f3;
+  border-left: 0.5rem solid #6bd8ff;
+  /* border-left: 0.5rem solid #13b7f3;*/
   background-color: rgba(107, 214, 253, 0.1);
   /* background-color: #f3f5f7; */
   padding: .25rem .75rem;
@@ -871,14 +879,15 @@ img {
   line-break: anywhere;
   font-size: .875rem;
   font-family: Source Code Pro, Menlo, Consolas, Monaco, monospace, system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
-  color: #E74C3C;
+  /*color: #e74c3c;*/
+  color: #333;
   /* background-color: #c5eeff !important; */
   /* border-radius: 5px; */
 }
 
 
 [theme=dark] .single .content code {
-  color: #E5BF78
+  color: #e5bf78
 }
 
 .single .content pre {
@@ -922,7 +931,7 @@ img {
 [theme=dark] .single .content .highlight table,
 [theme=dark] .single .content .highlight tr,
 [theme=dark] .single .content .highlight td {
-  background: #272C34
+  background: #272c34
 }
 
 .single .content .highlight,
@@ -931,14 +940,14 @@ img {
   font-size: .875rem
 }
 
-.single .content .highlight .table-wrapper>table,
-.single .content .highlight .table-wrapper>table thead,
-.single .content .highlight .table-wrapper>table tr,
-.single .content .highlight .table-wrapper>table td,
-.single .content .gist .table-wrapper>table,
-.single .content .gist .table-wrapper>table thead,
-.single .content .gist .table-wrapper>table tr,
-.single .content .gist .table-wrapper>table td {
+.single .content .highlight .table-wrapper > table,
+.single .content .highlight .table-wrapper > table thead,
+.single .content .highlight .table-wrapper > table tr,
+.single .content .highlight .table-wrapper > table td,
+.single .content .gist .table-wrapper > table,
+.single .content .gist .table-wrapper > table thead,
+.single .content .gist .table-wrapper > table tr,
+.single .content .gist .table-wrapper > table td {
   margin: 0;
   padding: 0;
   border: none !important;
@@ -952,11 +961,11 @@ img {
   margin-bottom: .5rem;
 }
 
-.single .content .highlight>.chroma {
+.single .content .highlight > .chroma {
   position: relative
 }
 
-.single .content .highlight>.chroma .code-header {
+.single .content .highlight > .chroma .code-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -968,258 +977,258 @@ img {
   background: #e1e1e1;
 }
 
-[theme=dark] .single .content .highlight>.chroma .code-header {
+[theme=dark] .single .content .highlight > .chroma .code-header {
   color: #b1b0b0;
   background: #1a1d23
 }
 
-.single .content .highlight>.chroma .code-header:hover {
+.single .content .highlight > .chroma .code-header:hover {
   cursor: pointer
 }
 
-.single .content .highlight>.chroma .code-header .code-title {
+.single .content .highlight > .chroma .code-header .code-title {
   width: 100%;
   padding: .4rem;
-  /* background-color: #f1f1f1; */
+  background-color: #f1f1f1;
 }
 
-.single .content .highlight>.chroma .code-header .code-title::after {
+.single .content .highlight > .chroma .code-header .code-title::after {
   padding-left: .2rem;
-  content: 'Code'
+  content: "Code"
 }
 
-.single .content .highlight>.chroma .code-header.language-bash .code-title::after {
+.single .content .highlight > .chroma .code-header.language-bash .code-title::after {
   content: "Bash"
 }
 
-.single .content .highlight>.chroma .code-header.language-c .code-title::after {
+.single .content .highlight > .chroma .code-header.language-c .code-title::after {
   content: "C"
 }
 
-.single .content .highlight>.chroma .code-header.language-cs .code-title::after {
+.single .content .highlight > .chroma .code-header.language-cs .code-title::after {
   content: "C#"
 }
 
-.single .content .highlight>.chroma .code-header.language-cpp .code-title::after {
+.single .content .highlight > .chroma .code-header.language-cpp .code-title::after {
   content: "C++"
 }
 
-.single .content .highlight>.chroma .code-header.language-clojure .code-title::after {
+.single .content .highlight > .chroma .code-header.language-clojure .code-title::after {
   content: "Clojure"
 }
 
-.single .content .highlight>.chroma .code-header.language-coffeescript .code-title::after {
+.single .content .highlight > .chroma .code-header.language-coffeescript .code-title::after {
   content: "CoffeeScript"
 }
 
-.single .content .highlight>.chroma .code-header.language-css .code-title::after {
+.single .content .highlight > .chroma .code-header.language-css .code-title::after {
   content: "CSS"
 }
 
-.single .content .highlight>.chroma .code-header.language-dart .code-title::after {
+.single .content .highlight > .chroma .code-header.language-dart .code-title::after {
   content: "Dart"
 }
 
-.single .content .highlight>.chroma .code-header.language-diff .code-title::after {
+.single .content .highlight > .chroma .code-header.language-diff .code-title::after {
   content: "Diff"
 }
 
-.single .content .highlight>.chroma .code-header.language-erlang .code-title::after {
+.single .content .highlight > .chroma .code-header.language-erlang .code-title::after {
   content: "Erlang"
 }
 
-.single .content .highlight>.chroma .code-header.language-go .code-title::after {
+.single .content .highlight > .chroma .code-header.language-go .code-title::after {
   content: "Go"
 }
 
-.single .content .highlight>.chroma .code-header.language-go-html-template .code-title::after {
+.single .content .highlight > .chroma .code-header.language-go-html-template .code-title::after {
   content: "Go HTML Template"
 }
 
-.single .content .highlight>.chroma .code-header.language-groovy .code-title::after {
+.single .content .highlight > .chroma .code-header.language-groovy .code-title::after {
   content: "Groovy"
 }
 
-.single .content .highlight>.chroma .code-header.language-haskell .code-title::after {
+.single .content .highlight > .chroma .code-header.language-haskell .code-title::after {
   content: "Haskell"
 }
 
-.single .content .highlight>.chroma .code-header.language-html .code-title::after {
+.single .content .highlight > .chroma .code-header.language-html .code-title::after {
   content: "HTML"
 }
 
-.single .content .highlight>.chroma .code-header.language-http .code-title::after {
+.single .content .highlight > .chroma .code-header.language-http .code-title::after {
   content: "HTTP"
 }
 
-.single .content .highlight>.chroma .code-header.language-xml .code-title::after {
+.single .content .highlight > .chroma .code-header.language-xml .code-title::after {
   content: "XML"
 }
 
-.single .content .highlight>.chroma .code-header.language-java .code-title::after {
+.single .content .highlight > .chroma .code-header.language-java .code-title::after {
   content: "Java"
 }
 
-.single .content .highlight>.chroma .code-header.language-js .code-title::after {
+.single .content .highlight > .chroma .code-header.language-js .code-title::after {
   content: "JavaScript"
 }
 
-.single .content .highlight>.chroma .code-header.language-javascript .code-title::after {
+.single .content .highlight > .chroma .code-header.language-javascript .code-title::after {
   content: "JavaScript"
 }
 
-.single .content .highlight>.chroma .code-header.language-json .code-title::after {
+.single .content .highlight > .chroma .code-header.language-json .code-title::after {
   content: "JSON"
 }
 
-.single .content .highlight>.chroma .code-header.language-kotlin .code-title::after {
+.single .content .highlight > .chroma .code-header.language-kotlin .code-title::after {
   content: "Kotlin"
 }
 
-.single .content .highlight>.chroma .code-header.language-latex .code-title::after {
+.single .content .highlight > .chroma .code-header.language-latex .code-title::after {
   content: "LaTeX"
 }
 
-.single .content .highlight>.chroma .code-header.language-less .code-title::after {
+.single .content .highlight > .chroma .code-header.language-less .code-title::after {
   content: "Less"
 }
 
-.single .content .highlight>.chroma .code-header.language-lisp .code-title::after {
+.single .content .highlight > .chroma .code-header.language-lisp .code-title::after {
   content: "Lisp"
 }
 
-.single .content .highlight>.chroma .code-header.language-lua .code-title::after {
+.single .content .highlight > .chroma .code-header.language-lua .code-title::after {
   content: "Lua"
 }
 
-.single .content .highlight>.chroma .code-header.language-makefile .code-title::after {
+.single .content .highlight > .chroma .code-header.language-makefile .code-title::after {
   content: "Makefile"
 }
 
-.single .content .highlight>.chroma .code-header.language-markdown .code-title::after {
+.single .content .highlight > .chroma .code-header.language-markdown .code-title::after {
   content: "Markdown"
 }
 
-.single .content .highlight>.chroma .code-header.language-matlab .code-title::after {
+.single .content .highlight > .chroma .code-header.language-matlab .code-title::after {
   content: "Matlab"
 }
 
-.single .content .highlight>.chroma .code-header.language-objectivec .code-title::after {
+.single .content .highlight > .chroma .code-header.language-objectivec .code-title::after {
   content: "Objective-C"
 }
 
-.single .content .highlight>.chroma .code-header.language-php .code-title::after {
+.single .content .highlight > .chroma .code-header.language-php .code-title::after {
   content: "PHP"
 }
 
-.single .content .highlight>.chroma .code-header.language-perl .code-title::after {
+.single .content .highlight > .chroma .code-header.language-perl .code-title::after {
   content: "Perl"
 }
 
-.single .content .highlight>.chroma .code-header.language-python .code-title::after {
+.single .content .highlight > .chroma .code-header.language-python .code-title::after {
   content: "Python"
 }
 
-.single .content .highlight>.chroma .code-header.language-r .code-title::after {
+.single .content .highlight > .chroma .code-header.language-r .code-title::after {
   content: "R"
 }
 
-.single .content .highlight>.chroma .code-header.language-ruby .code-title::after {
+.single .content .highlight > .chroma .code-header.language-ruby .code-title::after {
   content: "Ruby"
 }
 
-.single .content .highlight>.chroma .code-header.language-rust .code-title::after {
+.single .content .highlight > .chroma .code-header.language-rust .code-title::after {
   content: "Rust"
 }
 
-.single .content .highlight>.chroma .code-header.language-scala .code-title::after {
+.single .content .highlight > .chroma .code-header.language-scala .code-title::after {
   content: "Scala"
 }
 
-.single .content .highlight>.chroma .code-header.language-scss .code-title::after {
+.single .content .highlight > .chroma .code-header.language-scss .code-title::after {
   content: "Scss"
 }
 
-.single .content .highlight>.chroma .code-header.language-shell .code-title::after {
+.single .content .highlight > .chroma .code-header.language-shell .code-title::after {
   content: "Shell"
 }
 
-.single .content .highlight>.chroma .code-header.language-sql .code-title::after {
+.single .content .highlight > .chroma .code-header.language-sql .code-title::after {
   content: "SQL"
 }
 
-.single .content .highlight>.chroma .code-header.language-swift .code-title::after {
+.single .content .highlight > .chroma .code-header.language-swift .code-title::after {
   content: "Swift"
 }
 
-.single .content .highlight>.chroma .code-header.language-tex .code-title::after {
+.single .content .highlight > .chroma .code-header.language-tex .code-title::after {
   content: "TeX"
 }
 
-.single .content .highlight>.chroma .code-header.language-toml .code-title::after {
+.single .content .highlight > .chroma .code-header.language-toml .code-title::after {
   content: "TOML"
 }
 
-.single .content .highlight>.chroma .code-header.language-ts .code-title::after {
+.single .content .highlight > .chroma .code-header.language-ts .code-title::after {
   content: "TypeScript"
 }
 
-.single .content .highlight>.chroma .code-header.language-typescript .code-title::after {
+.single .content .highlight > .chroma .code-header.language-typescript .code-title::after {
   content: "TypeScript"
 }
 
-.single .content .highlight>.chroma .code-header.language-vue .code-title::after {
+.single .content .highlight > .chroma .code-header.language-vue .code-title::after {
   content: "Vue"
 }
 
-.single .content .highlight>.chroma .code-header.language-yml .code-title::after {
+.single .content .highlight > .chroma .code-header.language-yml .code-title::after {
   content: "YAML"
 }
 
-.single .content .highlight>.chroma .code-header.language-yaml .code-title::after {
+.single .content .highlight > .chroma .code-header.language-yaml .code-title::after {
   content: "YAML"
 }
 
-.single .content .highlight>.chroma .lntd:first-child {
+.single .content .highlight > .chroma .lntd:first-child {
   min-width: 1.6rem;
   text-align: right
 }
 
-.single .content .highlight>.chroma .lntd:last-child {
+.single .content .highlight > .chroma .lntd:last-child {
   width: 100%
 }
 
-.single .content .highlight>.chroma .lntd:last-child pre {
+.single .content .highlight > .chroma .lntd:last-child pre {
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
   min-width: intrinsic;
   min-width: max-content
 }
 
-.single .content .highlight>.chroma .ln {
+.single .content .highlight > .chroma .ln {
   padding-right: .75rem
 }
 
-.single .content .highlight>.chroma .hl {
+.single .content .highlight > .chroma .hl {
   display: block;
   background-color: #dcdcdc
 }
 
-[theme=dark] .single .content .highlight>.chroma .hl {
+[theme=dark] .single .content .highlight > .chroma .hl {
   background-color: #1c2025
 }
 
-.single .content .highlight>.chroma .ln,
-.single .content .highlight>.chroma .lnt {
+.single .content .highlight > .chroma .ln,
+.single .content .highlight > .chroma .lnt {
   color: #a9a9b3
 }
 
-[theme=dark] .single .content .highlight>.chroma .ln,
-[theme=dark] .single .content .highlight>.chroma .lnt {
+[theme=dark] .single .content .highlight > .chroma .ln,
+[theme=dark] .single .content .highlight > .chroma .lnt {
   color: #5d5d5f
 }
 
-.single .content .highlight>.chroma .arrow {
+.single .content .highlight > .chroma .arrow {
   padding: 0 .2rem;
   -webkit-transition: transform 0.2s ease;
   -moz-transition: transform 0.2s ease;
@@ -1227,25 +1236,25 @@ img {
   transition: transform 0.2s ease
 }
 
-.single .content .highlight>.chroma .ellipses {
+.single .content .highlight > .chroma .ellipses {
   padding: .4rem
 }
 
-.single .content .highlight>.chroma .copy {
+.single .content .highlight > .chroma .copy {
   display: none;
   padding: .4rem
 }
 
-.single .content .highlight>.chroma .copy:hover {
+.single .content .highlight > .chroma .copy:hover {
   cursor: pointer;
   color: #2d96bd
 }
 
-[theme=dark] .single .content .highlight>.chroma .copy:hover {
+[theme=dark] .single .content .highlight > .chroma .copy:hover {
   color: #fff
 }
 
-.single .content .highlight>.chroma .table-wrapper {
+.single .content .highlight > .chroma .table-wrapper {
   max-height: 0;
   overflow-y: hidden;
   -webkit-transition: max-height 0.8s cubic-bezier(0, 1, 0, 1) -0.1s;
@@ -1254,15 +1263,15 @@ img {
   transition: max-height 0.8s cubic-bezier(0, 1, 0, 1) -0.1s
 }
 
-.single .content .highlight>.chroma.open .code-header {
+.single .content .highlight > .chroma.open .code-header {
   background: #ededed
 }
 
-[theme=dark] .single .content .highlight>.chroma.open .code-header {
+[theme=dark] .single .content .highlight > .chroma.open .code-header {
   background: #20252b
 }
 
-.single .content .highlight>.chroma.open .table-wrapper {
+.single .content .highlight > .chroma.open .table-wrapper {
   max-height: 12000px;
   -webkit-transition: max-height 0.8s cubic-bezier(0.5, 0, 1, 0) 0s;
   -moz-transition: max-height 0.8s cubic-bezier(0.5, 0, 1, 0) 0s;
@@ -1270,7 +1279,7 @@ img {
   transition: max-height 0.8s cubic-bezier(0.5, 0, 1, 0) 0s
 }
 
-.single .content .highlight>.chroma.open .arrow {
+.single .content .highlight > .chroma.open .arrow {
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
@@ -1278,11 +1287,11 @@ img {
   transform: rotate(90deg)
 }
 
-.single .content .highlight>.chroma.open .ellipses {
+.single .content .highlight > .chroma.open .ellipses {
   display: none
 }
 
-.single .content .highlight>.chroma.open .copy {
+.single .content .highlight > .chroma.open .copy {
   display: inline
 }
 
@@ -1308,33 +1317,33 @@ img {
 }
 
 .single .content .highlight .k {
-  color: #b501a9
+  color: #750EA5;
 }
 
 .single .content .highlight .kc {
-  color: #b501a9
+  color: #750EA5;
 }
 
 .single .content .highlight .kd {
-  color: #b501a9
+  color: #750EA5;
 }
 
 .single .content .highlight .kn {
-  color: #b501a9
+  color: #750EA5;
 }
 
 .single .content .highlight .kp {
-  color: #b501a9
+  color: #750EA5;
 }
 
 .single .content .highlight .kr {
-  color: #b501a9
-    /* 自定义 */
-    /* color: #750ea5 */
+  color: #750EA5;
+  /* 自定义 */
+  /* color: #750ea5 */
 }
 
 .single .content .highlight .kt {
-  color: #b501a9
+  color: #750EA5;
 }
 
 .single .content .highlight .n {
@@ -1342,7 +1351,7 @@ img {
 }
 
 .single .content .highlight .na {
-  color: #2b77fa
+  color: #245CB7
 }
 
 .single .content .highlight .nb {
@@ -1359,7 +1368,7 @@ img {
 }
 
 .single .content .highlight .no {
-  color: #2b77fa
+  color: #245CB7
 }
 
 .single .content .highlight .nd {
@@ -1367,15 +1376,15 @@ img {
 }
 
 .single .content .highlight .ni {
-  color: #2b77fa
+  color: #245CB7
 }
 
 .single .content .highlight .ne {
-  color: #2b77fa
+  color: #245CB7
 }
 
 .single .content .highlight .nf {
-  color: #2b77fa
+  color: #245CB7
 }
 
 .single .content .highlight .fm {
@@ -1383,44 +1392,44 @@ img {
 }
 
 .single .content .highlight .nl {
-  color: #2b77fa
+  color: #245CB7
 }
 
 .single .content .highlight .nn {
-  color: #2b77fa
+  color: #245CB7
 }
 
 .single .content .highlight .nx {
   /* 主要代码 */
-  color: #333
+  color: #333333;
 }
 
 .single .content .highlight .py {
-  color: #2b77fa
+  color: #245CB7
 }
 
 .single .content .highlight .nt {
-  color: #2b77fa
+  color: #245CB7
 }
 
 .single .content .highlight .nv {
-  color: #2b77fa
+  color: #245CB7
 }
 
 .single .content .highlight .vc {
-  color: #2b77fa
+  color: #245CB7
 }
 
 .single .content .highlight .vg {
-  color: #2b77fa
+  color: #245CB7
 }
 
 .single .content .highlight .vi {
-  color: #2b77fa
+  color: #245CB7
 }
 
 .single .content .highlight .vm {
-  color: #2b77fa
+  color: #245CB7
 }
 
 .single .content .highlight .l {
@@ -1432,59 +1441,59 @@ img {
 }
 
 .single .content .highlight .s {
-  color: #24a443
+  color: #268E3C;
 }
 
 .single .content .highlight .sa {
-  color: #24a443
+  color: #268E3C;
 }
 
 .single .content .highlight .sb {
-  color: #24a443
+  color: #268E3C;
 }
 
 .single .content .highlight .sc {
-  color: #24a443
+  color: #268E3C;
 }
 
 .single .content .highlight .dl {
-  color: #24a443
+  color: #268E3C;
 }
 
 .single .content .highlight .sd {
-  color: #24a443
+  color: #268E3C;
 }
 
 .single .content .highlight .s2 {
-  color: #24a443
+  color: #268E3C;
 }
 
 .single .content .highlight .se {
-  color: #24a443
+  color: #268E3C;
 }
 
 .single .content .highlight .sh {
-  color: #24a443
+  color: #268E3C;
 }
 
 .single .content .highlight .si {
-  color: #24a443
+  color: #268E3C;
 }
 
 .single .content .highlight .sx {
-  color: #24a443
+  color: #268E3C;
 }
 
 .single .content .highlight .sr {
-  color: #24a443
+  color: #268E3C;
 }
 
 .single .content .highlight .s1 {
-  color: #24a443
+  color: #268E3C;
 }
 
 .single .content .highlight .ss {
-  color: #24a443
+  color: #268E3C;
 }
 
 .single .content .highlight .m {
@@ -1524,7 +1533,7 @@ img {
 }
 
 .single .content .highlight .ow {
-  color: #b501a9
+  color: #750EA5;
 }
 
 .single .content .highlight .c {
@@ -1544,20 +1553,16 @@ img {
   color: #a0a1a8
 }
 
-/* 自定义：注释!**!、// */
-.single .content .highlight .c
-/*html注释、css注释*/
-,
-.single .content .highlight .cm
-/*js斜杠星注释*/
-,
-.single .content .highlight .c1
-
-/*js双斜杠注释*/
-  {
-  color: #b4654d;
+/* 自定义：注释 /**\/、// */
+.single .content .highlight .c /*html注释、css注释*/,
+.single .content .highlight .cm /*js斜杠星注释*/,
+.single .content .highlight .c1 /*js双斜杠注释*/ {
+  color: #AF623A;
   letter-spacing: -1px;
 }
+/*.single .content .highlight .language-vue .c + .nx {*/
+/*  color: #b4654d;*/
+/*}*/
 
 .single .content .highlight .cs {
   color: #a0a1a8
@@ -1926,7 +1931,7 @@ img {
 .single .content .gist .gist-meta a::before,
 .single .content .gist .gist-meta a::after {
   text-decoration: none;
-  color: #2d96bd
+  color: #2d96bd;
 }
 
 [theme=dark] .single .content .gist .gist-meta a,
@@ -2480,7 +2485,7 @@ img {
   box-shadow: inset 0 -1px 0 #f0f0f0;
   font-size: .8rem;
   font-family: Source Code Pro, Menlo, Consolas, Monaco, monospace, system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
-  color: #E74C3C
+  color: #e74c3c
 }
 
 [theme=dark] .single .content kbd {
@@ -2489,7 +2494,7 @@ img {
   border-bottom-color: #363636;
   -webkit-box-shadow: inset 0 -1px 0 #363636;
   box-shadow: inset 0 -1px 0 #363636;
-  color: #E5BF78
+  color: #e5bf78
 }
 
 .single .content .typeit .code {
@@ -2636,7 +2641,7 @@ img {
 
 .single .post-footer .post-nav::before,
 .single .post-footer .post-nav::after {
-  content: ' ';
+  content: " ";
   display: table
 }
 
