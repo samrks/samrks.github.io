@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>转换 - 标签 - Sam&#39;s Garage</title>
-        <link>http://samrks.github.io/tags/%E8%BD%AC%E6%8D%A2/</link>
+        <link>https://liubingxuan.xyz/tags/%E8%BD%AC%E6%8D%A2/</link>
         <description>转换 - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Thu, 27 Aug 2020 01:45:54 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/%E8%BD%AC%E6%8D%A2/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Thu, 27 Aug 2020 01:45:54 &#43;0800</lastBuildDate><atom:link href="https://liubingxuan.xyz/tags/%E8%BD%AC%E6%8D%A2/" rel="self" type="application/rss+xml" /><item>
     <title>JS 的数据类型🧐</title>
-    <link>http://samrks.github.io/javascript-something-about-data-type/</link>
+    <link>https://liubingxuan.xyz/javascript-something-about-data-type/</link>
     <pubDate>Thu, 27 Aug 2020 01:45:54 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/javascript-something-about-data-type/</guid>
+    <guid>https://liubingxuan.xyz/javascript-something-about-data-type/</guid>
     <description><![CDATA[<p>「如何存数字&amp;字符」「JS 的数据类型」「64位浮点数 」「变量声明 var / let / const」「类型转换」</p>
 <p>​</p>
 <h2 id="数据为什么需要类型">数据为什么需要类型</h2>

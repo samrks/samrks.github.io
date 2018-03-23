@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>增删改查 - 标签 - Sam&#39;s Garage</title>
-        <link>http://samrks.github.io/tags/%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/</link>
+        <link>https://liubingxuan.xyz/tags/%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/</link>
         <description>增删改查 - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Sat, 24 Oct 2020 01:23:34 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Sat, 24 Oct 2020 01:23:34 &#43;0800</lastBuildDate><atom:link href="https://liubingxuan.xyz/tags/%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/" rel="self" type="application/rss+xml" /><item>
     <title>jQuery 的设计思想（上）</title>
-    <link>http://samrks.github.io/dom-jquery-handwritten/</link>
+    <link>https://liubingxuan.xyz/dom-jquery-handwritten/</link>
     <pubDate>Sat, 24 Oct 2020 01:23:34 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/dom-jquery-handwritten/</guid>
+    <guid>https://liubingxuan.xyz/dom-jquery-handwritten/</guid>
     <description><![CDATA[<p>​</p>
 <h2 id="前言">前言</h2>
 <ul>
@@ -902,10 +902,10 @@
 </ul>]]></description>
 </item><item>
     <title>手写 DOM 库</title>
-    <link>http://samrks.github.io/dom-dom-handwritten/</link>
+    <link>https://liubingxuan.xyz/dom-dom-handwritten/</link>
     <pubDate>Thu, 22 Oct 2020 15:49:13 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/dom-dom-handwritten/</guid>
+    <guid>https://liubingxuan.xyz/dom-dom-handwritten/</guid>
     <description><![CDATA[<p>​</p>
 <h2 id="前言">前言</h2>
 <p><a href="https://github.com/samrks/dom-1" target="_blank" rel="noopener noreffer">本节代码地址</a></p>
@@ -1624,16 +1624,13 @@
 <p>​</p>]]></description>
 </item><item>
     <title>DOM 编程 </title>
-    <link>http://samrks.github.io/dom-dom-manipulate/</link>
+    <link>https://liubingxuan.xyz/dom-dom-manipulate/</link>
     <pubDate>Wed, 21 Oct 2020 00:41:12 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/dom-dom-manipulate/</guid>
-    <description><![CDATA[<p>​</p>
-<h2 id="前言">前言</h2>
-<blockquote>
+    <guid>https://liubingxuan.xyz/dom-dom-manipulate/</guid>
+    <description><![CDATA[<blockquote>
 <p>本节是 DOM 最基础的部分</p>
 </blockquote>
-<p>​</p>
 <h2 id="前置知识">前置知识</h2>
 <blockquote>
 <p>需要什么知识</p>
@@ -1646,7 +1643,6 @@
 <li>会用 div 和 span 标签</li>
 <li>会简单的 CSS 布局（flex）</li>
 </ul>
-<p>​</p>
 <h2 id="网页其实是一棵树">网页其实是一棵树</h2>
 <blockquote>
 <p>第一个知识点</p>
@@ -1713,10 +1709,7 @@
 <li>后来又有 React 了，就用 React 来操作 DOM</li>
 <li>从来不会用 DOM 自带的功能来操作 DOM，自带的功能实在是非常反人类</li>
 </ul>
-<p>​</p>
-<p> <a href="https://javascript.info/dom-navigation" target="_blank" rel="noopener noreffer">图片来自</a></p>
-<p>​</p>
-<p>​</p>
+<p><a href="https://javascript.info/dom-navigation" target="_blank" rel="noopener noreffer">图片来自</a></p>
 <h2 id="获取元素的-api">获取元素的 API</h2>
 <blockquote>
 <p>获取元素，也叫标签</p>
@@ -1841,14 +1834,12 @@ querySelectorAll()，用于选择匹配到的所有元素</p>
 </code></pre></td></tr></table>
 </div>
 </div><p>​</p>
-<p>​</p>
 <h3 id="用哪一个-">用哪一个 ⭕️</h3>
 <ul>
 <li>工作中用最新的， querySelector 和 querySelectorAll</li>
 <li>做 demo 直接用 idxxx，千万别让人发现</li>
 <li>要兼容 IE 的可怜虫才用 getElement(s)ByXxx</li>
 </ul>
-<p>​</p>
 <p>​</p>
 <h3 id="获取特定元素的-api">获取特定元素的 API</h3>
 <h4 id="获取-html-元素">获取 html 元素</h4>
@@ -1899,7 +1890,6 @@ querySelectorAll()，用于选择匹配到的所有元素</p>
 </div><ul>
 <li>这个 document.all 是个奇葩，第 6 个falsy值</li>
 </ul>
-<p>​</p>
 <p>​</p>
 <h2 id="获取到的元素是个啥">获取到的元素是个啥</h2>
 <blockquote>
@@ -1999,7 +1989,6 @@ querySelectorAll()，用于选择匹配到的所有元素</p>
 <p>综上，div 是个非常复杂的对象</p>
 </blockquote>
 <p>​</p>
-<p>​</p>
 <h3 id="div-完整原型链">div 完整原型链</h3>
 <blockquote>
 <p>自身属性和共有属性，<a href="https://i.loli.net/2020/10/21/bwt5rm24PC8IXa6.png" target="_blank" rel="noopener noreffer">点击查看</a></p>
@@ -2053,8 +2042,6 @@ querySelectorAll()，用于选择匹配到的所有元素</p>
 <li>就是个对象，且有 6 层原型</li>
 </ul>
 <p>​</p>
-<p>​</p>
-<p>​</p>
 <h2 id="节点类型-nodetype">节点类型 nodeType</h2>
 <p>节点？元素？傻傻分不清</p>
 <blockquote>
@@ -2106,8 +2093,6 @@ querySelectorAll()，用于选择匹配到的所有元素</p>
 </span></code></pre></td></tr></table>
 </div>
 </div><p></p>
-<p>​</p>
-<p>​</p>
 <p>​</p>
 <h2 id="节点的增删改查">节点的增删改查</h2>
 <blockquote>
@@ -2352,7 +2337,6 @@ querySelectorAll()，用于选择匹配到的所有元素</p>
 </code></pre></td></tr></table>
 </div>
 </div><p>​</p>
-<p>​</p>
 <h2 id="删">删</h2>
 <h3 id="两种方法">两种方法</h3>
 <div class="highlight"><div class="chroma">
@@ -2453,7 +2437,6 @@ querySelectorAll()，用于选择匹配到的所有元素</p>
 <p>由于【 <code>ele.remove()</code> 】是后发明的，所以不兼容 IE</p>
 </blockquote>
 <p>​</p>
-<p>​</p>
 <h3 id="思考">思考</h3>
 <ul>
 <li>如果一个 node 被移出页面（DOM 树）</li>
@@ -2490,8 +2473,6 @@ querySelectorAll()，用于选择匹配到的所有元素</p>
 </span></code></pre></td></tr></table>
 </div>
 </div><p>​</p>
-<p>​</p>
-<p>​</p>
 <h2 id="改-">改 💡</h2>
 <h3 id="改属性">改属性</h3>
 <h4 id="写标准属性">写标准属性</h4>
@@ -2671,7 +2652,6 @@ querySelectorAll()，用于选择匹配到的所有元素</p>
 <p>如果直接用 js 的属性，读出值。得出的结果，有可能会被浏览器加工</p>
 </blockquote>
 <p>​</p>
-<p>​</p>
 <h3 id="改事件处理函数">改事件处理函数</h3>
 <h4 id="divonclick-默认为-null">div.onclick 默认为 null</h4>
 <blockquote>
@@ -2748,7 +2728,6 @@ querySelectorAll()，用于选择匹配到的所有元素</p>
 <li>div.addEventListener 可以写无数个函数（点击时，执行的所有操作，可以写作不同的函数，对于复杂的操作情况非常友好）</li>
 </ul>
 <p>​</p>
-<p>​</p>
 <h3 id="改内容">改内容</h3>
 <h4 id="改文本内容">改文本内容</h4>
 <div class="highlight"><div class="chroma">
@@ -2794,7 +2773,6 @@ querySelectorAll()，用于选择匹配到的所有元素</p>
 </span></code></pre></td></tr></table>
 </div>
 </div><p>​</p>
-<p>​</p>
 <h3 id="改爸爸">改爸爸</h3>
 <blockquote>
 <p>想要找一个新爸爸</p>
@@ -2810,6 +2788,7 @@ querySelectorAll()，用于选择匹配到的所有元素</p>
 </div><ul>
 <li>直接这样就可以了，直接从原来的地方消失</li>
 </ul>
+<p>​</p>
 <h2 id="查">查</h2>
 <h3 id="查爸爸">查爸爸</h3>
 <div class="highlight"><div class="chroma">
@@ -2943,7 +2922,6 @@ querySelectorAll()，用于选择匹配到的所有元素</p>
 <p>答：通过 document.querySelectorAll 获取子元素集合。如果子元素变化，集合的长度**不会变化 **
 querySelectorAll 不会实时根据元素变化，去改变自己。获取过一次之后，就不再变化</p>
 <p>​</p>
-<p>​</p>
 <h3 id="查兄弟姐妹">查兄弟姐妹</h3>
 <blockquote>
 <p>没有 API 可以直接获取到「任一元素的兄弟元素」，只能通过「先获取到父元素，再获取父元素的子元素」的方式</p>
@@ -2992,7 +2970,6 @@ querySelectorAll 不会实时根据元素变化，去改变自己。获取过一
 </code></pre></td></tr></table>
 </div>
 </div><p>​</p>
-<p>​</p>
 <h3 id="查看第一个子代">查看第一个子代</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -3185,7 +3162,6 @@ querySelectorAll 不会实时根据元素变化，去改变自己。获取过一
 </li>
 </ul>
 <p>​</p>
-<p>​</p>
 <h3 id="dom-操作慢-">DOM 操作慢 ❓❗️</h3>
 <blockquote>
 <p>网上都说 DOM 操作慢，实际上只是比 JS 操作慢，DOM 操作比网络请求还是快很多的。
@@ -3214,6 +3190,7 @@ querySelectorAll 不会实时根据元素变化，去改变自己。获取过一
 </ul>
 </li>
 </ul>
+<p>​</p>
 <h3 id="插入新标签的完整过程生命周期">插入新标签的完整过程（生命周期）</h3>
 <blockquote>
 <p>这个 div 经历了 3 个过程（vue 也有生命周期：之前、之时、之后）</p>
@@ -3330,7 +3307,6 @@ querySelectorAll 不会实时根据元素变化，去改变自己。获取过一
 <p>这其实是非常高深的一点  ，很少有人能这么清晰的分析出原因</p>
 </blockquote>
 <p>​</p>
-<p>​</p>
 <h3 id="提问">提问</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -3378,7 +3354,6 @@ querySelectorAll 不会实时根据元素变化，去改变自己。获取过一
 <p>总结「属性同步」的标准，[见下](# 属性同步)</p>
 </blockquote>
 <p>​</p>
-<p>​</p>
 <h3 id="属性同步">属性同步</h3>
 <h4 id="标准属性">标准属性</h4>
 <ul>
@@ -3418,7 +3393,6 @@ querySelectorAll 不会实时根据元素变化，去改变自己。获取过一
 <li>所以 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getAttribute" target="_blank" rel="noopener noreffer">Element.getAttribute()</a> 这个 API 获取的是页面中的属性</li>
 </ul>
 </blockquote>
-<p>​</p>
 <p>​</p>
 <h3 id="property--vs--attribute">Property  vs  Attribute</h3>
 <h4 id="property-属性">property 属性</h4>
@@ -3471,10 +3445,10 @@ querySelectorAll 不会实时根据元素变化，去改变自己。获取过一
 </ul>]]></description>
 </item><item>
     <title>JS 对象的基本用法</title>
-    <link>http://samrks.github.io/javascript-crud-of-object-prototype/</link>
+    <link>https://liubingxuan.xyz/javascript-crud-of-object-prototype/</link>
     <pubDate>Wed, 02 Sep 2020 21:50:44 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/javascript-crud-of-object-prototype/</guid>
+    <guid>https://liubingxuan.xyz/javascript-crud-of-object-prototype/</guid>
     <description><![CDATA[<p>「增」「删」「改」「查」「原型」</p>
 <h2 id="回顾">回顾</h2>
 <h3 id="七种数据类型">七种数据类型</h3>

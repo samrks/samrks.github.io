@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>语法 - 标签 - Sam&#39;s Garage</title>
-        <link>http://samrks.github.io/tags/%E8%AF%AD%E6%B3%95/</link>
+        <link>https://liubingxuan.xyz/tags/%E8%AF%AD%E6%B3%95/</link>
         <description>语法 - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Mon, 24 Aug 2020 22:15:53 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/%E8%AF%AD%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Mon, 24 Aug 2020 22:15:53 &#43;0800</lastBuildDate><atom:link href="https://liubingxuan.xyz/tags/%E8%AF%AD%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
     <title>JS 的基本语法🤓</title>
-    <link>http://samrks.github.io/javascript-basic-syntax/</link>
+    <link>https://liubingxuan.xyz/javascript-basic-syntax/</link>
     <pubDate>Mon, 24 Aug 2020 22:15:53 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/javascript-basic-syntax/</guid>
+    <guid>https://liubingxuan.xyz/javascript-basic-syntax/</guid>
     <description><![CDATA[<p>内容包括「什么是表达式和语句」「标识符的规则」「 if else 语句」「 while for 语句」「 label 」</p>
 <h2 id="推荐书籍">推荐书籍</h2>
 <ol>
@@ -1054,10 +1054,10 @@
 </div>]]></description>
 </item><item>
     <title>测试 Markdown 语法</title>
-    <link>http://samrks.github.io/tools-test-markdown/</link>
+    <link>https://liubingxuan.xyz/tools-test-markdown/</link>
     <pubDate>Wed, 15 Jul 2020 16:34:19 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/tools-test-markdown/</guid>
+    <guid>https://liubingxuan.xyz/tools-test-markdown/</guid>
     <description><![CDATA[这里是文章描述，本文用于测试一些 Markdown 语法和样式展现]]></description>
 </item></channel>
 </rss>

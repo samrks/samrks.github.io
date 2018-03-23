@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Valine - 标签 - Sam&#39;s Garage</title>
-        <link>http://samrks.github.io/tags/valine/</link>
+        <link>https://liubingxuan.xyz/tags/valine/</link>
         <description>Valine - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Wed, 09 Sep 2020 23:44:25 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/valine/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Wed, 09 Sep 2020 23:44:25 &#43;0800</lastBuildDate><atom:link href="https://liubingxuan.xyz/tags/valine/" rel="self" type="application/rss+xml" /><item>
     <title>个人博客添加评论系统 Valine &#43; LeanCloud</title>
-    <link>http://samrks.github.io/blog-comments-valine-leancloud/</link>
+    <link>https://liubingxuan.xyz/blog-comments-valine-leancloud/</link>
     <pubDate>Wed, 09 Sep 2020 23:44:25 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/blog-comments-valine-leancloud/</guid>
+    <guid>https://liubingxuan.xyz/blog-comments-valine-leancloud/</guid>
     <description><![CDATA[<p>hugo 博客添加评论系统 Valine</p>
 <blockquote>
 <p>Valine - 一款快速、简洁且高效的无后端评论系统。</p>

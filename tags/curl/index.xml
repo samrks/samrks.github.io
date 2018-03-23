@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>curl - 标签 - Sam&#39;s Garage</title>
-        <link>http://samrks.github.io/tags/curl/</link>
+        <link>https://liubingxuan.xyz/tags/curl/</link>
         <description>curl - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Mon, 10 Aug 2020 18:49:11 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/curl/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Mon, 10 Aug 2020 18:49:11 &#43;0800</lastBuildDate><atom:link href="https://liubingxuan.xyz/tags/curl/" rel="self" type="application/rss+xml" /><item>
     <title>前端也得懂点儿 HTTP (下) </title>
-    <link>http://samrks.github.io/http-2/</link>
+    <link>https://liubingxuan.xyz/http-2/</link>
     <pubDate>Mon, 10 Aug 2020 18:49:11 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/http-2/</guid>
+    <guid>https://liubingxuan.xyz/http-2/</guid>
     <description><![CDATA[<p>🤞🏻 “Nobody knows HTTP better than me !! ” 🤥</p>
 <p>​</p>
 <h2 id="先导">先导</h2>
@@ -314,7 +314,7 @@
 </span><span class="sb">        &lt;!DOCTYPE html&gt;
 </span><span class="sb">        &lt;head&gt;
 </span><span class="sb">                &lt;meta charset=&#34;UTF-8&#34;&gt;
-</span><span class="sb">            &lt;link rel=&#34;stylesheet&#34; href=&#34;http://samrks.github.io/x&#34;&gt;  // &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; 将 html 和 css 结合起来
+</span><span class="sb">            &lt;link rel=&#34;stylesheet&#34; href=&#34;https://liubingxuan.xyz/x&#34;&gt;  // &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; 将 html 和 css 结合起来
 </span><span class="sb">        &lt;/head&gt;
 </span><span class="sb">        &lt;body&gt;
 </span><span class="sb">                &lt;h1&gt;标题&lt;/h1&gt;
@@ -404,11 +404,11 @@
 </span><span class="sb">        &lt;!DOCTYPE html&gt;
 </span><span class="sb">        &lt;head&gt;
 </span><span class="sb">                &lt;meta charset=&#34;UTF-8&#34;&gt;
-</span><span class="sb">            &lt;link rel=&#34;stylesheet&#34; href=&#34;http://samrks.github.io/x&#34;&gt;   ←←←←←←←←←←←←←← 引入 css
+</span><span class="sb">            &lt;link rel=&#34;stylesheet&#34; href=&#34;https://liubingxuan.xyz/x&#34;&gt;   ←←←←←←←←←←←←←← 引入 css
 </span><span class="sb">        &lt;/head&gt;
 </span><span class="sb">        &lt;body&gt;
 </span><span class="sb">                &lt;h1&gt;标题&lt;/h1&gt;
-</span><span class="sb">                &lt;script src=&#34;http://samrks.github.io/y&#34;&gt;&lt;script&gt;   ←←←←←←←←←←←←←←← 引入 js
+</span><span class="sb">                &lt;script src=&#34;https://liubingxuan.xyz/y&#34;&gt;&lt;script&gt;   ←←←←←←←←←←←←←←← 引入 js
 </span><span class="sb">            &lt;/body&gt;
 </span><span class="sb">    `</span><span class="p">)</span>
     <span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">()</span>

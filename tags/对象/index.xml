@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>对象 - 标签 - Sam&#39;s Garage</title>
-        <link>http://samrks.github.io/tags/%E5%AF%B9%E8%B1%A1/</link>
+        <link>https://liubingxuan.xyz/tags/%E5%AF%B9%E8%B1%A1/</link>
         <description>对象 - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Wed, 02 Sep 2020 21:50:44 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/%E5%AF%B9%E8%B1%A1/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Wed, 02 Sep 2020 21:50:44 &#43;0800</lastBuildDate><atom:link href="https://liubingxuan.xyz/tags/%E5%AF%B9%E8%B1%A1/" rel="self" type="application/rss+xml" /><item>
     <title>JS 对象的基本用法</title>
-    <link>http://samrks.github.io/javascript-crud-of-object-prototype/</link>
+    <link>https://liubingxuan.xyz/javascript-crud-of-object-prototype/</link>
     <pubDate>Wed, 02 Sep 2020 21:50:44 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/javascript-crud-of-object-prototype/</guid>
+    <guid>https://liubingxuan.xyz/javascript-crud-of-object-prototype/</guid>
     <description><![CDATA[<p>「增」「删」「改」「查」「原型」</p>
 <h2 id="回顾">回顾</h2>
 <h3 id="七种数据类型">七种数据类型</h3>

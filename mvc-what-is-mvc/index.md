@@ -3,8 +3,6 @@
 
 <!--more-->
 
-​	
-
 ## MVC 是啥
 
 >   MVC 是一种非常出名的架构模式（设计模式）。
@@ -108,8 +106,6 @@ $button4.on("click", () => {  // 除2
 
 ​	
 
-​	
-
 ## 模块化
 
 >   [MDN：模块](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Modules)
@@ -123,15 +119,13 @@ $button4.on("click", () => {  // 除2
 +   解耦：每个模块的代码都独立存在，不需要依赖其他模块。（甚至一个模块用 Vue、一个用 React、一个用 jQuery 都没问题。只不过体积会大一点）
 +   就像我们玩的积木一样，各个积木可以组合在一起形成一个形状，又可以拆分，又可以替换，因为各个积木块都是独立的，只要他们之间的接口（形状）匹配，就可以灵活地组合在一起，解耦就是为了逐渐达到这种理想的状态。
 
-<img src="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201212163039745.png" alt="image-20201212163039745" style="zoom: 67%;" />
+<p align="center"><img src="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201212163039745.png" alt="image-20201212163039745" style="zoom: 67%;" /></p>
 
 划分模块的一个准则是「高内聚、低耦合」
 
 +   高内聚，是指一个软件模块是由相关性很强的代码组成，只负责一项任务，也就是常说的单一责任原则。
 +   低耦合，是指模块之间的联系越少越好，接口越简单越好，实现低耦合，细线通信。
 +   如果各个模块之间接口很复杂，说明功能划分有不合理之处、模块之间的耦合太高，同时也说明单个模块的内聚不高。
-
-​	
 
 ​	
 
@@ -266,7 +260,7 @@ console.log(m.trigger)
 ...
 ```
 
-![image-20201212171718170](https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201212171718170.png)
+<p align="center"><img src="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201212171718170.png" alt="image-20201212171718170" style="zoom:100%;" /></p>
 
 ### Vue 中的 EventBus
 
@@ -293,9 +287,7 @@ console.log(eventBus.$emit)
 console.log(eventBus.$off)
 ```
 
-<img src="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201210114438499.png" alt="image-20201210114438499" style="zoom: 67%;" />
-
-​		
+<p align="center"><img src="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201210114438499.png" alt="image-20201210114438499" style="zoom: 60%;" /></p>
 
 ​	
 
@@ -315,7 +307,7 @@ console.log(eventBus.$off)
     但 **render 思维**是在数据修改后，将当前元素容器全部移除，再依据新的数据重新渲染元素，肯定比之前更费性能
 
 -   当然，render 的代价可以通过「虚拟 DOM」来弥补，让 render 只更新该更新的地方
-    
+  
     -   「虚拟 DOM」render 时，会对比第一次和第二次的区别，只有发生变化的地方才会重新 render
 
 ### 图示 ⭕️
@@ -326,7 +318,7 @@ console.log(eventBus.$off)
 >   -   绿字思路：数据永远保持在左边，最后被渲染到右边  ✔️✔️✔️
 >       -   数据的流向更稳定
 
- <img src="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201205203053565.png" alt="image-20201205203053565" style="zoom: 50%;" />
+<p align="center"><img src="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201205203053565.png" alt="image-20201205203053565" style="zoom: 45%;" /></p>
 
 
 
@@ -415,9 +407,7 @@ const c = {
 }
 ```
 
-
-
-
+​	
 
 ## 表驱动编程
 
@@ -426,8 +416,6 @@ const c = {
 适用场景：**消除代码中频繁的 if else 或 switch case 的逻辑结构代码**，使代码更加简化
 
 +   事实上，任何信息都可以通过表来挑选。在简单情况下用逻辑语句是更简单的，但是一旦判断条件增多，那可能要写大量重复的判断语句，这时候我们通过**遍历**表来实现条件判断，将事半功倍。
-
-
 
 ### 例1
 
@@ -475,8 +463,6 @@ console.log(getDay(2019, 2))  // 28
 
 常规写法
 
-+   常规写法，看起来逻辑直白，。如果监听事件有10个… 100个，那么代码量将非常之大
-
 ```js
 add1(){ ... }
 min1(){ ... }
@@ -518,8 +504,6 @@ const controller = {
 >   「表驱动编程」让代码具有一个**稳定的复杂度**，不论数据规模多大，都能保持简单。
 >
 >   +   拒绝重复，保持**稳定的简单**，这才是程序员所追求的
-
-​					
 
 ​	
 

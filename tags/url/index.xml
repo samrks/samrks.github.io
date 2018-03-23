@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>URL - 标签 - Sam&#39;s Garage</title>
-        <link>http://samrks.github.io/tags/url/</link>
+        <link>https://liubingxuan.xyz/tags/url/</link>
         <description>URL - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Tue, 04 Aug 2020 23:58:43 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/url/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Tue, 04 Aug 2020 23:58:43 &#43;0800</lastBuildDate><atom:link href="https://liubingxuan.xyz/tags/url/" rel="self" type="application/rss+xml" /><item>
     <title>前端也得懂点儿 HTTP (上) ：浅析 URL</title>
-    <link>http://samrks.github.io/http-1-url/</link>
+    <link>https://liubingxuan.xyz/http-1-url/</link>
     <pubDate>Tue, 04 Aug 2020 23:58:43 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/http-1-url/</guid>
+    <guid>https://liubingxuan.xyz/http-1-url/</guid>
     <description><![CDATA[<p>本文主要围绕 URL ，为学 HTTP 做个铺垫。</p>
 <p>​</p>
 <h2 id="先导">先导</h2>

@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>搭建 - 标签 - Sam&#39;s Garage</title>
-        <link>http://samrks.github.io/tags/%E6%90%AD%E5%BB%BA/</link>
+        <link>https://liubingxuan.xyz/tags/%E6%90%AD%E5%BB%BA/</link>
         <description>搭建 - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Tue, 14 Jul 2020 22:20:43 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/%E6%90%AD%E5%BB%BA/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Tue, 14 Jul 2020 22:20:43 &#43;0800</lastBuildDate><atom:link href="https://liubingxuan.xyz/tags/%E6%90%AD%E5%BB%BA/" rel="self" type="application/rss+xml" /><item>
     <title>使用 Hugo 搭建个人博客</title>
-    <link>http://samrks.github.io/blog-start-a-hugo/</link>
+    <link>https://liubingxuan.xyz/blog-start-a-hugo/</link>
     <pubDate>Tue, 14 Jul 2020 22:20:43 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/blog-start-a-hugo/</guid>
+    <guid>https://liubingxuan.xyz/blog-start-a-hugo/</guid>
     <description><![CDATA[<p>博客的快速搭建 及 基础配置 🥇</p>
 <p>​</p>
 <blockquote>

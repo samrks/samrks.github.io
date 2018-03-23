@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>jQuery - 标签 - Sam&#39;s Garage</title>
-        <link>http://samrks.github.io/tags/jquery/</link>
+        <link>https://liubingxuan.xyz/tags/jquery/</link>
         <description>jQuery - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Sun, 25 Oct 2020 14:20:02 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/jquery/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Sun, 25 Oct 2020 14:20:02 &#43;0800</lastBuildDate><atom:link href="https://liubingxuan.xyz/tags/jquery/" rel="self" type="application/rss+xml" /><item>
     <title> jQuery 快速上手</title>
-    <link>http://samrks.github.io/dom-jquery-api/</link>
+    <link>https://liubingxuan.xyz/dom-jquery-api/</link>
     <pubDate>Sun, 25 Oct 2020 14:20:02 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/dom-jquery-api/</guid>
+    <guid>https://liubingxuan.xyz/dom-jquery-api/</guid>
     <description><![CDATA[<h2 id="参考">参考</h2>
 <ul>
 <li>
@@ -1131,10 +1131,10 @@
 </div>]]></description>
 </item><item>
     <title>jQuery 的设计思想（下）</title>
-    <link>http://samrks.github.io/dom-jquery-prototype/</link>
+    <link>https://liubingxuan.xyz/dom-jquery-prototype/</link>
     <pubDate>Sun, 25 Oct 2020 14:20:02 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/dom-jquery-prototype/</guid>
+    <guid>https://liubingxuan.xyz/dom-jquery-prototype/</guid>
     <description><![CDATA[<p>​</p>
 <h2 id="命名风格">命名风格</h2>
 <blockquote>
@@ -2232,10 +2232,10 @@
 </ul>]]></description>
 </item><item>
     <title>jQuery 的设计思想（上）</title>
-    <link>http://samrks.github.io/dom-jquery-handwritten/</link>
+    <link>https://liubingxuan.xyz/dom-jquery-handwritten/</link>
     <pubDate>Sat, 24 Oct 2020 01:23:34 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/dom-jquery-handwritten/</guid>
+    <guid>https://liubingxuan.xyz/dom-jquery-handwritten/</guid>
     <description><![CDATA[<p>​</p>
 <h2 id="前言">前言</h2>
 <ul>
@@ -3128,10 +3128,10 @@
 </ul>]]></description>
 </item><item>
     <title>DOM vs jQuery（API篇）</title>
-    <link>http://samrks.github.io/dom-dom-vs-jquery/</link>
+    <link>https://liubingxuan.xyz/dom-dom-vs-jquery/</link>
     <pubDate>Tue, 26 May 2020 09:26:03 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/dom-dom-vs-jquery/</guid>
+    <guid>https://liubingxuan.xyz/dom-dom-vs-jquery/</guid>
     <description><![CDATA[<p>对比 DOM 和 jQuery</p>
 <p>​</p>
 <h2 id="javascript-的组成">JavaScript 的组成</h2>

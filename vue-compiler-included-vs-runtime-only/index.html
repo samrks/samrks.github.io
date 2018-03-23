@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>深入理解 Vue 完整版与非完整版 - Sam&#39;s Garage</title><meta name="Description" content="Vue 完整版与非完整版的区别、Vue 实例的使用、在线搭建 Vue 项目"><meta property="og:title" content="深入理解 Vue 完整版与非完整版" />
+<meta property="og:description" content="Vue 完整版与非完整版的区别、Vue 实例的使用、在线搭建 Vue 项目" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://liubingxuan.xyz/vue-compiler-included-vs-runtime-only/" />
+<meta property="og:image" content="https://liubingxuan.xyz/favicon-32x32.png"/>
+<meta property="article:published_time" content="2020-12-23T23:32:52+08:00" />
+<meta property="article:modified_time" content="2020-12-23T23:32:52+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://liubingxuan.xyz/favicon-32x32.png"/>
+
+<meta name="twitter:title" content="深入理解 Vue 完整版与非完整版"/>
+<meta name="twitter:description" content="Vue 完整版与非完整版的区别、Vue 实例的使用、在线搭建 Vue 项目"/>
+<meta name="application-name" content="Sam&#39;s Garage">
+<meta name="apple-mobile-web-app-title" content="Sam&#39;s Garage"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://liubingxuan.xyz/vue-compiler-included-vs-runtime-only/" /><link rel="prev" href="https://liubingxuan.xyz/mvc-what-is-mvc/" /><link rel="next" href="https://liubingxuan.xyz/vue-reactivity/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "深入理解 Vue 完整版与非完整版",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/liubingxuan.xyz\/vue-compiler-included-vs-runtime-only\/"
+        },"genre": "posts","keywords": "Vue, 完整版, 运行版, 实例","wordcount":  2005 ,
+        "url": "https:\/\/liubingxuan.xyz\/vue-compiler-included-vs-runtime-only\/","datePublished": "2020-12-23T23:32:52+08:00","dateModified": "2020-12-23T23:32:52+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Sam"
+            },"description": "Vue 完整版与非完整版的区别、Vue 实例的使用、在线搭建 Vue 项目"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa fa-home fa-fw'></i> 主页 </a><a class="menu-item" href="/posts/"><i class='fas fa-edit'></i> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="https://github.com/samrks" rel="noopener noreffer" target="_blank"><i class='fab fa-github'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title=""><i class='fa fa-home fa-fw'></i>主页</a><a class="menu-item" href="/posts/" title=""><i class='fas fa-edit'></i>文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="https://github.com/samrks" title="" rel="noopener noreffer" target="_blank"><i class='fab fa-github'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">深入理解 Vue 完整版与非完整版</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://liubingxuan.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Sam</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/vue/"><i class="far fa-folder fa-fw"></i>Vue</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-12-23">2020-12-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2005 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;<span id="/vue-compiler-included-vs-runtime-only/" class="leancloud_visitors" data-flag-title="深入理解 Vue 完整版与非完整版">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#深入理解两种区别">深入理解两种区别</a>
+          <ul>
+            <li><a href="#特点">特点</a></li>
+            <li><a href="#视图">视图</a></li>
+            <li><a href="#引入">引入</a>
+              <ul>
+                <li><a href="#通过-cdn-引入">通过 CDN 引入</a></li>
+                <li><a href="#通过-webpack-引入">通过 webpack 引入</a></li>
+                <li><a href="#通过-vuecli-引入">通过 @vue/cli 引入</a></li>
+              </ul>
+            </li>
+            <li><a href="#template-和-render">template 和 render</a></li>
+          </ul>
+        </li>
+        <li><a href="#vue-实例的使用">Vue 实例的使用</a>
+          <ul>
+            <li><a href="#方案一">方案一</a></li>
+            <li><a href="#方案二">方案二</a></li>
+            <li><a href="#方案三">方案三</a></li>
+            <li><a href="#最优方案--方案三">最优方案 — 方案三</a></li>
+          </ul>
+        </li>
+        <li><a href="#在线搭建-vue-项目">在线搭建 Vue 项目</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="深入理解两种区别">深入理解两种区别</h2>
+<blockquote>
+<p>Vue 完整版</p>
+<p>Vue 非完整版（运行版）</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Vue 完整版</th>
+<th>Vue 非完整版（运行版）</th>
+<th>评价（区别）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>特点</td>
+<td>有 compiler</td>
+<td>没有 compiler</td>
+<td>compiler 占 40% 体积</td>
+</tr>
+<tr>
+<td>视图</td>
+<td>写在 HTML 里<br />或者写在 template 选项</td>
+<td>写在 render 函数里<br />用 h 来创建标签</td>
+<td>h 是尤雨溪写好传给 render 的</td>
+</tr>
+<tr>
+<td>CDN 引入</td>
+<td>vue.js</td>
+<td>vue.runtime.js</td>
+<td>文件名不同，生产环境后缀为 .min.js</td>
+</tr>
+<tr>
+<td>webpack 引入</td>
+<td>需要配置 alias</td>
+<td>默认使用此版</td>
+<td>尤雨溪配置的</td>
+</tr>
+<tr>
+<td>@vue/cli 引入</td>
+<td>需要额外配置</td>
+<td>默认使用此版</td>
+<td>尤雨溪、蒋豪群配置的</td>
+</tr>
+</tbody>
+</table>
+<h3 id="特点">特点</h3>
+<blockquote>
+<p>「完整版」有 compiler，「非完整版」没有 compiler</p>
+</blockquote>
+<ul>
+<li>compiler 编译器，有编译 HTML 的功能，这个功能很复杂、占空间</li>
+<li>导致「完整版」比「非完整版」大 40% 的体积</li>
+</ul>
+<h3 id="视图">视图</h3>
+<blockquote>
+<p>比如要写一个 button</p>
+</blockquote>
+<ul>
+<li>
+<p>使用「完整版」，button 可以写在 HTML 里或者写在 template 选项里</p>
+</li>
+<li>
+<p>使用「非完整版」，只能写在 render 函数里。用 render 函数的参数 h 函数来创建标签</p>
+</li>
+<li>
+<p>h 是尤雨溪写好并传给 render 的，所以开发者可以获取到这个 h 函数。</p>
+<ul>
+<li>注意：因为 h 函数是作为 render 函数的参数传递进来的，所以参数名 h 可以任意修改，但 vue 文档里用的是 h，所以推荐不要修改，仍使用 h 作为函数名</li>
+</ul>
+</li>
+</ul>
+<h3 id="引入">引入</h3>
+<h4 id="通过-cdn-引入">通过 CDN 引入</h4>
+<blockquote>
+<p>在 index.html，通过 script 标签引入</p>
+<p><a href="https://cn.vuejs.org/v2/guide/installation.html#%E7%9B%B4%E6%8E%A5%E7%94%A8-lt-script-gt-%E5%BC%95%E5%85%A5" target="_blank" rel="noopener noreffer">官方文档</a>：用 <code>&lt;script&gt;</code> 标签引入，Vue 会被注册为一个全局变量</p>
+</blockquote>
+<ul>
+<li>文件名为  vue.js，表示「完整版」</li>
+<li>文件名为  vue.runtime.js，表示「非完整版」</li>
+<li>如果要上线部署（生产环境），需要使用后缀为 .min.js 的文件
+<ul>
+<li>.min.js 是去掉注释、代码压缩之后的版本，体积更小</li>
+<li>vue.min.js 和 vue.runtime.min.js</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h4 id="通过-webpack-引入">通过 webpack 引入</h4>
+<blockquote>
+<p>用 webpack 引入 vue 的配置，比较麻烦</p>
+</blockquote>
+<blockquote>
+<p>通过 webpack 引入，默认使用「非完整版」（这是尤雨溪配置的）</p>
+</blockquote>
+<p>如果想通过 webpack 引入「完整版」，可以参考</p>
+<ul>
+<li>⚠️ <a href="https://cn.vuejs.org/v2/guide/installation.html?#%E8%BF%90%E8%A1%8C%E6%97%B6-%E7%BC%96%E8%AF%91%E5%99%A8-vs-%E5%8F%AA%E5%8C%85%E5%90%AB%E8%BF%90%E8%A1%8C%E6%97%B6" target="_blank" rel="noopener noreffer">Vue 安装文档</a> 、<a href="https://webpack.js.org/configuration/resolve/#resolvealias" target="_blank" rel="noopener noreffer">webpack 文档</a></li>
+<li>⭕️ <a href="https://www.jianshu.com/p/fb265cdb920b" target="_blank" rel="noopener noreffer">webpack 引入 Vue 的两种方式</a></li>
+</ul>
+<p>​</p>
+<h4 id="通过-vuecli-引入">通过 @vue/cli 引入</h4>
+<blockquote>
+<p>通过 @vue/cli 创建的项目，默认使用「非完整版」（这是尤雨溪、蒋豪群配置的）</p>
+</blockquote>
+<p>如果想引入「完整版」，可以参考</p>
+<ul>
+<li>⚠️<a href="https://cli.vuejs.org/zh/guide/webpack.html#%E7%AE%80%E5%8D%95%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E5%BC%8F" target="_blank" rel="noopener noreffer">Vue Cli webpack 文档</a></li>
+<li>⭕️ <a href="https://github.com/vuejs/vue-cli/issues/2398" target="_blank" rel="noopener noreffer">Issues：how to set alias</a>、<a href="https://github.com/Yatoo2018/webpack-chain/tree/zh-cmn-Hans#%E9%85%8D%E7%BD%AE-resolve-%E5%88%AB%E5%90%8D" target="_blank" rel="noopener noreffer">chainWebpack 文档</a>、<a href="https://www.jianshu.com/p/0c4260120c2b" target="_blank" rel="noopener noreffer">Vue脚手架中配置别名📌</a></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// vue.config.js
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;path&#34;</span><span class="p">)</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// 方法一
+</span><span class="c1"></span>  <span class="nx">chainWebpack</span><span class="o">:</span> <span class="nx">config</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">config</span><span class="p">.</span><span class="nx">resolve</span><span class="p">.</span><span class="nx">alias</span>
+      <span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&#34;vuehaha&#34;</span><span class="p">,</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="s2">&#34;./node_modules/vue/dist/vue.esm.js&#34;</span><span class="p">))</span> 
+    	<span class="c1">// 给「vue完整版」取个别名，&#34;vuehaha&#34;（慎用符号）
+</span><span class="c1"></span>  <span class="p">}</span>
+  <span class="c1">// 方法二
+</span><span class="c1"></span>  <span class="c1">// configureWebpack: {
+</span><span class="c1"></span>  <span class="c1">//   resolve: {
+</span><span class="c1"></span>  <span class="c1">//     alias: {
+</span><span class="c1"></span>  <span class="c1">//       &#34;vuehaha&#34;: path.resolve(&#34;./node_modules/vue/dist/vue.esm.js&#34;)
+</span><span class="c1"></span>  <span class="c1">//     }
+</span><span class="c1"></span>  <span class="c1">//   }
+</span><span class="c1"></span>  <span class="c1">// }
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// main.js 入口文件
+</span><span class="c1"></span><span class="kr">import</span> <span class="nx">Vue</span> <span class="nx">from</span> <span class="s2">&#34;vuehaha&#34;</span>  <span class="c1">// 👈👈👈
+</span><span class="c1"></span><span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="nx">el</span><span class="o">:</span> <span class="s2">&#34;#app&#34;</span><span class="p">,</span>
+  <span class="c1">// 👇 完整版，可以「从index.html中」or「从template选项中」直接获取视图
+</span><span class="c1"></span>  <span class="nx">template</span><span class="o">:</span><span class="sb">`
+</span><span class="sb">	&lt;div&gt;
+</span><span class="sb">      {{n}}
+</span><span class="sb">      &lt;button @click=&#34;add&#34;&gt;+1&lt;/button&gt;
+</span><span class="sb">  	&lt;/div&gt;
+</span><span class="sb">	`</span><span class="p">,</span>
+  <span class="nx">data</span><span class="o">:</span> <span class="p">{</span> <span class="nx">n</span><span class="o">:</span> <span class="mi">0</span> <span class="p">},</span>
+  <span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">add</span><span class="p">()</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">n</span> <span class="o">+=</span> <span class="mi">1</span> <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h3 id="template-和-render">template 和 render</h3>
+<blockquote>
+<p>template 和 render 总是二选一使用。如果二者同时使用，必然有一个会失效</p>
+</blockquote>
+<ul>
+<li>template 是给「Vue 完整版」使用的
+<ul>
+<li>完整版必须要写 html 字符串，可以写到 template 选项里，也可以写到 HTML 文件里</li>
+</ul>
+</li>
+<li>render 是给「Vue 非完整版」使用的
+<ul>
+<li>非完整版必须要写 render 函数</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h2 id="vue-实例的使用">Vue 实例的使用</h2>
+<blockquote>
+<p>需求：实现点击按钮加一。实现四种方案下的 Demo</p>
+</blockquote>
+<h3 id="方案一">方案一</h3>
+<blockquote>
+<p>CDN 引入 Vue 完整版（vue.js 或 vue.min.js）</p>
+<ul>
+<li>包含编译器 compiler，视图可以直接从 HTML 里 或者 template 选项里获取</li>
+<li><a href="https://cn.vuejs.org/v2/guide/installation.html#%E6%9C%AF%E8%AF%AD" target="_blank" rel="noopener noreffer">官方文档</a> —— 编译器：用来将模板字符串编译成为 JavaScript 渲染函数的代码</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong><a href="https://codesandbox.io/s/beautiful-nobel-hdhj4?file=/src/main.js" target="_blank" rel="noopener noreffer">在线示例</a>：HTML</strong></p>
+<p><strong><a href="https://codesandbox.io/s/youthful-night-h7jiq?file=/src/main.js" target="_blank" rel="noopener noreffer">在线示例</a>：template</strong></p>
+</blockquote>
+<h3 id="方案二">方案二</h3>
+<blockquote>
+<p>CDN 引入 Vue 非完整版（vue.runtime.js 或 vue.runtime.min.js）</p>
+<ul>
+<li>没有编译器，无法编译 HTML，只能从 JS 构建视图</li>
+<li>开发者需书写 render 函数（ h 构建方法 ）<a href="https://cn.vuejs.org/v2/guide/installation.html#%E8%BF%90%E8%A1%8C%E6%97%B6-%E7%BC%96%E8%AF%91%E5%99%A8-vs-%E5%8F%AA%E5%8C%85%E5%90%AB%E8%BF%90%E8%A1%8C%E6%97%B6" target="_blank" rel="noopener noreffer">官方文档</a></li>
+<li>h 构建方法的代码非常复杂，所以不建议使用这种方案</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong><a href="https://codesandbox.io/s/quizzical-swirles-vn4w1?file=/src/main.js" target="_blank" rel="noopener noreffer">在线示例</a></strong></p>
+</blockquote>
+<h3 id="方案三">方案三</h3>
+<blockquote>
+<p>CDN 引入 Vue 非完整版，配合 Vue Loader（<a href="https://vue-loader.vuejs.org/zh/#vue-loader-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F" target="_blank" rel="noopener noreffer">官方文档</a>）和 .vue 文件</p>
+<ul>
+<li>Vue Loader 可以把一个<strong>单独的 .vue 文件</strong>翻译成一个对象，对象包含 render 函数（h 构建方法）</li>
+<li>开发者可以在不写 h 函数的基础上，得到 h 函数</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>Vue Loader 是 webpack 的 loader，它允许你以一种名为<strong>单文件组件 (SFCs)</strong> 的格式撰写 Vue 组件</p>
+<ul>
+<li>这就是 webpack 为前端带来的可能。允许以任意形式（如 .vue 文件）组织一个对象，只要最后能通过一个 loader 把它还原成这个对象即可</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong><a href="https://codesandbox.io/s/relaxed-tdd-bjums?file=/src/Demo.vue" target="_blank" rel="noopener noreffer">在线示例</a></strong></p>
+</blockquote>
+<p>​</p>
+<h3 id="最优方案--方案三">最优方案 — 方案三</h3>
+<blockquote>
+<p>最佳实践：<strong>总是使用非完整版，然后配合 vue-loader 和 .vue 文件</strong></p>
+<ul>
+<li>vue-loader 用于加载/翻译 .vue 文件</li>
+</ul>
+</blockquote>
+<p>具体思路（为什么说这个是最优方案）</p>
+<ol>
+<li>
+<p>保证用户体验，用户下载的 JS 文件体积更小，但<strong>只支持 h 函数</strong></p>
+</li>
+<li>
+<p>保证开发体验，开发者可直接在 vue 文件里写 HTML 标签，而<strong>不写 h 函数</strong></p>
+</li>
+<li>
+<p>脏活让 loader 做，vue-loader 会把 .vue 文件里开发者写的 HTML <strong>转为 h 函数</strong></p>
+<ul>
+<li>开发者可以在不写 h 函数的基础上 ,（通过 vue-loader）得到 h 函数</li>
+<li>既保证了开发体验，又保证了用户体验</li>
+<li>ps：把所有细节<strong>封装</strong>到一个（类、函数、插件…）里，这就是工程师要做的</li>
+</ul>
+</li>
+</ol>
+<p>​</p>
+<h2 id="在线搭建-vue-项目">在线搭建 Vue 项目</h2>
+<p>通常，我们会使用 @vue/cli 创建 vue 项目（sh ：vue create xxx-demo）</p>
+<p>但还有另一种更方便的方式 —— <a href="https://codesandbox.io/" target="_blank" rel="noopener noreffer">codesandbox.io</a></p>
+<blockquote>
+<p>CodeSandbox 是一个在线的代码编辑器，主要聚焦于创建 Web 应用项目。可以把它看作是一个浏览器端的沙盒运行环境，支持多种流行的构建模板，例如 create-react-app、 vue-cli、parcel 等等。 可以用于快速原型开发、DEMO 展示、Bug 还原等等。</p>
+</blockquote>
+<ul>
+<li>打开网址，点击 create sandbox，选择 vue 图标，即可在线创建出一个 vue 项目（如下图）</li>
+<li>在线项目支持下载 ZIP ，解压即用（不过通常都是测试 demo 也无需下载）</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201222202934247.png"
+        data-srcset="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201222202934247.png, https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201222202934247.png 1.5x, https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201222202934247.png 2x"
+        data-sizes="auto"
+        alt="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201222202934247.png"
+        title="image-20201222202934247" /></p>
+<blockquote>
+<p><strong>提示</strong></p>
+<p><a href="https://codesandbox.io/" target="_blank" rel="noopener noreffer">codesandbox.io</a> 登录后只能创建 50 个项目</p>
+<p>但不登录可以创建无限个（注意清理 cookie），所以不要登录（Do Not Sign In）😉</p>
+</blockquote></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-12-23</span>
+            </div>
+            <div class="post-info-license"><span>转载请注明出处</span></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/vue-compiler-included-vs-runtime-only/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://liubingxuan.xyz/vue-compiler-included-vs-runtime-only/" data-title="深入理解 Vue 完整版与非完整版" data-via="ryuukousen2" data-hashtags="Vue,完整版,运行版,实例"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://liubingxuan.xyz/vue-compiler-included-vs-runtime-only/" data-hashtag="Vue"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://liubingxuan.xyz/vue-compiler-included-vs-runtime-only/" data-title="深入理解 Vue 完整版与非完整版"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://liubingxuan.xyz/vue-compiler-included-vs-runtime-only/" data-title="深入理解 Vue 完整版与非完整版"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://liubingxuan.xyz/vue-compiler-included-vs-runtime-only/" data-title="深入理解 Vue 完整版与非完整版"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/vue/">Vue</a>,&nbsp;<a href="/tags/%E5%AE%8C%E6%95%B4%E7%89%88/">完整版</a>,&nbsp;<a href="/tags/%E8%BF%90%E8%A1%8C%E7%89%88/">运行版</a>,&nbsp;<a href="/tags/%E5%AE%9E%E4%BE%8B/">实例</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/mvc-what-is-mvc/" class="prev" rel="prev" title="浅析 MVC"><i class="fas fa-angle-left fa-fw"></i>浅析 MVC</a>
+            <a href="/vue-reactivity/" class="next" rel="next" title="深入理解 Vue 数据响应式">深入理解 Vue 数据响应式<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+    Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+  </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Thanks For Your Watching! ❤️</div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2017 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://liubingxuan.xyz" target="_blank">Sam</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":999},"comment":{"valine":{"appId":"M2gdPMfXs30Gw5NNnr2wSxv6-MdYXbMMI","appKey":"9V2iCzlcQbheaaWDXRLTNgec","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-twitter@5.0.1/img/twitter/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"📢 来都来了，说点什么 ~（填写邮箱可以收到回复提醒哦 ~ 😉）","recordIP":true,"visitor":true}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"KAKKI975YQ","algoliaIndex":"blog","algoliaSearchKey":"529eb6b7fa6e4f89bfe1d0043e53bda5","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

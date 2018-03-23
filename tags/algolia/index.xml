@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Algolia - 标签 - Sam&#39;s Garage</title>
-        <link>http://samrks.github.io/tags/algolia/</link>
+        <link>https://liubingxuan.xyz/tags/algolia/</link>
         <description>Algolia - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Tue, 08 Sep 2020 20:27:36 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/algolia/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Tue, 08 Sep 2020 20:27:36 &#43;0800</lastBuildDate><atom:link href="https://liubingxuan.xyz/tags/algolia/" rel="self" type="application/rss+xml" /><item>
     <title>Hugo 集成 Algolia 搜索</title>
-    <link>http://samrks.github.io/blog-search-algolia/</link>
+    <link>https://liubingxuan.xyz/blog-search-algolia/</link>
     <pubDate>Tue, 08 Sep 2020 20:27:36 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/blog-search-algolia/</guid>
+    <guid>https://liubingxuan.xyz/blog-search-algolia/</guid>
     <description><![CDATA[<p>hugo 搜索功能 Algolia</p>
 <h2 id="前言">前言</h2>
 <p><a href="https://gohugo.io/" target="_blank" rel="noopener noreffer">Hugo</a>是由 Steve Francis 大神（http://spf13.com/）基于<code>Go</code>语言开发的静态网站构建工具。没错你现在看到的本博客就是基于<code>Hugo</code>的，使用 Hugo 创建一个网站是非常简单的，基本上没有什么门槛，官方还提供了大量的主题供你选择，你只需要专心写的文章就行。不过有个问题是搜索，我们知道搜索属于动态行为了，如何给静态网站增加搜索功能呢？当然我们可以使用<code>Google</code>的站内搜索功能，Hugo 官方也提供了一些开源的和商业的解决方案，今天我们要介绍的就是一个非常优秀的商业解决方案：<a href="https://www.algolia.com/" target="_blank" rel="noopener noreffer">Algolia</a>。</p>

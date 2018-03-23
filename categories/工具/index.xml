@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>工具 - 分类 - Sam&#39;s Garage</title>
-        <link>http://samrks.github.io/categories/%E5%B7%A5%E5%85%B7/</link>
+        <link>https://liubingxuan.xyz/categories/%E5%B7%A5%E5%85%B7/</link>
         <description>工具 - 分类 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Thu, 16 Jul 2020 21:08:40 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/categories/%E5%B7%A5%E5%85%B7/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Thu, 16 Jul 2020 21:08:40 &#43;0800</lastBuildDate><atom:link href="https://liubingxuan.xyz/categories/%E5%B7%A5%E5%85%B7/" rel="self" type="application/rss+xml" /><item>
     <title>Typora 如何上传图片？（图床）</title>
-    <link>http://samrks.github.io/tools-upload-images-in-typora/</link>
+    <link>https://liubingxuan.xyz/tools-upload-images-in-typora/</link>
     <pubDate>Thu, 16 Jul 2020 21:08:40 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/tools-upload-images-in-typora/</guid>
+    <guid>https://liubingxuan.xyz/tools-upload-images-in-typora/</guid>
     <description><![CDATA[<p>​</p>
 <p>Typora 是一款简单、高效而且优雅的 Markdown 编辑器，它提供了一种所见即所得的全新的 Markdown 写作体验。它把<strong>源码编辑和效果预览</strong>两者合二为一，在输入 Markdown 代码的时候即时生成预览效果。Typora 的一切都围绕纯粹的生产效率而设计。</p>
 <p>Typora一直是我最喜欢的 markdown 编辑器，写博客、记笔记的首选软件。相信大部分朋友也在使用 Typora 这款软件。</p>
@@ -83,10 +83,10 @@
 <p>或者在已有的本地图片上面按右键，也可以弹出上传图片的按钮，整个操作非常便捷。</p>]]></description>
 </item><item>
     <title>测试 Markdown 语法</title>
-    <link>http://samrks.github.io/tools-test-markdown/</link>
+    <link>https://liubingxuan.xyz/tools-test-markdown/</link>
     <pubDate>Wed, 15 Jul 2020 16:34:19 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/tools-test-markdown/</guid>
+    <guid>https://liubingxuan.xyz/tools-test-markdown/</guid>
     <description><![CDATA[这里是文章描述，本文用于测试一些 Markdown 语法和样式展现]]></description>
 </item></channel>
 </rss>

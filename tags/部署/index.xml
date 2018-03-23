@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>部署 - 标签 - Sam&#39;s Garage</title>
-        <link>http://samrks.github.io/tags/%E9%83%A8%E7%BD%B2/</link>
+        <link>https://liubingxuan.xyz/tags/%E9%83%A8%E7%BD%B2/</link>
         <description>部署 - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Sun, 15 Mar 2020 21:22:22 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/%E9%83%A8%E7%BD%B2/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Sun, 15 Mar 2020 21:22:22 &#43;0800</lastBuildDate><atom:link href="https://liubingxuan.xyz/tags/%E9%83%A8%E7%BD%B2/" rel="self" type="application/rss+xml" /><item>
     <title>个人博客：💰购买并配置域名</title>
-    <link>http://samrks.github.io/blog-buy-setup-a-domain/</link>
+    <link>https://liubingxuan.xyz/blog-buy-setup-a-domain/</link>
     <pubDate>Sun, 15 Mar 2020 21:22:22 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/blog-buy-setup-a-domain/</guid>
+    <guid>https://liubingxuan.xyz/blog-buy-setup-a-domain/</guid>
     <description><![CDATA[<p>买个域名玩玩！</p>
 <h2 id="个人博客绑定域名">个人博客绑定域名</h2>
 <h3 id="购买域名">购买域名</h3>

@@ -1,0 +1,182 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>组件传值 - 标签 - Sam&#39;s Garage</title>
+        <link>https://liubingxuan.xyz/tags/%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/</link>
+        <description>组件传值 - 标签 - Sam&#39;s Garage</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><atom:link href="https://liubingxuan.xyz/tags/%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/" rel="self" type="application/rss+xml" /><item>
+    <title>Vue 中的 .sync 修饰符有什么用</title>
+    <link>https://liubingxuan.xyz/vue-props-sync/</link>
+    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://liubingxuan.xyz/vue-props-sync/</guid>
+    <description><![CDATA[<h2 id="vue-中的-sync-修饰符有什么用">Vue 中的 .sync 修饰符有什么用</h2>
+<blockquote>
+<p><a href="https://cn.vuejs.org/v2/guide/components-custom-events.html#sync-%E4%BF%AE%E9%A5%B0%E7%AC%A6" target="_blank" rel="noopener noreffer">官方文档</a></p>
+</blockquote>
+<ul>
+<li>.sync 是「实现 Vue 组件间传值」的一个语法糖</li>
+</ul>
+<p>​</p>
+<h3 id="组件间传值的实现">组件间传值的实现</h3>
+<blockquote>
+<p>props 传值遵循<a href="https://cn.vuejs.org/v2/guide/components-props.html#%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81" target="_blank" rel="noopener noreffer">单向数据流</a>原则：父级 prop 的更新会向下流动到子组件中，但是反过来则不行。这样可以防止子组件意外变更父组件的数据，从而导致你的应用的数据流向难以理解。</p>
+</blockquote>
+<h4 id="思路">思路</h4>
+<ul>
+<li>数据从父组件传入子组件，我们无法在子组件中直接修改 props 传入的外部数据，只能在父组件中进行修改，而更新后的数据会自动流向子组件</li>
+<li><a href="https://cn.vuejs.org/v2/guide/components-props.html#ad" target="_blank" rel="noopener noreffer">props</a> 加 <a href="https://cn.vuejs.org/v2/api/#vm-emit" target="_blank" rel="noopener noreffer">vm.$emit</a> 实现组件传值
+<ul>
+<li>props 用于接收父组件的数据</li>
+<li>vm.$emit（自定义事件）用于触发父组件事件，并传参</li>
+</ul>
+</li>
+</ul>
+<h4 id="具体实现">具体实现</h4>
+<blockquote>
+<p>事件的发布、订阅</p>
+</blockquote>
+<p><a href="https://codesandbox.io/s/objective-cloud-qnzvy?file=/src/Parent.vue" target="_blank" rel="noopener noreffer">在线演示</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vue" data-lang="vue"><span class="c">&lt;!--</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">vue</span> <span class="o">--&gt;</span>
+<span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;app&#34;</span><span class="p">&gt;</span>
+    <span class="nx">Parent</span><span class="p">.</span><span class="nx">vue</span> <span class="nx">现在有</span> <span class="p">{{</span> <span class="nx">total</span> <span class="p">}}</span>
+    <span class="p">&lt;</span><span class="nt">hr</span> <span class="p">/&gt;</span>
+    <span class="c">&lt;!--</span> <span class="nx">向</span> <span class="nx">Child</span> <span class="nx">组件传递</span> <span class="nx">money</span> <span class="nx">属性</span> <span class="o">--&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Child</span> <span class="nt">:money</span><span class="s">=&#34;total&#34;</span> <span class="err">@</span><span class="na">update</span><span class="o">:</span><span class="na">money</span><span class="o">=</span><span class="s">&#34;total = $event&#34;</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="kr">import</span> <span class="nx">Child</span> <span class="nx">from</span> <span class="s2">&#34;./Child.vue&#34;</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="nx">total</span><span class="o">:</span> <span class="mi">10000</span><span class="p">,</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nx">components</span><span class="o">:</span> <span class="p">{</span> <span class="nx">Child</span> <span class="p">},</span> 
+<span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vue" data-lang="vue"><span class="c">&lt;!--</span> <span class="nx">Child</span><span class="p">.</span><span class="nx">vue</span> <span class="o">--&gt;</span>
+<span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;child&#34;</span><span class="p">&gt;</span>
+    <span class="nx">Child</span><span class="p">.</span><span class="nx">vue</span> <span class="nx">现在有</span> <span class="p">{{</span> <span class="nx">money</span> <span class="p">}}</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&#34;$emit(&#39;update:money&#39;, money-100)&#34;</span><span class="p">&gt;</span><span class="nx">花钱</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="nx">props</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;money&#34;</span><span class="p">],</span> <span class="c1">// 接收到 money 属性
+</span><span class="c1"></span><span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>​</p>
+<p>​</p>
+<h3 id="sync-的使用">.sync 的使用</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vue" data-lang="vue"><span class="c">&lt;!--</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">vue</span> <span class="o">--&gt;</span>
+<span class="p">&lt;</span><span class="nt">Child</span> <span class="nt">:属性名.sync</span><span class="s">=&#34;数据&#34;</span> <span class="p">/&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="示例">示例</h4>
+<blockquote>
+<p><a href="https://codesandbox.io/s/sweet-pine-pij57?file=/src/Parent.vue" target="_blank" rel="noopener noreffer">在线演示</a></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vue" data-lang="vue"><span class="c">&lt;!--</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">vue</span> <span class="o">--&gt;</span>
+<span class="p">&lt;</span><span class="nt">Child</span> <span class="nt">:money.sync</span><span class="s">=&#34;total&#34;</span> <span class="p">/&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>👆 会扩展出一个完整的事件绑定 👇</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-vue" data-lang="vue"><span class="c">&lt;!--</span> <span class="nx">Parent</span><span class="p">.</span><span class="nx">vue</span> <span class="o">--&gt;</span>
+<span class="p">&lt;</span><span class="nt">Child</span> <span class="nt">:money</span><span class="s">=&#34;total&#34;</span>  <span class="err">@</span><span class="na">update</span><span class="o">:</span><span class="na">money</span><span class="o">=</span><span class="s">&#34;total = $event&#34;</span> <span class="p">/&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>当子组件需要更新「数据 total 」时，它需要显式的触发一个更新事件「<code>update:属性名</code>」</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">// Child.vue
+this.$emit(&#39;update:属性名&#39;, 更新数据)
+👇
+&lt;button @click=&#34;$emit(&#39;update:money&#39;, money-100)&#34;&gt;花钱&lt;/button&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h2 id="参考">参考</h2>
+<p><a href="https://www.jianshu.com/p/6b062af8cf01">https://www.jianshu.com/p/6b062af8cf01</a></p>
+<p><a href="https://segmentfault.com/a/1190000010700521">https://segmentfault.com/a/1190000010700521</a></p>]]></description>
+</item></channel>
+</rss>

@@ -1,17 +1,16 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>继承 - 标签 - Sam&#39;s Garage</title>
-        <link>http://samrks.github.io/tags/%E7%BB%A7%E6%89%BF/</link>
+        <link>https://liubingxuan.xyz/tags/%E7%BB%A7%E6%89%BF/</link>
         <description>继承 - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Sat, 12 Dec 2020 21:03:26 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/%E7%BB%A7%E6%89%BF/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Sat, 12 Dec 2020 21:03:26 &#43;0800</lastBuildDate><atom:link href="https://liubingxuan.xyz/tags/%E7%BB%A7%E6%89%BF/" rel="self" type="application/rss+xml" /><item>
     <title>浅析 MVC</title>
-    <link>http://samrks.github.io/mvc-what-is-mvc/</link>
+    <link>https://liubingxuan.xyz/mvc-what-is-mvc/</link>
     <pubDate>Sat, 12 Dec 2020 21:03:26 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/mvc-what-is-mvc/</guid>
-    <description><![CDATA[<p>​</p>
-<h2 id="mvc-是啥">MVC 是啥</h2>
+    <guid>https://liubingxuan.xyz/mvc-what-is-mvc/</guid>
+    <description><![CDATA[<h2 id="mvc-是啥">MVC 是啥</h2>
 <blockquote>
 <p>MVC 是一种非常出名的架构模式（设计模式）。</p>
 <p>如何设计一个程序的结构，这是一门专门的学问，叫做架构模式（architectural pattern），属于编程的方法论。</p>
@@ -184,7 +183,6 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>​</p>
-<p>​</p>
 <h2 id="模块化">模块化</h2>
 <blockquote>
 <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Modules" target="_blank" rel="noopener noreffer">MDN：模块</a></p>
@@ -196,14 +194,13 @@
 <li>解耦：每个模块的代码都独立存在，不需要依赖其他模块。（甚至一个模块用 Vue、一个用 React、一个用 jQuery 都没问题。只不过体积会大一点）</li>
 <li>就像我们玩的积木一样，各个积木可以组合在一起形成一个形状，又可以拆分，又可以替换，因为各个积木块都是独立的，只要他们之间的接口（形状）匹配，就可以灵活地组合在一起，解耦就是为了逐渐达到这种理想的状态。</li>
 </ul>
-<p></p>
+<p align="center"></p>
 <p>划分模块的一个准则是「高内聚、低耦合」</p>
 <ul>
 <li>高内聚，是指一个软件模块是由相关性很强的代码组成，只负责一项任务，也就是常说的单一责任原则。</li>
 <li>低耦合，是指模块之间的联系越少越好，接口越简单越好，实现低耦合，细线通信。</li>
 <li>如果各个模块之间接口很复杂，说明功能划分有不合理之处、模块之间的耦合太高，同时也说明单个模块的内聚不高。</li>
 </ul>
-<p>​</p>
 <p>​</p>
 <h2 id="eventbus">EventBus</h2>
 <h3 id="通信">通信</h3>
@@ -429,7 +426,7 @@
 <span class="p">...</span>
 </code></pre></td></tr></table>
 </div>
-</div><p></p>
+</div><p align="center"></p>
 <h3 id="vue-中的-eventbus">Vue 中的 EventBus</h3>
 <blockquote>
 <p>Vue 有没有继承 EventBus  ？ 答：有</p>
@@ -475,8 +472,7 @@
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">eventBus</span><span class="p">.</span><span class="nx">$off</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><p></p>
-<p>​</p>
+</div><p align="center"></p>
 <p>​</p>
 <h2 id="view--renderdata">view = render(data)</h2>
 <blockquote>
@@ -514,7 +510,7 @@
 </li>
 </ul>
 </blockquote>
-<p></p>
+<p align="center"></p>
 <h3 id="例">例</h3>
 <h4 id="初步代码-">初步代码 💩</h4>
 <blockquote>
@@ -674,7 +670,8 @@
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="表驱动编程">表驱动编程</h2>
+</div><p>​</p>
+<h2 id="表驱动编程">表驱动编程</h2>
 <p>表驱动编程（Table-Driven Methods）是一种编程模式。</p>
 <p>适用场景：<strong>消除代码中频繁的 if else 或 switch case 的逻辑结构代码</strong>，使代码更加简化</p>
 <ul>
@@ -754,9 +751,6 @@
 <p>监听元素绑定事件</p>
 </blockquote>
 <p>常规写法</p>
-<ul>
-<li>常规写法，看起来逻辑直白，。如果监听事件有10个… 100个，那么代码量将非常之大</li>
-</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -833,7 +827,6 @@
 <li>拒绝重复，保持<strong>稳定的简单</strong>，这才是程序员所追求的</li>
 </ul>
 </blockquote>
-<p>​</p>
 <p>​</p>
 <h2 id="参考文章">参考文章</h2>
 <p><a href="https://efe.baidu.com/blog/mvc-deformation/" target="_blank" rel="noopener noreffer">前端MVC变形记</a>：https://www.techug.com/post/mvc-deformation.html</p>

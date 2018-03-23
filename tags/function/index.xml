@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Function - 标签 - Sam&#39;s Garage</title>
-        <link>http://samrks.github.io/tags/function/</link>
+        <link>https://liubingxuan.xyz/tags/function/</link>
         <description>Function - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Mon, 14 Sep 2020 20:35:51 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/function/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Mon, 14 Sep 2020 20:35:51 &#43;0800</lastBuildDate><atom:link href="https://liubingxuan.xyz/tags/function/" rel="self" type="application/rss+xml" /><item>
     <title>JS 函数的基本介绍</title>
-    <link>http://samrks.github.io/javascript-function/</link>
+    <link>https://liubingxuan.xyz/javascript-function/</link>
     <pubDate>Mon, 14 Sep 2020 20:35:51 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/javascript-function/</guid>
+    <guid>https://liubingxuan.xyz/javascript-function/</guid>
     <description><![CDATA[<p>定义函数、call / apply / bind、大师调用法、调用时机、作用域、闭包、形参、调用栈、函数提升、arguments、this、箭头函数、立即执行函数。</p>
 <p>​</p>
 <h2 id="函数是对象">函数是对象</h2>

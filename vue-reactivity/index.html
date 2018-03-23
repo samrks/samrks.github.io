@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>深入理解 Vue 数据响应式 - Sam&#39;s Garage</title><meta name="Description" content="数据响应式的概念、原理、存在的问题"><meta property="og:title" content="深入理解 Vue 数据响应式" />
+<meta property="og:description" content="数据响应式的概念、原理、存在的问题" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://liubingxuan.xyz/vue-reactivity/" />
+<meta property="og:image" content="https://liubingxuan.xyz/favicon-32x32.png"/>
+<meta property="article:published_time" content="2020-12-31T23:45:19+08:00" />
+<meta property="article:modified_time" content="2020-12-31T23:45:19+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://liubingxuan.xyz/favicon-32x32.png"/>
+
+<meta name="twitter:title" content="深入理解 Vue 数据响应式"/>
+<meta name="twitter:description" content="数据响应式的概念、原理、存在的问题"/>
+<meta name="application-name" content="Sam&#39;s Garage">
+<meta name="apple-mobile-web-app-title" content="Sam&#39;s Garage"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://liubingxuan.xyz/vue-reactivity/" /><link rel="prev" href="https://liubingxuan.xyz/vue-compiler-included-vs-runtime-only/" /><link rel="next" href="https://liubingxuan.xyz/celebration/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "深入理解 Vue 数据响应式",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/liubingxuan.xyz\/vue-reactivity\/"
+        },"genre": "posts","keywords": "Vue, 响应式, 原理, 数据","wordcount":  8169 ,
+        "url": "https:\/\/liubingxuan.xyz\/vue-reactivity\/","datePublished": "2020-12-31T23:45:19+08:00","dateModified": "2020-12-31T23:45:19+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Sam"
+            },"description": "数据响应式的概念、原理、存在的问题"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa fa-home fa-fw'></i> 主页 </a><a class="menu-item" href="/posts/"><i class='fas fa-edit'></i> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="https://github.com/samrks" rel="noopener noreffer" target="_blank"><i class='fab fa-github'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title=""><i class='fa fa-home fa-fw'></i>主页</a><a class="menu-item" href="/posts/" title=""><i class='fas fa-edit'></i>文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="https://github.com/samrks" title="" rel="noopener noreffer" target="_blank"><i class='fab fa-github'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">深入理解 Vue 数据响应式</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://liubingxuan.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Sam</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/vue/"><i class="far fa-folder fa-fw"></i>Vue</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-12-31">2020-12-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 8169 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 17 分钟&nbsp;<span id="/vue-reactivity/" class="leancloud_visitors" data-flag-title="深入理解 Vue 数据响应式">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#相关文章参考">相关文章（参考）</a></li>
+        <li><a href="#什么是数据响应式">什么是数据响应式</a>
+          <ul>
+            <li><a href="#响应">响应</a></li>
+            <li><a href="#数据响应式">数据响应式</a>
+              <ul>
+                <li><a href="#怎么理解非侵入性">怎么理解“非侵入性”</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#浅析vue-响应式原理">浅析「Vue 响应式原理」</a></li>
+        <li><a href="#深入响应式原理">深入响应式原理</a>
+          <ul>
+            <li><a href="#普通对象--传入-vue-的普通对象">普通对象 🆚 传入 Vue 的普通对象</a></li>
+            <li><a href="#vue-对-data-做了什么">Vue 对 data 做了什么</a></li>
+            <li><a href="#前置知识">前置知识</a>
+              <ul>
+                <li><a href="#objectdefineproperty">Object.defineProperty</a></li>
+                <li><a href="#getter--setter">getter / setter</a></li>
+                <li><a href="#为什么使用这个-api-作用">为什么使用这个 API （作用）</a></li>
+              </ul>
+            </li>
+            <li><a href="#监听的逻辑-">监听的逻辑 📌</a>
+              <ul>
+                <li><a href="#示例">示例</a></li>
+                <li><a href="#模拟-vue-内部操作">模拟 Vue 内部操作</a></li>
+                <li><a href="#示例分析">示例分析</a></li>
+              </ul>
+            </li>
+            <li><a href="#拓展代理的逻辑">拓展：代理的逻辑</a>
+              <ul>
+                <li><a href="#实验一">实验一</a>
+                  <ul>
+                    <li><a href="#钻空子">钻空子</a></li>
+                  </ul>
+                </li>
+                <li><a href="#实验二">实验二</a>
+                  <ul>
+                    <li><a href="#钻空子-1">钻空子</a></li>
+                  </ul>
+                </li>
+                <li><a href="#实验三">实验三</a></li>
+                <li><a href="#总结">总结</a>
+                  <ul>
+                    <li><a href="#一定要注意-">一定要注意 💡</a></li>
+                    <li><a href="#new-vue-对-data-做了什么">new Vue 对 data 做了什么</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#监听存在的问题vue-的-bug">监听存在的问题（Vue 的 bug）📌</a>
+          <ul>
+            <li><a href="#情景一引用未定义的数据会怎样">情景一：引用未定义的数据会怎样</a>
+              <ul>
+                <li><a href="#解决办法">解决办法</a></li>
+              </ul>
+            </li>
+            <li><a href="#情景二-动态添加对象属性在-data-外新增-key">情景二 ：动态添加对象属性（在 data 外新增 key）</a>
+              <ul>
+                <li><a href="#解决办法-1">解决办法</a></li>
+                <li><a href="#vueset-和-thisset-执行了哪些操作">Vue.set 和 this.$set 执行了哪些操作</a></li>
+              </ul>
+            </li>
+            <li><a href="#情景三data-中的数组如何处理">情景三：data 中的数组如何处理？</a>
+              <ul>
+                <li><a href="#尝试动态添加数组元素">尝试：动态添加数组元素</a></li>
+                <li><a href="#尤雨溪的做法">尤雨溪的做法</a></li>
+                <li><a href="#具体是怎么篡改的呢-">具体是怎么篡改的呢 ？📌</a>
+                  <ul>
+                    <li><a href="#es6-写法">ES6 写法</a>
+                      <ul>
+                        <li><a href="#demo-测试">demo 测试</a></li>
+                        <li><a href="#模拟完整逻辑-">模拟完整逻辑 📌</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#es5-写法---原型">ES5 写法 - 原型</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#总结-1">总结</a>
+          <ul>
+            <li><a href="#对象中新增的-key">对象中新增的 key</a></li>
+            <li><a href="#数组中新增的-key">数组中新增的 key</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="相关文章参考">相关文章（参考）</h2>
+<p><a href="https://g.yuque.com/weixiaozhudelaocaipi/yy8wge/vn5cw7" target="_blank" rel="noopener noreffer">Vue响应式原理-理解Observer、Dep、Watcher</a></p>
+<p><a href="https://cn.vuejs.org/v2/guide/reactivity.html#%E5%A6%82%E4%BD%95%E8%BF%BD%E8%B8%AA%E5%8F%98%E5%8C%96" target="_blank" rel="noopener noreffer">深入响应式原理—— Vue 官方文档</a></p>
+<p><a href="https://www.codenong.com/j5e5e70f751882548ff3/" target="_blank" rel="noopener noreffer">Vue3将要使用Proxy作为数据驱动，不想进来看看吗？</a></p>
+<p><a href="https://g.yuque.com/weixiaozhudelaocaipi/yy8wge/pi0dhp?language=en-us" target="_blank" rel="noopener noreffer">vue3.0尝鲜 &ndash; 摒弃Object.defineProperty，基于 Proxy 的观察者机制探索</a></p>
+<p><a href="https://segmentfault.com/a/1190000016028331" target="_blank" rel="noopener noreffer">利用Proxy自动添加响应式属性</a></p>
+<p><a href="https://blog.fundebug.com/2019/07/10/responsive-vue/" target="_blank" rel="noopener noreffer">详解Vue响应式原理</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/143933911" target="_blank" rel="noopener noreffer">你真的理解Vue的数据响应式吗</a></p>
+<p>​</p>
+<h2 id="什么是数据响应式">什么是数据响应式</h2>
+<h3 id="响应">响应</h3>
+<p>“响应”，中文的意思也就是“回应”。比如，别人叫你一声或者给你发消息，你回复了他，这个过程就叫响应。</p>
+<h3 id="数据响应式">数据响应式</h3>
+<p><a href="https://link.zhihu.com/?target=https%3A//cn.vuejs.org/v2/guide/reactivity.html" target="_blank" rel="noopener noreffer">Vue 的官方文档</a>已经很明确的告诉我们：</p>
+<ul>
+<li>只要修改数据 data（<code>render(data)</code> 做出响应）就会重新渲染视图（不需要开发者再去操作 DOM）</li>
+<li>这个联动的过程，就是 vue 的数据响应式</li>
+<li>这也是 Vue 最独特的特性之一 —— <strong>非侵入性的响应式系统</strong>。</li>
+</ul>
+<h4 id="怎么理解非侵入性">怎么理解“非侵入性”</h4>
+<p>我觉得，可以理解为“不可篡改的”：</p>
+<ul>
+<li>即用户无法绕过 Vue 的监听，去篡改内部数据</li>
+<li>Vue 做到了「无论用户以任何方式修改 data 中的内部数据，都会被当前 Vue 组件监听到，并通知对应的 watcher，从而重新渲染与数据关联的组件」</li>
+<li>拓展：该特性依靠「代理 proxy」实现</li>
+</ul>
+<p>​</p>
+<h2 id="浅析vue-响应式原理">浅析「Vue 响应式原理」</h2>
+<blockquote>
+<p>Vue 是通过 Object.defineProperty 来实现数据响应式</p>
+</blockquote>
+<p>当我们把一个对象作为 data 选项传入 Vue 实例，Vue 会遍历 data 中的所有属性，并用 Object.defineProperty 对这些属性进行改造，<strong>用 getter / setter 监控每个属性的读写</strong>。</p>
+<p>每个组件实例都对应一个 watcher 实例，它会根据 getter 的触发来记录渲染视图用到的数据依赖项。<strong>当这些数据的 setter 触发（数据被修改）时</strong>，会通知 watcher，从而<strong>使数据关联的组件重新渲染</strong>。</p>
+<p><img src="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/data.png" alt="data" style="zoom:50%;" /></p>
+<blockquote>
+<p><a href="https://cn.vuejs.org/v2/guide/reactivity.html#%E5%A6%82%E4%BD%95%E8%BF%BD%E8%B8%AA%E5%8F%98%E5%8C%96" target="_blank" rel="noopener noreffer">如何追踪变化</a></p>
+<ul>
+<li>当你把一个普通的 JavaScript 对象传入 Vue 实例作为 data 选项，Vue 将遍历此对象所有的 property，并使用 Object.defineProperty 把这些 property 全部转为 getter/setter。</li>
+<li>这些 getter/setter 对用户来说是不可见的，但是在内部它们让 Vue 能够追踪依赖，在 property 被访问和修改时通知变更。</li>
+<li>每个组件实例都对应一个 watcher 实例，它会在组件渲染的过程中把“接触”过的数据 property 记录为依赖。之后当依赖项的 setter 触发时，会通知 watcher，从而使它关联的组件重新渲染。</li>
+</ul>
+</blockquote>
+<h2 id="深入响应式原理">深入响应式原理</h2>
+<h3 id="普通对象--传入-vue-的普通对象">普通对象 🆚 传入 Vue 的普通对象</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">myData</span> <span class="o">=</span> <span class="p">{</span> <span class="c1">// myData 是一个普通对象
+</span><span class="c1"></span>  <span class="nx">n</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myData</span><span class="p">)</span>  <span class="c1">// （输出如下图）
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201229170817094.png" alt="image-20201229170817094" style="zoom:80%;" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">myData</span> <span class="o">=</span> <span class="p">{</span> <span class="c1">// myData 是一个普通对象
+</span><span class="c1"></span>  <span class="nx">n</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+<span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="nx">data</span><span class="o">:</span> <span class="nx">myData</span>  <span class="c1">// 把 myData 作为 data 选项，传入 Vue 实例
+</span><span class="c1"></span><span class="p">})</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myData</span><span class="p">)</span> <span class="c1">// 看看现在的 myData 是什么样子（输出如下图）
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201229171546578.png" alt="image-20201229171546578" style="zoom:80%;" /></p>
+<h3 id="vue-对-data-做了什么">Vue 对 data 做了什么</h3>
+<blockquote>
+<p>Vue 最独特的特性之一，是其非侵入性的响应式系统。数据模型仅仅是普通的 JavaScript 对象。而当你修改它们时，视图会进行更新。</p>
+</blockquote>
+<p>当我们把 data 选项传入 Vue 实例，Vue 会遍历 data 中的所有属性（property），进行「监听和代理」</p>
+<ul>
+<li><strong>监听：数据响应式的底层细节</strong></li>
+<li>代理：不暴露任何接口，防止用户篡改数据</li>
+</ul>
+<p>从而将这些数据改造成非侵入性的响应式数据</p>
+<p>​</p>
+<h3 id="前置知识">前置知识</h3>
+<h4 id="objectdefineproperty">Object.defineProperty</h4>
+<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="noopener noreffer">MDN</a>：<code>Object.defineProperty()</code> 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。</p>
+</blockquote>
+<p><strong>使用方式</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">prop</span><span class="p">,</span> <span class="nx">descriptor</span><span class="p">)</span>
+<span class="c1">// obj 代表定义属性的对象；prop 代表定义的属性名称；descriptor 代表定义的内容。
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>需求 ⭕️ 用 Object.defineProperty 添加属性 n，值为 0</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">data1</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">data1</span><span class="p">,</span> <span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="p">{</span>  <span class="c1">// 表示向 对象data1 中添加属性 &#34;n&#34;，值为 0
+</span><span class="c1"></span>  <span class="nx">value</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">})</span> 
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data1</span><span class="p">)</span>    <span class="c1">// { n: 0 }
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data1</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span>  <span class="c1">// 0
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201229231800071.png" alt="image-20201229231800071" style="zoom:67%;" /></p>
+<h4 id="getter--setter">getter / setter</h4>
+<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty#%E6%8F%8F%E8%BF%B0" target="_blank" rel="noopener noreffer">MDN：getter/setter 描述 </a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty#%E8%87%AA%E5%AE%9A%E4%B9%89_Setters_%E5%92%8C_Getters" target="_blank" rel="noopener noreffer">示例</a></p>
+<ul>
+<li>get：属性的 getter 函数。当访问该属性时，会调用此函数。不传入任何参数</li>
+<li>set：属性的 setter 函数。当属性值被修改时，会调用此函数。接受一个参数（也就是被赋予的新值）</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>需求 ⭕️ 用 Object.defineProperty 添加属性 n，并监听 n 的读取。</p>
+<ul>
+<li>使用 Object.defineProperty 把这些 property 全部转为 getter/setter。</li>
+<li>设置 getter / setter，当我们读取 n 时会自动执行 getter，修改 n 时会自动执行 setter</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">data2</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="nx">data2</span><span class="p">.</span><span class="nx">_n</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1">// 添加一个媒介属性 _n 用于存储 n 的原值 0
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">data2</span><span class="p">,</span> <span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">get</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// return this.n 为什么 getter 不直接返回 this.n，而需要额外声明一个属性 _n，这不多此一举吗 ？
+</span><span class="c1"></span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_n</span>
+  <span class="p">},</span>
+  <span class="nx">set</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_n</span> <span class="o">=</span> <span class="nx">value</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data2</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span> <span class="c1">// 0
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>疑问：为什么 getter 不直接返回 this.n，而需要额外声明  _n 来存储下 n 值，并用 _n 作为中转呢 ？</p>
+</blockquote>
+<p>原因：</p>
+<ul>
+<li>所有读取 n 的操作（data2.n、this.n），都会自动调取 getter 方法的返回值，作为 n 值</li>
+<li>如果读取 n 时，getter 返回 this.n，this.n 仍是读取 n 值的操作，会接着自动获取 getter 返回值，于是这就成了一个「死循环」，不停的读取 n，始终拿不到终值</li>
+<li>所以声明一个媒介属性 _n 来存储 n 值。当读取 n 时，getter 返回 _n 值，写入 n 时 setter 修改 _n 值</li>
+</ul>
+<p>​</p>
+<blockquote>
+<p>疑惑：为什么不直接在声明对象时就定义属性 <code>n : 0</code> ，用 Object.defineProperty 不是把过程复杂化了吗 ？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">data1</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">n</span><span class="o">:</span> <span class="mi">0</span> <span class="p">}</span> 
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data1</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span>  <span class="c1">// 0
+</span><span class="c1"></span><span class="nx">data1</span><span class="p">.</span><span class="nx">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data1</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span>  <span class="c1">// 100
+</span></code></pre></td></tr></table>
+</div>
+</div><p>字面量形式创建对象，易读易写，难道不香 ？ 答：不香（往下看原因）</p>
+</blockquote>
+<p>​</p>
+<h4 id="为什么使用这个-api-作用">为什么使用这个 API （作用）</h4>
+<blockquote>
+<p>当需求变复杂 ↓</p>
+<ul>
+<li>需求 ⭕️ 添加属性 n，默认值 0 。同时，限制 n 的赋值永远不能小于 0</li>
+<li>比如：赋值 <code>data2.n = -1</code> 是无效的，赋值 <code>data2.n = 1</code> 有效</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">data2</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="nx">data2</span><span class="p">.</span><span class="nx">_n</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">data2</span><span class="p">,</span> <span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">get</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// others ...
+</span><span class="c1"></span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_n</span> 
+  <span class="p">},</span>
+  <span class="nx">set</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span>  <span class="c1">// 👈 如果 value 小于 0，就直接返回，不执行赋值操作
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">_n</span> <span class="o">=</span> <span class="nx">value</span>
+    <span class="c1">// others ...
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>所以，使用 Object.defineProperty 把对象的属性全部转为 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty#%E8%87%AA%E5%AE%9A%E4%B9%89_Setters_%E5%92%8C_Getters" target="_blank" rel="noopener noreffer">getter/setter</a></p>
+<ul>
+<li><strong>这样可以实现在读写触发的同时，添加其他操作。</strong></li>
+<li>Vue 就是利用 Object.defineProperty 的这一特性，实现数据监听的效果</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h3 id="监听的逻辑-">监听的逻辑 📌</h3>
+<blockquote>
+<p>Vue 的响应式原理，通过 Object.defineProperty 实现</p>
+</blockquote>
+<h4 id="示例">示例</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// demo.vue 组件
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">myData</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;jack&#39;</span><span class="p">,</span>
+  <span class="nx">sex</span><span class="o">:</span> <span class="s1">&#39;male&#39;</span><span class="p">,</span>
+  <span class="nx">age</span><span class="o">:</span> <span class="mi">20</span>
+<span class="p">}</span>
+<span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="nx">data</span><span class="o">:</span> <span class="nx">myData</span><span class="p">,</span>  <span class="c1">// 当我们把 myData 作为 data 选项传入 Vue 实例，Vue 会 ... 🔗
+</span><span class="c1"></span>  <span class="nx">template</span><span class="o">:</span> <span class="sb">`
+</span><span class="sb">		&lt;div&gt;
+</span><span class="sb">			姓名：{{ name }}
+</span><span class="sb">			年龄：{{ age }}
+</span><span class="sb">		&lt;/div&gt;
+</span><span class="sb">	`</span>
+<span class="p">}).</span><span class="nx">$mount</span><span class="p">(</span><span class="s2">&#34;#app&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201230185537838.png" alt="image-20201230185537838"  /></p>
+<h4 id="模拟-vue-内部操作">模拟 Vue 内部操作</h4>
+<blockquote>
+<p>🔗 Vue 会遍历 data，并通过 Object.defineproperty 将 data 中的每一项数据改造成 getter/setter</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 当 Vue 接收到 myData，会遍历对象、使用 Object.defineProperty 进行改造
+</span><span class="c1"></span><span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">myData</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">val</span> <span class="o">=</span> <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="c1">// val 存储当前遍历属性的原值
+</span><span class="c1"></span>  <span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">get</span><span class="p">()</span> <span class="p">{</span>
+      <span class="c1">// others... 通知 watcher 添加依赖项 📌
+</span><span class="c1"></span>      <span class="k">return</span> <span class="nx">val</span> <span class="c1">// 触发 get 函数，返回属性的值
+</span><span class="c1"></span>    <span class="p">},</span>
+    <span class="nx">set</span><span class="p">(</span><span class="nx">newVal</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">val</span> <span class="o">=</span> <span class="nx">newVal</span> <span class="c1">// 触发 set 函数，修改属性的值
+</span><span class="c1"></span>      <span class="c1">// others... 通知 watcher 渲染关联组件 📌
+</span><span class="c1"></span>    <span class="p">}</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>每个组件实例都对应一个 watcher 实例</p>
+<ul>
+<li>在组件<strong>渲染</strong>的过程中，getter 被触发的数据，会被 watcher 记录为「渲染视图的<strong>依赖项</strong>」</li>
+</ul>
+<ul>
+<li>当<strong>依赖项</strong>的 setter 触发时（说明数据被修改），会通知 watcher，从而使它<strong>关联的组件重新渲染</strong></li>
+</ul>
+</blockquote>
+<h4 id="示例分析">示例分析</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// demo.vue 组件
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">myData</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;jack&#39;</span><span class="p">,</span>
+  <span class="nx">sex</span><span class="o">:</span> <span class="s1">&#39;male&#39;</span><span class="p">,</span>
+  <span class="nx">age</span><span class="o">:</span> <span class="mi">20</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">vm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="nx">data</span><span class="o">:</span> <span class="nx">myData</span><span class="p">,</span>
+  <span class="nx">template</span><span class="o">:</span> <span class="sb">`
+</span><span class="sb">		&lt;div&gt;
+</span><span class="sb">			姓名：{{ name }}  
+</span><span class="sb">			年龄：{{ age }}
+</span><span class="sb">		&lt;/div&gt;
+</span><span class="sb">	`</span> <span class="c1">// 👆 视图渲染，触发了 name 和 age 的 getter，通知 watcher 记录属性为依赖项
+</span><span class="c1"></span><span class="p">}).</span><span class="nx">$mount</span><span class="p">(</span><span class="s2">&#34;#app&#34;</span><span class="p">)</span>
+
+<span class="nx">myData</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;rose&#39;</span> 
+<span class="c1">// 👆 触发 name 的 setter，依赖项的 setter 被触发，通知 watcher 重新渲染相关组件
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201230185813820.png" alt="image-20201230185813820"  /></p>
+<blockquote>
+<p>以上</p>
+<p>一个简单的数据响应式，就是这样实现的</p>
+</blockquote>
+<h3 id="拓展代理的逻辑">拓展：代理的逻辑</h3>
+<blockquote>
+<p>需求 ⭕️ 向对象中存储一个属性 n，条件是 n 的赋值永远不能小于0</p>
+<ul>
+<li>请问，我们怎样保证「不管用户怎么修改 n 的值，都可以满足上述要求」</li>
+</ul>
+</blockquote>
+<h4 id="实验一">实验一</h4>
+<p>（<a href="https://jsbin.com/voxomus/5/edit?html,js,console" target="_blank" rel="noopener noreffer">在线示例</a>）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">myData</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="nx">myData</span><span class="p">.</span><span class="nx">_n</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">// 始终用 _n 存储 n 值（ _n 相当于一个中转属性）
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">myData</span><span class="p">,</span> <span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">get</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_n</span> <span class="c1">// 必须中转，如果直接返回 this.n 会陷入死循环
+</span><span class="c1"></span>  <span class="p">},</span>
+  <span class="nx">set</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_n</span> <span class="o">=</span> <span class="nx">value</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+<span class="nx">myData</span><span class="p">.</span><span class="nx">n</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myData</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span> <span class="c1">// 0 修改无效
+</span><span class="c1"></span><span class="nx">myData</span><span class="p">.</span><span class="nx">n</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myData</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span> <span class="c1">// 1 修改成功
+</span></code></pre></td></tr></table>
+</div>
+</div><h5 id="钻空子">钻空子</h5>
+<p><a href="https://jsbin.com/voxomus/edit?html,js,console" target="_blank" rel="noopener noreffer">在线示例</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 看似需求已经实现，但如果对方直接修改 myData._n，那么上述 set 就无法限制了 ！
+</span><span class="c1">// 虽然 n 不能设置为小于0的值，但 _n 可以，它只是myData上的一个普通的属性，没有set监听，可以任意赋值
+</span><span class="c1"></span>
+<span class="nx">myData</span><span class="p">.</span><span class="nx">_n</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myData</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span> <span class="c1">// -1  篡改成功
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>结论：实验一可以通过修改中转属性，绕过监听，轻易篡改数据 n</p>
+</blockquote>
+<h4 id="实验二">实验二</h4>
+<blockquote>
+<p>根据实验一的“钻空子”，提出解决思路：</p>
+<ul>
+<li>不在 myData 对象上暴露出任何不被监听的属性接口（最好就不要起对象名了）</li>
+<li>换句话说，需求 ⭕️ 要让任何访问、任何接口，都必须能被监听到</li>
+<li>如果数据本身，就是一个函数的返回值，那么每次调用数据都会执行这个函数，我们只需在函数内部在实现对数据的监听，这样就可以防止用户偷跑、篡改数据</li>
+<li>具体实现参照「代理」的思想</li>
+</ul>
+</blockquote>
+<p>写一个 proxy 函数，参数接收一个匿名对象，<strong>在匿名对象中存放真实数据</strong>，在 proxy 函数中实现对数据的代理监听</p>
+<ul>
+<li>使用匿名对象，因为没有提前声明对象名的对象，就自然无法被外界访问</li>
+<li>每次调用 myData 上的数据，都会执行 proxy 方法，把真实数据转移到 obj 进行监听，再返回 obj，保证调用myData 的属性时，一定调用的是 obj 上被监听了的属性</li>
+<li>可保证 myData 上一定没有暴露任何未被监听的属性（_n），所有属性都经过 proxy 被监听处理了</li>
+</ul>
+<p><a href="https://jsbin.com/voxomus/15/edit?html,js,console" target="_blank" rel="noopener noreffer">在线示例</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">myData</span> <span class="o">=</span> <span class="nx">proxy</span><span class="p">({</span> <span class="nx">data</span><span class="o">:</span> <span class="p">{</span> <span class="nx">n</span><span class="o">:</span> <span class="mi">0</span> <span class="p">}</span> <span class="p">})</span>
+
+<span class="kd">function</span> <span class="nx">proxy</span><span class="p">({</span> <span class="nx">data</span> <span class="p">})</span> <span class="p">{</span>  <span class="c1">// 解构赋值，参数 data 就是 { n: 0 }，存储了真实数据
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span> 
+  <span class="c1">// 把 data 上的所有数据转移到 obj 上进行监听，然后返回 obj，这样 保证 obj 上的所有数据都是被监听到的 
+</span><span class="c1"></span>  <span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="p">{</span> 
+    <span class="nx">get</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">data</span><span class="p">.</span><span class="nx">n</span>
+    <span class="p">},</span>
+    <span class="nx">set</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+      <span class="nx">data</span><span class="p">.</span><span class="nx">n</span> <span class="o">=</span> <span class="nx">value</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+  <span class="k">return</span> <span class="nx">obj</span> <span class="c1">// obj 就是 data 的代理对象
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="nx">myData</span><span class="p">.</span><span class="nx">n</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myData</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span> <span class="c1">// 0  修改无效
+</span><span class="c1"></span><span class="nx">myData</span><span class="p">.</span><span class="nx">n</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myData</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span> <span class="c1">// 1  修改成功
+</span></code></pre></td></tr></table>
+</div>
+</div><h5 id="钻空子-1">钻空子</h5>
+<blockquote>
+<p>如果用户自己写一个数据对象 hackData</p>
+<p>再把 hackData 放到代理中，然后修改这个 hackData，就可以实现篡改数据的目的</p>
+</blockquote>
+<p><a href="https://jsbin.com/voxomus/21/edit?html,js,console" target="_blank" rel="noopener noreffer">在线示例</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">myData</span> <span class="o">=</span> <span class="nx">proxy</span><span class="p">({</span> <span class="nx">data</span><span class="o">:</span> <span class="p">{</span> <span class="nx">n</span><span class="o">:</span> <span class="mi">0</span> <span class="p">}</span> <span class="p">})</span> <span class="c1">// 原始数据
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">hackData</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">n</span><span class="o">:</span> <span class="mi">0</span> <span class="p">}</span> <span class="c1">// 声明新的数据，用于篡改原始数据
+</span><span class="c1"></span><span class="nx">myData</span> <span class="o">=</span> <span class="nx">proxy</span><span class="p">({</span> <span class="nx">data</span><span class="o">:</span> <span class="nx">hackData</span> <span class="p">})</span>
+
+<span class="kd">function</span> <span class="nx">proxy</span><span class="p">({</span> <span class="nx">data</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span> 
+  <span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="p">{</span> 
+    <span class="nx">get</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">data</span><span class="p">.</span><span class="nx">n</span>
+    <span class="p">},</span>
+    <span class="nx">set</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+      <span class="nx">data</span><span class="p">.</span><span class="nx">n</span> <span class="o">=</span> <span class="nx">value</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+  <span class="k">return</span> <span class="nx">obj</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myData</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span> <span class="c1">// 0
+</span><span class="c1"></span><span class="nx">hackData</span><span class="p">.</span><span class="nx">n</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myData</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span> <span class="c1">// -1 篡改成功
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>结论：用户可以强行往 proxy 中塞一个 hackData，这样只要 hackData 就可以篡改原始数据 n</p>
+</blockquote>
+<h4 id="实验三">实验三</h4>
+<blockquote>
+<p>根据实验二的 “钻空子”</p>
+<ul>
+<li>用户强行往 proxy 中塞了一个 hackData，想通过 hackData 篡改我方原始数据 n</li>
+<li>需求 ⭕️ 如果用户擅自篡改数据（传入自己写的数据），就要拦截这种行为（升级 proxy 2.0 ）</li>
+</ul>
+</blockquote>
+<p><a href="https://jsbin.com/soranoq/5/edit?html,js,console" target="_blank" rel="noopener noreffer">在线示例</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">myData</span> <span class="o">=</span> <span class="nx">proxy2</span><span class="p">({</span> <span class="nx">data</span><span class="o">:</span> <span class="p">{</span> <span class="nx">n</span><span class="o">:</span> <span class="mi">0</span> <span class="p">}</span> <span class="p">})</span> <span class="c1">// 原始数据
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">hackData</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">n</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span> <span class="p">}</span>  <span class="c1">// 声明新的数据，用于篡改原始数据
+</span><span class="c1"></span><span class="nx">myData</span> <span class="o">=</span> <span class="nx">proxy2</span><span class="p">({</span> <span class="nx">data</span><span class="o">:</span> <span class="nx">hackData</span> <span class="p">})</span>
+
+<span class="kd">function</span> <span class="nx">proxy2</span><span class="p">({</span> <span class="nx">data</span> <span class="p">})</span> <span class="p">{</span>  <span class="c1">// data 接收 hackData：{ n: 0 }
+</span><span class="c1"></span>  <span class="c1">// 原本应该遍历 data 上的所有 key，这里做了简化，假设 data 上只有一个数据 n
+</span><span class="c1"></span>  <span class="kd">let</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">n</span>  <span class="c1">// 声明变量来存储原始的n值（这里存储n，目的是后面把n删掉）
+</span><span class="c1"></span>  
+  <span class="c1">// delete data.n  
+</span><span class="c1"></span>  <span class="c1">// 可以省略删除操作，因为下面添加虚拟属性n时与data中原本的属性重名，会自动覆盖（删除）原本的属性
+</span><span class="c1"></span>  
+  <span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="p">{</span> <span class="c1">// 这样就完全监控了 n
+</span><span class="c1"></span>    <span class="nx">get</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">value</span>
+    <span class="p">},</span>
+    <span class="nx">set</span><span class="p">(</span><span class="nx">newValue</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">newValue</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span>
+      <span class="nx">value</span> <span class="o">=</span> <span class="nx">newValue</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+  <span class="c1">// 上面就是新添加的代码，用于完全监听 n【监听的逻辑】
+</span><span class="c1"></span>  <span class="c1">// 相当于安装监听器，如果用户想绕过监听，就立马知道并拦截你
+</span><span class="c1"></span>
+  <span class="c1">// 下面仍是【实验二中的代理逻辑】
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">get</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">data</span><span class="p">.</span><span class="nx">n</span>
+    <span class="p">},</span>
+    <span class="nx">set</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> 
+      <span class="nx">data</span><span class="p">.</span><span class="nx">n</span> <span class="o">=</span> <span class="nx">value</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+  <span class="k">return</span> <span class="nx">obj</span> <span class="c1">// obj 就是代理
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="c1">// 用户如果直接修改 myData 的数据，走正常的代理逻辑。
+</span><span class="c1">// 用户如果想绕过代理，篡改原始数据，会走监听逻辑
+</span><span class="c1">// 只要经过 proxy2 就一定会处于监听之下，因为会删掉原本的数据 n
+</span><span class="c1"></span>
+<span class="c1">// 篡改原始数据（会创建虚拟属性来替代原本属性，通过对虚拟属性的监听实现数据监听）
+</span><span class="c1"></span><span class="nx">hackData</span><span class="p">.</span><span class="nx">n</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myData</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span> <span class="c1">// 0 修改无效
+</span><span class="c1"></span><span class="nx">hackData</span><span class="p">.</span><span class="nx">n</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myData</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span> <span class="c1">// 1 修改成功
+</span><span class="c1"></span>
+<span class="c1">// 直接修改（通过代理实现数据监听）
+</span><span class="c1"></span><span class="nx">myData</span><span class="p">.</span><span class="nx">n</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myData</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span> <span class="c1">// 1 修改无效
+</span><span class="c1"></span><span class="nx">myData</span><span class="p">.</span><span class="nx">n</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myData</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span> <span class="c1">// 0 修改成功
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="总结">总结</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 下面这句代码看着眼熟吗 ?
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">myData</span> <span class="o">=</span> <span class="nx">proxy2</span><span class="p">({</span> <span class="nx">data</span><span class="o">:</span> <span class="nx">hackData</span> <span class="p">})</span>
+<span class="kd">let</span> <span class="nx">vm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span> <span class="nx">data</span><span class="o">:</span> <span class="nx">hackData</span> <span class="p">})</span>
+
+<span class="c1">// myData 就相当于 vm
+</span><span class="c1">// proxy2 就相当于 new Vue，只不过没加 new 而已
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>前面实验推出的 proxy 代码，<strong>就是 Vue 内部的源代码</strong></p>
+</blockquote>
+<h5 id="一定要注意-">一定要注意 💡</h5>
+<ul>
+<li>前面实验的<strong>研究方法</strong>比知识本身更重要</li>
+<li>这些方法能让你<strong>不读源码</strong>，也能了解真相（底层原理）</li>
+</ul>
+<h5 id="new-vue-对-data-做了什么">new Vue 对 data 做了什么</h5>
+<blockquote>
+<p>理清了代理的逻辑，现在我们可以说说 new Vue 到底对 data 做了什么</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="nx">Vue</span> <span class="nx">from</span> <span class="s2">&#34;vue/dist/vue.js&#34;</span>
+
+<span class="kr">const</span> <span class="nx">hackData</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">n</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">hackData</span><span class="p">)</span> <span class="c1">// 精髓 👈👈👈 通过log发现不同之处，从而进行推理验证
+</span><span class="c1"></span>
+<span class="kr">const</span> <span class="nx">vm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="nx">data</span><span class="o">:</span> <span class="nx">hackData</span><span class="p">,</span>
+  <span class="nx">template</span><span class="o">:</span> <span class="sb">`&lt;div&gt;{{n}}&lt;/div&gt;`</span><span class="p">,</span>
+<span class="p">}).</span><span class="nx">$mount</span><span class="p">(</span><span class="s2">&#34;#app&#34;</span><span class="p">)</span>
+
+<span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">hackData</span><span class="p">.</span><span class="nx">n</span> <span class="o">+=</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">hackData</span><span class="p">)</span> <span class="c1">// 精髓 👈👈👈
+</span><span class="c1"></span><span class="p">},</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>只要把 hackData 传给 new Vue 就会马上对 hackData 进行篡改</p>
+<ul>
+<li>hackData上原本的数据 n 会消失，取而代之的是 get n、set n（虚拟数据）</li>
+<li>关键点就在两个 log 上发现蛛丝马迹（这种研究方法很重要）</li>
+</ul>
+</blockquote>
+<h2 id="监听存在的问题vue-的-bug">监听存在的问题（Vue 的 bug）📌</h2>
+<blockquote>
+<p>（面试可能会问哦）</p>
+<p>我们已知：数据应提前在 data 中定义好才能使用。如果在 data 外动态的添加新的数据，或引用没有定义在 data 的数据，会怎样呢 ？</p>
+</blockquote>
+<h3 id="情景一引用未定义的数据会怎样">情景一：引用未定义的数据会怎样</h3>
+<blockquote>
+<p>Vue 实例的 data 中没有定义 n ，但又在视图中使用 n，会怎么样</p>
+</blockquote>
+<p><a href="https://codesandbox.io/s/empty-field-ofmwn" target="_blank" rel="noopener noreffer">代码示例</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="nx">data</span><span class="o">:</span> <span class="p">{},</span>
+  <span class="nx">template</span><span class="o">:</span> <span class="sb">`
+</span><span class="sb">    &lt;div&gt;{{n}}&lt;/div&gt;
+</span><span class="sb">  `</span>
+<span class="p">}).</span><span class="nx">$mount</span><span class="p">(</span><span class="s2">&#34;#app&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>在视图中使用未在 data 中定义的数据，Vue 会给出一个警告报错 <code>[Vue warn]</code></p>
+</blockquote>
+<ul>
+<li>
+<p>数据没有传入实例的 data 中，就无法实现监听数据变化，不监听就不能实现刷新视图，违背数据响应式原则</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201231110534602.png"
+        data-srcset="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201231110534602.png, https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201231110534602.png 1.5x, https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201231110534602.png 2x"
+        data-sizes="auto"
+        alt="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201231110534602.png"
+        title="image-20201231110534602" /></p>
+</li>
+</ul>
+<h4 id="解决办法">解决办法</h4>
+<blockquote>
+<p>必须在 data 中把 n 提前声明好</p>
+</blockquote>
+<blockquote>
+<p>由于 Vue <strong>不允许动态添加根级响应式 property</strong>，所以你必须在初始化实例前声明所有根级响应式 property，哪怕只是一个空值（<a href="https://cn.vuejs.org/v2/guide/reactivity.html#%E5%A3%B0%E6%98%8E%E5%93%8D%E5%BA%94%E5%BC%8F-property" target="_blank" rel="noopener noreffer">文档</a>）</p>
+</blockquote>
+<p><a href="https://codesandbox.io/s/serverless-fast-hl420?file=/src/main.js" target="_blank" rel="noopener noreffer">在线代码</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">n</span><span class="o">:</span> <span class="mi">1</span> <span class="c1">// 👈👈👈 null、undefined..都不会报错
+</span><span class="c1"></span>  <span class="p">},</span>
+  <span class="nx">template</span><span class="o">:</span> <span class="sb">`
+</span><span class="sb">		&lt;div&gt;{{n}}&lt;/div&gt;
+</span><span class="sb">	`</span><span class="p">,</span>
+<span class="p">}).</span><span class="nx">$mount</span><span class="p">(</span><span class="s2">&#34;#app&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h3 id="情景二-动态添加对象属性在-data-外新增-key">情景二 ：动态添加对象属性（在 data 外新增 key）</h3>
+<blockquote>
+<p>需求：点击按钮，视图中显示 1</p>
+</blockquote>
+<p><a href="https://codesandbox.io/s/tender-leaf-8ogdx?file=/src/main.js" target="_blank" rel="noopener noreffer">代码示例</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">obj</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">a</span><span class="o">:</span> <span class="mi">0</span> <span class="c1">// obj.a 会被 Vue 监听、代理
+</span><span class="c1"></span>    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nx">template</span><span class="o">:</span> <span class="sb">`
+</span><span class="sb">    &lt;div&gt;
+</span><span class="sb">      obj.b：{{obj.b}}             
+</span><span class="sb">      &lt;button @click=&#34;set&#34;&gt;赋值&lt;/button&gt;
+</span><span class="sb">    &lt;/div&gt;
+</span><span class="sb">  `</span><span class="p">,</span>
+  <span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">set</span><span class="p">()</span> <span class="p">{</span>             
+      <span class="k">this</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">b</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">// 请问，页面中会显示 1 吗？
+</span><span class="c1"></span>    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}).</span><span class="nx">$mount</span><span class="p">(</span><span class="s2">&#34;#app&#34;</span><span class="p">)</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201231181614259.png"
+        data-srcset="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201231181614259.png, https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201231181614259.png 1.5x, https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201231181614259.png 2x"
+        data-sizes="auto"
+        alt="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201231181614259.png"
+        title="image-20201231181614259" /></p>
+<blockquote>
+<p>请问，点击“赋值”按钮，视图中会显示 1 吗 ？</p>
+</blockquote>
+<ul>
+<li>答案：不会显示 1。</li>
+<li>因为 Vue 不能监听到未在 data 中定义的数据 <code>obj.b</code></li>
+<li>但为什么引用未定义的 obj.b 没有警告报错呢 ？</li>
+</ul>
+<blockquote>
+<p>情景一视图引用 data 中未定义的 n 会报错，那为什么情景二中引用未提前定义的 obj.b 却不会报错 ？</p>
+</blockquote>
+<ul>
+<li>因为 Vue 的数据响应式是数据的<strong>根级响应</strong>。Vue 只会检查第一层属性，检查不到第一层属性内部定义的属性</li>
+<li>也就是说，对于 <code>this.obj.b</code>，Vue 只会检查 data 中是否有定义 <code>this.obj</code>，如果没有定义 obj 就会警告报错，但 Vue 不会再深层检验 obj 的内部属性</li>
+<li><strong>情景二视图中虽然引用了未提前声明的 <code>obj.b</code>，但 Vue 会检查到 <code>obj </code>已经在 data 中提前声明了，所以此处的引用不会报错，但也不会生效，因为 <code>b</code> 确实没有在 data 中声明。</strong></li>
+<li>综上，情景二的这种用法，仅是不报错而已，但也并不会渲染出视图</li>
+</ul>
+<h4 id="解决办法-1">解决办法</h4>
+<blockquote>
+<p>使用 Vue.set 或者 this.$set，为已有对象添加新的属性（<a href="https://cn.vuejs.org/v2/guide/reactivity.html#%E5%AF%B9%E4%BA%8E%E5%AF%B9%E8%B1%A1" target="_blank" rel="noopener noreffer">文档</a>）</p>
+</blockquote>
+<p><a href="https://codesandbox.io/s/rough-darkness-wh3mw?file=/src/main.js" target="_blank" rel="noopener noreffer">在线代码</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">obj</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">a</span><span class="o">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nx">template</span><span class="o">:</span> <span class="sb">`
+</span><span class="sb">    &lt;div&gt;
+</span><span class="sb">      obj.b：{{obj.b}}
+</span><span class="sb">      &lt;button @click=&#34;set&#34;&gt;赋值&lt;/button&gt;
+</span><span class="sb">    &lt;/div&gt;
+</span><span class="sb">  `</span><span class="p">,</span>
+  <span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">set</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">Vue</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">obj</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>       <span class="c1">// 👈👈👈 
+</span><span class="c1"></span>      <span class="c1">// this.$set(this.obj, &#39;b&#39;, 1)  // 👈👈👈
+</span><span class="c1"></span>      <span class="c1">// 两种写法没有区别（是同一个函数）
+</span><span class="c1"></span>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Vue</span><span class="p">.</span><span class="nx">set</span> <span class="o">===</span> <span class="k">this</span><span class="p">.</span><span class="nx">$set</span><span class="p">)</span> <span class="c1">// true (加$是为防止data中有同名属性set)
+</span><span class="c1"></span>    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}).</span><span class="nx">$mount</span><span class="p">(</span><span class="s2">&#34;#app&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201231182143985.png"
+        data-srcset="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201231182143985.png, https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201231182143985.png 1.5x, https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201231182143985.png 2x"
+        data-sizes="auto"
+        alt="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201231182143985.png"
+        title="image-20201231182143985" /></p>
+<h4 id="vueset-和-thisset-执行了哪些操作">Vue.set 和 this.$set 执行了哪些操作</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">Vue</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span>  <span class="c1">// 往obj中新增一个key属性
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>新增 key</li>
+<li>对 key 自动创建代理和监听（如果没有创建过）</li>
+<li>触发 UI 更新（但并不会立刻更新 —— 异步更新，这块内容值得单独写一篇博客了）
+<ul>
+<li>执行 UI 更新是 Vue 做的，set 只会触发 Vue 来执行更新</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://codesandbox.io/s/youthful-swanson-yz7pm?file=/src/main.js" target="_blank" rel="noopener noreffer">示例演示</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">obj</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">a</span><span class="o">:</span> <span class="mi">0</span>  <span class="c1">// 👈
+</span><span class="c1"></span>    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nx">template</span><span class="o">:</span> <span class="sb">` 
+</span><span class="sb">    &lt;div&gt;
+</span><span class="sb">      {{obj.b}} 👈
+</span><span class="sb">      &lt;button @click=&#34;setB&#34;&gt;set b&lt;/button&gt; 👈
+</span><span class="sb">      &lt;button @click=&#34;addB&#34;&gt;add b&lt;/button&gt; 👈
+</span><span class="sb">    &lt;/div&gt;
+</span><span class="sb">  `</span><span class="p">,</span>
+  <span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">setB</span><span class="p">()</span> <span class="p">{</span>
+       <span class="nx">Vue</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">obj</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">// 👈👈   // 或 this.$set(this.obj, &#39;b&#39;, 1)
+</span><span class="c1"></span>    <span class="p">},</span>
+    <span class="nx">addB</span><span class="p">(){</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">b</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1">// 👈👈
+</span><span class="c1"></span>    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}).</span><span class="nx">$mount</span><span class="p">(</span><span class="s2">&#34;#app&#34;</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h3 id="情景三data-中的数组如何处理">情景三：data 中的数组如何处理？</h3>
+<blockquote>
+<p>有没有某种情况是「没办法把 key 提前在 data 中声明好」的</p>
+<ul>
+<li>有，如果数据是一个数组类型，就无法提前把所有元素声明好</li>
+<li>Vue 中的数组，可以理解成对象的形式（具体见下）</li>
+</ul>
+</blockquote>
+<h4 id="尝试动态添加数组元素">尝试：动态添加数组元素</h4>
+<blockquote>
+<p><a href="https://codesandbox.io/s/proud-worker-xwyoo" target="_blank" rel="noopener noreffer">示例</a></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">array</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;a&#34;</span><span class="p">,</span> <span class="s2">&#34;b&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">]</span>
+  <span class="p">},</span>
+  <span class="nx">template</span><span class="o">:</span> <span class="sb">`
+</span><span class="sb">    &lt;div&gt;
+</span><span class="sb">      {{array}}
+</span><span class="sb">      &lt;button @click=&#34;setD&#34;&gt;set d&lt;/button&gt;
+</span><span class="sb">    &lt;/div&gt;
+</span><span class="sb">  `</span><span class="p">,</span>
+  <span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">setD</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;d&#34;</span>  <span class="c1">// 请问，页面中会显示 &#39;d&#39; 吗 ？ 答：不会
+</span><span class="c1"></span>    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}).</span><span class="nx">$mount</span><span class="p">(</span><span class="s2">&#34;#app&#34;</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>如上代码，点击 button 按钮，往数组中添加一个元素，毫无反应，为什么会这样呢 ？</p>
+<ul>
+<li>分析：数组 <code>array: [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]</code> 理解成对象的形式 👇</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="p">{</span>
+  <span class="mi">0</span><span class="o">:</span> <span class="s2">&#34;a&#34;</span><span class="p">,</span>
+  <span class="mi">1</span><span class="o">:</span> <span class="s2">&#34;b&#34;</span><span class="p">,</span>
+  <span class="mi">2</span><span class="o">:</span> <span class="s2">&#34;c&#34;</span><span class="p">,</span>
+  <span class="nx">length</span><span class="o">:</span> <span class="mi">3</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>data 中的数据 array，相当于在 data 中声明了 0、1、2 三个属性</p>
+<ul>
+<li>往数组（对象）中新增元素，相当于[情景二](# 情景二 ：动态添加对象属性（在 data 外新增 key）)「在 data 外新增 key，动态添加对象属性，Vue 无法监听到该属性」</li>
+<li>所以 <code>this.array[3] = &quot;d&quot;</code> 是无效的</li>
+</ul>
+</blockquote>
+<p>综合「情景一、情景二」，对于「引用未声明的数据」或「动态添加对象属性」给出解决办法：</p>
+<ul>
+<li>方案一：视图中直接引用的根级属性，必须在 data 中提前声明</li>
+<li>方案二：动态添加对象属性，需用 set 方法</li>
+</ul>
+<blockquote>
+<p>如果采用方案一：提前在数组中定义数据</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">data</span><span class="o">:</span><span class="p">{</span>
+  <span class="nx">array</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="p">...]</span> 
+<span class="p">},</span>
+<span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">setD</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;d&#34;</span>  
+    <span class="c1">// 虽然可行，但无法预知有多少个 key、需要对应多少个 undefined
+</span><span class="c1"></span>    <span class="c1">// 所以这种「提前把 key 都写到 array 」的方案不可取
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>数组的长度可以一直增加（下标就是 key），不可能提前预知有多少个 key（如果这个数组是所有用户的列表），我们不可能提前把数组的 key 都声明出来</li>
+</ul>
+<blockquote>
+<p>如果采用方案二：不能提前声明，那就使用 Vue.set 或者 this.$set</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">this</span><span class="p">.</span><span class="nx">$set</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">)</span>
+<span class="c1">// set(Array, Index, value)
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>通过 set 新增数组 key，这是可行的方案。但每次添加新元素都要执行 set，比较繁琐</li>
+</ul>
+<ul>
+<li>有更简单的办法吗 ？</li>
+</ul>
+<h4 id="尤雨溪的做法">尤雨溪的做法</h4>
+<blockquote>
+<p>测试：既然是数组，可以用数组方法 push 添加元素吗？</p>
+<p>结果：可以，push 生效</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">)</span> <span class="c1">// 看看 vue 里的 push 
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>疑惑：为什么直接添加元素会失败，但 push 添加元素却成功呢 ？</p>
+<p>原因：Vue 里的 push 方法，已经不是数组原型上的 push 方法了（如下图 ）</p>
+</blockquote>
+<p><img src="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/122334问题.png" alt="122334问题" style="zoom:67%;" /></p>
+<blockquote>
+<p>如图，array 看起来是普通数组，但当我们把 array 传给 Vue 之后，Vue 会篡改这个数组，往中间插入一层原型，原型上有 7 个方法。此 7 法与数组原型上的方法<strong>同名</strong>（代码被修改），调用时就会覆盖原型方法</p>
+</blockquote>
+<p>7 个新的 api 会执行两个操作</p>
+<ul>
+<li>
+<p>首先，新 api 会调用「旧 api」方法</p>
+</li>
+<li>
+<p>然后，往数组上添加「监听&amp;代理」</p>
+</li>
+</ul>
+<blockquote>
+<p>总结</p>
+<ul>
+<li><strong>尤雨溪（Vue）篡改了数组的 API</strong> （Vue 文档中「<a href="https://cn.vuejs.org/v2/guide/list.html#%E5%8F%98%E5%BC%82%E6%96%B9%E6%B3%95-mutation-method" target="_blank" rel="noopener noreffer">变异方法</a>」章节有解释）</li>
+<li>这 7 个 API 都会被 Vue 篡改，调用后会更新 UI</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h4 id="具体是怎么篡改的呢-">具体是怎么篡改的呢 ？📌</h4>
+<blockquote>
+<p>尤雨溪的思路：就是插入一层原型，原型上有 7 个方法</p>
+<ul>
+<li>下面就是「模拟」篡改代码（怎么插入一层原型）</li>
+</ul>
+</blockquote>
+<h5 id="es6-写法">ES6 写法</h5>
+<h6 id="demo-测试">demo 测试</h6>
+<blockquote>
+<p>通过继承的思路，实现添加一层原型</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">VueArray</span> <span class="kr">extends</span> <span class="nb">Array</span> <span class="p">{</span> 
+  <span class="c1">// 当前 VueArray 继承于 Array ，意思就是 VueArray 在 Array原型 的前面
+</span><span class="c1"></span>  <span class="nx">push</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 表示在 VueArray 上声明一个 push 作为共有属性，会放在 VueArray 的 _proto_ 上
+</span><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;args&#34;</span><span class="p">,</span> <span class="nx">args</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;arguments&#34;</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;...args&#34;</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span>
+    
+    <span class="kr">super</span><span class="p">.</span><span class="nx">push</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span>  <span class="c1">// 表示执行 VueArray 的 push 时，会先调用 Array 上的原生 push 方法
+</span><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;你 push 了&#39;</span><span class="p">)</span> 
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">VueArray</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mf">2.3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1">// 往数组添加元素5，同时执行log
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;a&#34;</span><span class="p">,</span> <span class="nx">a</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201228185413204.png" alt="image-20201228185413204" style="zoom:67%;" /></p>
+<blockquote>
+<p>这样写的作用是</p>
+<ul>
+<li><strong>当我们执行 VueArray 的 push 方法时，效果与原生的 push 一样，但还会多执行一个 console.log</strong></li>
+<li>第一层原型上只有一个 push 方法，第二层原型才是 Array 的原型</li>
+</ul>
+</blockquote>
+<h6 id="模拟完整逻辑-">模拟完整逻辑 📌</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">VueArray</span> <span class="kr">extends</span> <span class="nb">Array</span><span class="p">{</span> 
+  <span class="nx">push</span><span class="p">(...</span><span class="nx">args</span><span class="p">){</span>
+    <span class="kr">const</span> <span class="nx">oldLength</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">length</span>  <span class="c1">// this 就是当前数组（指代new出来的数组实例）记录下旧数组的长度
+</span><span class="c1"></span>    <span class="kr">super</span><span class="p">.</span><span class="nx">push</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="c1">// push之后，this.length 已经更新
+</span><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;你 push 了&#39;</span><span class="p">)</span> 
+    
+    <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">oldLength</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span> 
+      <span class="nx">Vue</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="k">this</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>  
+      <span class="c1">// 将每个新增的 key 都告诉 Vue ，Vue 得知数据变化、需要添加代理&amp;监听、更新视图啦 
+</span><span class="c1"></span>    <span class="p">}</span> 
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">VueArray</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注：此代码仅用于逻辑理解。实际上这种实现方式是比较低效的、不代表 Vue 的真实实现。</p>
+<p>实际上 frank 没看过相关源代码（但尤雨溪的大概思路就是这样的）</p>
+</blockquote>
+<h5 id="es5-写法---原型">ES5 写法 - 原型</h5>
+<blockquote>
+<p>ES5 代码，会比 ES6 更难理解（ES6 相当于给前端降低了门槛）</p>
+<ul>
+<li>实现：新插入一层原型，<strong>新原型的上层是实例、下层是数组的原型</strong></li>
+<li>新原型上有 push 方法：执行一些开发者篡改的操作，然后再调用数组原型的 push 实现添加元素</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">vueArrayPrototype</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="nx">push</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span> 
+    <span class="nx">console</span><span class="mf">.1</span><span class="nx">og</span><span class="p">(</span><span class="s1">&#39;你 push 了&#39;</span><span class="p">)</span> <span class="c1">// 这里添加的其他代码，都属于对 push 的篡改
+</span><span class="c1"></span>    <span class="k">return</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">push</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">)</span> <span class="c1">// 透传
+</span><span class="c1"></span>    <span class="c1">// 👆 用户给我传了什么，我把所有东西透透的传给「数组原型上的的push方法」
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">vueArrayPrototype</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span> <span class="c1">// 把我的原型指向数组的原型，形成原型链
+</span><span class="c1">// 上面这句话用的不是标准属性，仅学习使用 
+</span><span class="c1"></span>
+<span class="kr">const</span> <span class="nx">array</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">vueArrayPrototype</span><span class="p">)</span> <span class="c1">// 使用我写的新原型，创建出一个数组
+</span><span class="c1"></span><span class="nx">array</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> 
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span>  <span class="c1">// 可以看到三层原型链效果：一层是对象本身、二层是新原型、三层是数组原型
+</span><span class="c1"></span>
+<span class="c1">// 如果看不懂就算了，反正面试官也看不懂
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201228185413204.png" alt="image-20201228185413204" style="zoom:67%;" /></p>
+<p>​</p>
+<h2 id="总结-1">总结</h2>
+<h3 id="对象中新增的-key">对象中新增的 key</h3>
+<ul>
+<li>Vue 没有办法事先监听和代理（导致 key 的变化完全不会影响 UI）</li>
+<li>要<strong>使用 set</strong> 来新增 key，创建监听和代理，更新 UI</li>
+<li>最好提前把属性都写出来，不要新增 key</li>
+<li>注意：数组做不到「提前把 key 属性写好」</li>
+</ul>
+<h3 id="数组中新增的-key">数组中新增的 key</h3>
+<ul>
+<li>数组可用 set 来新增 key，更新 UI
+<ul>
+<li>this.$set 作用于数组时，并不会自动添加监听和代理，原因未知（只能问尤雨溪了）
+<ul>
+<li>可以测试看看，set 了之后再用 <code>this.array[n] += 1</code> 是否会触发 UI 更新（答案是不会）</li>
+</ul>
+</li>
+<li>使用 Vue 提供的数组变异 API 时，会自动添加监听和代理</li>
+</ul>
+</li>
+<li>不过尤雨溪篡改了 7 个 API 方便开发者对数组进行<strong>增删</strong>
+<ul>
+<li>增，因为 Vue 无法监听到，所以需要修改代码，使 Vue 可以监听到</li>
+<li>删，虽然 Vue 已监听到了，但原生 API 直接删除，Vue 是不知道的，就会有多余的监听器，浪费内存，所以删除的 API 也修改一下，实现同时把监听器删除</li>
+<li>改、查：这两个操作肯定发生在 Vue 监听的环境中，不需要再帮 Vue 搞额外的处理，直接用原生 API 即可</li>
+</ul>
+</li>
+<li>这 7 个 API 会自动处理监听和代理，并（异步的）更新 UI
+<ul>
+<li>push、pop、shift、unshift、splice、sort、reverse</li>
+<li>前 5 个是必要的，后 2 个可能是为了方便才提供的，用处不算大，当然如果有需求还是使用 Vue 提供的 API，效率更高一些</li>
+</ul>
+</li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-12-31</span>
+            </div>
+            <div class="post-info-license"><span>转载请注明出处</span></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/vue-reactivity/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://liubingxuan.xyz/vue-reactivity/" data-title="深入理解 Vue 数据响应式" data-via="ryuukousen2" data-hashtags="Vue,响应式,原理,数据"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://liubingxuan.xyz/vue-reactivity/" data-hashtag="Vue"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://liubingxuan.xyz/vue-reactivity/" data-title="深入理解 Vue 数据响应式"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://liubingxuan.xyz/vue-reactivity/" data-title="深入理解 Vue 数据响应式"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://liubingxuan.xyz/vue-reactivity/" data-title="深入理解 Vue 数据响应式"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/vue/">Vue</a>,&nbsp;<a href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/">响应式</a>,&nbsp;<a href="/tags/%E5%8E%9F%E7%90%86/">原理</a>,&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE/">数据</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/vue-compiler-included-vs-runtime-only/" class="prev" rel="prev" title="深入理解 Vue 完整版与非完整版"><i class="fas fa-angle-left fa-fw"></i>深入理解 Vue 完整版与非完整版</a>
+            <a href="/celebration/" class="next" rel="next" title="【置顶】开博纪念🥰">【置顶】开博纪念🥰<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+    Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+  </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Thanks For Your Watching! ❤️</div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2017 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://liubingxuan.xyz" target="_blank">Sam</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":999},"comment":{"valine":{"appId":"M2gdPMfXs30Gw5NNnr2wSxv6-MdYXbMMI","appKey":"9V2iCzlcQbheaaWDXRLTNgec","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-twitter@5.0.1/img/twitter/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"📢 来都来了，说点什么 ~（填写邮箱可以收到回复提醒哦 ~ 😉）","recordIP":true,"visitor":true}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"KAKKI975YQ","algoliaIndex":"blog","algoliaSearchKey":"529eb6b7fa6e4f89bfe1d0043e53bda5","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

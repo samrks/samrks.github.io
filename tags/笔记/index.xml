@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>笔记 - 标签 - Sam&#39;s Garage</title>
-        <link>http://samrks.github.io/tags/%E7%AC%94%E8%AE%B0/</link>
+        <link>https://liubingxuan.xyz/tags/%E7%AC%94%E8%AE%B0/</link>
         <description>笔记 - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Tue, 04 Aug 2020 23:58:43 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Tue, 04 Aug 2020 23:58:43 &#43;0800</lastBuildDate><atom:link href="https://liubingxuan.xyz/tags/%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
     <title>前端也得懂点儿 HTTP (上) ：浅析 URL</title>
-    <link>http://samrks.github.io/http-1-url/</link>
+    <link>https://liubingxuan.xyz/http-1-url/</link>
     <pubDate>Tue, 04 Aug 2020 23:58:43 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/http-1-url/</guid>
+    <guid>https://liubingxuan.xyz/http-1-url/</guid>
     <description><![CDATA[<p>本文主要围绕 URL ，为学 HTTP 做个铺垫。</p>
 <p>​</p>
 <h2 id="先导">先导</h2>
@@ -836,10 +836,10 @@ http://ryuuks:8080/index.html
 </ol>]]></description>
 </item><item>
     <title>CSS 学习笔记——动画</title>
-    <link>http://samrks.github.io/css-animation/</link>
+    <link>https://liubingxuan.xyz/css-animation/</link>
     <pubDate>Sun, 02 Aug 2020 01:19:27 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/css-animation/</guid>
+    <guid>https://liubingxuan.xyz/css-animation/</guid>
     <description><![CDATA[<p>浏览器的渲染流程、transform、transition、animation</p>
 <p>​</p>
 <h2 id="动画的原理">动画的原理</h2>
@@ -1872,10 +1872,10 @@ http://ryuuks:8080/index.html
 </div>]]></description>
 </item><item>
     <title>HTML 标签の简单记录</title>
-    <link>http://samrks.github.io/html-a-simple-record-of-html-tags/</link>
+    <link>https://liubingxuan.xyz/html-a-simple-record-of-html-tags/</link>
     <pubDate>Thu, 16 Jul 2020 22:50:08 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/html-a-simple-record-of-html-tags/</guid>
+    <guid>https://liubingxuan.xyz/html-a-simple-record-of-html-tags/</guid>
     <description><![CDATA[<p>记录几个标签的简单用法，然后忘掉  🤪</p>
 <p>​</p>
 <h2 id="a-标签">a 标签</h2>

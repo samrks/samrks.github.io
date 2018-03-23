@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>HTML - 标签 - Sam&#39;s Garage</title>
-        <link>http://samrks.github.io/tags/html/</link>
+        <link>https://liubingxuan.xyz/tags/html/</link>
         <description>HTML - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Thu, 16 Jul 2020 22:50:08 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/html/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Thu, 16 Jul 2020 22:50:08 &#43;0800</lastBuildDate><atom:link href="https://liubingxuan.xyz/tags/html/" rel="self" type="application/rss+xml" /><item>
     <title>HTML 标签の简单记录</title>
-    <link>http://samrks.github.io/html-a-simple-record-of-html-tags/</link>
+    <link>https://liubingxuan.xyz/html-a-simple-record-of-html-tags/</link>
     <pubDate>Thu, 16 Jul 2020 22:50:08 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/html-a-simple-record-of-html-tags/</guid>
+    <guid>https://liubingxuan.xyz/html-a-simple-record-of-html-tags/</guid>
     <description><![CDATA[<p>记录几个标签的简单用法，然后忘掉  🤪</p>
 <p>​</p>
 <h2 id="a-标签">a 标签</h2>
@@ -912,10 +912,10 @@
 </figure>]]></description>
 </item><item>
     <title>HTML 入门笔记</title>
-    <link>http://samrks.github.io/html-introduction/</link>
+    <link>https://liubingxuan.xyz/html-introduction/</link>
     <pubDate>Thu, 16 Jul 2020 20:40:51 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/html-introduction/</guid>
+    <guid>https://liubingxuan.xyz/html-introduction/</guid>
     <description><![CDATA[<p>HTML (HyperText Markup Language) 不是一门编程语言，而是一种用来告知浏览器如何组织页面的<strong>标记语言</strong>。😎💋</p>
 <p>HTML 可复杂、可简单，一切取决于开发者。</p>
 <p>它由一系列的<strong>元素</strong>（<a href="https://developer.mozilla.org/zh-CN/docs/Glossary/%e5%85%83%e7%b4%a0" target="_blank" rel="noopener noreffer">elements</a>）组成，这些元素可以用来包围不同部分的内容，使其以某种方式呈现或者工作。 一对标签（ <a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Tag" target="_blank" rel="noopener noreffer">tags</a>）可以为一段文字或者一张图片添加超链接，将文字设置为斜体，改变字号，等等。</p>

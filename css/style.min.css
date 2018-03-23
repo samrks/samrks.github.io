@@ -7,7 +7,7 @@ html {
   font-weight: 400;
   font-display: swap;
   font-size: 16px;
-  line-height: 1.5rem; 
+  line-height: 1.5rem;
   width: 100%
 }
 
@@ -278,7 +278,8 @@ img {
 
 .toc .toc-content {
   font-size: 1rem;
-  line-height: 1.6rem;  /* 自定义，默认无：文章目录行高 */
+  line-height: 1.6rem;
+  /* 自定义，默认无：文章目录行高 */
 }
 
 .toc .toc-content ul {
@@ -292,7 +293,7 @@ img {
   content: "|";
   font-weight: bolder;
   margin-right: .5rem;
-  color: #2d96bd
+  color: #09a7e0;
 }
 
 [theme=dark] .toc .toc-content ul a:first-child::before {
@@ -303,7 +304,8 @@ img {
   padding-left: 1.5rem
 }
 
-.toc .toc-content ul ul li:last-child{   /* 自定义：目录子项的最后一个，添加边距进行分隔排版 */
+.toc .toc-content ul ul li:last-child {
+  /* 自定义：目录子项的最后一个，添加边距进行分隔排版 */
   padding-bottom: 0.5rem;
 }
 
@@ -328,6 +330,10 @@ img {
   position: absolute;
   width: 12000px;
   max-width: 0;
+  /* 自定义：给目录高度、超出一屏实现滚动 */
+  max-height: calc(100vh - 55px);
+  overflow-y: scroll;
+  /* ↑ */
   padding: 0 .8rem;
   border-left: 4px solid #f0f0f0;
   word-wrap: break-word;
@@ -358,7 +364,9 @@ img {
 }
 
 #toc-auto .toc-content.always-active ul {
-  display: block
+  display: block;
+  /* 自定义：目录 */
+  overflow: hidden;
 }
 
 #toc-auto .toc-content>nav>ul {
@@ -370,12 +378,15 @@ img {
 }
 
 #toc-auto .toc-content ul .has-active>ul {
-  display: block
+  display: block;
+  /* 自定义：目录 */
+  overflow: hidden; 
 }
 
 #toc-auto .toc-content a.active {
   font-weight: bold;
-  color: #2d96bd
+  /* 自定义 */
+  color: #00a6e2
 }
 
 [theme=dark] #toc-auto .toc-content a.active {
@@ -505,9 +516,20 @@ img {
   width: 100%
 }
 
+
+
 /* 可自定义：文章标题 */
 .single .content>h2 {
-  font-size: 1.65rem
+  /* font-size: 1.65rem */
+  /* text-align: center; */
+  font-size: 1.8rem;
+  margin-top: 4rem !important;
+  margin-bottom: 2rem !important;
+}
+
+/* 文章第一个标题，无需上边距 */
+.single .content>h2:first-of-type {
+  margin-top: 2rem !important;
 }
 
 .single .content>h2 code {
@@ -515,7 +537,7 @@ img {
 }
 
 .single .content>h3 {
-  font-size: 1.4rem
+  font-size: 1.6rem
 }
 
 .single .content>h3 code {
@@ -523,7 +545,7 @@ img {
 }
 
 .single .content>h4 {
-  font-size: 1.2rem
+  font-size: 1.3rem
 }
 
 .single .content>h4 code {
@@ -548,6 +570,13 @@ img {
   margin-bottom: 1.2rem;
 }
 
+.single .content h4,
+.single .content h5,
+.single .content h6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
 [theme=dark] .single .content h2,
 [theme=dark] .single .content h3,
 [theme=dark] .single .content h4,
@@ -557,6 +586,7 @@ img {
   margin: 2rem 0 1.2rem;
 }
 
+/* 自定义：title标题 */
 .single .content>h2>.header-mark::before,
 .single .content>h3>.header-mark::before,
 .single .content>h4>.header-mark::before,
@@ -564,7 +594,9 @@ img {
 .single .content>h6>.header-mark::before {
   content: "|";
   margin-right: .3125rem;
-  color: #2d96bd
+  /* color: #2d96bd; */
+  color: #00a6e2;
+  position: absolute;
 }
 
 [theme=dark] .single .content>h2>.header-mark::before,
@@ -572,34 +604,73 @@ img {
 [theme=dark] .single .content>h4>.header-mark::before,
 [theme=dark] .single .content>h5>.header-mark::before,
 [theme=dark] .single .content>h6>.header-mark::before {
-  color: #55bde2
+  color: #55bde2;
+  /* margin-left: -20px; */
 }
 
 .single .content>h2>.header-mark::before {
-  content: "#"
+  content: "#";
+  left: -1.7rem;
+  line-height: 1.9rem;
 }
+
+/* 自定义：#title# */
 /* .single .content>h2.headerLink::after {
   content: "#";
   margin-left: .3125rem;
-  color: #2d96bd
+  color: #00a6e2
 } */
- .single .content>h3>.header-mark::before {
-  content: "##"
+
+/* 自定义：深色模式 #title# */
+/* [theme=dark] .single .content>h2.headerLink::after {
+  color: #55bde2;
+} */
+
+.single .content>h3>.header-mark::before {
+  content: "##";
+  left: -2.5rem;
+  font-size: 1.5rem;
+  line-height: 1.9rem;
 }
-/*
+
 .single .content>h4>.header-mark::before {
-  content: "###"
+  content: "###";
+  left: -2.6rem;
+  font-size: 1.1rem;
+  line-height: 1.8rem;
+  letter-spacing: -1px;
 }
+
 .single .content>h5>.header-mark::before {
-  content: "####"
+  content: "|";
+  left: -1rem;
 }
+
 .single .content>h6>.header-mark::before {
-  content: "|"
-} */
+  content: "|";
+  font-size: .9rem;
+  left: -1rem;
+}
 
+/*自定义：文章行间距*/
+.single .content {
+  line-height: 1.7rem;
+}
 
+/*自定义*/
+.single .content ul li {
+  margin-bottom: 0.5rem;
+}
+
+/*自定义*/
 .single .content p {
-  margin: .5rem 0
+  margin-bottom: .5rem;
+  margin-top: .7rem;
+}
+
+.single .content ul li p {
+  margin-top: .2rem;
+  margin-bottom: .2rem;
 }
 
 .single .content b,
@@ -612,11 +683,13 @@ img {
   color: #ddd
 }
 
+/*自定义：a链接*/
 .single .content a,
 .single .content a::before,
 .single .content a::after {
   text-decoration: none;
-  color: #2d96bd
+  color: #09b2f0;
+  font-weight: bolder;
 }
 
 [theme=dark] .single .content a,
@@ -756,10 +829,18 @@ img {
 /* 可自定义：引用块*/
 .single .content blockquote {
   display: block;
-  border-left: 0.5rem solid #6bd6fd;
-  background-color: rgba(107, 214, 253, 0.17);
+  /* border-left: 0.5rem solid #6bd6fd; */
+  border-left: 0.5rem solid #13b7f3;
+  background-color: rgba(107, 214, 253, 0.1);
+  /* background-color: #f3f5f7; */
   padding: .25rem .75rem;
   margin: 1rem 0
+}
+
+/*自定义：引用块*/
+.single .content blockquote p {
+  margin: .5rem 0;
+  margin-left: .5rem;
 }
 
 [theme=dark] .single .content blockquote {
@@ -790,8 +871,11 @@ img {
   line-break: anywhere;
   font-size: .875rem;
   font-family: Source Code Pro, Menlo, Consolas, Monaco, monospace, system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
-  color: #E74C3C
+  color: #E74C3C;
+  /* background-color: #c5eeff !important; */
+  /* border-radius: 5px; */
 }
+
 
 [theme=dark] .single .content code {
   color: #E5BF78
@@ -806,7 +890,17 @@ img {
 }
 
 .single .content pre code {
-  padding: 0
+  padding: 0;
+}
+
+.single .content .lntd:last-child pre code {
+  padding-left: .7rem;
+  border-left: 1px solid rgb(238, 238, 238);
+}
+
+/* 自定义：代码行高，默认1.4em */
+.single .content pre code span {
+  line-height: 1.5em;
 }
 
 .single .content pre img {
@@ -820,7 +914,7 @@ img {
 .single .content .highlight table,
 .single .content .highlight tr,
 .single .content .highlight td {
-  background: #f5f5f5
+  background: #f8f8f8
 }
 
 [theme=dark] .single .content code,
@@ -853,7 +947,9 @@ img {
 
 .single .content .highlight {
   line-height: 1.4em;
-  margin: .5rem 0
+  /*自定义: margin*/
+  margin-top: 1.2rem;
+  margin-bottom: .5rem;
 }
 
 .single .content .highlight>.chroma {
@@ -868,8 +964,8 @@ img {
   width: 100%;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
   font-weight: bold;
-  color: #9c9c9c;
-  background: #e1e1e1
+  color: #bbbbbb;
+  background: #e1e1e1;
 }
 
 [theme=dark] .single .content .highlight>.chroma .code-header {
@@ -883,7 +979,8 @@ img {
 
 .single .content .highlight>.chroma .code-header .code-title {
   width: 100%;
-  padding: .4rem
+  padding: .4rem;
+  /* background-color: #f1f1f1; */
 }
 
 .single .content .highlight>.chroma .code-header .code-title::after {
@@ -1189,7 +1286,8 @@ img {
   display: inline
 }
 
-.single .content .highlight .c,
+/*自定义：代码块中取消斜体*/
+/* .single .content .highlight .c,
 .single .content .highlight .ch,
 .single .content .highlight .cm,
 .single .content .highlight .c1,
@@ -1197,14 +1295,16 @@ img {
 .single .content .highlight .cp,
 .single .content .highlight .cpf {
   font-style: italic
-}
+} */
 
 .single .content .highlight .gl {
   text-decoration: underline
 }
 
 .single .content .highlight .p {
-  color: #a9a9b3
+  /* color: #a9a9b3 */
+  /* 自定义：符号标点 */
+  color: #333
 }
 
 .single .content .highlight .k {
@@ -1229,6 +1329,8 @@ img {
 
 .single .content .highlight .kr {
   color: #b501a9
+    /* 自定义 */
+    /* color: #750ea5 */
 }
 
 .single .content .highlight .kt {
@@ -1244,6 +1346,7 @@ img {
 }
 
 .single .content .highlight .nb {
+  /* 自定义：document */
   color: #f74840
 }
 
@@ -1288,6 +1391,7 @@ img {
 }
 
 .single .content .highlight .nx {
+  /* 主要代码 */
   color: #333
 }
 
@@ -1400,7 +1504,9 @@ img {
 }
 
 .single .content .highlight .mi {
-  color: #e2893c
+  /* color: #e2893c */
+  /* 自定义：数字 */
+  color: #002bff
 }
 
 .single .content .highlight .il {
@@ -1412,7 +1518,9 @@ img {
 }
 
 .single .content .highlight .o {
-  color: #f19b04
+  /* color: #f19b04 */
+  /* 自定义：关键字 */
+  color: #96151e
 }
 
 .single .content .highlight .ow {
@@ -1428,11 +1536,27 @@ img {
 }
 
 .single .content .highlight .cm {
+  /*注释*/
   color: #a0a1a8
 }
 
 .single .content .highlight .c1 {
   color: #a0a1a8
+}
+
+/* 自定义：注释!**!、// */
+.single .content .highlight .c
+/*html注释、css注释*/
+,
+.single .content .highlight .cm
+/*js斜杠星注释*/
+,
+.single .content .highlight .c1
+
+/*js双斜杠注释*/
+  {
+  color: #b4654d;
+  letter-spacing: -1px;
 }
 
 .single .content .highlight .cs {
@@ -2806,7 +2930,8 @@ img {
 }
 
 .home[posts] .summary {
-  padding-top: 0.5rem;     /*自定义：首页文章封面图上边距*/
+  padding-top: 0.5rem;
+  /*自定义：首页文章封面图上边距*/
   padding-bottom: .8rem;
   color: #161209;
   border-bottom: 1px dashed #f0f0f0

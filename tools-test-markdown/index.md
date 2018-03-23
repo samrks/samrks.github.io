@@ -29,29 +29,76 @@ weight: 1   // Front-matter
 
 >   [主题文档链接](https://hugoloveit.com/zh-cn/theme-documentation-content/#3-%E5%86%85%E5%AE%B9%E6%91%98%E8%A6%81)
 
-  ​
+```html
+<font color="red">red</font>
+<font color="violet">violet</font>
+<font color="orange">orange</font>
+<font color="blue">blue</font>
+<font color="green">green</font>
+```
+
+<font color="red">red</font>、<font color="violet">violet</font>、<font color="orange">orange</font>、<font color="blue">blue</font>、<font color="green">green</font>
+
+```
+`反引号`
+```
 
 `反引号` 		
 
-  ==高亮==   	
+```
+<table><tr><td bgcolor=orange>背景色</td></tr></table>
+```
 
-​	**加粗**   	
+<table><tr><td bgcolor=orange>背景色</td></tr></table>
 
-​	*斜体*  		
+```
+**加粗**
+```
 
-  <u>下划线</u>
+**加粗**   
 
-这是一个[链接](https://gohugo.io/getting-started/quick-start/)哦。
+```
+_斜体_
+*斜体*
+```
 
-​		  
+*斜体*
+
+```
+~~删除线~~
+```
+
+~~删除线~~
+
+```
+<u>下划线</u>
+```
+
+<u>下划线</u>
+
+```
+[链接](https://gohugo.io/getting-started/quick-start/)
+```
+
+[链接](https://gohugo.io/getting-started/quick-start/)
+
+```
+[Hugo] ^ (一个开源的静态网站生成工具)
+```
+
+[Hugo]^(一个开源的静态网站生成工具)
+
+​	
+
+​	
 
 ## markdown 支持 emoji
 
 在 ` config.toml` 中开启/关闭 emoji 支持
 
-表情包大全：https://hugoloveit.com/zh-cn/emoji-support/
+[表情包大全](https://hugoloveit.com/zh-cn/emoji-support/)
 
-```html
+```markdown
 冒号joy冒号  冒号jack_o_lantern冒号  冒号heart冒号
 ```
 
@@ -61,11 +108,11 @@ weight: 1   // Front-matter
 
 ## 有序列表
 
-1.  有序列表1
+1.  有序列表
     +    无序列表
     +    无序列表
-2.  有序列表2
-3.  有序列表3
+2.  有序列表
+3.  有序列表
 
 
 
@@ -75,12 +122,13 @@ weight: 1   // Front-matter
 ## 无序列表
 
 +   无序列表
-+   无序列表
+
     +   无序列表
         +   无序列表
         +   在这里添加一个脚注 [^1]
 +   无序列表
-+   无序列表
+
+    
 
 [^1]: 这是一段脚注 https://xxx 这是一段脚注
 

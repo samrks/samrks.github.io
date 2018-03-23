@@ -3,13 +3,9 @@
 
 <!--more-->
 
-​	
 
-## 前言
 
 >   本节是 DOM 最基础的部分
-
-​	
 
 ## 前置知识
 
@@ -22,7 +18,7 @@
 -   会用 div 和 span 标签
 -   会简单的 CSS 布局（flex）
 
-​	
+
 
 ## 网页其实是一棵树
 
@@ -89,15 +85,11 @@
 +   后来又有 React 了，就用 React 来操作 DOM
 +   从来不会用 DOM 自带的功能来操作 DOM，自带的功能实在是非常反人类
 
-​	
 
 
+ <img src="https://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201226122610995.png" alt="image-20201226122610995" style="zoom: 80%;" />[图片来自](https://javascript.info/dom-navigation)
 
- <img src="http://imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201027005340133.png" alt="image-123340133" style="zoom:67%;" /> [图片来自](https://javascript.info/dom-navigation)
 
-​	
-
-​	
 
 ## 获取元素的 API
 
@@ -185,15 +177,11 @@ document.querySelectorAll('.red')[0]
 
 ​		
 
-​		
-
 ### 用哪一个 ⭕️
 
 -   工作中用最新的， querySelector 和 querySelectorAll  
 -   做 demo 直接用 idxxx，千万别让人发现 
 -   要兼容 IE 的可怜虫才用 getElement(s)ByXxx
-
-​	
 
 ​	
 
@@ -230,8 +218,6 @@ document.all
 ```
 
 -   这个 document.all 是个奇葩，第 6 个falsy值
-
-​	
 
 ​	
 
@@ -301,8 +287,6 @@ div.__proto__ === HTMLDivElment.prototype  // true
 
 ​		
 
-​		
-
 ### div 完整原型链
 
 >   自身属性和共有属性，[点击查看](https://i.loli.net/2020/10/21/bwt5rm24PC8IXa6.png)
@@ -346,10 +330,6 @@ head.requestFullScreen() // head元素全屏显示  // 这个 API 兼容性一�
 
 ​	
 
-​	
-
-​	
-
 ## 节点类型 nodeType
 
 节点？元素？傻傻分不清
@@ -386,10 +366,6 @@ div.firstChild.nodeType  // 3  获取到div的第一个子节点的节点类型�
 ```
 
 ![image-20201021135544247](https://i.loli.net/2020/10/21/vIEMQC3JioRr41f.png)
-
-​	
-
-​	
 
 ​	
 
@@ -553,8 +529,6 @@ document.body.appendChild(div2)
 
 ​	
 
-​	
-
 ## 删
 
 ### 两种方法
@@ -619,8 +593,6 @@ document.body.appendChild(div2)
 
 ​	
 
-​	
-
 ### 思考
 
 -   如果一个 node 被移出页面（DOM 树）
@@ -644,10 +616,6 @@ div1 = null
 div2 = null  
 // 等于空，div1/div2 就与内存断开联系了，就会被【垃圾回收】掉
 ```
-
-​	
-
-​	
 
 ​	
 
@@ -771,8 +739,6 @@ console.log(test.href)  // https://null.jsbin.com/xxx  浏览器把域名给补�
 
 ​	
 
-​	
-
 ### 改事件处理函数
 
 #### div.onclick 默认为 null
@@ -822,8 +788,6 @@ test.onclick = function(x){
 
 ​	
 
-​		
-
 ### 改内容
 
 #### 改文本内容 
@@ -861,8 +825,6 @@ div.appendChild(div2)   // 再加内容
 
 ​	
 
-​	
-
 ### 改爸爸
 
 >   想要找一个新爸爸
@@ -873,11 +835,7 @@ newParent.appendChild(div)  // 直接把div添加到新的父节点内，以前�
 
 +   直接这样就可以了，直接从原来的地方消失
 
-	
-
-	
-
-	
+​	
 
 ## 查
 
@@ -978,8 +936,6 @@ querySelectorAll 不会实时根据元素变化，去改变自己。获取过一
 
 ​	
 
-​	
-
 ### 查兄弟姐妹
 
 >   没有 API 可以直接获取到「任一元素的兄弟元素」，只能通过「先获取到父元素，再获取父元素的子元素」的方式
@@ -1006,8 +962,6 @@ for(let i = 0; i > c.length; i++){
   }
 }
 ```
-
-​	
 
 ​	
 
@@ -1071,11 +1025,7 @@ travel(div1, (node) => console.log(node) )
 
 +   看，数据结构多么有用
 
-	
 
-	
-
-	
 
 ## DOM 操作是跨线程的（详解）📌
 
@@ -1157,8 +1107,6 @@ document.body.appendChild(div1)
 
 ​	
 
-​	
-
 ### DOM 操作慢 ❓❗️
 
 >   网上都说 DOM 操作慢，实际上只是比 JS 操作慢，DOM 操作比网络请求还是快很多的。
@@ -1178,11 +1126,8 @@ document.body.appendChild(div1)
     +   「模块化」可以让划分的每一块，都比较简单、容易优化、容易代替
     +   虽然损失了时间，但「模块化的优点」却是更显著的
 
-	
 
-	
-
-	
+​	
 
 ### 插入新标签的完整过程（生命周期）
 
@@ -1256,8 +1201,6 @@ document.body.appendChild(div1)
 
 ​	
 
-​	
-
 ### 提问
 
 ```js
@@ -1288,8 +1231,6 @@ div.textContent = 'sam'   // 在div插入页面之后，修改 div 的文本内�
     而 x 属于非标准属性，修改它就不会影响（渲染）到页面
 
 >   总结「属性同步」的标准，[见下](# 属性同步)
-
-​	
 
 ​	
 
@@ -1330,8 +1271,6 @@ div.textContent = 'sam'   // 在div插入页面之后，修改 div 的文本内�
 >
 >   +   JS 线程中的属性叫「properties」，渲染线程中的属性叫「attributes」 （[对比](# Property  vs  Attribute)）
 >   +   所以 [Element.getAttribute()](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getAttribute) 这个 API 获取的是页面中的属性
-
-​	
 
 ​	
 
