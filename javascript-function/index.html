@@ -1,0 +1,2921 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>JS 函数的基本介绍 - Sam&#39;s Garage</title><meta name="Description" content="JS 函数的基本介绍"><meta property="og:title" content="JS 函数的基本介绍" />
+<meta property="og:description" content="JS 函数的基本介绍" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://samrks.github.io/javascript-function/" />
+<meta property="og:image" content="http://samrks.github.io/javascript-function/featured-image-preview.jpg"/>
+<meta property="article:published_time" content="2020-09-14T20:35:51+08:00" />
+<meta property="article:modified_time" content="2020-09-14T20:35:51+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://samrks.github.io/javascript-function/featured-image-preview.jpg"/>
+<meta name="twitter:title" content="JS 函数的基本介绍"/>
+<meta name="twitter:description" content="JS 函数的基本介绍"/>
+<meta name="application-name" content="Sam&#39;s Garage">
+<meta name="apple-mobile-web-app-title" content="Sam&#39;s Garage"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://samrks.github.io/javascript-function/" /><link rel="prev" href="http://samrks.github.io/javascript-array/" /><link rel="next" href="http://samrks.github.io/javascript-timing-of-call-a-function/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "JS 函数的基本介绍",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/samrks.github.io\/javascript-function\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "http:\/\/samrks.github.io\/javascript-function\/featured-image-preview.jpg",
+                            "width":  1280 ,
+                            "height":  384 
+                        }],"genre": "posts","keywords": "JavaScript, 函数, Function","wordcount":  12278 ,
+        "url": "http:\/\/samrks.github.io\/javascript-function\/","datePublished": "2020-09-14T20:35:51+08:00","dateModified": "2020-09-14T20:35:51+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Sam"
+            },"description": "JS 函数的基本介绍"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa fa-home fa-fw'></i> 主页 </a><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title=""><i class='fa fa-home fa-fw'></i>主页</a><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">JS 函数的基本介绍</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://liubingxuan.xyz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Sam</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/javascript/"><i class="far fa-folder fa-fw"></i>JavaScript</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-09-14">2020-09-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 12278 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 25 分钟&nbsp;<span id="/javascript-function/" class="leancloud_visitors" data-flag-title="JS 函数的基本介绍">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/javascript-function/featured-image-preview.jpg"
+        data-srcset="/javascript-function/featured-image-preview.jpg, /javascript-function/featured-image-preview.jpg 1.5x, /javascript-function/featured-image-preview.jpg 2x"
+        data-sizes="auto"
+        alt="/javascript-function/featured-image-preview.jpg"
+        title="JS 函数的基本介绍" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#函数是对象">函数是对象</a></li>
+        <li><a href="#定义一个函数">定义一个函数</a>
+          <ul>
+            <li><a href="#1-具名函数">1️⃣ 具名函数</a></li>
+            <li><a href="#2-匿名函数">2️⃣ 匿名函数</a></li>
+            <li><a href="#例">例</a>
+              <ul>
+                <li><a href="#变态">变态</a></li>
+              </ul>
+            </li>
+            <li><a href="#3-箭头函数">3️⃣ 箭头函数</a></li>
+            <li><a href="#4-用构造函数">4️⃣ 用构造函数</a></li>
+          </ul>
+        </li>
+        <li><a href="#函数自身-vs-函数调用区别">函数自身 vs. 函数调用（区别）</a>
+          <ul>
+            <li><a href="#函数自身">函数自身</a></li>
+            <li><a href="#函数调用">函数调用</a></li>
+            <li><a href="#再进一步">再进一步</a></li>
+          </ul>
+        </li>
+        <li><a href="#函数的要素9-个">函数的要素（9 个）🤩</a>
+          <ul>
+            <li><a href="#每个函数都有这些东西">每个函数都有这些东西</a></li>
+            <li><a href="#1-调用时机-">1️⃣ 调用时机 🧐</a>
+              <ul>
+                <li><a href="#例1">例1</a></li>
+                <li><a href="#例2">例2</a></li>
+                <li><a href="#例3">例3</a></li>
+                <li><a href="#例4">例4</a></li>
+                <li><a href="#例5">例5</a></li>
+                <li><a href="#例6-">例6 💡</a></li>
+                <li><a href="#例7-">例7 💡</a></li>
+                <li><a href="#总结">总结</a></li>
+              </ul>
+            </li>
+            <li><a href="#2-作用域">2️⃣ 作用域</a>
+              <ul>
+                <li><a href="#例1-1">例1</a></li>
+                <li><a href="#例2-1">例2</a></li>
+                <li><a href="#全局变量-vs-局部变量">全局变量 vs. 局部变量</a></li>
+                <li><a href="#函数可嵌套">函数可嵌套</a></li>
+                <li><a href="#作用域规则">作用域规则</a></li>
+                <li><a href="#例4-">例4 ⭐️</a></li>
+              </ul>
+            </li>
+            <li><a href="#3-闭包">3️⃣ 闭包</a>
+              <ul>
+                <li><a href="#重看例4">重看例4</a></li>
+              </ul>
+            </li>
+            <li><a href="#4-形式参数">4️⃣ 形式参数</a>
+              <ul>
+                <li><a href="#形式参数的意思就是非实际参数">形式参数的意思就是非实际参数</a></li>
+                <li><a href="#形参可认为是变量声明">形参可认为是变量声明</a></li>
+                <li><a href="#形参可多可少">形参可多可少</a></li>
+              </ul>
+            </li>
+            <li><a href="#5-返回值">5️⃣ 返回值</a>
+              <ul>
+                <li><a href="#每个函数都有返回值">每个函数都有返回值</a></li>
+                <li><a href="#函数执行完了后才会返回">函数执行完了后才会返回</a></li>
+                <li><a href="#只有函数有返回值">只有函数有返回值</a></li>
+              </ul>
+            </li>
+            <li><a href="#6-调用栈-">6️⃣ 调用栈 ⭐️</a>
+              <ul>
+                <li><a href="#举例">举例</a></li>
+                <li><a href="#调用栈的作用抽象">调用栈的作用（抽象）</a></li>
+                <li><a href="#递归函数">递归函数</a>
+                  <ul>
+                    <li><a href="#阶乘">阶乘</a></li>
+                    <li><a href="#理解递归">理解递归</a></li>
+                  </ul>
+                </li>
+                <li><a href="#递归函数的调用栈">递归函数的调用栈</a>
+                  <ul>
+                    <li><a href="#递归函数的调用栈很长">递归函数的调用栈很长</a></li>
+                  </ul>
+                </li>
+                <li><a href="#爆栈">爆栈</a></li>
+                <li><a href="#调用栈最长有多少">调用栈最长有多少</a></li>
+                <li><a href="#总结-1">总结—————————————</a></li>
+              </ul>
+            </li>
+            <li><a href="#7-函数提升">7️⃣ 函数提升</a>
+              <ul>
+                <li><a href="#什么是函数提升">什么是函数提升</a></li>
+                <li><a href="#什么不是函数提升">什么不是函数提升</a></li>
+              </ul>
+            </li>
+            <li><a href="#8-arguments">8️⃣ arguments</a></li>
+            <li><a href="#9-this-">9️⃣ this ⚡️</a></li>
+          </ul>
+        </li>
+        <li><a href="#理解-arguments">理解 arguments</a></li>
+        <li><a href="#理解-this-">理解 this ⚡️</a>
+          <ul>
+            <li><a href="#情况一">情况一</a></li>
+            <li><a href="#如何指定-this">如何指定 this</a>
+              <ul>
+                <li><a href="#情况一-1">情况一</a></li>
+                <li><a href="#什么叫封装成对象">什么叫「封装成对象」？</a></li>
+                <li><a href="#怎么禁用这个自动封装的特性-">怎么禁用这个自动封装的特性 ？</a></li>
+              </ul>
+            </li>
+            <li><a href="#同时指定-this-和-arguments">同时指定 this 和 arguments</a></li>
+            <li><a href="#-this-是隐藏参数arguments-是普通参数-">“ this 是隐藏参数、arguments 是普通参数 ”</a></li>
+            <li><a href="#假设没有-this">假设没有 this</a>
+              <ul>
+                <li><a href="#问题一">问题一</a></li>
+                <li><a href="#问题二-">问题二 ⚡️⚡️</a></li>
+                <li><a href="#需要一种办法拿到未来的对象">需要一种办法拿到未来的对象</a></li>
+                <li><a href="#一种土办法用参数传参">一种土办法，用参数（传参）</a></li>
+                <li><a href="#谁会用这种办法--python">谁会用这种办法 —— Python</a></li>
+                <li><a href="#js-没有模仿-python-的思路">JS 没有模仿 Python 的思路</a></li>
+              </ul>
+            </li>
+            <li><a href="#js-在每个函数里加了-this-">JS 在每个函数里加了 this ⚡️⚡️</a></li>
+            <li><a href="#personsayhi-会隐式地把-person-作为-this-传给-sayhi"><strong>person.sayHi() 会隐式地把 person 作为 this 传给 sayHi</strong></a></li>
+            <li><a href="#总结-2">总结</a></li>
+            <li><a href="#这就引出另一个问题-">这就引出另一个问题 💡</a>
+              <ul>
+                <li><a href="#到底哪个对">到底哪个对</a></li>
+                <li><a href="#js-怎么解决这种不和谐">JS 怎么解决这种不和谐</a></li>
+              </ul>
+            </li>
+            <li><a href="#两种调用">两种调用🧐</a>
+              <ul>
+                <li><a href="#小白调用法-">小白调用法 🚫</a></li>
+                <li><a href="#大师调用法-">大师调用法 ✅</a></li>
+                <li><a href="#应该学习哪种">应该学习哪种？</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#指定-this-">指定 this 😈</a>
+          <ul>
+            <li><a href="#call-指定-this">call 指定 this</a></li>
+            <li><a href="#所有函数调用必须强迫自己使用大师调用法-call--apply">所有函数调用，必须强迫自己使用「大师调用法」—— call / apply</a>
+              <ul>
+                <li><a href="#例1-2">例1</a>
+                  <ul>
+                    <li><a href="#没有用到-this">没有用到 this</a></li>
+                    <li><a href="#为什么要多写一个-undefined">为什么要多写一个 undefined</a></li>
+                  </ul>
+                </li>
+                <li><a href="#例2-2">例2</a>
+                  <ul>
+                    <li><a href="#尝试写出完整的-foreach-函数">尝试写出完整的 forEach 函数</a></li>
+                    <li><a href="#如何调用">如何调用</a></li>
+                  </ul>
+                </li>
+                <li><a href="#this-一定是数组吗">this 一定是数组吗</a></li>
+              </ul>
+            </li>
+            <li><a href="#总结-this-的两种使用方法">总结 this 的两种使用方法</a>
+              <ul>
+                <li><a href="#隐式传递">隐式传递</a></li>
+                <li><a href="#显式传递">显式传递</a></li>
+                <li><a href="#apply-区别">apply 区别</a></li>
+              </ul>
+            </li>
+            <li><a href="#绑定-this">绑定 this</a>
+              <ul>
+                <li><a href="#使用-bind-可以让-this-不被改变">使用 .bind 可以让 this 不被改变</a></li>
+                <li><a href="#bind-还可以绑定其他参数">.bind 还可以绑定其他参数</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#箭头函数">箭头函数</a>
+          <ul>
+            <li><a href="#函数里面的-this-就是外面的-this">函数里面的 this 就是外面的 this</a></li>
+            <li><a href="#就算用-call-也无法指定-this">就算用 call 也无法指定 this</a></li>
+            <li><a href="#箭头函数没有-arguments">箭头函数没有 arguments</a></li>
+          </ul>
+        </li>
+        <li><a href="#总结-3">总结</a></li>
+        <li><a href="#立即执行函数">立即执行函数</a>
+          <ul>
+            <li><a href="#声明局部变量es6-之前">声明局部变量（ES6 之前）</a>
+              <ul>
+                <li><a href="#思考--办法">思考 / 办法</a></li>
+                <li><a href="#执行--报错">执行 / 报错</a></li>
+                <li><a href="#解决">解决</a></li>
+              </ul>
+            </li>
+            <li><a href="#总结原理">总结原理</a></li>
+            <li><a href="#声明局部变量es6-之后">声明局部变量（ES6 之后）</a></li>
+            <li><a href="#注意事项">注意事项</a>
+              <ul>
+                <li><a href="#总结-4">总结</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>定义函数、call / apply / bind、大师调用法、调用时机、作用域、闭包、形参、调用栈、函数提升、arguments、this、箭头函数、立即执行函数。</p>
+<p>​</p>
+<h2 id="函数是对象">函数是对象</h2>
+<ul>
+<li>
+<p>函数怎么会是对象……看起来不一样啊</p>
+</li>
+<li>
+<p>解释起来非常抽象，请直接接受这个结论</p>
+</li>
+</ul>
+<blockquote>
+<p>函数是一种特殊的对象</p>
+</blockquote>
+<h2 id="定义一个函数">定义一个函数</h2>
+<h3 id="1-具名函数">1️⃣ 具名函数</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">函数名</span><span class="p">(</span><span class="nx">形式参数1</span><span class="p">,</span> <span class="nx">形式参数2</span><span class="p">){</span>
+  <span class="nx">语句</span>
+  <span class="k">return</span> <span class="nx">返回值</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="2-匿名函数">2️⃣ 匿名函数</h3>
+<blockquote>
+<p>上面的具名函数，去掉函数名就是匿名函数</p>
+<p>匿名函数，通常要声明一个变量进行赋值，不然函数就消失了</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">){</span> <span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>也叫函数表达式</p>
+<p>ps：等号左边是声明变量 a 并赋值。等号右边部分，才是函数表达式</p>
+<h3 id="例">例</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fn</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span>
+<span class="p">}</span>
+<span class="o">-------------------------------</span> <span class="nx">上面是具名函数</span><span class="err">，</span><span class="nx">函数名为fn</span><span class="err">；</span>
+<span class="o">-------------------------------</span> <span class="nx">下面是匿名函数</span><span class="err">，</span><span class="nx">函数没有名字</span><span class="err">，</span><span class="nx">但是声明一个变量a来容纳这个函数的地址</span>
+<span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="变态">变态</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">fn</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">){</span><span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span><span class="p">}</span>
+<span class="c1">// fn(1,2)  // 报错 fn 不存在：fn is not defined    // 为什么？
+</span><span class="c1"></span><span class="nx">a</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>  <span class="c1">// 3
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2020/09/16/TuP3W7gAVeJ6oF8.png"
+        data-srcset="https://i.loli.net/2020/09/16/TuP3W7gAVeJ6oF8.png, https://i.loli.net/2020/09/16/TuP3W7gAVeJ6oF8.png 1.5x, https://i.loli.net/2020/09/16/TuP3W7gAVeJ6oF8.png 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2020/09/16/TuP3W7gAVeJ6oF8.png"
+        title="image-20200912151053139" /></p>
+<p>解：</p>
+<ul>
+<li>如果 fn 函数式的声明是在等号右边，那么这个 fn 的作用域就只能在等号右边、这块<font color="purple"><strong>高亮</strong></font>的范围</li>
+<li>出了这块高亮范围，fn 就不存在</li>
+<li>其他地方要用这个函数，只能用 a 来调用</li>
+</ul>
+<p>​</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fn</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">){</span><span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span><span class="p">}</span>
+<span class="nx">fn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>  <span class="c1">// 3
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>如果没有左边赋值的操作，那么 fn 在哪里都可以用</li>
+</ul>
+<p>​</p>
+<h3 id="3-箭头函数">3️⃣ 箭头函数</h3>
+<p>写法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">f1</span> <span class="o">=</span> <span class="nx">x</span> <span class="p">=&gt;</span> <span class="nx">x</span><span class="o">*</span><span class="nx">x</span> 
+<span class="kd">let</span> <span class="nx">f2</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span> <span class="c1">// 多个形参，则圆括号不能省
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">f3</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span> <span class="p">}</span>  <span class="c1">// 写了return，则花括号不能省
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">f4</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;x+y=&#39;</span><span class="p">);</span> <span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span> <span class="p">}</span> <span class="c1">// 多语句时，花括号不能省，return不能省
+</span></code></pre></td></tr></table>
+</div>
+</div><p>变态：函数返回值是一个对象</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// let f5 = (x,y) =&gt; {name:x, age: y} // JS 中 {} 被优先当做【代码块(label语法)】的起始，而不是对象
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">f5</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="nx">x</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="nx">y</span><span class="p">})</span>  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>函数返回值是一个对象，需要加个圆括号，表示里面是一个整体，不是一个代码块</li>
+<li>可以看出 JS 这门语言每次添加新的语法时，可能都多少会有点小bug，大概是因为它要兼容以前得版本，所以有些错误它也解决不了（不是门很严谨的语言）</li>
+</ul>
+<p>​</p>
+<h3 id="4-用构造函数">4️⃣ 用构造函数</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 单语句
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">f</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;return x+y&#39;</span><span class="p">)</span>   
+<span class="c1">// 多语句
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">f</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;console.log(\&#39;hi\&#39;); return x+y&#39;</span><span class="p">)</span>   
+<span class="nx">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> 
+<span class="c1">// hi 
+</span><span class="c1">// 3
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>基本没人用，但是能让你知道函数是谁构造的</li>
+<li>所有函数都是 Function 构造出来的</li>
+<li>包括 Object、Array、Function 也是 （这里都省略了 window. ）
+<ul>
+<li>Function 本身也是由自己构造出来的（在对象原型的笔记中解释过）</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="函数自身-vs-函数调用区别">函数自身 vs. 函数调用（区别）</h2>
+<blockquote>
+<p><code>fn</code>    V.S.    <code>fn()</code></p>
+</blockquote>
+<h3 id="函数自身">函数自身</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">fn</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>
+<span class="nx">fn</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>结果</p>
+<ul>
+<li>不会有任何结果</li>
+<li>因为 fn 没有执行（执行就是调用，调用就是执行）</li>
+</ul>
+<h3 id="函数调用">函数调用</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">fn</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>
+<span class="nx">fn</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>结果</p>
+<ul>
+<li>打印出 hi</li>
+<li>有圆括号才是调用</li>
+</ul>
+<h3 id="再进一步">再进一步</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">fn</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>  <span class="c1">// 很多人认为fn就是函数，实际上这里的fn只是保存了函数的地址
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">fn2</span> <span class="o">=</span> <span class="nx">fn</span> <span class="c1">// 把fn保存的地址复制给fn2
+</span><span class="c1"></span><span class="nx">fn2</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>结果</p>
+<ul>
+<li><strong>fn 保存了匿名函数的地址</strong></li>
+<li>这个地址被复制给了 fn2</li>
+<li>fn2() 调用了匿名函数</li>
+<li>实际上 fn 和 fn2 都是对匿名函数的<strong>引用</strong>而已</li>
+<li>真正的函数既不是 fn 也不是 fn2</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="函数的要素9-个">函数的要素（9 个）🤩</h2>
+<blockquote>
+<p>9个概念需要知道，其他函数的教程，都没这里讲的细</p>
+</blockquote>
+<h3 id="每个函数都有这些东西">每个函数都有这些东西</h3>
+<ol>
+<li>
+<p>调用时机</p>
+</li>
+<li>
+<p>作用域</p>
+</li>
+<li>
+<p>闭包</p>
+</li>
+<li>
+<p>形式参数</p>
+</li>
+<li>
+<p>返回值</p>
+</li>
+<li>
+<p>调用栈</p>
+</li>
+<li>
+<p>函数提升</p>
+</li>
+<li>
+<p><strong>arguments（除了箭头函数）</strong></p>
+</li>
+<li>
+<p><strong>this（除了箭头函数）</strong></p>
+<blockquote>
+<p>JS 的三座大山</p>
+<ol>
+<li>原型、原型链</li>
+<li><strong>this</strong></li>
+<li>AJAX</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>搞懂这三座大山，vue、react、angular … 就都可以去学了。</p>
+<p>但如果三个有任何一个没搞清楚，那就还是 JS 没入门的水平。你会感觉一直在 JS 的屏障/瓶颈中</p>
+</blockquote>
+</li>
+</ol>
+<p>​</p>
+<p>​</p>
+<h3 id="1-调用时机-">1️⃣ 调用时机 🧐</h3>
+<blockquote>
+<p>JS 函数的执行时机 —— 时机不同，结果不同</p>
+</blockquote>
+<h4 id="例1">例1</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="kd">function</span> <span class="nx">fn</span><span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>问打印出多少？答：不知，因为没有调用（函数只有被调用才会执行）</p>
+<h4 id="例2">例2</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="kd">function</span> <span class="nx">fn</span><span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">fn</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>问打印出多少？答：1</p>
+<h4 id="例3">例3</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="kd">function</span> <span class="nx">fn</span><span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>   
+  <span class="c1">// 很多人看到这，会认为是打印 1。
+</span><span class="c1"></span>  <span class="c1">// 但此时函数根本没执行过，可以完全忽略整个函数，不要提前就把 a=1 带入到函数中做记号
+</span><span class="c1"></span><span class="p">}</span>
+<span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1">// 到这里，a变成2了
+</span><span class="c1"></span><span class="nx">fn</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>问打印出多少？答：2</p>
+<h4 id="例4">例4</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="kd">function</span> <span class="nx">fn</span><span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">fn</span><span class="p">()</span>   <span class="c1">// 看时机：函数被调用，此时a=1
+</span><span class="c1"></span><span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>问打印出多少？答：1</p>
+<h4 id="例5">例5</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="kd">function</span> <span class="nx">fn</span><span class="p">(){</span>
+  <span class="nx">setTimeout</span><span class="p">(()=&gt;{</span>  <span class="c1">// setTimeout 相当于过一会、尽快（意思是当前手头事忙完，就立马执行里面的语句）
+</span><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+  <span class="p">},</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">fn</span><span class="p">()</span>
+<span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>举个栗子：你在打游戏（运行这段js），你妈叫你去吃饭（fn()被调用） ，你说马上去（执行setTimeout）。说了马上去，意思是要先把这局游戏打完才去（继续向下执行a=2）。现在打完了(js全部走完)，可以吃饭 console.log(a)</p>
+<p>问打印出多少？答：2</p>
+<h4 id="例6-">例6 💡</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1">// 注意：let i 写在for外面，相当于 i 只声明了一个。let i（声明i）的过程不会参加到循环中
+</span><span class="c1"></span><span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">6</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>  
+  <span class="nx">setTimeout</span><span class="p">(()=&gt;{</span>  <span class="c1">// 忙完手头事（for循环）立马执行里面的语句 console.log   // 【异步】
+</span><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>  <span class="c1">// 6 6 6 6 6 6 
+</span><span class="c1"></span>  <span class="p">},</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面代码块打印出多少？答：不是 0、1、2、3、4、5，而是 6 个 6</p>
+<p>变形：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">6</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>  <span class="c1">// 相当于只有一个 i
+</span><span class="c1"></span>  <span class="nx">setTimeout</span><span class="p">(()=&gt;{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>  <span class="c1">// 6 6 6 6 6 6
+</span><span class="c1"></span>  <span class="p">},</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="o">-------------------------------------------------</span>
+<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">6</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>   <span class="c1">// 这样相当于在每一次循环体的代码块中各声明了一个i，一共声明了6个i
+</span><span class="c1"></span>  <span class="nx">setTimeout</span><span class="p">(()=&gt;{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>  <span class="c1">// 0 1 2 3 4 5 
+</span><span class="c1"></span>  <span class="p">},</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="例7-">例7 💡</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">6</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span> <span class="c1">// 这样相当于在每一次循环体的代码块中各声明了一个i，一共声明了6个i
+</span><span class="c1"></span>  <span class="c1">// 每次循环都会创建一个i 进行赋值，然后留在这个空间中。6次循环创建6个新的i在各自的{}中，互不干涉
+</span><span class="c1"></span>  <span class="c1">// 细品：类似于刻舟求剑，每次刻一下，剑的位置竟随着舟的移动也发生了变化
+</span><span class="c1"></span>  <span class="nx">setTimeout</span><span class="p">(()=&gt;{</span> 
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+  <span class="p">},</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>问打印出多少？答：是 0、1、2、3、4、5。</p>
+<ul>
+<li>因为 JS 在 for 和 let 一起用的时候会加东西，每次循环会多创建一个 i（我服了 JS）</li>
+</ul>
+<p>​</p>
+<h4 id="总结">总结</h4>
+<ul>
+<li>setTimeout 就是尽快、等一会，但是不是现在。相当于先干完手头的，然后去做 setTimeout 里面的</li>
+<li>JS 函数的「调用时机」，由于变量的值可能会发生改变，所以每次求值的时候都要想一想所有代码执行的顺序是怎样的。如果不能确定代码执行的顺序，那么最终结果可能就是不对的。</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="2-作用域">2️⃣ 作用域</h3>
+<blockquote>
+<p>每个函数都会默认创建一个作用域</p>
+</blockquote>
+<blockquote>
+<p>作用域特别简单，就是画圈圈</p>
+</blockquote>
+<h4 id="例1-1">例1</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fn</span><span class="p">(){</span>
+  <span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span>           <span class="c1">// let声明的变量的作用域仅在当前这个 {...} 中
+</span><span class="c1"></span><span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="c1">// 报错 a is not defined  // a不存在
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>问：是不是因为 fn 没执行，导致 a 不存在 ？？</p>
+</blockquote>
+<h4 id="例2-1">例2</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fn</span><span class="p">(){</span>
+  <span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="p">}</span>
+<span class="nx">fn</span><span class="p">()</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="c1">// 即使 fn 执行了，a 还是不存在，仍旧报错
+</span></code></pre></td></tr></table>
+</div>
+</div><p>答：就算 fn 执行了，也访问不到作用域里面的 a</p>
+<ul>
+<li>跟执不执行没有关系。</li>
+<li>let 声明的变量的作用域非常好找。</li>
+<li>在 let 声明语句的前面找到一个 <code>{</code>  ，在 let 语句后面找到一个 <code>}</code>  ，这俩半个花括号组成的作用域<code>{ } </code>，就是 let 变量的作用域</li>
+</ul>
+<p>​</p>
+<h4 id="全局变量-vs-局部变量">全局变量 vs. 局部变量</h4>
+<ul>
+<li>在<strong>顶级作用域</strong>声明的变量是【全局变量】</li>
+<li><strong>挂载到 window 上的属性</strong>是【全局变量】</li>
+<li>其他都是【局部变量】</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fn</span><span class="p">(){</span>
+  <span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span>     <span class="c1">// let 声明的变量 a，仅在fn函数的{}内生效，所以是局部变量
+</span><span class="c1"></span><span class="p">}</span>
+<span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">2</span>   <span class="c1">// let声明的变量b，是在顶级作用域声明的，所以是全局变量，全局可访问
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">c</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1">// 在window上声明变量c，c就是全局变量，全局可访问
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">f1</span><span class="p">(){</span>
+  <span class="nb">window</span><span class="p">.</span><span class="nx">d</span> <span class="o">=</span> <span class="mi">4</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">f2</span><span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">f1</span><span class="p">()</span> <span class="c1">// 3   // 函数里也可以访问到 window 上的 c
+</span><span class="c1"></span><span class="nx">f2</span><span class="p">()</span> <span class="c1">// 4   // f2函数中能访问到f1函数中，声明在window 上的变量d
+</span></code></pre></td></tr></table>
+</div>
+</div><p>只要是挂载在window上的变量，不论在哪个作用域声明/挂载的，都是全局变量，全局可访问</p>
+<blockquote>
+<p>为什么有些方法可以直接使用，因为是挂在 window 上的</p>
+<p>例如： Object / window.Object 、parseInt / window.parseInt  …</p>
+</blockquote>
+<h4 id="函数可嵌套">函数可嵌套</h4>
+<blockquote>
+<p>作用域也可嵌套</p>
+<p>就近原则</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">f1</span><span class="p">(){</span>
+  <span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span>
+
+  <span class="kd">function</span> <span class="nx">f2</span><span class="p">(){</span>   <span class="c1">// 在f1函数中声明了一个f2函数
+</span><span class="c1"></span>    <span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>  
+  <span class="p">}</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> 
+  <span class="nx">a</span> <span class="o">=</span> <span class="mi">3</span>
+  <span class="nx">f2</span><span class="p">()</span> 
+<span class="p">}</span>
+<span class="nx">f1</span><span class="p">()</span>  
+<span class="c1">// 1
+</span><span class="c1">// 2
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/09/12/zcNhGuS7vwyOTHI.png" alt="image-20200912222917120" style="zoom:67%;" /></p>
+<h4 id="作用域规则">作用域规则</h4>
+<p>如果多个作用域有同名变量 a  （如上）</p>
+<ul>
+<li>那么查找 a 的声明时，就向上取最近的作用域</li>
+<li>简称「<strong>就近原则</strong>」</li>
+<li>查找 a（分清作用域）的过程与函数执行无关
+<ul>
+<li>函数的作用域与函数执行无关 —— 静态作用域（又叫 词法作用域，属于编译原理的知识）</li>
+<li>函数的作用域与函数执行有关 —— 动态作用域，但 JS 里没有动态作用域，只有静态</li>
+</ul>
+</li>
+<li>但 a 的值与函数执行有关</li>
+</ul>
+<h4 id="例4-">例4 ⭐️</h4>
+<blockquote>
+<p>看懂这个例子，作用域就没什么问题了</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">f1</span><span class="p">(){</span>
+  <span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="kd">function</span> <span class="nx">f2</span><span class="p">(){</span>
+    <span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="kd">function</span> <span class="nx">f3</span><span class="p">(){</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nx">a</span> <span class="o">=</span> <span class="mi">22</span>
+    <span class="nx">f3</span><span class="p">()</span>
+  <span class="p">}</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+  <span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span>
+  <span class="nx">f2</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="nx">f1</span><span class="p">()</span>
+<span class="c1">// 1
+</span><span class="c1">// 22
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>作用域总结：==「就近原则」==</p>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h3 id="3-闭包">3️⃣ 闭包</h3>
+<blockquote>
+<p>闭包上面讲过了  ——  讲过了吗？！</p>
+</blockquote>
+<h4 id="重看例4">重看例4</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">f1</span><span class="p">(){</span>
+  <span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="kd">function</span> <span class="nx">f2</span><span class="p">(){</span>
+    <span class="o">---------------------------</span>
+    <span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="kd">function</span> <span class="nx">f3</span><span class="p">(){</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>  <span class="c1">// f3里面用到了外层函数f2的变量 a ，那么 a 和 f3 就是闭包
+</span><span class="c1"></span>    <span class="p">}</span>
+    <span class="o">---------------------------</span>
+    <span class="nx">a</span> <span class="o">=</span> <span class="mi">22</span>
+    <span class="nx">f3</span><span class="p">()</span>
+  <span class="p">}</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+  <span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span>
+  <span class="nx">f2</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="nx">f1</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>闭包</strong></p>
+<ul>
+<li><strong>如果一个函数用到了外部的变量</strong></li>
+<li><strong>那么这个函数加这个变量</strong></li>
+<li><strong>就叫做闭包</strong>
+<ul>
+<li>左边的 a 和 f3 组成了闭包</li>
+<li>闭包的用途以后讲，这里先把【闭包】的形式记下来即可</li>
+<li>你也可以先搜一下</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>“ 闭包这么简单吗？怎么看到网上讲的各种花里胡哨…  ”</p>
+<p>frank：在 JS 基础知识这方面，我很有自信，我比其他所有在网上教你的人都懂。网上教的乱七八糟的</p>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h3 id="4-形式参数">4️⃣ 形式参数</h3>
+<h4 id="形式参数的意思就是非实际参数">形式参数的意思就是非实际参数</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span>
+<span class="p">}</span>
+<span class="c1">// 其中 x 和 y 就是【形参】，因为并不是实际的参数，x/y并【不代表任何实际的值】，仅代表参数的【顺序】
+</span><span class="c1"></span>
+<span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1">// 调用 add 时，1 和 2 是实际参数【实参】，会被赋值给 x 和 y
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>其他 JS 教程可能会说： JS 传参时分为「值传递」和「地址传递」。</p>
+<p>上面记法太复杂，如果你<strong>搞懂了内存图</strong>，就知道没那么麻烦。</p>
+<ul>
+<li>实际上，<strong>传参就是把 stack 里记的内容拷贝给形参</strong>（不要区分什么值和地址，太麻烦了）</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span>
+<span class="p">}</span>
+<span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>  <span class="c1">// 3
+</span><span class="c1">// x接收到的 1，和 add(1,2) 这里的1，不是同一个1，只是复制了一份给 x
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">addObject</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nx">x</span><span class="p">.</span><span class="nx">value</span> <span class="o">+</span> <span class="nx">y</span><span class="p">.</span><span class="nx">value</span>
+<span class="p">}</span>
+<span class="nx">addObject</span><span class="p">({</span><span class="nx">value</span><span class="o">:</span><span class="mi">1</span><span class="p">},{</span><span class="nx">value</span><span class="o">:</span><span class="mi">2</span><span class="p">})</span>  <span class="c1">// 3
+</span><span class="c1">// 怎么知道调用时，赋给x的{value:1}和 addObject(x,y)中x接收到的{value:1}是不是同一个
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 测试一下
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="mi">1</span><span class="p">}</span>
+<span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="mi">2</span><span class="p">}</span>
+<span class="kd">function</span> <span class="nx">addObject</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">){</span> <span class="c1">// 执行函数不仅把value加起来，还偷偷把x的内容改掉，看看是否影响到外面定义的x
+</span><span class="c1"></span>  <span class="nx">x</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span>
+  <span class="k">return</span> <span class="nx">x</span><span class="p">.</span><span class="nx">value</span> <span class="o">+</span> <span class="nx">y</span><span class="p">.</span><span class="nx">value</span>
+<span class="p">}</span>
+<span class="nx">addObject</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span>   <span class="c1">// 3
+</span><span class="c1"></span><span class="nx">a</span>  <span class="c1">// {value: 1, name: &#34;xxx&#34;}    // 诶! a被改了
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>如果搞懂内存图，就会知道，当我们在赋值时，只是把 a 存的 stack 内容，拷贝给形参</p>
+<ul>
+<li>实际上，<strong>传参就是把 stack 里记的内容拷贝给形参</strong>（不要区分什么值和地址，太麻烦了）</li>
+<li>而形参 x / y ，应该会存储在「不知道什么区」（代指任何应该出现的区）</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h4 id="形参可认为是变量声明">形参可认为是变量声明</h4>
+<blockquote>
+<p>其实，形参的本质就是变量声明</p>
+<p>「形参」并不特殊，就是个语法糖</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 上面代码近似等价于下面代码
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">add</span><span class="p">(){</span>
+  <span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>   <span class="c1">// 为什么用 var ?  答：历史原因，当时发明形参时 就只有var声明
+</span><span class="c1"></span>  <span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+  <span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="形参可多可少">形参可多可少</h4>
+<blockquote>
+<p>形参只是给参数取名字而已</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">){</span>   <span class="c1">// 只声明一个形参，如果传了两个参数，怎么拿到第2个形参呢？
+</span><span class="c1"></span>  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>   <span class="c1">// 3
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>arguments 就是所有形参组成的数组</p>
+<p>所以我们没有必要，把形参全部声明出来。通过 arguments 就可以全部获取到</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">,</span><span class="nx">z</span><span class="p">){</span>  
+  <span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span>   <span class="c1">// z 怎么办？无所谓，声明着玩
+</span><span class="c1"></span><span class="p">}</span>
+<span class="nx">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>   <span class="c1">// 7
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>JS 代码就是这么随意，形参爱多就多，爱少就少，没有规则约束</p>
+<ul>
+<li>后来这种特性造成一些问题，比如 TypeScript 兴起，TS 要求形参必须按照严格的类型和顺序</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h3 id="5-返回值">5️⃣ 返回值</h3>
+<h4 id="每个函数都有返回值">每个函数都有返回值</h4>
+<blockquote>
+<p>不存在没有返回值的函数</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">hi</span><span class="p">(){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span> <span class="p">}</span>
+<span class="nx">hi</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>没写 return，会默认返回值是 undefined</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">hi</span><span class="p">(){</span> <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span> <span class="p">}</span>
+<span class="nx">hi</span><span class="p">()</span>  
+<span class="c1">// hi           // 会照常执行语句的打印效果，并不表示这是语句的返回值
+</span><span class="c1">// undefined    // 返回值
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><code>return console.log('hi')</code> 也就是说返回值为 console.log(&lsquo;hi&rsquo;) 的值，也就是 log 函数 的返回值，因为 log 函数没有 return，所以最终的值就是 undefined</p>
+<blockquote>
+<p>return 的结果，还是比较严谨的</p>
+</blockquote>
+</li>
+</ul>
+<p>​</p>
+<h4 id="函数执行完了后才会返回">函数执行完了后才会返回</h4>
+<blockquote>
+<p>如果不执行，就不会有返回值</p>
+<p>执行了，才会有返回值</p>
+</blockquote>
+<p>​</p>
+<h4 id="只有函数有返回值">只有函数有返回值</h4>
+<ul>
+<li>1+2 的返回值为 3  ❌ （这是我们常见的一种口误，没有 return 哪来的返回值）</li>
+<li>1+2 的值为 3   ✅</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="6-调用栈-">6️⃣ 调用栈 ⭐️</h3>
+<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Call_stack" target="_blank" rel="noopener noreffer">MDN：Call stack</a></p>
+</blockquote>
+<blockquote>
+<p>很抽象。是函数非常重要的要素。</p>
+</blockquote>
+<p>什么是调用栈</p>
+<ul>
+<li>JS 引擎在调用一个函数前</li>
+<li>需要把函数所在的环境 push 到一个数组里</li>
+<li>这个数组叫做调用栈</li>
+<li>等函数执行完了，就会把环境弹(pop)出来</li>
+<li>然后 return 到之前的环境，继续执行后续代码</li>
+</ul>
+<h4 id="举例">举例</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;1+2的结果为&#39;</span> <span class="o">+</span> <span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2020/09/16/8KGRIamcz4VHs35.jpg"
+        data-srcset="https://i.loli.net/2020/09/16/8KGRIamcz4VHs35.jpg, https://i.loli.net/2020/09/16/8KGRIamcz4VHs35.jpg 1.5x, https://i.loli.net/2020/09/16/8KGRIamcz4VHs35.jpg 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2020/09/16/8KGRIamcz4VHs35.jpg"
+        title="调用栈" /></p>
+<h4 id="调用栈的作用抽象">调用栈的作用（抽象）</h4>
+<ul>
+<li><strong>计算机是健忘的</strong>，每次进到一个函数，都要记下来等会要回到哪。把记录写到「调用栈」中</li>
+<li>所以要把这个回到的地址，写到这个调用栈里面 ——<strong>「压栈」</strong>
+<ul>
+<li>在进入一个函数后，还要再进入另一个函数（嵌套的），那也要把这个子函数的地址放到栈里</li>
+</ul>
+</li>
+<li>等当前子函数执行完毕，就**「弹栈」**—— 告诉计算机函数执行完要回到哪了。当前父函数执行完，再弹栈…
+<ul>
+<li>弹栈，会立刻删除调用栈列表中压栈时存下的对应信息。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Call_stack" target="_blank" rel="noopener noreffer">MDN 调用栈</a></p>
+<p>这个模型还是比较重要的。</p>
+<ul>
+<li>JS 每次进入一个函数之前，先存档，执行完毕，没什么问题就读档，消掉前面的档</li>
+<li>类似玩游戏打boss之前要存档，dead了后，就能自动读档到打boss之前的游戏进度 —— 与 JS 的流程不是非常一致，就是大概意思.</li>
+<li>主要理解上面的流程图</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>「栈」会不会满呢？</p>
+<ul>
+<li>如果使用<strong>递归函数</strong>，就有可能把栈压满。</li>
+<li>因为递归函数，可能会一直不停的在压栈。</li>
+</ul>
+</blockquote>
+<h4 id="递归函数">递归函数</h4>
+<h5 id="阶乘">阶乘</h5>
+<ul>
+<li>当 n 不等于 1，就执行 n × f(n-1)</li>
+<li>当 n 等于 1，就返回 1</li>
+</ul>
+<p><img src="https://i.loli.net/2020/09/13/oy5datf3LXH9BQj.png" alt="image-20200913170028265" style="zoom:50%;" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">n</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nx">n</span> <span class="o">!==</span> <span class="mi">1</span> <span class="o">?</span> <span class="nx">n</span><span class="o">*</span> <span class="nx">f</span><span class="p">(</span><span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h5 id="理解递归">理解递归</h5>
+<blockquote>
+<p>层层递进↘，再层层回归↙  —— 递归</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">f</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="nx">f</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="nx">f</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="nx">f</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+<span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+<span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="mi">24</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>先递进↘，再回归↙</p>
+<ul>
+<li>很多教程中，说递归就是不停的调用自己，实际上是不正确的理解</li>
+<li>调用自己 !== 递归。调用自己有时候会死循环的，死循环就不是递归。递归——先递进，再回归、</li>
+<li>递归的尽头，就在 <strong><code>f(1) === 1</code></strong>  这个关键点。</li>
+</ul>
+<p>​</p>
+<h4 id="递归函数的调用栈">递归函数的调用栈</h4>
+<h5 id="递归函数的调用栈很长">递归函数的调用栈很长</h5>
+<ul>
+<li>
+<p>请画出阶乘 (4) 的调用栈</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2020/09/16/ObmNoZXLcHCV597.jpg"
+        data-srcset="https://i.loli.net/2020/09/16/ObmNoZXLcHCV597.jpg, https://i.loli.net/2020/09/16/ObmNoZXLcHCV597.jpg 1.5x, https://i.loli.net/2020/09/16/ObmNoZXLcHCV597.jpg 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2020/09/16/ObmNoZXLcHCV597.jpg"
+        title="递归函数的调用栈" /></p>
+</li>
+<li>
+<p>阶乘 4 ，会压 4 次栈</p>
+</li>
+<li>
+<p>阶乘 10000 ，会压 10000 次栈  （数值太大，Chrome 计算不了）</p>
+<p><img src="https://i.loli.net/2020/09/13/1ZSaXi7y3TMJCHj.png" alt="image-20200913174120616" style="zoom:67%;" /></p>
+</li>
+<li>
+<p>试试「阶加」10000，压 10000 次栈</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">n</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nx">n</span> <span class="o">!==</span> <span class="mi">1</span> <span class="o">?</span> <span class="nx">n</span><span class="o">+</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+<span class="nx">sum</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span> <span class="c1">// 50005000 
+</span><span class="c1"></span><span class="nx">sum</span><span class="p">(</span><span class="mi">20000</span><span class="p">)</span> <span class="c1">// Maximum call stack size exceeded 【爆栈】
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/09/13/Y3dtPuT49ExkfaF.png" alt="image-20200913174351155" style="zoom:67%;" /></p>
+</li>
+</ul>
+<h4 id="爆栈">爆栈</h4>
+<blockquote>
+<p>如果调用栈中压入的帧过多，程序就会崩溃 —— 爆栈</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">n</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nx">n</span> <span class="o">!==</span> <span class="mi">1</span> <span class="o">?</span> <span class="nx">n</span><span class="o">+</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+<span class="nx">sum</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>   <span class="c1">// 要压10000次栈 // 50005000
+</span><span class="c1"></span><span class="nx">sum</span><span class="p">(</span><span class="mi">20000</span><span class="p">)</span>   <span class="c1">// 要压20000次栈 // 已经报错。Maximum call stack size exceeded
+</span></code></pre></td></tr></table>
+</div>
+</div><p>可以用<strong>二分法</strong>，试试 Chrome 最多能压多少次栈</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">sum</span><span class="p">(</span><span class="mi">15000</span><span class="p">)</span>  <span class="c1">// 爆栈
+</span><span class="c1"></span><span class="nx">sum</span><span class="p">(</span><span class="mi">12500</span><span class="p">)</span>  <span class="c1">// 爆栈
+</span><span class="c1"></span><span class="nx">sum</span><span class="p">(</span><span class="mi">11431</span><span class="p">)</span>  <span class="c1">// 爆栈
+</span><span class="c1"></span><span class="nx">sum</span><span class="p">(</span><span class="mi">11430</span><span class="p">)</span>  <span class="c1">// 65328165
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Chrome 的调用栈的长度，大概 11000 ~ 12000 左右，不是固定值（因为里面可能已经放了一些别的东西）</p>
+</blockquote>
+<p>​</p>
+<h4 id="调用栈最长有多少">调用栈最长有多少</h4>
+<blockquote>
+<p>使用下面代码，可以测试一个浏览器的调用栈的长度</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">computeMaxCallStackSize</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="nx">computeMaxCallStackSize</span><span class="p">();</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 报错说明 stack overflow 了
+</span><span class="c1"></span>    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>Chrome 12578
+Firefox 26773
+Node 12536</p>
+</li>
+<li>
+<p>Chrome 和 Node 的用的是同一个 JS 引擎，所以测出来差不多。
+Firefox 用的是自己的 JS 引擎，所以可能大一些</p>
+</li>
+</ul>
+<p>​</p>
+<h4 id="总结-1">总结—————————————</h4>
+<blockquote>
+<p>什么是调用栈</p>
+<ul>
+<li>
+<p>就是我们进入一个函数时，要先把这个环境存下来，然后再进去，不然函数执行完就不知道怎么回去了。
+要存的东西很多，就需要一个数组来保存。这个保存函数所在环境的数组，就叫<a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Call_stack" target="_blank" rel="noopener noreffer">「调用栈」</a></p>
+</li>
+<li>
+<p>调用栈的长度大概是在一万到两万左右，超过这个值程序就会崩溃 —— 爆栈</p>
+</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<p>​</p>
+<h3 id="7-函数提升">7️⃣ 函数提升</h3>
+<h4 id="什么是函数提升">什么是函数提升</h4>
+<blockquote>
+<p>不管你把具名函数声明在哪里，它都会跑到第一行</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fn</span><span class="p">(){}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>示例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span>
+<span class="p">}</span>
+<span class="c1">// 3
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>有一种代码规范就是，把所有声明的函数，都集中放到最后面，这样代码阅读起来就更简洁</p>
+</blockquote>
+<p>拓展</p>
+<ul>
+<li>
+<p>如果同时声明 变量 add 和 函数 add，那 add 到底是谁呢？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">add</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="kd">function</span> <span class="nx">add</span><span class="p">(){}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/09/13/PeYVQwNxahILg1c.png" alt="image-20200913181910418" style="zoom:67%;" /></p>
+<p>报错：add 已经被声明了。</p>
+<p>输出 add，结果为 函数 add。（函数会提升，自动变成 ↓↓ 这样）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">add</span><span class="p">(){}</span>
+<span class="kd">let</span> <span class="nx">add</span> <span class="o">=</span> <span class="mi">1</span> 
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>let 特性：如果这个变量已经存在，就不允许再次重复声明，会直接报错</p>
+</li>
+<li>
+<p>但是用 var 声明，就不会报错</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">add</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="kd">function</span> <span class="nx">add</span><span class="p">(){}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/09/13/cJjEQmTByzAI2wo.png" alt="image-20200913182633832" style="zoom:67%;" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">add</span>
+<span class="kd">function</span> <span class="nx">add</span><span class="p">(){}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/09/13/MzW2K5qsrlFDECx.png" alt="image-20200913184305554" style="zoom:67%;" /></p>
+</li>
+<li>
+<p>由上，用 var 可能有很多问题，搞不清到底表示函数还是什么。（押题再讲 var）</p>
+</li>
+<li>
+<p>如果只用 let ，那世界就清净了。因为只要 let 重复声明，就会报错，避免上述搞不清变量到底是谁的 bug</p>
+<blockquote>
+<p>学习方法：难得东西着重去学；简单的东西，可以放到面试准备阶段背</p>
+<p>就比如：var 很复杂，但又没什么用，只是面试会考到。所以我们只在面试准备阶段，讲一下</p>
+</blockquote>
+</li>
+</ul>
+<p>​</p>
+<h4 id="什么不是函数提升">什么不是函数提升</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">fn</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>这是赋值，右边的匿名函数声明不会提升，你在什么时候写，它就什么时候声明</p>
+</blockquote>
+<p>例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>   <span class="c1">// 报错
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">add</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">){</span><span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span><span class="p">}</span>   <span class="c1">// 这个函数的声明并没有提升，导致声明前先调用，所以会报错
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/09/13/FH9Njmozp7s3eQt.png" alt="image-20200913211540977" style="zoom:67%;" /></p>
+<p>​</p>
+<p>​</p>
+<h3 id="8-arguments">8️⃣ arguments</h3>
+<h3 id="9-this-">9️⃣ this ⚡️</h3>
+<blockquote>
+<p>arguments 和 this，是<strong>除了箭头函数</strong>，每个函数都有的。</p>
+</blockquote>
+<ul>
+<li>箭头函数，是新出的语法，故意摒弃了这两个特性。</li>
+<li>可见，新的语法并不认为这俩是好东西</li>
+<li>正如 JS 之父说的：JS 的原创之处并不优秀、优秀之处并非原创</li>
+<li>arguments 和 this 就是 JS 原创的，使得 JS 语法特别独特，也特别不好用</li>
+</ul>
+<p>​</p>
+<h2 id="理解-arguments">理解 arguments</h2>
+<blockquote>
+<p>译为：参数</p>
+</blockquote>
+<blockquote>
+<p>注意</p>
+<ul>
+<li>arguments 是所有参数组成的伪数组</li>
+<li>每次<strong>调用函数</strong>时，都会对应产生一个 arguments</li>
+<li>我们应该尽量不对 arguments 内的元素进行修改，修改 arguments 会让代码变得令人疑惑</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fn</span><span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">fn</span><span class="p">()</span>
+<span class="nx">fn</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nx">fn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/09/14/vLQEN8MD63Vmraz.png" alt="image-20200914192202937" style="zoom:67%;" /></p>
+<blockquote>
+<p>发现：打印 arguments，结果类似<strong>数组</strong></p>
+<ul>
+<li>实际上， <strong>arguments 是包含所有参数的伪数组</strong>。
+<ul>
+<li>arguments 数组的原型是「根对象」——包含对象的共有属性。没有 push、shift、join … 这些数组共有方法</li>
+<li>没有数组共有方法的数组，就是「伪数组」</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>「伪数组」怎么变真数组 ？</p>
+<ul>
+<li>通过 <code>Array.from(array)</code> 可以把任何不是数组的东西，转换为真数组（具有数组的共有属性）</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h2 id="理解-this-">理解 this ⚡️</h2>
+<blockquote>
+<p>this 可以说是 JS 的 “ 千古奇案 ” —— 各种取值，眼花缭乱</p>
+</blockquote>
+<h3 id="情况一">情况一</h3>
+<blockquote>
+<p>如果不给任何条件，那么 this 默认指向 window（包含所有全局变量）</p>
+<ul>
+<li>这种情况，通常用不上。因为如果要获取 window 上的某变量，直接写就行 <code>window.xxx</code> ，不需要用 this 来指代</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fn</span><span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/09/14/4w16HChlcqx2ryP.png" alt="image-20200914193603652" style="zoom:67%;" /></p>
+<p>​</p>
+<p>​</p>
+<h3 id="如何指定-this">如何指定 this</h3>
+<blockquote>
+<p>目前只能用 fn.call(…)</p>
+</blockquote>
+<h4 id="情况一-1">情况一</h4>
+<blockquote>
+<p>如果传的 this 不是对象，JS 会尽量<strong>封装成对象</strong></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fn</span><span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>          <span class="c1">// → 对象1
+</span><span class="c1"></span><span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kc">undefined</span><span class="p">)</span>  <span class="c1">// → window
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/09/14/ZKBRAVTGw9zSxyN.png" alt="image-20200914201002349" style="zoom:67%;" /></p>
+<p><img src="https://i.loli.net/2020/09/14/6RSBem3sIvJWYKo.png" alt="image-20200914202807474" style="zoom:67%;" /></p>
+<h4 id="什么叫封装成对象">什么叫「封装成对象」？</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">就是</span> <span class="k">new</span> <span class="nb">Number</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>   <span class="c1">// 具有 number 的共有属性 —— 但基本没人用
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/09/14/baWCiSjqVP4xFtI.png" alt="image-20200914200721378" style="zoom:67%;" /></p>
+<h4 id="怎么禁用这个自动封装的特性-">怎么禁用这个自动封装的特性 ？</h4>
+<blockquote>
+<p>例：传数字 1，最终 this 就是指向【数字 1】，而不被自动封装成【对象 1】</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 很简单，在声明函数的时候，【使用严格模式】，相当于告诉 JS 不要随便添加东西
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">fn</span><span class="p">(){</span>
+  <span class="s1">&#39;use strict&#39;</span>  
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kc">undefined</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/09/14/lwNF9J1CheavqKM.png" alt="image-20200914202233840" style="zoom:80%;" /></p>
+<p><img src="https://i.loli.net/2020/09/14/zXoYCN8yHKEL1TZ.png" alt="image-20200914203201885" style="zoom:80%;" /></p>
+<p>​</p>
+<p>​</p>
+<h3 id="同时指定-this-和-arguments">同时指定 this 和 arguments</h3>
+<ul>
+<li>目前可以用 fn.call(xxx, 1,2,3) 传 this 和 arguments</li>
+<li><strong>第1个参数是 this，后面所有参数是 arguments</strong></li>
+<li>xxx 作为 this，会被自动转化成对象（JS 的糟粕）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fn</span><span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/09/14/okUVGdxmJTCyKzg.png" alt="image-20200914205359679" style="zoom:67%;" /></p>
+<p>​</p>
+<p>​</p>
+<h3 id="-this-是隐藏参数arguments-是普通参数-">“ this 是隐藏参数、arguments 是普通参数 ”</h3>
+<blockquote>
+<p>this 是参数（此结论是 frank 个人的）</p>
+</blockquote>
+<blockquote>
+<p>↑↑ 是什么意思呢 ？ —— 我们需要花很多例子，来理解这句话</p>
+</blockquote>
+<blockquote>
+<p>要理解 this，先从 JS 中把 this 排除出去。就是看看不用 this，能不能达到跟 this 一样的功能 ！</p>
+</blockquote>
+<h3 id="假设没有-this">假设没有 this</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;frank&#39;</span><span class="p">,</span>
+  <span class="nx">sayHi</span><span class="p">(){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`你好，我叫`</span> <span class="o">+</span> <span class="nx">person</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>  <span class="c1">// 以前是使用 this.name，改成 person.name
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>为什么这里可以用 person.name，应该还没完成 person 的声明吧 ？</p>
+<ul>
+<li>因为这是一个函数，函数等会儿才会执行，等到执行时，person 不是已经完成了声明吗 ！！所以这是可以的</li>
+<li>我们在 person 对象中声明一个函数的时候，在函数中可以用变量 person 得到这个对象的引用</li>
+<li>在不准用 this 的前提下，这段代码是合法的，也符合我们的预期</li>
+</ul>
+<blockquote>
+<p>我们可以用直接保存了对象地址的<strong>变量</strong>获取 &lsquo;name&rsquo;
+我们把这种办法简称为<strong>引用</strong> （ 一个变量<strong>保存了</strong>一个对象的<strong>地址</strong>，就叫引用）</p>
+</blockquote>
+<h4 id="问题一">问题一</h4>
+<blockquote>
+<p>如果先声明了这个函数，后声明对象</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">sayHi</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`你好，我叫`</span> <span class="o">+</span> <span class="nx">person</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span> 
+  <span class="c1">// 函数声明时怎么知道会有 person 变量呢，person 还没声明 ？
+</span><span class="c1"></span>  <span class="c1">// 虽然执行上没问题，但先后逻辑上确实略有不通之处
+</span><span class="c1"></span><span class="p">}</span>
+<span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;frank&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;sayHi&#39;</span><span class="o">:</span> <span class="nx">sayHi</span>  <span class="c1">// 引用sayHi函数
+</span><span class="c1"></span><span class="p">}</span>
+<span class="nx">person</span>
+<span class="nx">sayHi</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>分析</p>
+<ul>
+<li>person 如果改名，sayHi 中引用 person 的地方也必须跟着修改，否则 sayHi 函数就挂了</li>
+<li>甚至有可能有 2 个单独 JS 文件，一个放着 person，而 sayHi 函数在另一个文件里面。
+这样就显得更加奇怪：一个文件居然需要知道另一个文件中有什么变量</li>
+<li>所以我们可能不是很希望 sayHi 函数里出现 person 引用
+（感觉上这个代码有点不好，但也不是那么不好，较尴尬令人不爽 🙃 ）</li>
+</ul>
+<p>​</p>
+<h4 id="问题二-">问题二 ⚡️⚡️</h4>
+<blockquote>
+<p>对象还好，如果用 类 class 的话，问题就更大了。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Person</span><span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span> 
+    <span class="c1">// this 指临时的新对象，这里的 this 是 new 强制指定的。我们就不讨论了 😅
+</span><span class="c1"></span>  <span class="p">}</span>
+  <span class="nx">sayHi</span><span class="p">(){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">???</span><span class="p">)</span> <span class="c1">// 问题在这，怎么打印出name呢？声明类时，还没有new出任何实例对象，没法引用
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>我们想在 sayHi 中获取到当前对象的 name，但此时根本就没有当前对象，那怎么获取 ？</p>
+<ul>
+<li>我们就需要一种机制，来获取到未来的对象的 name 的引用</li>
+</ul>
+</blockquote>
+<p>分析</p>
+<ul>
+<li>这里只有类，还没创建对象，故不可能获取对象的引用</li>
+<li>那么如何拿到对象的 name 属性？ 🤔</li>
+</ul>
+<p>​</p>
+<h4 id="需要一种办法拿到未来的对象">需要一种办法拿到未来的对象</h4>
+<blockquote>
+<p>复述问题：我们需要在函数中，获取一个对象的引用，但这个对象还未创建，那要怎么获取 ？</p>
+</blockquote>
+<blockquote>
+<p>怎样才能获取的未来对象的引用，以便拿到对象的 name 属性？  →  怎样在不知道对象名字的情况下，拿到对象的引用 ？</p>
+</blockquote>
+<h4 id="一种土办法用参数传参">一种土办法，用参数（传参）</h4>
+<p>对象</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;frank&#39;</span><span class="p">,</span>
+  <span class="nx">sayHi</span><span class="p">(</span><span class="nx">p</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`你好，我叫`</span> <span class="o">+</span> <span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">person</span><span class="p">.</span><span class="nx">sayHi</span><span class="p">(</span><span class="nx">person</span><span class="p">)</span>  
+<span class="c1">// 用参数的形式，把你要得到的对象，传给了你
+</span><span class="c1">// 这种方法，看起来很冗余、很挫
+</span></code></pre></td></tr></table>
+</div>
+</div><p>类</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Person</span><span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span> <span class="p">}</span>
+  <span class="nx">sayHi</span><span class="p">(</span><span class="nx">p</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`你好，我叫`</span> <span class="o">+</span> <span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="谁会用这种办法--python">谁会用这种办法 —— Python</h4>
+<blockquote>
+<p>Python 在每一个函数中加了一个参数，并且约定这个参数就是后面创建的新对象</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span> <span class="c1"># 构造函数</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">sayHi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hi, I am &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+<span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s1">&#39;frank&#39;</span><span class="p">)</span>
+<span class="n">person</span><span class="o">.</span><span class="n">sayHi</span><span class="p">()</span>   <span class="c1"># Python 默认会把 sayHi 前面的 person 作为参数传到 sayHi 中，所以 self 就是这个参数</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>特点</p>
+<ul>
+<li>每个函数都接受一个额外的 self</li>
+<li><strong>这个 self 就是后面会创建并传进来的对象</strong></li>
+<li>只不过 Python 会偷偷帮你传对象
+<ul>
+<li>person.sayHi() 等价于 person.sayHi(person)</li>
+</ul>
+</li>
+<li><strong>person 就被传给 self 了</strong>（得到了一个未来的对象的引用）</li>
+</ul>
+<blockquote>
+<p>这其实是任何语言都要解决的问题 —— 在写代码的时候，不知道后面要创建的对象叫什么</p>
+</blockquote>
+<p>​</p>
+<h4 id="js-没有模仿-python-的思路">JS 没有模仿 Python 的思路</h4>
+<blockquote>
+<p>JS 走了另一条路 —— 更难理解的路 —— 这就是 JS 的第二座大山 this</p>
+</blockquote>
+<p>​</p>
+<h3 id="js-在每个函数里加了-this-">JS 在每个函数里加了 this ⚡️⚡️</h3>
+<blockquote>
+<p>JS 没有像 Python 那样加一个参数，而是发明了一个关键字 —— this</p>
+<p>在任何一个函数里，可<strong>用 this 获取到那个</strong>你现在还不知道名字的<strong>对象</strong></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;frank&#39;</span><span class="p">,</span>
+  <span class="nx">sayHi</span><span class="p">(</span><span class="nx">隐藏的this</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`你好，我叫`</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">person</span><span class="p">.</span><span class="nx">sayHi</span><span class="p">()</span>
+<span class="o">----------------------------------------------------</span>
+<span class="kr">class</span> <span class="nx">Person</span><span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span> <span class="p">}</span>
+  <span class="nx">sayHi</span><span class="p">(</span><span class="nx">p</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`你好，我叫`</span> <span class="o">+</span> <span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="s1">&#39;frank&#39;</span><span class="p">)</span>
+<span class="nx">person</span><span class="p">.</span><span class="nx">sayHi</span><span class="p">()</span>  <span class="c1">// 隐式的写了 this = p （JS引擎擅自执行的操作）
+</span><span class="c1">// ↑↑ 相当于 ↓↓ 
+</span><span class="c1">// person.sayHi(person)  
+</span><span class="c1">// JS 和 Python 做了一样的处理：会自动把 person 传给 sayHi
+</span><span class="c1">// 然后 person 被传给 this 了（person 是个地址）
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<ul>
+<li>JS 做的第 1 件事：把 this关键字 赋予 sayHi。</li>
+<li>JS 做的第 2 件事：把 person(地址) 传给 this。</li>
+<li>综上，就是把 person 给了 sayHi</li>
+</ul>
+<p>这样，每个函数都能用 this 获取一个未知对象（person）的引用了</p>
+</blockquote>
+<blockquote>
+<h3 id="personsayhi-会隐式地把-person-作为-this-传给-sayhi"><strong>person.sayHi() 会隐式地把 person 作为 this 传给 sayHi</strong></h3>
+<p>（ 而不是像 Python 一样作为第 1 个参数 self ，传给 sayHi ）</p>
+<p><strong>方便 sayHi 获取 person 对应的对象</strong></p>
+</blockquote>
+<p>​</p>
+<h3 id="总结-2">总结</h3>
+<blockquote>
+<p>总结一下目前的知识</p>
+</blockquote>
+<ul>
+<li>我们想让函数获取对象的引用</li>
+<li>但是并不想通过变量名做到</li>
+<li>Python 通过额外的 self 参数做到</li>
+<li>JS 通过额外的 this 做到：
+<ul>
+<li>person.sayHi() 会把 person 自动传给 sayHi，sayHi 可以通过 this 引用 person</li>
+</ul>
+</li>
+<li>其他
+<ul>
+<li>注意 person.sayHi 和 person.sayHi() 的区别</li>
+<li>注意 person.sayHi() 的断句 (person.sayHi) ( )</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h3 id="这就引出另一个问题-">这就引出另一个问题 💡</h3>
+<h4 id="到底哪个对">到底哪个对</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;frank&#39;</span><span class="p">,</span>
+  <span class="nx">sayHi</span><span class="p">(){</span>  <span class="c1">// 隐藏的this参数
+</span><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`你好，我叫`</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 自动隐式的把 person 传给 sayHi
+</span><span class="c1"></span><span class="nx">person</span><span class="p">.</span><span class="nx">sayHi</span><span class="p">()</span>        <span class="c1">// 省略传参 ？
+</span><span class="c1"></span><span class="nx">person</span><span class="p">.</span><span class="nx">sayHi</span><span class="p">(</span><span class="nx">person</span><span class="p">)</span>  <span class="c1">// 完整传参 ？  哪种写法是对的
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>省略形式反而对了，完整形式反而是错的</p>
+</blockquote>
+<h4 id="js-怎么解决这种不和谐">JS 怎么解决这种不和谐</h4>
+<blockquote>
+<p>[Python](#谁会用这种办法 —— Python) 至少有明确的约定：这种 person.sayHi() 写法就会把 person 传给 sayHi 的第 1 个显式参数 self 。</p>
+<p>那 JS 要怎么解释 this 的存在呢 ？（函数并没有显式的形参，this 完全是一个不成文的、隐性的约定）</p>
+<ul>
+<li>JS 提供两种调用形式</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h3 id="两种调用">两种调用🧐</h3>
+<h4 id="小白调用法-">小白调用法 🚫</h4>
+<ul>
+<li>person.sayHi()</li>
+<li>会自动把 person 传到函数里，作为 this</li>
+</ul>
+<h4 id="大师调用法-">大师调用法 ✅</h4>
+<blockquote>
+<p>使用 JS 新出的调用方法：call</p>
+</blockquote>
+<ul>
+<li>
+<p>person.sayHi.call(person)</p>
+</li>
+<li>
+<p>需要自己手动把 person 传到函数里，作为 this （更为清晰）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;frank&#39;</span><span class="p">,</span>
+  <span class="nx">sayHi</span><span class="p">(){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`你好，我叫`</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">person</span><span class="p">.</span><span class="nx">sayHi</span><span class="p">.</span><span class="nx">call</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="mi">1</span><span class="p">})</span>   <span class="c1">// call 里传什么 this 就是什么，非常清晰
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="应该学习哪种">应该学习哪种？</h4>
+<ul>
+<li>学习大师调用法，因为小白调用法你早就会了</li>
+<li>从这段笔记开始，默认用大师调用法</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="指定-this-">指定 this 😈</h2>
+<h3 id="call-指定-this">call 指定 this</h3>
+<blockquote>
+<p>call 是 JS 新出的调用方法。call 会使得所有东西变得明朗起来</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;frank&#39;</span><span class="p">,</span>
+  <span class="nx">sayHi</span><span class="p">(){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`你好，我叫`</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>  <span class="c1">// call传什么this就是什么
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">person</span><span class="p">.</span><span class="nx">sayHi</span><span class="p">.</span><span class="nx">call</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="mi">1</span><span class="p">})</span>   <span class="c1">// call 里传什么 this 就是什么，非常清晰
+</span><span class="c1"></span><span class="nx">person</span><span class="p">.</span><span class="nx">sayHi</span><span class="p">.</span><span class="nx">call</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;jack&#39;</span><span class="p">})</span>
+<span class="o">-------------------------------------------------------------------------------</span>
+<span class="c1">// 大多数情况，我们需要this就是当前对象
+</span><span class="c1"></span><span class="nx">person</span><span class="p">.</span><span class="nx">sayHi</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">person</span><span class="p">)</span>  
+<span class="nx">person</span><span class="p">.</span><span class="nx">sayHi</span><span class="p">()</span>  <span class="c1">// 为什么不用这种写法？因为隐藏了太多细节，只适合小白
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/09/15/FwDMEWhaqU9k5yt.png" alt="image-20200915224945178" style="zoom:67%;" /></p>
+<blockquote>
+<h3 id="所有函数调用必须强迫自己使用大师调用法-call--apply">所有函数调用，必须强迫自己使用「大师调用法」—— call / apply</h3>
+</blockquote>
+<p>​</p>
+<h4 id="例1-2">例1</h4>
+<blockquote>
+<p>有一个 add 函数，不需要用到 this，那如何使用 call 调用 ？</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h5 id="没有用到-this">没有用到 this</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">add</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// 3   
+</span><span class="c1">// call的第1个参数是指定this的，后面所有参数作为实参传递给函数对应形参
+</span></code></pre></td></tr></table>
+</div>
+</div><h5 id="为什么要多写一个-undefined">为什么要多写一个 undefined</h5>
+<ul>
+<li>因为第一个参数要作为 this</li>
+<li>但是代码里没有用 this</li>
+<li>所以只能用 undefined 占位</li>
+<li>其实用 null 也可以</li>
+</ul>
+<p>​</p>
+<h4 id="例2-2">例2</h4>
+<blockquote>
+<p>Array.prototype.forEach 这个函数就用到了 this</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">forEach2</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="nx">array</span><span class="p">.</span><span class="nx">forEach2</span><span class="p">()</span>   <span class="c1">// 小白写法：脑子一懵，就不知道了this是什么了
+</span><span class="c1"></span><span class="nx">array</span><span class="p">.</span><span class="nx">forEach2</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span>  <span class="c1">// [1,2,3]  // 大师写法：规定了call里面的就是this，所以清晰明了的知道此时打印的this就是传进去的array数组本身
+</span></code></pre></td></tr></table>
+</div>
+</div><h5 id="尝试写出完整的-foreach-函数">尝试写出完整的 forEach 函数</h5>
+<blockquote>
+<p>forEach 功能是遍历当前数组。当前数组在哪呢？ 就是 this，this 就可以作为未来数组的引用</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">forEach2</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fn</span><span class="p">){</span>  <span class="c1">// 传一个方法fn
+</span><span class="c1"></span>  <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="k">this</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="nx">fn</span><span class="p">(</span><span class="k">this</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">i</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>  <span class="c1">// 对每一个元素，执行fn方法
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Tips</p>
+<p>我们在看一个函数的代码时，不要想 this 的值是什么 ， 因为 this 的值是不确定的，没人知道</p>
+<ul>
+<li>只有在函数被调用时（用大师法传进 this），才清晰的知道 this 是什么</li>
+</ul>
+</blockquote>
+<h5 id="如何调用">如何调用</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">forEach2</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fn</span><span class="p">){</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="k">this</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="nx">fn</span><span class="p">(</span><span class="k">this</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">i</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> 
+<span class="nx">array</span><span class="p">.</span><span class="nx">forEach2</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span> <span class="nx">item</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">)</span> <span class="c1">// 大师：显式的指定了this
+</span><span class="c1"></span><span class="nx">array</span><span class="p">.</span><span class="nx">forEach2</span><span class="p">(</span><span class="nx">item</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">)</span> <span class="c1">// 小白：隐式的把array作为this
+</span></code></pre></td></tr></table>
+</div>
+</div><p>this 是什么</p>
+<ul>
+<li>由于大家使用 forEach2 的时候总是习惯于用 arr.forEach2</li>
+<li>所以 arr 就被自动传给 forEach2 了</li>
+</ul>
+<p>​</p>
+<h4 id="this-一定是数组吗">this 一定是数组吗</h4>
+<ul>
+<li>
+<p>不一定，比如</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">forEach2</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fn</span><span class="p">){</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="k">this</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="nx">fn</span><span class="p">(</span><span class="k">this</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">i</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 我们可以指定 this 为一个对象转化的伪数组
+</span><span class="c1"></span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">forEach2</span><span class="p">.</span><span class="nx">call</span><span class="p">({</span><span class="mi">0</span><span class="o">:</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="mi">1</span><span class="o">:</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="nx">length</span><span class="o">:</span><span class="mi">2</span><span class="p">},</span> <span class="nx">item</span><span class="p">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/09/15/EeRHQBhSFnMtDzw.png" alt="image-20200915233452747" style="zoom:67%;" /></p>
+</li>
+</ul>
+<blockquote>
+<p>所以 this 就是我们可以任意指定的参数而已。</p>
+<ul>
+<li>使用小白写法，JS 就会猜你想要的 this 是什么，绝大部分情况都能猜对。</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h3 id="总结-this-的两种使用方法">总结 this 的两种使用方法</h3>
+<blockquote>
+<p>不论什么方式调用函数，实际上都在传递 this 。 区别在于：你【知道】传的 this 什么 或【不知道】</p>
+</blockquote>
+<h4 id="隐式传递">隐式传递</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">fn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// 等价于 fn.call(undefined, 1, 2)
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">child</span><span class="p">.</span><span class="nx">fn</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">// 等价于 obj.child.fn.call(obj.child, 1)   // 一个对象的属性上的fn函数
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="显式传递">显式传递</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="nx">fn</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="apply-区别">apply 区别</h4>
+<ul>
+<li>apply 要在后面其他参数的部分，加上中括号 [  ]</li>
+<li>apply 后面的参数要用<strong>数组</strong>的形式来表示</li>
+<li>只是写法形式不同，其他都和 call 是一样的</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="绑定-this">绑定 this</h3>
+<blockquote>
+<p>如果不确定 this 是什么，可以使用 bind <strong>强制绑定</strong></p>
+</blockquote>
+<h4 id="使用-bind-可以让-this-不被改变">使用 .bind 可以让 this 不被改变</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">f1</span><span class="p">(</span><span class="nx">p1</span><span class="p">,</span> <span class="nx">p2</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">p1</span><span class="p">,</span> <span class="nx">p2</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">f2</span> <span class="o">=</span> <span class="nx">f1</span><span class="p">.</span><span class="nx">bind</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;frank&#39;</span><span class="p">})</span> <span class="c1">// 那么 f2 就是 f1 绑定了 this 之后的新函数
+</span><span class="c1"></span><span class="nx">f2</span><span class="p">()</span> <span class="c1">// 等价于 f1.call({name:&#39;frank&#39;})
+</span><span class="c1">// 打印结果：{name: &#34;frank&#34;} undefined undefined  // this是传进来的对象，p1/p2没传所以是undefined
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/09/15/84BVSHIqy5FnJt9.png" alt="image-20200915235302436" style="zoom:67%;" /></p>
+<ul>
+<li>f2 是 f1 的 this 绑定之后的版本</li>
+<li>调 f2 相当于调 f1，唯一的区别就是，f2 的 this 被绑定了，绑定成通过 bind 传递的参数</li>
+</ul>
+<blockquote>
+<p>有什么用呢？ —— 后面学 vue / react 可能就天天遇到了</p>
+</blockquote>
+<p>​</p>
+<h4 id="bind-还可以绑定其他参数">.bind 还可以绑定其他参数</h4>
+<blockquote>
+<p>bind 除了可以绑定 this，其实可以<strong>用来绑定所有参数</strong></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">f1</span><span class="p">(</span><span class="nx">p1</span><span class="p">,</span> <span class="nx">p2</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">p1</span><span class="p">,</span> <span class="nx">p2</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">f3</span> <span class="o">=</span> <span class="nx">f1</span><span class="p">.</span><span class="nx">bind</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;frank&#39;</span><span class="p">},</span> <span class="s1">&#39;hi&#39;</span><span class="p">)</span>
+<span class="nx">f3</span><span class="p">()</span> <span class="c1">// 等价于 f1.call({name:&#39;frank&#39;}, hi)  // 已经绑死了：this是这个对象，p1是&#39;hi&#39;
+</span><span class="c1"></span><span class="nx">f3</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1">// 因为 this 和 p1 已经绑死了，所以这里传的 3 会作为 p2
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/09/15/cXhOtpwrH8gIJBD.png" alt="image-20200915235700244" style="zoom:67%;" /></p>
+<p>​</p>
+<p>​</p>
+<h2 id="箭头函数">箭头函数</h2>
+<blockquote>
+<p>「箭头函数」没有 arguments 和 this 。</p>
+</blockquote>
+<blockquote>
+<p>上面讲 this 用了大量篇幅，因为 this 功能太复杂且隐晦。所以新版 JS 就放弃了 this</p>
+</blockquote>
+<h3 id="函数里面的-this-就是外面的-this">函数里面的 this 就是外面的 this</h3>
+<blockquote>
+<p>默认的 this 是 window</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">)</span> <span class="c1">// window
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span> <span class="o">===</span> <span class="nb">window</span><span class="p">)</span> <span class="c1">// true
+</span><span class="c1"></span>
+<span class="kd">let</span> <span class="nx">fn</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">)</span> <span class="c1">// 这里的this无需确认，外面的this是什么，箭头函数里面的this就是什么
+</span><span class="c1"></span><span class="nx">fn</span><span class="p">()</span> <span class="c1">// window
+</span></code></pre></td></tr></table>
+</div>
+</div><p>例</p>
+<blockquote>
+<p>对于箭头函数来说，变量就是普通变量</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="kd">let</span> <span class="nx">fn</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+<span class="nx">fn</span><span class="p">()</span>   <span class="c1">// 1
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>函数打印变量a 。就近原则，先找函数里有没有变量a，没有。就用函数外的变量a</p>
+</blockquote>
+<blockquote>
+<p>this 同理，箭头函数里面没有 this 变量，就找外层的 this 变量。所以箭头函数中的 this 就是外面的 this</p>
+</blockquote>
+<p>​</p>
+<h3 id="就算用-call-也无法指定-this">就算用 call 也无法指定 this</h3>
+<blockquote>
+<p>怎么证明箭头函数里面没有 this 呢？</p>
+</blockquote>
+<blockquote>
+<p>可以用 call 来尝试指定箭头函数的 this 。 结果，无法指定，this 仍然指向 window</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">fn</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+<span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;frank&#39;</span><span class="p">})</span> <span class="c1">// 仍是 window
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>不论是用 call 、 bind … 都无法改变箭头函数中 this 的指向，永远是和 函数外的this 保持一致。
+除非外面的 this 改变了，否则 箭头函数的 this 不会变化</p>
+</blockquote>
+<h3 id="箭头函数没有-arguments">箭头函数没有 arguments</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">fn</span> <span class="o">=</span> <span class="p">()=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">)</span>  <span class="c1">// arguments是所有参数组成的伪数组
+</span><span class="c1"></span><span class="nx">fn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>  <span class="c1">// 报错：arguments is not defined
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>没有 this ，没有 arguments 的函数就是「箭头函数」</p>
+</blockquote>
+<h2 id="总结-3">总结</h2>
+<p>每个函数都有这些东西</p>
+<ol>
+<li><strong>调用时机</strong>：决定了变量的值</li>
+<li><strong>作用域</strong>：同时多个作用域，遵循「就近原则」</li>
+<li><strong>闭包</strong>：如果一个函数用到了外部的变量，那么这个函数加这个变量，就叫做闭包</li>
+</ol>
+<ul>
+<li><strong>形式参数</strong>：给参数取名字，相当于声明一个变量</li>
+</ul>
+<ol start="5">
+<li><strong>返回值</strong>：return ，默认 return undefined</li>
+<li><strong>调用栈</strong>：进去每个函数前都要先压栈，出来函数前要弹栈</li>
+<li><strong>函数提升</strong>：函数跑到最前面</li>
+<li><strong>arguments（除了箭头函数）</strong>：包含所有参数的伪数组</li>
+<li><strong>this（除了箭头函数）</strong>：引用一个当前不存在的对象，是 call() 方法的第一个参数</li>
+</ol>
+<p>​</p>
+<p>​</p>
+<h2 id="立即执行函数">立即执行函数</h2>
+<blockquote>
+<p>只有 JS 有的变态玩意，现在用得少</p>
+</blockquote>
+<h3 id="声明局部变量es6-之前">声明局部变量（ES6 之前）</h3>
+<blockquote>
+<p>在 ES6 之前，怎么获得一个局部变量</p>
+</blockquote>
+<p>例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 以前只有 var声明时
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">// a 是一个全局变量
+</span><span class="c1"></span>
+<span class="c1">// 如果想声明一个局部变量，必须写一个函数
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">fn</span><span class="p">(){</span>
+  <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span>   <span class="c1">// 在函数里，声明的 a 才是局部变量
+</span><span class="c1"></span>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>  
+<span class="p">}</span>
+
+<span class="nx">fn</span><span class="p">()</span>           <span class="c1">// 2
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="c1">// 1
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>用函数确能得到局部变量，但也同时增加了一个全局的函数（不也是全局变量），这与初衷相悖</p>
+</blockquote>
+<h4 id="思考--办法">思考 / 办法</h4>
+<blockquote>
+<p>思考：如果函数没有名字，那就不会生成一个全局函数，然后直接调用这个没名的函数不就行了</p>
+</blockquote>
+<blockquote>
+<p>办法：声明一个匿名函数，然后直接调用执行 —— 没有暴露任何一个全局变量 或 全局函数</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fn</span><span class="p">(){</span>
+  <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span>   <span class="c1">// 获得局部变量a，但副作用是又带来一个全局函数
+</span><span class="c1"></span>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">fn</span><span class="p">()</span> <span class="c1">// 2
+</span><span class="c1"></span><span class="o">-----------------------------------------</span> <span class="err">↑↑</span> <span class="nx">改写成</span> <span class="err">↓↓</span> <span class="o">---------------</span>
+<span class="c1">// 去掉函数名
+</span><span class="c1"></span><span class="kd">function</span><span class="p">(){</span>
+  <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span>   <span class="c1">// 获得局部变量a，但副作用是又带来一个全局函数
+</span><span class="c1"></span>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+<span class="p">}</span> <span class="p">()</span> <span class="c1">// 把圆括号加到匿名函数的后面
+</span><span class="c1">// 上面就是声明一个匿名函数，然后直接调用执行
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="执行--报错">执行 / 报错</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span><span class="p">(){</span>
+  <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+<span class="p">}</span> <span class="p">()</span> 
+<span class="c1">// Uncaught SyntaxError: Function statements require a function name
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>执行，报错（JS认为语法不对）</p>
+</blockquote>
+<h4 id="解决">解决</h4>
+<blockquote>
+<p>JS 的程序员绞尽脑汁，找到一些解决办法    ↓↓</p>
+</blockquote>
+<ul>
+<li>
+<p>匿名函数前加一个操作符</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">+</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+<span class="p">}</span> <span class="p">()</span>
+<span class="c1">// 2
+</span><span class="c1">// NaN（返回值并不影响需求，所以放着就好）
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/09/16/QzT8kpw4EJ2C6bu.png" alt="image-20200916153324433" style="zoom:67%;" /></p>
+</li>
+<li>
+<p>只要做一个运算，上面函数的写法都可以直接执行，不会再报错（与 undefined 运算，返回都是 NaN）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">+</span> <span class="kd">function</span><span class="p">(){...}()</span>   <span class="c1">// NaN
+</span><span class="c1"></span><span class="o">-</span> <span class="kd">function</span><span class="p">(){...}()</span>   <span class="c1">// NaN
+</span><span class="c1"></span><span class="mi">1</span><span class="o">*</span> <span class="kd">function</span><span class="p">(){...}()</span>  <span class="c1">// NaN   // 乘号必须左右都有值
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>取反也可以 <strong><code>!</code></strong></p>
+<p>返回值为 undefined  =&gt;  ! undefined  =&gt;  true</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">!</span> <span class="kd">function</span><span class="p">(){...}()</span>  <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>…</p>
+</li>
+</ul>
+<blockquote>
+<p>这样我们终于就得到 JS 中，只要一个局部变量的方法</p>
+</blockquote>
+<blockquote>
+<p>总结：为得到一个局部变量，不得不去造一个函数，并执行这个函数 —— 这也是 JS（旧） 的问题</p>
+</blockquote>
+<h3 id="总结原理">总结原理</h3>
+<ul>
+<li>ES 5 时代，为了得到局部变量，必须引入一个函数</li>
+<li>但是这个函数如果有名字，就得不偿失</li>
+<li>于是这个函数必须是匿名函数</li>
+<li>声明匿名函数，然后立即加个 () 执行它</li>
+<li>但是 JS 标准认为这种语法不合法</li>
+<li>所以 JS 程序员寻求各种办法</li>
+<li>最终发现，只要在匿名函数前面加个运算符即可</li>
+<li>!、~、()、+、- 都可以</li>
+<li>但是这里面有些运算符会往上走</li>
+<li>所以方方推荐永远用 ! 来解决</li>
+</ul>
+<p>​</p>
+<h3 id="声明局部变量es6-之后">声明局部变量（ES6 之后）</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="mi">2</span>
+<span class="kc">undefined</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>  <span class="c1">// 报错 a is not defined
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/09/16/vqsik8e2anXctmo.png" alt="image-20200916155138292" style="zoom:67%;" /></p>
+<h3 id="注意事项">注意事项</h3>
+<blockquote>
+<p>推荐永远用 ! 来解决</p>
+</blockquote>
+<p>用 +、括号 … 可能有 bug</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span> <span class="c1">// 没有这句时，代码执行一切正常，返回值也是 undefined。一旦有这句话，代码执行就不同了
+</span><span class="c1"></span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+<span class="p">}</span> <span class="p">())</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/09/16/oCEeiWspb4Z18RU.png" alt="image-20200916155617412" style="zoom:67%;" /></p>
+<blockquote>
+<p>JS 有个特点：它的回车是没有意义的</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 上面代码执行过程，如下
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>  <span class="p">=&gt;</span>  <span class="nx">log函数返回值</span> <span class="kc">undefined</span>  <span class="p">=&gt;</span> <span class="kc">undefined</span><span class="p">(</span><span class="kd">function</span><span class="p">(){}())</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>因为回车是没有意义的，等同于 undefined 后面跟着一对 <strong><code>( )</code></strong>，所以把 undefined 当成函数执行，必然报错</p>
+</blockquote>
+<h4 id="总结-4">总结</h4>
+<blockquote>
+<p>永远<strong>不要</strong>用 【圆括号】来写立即执行函数（圆括号会往上面代码凑，甚至可能连起来执行）</p>
+<ul>
+<li>虽然可以用【分号】来强制结束/分隔两个语句 。但显然也没感叹号方便</li>
+<li><strong>这是 JS 中唯一需要加分号 <code>;</code> 的地方</strong>，其他任何代码不需要分号</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">);</span>   <span class="c1">// 可以用 ; 分隔两个语句   // 如果别人用了圆括号，一定要在前面加 ; 分号
+</span><span class="c1"></span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+<span class="p">}</span> <span class="p">())</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>用【感叹号】最合适，因为感叹号不会往上面代码看，只会往后看</p>
+</blockquote></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-09-14</span>
+            </div>
+            <div class="post-info-license"><span>转载请注明出处</span></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/javascript-function/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://samrks.github.io/javascript-function/" data-title="JS 函数的基本介绍" data-via="ryuukousen2" data-hashtags="JavaScript,函数,Function"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://samrks.github.io/javascript-function/" data-hashtag="JavaScript"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://samrks.github.io/javascript-function/" data-title="JS 函数的基本介绍"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://samrks.github.io/javascript-function/" data-title="JS 函数的基本介绍"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://samrks.github.io/javascript-function/" data-title="JS 函数的基本介绍"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/javascript/">JavaScript</a>,&nbsp;<a href="/tags/%E5%87%BD%E6%95%B0/">函数</a>,&nbsp;<a href="/tags/function/">Function</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/javascript-array/" class="prev" rel="prev" title="JS 数组"><i class="fas fa-angle-left fa-fw"></i>JS 数组</a>
+            <a href="/javascript-timing-of-call-a-function/" class="next" rel="next" title="JS 函数的执行时机 🚀⌚">JS 函数的执行时机 🚀⌚<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+    Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+  </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Thanks For Your Watching! ❤️</div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2017 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Sam</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":15},"comment":{"valine":{"appId":"M2gdPMfXs30Gw5NNnr2wSxv6-MdYXbMMI","appKey":"9V2iCzlcQbheaaWDXRLTNgec","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-twitter@5.0.1/img/twitter/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"📢 来都来了，说点什么 ~（填写邮箱可以收到回复提醒哦 ~ 😉）","recordIP":true,"visitor":true}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"KAKKI975YQ","algoliaIndex":"blog","algoliaSearchKey":"529eb6b7fa6e4f89bfe1d0043e53bda5","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

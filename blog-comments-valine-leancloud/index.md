@@ -133,7 +133,7 @@ hugo 博客添加评论系统 Valine  <!--more-->
     -   `SMTP_SERVICE` : 邮件服务提供商，支持 `QQ`、`163`、`126`、`Gmail`、`"Yahoo"`、`......` ，全部支持请参考 : [Nodemailer Supported services](https://nodemailer.com/smtp/well-known/#supported-services)。 --- *如这里没有你使用的邮件提供商，请查看[自定义邮件服务器](https://github.com/zhaojun1998/Valine-Admin/blob/master/高级配置.md#自定义邮件服务器)*
     -   `SENDER_NAME` : 寄件人名称。
 
-        ![image-20200909010618828](https://i.loli.net/2020/09/09/Yki6BNtXu9VmpEg.png)
+        （图略）
 
 3.  设置完环境变量，必须**重新部署**，邮件提醒功能才会生效
 
@@ -176,15 +176,65 @@ hugo 博客添加评论系统 Valine  <!--more-->
 
 至此完成了 **Valine** 评论系统的添加和完善，喝杯咖啡☕️庆祝一下！
 
+​	
 
+​	
 
-### 崩
+## 解决：自动唤醒失败
+
+>   免费版的 LeanCloud 容器，是有强制性休眠策略的，不能 24 小时运行：
+>
+>   -   每天必须休眠 6 个小时
+>   -   30 分钟内没有外部请求，则休眠。
+>   -   休眠后如果有新的外部请求实例则马上启动（但激活时此次发送邮件会失败）。
+>
+>   分析了一下上方的策略，如果不想付费的话，最佳使用方案就设置定时器，每天 7 - 23 点每 20 分钟访问一次，这样可以保持每天的绝大多数时间邮件服务是正常的。
+
+>   使用 cron-job 解决 Valine-admin 因流控原因自动唤醒失败的问题
 
 免费的体验版，基本崩了。
 
 评论提醒功能，可能必须经常手动部署。阅读量仍正常记录，不受牵连。
 
-![image-20200910183223427](https://i.loli.net/2020/09/10/nPLo3e4HaTwyi9E.png)
+![image-20200910183223427](https://i.loli.net/2020/09/16/nxOv8uGZkzfTHos.png)
+
+>   Valine-admin由于Leancloud流控原因，自动唤醒任务可能会失败
+>
+>   所以这里介绍一个使用第三方计划任务网站进行定时唤醒 Valine-admin 的方法。
+
+### 注册 cron-job 帐号
+
+注册地址：https://cron-job.org/en/signup/
+
+>   注册时的时区请选择  `Asia/Shanghai`
+
+### 添加一个计划任务
+
+1.  登陆之后依次点击 `Members`，`cronjobs`，`Create cronjob`
+
+2.  Title, Address
+    +   Title 可以随便填一个
+    +   Address 填写你的云引擎环境变量的 ADMIN_URL，也就是Leancloud的Web 主机域名。
+
+3.  Schedule
+
+    选择 User-defined 进行自定义设置（按住 Ctrl  可多选）
+
+    -   Days of month: 全选
+    -   Days of week: 全选
+    -   Months: 全选
+    -   Hours: 你需要在哪个时间段唤醒就选择什么  （每天强制休眠 6 小时，推荐选 7-23-0 唤醒）
+    -   Minutes: 选择 0 , 20 , 40
+
+4.  Notifications
+
+    可以不用修改，也可以根据自己的需要修改
+
+5.  Common
+
+    勾选Save responses, 保存唤醒日志
+
+6.  点击Create cronjob
 
 ​	
 
@@ -195,5 +245,10 @@ hugo 博客添加评论系统 Valine  <!--more-->
 -   [leancloud-休眠策略](https://github.com/zhaojun1998/Valine-Admin/blob/master/高级配置.md#leancloud-休眠策略)
 -   [hugo博客添加评论系统Valine](https://www.smslit.top/2018/07/08/hugo-valine/)
 -   [将 Valine 切换至 leancloud 国际版](https://co5.me/2019/190818-valine.html)
+-   https://juejin.im/post/6844904175298428941
+
+
+
+
 
 
