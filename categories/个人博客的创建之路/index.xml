@@ -250,7 +250,7 @@
 <li><a href="https://co5.me/2019/190818-valine.html" target="_blank" rel="noopener noreffer">将 Valine 切换至 leancloud 国际版</a></li>
 </ul>]]></description>
 </item><item>
-    <title>博客之路3：hugo 搜索功能 Algolia</title>
+    <title>Hugo 集成 Algolia 搜索</title>
     <link>http://samrks.github.io/blog-search-algolia/</link>
     <pubDate>Fri, 13 Mar 2020 21:36:27 &#43;0800</pubDate>
     <author>作者</author>
@@ -281,7 +281,7 @@
 </li>
 </ol>
 <h2 id="修改-configtoml-配置">修改 config.toml 配置</h2>
-<p>以下内容，基于 Hugo-Loveit 主题测试生效</p>
+<p>以下内容，基于 Loveit 主题测试生效</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -386,7 +386,7 @@
 <ol>
 <li><a href="https://edward852.github.io/post/hugo%E6%B7%BB%E5%8A%A0algolia%E6%90%9C%E7%B4%A2%E6%94%AF%E6%8C%81/#%E4%B8%8A%E4%BC%A0%E7%B4%A2%E5%BC%95%E6%96%87%E4%BB%B6" target="_blank" rel="noopener noreffer">Hugo添加Algolia搜索支持</a></li>
 <li><a href="https://github.com/chrisdmacrae/atomic-algolia" target="_blank" rel="noopener noreffer">atomic-algolia 插件</a></li>
-<li>[Hugo 集成 Algolia 搜索</li>
+<li><a href="https://www.qikqiak.com/post/hugo-integrated-algolia-search/" target="_blank" rel="noopener noreffer">Hugo 集成 Algolia 搜索</a></li>
 </ol>]]></description>
 </item><item>
     <title>博客之路2：💰个人博客绑定域名</title>
@@ -530,7 +530,7 @@
 </ul>
 </blockquote>]]></description>
 </item><item>
-    <title>博客之路1：如何用 hugo 搭建个人博客</title>
+    <title>使用Hugo &#43; GitHub Pages 搭建个人博客</title>
     <link>http://samrks.github.io/blog-start-a-hugo/</link>
     <pubDate>Sat, 07 Mar 2020 00:05:01 &#43;0800</pubDate>
     <author>作者</author>

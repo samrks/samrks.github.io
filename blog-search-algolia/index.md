@@ -1,4 +1,4 @@
-# 博客之路3：hugo 搜索功能 Algolia
+# Hugo 集成 Algolia 搜索
 
 
 hugo 搜索功能 Algolia  <!--more-->
@@ -25,7 +25,7 @@ hugo 搜索功能 Algolia  <!--more-->
 
 ## 修改 config.toml 配置
 
-以下内容，基于 Hugo-Loveit 主题测试生效
+以下内容，基于 Loveit 主题测试生效
 
 ```toml
 [params.algolia]
@@ -109,4 +109,4 @@ hugo 搜索功能 Algolia  <!--more-->
 
 1.  [Hugo添加Algolia搜索支持](https://edward852.github.io/post/hugo%E6%B7%BB%E5%8A%A0algolia%E6%90%9C%E7%B4%A2%E6%94%AF%E6%8C%81/#%E4%B8%8A%E4%BC%A0%E7%B4%A2%E5%BC%95%E6%96%87%E4%BB%B6)
 2.  [atomic-algolia 插件](https://github.com/chrisdmacrae/atomic-algolia)
-3.  [Hugo 集成 Algolia 搜索
+3.  [Hugo 集成 Algolia 搜索](https://www.qikqiak.com/post/hugo-integrated-algolia-search/)

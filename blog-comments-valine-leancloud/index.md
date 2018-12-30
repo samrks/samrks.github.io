@@ -44,7 +44,7 @@ hugo 博客添加评论系统 Valine  <!--more-->
 
 -   创建好应用，进入应用，点击【组件】
 
-    <img src="C:\Users\Sam\AppData\Roaming\Typora\typora-user-images\image-20200909000346264.png" alt="image-20200909000346264" style="zoom: 50%;" />
+    <img src="https://i.loli.net/2020/09/10/OsA25v7fpRh8X9G.png" alt="image-20200909000346264" style="zoom: 50%;" />
 
 -   左边栏找到【设置】，然后点击【应用Key】，此时记录出现的 App ID 和 App Key，后面配置文件中会用到：
 
