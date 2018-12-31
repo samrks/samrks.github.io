@@ -5,7 +5,7 @@
         <description>博客 - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
             <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Sun, 15 Mar 2020 22:40:49 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/%E5%8D%9A%E5%AE%A2/" rel="self" type="application/rss+xml" /><item>
-    <title>博客之路4：hugo 添加评论系统 Valine</title>
+    <title>hugo 添加评论系统 Valine</title>
     <link>http://samrks.github.io/blog-comments-valine-leancloud/</link>
     <pubDate>Sun, 15 Mar 2020 22:40:49 &#43;0800</pubDate>
     <author>作者</author>
@@ -389,7 +389,7 @@
 <li><a href="https://www.qikqiak.com/post/hugo-integrated-algolia-search/" target="_blank" rel="noopener noreffer">Hugo 集成 Algolia 搜索</a></li>
 </ol>]]></description>
 </item><item>
-    <title>博客之路2：💰个人博客绑定域名</title>
+    <title>💰个人博客绑定域名</title>
     <link>http://samrks.github.io/blog-buy-setup-a-domain/</link>
     <pubDate>Thu, 12 Mar 2020 15:52:18 &#43;0800</pubDate>
     <author>作者</author>

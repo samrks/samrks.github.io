@@ -1,4 +1,4 @@
-# 博客之路4：hugo 添加评论系统 Valine
+# hugo 添加评论系统 Valine
 
 
 hugo 博客添加评论系统 Valine  <!--more-->
