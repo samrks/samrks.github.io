@@ -155,8 +155,120 @@
 <p>将本地 xxx.github.io-generator 目录，<code>git init</code>，<code>git add .</code> ，<code>git commit -m backup</code>，<code>git remote add origin xxx</code>，<code>git push -u origin master</code>  即可</p>
 <ul>
 <li>如果在执行 add 时，提示我们需要执行 rm 操作，可能是因为主题目录下已经存在 .git 文件，主题目录本身就是一个本地仓库了，那和 generator 目录会形成一个嵌套子目录的关系，that&rsquo;s not good . 我们需要把主题目录下的 .git 文件删除</li>
+<li>如果嵌套了，可以创建 .gitignore 文件。把【嵌套的子目录】添加到【.gitignore】中，忽略不上传</li>
 </ul>
 </li>
-</ul>]]></description>
+</ul>
+<h2 id="网站基础配置">网站基础配置</h2>
+<h3 id="网站-ico-图标配置">网站 ico 图标配置</h3>
+<p>强烈建议你把:</p>
+<ul>
+<li>apple-touch-icon.png (180x180)</li>
+<li>favicon-32x32.png (32x32)</li>
+<li>favicon-16x16.png (16x16)</li>
+<li>mstile-150x150.png (150x150)</li>
+<li>android-chrome-192x192.png (192x192)</li>
+<li>android-chrome-512x512.png (512x512)</li>
+</ul>
+<p>放在根目录下的 <code>/static</code> 目录中。利用 <a href="https://realfavicongenerator.net/">https://realfavicongenerator.net/</a> 可以很容易地生成这些文件。</p>
+<p>可以自定义 <code>browserconfig.xml </code> 和 <code>site.webmanifest</code> 文件来设置 theme-color 和 background-color 。</p>
+<p></p>
+<h3 id="域名配置">域名配置</h3>
+<p>博客根目录下的 <code>/static</code> 目录中，新建文件 <code>CNAME</code> 无后缀，填入域名</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">touch</span> <span class="nx">CNAME</span>
+<span class="nx">echo</span> <span class="s2">&#34;[你的域名]&#34;</span> <span class="o">&gt;&gt;</span> <span class="nx">CNAME</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>执行 hugo ，会在 public 目录下生成 CNAME 文件。</li>
+<li>push 到 github 后，会自动识别 CNAME 文件中的域名，填入 Github pages 的 custom domain 中，就无需手动配置域名啦！👍</li>
+</ol>
+<h3 id="头像配置">头像配置</h3>
+<ol>
+<li>博客根目录下的 <code>/assets/images</code> 目录中，存放名为 <code>avatar.png</code> 的图片。</li>
+<li>执行 hugo，会在 public/images 目录下生成 <code>avatar.png</code>。push 到 github 后，网站会自动识别 <code>avatar.png</code> 作为网站头像</li>
+</ol>
+<h3 id="文章-front-matter-配置">文章 Front-matter 配置</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-toml" data-lang="toml"><span class="nx">title</span><span class="err">:</span> <span class="s2">&#34;主标题&#34;</span>
+<span class="nx">subtitle</span><span class="err">:</span> <span class="s2">&#34;这里是副标题&#34;</span>
+<span class="nx">draft</span><span class="err">:</span> <span class="kc">false</span> <span class="c">#是否为草稿</span>
+<span class="nx">weight</span><span class="err">:</span> <span class="mi">1</span> <span class="c">#表示置顶。数字越小，文章越靠前</span>
+<span class="nx">toc</span><span class="err">:</span>
+  <span class="nx">auto</span><span class="err">:</span> <span class="kc">false</span>    <span class="c"># true自动收放，false全部展开不能收缩</span>
+
+<span class="nx">author</span><span class="err">:</span> <span class="s2">&#34;Sam&#34;</span>
+<span class="nx">authorLink</span><span class="err">:</span> <span class="s2">&#34;https://liubingxuan.xyz/&#34;</span>  <span class="c">#设置作者名的链接</span>
+<span class="nx">description</span><span class="err">:</span> <span class="s2">&#34;这里是文章描述。可在鼠标悬停文章封面图时显示此处内容&#34;</span>
+<span class="nx">license</span><span class="err">:</span> <span class="s2">&#34;转载请注明出处&#34;</span>    
+<span class="nx">images</span><span class="err">:</span> <span class="p">[]</span> <span class="c"># 页面图片, 用于 Open Graph 和 Twitter Cards.</span>
+
+<span class="nx">tags</span><span class="err">:</span> <span class="p">[</span><span class="s2">&#34;标签1&#34;</span><span class="p">,</span><span class="s2">&#34;标签2&#34;</span><span class="p">]</span>
+<span class="nx">categories</span><span class="err">:</span> <span class="p">[</span><span class="s2">&#34;文章所处的大分类&#34;</span><span class="p">]</span>
+<span class="c">#featuredImagePreview: &#34;https://i.loli.net/2020/07/15/QY8Ac1ojVqtl9XB.png&#34; 指定封面图网络地址</span>
+<span class="c">#featuredImage: &#34;https://i.loli.net/2020/07/15/QY8Ac1ojVqtl9XB.png&#34;</span>
+<span class="nx">resources</span><span class="err">:</span>
+<span class="err">-</span> <span class="nx">name</span><span class="err">:</span> <span class="s2">&#34;featured-image&#34;</span>  <span class="c"># 指定文章内顶部封面图</span>
+  <span class="nx">src</span><span class="err">:</span> <span class="s2">&#34;featured-image.jpg&#34;</span>
+<span class="err">-</span> <span class="nx">name</span><span class="err">:</span> <span class="s2">&#34;featured-image-preview&#34;</span> <span class="c"># 指定文章在首页显示的封面图。可省略并默认使用featured-image</span>
+  <span class="nx">src</span><span class="err">:</span> <span class="s2">&#34;featured-image-preview.jpg&#34;</span>
+
+<span class="nx">hiddenFromHomePage</span><span class="err">:</span> <span class="kc">false</span>   <span class="c"># 如果设为 true, 这篇文章将不会显示在主页上.</span>
+<span class="nx">hiddenFromSearch</span><span class="err">:</span> <span class="kc">false</span>   <span class="c"># 如果设为 true, 这篇文章将不会显示在搜索结果中.</span>
+<span class="nx">twemoji</span><span class="err">:</span> <span class="kc">false</span>    <span class="c">#如果设为 true, 这篇文章会使用 twemoji.</span>
+<span class="nx">lightgallery</span><span class="err">:</span> <span class="kc">true</span>   <span class="c"># 如果设为 true, 文章中的图片将可以按照画廊形式呈现.</span>
+<span class="nx">ruby</span><span class="err">:</span> <span class="kc">true</span>   <span class="c"># 如果设为 true, 这篇文章会使用 上标注释扩展语法.</span>
+<span class="nx">fraction</span><span class="err">:</span> <span class="kc">true</span>  <span class="c"># 如果设为 true, 这篇文章会使用 分数扩展语法.</span>
+<span class="nx">fontawesome</span><span class="err">:</span> <span class="kc">true</span>  <span class="c"># 如果设为 true, 这篇文章会使用 Font Awesome 扩展语法.</span>
+<span class="nx">linkToMarkdown</span><span class="err">:</span> <span class="kc">true</span>   <span class="c">#如果设为 true, 内容的页脚将显示指向原始 Markdown 文件的链接.</span>
+<span class="nx">rssFullText</span><span class="err">:</span> <span class="kc">false</span>  <span class="c">#如果设为 true, 在 RSS 中将会显示全文内容.</span>
+<span class="c"># ......</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>更多配置，详见 <a href="https://gohugo.io/getting-started/" target="_blank" rel="noopener noreffer">Hugo 文档</a>、<a href="https://gohugo.io/content-management/front-matter/" target="_blank" rel="noopener noreffer">Front Matter</a></p>
+</blockquote>]]></description>
 </item></channel>
 </rss>

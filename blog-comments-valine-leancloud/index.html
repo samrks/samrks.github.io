@@ -33,7 +33,7 @@
                             "url": "http:\/\/samrks.github.io\/blog-comments-valine-leancloud\/featured-image.jpg",
                             "width":  1015 ,
                             "height":  574 
-                        }],"genre": "posts","keywords": "Valine, Leancloud, 评论, 博客","wordcount":  1901 ,
+                        }],"genre": "posts","keywords": "Valine, Leancloud, 评论, 博客","wordcount":  1948 ,
         "url": "http:\/\/samrks.github.io\/blog-comments-valine-leancloud\/","datePublished": "2020-03-15T22:40:49+08:00","dateModified": "2020-03-15T22:40:49+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -110,7 +110,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">添加评论系统 Valine &#43; LeanCloud</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="http://liubingxuan.xyz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Sam</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B9%8B%E8%B7%AF/"><i class="far fa-folder fa-fw"></i>个人博客的创建之路</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-03-15">2020-03-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1901 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-03-15">2020-03-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1948 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;<span id="/blog-comments-valine-leancloud/" class="leancloud_visitors" data-flag-title="添加评论系统 Valine &#43; LeanCloud">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
@@ -132,7 +132,12 @@
       <ul>
         <li><a href="#leancloud相关配置">Leancloud相关配置</a></li>
         <li><a href="#configtoml-添加参数">config.toml 添加参数</a></li>
-        <li><a href="#完善评论通知--">完善评论通知  ⭐️⭐️</a></li>
+        <li><a href="#完善评论通知--">完善评论通知  ⭐️⭐️</a>
+          <ul>
+            <li><a href="#步骤">步骤</a></li>
+            <li><a href="#崩">崩</a></li>
+          </ul>
+        </li>
         <li><a href="#参考">参考</a></li>
       </ul>
     </li>
@@ -162,7 +167,7 @@
 </ul>
 <p>​</p>
 <h2 id="leancloud相关配置">Leancloud相关配置</h2>
-<p>评论系统依赖于leancloud，所以需要先在leancloud中进行相关的准备工作。</p>
+<p>评论系统依赖于 leancloud，所以需要先在leancloud中进行相关的准备工作。</p>
 <ul>
 <li>
 <p>登录 或 注册 <a href="https://leancloud.app/" target="_blank" rel="noopener noreffer">LeanCloud（国际版）</a>
@@ -285,7 +290,8 @@
 </tbody>
 </table>
 <h2 id="完善评论通知--">完善评论通知  ⭐️⭐️</h2>
-<p><strong>Valine</strong> 评论邮件提醒功能不太健全，通知邮件中没有文章直达链接，<strong>Valine</strong> 官网中提供了评论系统第三方功能扩展<a href="https://github.com/zhaojun1998/Valine-Admin" target="_blank" rel="noopener noreffer">Valine</a>链接，按照链接中的说明，非常详细的步骤，一步步很容易实现完备的评论系统后台管理以及邮件提醒功能，部分高级配置<a href="https://github.com/zhaojun1998/Valine-Admin/blob/master/%e9%ab%98%e7%ba%a7%e9%85%8d%e7%bd%ae.md#%e8%87%aa%e5%ae%9a%e4%b9%89%e9%82%ae%e4%bb%b6%e6%9c%8d%e5%8a%a1%e5%99%a8" target="_blank" rel="noopener noreffer">点我</a>了解，这里简单列举步骤如下：</p>
+<p><strong>Valine</strong> 评论邮件提醒功能不太健全，通知邮件中没有文章直达链接，<strong>Valine</strong> 官网中提供了评论系统第三方功能扩展<a href="https://github.com/zhaojun1998/Valine-Admin" target="_blank" rel="noopener noreffer">Valine</a>链接，按照链接中的说明，非常详细的步骤，一步步很容易实现完备的评论系统后台管理以及邮件提醒功能，部分高级配置<a href="https://github.com/zhaojun1998/Valine-Admin/blob/master/%e9%ab%98%e7%ba%a7%e9%85%8d%e7%bd%ae.md#%e8%87%aa%e5%ae%9a%e4%b9%89%e9%82%ae%e4%bb%b6%e6%9c%8d%e5%8a%a1%e5%99%a8" target="_blank" rel="noopener noreffer">点我</a>了解。这里简单列举步骤如下：</p>
+<h3 id="步骤">步骤</h3>
 <ol>
 <li>
 <p>进入leancloud，【<strong>云引擎</strong>】【<strong>部署项目</strong>】【<strong>git</strong>】</p>
@@ -382,6 +388,17 @@
 </li>
 </ol>
 <p>至此完成了 <strong>Valine</strong> 评论系统的添加和完善，喝杯咖啡☕️庆祝一下！</p>
+<h3 id="崩">崩</h3>
+<p>免费的体验版，基本崩了。</p>
+<p>评论提醒功能，可能必须经常手动部署。阅读量仍正常记录，不受牵连。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2020/09/10/nPLo3e4HaTwyi9E.png"
+        data-srcset="https://i.loli.net/2020/09/10/nPLo3e4HaTwyi9E.png, https://i.loli.net/2020/09/10/nPLo3e4HaTwyi9E.png 1.5x, https://i.loli.net/2020/09/10/nPLo3e4HaTwyi9E.png 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2020/09/10/nPLo3e4HaTwyi9E.png"
+        title="image-20200910183223427" /></p>
 <p>​</p>
 <h2 id="参考">参考</h2>
 <ul>

@@ -34,7 +34,7 @@
 </ul>
 <p>​</p>
 <h2 id="leancloud相关配置">Leancloud相关配置</h2>
-<p>评论系统依赖于leancloud，所以需要先在leancloud中进行相关的准备工作。</p>
+<p>评论系统依赖于 leancloud，所以需要先在leancloud中进行相关的准备工作。</p>
 <ul>
 <li>
 <p>登录 或 注册 <a href="https://leancloud.app/" target="_blank" rel="noopener noreffer">LeanCloud（国际版）</a>
@@ -157,7 +157,8 @@
 </tbody>
 </table>
 <h2 id="完善评论通知--">完善评论通知  ⭐️⭐️</h2>
-<p><strong>Valine</strong> 评论邮件提醒功能不太健全，通知邮件中没有文章直达链接，<strong>Valine</strong> 官网中提供了评论系统第三方功能扩展<a href="https://github.com/zhaojun1998/Valine-Admin" target="_blank" rel="noopener noreffer">Valine</a>链接，按照链接中的说明，非常详细的步骤，一步步很容易实现完备的评论系统后台管理以及邮件提醒功能，部分高级配置<a href="https://github.com/zhaojun1998/Valine-Admin/blob/master/%e9%ab%98%e7%ba%a7%e9%85%8d%e7%bd%ae.md#%e8%87%aa%e5%ae%9a%e4%b9%89%e9%82%ae%e4%bb%b6%e6%9c%8d%e5%8a%a1%e5%99%a8" target="_blank" rel="noopener noreffer">点我</a>了解，这里简单列举步骤如下：</p>
+<p><strong>Valine</strong> 评论邮件提醒功能不太健全，通知邮件中没有文章直达链接，<strong>Valine</strong> 官网中提供了评论系统第三方功能扩展<a href="https://github.com/zhaojun1998/Valine-Admin" target="_blank" rel="noopener noreffer">Valine</a>链接，按照链接中的说明，非常详细的步骤，一步步很容易实现完备的评论系统后台管理以及邮件提醒功能，部分高级配置<a href="https://github.com/zhaojun1998/Valine-Admin/blob/master/%e9%ab%98%e7%ba%a7%e9%85%8d%e7%bd%ae.md#%e8%87%aa%e5%ae%9a%e4%b9%89%e9%82%ae%e4%bb%b6%e6%9c%8d%e5%8a%a1%e5%99%a8" target="_blank" rel="noopener noreffer">点我</a>了解。这里简单列举步骤如下：</p>
+<h3 id="步骤">步骤</h3>
 <ol>
 <li>
 <p>进入leancloud，【<strong>云引擎</strong>】【<strong>部署项目</strong>】【<strong>git</strong>】</p>
@@ -240,6 +241,10 @@
 </li>
 </ol>
 <p>至此完成了 <strong>Valine</strong> 评论系统的添加和完善，喝杯咖啡☕️庆祝一下！</p>
+<h3 id="崩">崩</h3>
+<p>免费的体验版，基本崩了。</p>
+<p>评论提醒功能，可能必须经常手动部署。阅读量仍正常记录，不受牵连。</p>
+<p></p>
 <p>​</p>
 <h2 id="参考">参考</h2>
 <ul>

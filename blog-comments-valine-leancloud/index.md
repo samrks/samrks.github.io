@@ -33,7 +33,7 @@ hugo 博客添加评论系统 Valine  <!--more-->
 
 ## Leancloud相关配置
 
-评论系统依赖于leancloud，所以需要先在leancloud中进行相关的准备工作。
+评论系统依赖于 leancloud，所以需要先在leancloud中进行相关的准备工作。
 
 -   登录 或 注册 [LeanCloud（国际版）](https://leancloud.app/)
     必须验证邮箱和手机号
@@ -110,7 +110,9 @@ hugo 博客添加评论系统 Valine  <!--more-->
 
 ## 完善评论通知  ⭐️⭐️
 
-**Valine** 评论邮件提醒功能不太健全，通知邮件中没有文章直达链接，**Valine** 官网中提供了评论系统第三方功能扩展[Valine](https://github.com/zhaojun1998/Valine-Admin)链接，按照链接中的说明，非常详细的步骤，一步步很容易实现完备的评论系统后台管理以及邮件提醒功能，部分高级配置[点我](https://github.com/zhaojun1998/Valine-Admin/blob/master/高级配置.md#自定义邮件服务器)了解，这里简单列举步骤如下：
+**Valine** 评论邮件提醒功能不太健全，通知邮件中没有文章直达链接，**Valine** 官网中提供了评论系统第三方功能扩展[Valine](https://github.com/zhaojun1998/Valine-Admin)链接，按照链接中的说明，非常详细的步骤，一步步很容易实现完备的评论系统后台管理以及邮件提醒功能，部分高级配置[点我](https://github.com/zhaojun1998/Valine-Admin/blob/master/高级配置.md#自定义邮件服务器)了解。这里简单列举步骤如下：
+
+### 步骤
 
 1.  进入leancloud，【**云引擎**】【**部署项目**】【**git**】
 
@@ -175,6 +177,14 @@ hugo 博客添加评论系统 Valine  <!--more-->
 至此完成了 **Valine** 评论系统的添加和完善，喝杯咖啡☕️庆祝一下！
 
 
+
+### 崩
+
+免费的体验版，基本崩了。
+
+评论提醒功能，可能必须经常手动部署。阅读量仍正常记录，不受牵连。
+
+![image-20200910183223427](https://i.loli.net/2020/09/10/nPLo3e4HaTwyi9E.png)
 
 ​	
 
