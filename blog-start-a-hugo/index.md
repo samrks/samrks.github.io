@@ -1,4 +1,4 @@
-# 使用Hugo + GitHub Pages 搭建个人博客
+# 使用 Hugo 搭建个人博客
 
 
 第一篇正式博文，我想给大家分享下我的博客的创建过程吧！:1st_place_medal:<!--more--> 

@@ -5,7 +5,7 @@
         <description>评论 - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
             <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Sun, 15 Mar 2020 22:40:49 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/%E8%AF%84%E8%AE%BA/" rel="self" type="application/rss+xml" /><item>
-    <title>hugo 添加评论系统 Valine</title>
+    <title>添加评论系统 Valine &#43; LeanCloud</title>
     <link>http://samrks.github.io/blog-comments-valine-leancloud/</link>
     <pubDate>Sun, 15 Mar 2020 22:40:49 &#43;0800</pubDate>
     <author>作者</author>

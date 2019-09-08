@@ -1,4 +1,4 @@
-# hugo 添加评论系统 Valine
+# 添加评论系统 Valine + LeanCloud
 
 
 hugo 博客添加评论系统 Valine  <!--more-->
