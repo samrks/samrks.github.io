@@ -6,10 +6,10 @@
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
             <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Wed, 15 Jul 2020 12:58:21 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B9%8B%E8%B7%AF/" rel="self" type="application/rss+xml" /><item>
     <title>博客之路02：💰个人博客绑定域名</title>
-    <link>http://samrks.github.io/20200715-%E5%8D%9A%E5%AE%A2%E7%BB%91%E5%AE%9A%E5%9F%9F%E5%90%8D/</link>
+    <link>http://samrks.github.io/3-buy-setup-a-domain-to-your-blog/</link>
     <pubDate>Wed, 15 Jul 2020 12:58:21 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200715-%E5%8D%9A%E5%AE%A2%E7%BB%91%E5%AE%9A%E5%9F%9F%E5%90%8D/</guid>
+    <guid>http://samrks.github.io/3-buy-setup-a-domain-to-your-blog/</guid>
     <description><![CDATA[<p>买个域名玩玩！</p>
 <h2 id="个人博客绑定域名">个人博客绑定域名</h2>
 <h3 id="购买域名">购买域名</h3>
@@ -147,10 +147,10 @@
 </blockquote>]]></description>
 </item><item>
     <title>博客之路01：如何用 hugo 搭建个人博客</title>
-    <link>http://samrks.github.io/20200713-%E6%90%AD%E5%BB%BAhugo%E5%8D%9A%E5%AE%A2/</link>
+    <link>http://samrks.github.io/1-setup-a-blog-with-hugo/</link>
     <pubDate>Mon, 13 Jul 2020 18:54:01 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200713-%E6%90%AD%E5%BB%BAhugo%E5%8D%9A%E5%AE%A2/</guid>
+    <guid>http://samrks.github.io/1-setup-a-blog-with-hugo/</guid>
     <description><![CDATA[<p>第一篇正式博文，我想给大家分享下我的博客的创建过程吧！🥇</p>
 <p>​</p>
 <blockquote>

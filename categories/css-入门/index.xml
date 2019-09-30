@@ -6,10 +6,10 @@
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
             <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Sun, 02 Aug 2020 01:19:27 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/categories/css-%E5%85%A5%E9%97%A8/" rel="self" type="application/rss+xml" /><item>
     <title>Re：从零开始の CSS 学习笔记——动画</title>
-    <link>http://samrks.github.io/20200802-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%8A%A8%E7%94%BB/</link>
+    <link>http://samrks.github.io/11-css-animation/</link>
     <pubDate>Sun, 02 Aug 2020 01:19:27 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200802-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%8A%A8%E7%94%BB/</guid>
+    <guid>http://samrks.github.io/11-css-animation/</guid>
     <description><![CDATA[<p>浏览器的渲染流程、transform、transition、animation</p>
 <p>​</p>
 <h2 id="动画的原理">动画的原理</h2>
@@ -1042,10 +1042,10 @@
 </div>]]></description>
 </item><item>
     <title>Re：从零开始の CSS 学习笔记——定位</title>
-    <link>http://samrks.github.io/20200729-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%AE%9A%E4%BD%8D/</link>
+    <link>http://samrks.github.io/10-css-position/</link>
     <pubDate>Wed, 29 Jul 2020 13:01:21 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200729-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%AE%9A%E4%BD%8D/</guid>
+    <guid>http://samrks.github.io/10-css-position/</guid>
     <description><![CDATA[<p>复习盒模型、div 的分层、新属性 position 详解、层叠上下文</p>
 <p>​</p>
 <h2 id="布局和定位的区别">布局和定位的区别</h2>
@@ -1680,10 +1680,10 @@
 </blockquote>]]></description>
 </item><item>
     <title>Re：从零开始の CSS 学习笔记——布局（下）</title>
-    <link>http://samrks.github.io/20200726-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%B8%83%E5%B1%80-%E4%B8%8B/</link>
+    <link>http://samrks.github.io/9-css-layout-2/</link>
     <pubDate>Sun, 26 Jul 2020 13:26:52 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200726-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%B8%83%E5%B1%80-%E4%B8%8B/</guid>
+    <guid>http://samrks.github.io/9-css-layout-2/</guid>
     <description><![CDATA[<p>CSS 布局篇（下）：Grid 布局。</p>
 <p>​</p>
 <h2 id="如何在两套布局中切换">如何在两套布局中切换</h2>
@@ -2509,10 +2509,10 @@
 </div>]]></description>
 </item><item>
     <title>Re：从零开始の CSS 学习笔记——布局（上）</title>
-    <link>http://samrks.github.io/20200725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%B8%83%E5%B1%80-%E4%B8%8A/</link>
+    <link>http://samrks.github.io/8-css-layout-1/</link>
     <pubDate>Sat, 25 Jul 2020 16:16:55 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%B8%83%E5%B1%80-%E4%B8%8A/</guid>
+    <guid>http://samrks.github.io/8-css-layout-1/</guid>
     <description><![CDATA[<p>CSS 布局篇（上）： Float 布局、Flex 布局 。</p>
 <p>​</p>
 <p>​</p>
@@ -3611,10 +3611,10 @@
 </div><p></p>]]></description>
 </item><item>
     <title>Re：从零开始の CSS 学习笔记——基础篇</title>
-    <link>http://samrks.github.io/20200724-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%9F%BA%E7%A1%80%E7%AF%87/</link>
+    <link>http://samrks.github.io/7-css-basic/</link>
     <pubDate>Sat, 25 Jul 2020 02:12:24 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200724-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%9F%BA%E7%A1%80%E7%AF%87/</guid>
+    <guid>http://samrks.github.io/7-css-basic/</guid>
     <description><![CDATA[<p>熬夜总结 – CSS 基础篇 。</p>
 <p></p>
 <h2 id="css-的历史">CSS 的历史</h2>

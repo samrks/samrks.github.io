@@ -6,10 +6,10 @@
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
             <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Mon, 10 Aug 2020 18:49:11 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/categories/http/" rel="self" type="application/rss+xml" /><item>
     <title>前端也得懂点儿 HTTP (下) </title>
-    <link>http://samrks.github.io/20200810-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8B/</link>
+    <link>http://samrks.github.io/13-http-2/</link>
     <pubDate>Mon, 10 Aug 2020 18:49:11 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200810-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8B/</guid>
+    <guid>http://samrks.github.io/13-http-2/</guid>
     <description><![CDATA[<p>🤞🏻 “Nobody knows HTTP better than me !! ” 🤥</p>
 <p>​</p>
 <h2 id="先导">先导</h2>
@@ -782,10 +782,10 @@
 </ul>]]></description>
 </item><item>
     <title>前端也得懂点儿 HTTP (上) ——浅析 URL</title>
-    <link>http://samrks.github.io/20200804-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8A/</link>
+    <link>http://samrks.github.io/12-http-1/</link>
     <pubDate>Tue, 04 Aug 2020 23:58:43 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200804-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8A/</guid>
+    <guid>http://samrks.github.io/12-http-1/</guid>
     <description><![CDATA[<p>本文主要围绕 URL ，为学 HTTP 做个铺垫。</p>
 <p>​</p>
 <h2 id="先导">先导</h2>

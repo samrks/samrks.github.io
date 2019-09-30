@@ -4,25 +4,1550 @@
         <link>http://samrks.github.io/</link>
         <description>Stay Simple, Stay Young</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Wed, 02 Sep 2020 21:50:44 &#43;0800</lastBuildDate>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Mon, 07 Sep 2020 23:08:13 &#43;0800</lastBuildDate>
             <atom:link href="http://samrks.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>【置顶】开博纪念🥰</title>
-    <link>http://samrks.github.io/20200306-%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/</link>
+    <link>http://samrks.github.io/0-celebration/</link>
     <pubDate>Fri, 06 Mar 2020 20:10:04 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200306-%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/</guid>
+    <guid>http://samrks.github.io/0-celebration/</guid>
     <description><![CDATA[<p>每一天都是新的开始，Stay Simple，Stay Young 🎉</p>
 <h2 id="yeah">Yeah！🎉🎉</h2>
 <blockquote>
 <p>Life is simply about getting hit over and over :)</p>
 </blockquote>]]></description>
 </item><item>
+    <title>JS 对象分类——原型 &amp; 类</title>
+    <link>http://samrks.github.io/18-javascript-constructor-prototype-vs-class/</link>
+    <pubDate>Mon, 07 Sep 2020 23:08:13 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/18-javascript-constructor-prototype-vs-class/</guid>
+    <description><![CDATA[<p>「构造函数」「原型」「new 操作符」「类 class」</p>
+<p>​</p>
+<h2 id="对象需要分类吗">对象需要分类吗？</h2>
+<blockquote>
+<p>这是一个值得思考的问题</p>
+</blockquote>
+<p>我们来做一个小程序</p>
+<ul>
+<li>输出各种形状的面积和周长</li>
+</ul>
+<p>​</p>
+<h2 id="一个正方形--square">一个正方形  Square</h2>
+<p>代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">square</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="nx">width</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span> 
+  <span class="nx">getArea</span><span class="p">(){</span> 
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span>   <span class="c1">// 先简单的把this理解成当前对象，在「函数篇」会重新学习this 
+</span><span class="c1"></span>  <span class="p">}</span><span class="err">，</span> 
+  <span class="nx">getLength</span><span class="p">(){</span> 
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>分析</p>
+<ul>
+<li>声明一个「正方形」对象</li>
+<li>「正方形」拥有三个属性：边长、面积、周长</li>
+</ul>
+<p>​</p>
+<h2 id="一打正方形-">一打正方形 💡</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">square1</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="nx">width</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span> 
+  <span class="nx">getArea</span><span class="p">(){</span> 
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span>
+  <span class="p">}</span><span class="err">，</span> 
+  <span class="nx">getLength</span><span class="p">(){</span> 
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">square2</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="nx">width</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span> 
+  <span class="nx">getArea</span><span class="p">(){</span> 
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span>
+  <span class="p">}</span><span class="err">，</span> 
+  <span class="nx">getLength</span><span class="p">(){</span> 
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">square3</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="p">...</span>
+<span class="kd">let</span> <span class="nx">square12</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>写12遍。这样写代码的，要么是新人，要么是傻子。</p>
+<ul>
+<li>这么写非常累，如果修改，需要逐个修改，非常非常麻烦</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h3 id="用-for-循环实现浪费内存">用 for 循环实现（浪费内存）</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">squareList</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">12</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>  <span class="c1">// &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+</span><span class="c1"></span>  <span class="nx">squareList</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>       <span class="c1">// &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+</span><span class="c1"></span>    <span class="nx">width</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="nx">getArea</span><span class="p">(){</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span>
+    <span class="p">},</span>
+    <span class="nx">getLength</span><span class="p">(){</span> 
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果 width 不全是 5，怎么实现</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">squareList</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="kd">let</span> <span class="nx">widthList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>   <span class="c1">// &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+</span><span class="c1"></span><span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">12</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+  <span class="nx">squareList</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="nx">widthList</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span>  <span class="c1">// &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+</span><span class="c1"></span>    <span class="nx">getArea</span><span class="p">(){</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span>
+    <span class="p">},</span>
+    <span class="nx">getLength</span><span class="p">(){</span> 
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="分析">分析</h4>
+<ul>
+<li>虽然实现了需求，但上面写法仍属于「垃圾代码」，浪费了太多内存，自己画 <strong>内存图</strong> 就知道了</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">squareList</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">getArea</span> <span class="o">===</span> <span class="nx">squareList</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">getArea</span>   <span class="c1">// false
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://i.loli.net/2020/09/03/kQiTnhXL92HNabF.jpg&#34;</span> <span class="nx">alt</span><span class="o">=</span><span class="s2">&#34;内存图-循环过程&#34;</span> <span class="o">/&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>会画内存图的人， 比其他人理解的更好</p>
+<ul>
+<li>内存中，一共创建了 24 个函数，其中 22 个都是多余重复的</li>
+</ul>
+</blockquote>
+<p></p>
+<p>​</p>
+<h3 id="借助原型-">借助原型 √</h3>
+<blockquote>
+<p>将12个正方形对象的共有属性放到原型里</p>
+</blockquote>
+<p>代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">squareList</span> <span class="o">=</span> <span class="p">[]</span> 
+<span class="kd">let</span> <span class="nx">widthList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span> 
+<span class="kd">let</span> <span class="nx">squarePrototype</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="nx">getArea</span><span class="p">(){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="p">},</span> 
+  <span class="nx">getLength</span><span class="p">(){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span> <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">12</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span> 
+  <span class="nx">squareList</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">squarePrototype</span><span class="p">)</span> <span class="c1">// 每一个正方形都以squarePrototype为原型，共享方法
+</span><span class="c1"></span>  <span class="nx">squareList</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">widthList</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+<span class="p">}</span> 
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">squareList</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">getArea</span> <span class="o">===</span> <span class="nx">squareList</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">getArea</span>   <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p></p>
+<h4 id="分析-1">分析</h4>
+<blockquote>
+<p>有人指出创建一个正方形的代码分散在两个地方很不优雅，于是我们用一个函数把这两部分联系起来</p>
+</blockquote>
+<ul>
+<li>还是垃圾代码！创建square的代码太分散了！</li>
+<li>在上面基础上，应该再把代码抽离到一个函数里，实现调用函数 就可以创建正方形 —— 封装函数</li>
+</ul>
+<p>​</p>
+<h3 id="抽离到函数封装">抽离到函数（封装）⭐️</h3>
+<blockquote>
+<ul>
+<li>将创建正方形的代码，整合到一个 function 中</li>
+<li>直接调用 function 即可创建出对应个数的正方形对象</li>
+</ul>
+</blockquote>
+<p>这种过程就叫做「封装」</p>
+<ul>
+<li>把细节写到一个函数里，调用函数、传参，就搞定了</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">squareList</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="kd">let</span> <span class="nx">widthList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span> 
+
+<span class="kd">function</span> <span class="nx">createSquare</span><span class="p">(</span><span class="nx">width</span><span class="p">){</span> <span class="c1">// 此函数叫做「构造函数」详见一下版块
+</span><span class="c1"></span>  <span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">squarePrototype</span><span class="p">)</span>   <span class="c1">// 以 squarePrototype 为原型创建空对象 
+</span><span class="c1"></span>  <span class="nx">obj</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span> 
+  <span class="k">return</span> <span class="nx">obj</span> 
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">squarePrototype</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="nx">getArea</span><span class="p">(){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="p">}</span> 
+  <span class="nx">getLength</span><span class="p">(){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span> <span class="p">}</span> 
+<span class="p">}</span>
+<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">12</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span> 
+  <span class="nx">squareList</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">createSquare</span><span class="p">(</span><span class="nx">widthList</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>  <span class="c1">// 这下创建 square 很简单了吧！
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h2 id="构造函数-">构造函数 ⭐️</h2>
+<ul>
+<li>就是可以构造出对象的函数</li>
+</ul>
+<h3 id="函数和原型结合进一步封装">函数和原型结合（进一步封装）⭐️</h3>
+<blockquote>
+<p>进一步封装</p>
+<ul>
+<li>squarePrototype 原型 和 creatSquare 函数，还是分散的</li>
+<li>能不能组合在一起？</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">squareList</span> <span class="o">=</span> <span class="p">[]</span> 
+<span class="kd">let</span> <span class="nx">widthList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span> 
+<span class="kd">function</span> <span class="nx">createSquare</span><span class="p">(</span><span class="nx">width</span><span class="p">){</span>  <span class="c1">// 构造函数：用于创建 square 对象
+</span><span class="c1"></span>  <span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">createSquare</span><span class="p">.</span><span class="nx">squarePrototype</span><span class="p">)</span> 
+  <span class="c1">// 先使用后定义？NO，这里并未执行，执行时已经定义完了
+</span><span class="c1"></span>  <span class="nx">obj</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span> 
+  <span class="k">return</span> <span class="nx">obj</span> 
+<span class="p">}</span>
+<span class="nx">createSquare</span><span class="p">.</span><span class="nx">squarePrototype</span> <span class="o">=</span> <span class="p">{</span> <span class="c1">// 把原型放到构造函数上，结合够紧密了吗？
+</span><span class="c1"></span>  <span class="nx">getArea</span><span class="p">(){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="p">},</span>
+  <span class="nx">getLength</span><span class="p">(){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span> <span class="p">},</span> 
+  <span class="nx">constructor</span><span class="o">:</span> <span class="nx">createSquare</span> <span class="c1">// 再把构造函数放到原型上，方便通过原型找到构造函数 
+</span><span class="c1"></span>	<span class="c1">// 原型和构造函数互相引用，非常紧密
+</span><span class="c1"></span>  <span class="c1">// 可以通过createSquare函数，找到原型squarePrototype。也可以拿到原型，方便的找到createSquare函数
+</span><span class="c1"></span><span class="p">}</span> 
+<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">12</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span> 
+  <span class="nx">squareList</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">createSquare</span><span class="p">(</span><span class="nx">widthList</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">squareList</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">constructor</span><span class="p">)</span> <span class="c1">// ƒ createSquare(width){...}
+</span><span class="c1"></span>  <span class="c1">// 打印 constructor 可以知道谁构造了 squareList[0→11] 对象：你妈是谁？
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>函数上面也可以用「点 . 」？</p>
+<ul>
+<li>因为函数属于对象</li>
+</ul>
+<blockquote>
+<p>此时，代码已经没有进一步优化的空间了</p>
+<ul>
+<li>这段代码几乎完美</li>
+<li>为什么不固定下来，让每个JS开发者直接用呢?</li>
+<li>这时 JS 就有了 new 操作符 来帮我们实现</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h3 id="new-操作符-">new 操作符 ⭐️</h3>
+<blockquote>
+<p>让我们感受JS之父的爱</p>
+<ul>
+<li>JS 之父创建了 new 关键字，可以让我们可以再少写几行代码</li>
+<li><a href="https://zhuanlan.zhihu.com/p/23987456" target="_blank" rel="noopener noreffer">JS 的 new 到底是干什么的？</a>⚡️⚡️⚡️⚡️（必读！！！）</li>
+</ul>
+</blockquote>
+<h4 id="函数和原型结合重写">函数和原型结合（重写）⭐️⭐️</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">squareList</span> <span class="o">=</span> <span class="p">[]</span> 
+<span class="kd">let</span> <span class="nx">widthList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span> 
+
+<span class="kd">function</span> <span class="nx">Square</span><span class="p">(</span><span class="nx">width</span><span class="p">){</span>  <span class="c1">// 构造函数
+</span><span class="c1"></span>  <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span> 
+<span class="p">}</span>
+
+<span class="nx">Square</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getArea</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="p">}</span> 
+<span class="nx">Square</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getLength</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span> <span class="p">}</span>
+<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">12</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span> 
+  <span class="nx">squareList</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Square</span><span class="p">(</span><span class="nx">widthList</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">squareList</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">constructor</span><span class="p">)</span> 
+<span class="p">}</span>
+<span class="c1">// 多美，几乎没有一句多余的废话 
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>每个函数创建时，都自带有prototype属性，这是JS之父故意的</p>
+</li>
+<li>
+<p>每个prototype都自带有constructor属性，也是故意的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">f1</span><span class="p">(){}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="nx">f1</span><span class="p">)</span>
+<span class="nx">f1</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nx">f1</span>   <span class="c1">// true   // 函数原型上的constructor等于函数本身
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+</li>
+</ul>
+<p>​</p>
+<h4 id="对比">对比</h4>
+<p></p>
+<ul>
+<li>上面的代码被简化为下面的代码</li>
+<li>唯一的区别是要用 new 来调用</li>
+</ul>
+<p></p>
+<h4 id="细节">细节</h4>
+<ul>
+<li>
+<p>creatSquare  =&gt;  Square 函数名变了</p>
+</li>
+<li>
+<p>之前需要创建对象，让对象的原型指向拥有 getArea 和 getLength 的那个对象 。
+现在这句话不用写了，new 会帮我们实现</p>
+</li>
+<li>
+<p>用 this 代表新的对象（this 会指向临时对象）</p>
+</li>
+<li>
+<p>return obj 也不用写了，new 会帮我们实现（函数原本三行，压缩成一行，其他 new 会帮我们实现）</p>
+</li>
+<li>
+<p>现在，把 getArea 和 getLength 通过「点方法」挨个添加到 prototype 上，不能直接给 prototype 赋新值，会导致丢失原本的 constructor（可以用 Object.assign 批量添加）</p>
+</li>
+<li>
+<p>最后，声明新对象时，用 new Square(width)</p>
+</li>
+</ul>
+<p>​</p>
+<h2 id="总结-">总结 ⚡️⚡️⚡️</h2>
+<blockquote>
+<p><a href="https://zhuanlan.zhihu.com/p/23987456" target="_blank" rel="noopener noreffer">JS 的 new 到底是干什么的？</a>⚡️⚡️⚡️⚡️（必读！！！）</p>
+</blockquote>
+<h3 id="new-x-自动做了四件事情">new X() 自动做了四件事情</h3>
+<ol>
+<li>
+<p>自动创建空对象</p>
+</li>
+<li>
+<p>自动为空对象关联原型，原型地址指定为 <code>X.prototype</code></p>
+</li>
+<li>
+<p>自动将空对象作为 this 关键字运行构造函数</p>
+<ul>
+<li>this 就是我们new构造函数创建的对象</li>
+</ul>
+</li>
+<li>
+<p>自动 return this</p>
+</li>
+</ol>
+<p>——这就是 JS 之父的爱</p>
+<h3 id="构造函数-x">构造函数 X</h3>
+<ul>
+<li>X 函数本身负责给对象本身添加属性</li>
+<li><code>X.prototype</code> 对象负责保存对象的共用属性</li>
+</ul>
+<h3 id="原型与共有属性的关系">原型与共有属性的关系</h3>
+<blockquote>
+<p>因为 JS 引擎按照「堆栈」来分配内存、存储数据
+根据「堆栈」的规则，简单类型在「栈区 Stack」存储，复杂类型在「堆区 Heap」存储</p>
+<ul>
+<li>X.prototype 的值是，原型的地址
+<ul>
+<li>因为原型是一个对象，对象是以「堆」的形式存储，所以严格来说，X.prototype的值是：原型的地址</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>这个地址，对应到计算机中的那一坨内存，才是原型本身</li>
+<li>而原型中，有很多属性/方法：toString、valueOf … 它们就是「共有属性」（原创的词）</li>
+<li>共有属性的集合就是原型</li>
+</ul>
+<blockquote>
+<p>如果会画内存图，会理解的更清楚   ↓↓↓</p>
+</blockquote>
+</blockquote>
+<p></p>
+<p>​</p>
+<p>​</p>
+<h2 id="示例">示例</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Dog</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span> 
+	<span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span>  
+	<span class="k">this</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">kind</span> <span class="o">=</span> <span class="s1">&#39;萨摩耶&#39;</span>    <span class="c1">// this 就是我们new构造函数创建的对象
+</span><span class="c1"></span><span class="p">}</span>
+<span class="nx">Dog</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">say</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;汪汪&#39;</span><span class="p">)</span> <span class="p">}</span>    <span class="c1">// 共用函数
+</span><span class="c1"></span><span class="nx">Dog</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">run</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;狗在跑&#39;</span><span class="p">)</span> <span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">dog1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dog</span><span class="p">(</span><span class="s1">&#39;小白&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">Dog</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="s1">&#39;狗&#39;</span>   <span class="c1">// 共用的不一定都是函数, 也可以共用属性。
+</span><span class="c1"></span>
+<span class="kd">let</span> <span class="nx">dog2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dog</span><span class="p">(</span><span class="s1">&#39;小黑&#39;</span><span class="p">)</span>
+<span class="nx">dog1</span><span class="p">.</span><span class="nx">x</span> <span class="c1">// &#39;狗&#39;
+</span><span class="c1"></span><span class="nx">dog2</span><span class="p">.</span><span class="nx">x</span> <span class="c1">// &#39;狗&#39;
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h2 id="题外话代码规范">题外话：代码规范</h2>
+<h3 id="大小写">大小写</h3>
+<ul>
+<li>所有构造函数（专门用于创建对象的函数）首字母大写</li>
+<li>所有被构造出来的对象，首字母小写</li>
+</ul>
+<h3 id="词性">词性</h3>
+<ul>
+<li>new 后面的函数（构造函数），使用名词形式。 如 <code>new Person()</code>、<code>new Object()</code></li>
+<li>普通函数，一般使用动词开头。如 <code>createSquare(5)</code>、<code>createElement('div')</code></li>
+<li>其他规则以后再说</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="总结一个非常重要的公式-">总结一个非常重要的公式 💋</h2>
+<blockquote>
+<p>也是 JS 里唯一的一个公式</p>
+</blockquote>
+<p>很多前端对于原型的理解是通过画图，实际上是可以通过公式来表示的
+只有方方的课才能看到，若愚的课也没有</p>
+<h3 id="如何确定一个对象的原型">如何确定一个对象的原型</h3>
+<p>为什么</p>
+<ul>
+<li><code>let obj = new Object()</code>的原型是 <code>Object.prototype </code></li>
+<li><code>let arr = new Array()</code>的原型是 <code>Array.prototype </code></li>
+<li><code>let square = new Square()</code>的原型是 <code>Square.prototype </code></li>
+<li><code>let fn = new Function()</code>的原型是 <code>Function.prototype</code></li>
+</ul>
+<blockquote>
+<p>可以总结出，一个对象通过 new XXX 创建出来，那么 XXX.prototype 就是这个对象的原型</p>
+</blockquote>
+<p>因为 new 操作故意这么做的</p>
+<p></p>
+<p>​</p>
+<h3 id="结论">结论</h3>
+<blockquote>
+<p>你是谁构造的
+你的原型就是谁的 prototype 属性
+对应的对象</p>
+</blockquote>
+<ul>
+<li>很多前端会说 prototype 就是原型</li>
+<li>实际上、严格来说，prototype 只是存了个地址，不是对象。</li>
+<li>prototype 地址对应的那块内存、内存中所有共有属性的集合，才是原型对象本身</li>
+</ul>
+<blockquote>
+<p>⚡️⚡️⚡️⚡️ 原型公式 ⚡️⚡️⚡️</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">对象</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">其构造函数</span><span class="p">.</span><span class="nx">prototype</span>
+</code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<p>​</p>
+<h3 id="例-">例 💋</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">X</span><span class="p">(</span><span class="nx">width</span><span class="p">){</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span>
+<span class="p">}</span>
+<span class="nx">X</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getArea</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="p">}</span>
+<span class="nx">X</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getLength</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span> <span class="p">}</span>
+<span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">X</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">X</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>构造函数的原型：<code>X.prototype </code> 是 #309</li>
+<li>构造出的对象 a 和 b 的原型 ：<code> a.__proto__</code> 和 <code>b.__proto__</code> 也是 #309</li>
+</ul>
+<p></p>
+<p>补充：#109 结构</p>
+<p></p>
+<p>​</p>
+<h3 id="参考资料">参考资料</h3>
+<p><a href="https://www.zhihu.com/question/56770432/answer/315342130" target="_blank" rel="noopener noreffer">JS 中 <code>__proto__</code> 和 <code>prototype</code> 存在的意义是什么？</a></p>
+<p>​</p>
+<h3 id="做几个题">做几个题</h3>
+<blockquote>
+<p>来理解公式：<strong><code>对象.__proto__ === 其构造函数.prototype</code></strong></p>
+</blockquote>
+<h4 id="难度1">难度1</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="p">{}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>请问：</p>
+<ol>
+<li>
+<p>x的原型是什么？  Object.prototype</p>
+</li>
+<li>
+<p><code>x.__proto__</code>的值是什么？  Object.prototype</p>
+</li>
+<li>
+<p>上面两个问题是等价的吗？</p>
+</li>
+<li>
+<p>请用内存图画出x的所有属性</p>
+</li>
+</ol>
+<p>答：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>  <span class="c1">// x的原型
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>  <span class="c1">// x.__proto__
+</span><span class="c1"></span><span class="nx">x</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>   <span class="c1">// true  二者是等价的
+</span><span class="c1"></span><span class="nx">x</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">window</span><span class="p">.</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>  <span class="c1">// true  「window.」可省略
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>​</p>
+<h4 id="难度2">难度2</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Square</span><span class="p">(</span><span class="nx">width</span><span class="p">){</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">square</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Square</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="err">⚡️⚡️⚡️</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>请问：</p>
+<ol>
+<li>square的原型是什么？</li>
+<li><code>square.__proto__</code>的值是什么？</li>
+<li>请用内存图画出 square 的所有属性</li>
+</ol>
+<p>答：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">Square</span><span class="p">.</span><span class="nx">prototype</span>  <span class="c1">// square的原型
+</span><span class="c1"></span><span class="nx">Square</span><span class="p">.</span><span class="nx">prototype</span>  <span class="c1">// square.__proto__   
+</span><span class="c1">// 1/2两个问题是等价的（带入公式理解）
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>​</p>
+<h4 id="难度3">难度3</h4>
+<p>请问：</p>
+<ol>
+<li>Object.prototype 是哪个函数构造出来的？</li>
+<li>Object.prototype 的原型是什么？</li>
+<li><code>Object.prototype.__proto__</code> 值是什么?</li>
+<li>请用内存图画出上述内容</li>
+</ol>
+<p>答：</p>
+<ol>
+<li>
+<p>未知，Object.prototype 是默认就存在的，没有谁把它构造出来</p>
+</li>
+<li>
+<p>没有原型</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="kc">null</span>   <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<p>​</p>
+<p>​</p>
+<h2 id="构造函数prototypenew">构造函数、prototype、new</h2>
+<blockquote>
+<p>通过 Square 的例子，已经可以基本理解了</p>
+</blockquote>
+<p><strong>构造函数</strong></p>
+<ul>
+<li>用来创建对象的函数，就是构造函数（特点：首字母大写）</li>
+</ul>
+<p>​</p>
+<p><strong>prototype</strong></p>
+<ul>
+<li>
+<p>不论构造函数、还是普通函数，每一个函数（对象）都有一个 prototype，用来存放共有属性</p>
+</li>
+<li>
+<p>每个对象都有原型，但除了「根对象 Object.prototype」比较特殊，Object.prototype 这个对象的原型为空 null</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">){</span><span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span><span class="p">}</span>
+<span class="nx">add</span><span class="p">.</span><span class="nx">prototype</span>  <span class="c1">// 不仅是构造函数，普通函数也有 prototype
+</span><span class="c1"></span><span class="k">delete</span> <span class="nx">add</span><span class="p">.</span><span class="nx">prototype</span>  <span class="c1">// false  而且删不掉，仍然存在
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<p><strong>new</strong>：会帮我们做四件事情（省略了很多代码）</p>
+<ol>
+<li>创建一个临时对象</li>
+<li>把这个对象指向一个原型</li>
+<li>把这个对象作为 this 来运行这个构造函数</li>
+<li>return this</li>
+</ol>
+<p>​</p>
+<h2 id="square-最终版存疑">Square 最终版（存疑）</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Square</span><span class="p">(</span><span class="nx">width</span><span class="p">){</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span>
+<span class="p">}</span>
+<span class="nx">Square</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getArea</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span>
+<span class="p">}</span>
+<span class="nx">Square</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getLength</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">square</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Square</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nx">square</span><span class="p">.</span><span class="nx">width</span>         <span class="c1">// 5
+</span><span class="c1"></span><span class="nx">square</span><span class="p">.</span><span class="nx">getArea</span><span class="p">()</span>     <span class="c1">// 25
+</span><span class="c1"></span><span class="nx">square</span><span class="p">.</span><span class="nx">getLength</span><span class="p">()</span>   <span class="c1">// 20
+</span></code></pre></td></tr></table>
+</div>
+</div><p>为什么说存疑：因为还有一个更简化的版本，后面再讲</p>
+<p>​</p>
+<p>​</p>
+<h2 id="圆形-circle">圆形 Circle</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Circle</span><span class="p">(</span><span class="nx">radius</span><span class="p">){</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">radius</span> <span class="o">=</span> <span class="nx">radius</span>
+<span class="p">}</span>
+<span class="nx">Circle</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getLength</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">radius</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span>
+<span class="p">}</span>
+<span class="nx">Circle</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getArea</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">radius</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">c1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Circle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="nx">c1</span><span class="p">.</span><span class="nx">radius</span>        <span class="c1">// 10
+</span><span class="c1"></span><span class="nx">c1</span><span class="p">.</span><span class="nx">getLength</span><span class="p">()</span>   <span class="c1">// 31.41592653589793
+</span><span class="c1"></span><span class="nx">c1</span><span class="p">.</span><span class="nx">getArea</span><span class="p">()</span>     <span class="c1">// 314.1592653589793
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h2 id="长方形-rectangle">长方形 Rectangle</h2>
+<p>两个参数：宽、高</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Rect</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">){</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span>
+<span class="p">}</span>
+<span class="nx">Rect</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getArea</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span>
+<span class="p">}</span>
+<span class="nx">Rect</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getLength</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">r1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Rect</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="nx">r1</span><span class="p">.</span><span class="nx">width</span>
+<span class="nx">r1</span><span class="p">.</span><span class="nx">height</span>
+<span class="nx">r1</span><span class="p">.</span><span class="nx">getLength</span><span class="p">()</span>
+<span class="nx">r1</span><span class="p">.</span><span class="nx">getArea</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h2 id="对象需要分类吗-1">对象需要分类吗？🧐</h2>
+<blockquote>
+<p>回到最初的问题</p>
+</blockquote>
+<blockquote>
+<h3 id="答案是-需要分类">答案是 需要分类</h3>
+</blockquote>
+<p>因为不同的对象有不同的功能，某些对象具有相同功能，某些对象具有不同功能</p>
+<h3 id="理由一">理由一</h3>
+<ul>
+<li>有很多对象拥有一样的属性和行为</li>
+<li>需要把它们分为同一类</li>
+<li>如 square1 和 square2
+如 圆1、圆2、圆3，都是圆
+如 长方形1、长方形2，都是长方形
+…</li>
+<li>这样创建类似对象的时候就很方便
+<ul>
+<li>直接 new 一个 Square、new Circle、new Rect … 然后传参，就能创建出相应图形的对象</li>
+<li>就不需要【 <code>let square1 = {…}; let square2 = {…} </code> 然后把所有属性写一遍】，这样会很麻烦</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h3 id="理由二">理由二</h3>
+<ul>
+<li>
+<p>但是还有很多对象拥有其他的属性和行为</p>
+</li>
+<li>
+<p>所以就需要不同的分类</p>
+</li>
+<li>
+<p>比如 Square / Circle / Rect 就是不同的分类</p>
+</li>
+<li>
+<p>Array / Function 也是不同的分类</p>
+</li>
+<li>
+<p>而 <strong>Object 创建出来的对象，是最没有特点的对象</strong>（没有什么额外更多的功能，相对比较普通）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="p">{}</span>   <span class="c1">// 等价于  let x = new Object()
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="类型-vs-类">类型 vs. 类</h2>
+<blockquote>
+<p>「 类型  &amp;  类 」有什么区别 ？</p>
+</blockquote>
+<h3 id="类型">类型</h3>
+<ul>
+<li>类型是 JS 数据的分类，有 7 种</li>
+<li>四基两空一对象
+<ol>
+<li>string</li>
+<li>number</li>
+<li>boolean</li>
+<li>symbol</li>
+<li>null</li>
+<li>undefined</li>
+<li>object</li>
+</ol>
+</li>
+</ul>
+<h3 id="类">类</h3>
+<ul>
+<li><strong>类是针对于对象的分类，有无数种</strong>
+<ul>
+<li>Object 创建出来的对象，是最没有特点的对象</li>
+<li>只要觉得需要再创建一个分类，就再写一个 构造函数，new 出来新的分类对象</li>
+</ul>
+</li>
+<li><strong>常见的有 Array、Function、Date(日期)、RegExp(正则) 等</strong></li>
+</ul>
+<p>​</p>
+<h2 id="有特色的类-">有特色的类 ⭐️</h2>
+<blockquote>
+<p>上面提到 Object 创建的的对象，是最没有特色的类</p>
+<p>那什么是有特色的的类？举两个例子：数组对象、函数对象</p>
+<p>（在其他语言中，数组、函数可能都不是对象，但在 JS 中，数组/函数 都属于对象）</p>
+</blockquote>
+<h3 id="数组对象">数组对象</h3>
+<h4 id="定义一个数组">定义一个数组</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="c1">// 简写
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="c1">// 元素为 1,2,3  // arr [1,2,3]
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1">// 长度为 3   // arr [empty×3]
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="数组对象的自身属性">数组对象的自身属性</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="c1">// arr的自身属性有 4 个： &#39;0&#39;/&#39;1&#39;/&#39;2&#39;/&#39;length&#39;
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意，属性名没有数字，只有字符串</p>
+</blockquote>
+<ul>
+<li>属性名：&lsquo;0&rsquo;/&lsquo;1&rsquo;/&lsquo;2&rsquo;  ，都是字符串</li>
+<li>灰色属性，是不能被遍历到的：如 <code>length</code>、<code>__proto__</code></li>
+</ul>
+<p></p>
+<p></p>
+<h4 id="数组对象的共用属性">数组对象的共用属性</h4>
+<blockquote>
+<ol>
+<li>共有属性非常多，都存储在数组对象的 <code>__proto__</code> 中</li>
+</ol>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="s1">&#39;push&#39;</span><span class="o">/</span><span class="s1">&#39;pop&#39;</span><span class="o">/</span><span class="s1">&#39;shift&#39;</span><span class="o">/</span><span class="s1">&#39;unshift&#39;</span><span class="o">/</span><span class="s1">&#39;join&#39;</span>  <span class="p">......</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<blockquote>
+<ol start="2">
+<li>数组对象 比 普通对象，多一层 原型</li>
+</ol>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>            <span class="c1">// true
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span>     <span class="c1">// true
+</span><span class="c1"></span>          
+<span class="nx">arr</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>  <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<blockquote>
+<ol start="3">
+<li>调用共有属性时，采用<strong>就近原则</strong>
+<ul>
+<li>在 arr 自身的原型上找到这个属性时，就不会再去 对象原型 上找</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">toString</span> <span class="o">==</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">toString</span>  <span class="c1">// false
+</span><span class="c1"></span><span class="nx">arr</span><span class="p">.</span><span class="nx">toString</span> <span class="o">==</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">toString</span>  <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<blockquote>
+<ol start="4">
+<li>各个【共有属性】，用法都在 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array#" target="_blank" rel="noopener noreffer">MDN</a>，基本与其英文原意相关
+<ul>
+<li>后面会有单独课程 教这些 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array" target="_blank" rel="noopener noreffer">API</a>。所谓的 API  就是【数组有哪些函数、对象有哪些函数】</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<ul>
+<li>推  push() 方法，将一个或多个元素添加到数的末尾，并返回该数组的新长度。</li>
+<li>弹 pop()方法，从数组中删除最后一个元素，并返回该元素的值。此方法更改数组的长度。</li>
+<li>提档 shift() 方法，从数组中删除第一个元素，并返回该元素的值。</li>
+<li>降档 unshift() 方法，将一个或多个元素添加到数组的开头，并返回该数组的新长度。（修改原数组）</li>
+<li>联结 join() 方法，将一个数组（或一个类数组对象）的所有元素连接成一个字符串并返回这个字符串。</li>
+<li>联结 concat() 方法，用于<strong>合并两个或多个数组</strong>。此方法不会更改现有数组，而是<strong>返回一个新数组</strong>。</li>
+<li>…</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> 
+<span class="nx">arr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1">// 4  返回数组的新长度
+</span><span class="c1"></span><span class="nx">arr</span> <span class="c1">// [1,2,3,0]
+</span><span class="c1"></span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span>  <span class="c1">// 0   返回被删除的元素的值
+</span><span class="c1"></span><span class="nx">arr</span> <span class="c1">// [1,2,3]
+</span><span class="c1"></span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>  <span class="c1">// 1   返回被删除的元素的值
+</span><span class="c1"></span><span class="nx">arr</span> <span class="c1">// [2,3]
+</span><span class="c1"></span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">unshift</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1">//  3   返回数组的新长度
+</span><span class="c1"></span><span class="nx">arr</span> <span class="c1">// [0,2,3]
+</span><span class="c1"></span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;哈&#39;</span><span class="p">)</span> <span class="c1">//  &#34;0哈2哈3&#34;  直接返回字符串
+</span><span class="c1"></span>
+<span class="kd">let</span> <span class="nx">arr1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="nx">arr2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="nx">arr3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="nx">arr1</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">arr2</span><span class="p">)</span> <span class="c1">// [1, 1, 2, 2]
+</span><span class="c1"></span><span class="nx">arr1</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">arr2</span><span class="p">,</span> <span class="nx">arr3</span><span class="p">)</span>  <span class="c1">// [1, 1, 2, 2, 3, 3]
+</span><span class="c1"></span>
+<span class="p">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h3 id="函数对象">函数对象</h3>
+<h4 id="定义一个函数">定义一个函数</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fn</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">){</span><span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span><span class="p">}</span>   <span class="c1">// 声明函数 fn
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">fn2</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">fn</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">){</span><span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span><span class="p">}</span>  <span class="c1">// 声明函数 fn，并赋给变量fn2
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">fn3</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span> 
+<span class="kd">let</span> <span class="nx">fn4</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;return x+y&#39;</span><span class="p">)</span>  <span class="c1">// 声明的是匿名函数，并将它赋给 fn4
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fn1</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">){</span><span class="k">return</span> <span class="s1">&#39;fn1&#39;</span><span class="p">}</span>   <span class="c1">// 声明函数 fn
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">fn2</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">fn</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">){</span><span class="k">return</span> <span class="s1">&#39;fn2&#39;</span><span class="p">}</span>  <span class="c1">// 声明函数 fn，并赋给变量fn2
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">fn3</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s1">&#39;fn3&#39;</span>  <span class="c1">// 声明函数 fn3
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">fn4</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;return `fn4`&#39;</span><span class="p">)</span> <span class="c1">// 声明的是匿名函数，并将它赋给 fn4
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<h4 id="函数对象自身属性">函数对象自身属性</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="s1">&#39;name&#39;</span> <span class="o">/</span> <span class="s1">&#39;length&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p></p>
+<p>​</p>
+<h4 id="函数对象共用属性">函数对象共用属性</h4>
+<blockquote>
+<p>共有属性非常多，都存储在函数对象的 <code>__proto__</code> 中</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="s1">&#39;call&#39;</span> <span class="o">/</span> <span class="s1">&#39;apply&#39;</span> <span class="o">/</span> <span class="s1">&#39;bind&#39;</span>    <span class="nx">这三个属性是重点</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>后面会有单独课程介绍函数</p>
+<p>​</p>
+<p>​</p>
+<h2 id="js-终极一问谁构造了ta">JS 终极一问：谁构造了ta</h2>
+<h3 id="window-是谁构造的">window 是谁构造的</h3>
+<ul>
+<li>
+<p>Window</p>
+</li>
+<li>
+<p>可以通过 constructor 属性看出构造者</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nx">Window</span>           <span class="c1">// true
+</span><span class="c1"></span><span class="nb">window</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">Window</span><span class="p">.</span><span class="nx">prototype</span>   <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+</li>
+</ul>
+<h3 id="windowobject-是谁构造的">window.Object 是谁构造的</h3>
+<ul>
+<li>
+<p>window.Function</p>
+</li>
+<li>
+<p>==<strong>因为所有函数都是 window.Function 构造的</strong>==</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nb">Object</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nb">window</span><span class="p">.</span><span class="nb">Function</span>         <span class="c1">// true
+</span><span class="c1"></span><span class="nb">window</span><span class="p">.</span><span class="nb">Object</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">window</span><span class="p">.</span><span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span> <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+</li>
+</ul>
+<h3 id="windowfunction-是谁构造的">window.Function 是谁构造的</h3>
+<ul>
+<li>
+<p>window.Function</p>
+</li>
+<li>
+<p>因为所有函数都是 window.Function 构造的</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nb">Function</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nb">window</span><span class="p">.</span><span class="nb">Function</span>  <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>自己构造的自己？并不是这样，这是「上帝(浏览器)」的安排</p>
+</li>
+<li>
+<p>浏览器构造了 Function，然后指定它的构造者是自己</p>
+</li>
+</ul>
+<h2 id="es6-class-语法-">ES6 ：class 语法 💋</h2>
+<blockquote>
+<p>JS 构造对象目前有两种方式，一种是用【构造函数+prototype】，一种是用【class】</p>
+</blockquote>
+<h3 id="prototype-是过时的-">prototype 是过时的 ？</h3>
+<blockquote>
+<p>非常遗憾，下面代码（构造函数）被某些前端认为是过时的</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Square</span><span class="p">(</span><span class="nx">width</span><span class="p">){</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span>
+<span class="p">}</span>
+<span class="nx">Square</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getArea</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span>
+<span class="p">}</span>
+<span class="nx">Square</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getLength</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>学习资料：<a href="https://zhuanlan.zhihu.com/p/35279244" target="_blank" rel="noopener noreffer">你可以不会 class，但是一定要学会 prototype</a></p>
+</blockquote>
+<h3 id="es6-class-语法">ES6 ：class 语法</h3>
+<blockquote>
+<p>class 是用来声明一个类，类是用来创建对象的，不讲究什么内存共用</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Square</span><span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">width</span><span class="p">){</span>   <span class="c1">// constructor中写对象里的属性
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span>
+  <span class="p">}</span>
+  <span class="nx">getArea</span><span class="p">(){</span>    <span class="c1">// 对象里的函数
+</span><span class="c1"></span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span>
+  <span class="p">}</span>
+  <span class="nx">getLength</span><span class="p">(){</span>  <span class="c1">// 对象里的函数
+</span><span class="c1"></span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：方法不能写成 <code>getLength: function(){ ... }</code>  这种形式</p>
+<h3 id="class-语法引入了更多概念">class 语法引入了更多概念</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Square</span><span class="p">{</span>
+  <span class="kr">static</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">1</span>   <span class="c1">// static表示x属于Square，调用需采用 Square.x 的写法 &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+</span><span class="c1"></span>  <span class="nx">width</span> <span class="o">=</span> <span class="mi">0</span>      <span class="c1">// 初始化 width 的值 // &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+</span><span class="c1"></span>  <span class="nx">constructor</span><span class="p">(</span><span class="nx">width</span><span class="p">){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span>
+  <span class="p">}</span>
+  <span class="nx">getArea</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span>
+  <span class="p">}</span>
+  <span class="nx">getLength</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span>
+  <span class="p">}</span>
+  <span class="nx">get</span> <span class="nx">area2</span><span class="p">(){</span>  <span class="c1">// 只读属性：调用时直接Square.area2就会执行，无需括号 &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+</span><span class="c1"></span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>class 引入更多的语法，这些语法多来自 Java世界 或 c#世界（跟 JS 以前的世界是格格不入的）</p>
+<p>​</p>
+<h3 id="用-class-重写-circle">用 class 重写 Circle</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Circle</span><span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">radius</span><span class="p">){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">radius</span> <span class="o">=</span> <span class="nx">radius</span>
+  <span class="p">}</span>
+  <span class="nx">getArea</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">radius</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span>
+  <span class="p">}</span>
+  <span class="nx">getLength</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">radius</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">circle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Circle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="nx">circle</span><span class="p">.</span><span class="nx">radius</span>
+<span class="nx">circle</span><span class="p">.</span><span class="nx">getArea</span><span class="p">()</span>
+<span class="nx">circle</span><span class="p">.</span><span class="nx">getLength</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="用-class-重写-rectangle">用 class 重写 Rectangle</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Rectangle</span><span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span>
+  <span class="p">}</span>
+  <span class="nx">getArea</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span>
+  <span class="p">}</span>
+  <span class="nx">getLength</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">neww</span> <span class="nx">Rectangle</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">width</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">height</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">getArea</span><span class="p">()</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">getLenght</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h3 id="易混淆语法">易混淆语法</h3>
+<p><strong>语法1：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Person</span><span class="p">{</span>
+  <span class="nx">sayHi</span><span class="p">(</span><span class="nx">name</span><span class="p">){}</span>
+<span class="p">}</span>
+<span class="c1">// 等价于
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">Person</span><span class="p">(){}</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayHi</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">){}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>语法2：</strong></p>
+<p>注意冒号变成了等于号</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Person</span><span class="p">{</span>
+  <span class="nx">sayHi</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">)=&gt;{}</span> <span class="c1">// 注意，一般我们不在这个语法里使用普通函数，多用箭头函数
+</span><span class="c1"></span><span class="p">}</span>
+<span class="c1">// 等价于
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">Person</span><span class="p">(){</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">sayHi</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">)=&gt;{}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="不要强求完全转换成-es5">不要强求完全转换成 ES5</h3>
+<p>大部分 class 语法都可以转为 ES5 语法，但并不是 100% 能转，有些 class 语法你意思理解就行，不需要强行转换为 ES5。</p>
+<h2 id="原型好还是类好">原型好，还是类好？</h2>
+<blockquote>
+<p>都是用来给对象分类的</p>
+</blockquote>
+<p>目前，先推荐用 class</p>
+<ul>
+<li>
+<p>但是 class 的语法知识比较复杂，还需要再多花点时间学习
+（关于类和对象的新语法有 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes" target="_blank" rel="noopener noreffer">页面1</a>，<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Object_initializer#ECMAScript_6%E6%96%B0%E6%A0%87%E8%AE%B0" target="_blank" rel="noopener noreffer">页面2</a> 和 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment" target="_blank" rel="noopener noreffer">页面3</a>）</p>
+</li>
+<li>
+<p>原型的知识，上面👆已经全部讲过了</p>
+</li>
+</ul>]]></description>
+</item><item>
     <title>JS 对象的基本用法</title>
-    <link>http://samrks.github.io/20200902-js%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</link>
+    <link>http://samrks.github.io/17-javascript-crud-of-object-prototype/</link>
     <pubDate>Wed, 02 Sep 2020 21:50:44 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200902-js%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</guid>
+    <guid>http://samrks.github.io/17-javascript-crud-of-object-prototype/</guid>
     <description><![CDATA[<p>「增」「删」「改」「查」</p>
 <h2 id="回顾">回顾</h2>
 <h3 id="七种数据类型">七种数据类型</h3>
@@ -970,10 +2495,10 @@ obj.name 不等价于 obj[name]</p>
 </blockquote>]]></description>
 </item><item>
     <title>JS 的数据类型🧐</title>
-    <link>http://samrks.github.io/20200827-js%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
+    <link>http://samrks.github.io/16-javascript-data-type/</link>
     <pubDate>Thu, 27 Aug 2020 01:45:54 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200827-js%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
+    <guid>http://samrks.github.io/16-javascript-data-type/</guid>
     <description><![CDATA[<p>「如何存数字&amp;字符」「JS 的数据类型」「64位浮点数 」「变量声明 var / let / const」「类型转换」</p>
 <p>​</p>
 <h2 id="数据为什么需要类型">数据为什么需要类型</h2>
@@ -1254,7 +2779,7 @@ obj.name 不等价于 obj[name]</p>
 <p>​</p>
 <h2 id="js-中的数据类型-">JS 中的数据类型 💡</h2>
 <p>7 种（大小写无所谓）</p>
-<ul>
+<ol>
 <li>数字 number</li>
 <li>字符串 string</li>
 <li>布尔 bool</li>
@@ -1262,7 +2787,10 @@ obj.name 不等价于 obj[name]</p>
 <li>空 undefined</li>
 <li>空 null</li>
 <li>对象 object</li>
+</ol>
+<ul>
 <li><strong>总结：四基两空一对象</strong></li>
+<li>bigint（新增第8种）</li>
 </ul>
 <p>以下不是数据类型</p>
 <ul>
@@ -2360,10 +3888,10 @@ obj.name 不等价于 obj[name]</p>
 </blockquote>]]></description>
 </item><item>
     <title>JS 的基本语法⚙️</title>
-    <link>http://samrks.github.io/20200824-js%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</link>
+    <link>http://samrks.github.io/15-javascript-basic-syntax/</link>
     <pubDate>Mon, 24 Aug 2020 22:15:53 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200824-js%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</guid>
+    <guid>http://samrks.github.io/15-javascript-basic-syntax/</guid>
     <description><![CDATA[<p>内容包括「什么是表达式和语句」「标识符的规则」「 if else 语句」「 while for 语句」「 label 」</p>
 <h2 id="推荐书籍">推荐书籍</h2>
 <ol>
@@ -3408,10 +4936,10 @@ obj.name 不等价于 obj[name]</p>
 </div>]]></description>
 </item><item>
     <title>JavaScript 的发展历史</title>
-    <link>http://samrks.github.io/20200812-javascript%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2/</link>
+    <link>http://samrks.github.io/14-javascript-history/</link>
     <pubDate>Wed, 12 Aug 2020 21:13:23 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200812-javascript%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2/</guid>
+    <guid>http://samrks.github.io/14-javascript-history/</guid>
     <description><![CDATA[<p>简单了解「学 JS 的基本要求」，重点了解「JS 的诞生与历史」</p>
 <p>​</p>
 <h2 id="一些链接">一些链接</h2>
@@ -3895,10 +5423,10 @@ obj.name 不等价于 obj[name]</p>
 </blockquote>]]></description>
 </item><item>
     <title>前端也得懂点儿 HTTP (下) </title>
-    <link>http://samrks.github.io/20200810-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8B/</link>
+    <link>http://samrks.github.io/13-http-2/</link>
     <pubDate>Mon, 10 Aug 2020 18:49:11 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200810-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8B/</guid>
+    <guid>http://samrks.github.io/13-http-2/</guid>
     <description><![CDATA[<p>🤞🏻 “Nobody knows HTTP better than me !! ” 🤥</p>
 <p>​</p>
 <h2 id="先导">先导</h2>
@@ -4671,10 +6199,10 @@ obj.name 不等价于 obj[name]</p>
 </ul>]]></description>
 </item><item>
     <title>前端也得懂点儿 HTTP (上) ——浅析 URL</title>
-    <link>http://samrks.github.io/20200804-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8A/</link>
+    <link>http://samrks.github.io/12-http-1/</link>
     <pubDate>Tue, 04 Aug 2020 23:58:43 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200804-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8A/</guid>
+    <guid>http://samrks.github.io/12-http-1/</guid>
     <description><![CDATA[<p>本文主要围绕 URL ，为学 HTTP 做个铺垫。</p>
 <p>​</p>
 <h2 id="先导">先导</h2>
@@ -5501,10 +7029,10 @@ http://ryuuks:8080/index.html
 </ol>]]></description>
 </item><item>
     <title>Re：从零开始の CSS 学习笔记——动画</title>
-    <link>http://samrks.github.io/20200802-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%8A%A8%E7%94%BB/</link>
+    <link>http://samrks.github.io/11-css-animation/</link>
     <pubDate>Sun, 02 Aug 2020 01:19:27 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200802-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%8A%A8%E7%94%BB/</guid>
+    <guid>http://samrks.github.io/11-css-animation/</guid>
     <description><![CDATA[<p>浏览器的渲染流程、transform、transition、animation</p>
 <p>​</p>
 <h2 id="动画的原理">动画的原理</h2>
@@ -6537,10 +8065,10 @@ http://ryuuks:8080/index.html
 </div>]]></description>
 </item><item>
     <title>Re：从零开始の CSS 学习笔记——定位</title>
-    <link>http://samrks.github.io/20200729-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%AE%9A%E4%BD%8D/</link>
+    <link>http://samrks.github.io/10-css-position/</link>
     <pubDate>Wed, 29 Jul 2020 13:01:21 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200729-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%AE%9A%E4%BD%8D/</guid>
+    <guid>http://samrks.github.io/10-css-position/</guid>
     <description><![CDATA[<p>复习盒模型、div 的分层、新属性 position 详解、层叠上下文</p>
 <p>​</p>
 <h2 id="布局和定位的区别">布局和定位的区别</h2>
@@ -7173,834 +8701,5 @@ http://ryuuks:8080/index.html
 <blockquote>
 <p>z-index = -1  不一定存在于容器的背景之下。当这个容器是一个层叠上下文时，就不可能存在于容器之外</p>
 </blockquote>]]></description>
-</item><item>
-    <title>Re：从零开始の CSS 学习笔记——布局（下）</title>
-    <link>http://samrks.github.io/20200726-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%B8%83%E5%B1%80-%E4%B8%8B/</link>
-    <pubDate>Sun, 26 Jul 2020 13:26:52 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://samrks.github.io/20200726-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%B8%83%E5%B1%80-%E4%B8%8B/</guid>
-    <description><![CDATA[<p>CSS 布局篇（下）：Grid 布局。</p>
-<p>​</p>
-<h2 id="如何在两套布局中切换">如何在两套布局中切换</h2>
-<blockquote>
-<p>一个css中，写两种布局，使用 @media 媒体查询来切换</p>
-</blockquote>
-<p>​</p>
-<h2 id="grid-布局">Grid 布局</h2>
-<blockquote>
-<p>Grid 布局兼容性并不好，在一两年内都可能不会非常广泛的使用（现在可以不用学的那么仔细）</p>
-<p>但功能确实非常强大</p>
-</blockquote>
-<ul>
-<li>flex 更擅长 一维布局，要么横着布局，要么竖着布局</li>
-<li>一维布局用 Flex</li>
-</ul>
-<p>​</p>
-<h2 id="二维布局用-grid">二维布局用 Grid</h2>
-<blockquote>
-<p>以下内容主要来自 CSS Tricks 的一篇文章  <a href="https://css-tricks.com/snippets/css/complete-guide-grid/" target="_blank" rel="noopener noreffer">A Complete Guide to Grid</a></p>
-</blockquote>
-<ul>
-<li>查看本地代码</li>
-</ul>
-<p>​</p>
-<h3 id="grid-也分-container-和-items">Grid 也分 container 和 items</h3>
-<blockquote>
-<p>分别记忆</p>
-</blockquote>
-<h3 id="成为-container">成为 container</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span>
-	<span class="k">display</span><span class="p">:</span> <span class="k">grid</span> <span class="o">|</span> <span class="kc">inline</span><span class="o">-</span><span class="k">grid</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="行和列">行和列</h3>
-<blockquote>
-<p>类似 table 表格（grid 被称为新时代的表格）</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span>
-	<span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
-  <span class="n">grid-tamplate-columns</span><span class="p">:</span> <span class="mi">40</span><span class="kt">px</span> <span class="mi">50</span><span class="kt">px</span> <span class="kc">auto</span> <span class="mi">50</span><span class="kt">px</span> <span class="mi">40</span><span class="kt">px</span><span class="p">;</span>   <span class="c">/* 每列宽度（有n个值对应生成n列） */</span>
-    			         <span class="c">/*  第1列 第2列 第3列 第4列 第5列  */</span>
-  
-  <span class="n">grid-tamplate-rows</span><span class="p">:</span> <span class="mi">25</span><span class="kt">%</span> <span class="mi">100</span><span class="kt">px</span> <span class="kc">auto</span><span class="p">;</span>   <span class="c">/* 每行高度（有n个值对应生成n行） */</span>
-                 <span class="c">/*  第1行 第2行 第3行  */</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p></p>
-<blockquote>
-<p>[1]  [2]  [3]  …  [6]   指的是线的序号。用于划分 items  的范围（<a href="#%e7%ac%ac%e4%ba%8c%e6%ad%a5" rel="">具体使用见 items 部分 </a>）</p>
-</blockquote>
-<p>​</p>
-<h4 id="缩写--grid-template">缩写  grid-template</h4>
-<blockquote>
-<p><code>grid-template</code>是<code>grid-template-rows</code>（行高）和<code>grid-template-columns</code>（列宽）的缩写形式。</p>
-<p>比如说，<code>grid-template: 50% 50% / 200px;</code>将创建一个具有两行的网格，每一行占据50%，以及一个200像素宽的列。</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="c">/* 需要包括你的花园上部的60%，以及左侧的200像素。 */</span>
-<span class="p">#</span><span class="nn">garden</span> <span class="p">{</span>
-  <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
-  <span class="k">grid-template</span><span class="p">:</span> <span class="mi">60</span><span class="kt">%</span> <span class="mi">40</span><span class="kt">%</span> <span class="o">/</span> <span class="mi">200</span><span class="kt">px</span> <span class="nb">calc</span><span class="p">(</span><span class="mi">100</span><span class="kt">%</span> <span class="o">-</span> <span class="mi">200</span><span class="kt">px</span><span class="p">)</span> <span class="p">;</span>
-  			 	<span class="c">/*	行高↑↑       列宽↑↑   */</span>
-<span class="p">}</span>
-
-<span class="p">#</span><span class="nn">water</span> <span class="p">{</span>
-  <span class="k">grid-column</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>
-  <span class="k">grid-row</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="c">/* 你的花园看起来很棒。现在，你在花园的底部留下了50像素的小路，其他的空间用来种植胡萝卜。
-</span><span class="c">不幸的是，胡萝卜地的20%已经杂草丛生了，最后一次用CSS网格布局来规划你的花园吧！ */</span>
-<span class="p">#</span><span class="nn">garden</span> <span class="p">{</span>
-  <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
-  <span class="k">grid-template</span><span class="p">:</span> <span class="nb">calc</span><span class="p">(</span><span class="mi">100</span><span class="kt">%</span> <span class="o">-</span> <span class="mi">50</span><span class="kt">px</span><span class="p">)</span> <span class="mi">50</span><span class="kt">px</span><span class="o">/</span><span class="mi">20</span><span class="kt">%</span> <span class="mi">80</span><span class="kt">%</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p></p>
-<p>​</p>
-<h3 id="指定-items-布局">指定 items 布局</h3>
-<h4 id="第一步">第一步</h4>
-<blockquote>
-<ul>
-<li>
-<p>搭出大框架：几行几列</p>
-</li>
-<li>
-<p>有几个区域，就建立几个 items</p>
-</li>
-</ul>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-  <span class="o">*</span> <span class="p">{</span>
-    <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">box-sizing</span><span class="p">:</span> <span class="kc">border-box</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="p">.</span><span class="nc">container</span> <span class="p">{</span>
-    <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
-    <span class="k">grid-template-columns</span><span class="p">:</span> <span class="mi">40</span><span class="kt">px</span> <span class="mi">50</span><span class="kt">px</span> <span class="kc">auto</span> <span class="mi">50</span><span class="kt">px</span> <span class="mi">40</span><span class="kt">px</span><span class="p">;</span>   <span class="c">/* 5列（auto会撑满该行余下空间） */</span>
-    <span class="k">grid-template-rows</span><span class="p">:</span> <span class="mi">100</span><span class="kt">px</span> <span class="mi">300</span><span class="kt">px</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* 3行（每行高度累加，成为container的总高度） */</span>
-    <span class="k">border</span><span class="p">:</span> <span class="mi">3</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="p">.</span><span class="nc">a</span><span class="o">,</span> <span class="p">.</span><span class="nc">b</span><span class="o">,</span> <span class="p">.</span><span class="nc">c</span><span class="o">,</span> <span class="p">.</span><span class="nc">d</span><span class="o">,</span> <span class="p">.</span><span class="nc">e</span> <span class="p">{</span>
-    <span class="k">border</span><span class="p">:</span> <span class="mi">3</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">black</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-
-<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
-  <span class="c">&lt;!-- emmet快捷键: 键入.a+.b+.c+.d ——&gt; tab 创建出5个div，class分别为abcde --&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;a&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>  <span class="c">&lt;!--第1行, 第1列--&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;b&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>  <span class="c">&lt;!--第1行, 第2列--&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;c&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>  <span class="c">&lt;!--第1行, 第3列--&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;d&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>  <span class="c">&lt;!--第1行, 第4列--&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;e&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>  <span class="c">&lt;!--第1行, 第5列--&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>container 中的子元素，<strong>与列数一一对应</strong>。且默认只占据第一行。所以添加 border 后 效果如下图所示</li>
-</ul>
-<p></p>
-<h4 id="第二步">第二步</h4>
-<blockquote>
-<p>给每个 item 指定区域、设置范围</p>
-</blockquote>
-<h5 id="grid-xxx-start--grid-xxx-end">grid-xxx-start / grid-xxx-end</h5>
-<blockquote>
-<p>grid-row-start、grid-row-end</p>
-<p>grid-column-start、grid-column-end</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">a</span><span class="p">{</span>
-  <span class="k">grid-row-start</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>  <span class="c">/* a从哪条线开始 */</span>     
-  <span class="k">grid-row-end</span><span class="p">:</span> <span class="mi">3</span><span class="p">;</span>    <span class="c">/* a到哪条线结束 */</span>         
-  <span class="c">/* 指定的两条【线】的中间区域，就是a所占的【行】 */</span>
-
-  <span class="k">grid-column-start</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>   
-  <span class="k">grid-column-end</span><span class="p">:</span> <span class="mi">2</span><span class="p">;</span>
-  <span class="c">/* 指定的两条【线】的中间区域，就是a所占的【列】 */</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h5 id="grid-row--grid-column">grid-row / grid-column</h5>
-<blockquote>
-<p>grid-row：grid-row-start / grid-row-end;</p>
-<p>grid-column:  grid-column-start / grid-column-end;</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="c">/* 上面写法，可以缩写成 ↓ */</span>
-<span class="p">.</span><span class="nc">a</span><span class="p">{</span>
-  <span class="k">grid-row</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="p">;</span>
-  <span class="k">grid-column</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="p">;</span>   
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h5 id="grid-area">grid-area</h5>
-<blockquote>
-<p>grid-area属性接受4个由&rsquo;/&lsquo;分开的值：grid-row-start, grid-column-start, grid-row-end, 最后是 grid-column-end。</p>
-<p>​																					起始行 ↑↑            起始列 ↑↑           终止行 ↑↑                      终止列 ↑↑</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="c">/* 再进一步缩写 */</span>
-<span class="p">.</span><span class="nc">a</span><span class="p">{</span>
-  <span class="k">grid-area</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="mi">2</span> <span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>
-<p>最终效果</p>
-<p></p>
-</li>
-</ul>
-<p>​</p>
-<h4 id="可以给线起名字">可以给线起名字</h4>
-<blockquote>
-<p>但没必要，代码太麻烦。就按照序号就很好</p>
-</blockquote>
-<p></p>
-<p>取名结果：如图↘</p>
-<p></p>
-<p>item可以设置范围，直接用线的名称</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">item-a</span><span class="p">{</span> 
-  <span class="k">grid-column-start</span><span class="p">:</span> <span class="mi">2</span><span class="p">;</span> 
-  <span class="k">grid-column-end</span><span class="p">:</span> <span class="n">five</span><span class="p">;</span>
-  <span class="k">grid-row-start</span><span class="p">:</span> <span class="n">rowl-start</span><span class="p">;</span> 
-  <span class="k">grid-row-end</span><span class="p">:</span> <span class="mi">3</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><hr>
-<p>​</p>
-<p>​</p>
-<h3 id="fr-单位份">fr ：单位【份】</h3>
-<blockquote>
-<p>容器属性</p>
-</blockquote>
-<blockquote>
-<p>全称  free space   自由空间</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;a&#34;</span><span class="p">&gt;</span>a<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;b&#34;</span><span class="p">&gt;</span>b<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;c&#34;</span><span class="p">&gt;</span>c<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;d&#34;</span><span class="p">&gt;</span>d<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;e&#34;</span><span class="p">&gt;</span>e<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="c">&lt;!-- &lt;div class=&#34;f&#34;&gt;f&lt;/div&gt; --&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="o">&lt;</span><span class="nt">style</span><span class="o">&gt;</span>
-<span class="o">*</span> <span class="p">{</span><span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span><span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span><span class="k">box-sizing</span><span class="p">:</span> <span class="kc">border-box</span><span class="p">;}</span>
-<span class="p">.</span><span class="nc">container</span> <span class="p">{</span>
-  <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
-  <span class="k">grid-template-columns</span><span class="p">:</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span><span class="p">;</span>   <span class="c">/* fr=份，与flex的份类似：共3列每列占1份，也就是均分 */</span>
-  <span class="k">grid-template-rows</span><span class="p">:</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span><span class="p">;</span>  <span class="c">/* 共2行，每行占1份，均分 */</span>
-  <span class="k">border</span><span class="p">:</span> <span class="mi">3</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
-  <span class="k">min-height</span><span class="p">:</span> <span class="mi">500</span><span class="kt">px</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="p">.</span><span class="nc">a</span><span class="o">,</span> <span class="p">.</span><span class="nc">b</span><span class="o">,</span> <span class="p">.</span><span class="nc">c</span><span class="o">,</span> <span class="p">.</span><span class="nc">d</span><span class="o">,</span> <span class="p">.</span><span class="nc">e</span> <span class="p">{</span>
-  <span class="k">border</span><span class="p">:</span> <span class="mi">3</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">black</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="p">.</span><span class="nc">e</span><span class="p">{</span>
-  <span class="k">grid-column-start</span><span class="p">:</span> <span class="mi">2</span><span class="p">;</span>    <span class="c">/* 再单独定义e版块占两列空间 */</span>
-  <span class="k">grid-column-end</span><span class="p">:</span> <span class="mi">4</span><span class="p">;</span>
-  <span class="k">background-color</span><span class="p">:</span> <span class="mh">#ccc</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="o">&lt;/</span><span class="nt">style</span><span class="o">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p></p>
-<p>​</p>
-<h4 id="变形">变形</h4>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span> <span class="p">{</span>
-  <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
-  <span class="k">grid-template-rows</span><span class="p">:</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">3</span><span class="n">fr</span><span class="p">;</span>   <span class="c">/* 2行：第2行占3份 */</span>
-  <span class="k">grid-template-columns</span><span class="p">:</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">2</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span><span class="p">;</span>   <span class="c">/* 3列：第2列占2份 */</span>
-  <span class="err">...</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p></p>
-<p>​</p>
-<h4 id="平均布局-grid-gap">平均布局 grid-gap</h4>
-<blockquote>
-<p>fr 主要用于实现平均布局</p>
-</blockquote>
-<blockquote>
-<p>容器属性：grid-gap  用于控制间距</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="c">&lt;!-- 应用下面grid布局样式，可实现任意添加.image，都可以实现一排4个、间距12px的布局 --&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-
-<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-  <span class="o">*</span><span class="p">{</span>
-    <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">box-sizing</span><span class="p">:</span> <span class="kc">border-box</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="p">.</span><span class="nc">container</span><span class="p">{</span>
-    <span class="k">margin-right</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
-    <span class="k">margin-left</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
-    <span class="k">margin-top</span><span class="p">:</span> <span class="mi">30</span><span class="kt">px</span><span class="p">;</span>
-    <span class="k">outline</span><span class="p">:</span> <span class="mi">5</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
-    <span class="k">width</span><span class="p">:</span> <span class="mi">800</span><span class="kt">px</span><span class="p">;</span>
-    <span class="c">/* 开启grid布局 */</span>
-    <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
-    <span class="k">grid-template-columns</span><span class="p">:</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span><span class="p">;</span>  <span class="c">/* 格子布局：1排4个 */</span>
-    <span class="k">grid-template-rows</span><span class="p">:</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span><span class="p">;</span>   
-    <span class="k">grid-gap</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* 计算每项边距，自动计算位置，四边上的会紧贴 */</span>
-  <span class="p">}</span>
-  <span class="p">.</span><span class="nc">container</span><span class="o">&gt;</span><span class="nt">div</span><span class="p">{</span>
-    <span class="k">border</span><span class="p">:</span> <span class="mi">2</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">black</span><span class="p">;</span>
-    <span class="k">background-color</span><span class="p">:</span> <span class="mh">#ccc</span><span class="p">;</span>
-    <span class="k">height</span><span class="p">:</span> <span class="mi">191</span><span class="kt">px</span><span class="p">;</span> <span class="c">/* 宽800px，1排4个产品，计算得出：每个产品可占宽191px，则间距为12px */</span>
-    <span class="k">width</span><span class="p">:</span> <span class="mi">191</span><span class="kt">px</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p></p>
-<p>​</p>
-<h3 id="分区-grid-template-areas">分区 grid template-areas</h3>
-<blockquote>
-<p>名字很长，但非常好用</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">header</span><span class="p">&gt;</span>header<span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">aside</span><span class="p">&gt;</span>aside<span class="p">&lt;/</span><span class="nt">aside</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">main</span><span class="p">&gt;</span>main<span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;ad&#34;</span><span class="p">&gt;</span>ad<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">footer</span><span class="p">&gt;</span>footer<span class="p">&lt;/</span><span class="nt">footer</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-
-<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-  <span class="p">.</span><span class="nc">container</span> <span class="p">{</span>
-    <span class="k">min-height</span><span class="p">:</span> <span class="mi">100</span><span class="kt">vh</span><span class="p">;</span>   <span class="c">/* 最小高度为占满整个屏幕 */</span>
-    <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
-    <span class="k">grid-template-rows</span><span class="p">:</span> <span class="mi">60</span><span class="kt">px</span> <span class="kc">auto</span> <span class="mi">60</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* 行高 */</span>
-    <span class="k">grid-template-columns</span><span class="p">:</span> <span class="mi">190</span><span class="kt">px</span> <span class="kc">auto</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>    <span class="c">/* 列宽 */</span>
-    <span class="c">/* 布局：以版块名称直接写出布局、位置 */</span>
-    <span class="k">grid-template-areas</span><span class="p">:</span>  
-      <span class="s2">&#34;header header header&#34;</span>
-      <span class="s2">&#34;aside main ad&#34;</span>
-      <span class="s2">&#34;. footer .&#34;</span><span class="p">;</span>  <span class="c">/* 空格通常会写一个不存在的名称，如【.】点 */</span>
-    <span class="k">grid-gap</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* 设置空隙 */</span>
-  <span class="p">}</span>
-  <span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="o">*</span> <span class="p">{</span>
-    <span class="k">border</span><span class="p">:</span> <span class="mi">2</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span>
-  <span class="p">}</span>
-  <span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="nt">header</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">header</span><span class="p">;}</span>   <span class="c">/* 版块命名 */</span>
-  <span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="nt">aside</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">aside</span><span class="p">;}</span>
-  <span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="nt">aside</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">aside</span><span class="p">;}</span>
-  <span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="nt">main</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">main</span><span class="p">;}</span>
-  <span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">ad</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">ad</span><span class="p">;}</span>
-  <span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="nt">footer</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">footer</span><span class="p">;}</span>
-<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p></p>
-<h4 id="grid-gap-设置间距">grid-gap 设置间距</h4>
-<blockquote>
-<p>grid-gap：通用间距</p>
-<p>grid-row-gap :   行间距</p>
-<p>grid-column-gap： 列间距</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span>
-  <span class="err">...</span>
-  <span class="k">grid-gap</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span>
-  <span class="err">...</span>
-  <span class="k">grid-row-gap</span><span class="p">:</span> <span class="mi">20</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* 行间距 */</span>
-  <span class="k">grid-column-gap</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>   <span class="c">/* 列间距 */</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p></p>
-<p>​</p>
-<p>​</p>
-<h2 id="实践">实践</h2>
-<h3 id="布局">布局</h3>
-<blockquote>
-<p>Grid 尤其适合不规则布局</p>
-</blockquote>
-<h3 id="经验">经验</h3>
-<blockquote>
-<ul>
-<li>等到 Grid 普及了，前端对CSS的要求会进一步降低</li>
-<li>目前你简单尝试一下 Grid 就可以了</li>
-</ul>
-</blockquote>
-<h3 id="示例">示例</h3>
-<h4 id="第一步根据设计图划分行列需求给每块区域命名">第一步：根据设计图，划分行列需求，给每块区域命名</h4>
-<p></p>
-<h4 id="第二步书写容器样式">第二步：书写【容器】样式</h4>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">header</span><span class="p">&gt;</span>header<span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image bigImage&#34;</span><span class="p">&gt;</span>big<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image smallImage&#34;</span><span class="p">&gt;</span>small<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image smallImage&#34;</span><span class="p">&gt;</span>small<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image smallImage&#34;</span><span class="p">&gt;</span>small<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image middleImage&#34;</span><span class="p">&gt;</span>middle<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image middleImage&#34;</span><span class="p">&gt;</span>middle<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image middleImage&#34;</span><span class="p">&gt;</span>middle<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-
-<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-  <span class="o">*</span> <span class="p">{</span>
-    <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">box-sizing</span><span class="p">:</span> <span class="kc">border-box</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="p">.</span><span class="nc">container</span> <span class="p">{</span>
-    <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
-    <span class="k">grid-template-rows</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span> <span class="mi">200</span><span class="kt">px</span> <span class="nf">repeat</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">100</span><span class="kt">px</span><span class="p">);</span> <span class="c">/* 重复4个120px，可以使用repeat()缩写语法 */</span>
-    <span class="k">grid-template-columns</span><span class="p">:</span> <span class="mi">240</span><span class="kt">px</span> <span class="mi">240</span><span class="kt">px</span><span class="p">;</span>
-    <span class="k">grid-template-areas</span><span class="p">:</span>
-      <span class="s2">&#34;header header&#34;</span>
-      <span class="s2">&#34;big mid1&#34;</span>
-      <span class="s2">&#34;big mid2&#34;</span>
-      <span class="s2">&#34;sm1 mid2&#34;</span>
-      <span class="s2">&#34;sm2 mid3&#34;</span>
-      <span class="s2">&#34;sm3 mid3&#34;</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h4 id="第三步指定每项的名称所属">第三步：指定每项的名称（所属）</h4>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="o">*</span> <span class="p">{</span>
-  <span class="k">border</span><span class="p">:</span> <span class="mi">2</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">black</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="nt">header</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">header</span><span class="p">;}</span>
-<span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">image</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">2</span><span class="o">)</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">big</span><span class="p">;}</span>
-<span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">image</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">3</span><span class="o">)</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">sm2</span><span class="p">;}</span>
-<span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">image</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">4</span><span class="o">)</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">sm3</span><span class="p">;}</span>
-<span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">image</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">5</span><span class="o">)</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">mid1</span><span class="p">;}</span>
-<span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">image</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">6</span><span class="o">)</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">mid2</span><span class="p">;}</span>
-<span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">image</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">7</span><span class="o">)</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">mid3</span><span class="p">;}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p></p>
-<p>​</p>
-<p>​</p>
-<h3 id="游戏">游戏</h3>
-<p><a href="https://cssgridgarden.com/#zh-cn">https://cssgridgarden.com/#zh-cn</a></p>
-<p>忘记用法时，可以通过游戏来快速回忆</p>
-<p>​</p>
-<h4 id="grid-area-1">grid-area</h4>
-<blockquote>
-<p>grid-area属性接受4个由&rsquo;/&lsquo;分开的值：grid-row-start, grid-column-start, grid-row-end, 最后是 grid-column-end。</p>
-<p>​																					起始行 ↑↑            起始列 ↑↑           终止行 ↑↑                      终止列 ↑↑</p>
-</blockquote>
-<p></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">#</span><span class="nn">garden</span> <span class="p">{</span>
-  <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
-  <span class="k">grid-template-columns</span><span class="p">:</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span><span class="p">;</span>
-  <span class="k">grid-template-rows</span><span class="p">:</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="p">#</span><span class="nn">water-1</span> <span class="p">{</span>
-  <span class="k">grid-area</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">4</span> <span class="o">/</span> <span class="mi">6</span> <span class="o">/</span> <span class="mi">5</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="p">#</span><span class="nn">water-2</span> <span class="p">{</span>
-  <span class="k">grid-area</span><span class="p">:</span> <span class="mi">2</span> <span class="o">/</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">6</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>​</p>
-<h4 id="order">order</h4>
-<blockquote>
-<p>如果网格项不是以<code>grid-area</code>、<code>grid-column</code>、<code>grid-row</code> 等显示的，它们会自动按照它们在源程序中出现的位置摆放。同样我们也可以使用<code>order</code>属性来重写它的顺序，这也是网格布局优于表格布局的好处之一。</p>
-<p>默认情况下，所有的网格项的<code>order</code>都是0，但是顺序也可以被任意设置为正数或者负数，就像<code>z-index</code>一样。</p>
-</blockquote>
-<p>​</p>
-<h4 id="fr-与-px-结合">fr 与 px 结合</h4>
-<p></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">#</span><span class="nn">garden</span> <span class="p">{</span>
-  <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
-  <span class="k">grid-template-columns</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
-  <span class="k">grid-template-rows</span><span class="p">:</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="p">#</span><span class="nn">water</span> <span class="p">{</span>
-  <span class="k">grid-area</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">6</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="p">#</span><span class="nn">poison</span> <span class="p">{</span>
-  <span class="k">grid-area</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">6</span> <span class="o">/</span> <span class="mi">6</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">#</span><span class="nn">garden</span> <span class="p">{</span>
-  <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
-  <span class="k">grid-template-columns</span><span class="p">:</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span><span class="p">;</span>
-  <span class="k">grid-template-rows</span><span class="p">:</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span> <span class="nb">calc</span><span class="p">(</span><span class="mi">100</span><span class="kt">%</span> <span class="o">-</span> <span class="mi">50</span><span class="kt">px</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="p">#</span><span class="nn">water</span> <span class="p">{</span>
-  <span class="k">grid-column</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">6</span><span class="p">;</span>
-  <span class="k">grid-row</span><span class="p">:</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">6</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div>]]></description>
 </item></channel>
 </rss>

@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Re：从零开始の CSS 学习笔记——动画 - Sam&#39;s Garage</title><meta name="Description" content="CSS is A*s***e!! 🥴 🤢 🤮"><meta property="og:title" content="Re：从零开始の CSS 学习笔记——动画" />
+<meta property="og:description" content="CSS is A*s***e!! 🥴 🤢 🤮" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://samrks.github.io/11-css-animation/" />
+<meta property="og:image" content="http://samrks.github.io/11-css-animation/featured-image.jpg"/>
+<meta property="article:published_time" content="2020-08-02T01:19:27+08:00" />
+<meta property="article:modified_time" content="2020-08-02T01:19:27+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://samrks.github.io/11-css-animation/featured-image.jpg"/>
+<meta name="twitter:title" content="Re：从零开始の CSS 学习笔记——动画"/>
+<meta name="twitter:description" content="CSS is A*s***e!! 🥴 🤢 🤮"/>
+<meta name="application-name" content="Sam&#39;s Garage">
+<meta name="apple-mobile-web-app-title" content="Sam&#39;s Garage"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://samrks.github.io/11-css-animation/" /><link rel="prev" href="http://samrks.github.io/10-css-position/" /><link rel="next" href="http://samrks.github.io/12-http-1/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Re：从零开始の CSS 学习笔记——动画",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/samrks.github.io\/11-css-animation\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "http:\/\/samrks.github.io\/11-css-animation\/featured-image.jpg",
+                            "width":  1280 ,
+                            "height":  384 
+                        }],"genre": "posts","keywords": "CSS, 笔记","wordcount":  4917 ,
+        "url": "http:\/\/samrks.github.io\/11-css-animation\/","datePublished": "2020-08-02T01:19:27+08:00","dateModified": "2020-08-02T01:19:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Sam"
+            },"description": "CSS is A*s***e!! 🥴 🤢 🤮"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa fa-home fa-fw'></i> 主页 </a><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title=""><i class='fa fa-home fa-fw'></i>主页</a><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Re：从零开始の CSS 学习笔记——动画</h1><h2 class="single-subtitle">CSS 动画</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://liubingxuan.xyz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Sam</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/css-%E5%85%A5%E9%97%A8/"><i class="far fa-folder fa-fw"></i>CSS 入门</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-08-02">2020-08-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4917 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 10 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/11-css-animation/featured-image.jpg"
+        data-srcset="/11-css-animation/featured-image.jpg, /11-css-animation/featured-image.jpg 1.5x, /11-css-animation/featured-image.jpg 2x"
+        data-sizes="auto"
+        alt="/11-css-animation/featured-image.jpg"
+        title="CSS is A*s***e!! 🥴 🤢 🤮" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#动画的原理">动画的原理</a>
+          <ul>
+            <li><a href="#动画">动画</a>
+              <ul>
+                <li><a href="#定义">定义</a></li>
+                <li><a href="#概念">概念</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#一个最简单的例子">一个最简单的例子</a>
+          <ul>
+            <li><a href="#将div从左往右移动">将div从左往右移动</a>
+              <ul>
+                <li><a href="#原理">原理</a></li>
+                <li><a href="#注意性能">注意性能</a></li>
+              </ul>
+            </li>
+            <li><a href="#前端高手不用-left-做动画">前端高手不用 left 做动画</a>
+              <ul>
+                <li><a href="#用-transform变形">用 transform（变形）</a></li>
+                <li><a href="#原理-1">原理</a></li>
+                <li><a href="#注意性能-1">注意性能</a></li>
+              </ul>
+            </li>
+            <li><a href="#如何查看性能">如何查看性能</a>
+              <ul>
+                <li><a href="#查看性能的方式">查看性能的方式</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#浏览器的渲染原理">浏览器的渲染原理</a>
+          <ul>
+            <li><a href="#参考文章">参考文章</a>
+              <ul>
+                <li><a href="#google-团队写的文章右上角中文">Google 团队写的文章（右上角中文）</a></li>
+                <li><a href="#查看css各属性触发什么">查看CSS各属性触发什么</a></li>
+              </ul>
+            </li>
+            <li><a href="#浏览器渲染过程">浏览器渲染过程</a>
+              <ul>
+                <li><a href="#步骤">步骤</a></li>
+                <li><a href="#三棵树">三棵树</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#如何更新样式">如何更新样式</a>
+          <ul>
+            <li><a href="#一般我们用-js-来更新样式">一般我们用 JS 来更新样式</a></li>
+            <li><a href="#那么这些方法有什么不同吗">那么这些方法有什么不同吗</a></li>
+            <li><a href="#三种更新方式">三种更新方式</a>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#第一种流程全走一遍">第一种，流程全走一遍</a></li>
+                    <li><a href="#第二种跳过-layout">第二种，跳过 layout</a></li>
+                    <li><a href="#第三种跳过-layout-和-paint">第三种，跳过 layout 和 paint</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#每个属性触发什么流程">每个属性触发什么流程</a></li>
+          </ul>
+        </li>
+        <li><a href="#css动画优化">CSS动画优化</a>
+          <ul>
+            <li><a href="#没什么技术含量">没什么技术含量</a></li>
+            <li><a href="#js优化">JS优化</a></li>
+            <li><a href="#css优化">CSS优化</a></li>
+            <li><a href="#没错">没错</a></li>
+          </ul>
+        </li>
+        <li><a href="#transform-全解">transform 全解</a>
+          <ul>
+            <li><a href="#transform">transform</a>
+              <ul>
+                <li><a href="#四个常用功能">四个常用功能</a></li>
+                <li><a href="#经验">经验</a></li>
+              </ul>
+            </li>
+            <li><a href="#transform之translate">transform之translate</a>
+              <ul>
+                <li><a href="#常用写法">常用写法</a></li>
+                <li><a href="#经验-1">经验</a></li>
+              </ul>
+            </li>
+            <li><a href="#transform之scale">transform之scale</a>
+              <ul>
+                <li><a href="#常用写法-1">常用写法</a></li>
+                <li><a href="#经验-2">经验</a></li>
+              </ul>
+            </li>
+            <li><a href="#transform之rotate">transform之rotate</a>
+              <ul>
+                <li><a href="#常用写法-2">常用写法</a></li>
+                <li><a href="#经验-3">经验</a></li>
+              </ul>
+            </li>
+            <li><a href="#transform之skew">transform之skew</a>
+              <ul>
+                <li><a href="#常用写法-3">常用写法</a></li>
+                <li><a href="#经验-4">经验</a></li>
+              </ul>
+            </li>
+            <li><a href="#transform-多重效果">transform 多重效果</a>
+              <ul>
+                <li><a href="#组合使用">组合使用</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#实践用-transform-做红心">实践：用 transform 做红心</a>
+          <ul>
+            <li><a href="#跳动的心">跳动的心</a></li>
+            <li><a href="#心得">心得</a></li>
+          </ul>
+        </li>
+        <li><a href="#transition-过渡">transition 过渡</a>
+          <ul>
+            <li><a href="#作用">作用</a></li>
+            <li><a href="#语法">语法</a></li>
+            <li><a href="#注意">注意</a>
+              <ul>
+                <li><a href="#并不是所有属性都能过渡">并不是所有属性都能过渡</a></li>
+              </ul>
+            </li>
+            <li><a href="#过渡必须要有起始">过渡必须要有起始</a></li>
+          </ul>
+        </li>
+        <li><a href="#如果除了起始还有中间点怎么办">如果除了起始，还有中间点，怎么办</a>
+          <ul>
+            <li><a href="#方法-使用两次-transform">方法① 使用两次 transform</a></li>
+            <li><a href="#方法-使用-animation">方法② 使用 animation</a></li>
+          </ul>
+        </li>
+        <li><a href="#animation-动画">animation 动画</a>
+          <ul>
+            <li><a href="#提问">提问</a></li>
+            <li><a href="#keyframes-完整语法">@keyframes 完整语法</a>
+              <ul>
+                <li><a href="#标准写法">标准写法</a></li>
+              </ul>
+            </li>
+            <li><a href="#animation-缩写语法">animation 缩写语法</a></li>
+          </ul>
+        </li>
+        <li><a href="#实践用-animation-做红心">实践：用 animation 做红心</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>浏览器的渲染流程、transform、transition、animation</p>
+<p>​</p>
+<h2 id="动画的原理">动画的原理</h2>
+<blockquote>
+<p>人脑的 bug</p>
+</blockquote>
+<h3 id="动画">动画</h3>
+<h4 id="定义">定义</h4>
+<ul>
+<li>由许多静止的画面（帧），</li>
+<li>以一定的速度（如每秒30张）连续播放时，</li>
+<li>肉眼因视觉残象产生错觉，</li>
+<li>而误以为是活动的画面。</li>
+</ul>
+<h4 id="概念">概念</h4>
+<ul>
+<li>帧：每个静止的画面都叫做帧</li>
+<li>播放速度：每秒24帧（影视）或者每秒30帧（游戏）</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="一个最简单的例子">一个最简单的例子</h2>
+<h3 id="将div从左往右移动">将div从左往右移动</h3>
+<blockquote>
+<p><a href="http://js.jirengu.com/bagow/1/edit?html,css,js,output">http://js.jirengu.com/bagow/1/edit?html,css,js,output</a></p>
+</blockquote>
+<ul>
+<li><a href="http://js.jirengu.com/wotud/3/edit" target="_blank" rel="noopener noreffer">JSBin 示例1</a>  通过循环定时器 + 定位 + left 实现动画。控制每隔一小段时间增加 left 值，实现位移</li>
+<li><a href="http://js.jirengu.com/rogot/1/edit" target="_blank" rel="noopener noreffer">JSBin 示例2</a>  通过延时器 + 添加类名 + transition / transform 实现动画。控制添加类名</li>
+</ul>
+<h4 id="原理">原理</h4>
+<ul>
+<li>每过一段时间（用setlnterval做到），</li>
+<li>将div移动一小段距离，</li>
+<li>直到移动到目标地点。</li>
+</ul>
+<h4 id="注意性能">注意性能</h4>
+<blockquote>
+<p>需要先搞懂：<a href="#%e6%b5%8f%e8%a7%88%e5%99%a8%e6%b8%b2%e6%9f%93%e8%bf%87%e7%a8%8b" rel="">浏览器的渲染步骤</a>，以及 <a href="#%e6%af%8f%e4%b8%aa%e5%b1%9e%e6%80%a7%e8%a7%a6%e5%8f%91%e4%bb%80%e4%b9%88%e6%b5%81%e7%a8%8b" rel="">每个属性会触发什么流程</a></p>
+</blockquote>
+<ul>
+<li>
+<p>绿色表示重新绘制（repaint）了</p>
+</li>
+<li>
+<p>CSS渲染过程依次包含布局、绘制、合成</p>
+</li>
+<li>
+<p>其中布局和绘制有可能被省略</p>
+</li>
+</ul>
+<p>​</p>
+<h3 id="前端高手不用-left-做动画">前端高手不用 left 做动画</h3>
+<h4 id="用-transform变形">用 transform（变形）</h4>
+<ul>
+<li><a href="http://js.jirengu.com/lojiz/1/edit?html,css,js,output" target="_blank" rel="noopener noreffer">JSBin 演示</a></li>
+</ul>
+<h4 id="原理-1">原理</h4>
+<ul>
+<li><code>transform: translateX(0=&gt;300px)</code></li>
+<li>直接修改会被合成，需要等一会修改</li>
+<li>transition 过渡属性可以自动脑补中间帧</li>
+</ul>
+<h4 id="注意性能-1">注意性能</h4>
+<blockquote>
+<p>需要先搞懂：<a href="#%e6%b5%8f%e8%a7%88%e5%99%a8%e6%b8%b2%e6%9f%93%e8%bf%87%e7%a8%8b" rel="">浏览器的渲染步骤</a>，以及 <a href="#%e6%af%8f%e4%b8%aa%e5%b1%9e%e6%80%a7%e8%a7%a6%e5%8f%91%e4%bb%80%e4%b9%88%e6%b5%81%e7%a8%8b" rel="">每个属性会触发什么流程</a></p>
+</blockquote>
+<ul>
+<li>transform 优势在于，并没有 relayout（重新布局） 和 repaint（重新绘制）过程</li>
+<li>transform 比 left 性能好很多（ 因为 left 会依次经过 relayout、 repaint、composite 3个过程）</li>
+</ul>
+<p>​</p>
+<h3 id="如何查看性能">如何查看性能</h3>
+<blockquote>
+<p>上述 JSBin 示例1/2两种方式，在性能上有什么区别 ？</p>
+</blockquote>
+<h4 id="查看性能的方式">查看性能的方式</h4>
+<ul>
+<li>开启浏览器的【渲染 Rendering 】&gt;  【画图闪烁 Paint flashing】：突出显示需要重新绘制的页面区域（绿色）
+<ul>
+<li><strong>如果元素发生的重新渲染（绿）的次数多，则更耗性能</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2020/07/30/86zKIfi5kT3HnNb.png" alt="image-20200730191619715" style="zoom: 67%;" /></p>
+<ul>
+<li>
+<p>示例1：使用 setInterval ，控制 left 实现动画</p>
+<p>（位移全程 demo元素 都呈绿色：说明全程都在进行demo元素的重新渲染绘制）</p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2020/07/30/Ucpilskq7vNdywJ.gif" alt="left" style="zoom:67%;" /></p>
+<ul>
+<li>
+<p>示例2：添加类名，通过 transition + transform 实现动画</p>
+<p>（刷新后，初次渲染呈绿色，移动过程没有发生重新渲染，移动结束的位置重新渲染一次）</p>
+<p><img src="https://i.loli.net/2020/07/30/chLvHnw4sjBQfJo.gif" alt="transform.gif" style="zoom:67%;" /></p>
+</li>
+<li>
+<p><strong>总结</strong>：<strong>显然 ，示例1 更耗性能，全程都需要重新渲染</strong></p>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="浏览器的渲染原理">浏览器的渲染原理</h2>
+<blockquote>
+<ul>
+<li>既然讲到这里，提到了性能、渲染，那就深入了解一下</li>
+<li>了解浏览器的渲染流程后，再回头看前面2个示例，可能会更好理解它们的不同</li>
+</ul>
+</blockquote>
+<h3 id="参考文章">参考文章</h3>
+<h4 id="google-团队写的文章右上角中文">Google 团队写的文章（右上角中文）</h4>
+<ul>
+<li><a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction" target="_blank" rel="noopener noreffer">渲染树构建、布局及绘制</a></li>
+<li><a href="https://developers.google.com/web/fundamentals/performance/rendering/" target="_blank" rel="noopener noreffer">渲染性能</a></li>
+<li><a href="https://developers.google.com/web/fundamentals/performance/rendering/stick-to-compositor-only-properties-and-manage-layer-count" target="_blank" rel="noopener noreffer">使用 transform 来实现动画</a></li>
+</ul>
+<h4 id="查看css各属性触发什么">查看CSS各属性触发什么</h4>
+<ul>
+<li><a href="https://csstriggers.com/" target="_blank" rel="noopener noreffer">CSSTriggers.com</a></li>
+</ul>
+<p>​</p>
+<h3 id="浏览器渲染过程">浏览器渲染过程</h3>
+<blockquote>
+<p>浏览器在获取到 html 和 css 后做了什么？</p>
+</blockquote>
+<h4 id="步骤">步骤</h4>
+<ol>
+<li>根据 HTML 构建 HTML 树（DOM）</li>
+<li>根据 CSS 构建 CSS 树（CSSOM）</li>
+<li>将两棵树合并成一颗渲染树（render tree）</li>
+<li>根据渲染树，进行 Layout 布局（<strong>文档流</strong>、盒模型、计算大小和位置）
+<ul>
+<li>先定位：某个标签是否在文档流中…<strong>（文档流的概念非常重要！！）</strong></li>
+<li>定位后，要知道这个标签多高多宽、样式如何…</li>
+</ul>
+</li>
+<li>Paint 绘制（填色：把边框颜色、文字颜色、阴影等画出来）</li>
+<li>Composite 合成（根据层叠关系展示画面）</li>
+</ol>
+<h4 id="三棵树">三棵树</h4>
+<blockquote>
+<p>render tree 就是最终用户看到的树</p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/07/30/QkBCtAZrgmjcxJa.png" alt="image-20200730202635490" style="zoom: 80%;" /></p>
+<p>​</p>
+<h2 id="如何更新样式">如何更新样式</h2>
+<h3 id="一般我们用-js-来更新样式">一般我们用 JS 来更新样式</h3>
+<ul>
+<li>比如 <code>div.style.background='red'</code>  让内联背景变红色</li>
+<li>比如 <code>div.style.display='none'</code>  让div消失</li>
+<li>比如 <code>div.classList.add('red')</code>  （小白才直接加样式，高手从来只加类名）</li>
+<li>比如 <code>div.remove()</code>直接删掉节点</li>
+</ul>
+<h3 id="那么这些方法有什么不同吗">那么这些方法有什么不同吗</h3>
+<ul>
+<li>有三种不同的渲染方式</li>
+<li>详细看下面  ↓↓</li>
+</ul>
+<h3 id="三种更新方式">三种更新方式</h3>
+<blockquote>
+<p>使用 JS 来更新样式，要经过哪些步骤 ？</p>
+<ul>
+<li>
+<p>下面有3种代码示例，配合开启浏览器渲染功能，清晰看到执行重新绘制（Paint）的元素</p>
+</li>
+<li>
+<p>注意 JSBin 中最好<strong>全屏</strong>查看效果，在 iframe 里看可能有问题</p>
+</li>
+</ul>
+</blockquote>
+<p><img src="https://i.loli.net/2020/07/30/eLaStTpGBv5wl71.png" alt="image-20200730202524163" style="zoom: 50%;" /></p>
+<h5 id="第一种流程全走一遍">第一种，流程全走一遍</h5>
+<ul>
+<li><a href="http://js.jirengu.com/jagel/1/edit?html,css,js,output" target="_blank" rel="noopener noreffer">div.remove()</a> 会触发当前消失，其他元素 relayout 重新布局</li>
+</ul>
+<h5 id="第二种跳过-layout">第二种，跳过 layout</h5>
+<ul>
+<li>说明没有改变元素的位置和大小，不需要变动布局</li>
+</ul>
+<ul>
+<li>比如说：只<a href="http://js.jirengu.com/jidam/1/edit?html,css,js,output" target="_blank" rel="noopener noreffer">改变背景颜色</a>，直接 repaint + composite</li>
+</ul>
+<h5 id="第三种跳过-layout-和-paint">第三种，跳过 layout 和 paint</h5>
+<ul>
+<li>没有改变位置、大小，也没有改颜色，只需要合成</li>
+</ul>
+<ul>
+<li>例如：只<a href="http://js.jirengu.com/wusew/1" target="_blank" rel="noopener noreffer">改变 transform</a>，则只需 composite 合成</li>
+<li>注意必须全屏查看效果，在 iframe 里看有问题</li>
+</ul>
+<p>​</p>
+<h3 id="每个属性触发什么流程">每个属性触发什么流程</h3>
+<blockquote>
+<p>CSS变态之处来了：挨个尝试吧</p>
+</blockquote>
+<p>还好，程序员喜欢分享</p>
+<p><a href="https://csstriggers.com/">https://csstriggers.com/</a>  这个网站已经把所有属性全试过了</p>
+<p><img src="https://i.loli.net/2020/07/31/WtaTQbkACBsUJyp.png" alt="image-20200731000339579" style="zoom: 80%;" /></p>
+<ul>
+<li>Blink：谷歌 Chrome 浏览器的内核（一般只看 Chrome 性能渲染）</li>
+<li>Gecko：火狐浏览器 Firefox</li>
+<li>WebKit：苹果 Safari 浏览器</li>
+<li>EdgeHTML：微软 Edge 浏览器</li>
+</ul>
+<blockquote>
+<p>现在可以解释 <a href="#%e4%b8%80%e4%b8%aa%e6%9c%80%e7%ae%80%e5%8d%95%e7%9a%84%e4%be%8b%e5%ad%90" rel="">为什么</a> <strong>前端高手不用 left 做动画</strong>，而用 transform 做动画了</p>
+<ul>
+<li>因为执行 left 会触发3个流程：先布局、再绘制、最后合成</li>
+<li>而执行 transform 只会触发 1个流程：只合成</li>
+</ul>
+</blockquote>
+<p><img src="https://i.loli.net/2020/07/31/aqiuHFsVROeUj9g.png" alt="image-20200731005144963" style="zoom:80%;" /></p>
+<p><img src="https://i.loli.net/2020/07/31/BaYIjDdrhTEyAbo.png" alt="image-20200731004929606" style="zoom:80%;" /></p>
+<p>​</p>
+<p>​</p>
+<h2 id="css动画优化">CSS动画优化</h2>
+<blockquote>
+<p>可以自己总结一篇博客。面试背不出来，可以让面试官去看博客</p>
+</blockquote>
+<blockquote>
+<p>CSS 性能优化，除了把 left 变成 transform ，还有什么？</p>
+<ul>
+<li>面试可能考察，但这个问题<strong>没什么技术含量</strong>，就是背</li>
+</ul>
+</blockquote>
+<h3 id="没什么技术含量">没什么技术含量</h3>
+<p>答案都在 <a href="https://developers.google.com/web/fundamentals/performance/rendering/stick-to-compositor-only-properties-and-manage-layer-count" target="_blank" rel="noopener noreffer">Google写的文章</a> 里，谁看完谁牛 X</p>
+<p><img src="https://i.loli.net/2020/07/31/lNgzP8CATID5Hy6.png" alt="image-20200731002020630" style="zoom:80%;" /></p>
+<ul>
+<li>
+<p><a href="https://developers.google.com/web/fundamentals/performance/rendering/optimize-javascript-execution" target="_blank" rel="noopener noreffer">优化 JS 的执行</a> （JavaScript）</p>
+</li>
+<li>
+<p><a href="https://developers.google.com/web/fundamentals/performance/rendering/reduce-the-scope-and-complexity-of-style-calculations" target="_blank" rel="noopener noreffer">缩小样式计算的范围并降低其复杂性</a> （优化 Style 过程）</p>
+</li>
+<li>
+<p><a href="https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing" target="_blank" rel="noopener noreffer">避免大型、复杂的布局和布局抖动</a>（优化 Layout 布局过程）</p>
+</li>
+<li>
+<p><a href="https://developers.google.com/web/fundamentals/performance/rendering/simplify-paint-complexity-and-reduce-paint-areas" target="_blank" rel="noopener noreffer">简化绘制的复杂度、减小绘制区域</a>（优化 Paint 绘制过程）</p>
+</li>
+<li>
+<p><a href="https://developers.google.com/web/fundamentals/performance/rendering/stick-to-compositor-only-properties-and-manage-layer-count" target="_blank" rel="noopener noreffer">坚持仅合成器的属性和管理层计数</a>（优化 Composite 合成过程）</p>
+</li>
+</ul>
+<blockquote>
+<p>上述每篇文章中的优化方法，都总结在【<strong>TL;DR</strong>（too long don&rsquo;t read 太长不看）】部分</p>
+<p>每条优化点之间，都没什么规律，就依靠死记硬背（面试问到，可能这些点，如果能答出1个，就得满分）</p>
+</blockquote>
+<h3 id="js优化">JS优化</h3>
+<p>使用 requestAnimationFrame 代替 setTimeout 或 setInterval</p>
+<h3 id="css优化">CSS优化</h3>
+<p>使用 will-change 或 translate（transform）</p>
+<h3 id="没错">没错</h3>
+<blockquote>
+<p>没错，完全就是死记硬背！</p>
+</blockquote>
+<blockquote>
+<p>如果面试官问，“ CSS 怎么优化 ”？（通常就是问动画怎么优化，性能上更低耗）</p>
+<ul>
+<li>动画尽量使用 will-change 或 translate（transform），不直接使用 left</li>
+<li>JS 控制的动画中，尽量不使用 setTimeout 和 setInterval，而使用 requestAnimationFrame</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h2 id="transform-全解">transform 全解</h2>
+<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform" target="_blank" rel="noopener noreffer">MDN</a> 上讲的非常详细</p>
+</blockquote>
+<h3 id="transform">transform</h3>
+<h4 id="四个常用功能">四个常用功能</h4>
+<ul>
+<li><a href="#transform%e4%b9%8btranslate" rel="">位移 translate</a>（常用）</li>
+<li><a href="#transform%e4%b9%8bscale" rel="">缩放 scale</a>（常用）</li>
+<li><a href="#transform%e4%b9%8brotate" rel="">旋转 rotate</a>（做加载动画可能用到）</li>
+<li><a href="#transform%e4%b9%8bskew" rel="">倾斜 skew</a>（不常用）</li>
+</ul>
+<h4 id="经验">经验</h4>
+<ul>
+<li>一般都需要配合 transition 过渡</li>
+<li>inline 元素不支持 transform，需要先变成 block</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="transform之translate">transform之translate</h3>
+<h4 id="常用写法">常用写法</h4>
+<blockquote>
+<p>可以写长度length和百分号percentage， ?表示可省略值</p>
+</blockquote>
+<ul>
+<li>
+<p><code>translateX(&lt;length-percentage&gt;)</code>   （横向）</p>
+</li>
+<li>
+<p><code>translateY（&lt;length-percentage&gt;)</code>    （纵向）</p>
+</li>
+<li>
+<p><code>translate(&lt;length-percentage&gt;,&lt;length-percentage&gt;?) </code></p>
+<ul>
+<li>可省略第二个值，只写第一个值，默认x轴</li>
+</ul>
+</li>
+<li>
+<p><code>translateZ(&lt;length&gt;)</code> （垂直于屏幕的方向）</p>
+<ul>
+<li>
+<p>在三维世界中，才能看出 Z 的变化。</p>
+<ul>
+<li>需要配合 perspective 属性，告知浏览器<strong>视点</strong>的位置 来形成三维。</li>
+<li>例：<strong><code>perspective: 1000px</code></strong> 指视点在（位于画面中心）距离屏幕 1000 像素的位置上。</li>
+</ul>
+</li>
+<li>
+<p>注意：是给父容器设置 perspective</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;wrapper&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;demo&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">#</span><span class="nn">demo</span><span class="p">{</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">height</span><span class="p">:</span> <span class="mi">200</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
+    <span class="k">margin</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="p">#</span><span class="nn">demo</span><span class="p">:</span><span class="nd">hover</span><span class="p">{</span>
+    <span class="k">transform</span><span class="p">:</span> <span class="nb">translateZ</span><span class="p">(</span><span class="mi">50</span><span class="kt">px</span><span class="p">);</span>  <span class="c">/* 元素在z轴（默认垂直屏幕方向）上的位置 */</span>
+  <span class="p">}</span>
+  <span class="p">.</span><span class="nc">wrapper</span><span class="p">{</span>
+    <span class="k">perspective</span><span class="p">:</span> <span class="mi">1000</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* 形成三维构图，标注视点位置 */</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">black</span><span class="p">;</span>
+  <span class="p">}</span> 
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>translate3d(x,y,z)</p>
+<ul>
+<li><strong><code>translate3d(50px,50px,200px);</code></strong>  同时设定3个轴上的位置</li>
+</ul>
+</li>
+<li>
+<p><a href="http://js.jirengu.com/xidiy/1/edit?html,css,output" target="_blank" rel="noopener noreffer">JSBin 演示</a></p>
+</li>
+</ul>
+<h4 id="经验-1">经验</h4>
+<ul>
+<li>
+<p>要学会看懂 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform" target="_blank" rel="noopener noreffer">MDN 的语法格式</a></p>
+</li>
+<li>
+<p>translate(-50%，-50%) 可做绝对定位元素的<strong>居中</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">#</span><span class="nn">demo</span><span class="p">{</span>
+  <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+  <span class="k">left</span><span class="p">:</span> <span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+  <span class="k">top</span><span class="p">:</span> <span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+  <span class="k">transform</span><span class="p">:</span> <span class="nb">translate</span><span class="p">(</span><span class="mi">-50</span><span class="kt">%</span><span class="p">,</span> <span class="mi">-50</span><span class="kt">%</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="transform之scale">transform之scale</h3>
+<h4 id="常用写法-1">常用写法</h4>
+<ul>
+<li><code>scaleX(&lt;number&gt;) </code></li>
+<li><code>scaleY(&lt;number&gt;) </code></li>
+<li><code>scale(&lt;number&gt;,&lt;number&gt;?)</code></li>
+<li><a href="http://js.jirengu.com/jucal/1/edit?html,css,output" target="_blank" rel="noopener noreffer">JSBin 演示</a></li>
+</ul>
+<h4 id="经验-2">经验</h4>
+<ul>
+<li>用得较少，因为缩放容易出现模糊
+<ul>
+<li>border 也会跟随缩放</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="transform之rotate">transform之rotate</h3>
+<h4 id="常用写法-2">常用写法</h4>
+<blockquote>
+<p>rotate 默认以 Z轴为中心轴，进行转动</p>
+</blockquote>
+<ul>
+<li><code>rotate（[&lt;angle&gt;|&lt;zero&gt;]) </code>   以Z轴为中心旋转</li>
+<li><code>rotateZ([&lt;angle&gt;|&lt;zero&gt;]) </code>   以Z轴为中心旋转</li>
+<li><code>rotateX([&lt;angle&gt;|&lt;zero&gt;])  </code> 以X轴为中心旋转</li>
+<li><code>rotateY（[&lt;angle&gt;|&lt;zero&gt;]) </code>   以Y轴为中心旋转</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-function/rotate3d" target="_blank" rel="noopener noreffer">rotate3d</a> 太复杂，无法用语言表述</li>
+<li><a href="http://js.jirengu.com/jiquq/1/edit?html,css,output" target="_blank" rel="noopener noreffer">JSBin 演示</a></li>
+</ul>
+<h4 id="经验-3">经验</h4>
+<ul>
+<li>一般用于360度旋转制作 loading</li>
+<li>用到时再搜索 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-function/rotate" target="_blank" rel="noopener noreffer">rotate MDN</a> 看文档</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="transform之skew">transform之skew</h3>
+<h4 id="常用写法-3">常用写法</h4>
+<ul>
+<li><code>skewX([&lt;angle&gt;|&lt;zero&gt;]) </code></li>
+<li><code>skewY（[&lt;angle&gt;|&lt;zero&gt;]) </code></li>
+<li><code>skew([&lt;angle&gt;I&lt;zero&gt;],[&lt;angle&gt;|&lt;zero&gt;]?) </code></li>
+<li><a href="http://js.jirengu.com/tazer/1/edit?html,css,output" target="_blank" rel="noopener noreffer">JSBin 演示</a></li>
+</ul>
+<h4 id="经验-4">经验</h4>
+<ul>
+<li>用得较少</li>
+<li>用到时再搜 skew MDN 文档</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="transform-多重效果">transform 多重效果</h3>
+<h4 id="组合使用">组合使用</h4>
+<ul>
+<li>
+<p><strong><code>transform: scale(0.5) translate(-100%, -100%);</code></strong></p>
+</li>
+<li>
+<p><strong><code>transform: none;</code></strong> 取消所有</p>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="实践用-transform-做红心">实践：用 transform 做红心</h2>
+<h3 id="跳动的心">跳动的心</h3>
+<ul>
+<li><a href="http://js.jirengu.com/nonud/1/edit?html,css,output" target="_blank" rel="noopener noreffer">JSBin</a></li>
+</ul>
+<h3 id="心得">心得</h3>
+<ul>
+<li>CSS需要你有想象力，而不是逻辑</li>
+<li>CSS给出的属性都很简单，但是可以组合得很复杂</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!doctype html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&#34;X-UA-Compatible&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;ie=edge&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>beating heart<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+      <span class="o">*</span><span class="p">{</span>
+        <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">box-sizing</span><span class="p">:</span> <span class="kc">border-box</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="p">#</span><span class="nn">heart</span><span class="p">{</span>
+        <span class="k">margin</span><span class="p">:</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">position</span><span class="p">:</span> <span class="kc">relative</span><span class="p">;</span>
+        <span class="c">/*border: 1px solid black;*/</span>
+        <span class="k">display</span><span class="p">:</span> <span class="kc">inline</span><span class="o">-</span><span class="kc">block</span><span class="p">;</span>
+        <span class="k">transition</span><span class="p">:</span> <span class="kc">all</span> <span class="mf">.5</span><span class="kt">s</span> <span class="kc">ease</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="p">#</span><span class="nn">heart</span><span class="p">:</span><span class="nd">hover</span><span class="p">{</span>
+        <span class="k">transform</span><span class="p">:</span> <span class="nb">scale</span><span class="p">(</span><span class="mf">1.5</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="p">#</span><span class="nn">heart</span><span class="o">&gt;</span><span class="p">.</span><span class="nc">bottom</span><span class="p">{</span>
+        <span class="k">width</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">height</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">background-color</span><span class="p">:</span> <span class="kc">red</span><span class="p">;</span>
+        <span class="c">/*border: 1px solid red;*/</span>
+        <span class="k">transform</span><span class="p">:</span> <span class="nb">rotate</span><span class="p">(</span><span class="mi">45</span><span class="kt">deg</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="p">#</span><span class="nn">heart</span><span class="o">&gt;</span><span class="p">.</span><span class="nc">left</span><span class="p">{</span>
+        <span class="k">width</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">height</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">background-color</span><span class="p">:</span> <span class="kc">red</span><span class="p">;</span>
+        <span class="c">/*border: 1px solid red;*/</span>
+        <span class="k">border-radius</span><span class="p">:</span> <span class="mi">50</span><span class="kt">%</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+        <span class="k">transform</span><span class="p">:</span> <span class="nb">rotate</span><span class="p">(</span><span class="mi">45</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">translateX</span><span class="p">(</span><span class="mi">31</span><span class="kt">px</span><span class="p">);</span>
+        <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+        <span class="k">bottom</span><span class="p">:</span><span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+        <span class="k">right</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="p">#</span><span class="nn">heart</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">right</span> <span class="p">{</span>
+        <span class="k">width</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">height</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">background-color</span><span class="p">:</span> <span class="kc">red</span><span class="p">;</span>
+        <span class="c">/*border: 1px solid red;*/</span>
+        <span class="k">border-radius</span><span class="p">:</span> <span class="mi">50</span><span class="kt">%</span> <span class="mi">50</span><span class="kt">%</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">transform</span><span class="p">:</span> <span class="nb">rotate</span><span class="p">(</span><span class="mi">45</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">translate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="kt">px</span><span class="p">);</span>
+        <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+        <span class="k">bottom</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+        <span class="k">left</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;heart&#34;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;left&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;right&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bottom&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h2 id="transition-过渡">transition 过渡</h2>
+<blockquote>
+<p>学习资料：<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition" target="_blank" rel="noopener noreffer">MDN</a></p>
+</blockquote>
+<h3 id="作用">作用</h3>
+<ul>
+<li>补充中间帧
+<ul>
+<li>已知开头位置，结尾位置，中间运动轨迹自动补齐</li>
+</ul>
+</li>
+</ul>
+<h3 id="语法">语法</h3>
+<blockquote>
+<p><strong><code>transition</code></strong> CSS 属性是 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition-property" target="_blank" rel="noopener noreffer"><code>transition-property</code></a>，<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition-duration" target="_blank" rel="noopener noreffer"><code>transition-duration</code></a>，<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition-timing-function" target="_blank" rel="noopener noreffer"><code>transition-timing-function</code></a> 和 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition-delay" target="_blank" rel="noopener noreffer"><code>transition-delay</code></a> 的一个<a href="https://developer.mozilla.org/en-US/docs/CSS/Shorthand_properties" target="_blank" rel="noopener noreffer">简写属性</a>。</p>
+<blockquote>
+<p><a href="http://js.jirengu.com/wasiv/1/edit?html,css,js,output" target="_blank" rel="noopener noreffer">JSBin 示例</a></p>
+</blockquote>
+</blockquote>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="nt">transition</span><span class="o">:</span> <span class="nt">属性名</span> <span class="nt">时长</span> <span class="nt">过渡方式</span> <span class="nt">延迟</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong><code>transition: left 200ms linear </code></strong>   属性名是指要给哪个属性添加过渡效果</p>
+</li>
+<li>
+<p>可以用 all 代表所有属性：width | height | left | right | margin-right  ……</p>
+<p><strong><code>transition: all 200ms </code></strong></p>
+</li>
+<li>
+<p>可以用逗号分隔两个不同属性</p>
+<p><strong><code>transition: left 200ms, top 400ms </code></strong></p>
+</li>
+<li>
+<p>时长 ：支持 秒 s  和  毫秒 ms 单位。0.5s 可以写成  .5s</p>
+</li>
+<li>
+<p>过渡方式有：linear（线性匀速） | ease（默认值：缓动） | ease-in | ease-out | ease- in-out | cubic-bezier | step-start | step-end | steps</p>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/timing-function" target="_blank" rel="noopener noreffer">具体含义</a>要靠数学知识</li>
+<li><a href="https://cubic-bezier.com/">https://cubic-bezier.com/</a>   测试运动曲线</li>
+</ul>
+</li>
+</ul>
+<h3 id="注意">注意</h3>
+<blockquote>
+<p>不学常态，学变态</p>
+</blockquote>
+<h4 id="并不是所有属性都能过渡">并不是所有属性都能过渡</h4>
+<ul>
+<li>
+<p>一个元素，切换可见状态</p>
+<ul>
+<li>
+<p>使用 display: none &lt;=&gt; display: block 没法过渡，会闪现、闪隐【元素消失，不占位置】</p>
+</li>
+<li>
+<p>使用 opacity: 0 &lt;=&gt;  opacity: 1   透明度控制可见状态【可实现过渡效果，<strong>缺点</strong>是元素消失仍占位置】</p>
+</li>
+<li>
+<p><strong>推荐</strong>使用 <strong><code>visibility: hidden</code></strong> &lt;=&gt; <strong><code>visibility: visible</code></strong> （不要问为什么）【缺点没法过渡、元素消失仍占位置】</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">button</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">demo</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">);</span>
+  <span class="cm">/* 解决隐藏后仍占位问题：延迟1s后，将元素删除 */</span>
+  <span class="cm">/* 方法一：使用延时器 */</span>
+  <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="nx">demo</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span> <span class="p">}</span> <span class="p">,</span><span class="mi">1000</span><span class="p">)</span>  
+  <span class="cm">/* 方法二: on事件可能有bug，推荐使用事件监听器 */</span>
+  <span class="nx">demo</span><span class="p">.</span><span class="nx">ontransitionend</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="nx">demo</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span> <span class="p">}</span>  <span class="cm">/* on事件 */</span>
+  <span class="nx">demo</span><span class="p">.</span><span class="nx">addEventLisener</span><span class="p">(</span><span class="s1">&#39;transitionend&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="nx">demo</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span> <span class="p">})</span>   <span class="cm">/* 事件监听器 */</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>display 和 visibility 的区别</p>
+<ul>
+<li>
+<p><a href="https://www.cnblogs.com/zrenj/p/9785835.html">https://www.cnblogs.com/zrenj/p/9785835.html</a></p>
+<p><img src="https://i.loli.net/2020/07/31/9sFSKeyDGiZ2Va1.png" alt="image-20200731220756239" style="zoom: 5%;" /></p>
+</li>
+</ul>
+</li>
+<li>
+<p>background 颜色可以过渡吗？可以 。</p>
+<ul>
+<li><a href="http://js.jirengu.com/wasiv/3/edit?html,css,js,output" target="_blank" rel="noopener noreffer">查看示例</a></li>
+</ul>
+</li>
+<li>
+<p>opacity 透明度可以过渡吗？ 可以 。</p>
+<ul>
+<li><a href="http://js.jirengu.com/wasiv/5/edit?html,css,js,output" target="_blank" rel="noopener noreffer">查看示例</a></li>
+<li><strong>不推荐用透明度控制显示隐藏，推荐 visibility</strong></li>
+<li>opacity: 0 &lt;=&gt;  opacity: 1   可实现过渡效果，<strong>缺点</strong>是元素消失仍占位置，可通过 js 控制 remove() 该元素</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h3 id="过渡必须要有起始">过渡必须要有起始</h3>
+<blockquote>
+<p>起始：指一个属性的开始是一个值，该属性的结尾也有一个值。这样才能实现某属性的属性值的变化过渡，中间过渡的效果浏览器会自动补充</p>
+</blockquote>
+<ul>
+<li>一般只有一次动画，或者两次
+<ul>
+<li>一次：指只有进入动画</li>
+<li>两次：①进入动画、②离开动画</li>
+</ul>
+</li>
+<li>比如 hover 和 非 hover 状态的过渡，就是两次动画</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="如果除了起始还有中间点怎么办">如果除了起始，还有中间点，怎么办</h2>
+<blockquote>
+<p>例如：从红色，先变黄色，最后再变绿色，怎么实现</p>
+</blockquote>
+<p>有如下两种办法</p>
+<h3 id="方法-使用两次-transform">方法① 使用两次 transform</h3>
+<ul>
+<li>
+<p>流程：   .a === transform ===&gt; .b    然后   .b === transform ===&gt; .c</p>
+</li>
+<li>
+<p>如何知道到了中间点呢？</p>
+<ul>
+<li>
+<p>用 setTimeout 或者监听 transitionend 事件。</p>
+<blockquote>
+<p>给元素添加新的类名：执行第二段 transform 效果。</p>
+<ul>
+<li>注意：第二段 transform 中必须包含第一段动画效果，不然执行第二段动画可能还原初始位置，有 bug，可自行测试。</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p><a href="http://js.jirengu.com/vehuz/2/edit" target="_blank" rel="noopener noreffer">JSBin 示例</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="方法-使用-animation">方法② 使用 animation</h3>
+<ul>
+<li>声明关键帧</li>
+<li>添加动画</li>
+<li><a href="http://js.jirengu.com/peran/1/edit?html,css,output" target="_blank" rel="noopener noreffer">JSBin 示例</a></li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="animation-动画">animation 动画</h2>
+<h3 id="提问">提问</h3>
+<blockquote>
+<p>如何让动画停在最后一帧？</p>
+</blockquote>
+<ul>
+<li>
+<p>搜索 css animation stop at end</p>
+<ul>
+<li>
+<p>网友给出的答案是：加个 forwards</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="nt">animation</span><span class="o">:</span> <span class="nt">xxx</span> <span class="nt">1</span><span class="p">.</span><span class="nc">5s</span> <span class="nt">forwards</span><span class="o">;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p><a href="http://js.jirengu.com/lodoy/1/edit?html,css,output" target="_blank" rel="noopener noreffer">JSBin 演示</a></p>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="keyframes-完整语法">@keyframes 完整语法</h3>
+<h4 id="标准写法">标准写法</h4>
+<ul>
+<li>搜索 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes" target="_blank" rel="noopener noreffer">keyframes MDN</a> 讲得很清楚
+<ul>
+<li>一种写法是 from to ：只支持两种状态</li>
+<li>另一种写法是百分数：支持添加 n 个帧状态</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2020/07/31/LINXuQmsd6Pzaj7.png" alt="image-20200731223012625" style="zoom: 60%;" /></p>
+<p><img src="https://i.loli.net/2020/07/31/AYK8w2osjMNpSFh.png" alt="image-20200731223033136" style="zoom: 67%;" /></p>
+<p>​</p>
+<h3 id="animation-缩写语法">animation 缩写语法</h3>
+<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation" target="_blank" rel="noopener noreffer">animation MDN</a></p>
+</blockquote>
+<blockquote>
+<p><strong>animation</strong> 属性是 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-name" target="_blank" rel="noopener noreffer"><code>animation-name</code></a>，<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-duration" target="_blank" rel="noopener noreffer"><code>animation-duration</code></a>, <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-timing-function" target="_blank" rel="noopener noreffer"><code>animation-timing-function</code></a>，<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-delay" target="_blank" rel="noopener noreffer"><code>animation-delay</code></a>，<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-iteration-count" target="_blank" rel="noopener noreffer"><code>animation-iteration-count</code></a>，<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-direction" target="_blank" rel="noopener noreffer"><code>animation-direction</code></a>，<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-fill-mode" target="_blank" rel="noopener noreffer"><code>animation-fill-mode</code></a> 和 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-play-state" target="_blank" rel="noopener noreffer"><code>animation-play-state</code></a> 属性的一个简写属性形式。</p>
+<p><a href="https://xiedaimala.com/tasks/597dbc7b-15e1-4f27-b814-d2151a63c34b/video_tutorials/046dd8ef-8f6f-4051-a233-d4c997113e24" target="_blank" rel="noopener noreffer">Jirengu 视频讲解</a></p>
+<p><a href="http://js.jirengu.com/gaxed/2/edit?html,css,js,output" target="_blank" rel="noopener noreffer">JSBin 演示</a></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="nt">animation</span><span class="o">:</span> <span class="nt">时长</span> <span class="o">|</span> <span class="nt">过渡方式</span> <span class="o">|</span> <span class="nt">延迟</span> <span class="o">|</span> <span class="nt">次数</span> <span class="o">|</span> <span class="nt">方向</span> <span class="o">|</span> <span class="nt">填充模式</span> <span class="o">|</span> <span class="nt">是否暂停</span> <span class="o">|</span> <span class="nt">动画名</span> <span class="o">;</span>  <span class="c">/* 位置任意 */</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>时长：1s 或者 1000ms</p>
+</li>
+<li>
+<p>过渡方式：跟 transition 取值一样，如 linear 。默认是 ease 先快后慢</p>
+</li>
+<li>
+<p>延迟时间：1s 或 1000ms</p>
+</li>
+<li>
+<p>次数：3 或者 2.4 或者 <a href="" rel="">infinite</a>（无限次）</p>
+</li>
+<li>
+<p>方向：reverse | <strong><a href="" rel="">alternate</a></strong>（交替，非常适合做加载动画） | alternate-reverse</p>
+</li>
+<li>
+<p>填充模式：none | <a href="" rel="">forwards</a>（保持在动画终点位置） | backwards | both</p>
+</li>
+<li>
+<p>是否暂停：paused | running</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">pauseBtn</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="nx">demo</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">animationPlayState</span> <span class="o">=</span> <span class="s1">&#39;paused&#39;</span> <span class="p">}</span> 
+<span class="cm">/* 点击按钮，暂停demo元素的动画 */</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>更多属性值的效果，需要自己尝试。<a href="http://js.jirengu.com/gaxed/3/edit" target="_blank" rel="noopener noreffer">JSBin 演示</a></p>
+</li>
+<li>
+<p>以上所有属性都有对应的单独属性</p>
+<ul>
+<li>
+<pre><code>**animation** 只是这些单独属性的**缩写**，上述效果可以通过单独的属性设置
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="实践用-animation-做红心">实践：用 animation 做红心</h2>
+<blockquote>
+<p><a href="http://js.jirengu.com/hosug/1/edit?html,css,output" target="_blank" rel="noopener noreffer">JSBin 示例</a></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!doctype html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&#34;X-UA-Compatible&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;ie=edge&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>beating heart-animation<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+      <span class="o">*</span> <span class="p">{</span>
+        <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">box-sizing</span><span class="p">:</span> <span class="kc">border-box</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="p">@</span><span class="k">keyframes</span> <span class="nt">beating</span> <span class="p">{</span>
+        <span class="nt">0</span><span class="o">%</span> <span class="p">{</span><span class="k">transform</span><span class="p">:</span> <span class="nb">scale</span><span class="p">(</span><span class="mi">1</span><span class="p">)}</span>
+        <span class="c">/*25% {transform: scale(1.25)}*/</span>
+        <span class="c">/*50% {transform: scale(1.5)}*/</span>
+        <span class="c">/*75% {transform: scale(1.25)}*/</span>
+        <span class="nt">100</span><span class="o">%</span> <span class="p">{</span><span class="k">transform</span><span class="p">:</span> <span class="nb">scale</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)}</span>
+      <span class="p">}</span>
+      <span class="p">#</span><span class="nn">heart</span> <span class="p">{</span>
+        <span class="c">/*border: 1px solid black;*/</span>
+        <span class="k">display</span><span class="p">:</span> <span class="kc">inline</span><span class="o">-</span><span class="kc">block</span><span class="p">;</span>
+        <span class="k">position</span><span class="p">:</span> <span class="kc">relative</span><span class="p">;</span>
+        <span class="k">margin</span><span class="p">:</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="p">#</span><span class="nn">heart</span><span class="p">:</span><span class="nd">hover</span> <span class="p">{</span>
+        <span class="k">animation</span><span class="p">:</span> <span class="n">beating</span> <span class="mf">.5</span><span class="kt">s</span> <span class="kc">ease</span> <span class="kc">infinite</span> <span class="kc">alternate</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="p">#</span><span class="nn">heart</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">left</span> <span class="p">{</span>
+        <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+        <span class="k">bottom</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">left</span><span class="p">:</span> <span class="mi">-50</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">width</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">height</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+        <span class="c">/*border: 1px solid red;*/</span>
+        <span class="k">background</span><span class="p">:</span> <span class="kc">red</span><span class="p">;</span>
+        <span class="k">border-radius</span><span class="p">:</span> <span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+        <span class="k">transform</span><span class="p">:</span> <span class="nb">rotate</span><span class="p">(</span><span class="mi">45</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">translateX</span><span class="p">(</span><span class="mi">43</span><span class="kt">px</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="p">#</span><span class="nn">heart</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">right</span> <span class="p">{</span>
+        <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+        <span class="k">bottom</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">right</span><span class="p">:</span> <span class="mi">-50</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">width</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">height</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+        <span class="c">/*border: 1px solid red;*/</span>
+        <span class="k">background</span><span class="p">:</span> <span class="kc">red</span><span class="p">;</span>
+        <span class="k">border-radius</span><span class="p">:</span> <span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+        <span class="k">transform</span><span class="p">:</span> <span class="nb">rotate</span><span class="p">(</span><span class="mi">45</span><span class="kt">deg</span><span class="p">)</span> <span class="nb">translateY</span><span class="p">(</span><span class="mi">45</span><span class="kt">px</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="p">#</span><span class="nn">heart</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">bottom</span> <span class="p">{</span>
+        <span class="k">width</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">height</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+        <span class="c">/*border: 1px solid red;*/</span>
+        <span class="k">background</span><span class="p">:</span> <span class="kc">red</span><span class="p">;</span>
+        <span class="k">transform</span><span class="p">:</span> <span class="nb">rotate</span><span class="p">(</span><span class="mi">45</span><span class="kt">deg</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;heart&#34;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;left&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;right&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bottom&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-08-02</span>
+            </div>
+            <div class="post-info-license"><span>转载请注明出处</span></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/11-css-animation/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://samrks.github.io/11-css-animation/" data-title="Re：从零开始の CSS 学习笔记——动画" data-via="ryuukousen2" data-hashtags="CSS,笔记"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://samrks.github.io/11-css-animation/" data-hashtag="CSS"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://samrks.github.io/11-css-animation/" data-title="Re：从零开始の CSS 学习笔记——动画"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://samrks.github.io/11-css-animation/" data-title="Re：从零开始の CSS 学习笔记——动画"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://samrks.github.io/11-css-animation/" data-title="Re：从零开始の CSS 学习笔记——动画"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/css/">CSS</a>,&nbsp;<a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/10-css-position/" class="prev" rel="prev" title="Re：从零开始の CSS 学习笔记——定位"><i class="fas fa-angle-left fa-fw"></i>Re：从零开始の CSS 学习笔记——定位</a>
+            <a href="/12-http-1/" class="next" rel="next" title="前端也得懂点儿 HTTP (上) ——浅析 URL">前端也得懂点儿 HTTP (上) ——浅析 URL<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+    Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+  </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Thanks For Your Watching!</div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2017 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Sam</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":15},"comment":{"valine":{"appId":"CfUKfSqtOvOnmsUdCmExO2ix-gzGzoHsz","appKey":"l2R78qA3PuUSe1cCxw9WdVxz","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-twitter@5.0.1/img/twitter/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"说点什么吧...（提醒：填写邮箱，若有人回复您，服务器正常的话，您将及时收到提醒邮件！）","recordIP":true,"visitor":false}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
