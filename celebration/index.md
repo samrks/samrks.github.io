@@ -1,13 +1,13 @@
 # 【置顶】开博纪念🥰
 
 
+<!--more-->
 
+## Come on, G！🎉🎉 💪
 
-每一天都是新的开始，Stay Simple，Stay Young 🎉<!--more-->
+> Life is simply about getting hit over and over :)    
 
-## Yeah！🎉🎉
+>   Never put off till tomorrow what you can do today :)
+>
 
-> Life is simply about getting hit over and over :)
-
-
-
+>   You can make IT :)

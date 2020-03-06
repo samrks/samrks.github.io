@@ -2,7 +2,7 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>http://samrks.github.io/celebration/</loc><lastmod>2020-03-11T15:58:26&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://samrks.github.io/celebration/</loc><lastmod>2020-03-06T15:58:26&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://samrks.github.io/categories/</loc><lastmod>2020-09-07T23:08:13&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
             <loc>http://samrks.github.io/tags/class/</loc><lastmod>2020-09-07T23:08:13&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
             <loc>http://samrks.github.io/categories/javascript/</loc><lastmod>2020-09-07T23:08:13&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
@@ -77,10 +77,10 @@
             <loc>http://samrks.github.io/tags/algolia/</loc><lastmod>2020-03-13T21:36:27&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://samrks.github.io/blog-search-algolia/</loc><lastmod>2020-03-13T21:36:27&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://samrks.github.io/tags/%E6%90%9C%E7%B4%A2/</loc><lastmod>2020-03-13T21:36:27&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://samrks.github.io/blog-buy-setup-a-domain/</loc><lastmod>2020-03-12T15:52:18&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://samrks.github.io/tags/%E5%9F%9F%E5%90%8D/</loc><lastmod>2020-03-12T15:52:18&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://samrks.github.io/tags/%E9%83%A8%E7%BD%B2/</loc><lastmod>2020-03-12T15:52:18&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>http://samrks.github.io/blog-buy-setup-a-domain/</loc><lastmod>2020-03-12T15:52:18&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://samrks.github.io/tags/hugo/</loc><lastmod>2020-03-07T00:05:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://samrks.github.io/blog-start-a-hugo/</loc><lastmod>2020-03-07T00:05:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://samrks.github.io/tags/%E6%90%AD%E5%BB%BA/</loc><lastmod>2020-03-07T00:05:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>http://samrks.github.io/tags/%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/</loc><lastmod>2020-03-11T15:58:26&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>
+            <loc>http://samrks.github.io/tags/%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/</loc><lastmod>2020-03-06T15:58:26&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>

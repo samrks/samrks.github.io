@@ -262,7 +262,7 @@
     <guid>http://samrks.github.io/blog-search-algolia/</guid>
     <description><![CDATA[<p>hugo 搜索功能 Algolia</p>
 <h2 id="前言">前言</h2>
-<p><a href="https://gohugo.io/" target="_blank" rel="noopener noreffer">Hugo</a>是由 Steve Francis 大神(<a href="http://spf13.com/">http://spf13.com/</a>)基于<code>Go</code>语言开发的静态网站构建工具。没错你现在看到的本博客就是基于<code>Hugo</code>的，使用 Hugo 创建一个网站是非常简单的，基本上没有什么门槛，官方还提供了大量的主题供你选择，你只需要专心写的文章就行。不过有个问题是搜索，我们知道搜索属于动态行为了，如何给静态网站增加搜索功能呢？当然我们可以使用<code>Google</code>的站内搜索功能，Hugo 官方也提供了一些开源的和商业的解决方案，今天我们要介绍的就是一个非常优秀的商业解决方案：<a href="https://www.algolia.com/" target="_blank" rel="noopener noreffer">Algolia</a>。</p>
+<p><a href="https://gohugo.io/" target="_blank" rel="noopener noreffer">Hugo</a>是由 Steve Francis 大神（http://spf13.com/）基于<code>Go</code>语言开发的静态网站构建工具。没错你现在看到的本博客就是基于<code>Hugo</code>的，使用 Hugo 创建一个网站是非常简单的，基本上没有什么门槛，官方还提供了大量的主题供你选择，你只需要专心写的文章就行。不过有个问题是搜索，我们知道搜索属于动态行为了，如何给静态网站增加搜索功能呢？当然我们可以使用<code>Google</code>的站内搜索功能，Hugo 官方也提供了一些开源的和商业的解决方案，今天我们要介绍的就是一个非常优秀的商业解决方案：<a href="https://www.algolia.com/" target="_blank" rel="noopener noreffer">Algolia</a>。</p>
 <h2 id="注册">注册</h2>
 <ol>
 <li>
@@ -394,7 +394,7 @@
 <li><a href="https://www.qikqiak.com/post/hugo-integrated-algolia-search/" target="_blank" rel="noopener noreffer">Hugo 集成 Algolia 搜索</a></li>
 </ol>]]></description>
 </item><item>
-    <title>💰个人博客绑定域名</title>
+    <title>个人博客：💰购买并配置域名</title>
     <link>http://samrks.github.io/blog-buy-setup-a-domain/</link>
     <pubDate>Thu, 12 Mar 2020 15:52:18 &#43;0800</pubDate>
     <author>作者</author>
@@ -527,11 +527,11 @@
 <li>A 记录可能要很久才会生效，等就好了</li>
 </ul>
 <p>​</p>
-<h3 id="无法访问域名">无法访问域名</h3>
+<h3 id="tip">tip</h3>
 <blockquote>
-<p>如果全部配置成功，但仍无法访问域名、进入博客或者博客乱码，就只能放弃域名方案 😭。。。</p>
+<p>如果要放弃域名方案 😭</p>
 <ul>
-<li>把仓库中的 CNAME（自定义域名） 删掉。settings中 custom domain 也删掉。</li>
+<li>把仓库中的 CNAME文件（自定义域名） 删掉。settings 中 custom domain 也删掉。</li>
 </ul>
 </blockquote>]]></description>
 </item><item>

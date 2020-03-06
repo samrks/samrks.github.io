@@ -1,4 +1,4 @@
-# 💰个人博客绑定域名
+# 个人博客：💰购买并配置域名
 
 
 买个域名玩玩！  <!--more-->
@@ -84,11 +84,11 @@
 
 +   （点击蓝色圆形按钮）进入某个域名的管理页面，点击选择 A
 
-    +   ![image-20200714152032229](https://gitee.com/samrks/PicGo-Img/raw/master/img/image-20200714152032229.png)
+    +   ![image-20200714152032229](https://i.loli.net/2020/09/15/4zCaRt7fprTy1xl.png)
 
     +   会生成一个配置，然后依次将4个IP 多填入提交，生成4条配置。只保留这4条配置，将其他默认存在的配置删除即可，默认提供的配置都是没用的
 
-        ![image-20200714152421752](https://gitee.com/samrks/PicGo-Img/raw/master/img/image-20200714152421752.png)
+        ![image-20200714152421752](https://i.loli.net/2020/09/15/CMc7yOmNpe3lU9q.png)
 
 ##### 阿里云 配置 A 记录
 
@@ -115,11 +115,11 @@
 
 ​	
 
-### 无法访问域名
+### tip
 
->   如果全部配置成功，但仍无法访问域名、进入博客或者博客乱码，就只能放弃域名方案 :sob:。。。
+>   如果要放弃域名方案 :sob:
 >
->   +   把仓库中的 CNAME（自定义域名） 删掉。settings中 custom domain 也删掉。
+>   +   把仓库中的 CNAME文件（自定义域名） 删掉。settings 中 custom domain 也删掉。
 
 
 
