@@ -1,0 +1,837 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Grid - 标签 - Sam&#39;s Garage</title>
+        <link>http://samrks.github.io/tags/grid/</link>
+        <description>Grid - 标签 - Sam&#39;s Garage</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Sun, 26 Jul 2020 13:26:52 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/grid/" rel="self" type="application/rss+xml" /><item>
+    <title>Re：从零开始の CSS 学习笔记——布局（下）</title>
+    <link>http://samrks.github.io/css-layout-2/</link>
+    <pubDate>Sun, 26 Jul 2020 13:26:52 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/css-layout-2/</guid>
+    <description><![CDATA[<p>CSS 布局篇（下）：Grid 布局。</p>
+<p>​</p>
+<h2 id="如何在两套布局中切换">如何在两套布局中切换</h2>
+<blockquote>
+<p>一个css中，写两种布局，使用 @media 媒体查询来切换</p>
+</blockquote>
+<p>​</p>
+<h2 id="grid-布局">Grid 布局</h2>
+<blockquote>
+<p>Grid 布局兼容性并不好，在一两年内都可能不会非常广泛的使用（现在可以不用学的那么仔细）</p>
+<p>但功能确实非常强大</p>
+</blockquote>
+<ul>
+<li>flex 更擅长 一维布局，要么横着布局，要么竖着布局</li>
+<li>一维布局用 Flex</li>
+</ul>
+<p>​</p>
+<h2 id="二维布局用-grid">二维布局用 Grid</h2>
+<blockquote>
+<p>以下内容主要来自 CSS Tricks 的一篇文章  <a href="https://css-tricks.com/snippets/css/complete-guide-grid/" target="_blank" rel="noopener noreffer">A Complete Guide to Grid</a></p>
+</blockquote>
+<ul>
+<li>查看本地代码</li>
+</ul>
+<p>​</p>
+<h3 id="grid-也分-container-和-items">Grid 也分 container 和 items</h3>
+<blockquote>
+<p>分别记忆</p>
+</blockquote>
+<h3 id="成为-container">成为 container</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span>
+	<span class="k">display</span><span class="p">:</span> <span class="k">grid</span> <span class="o">|</span> <span class="kc">inline</span><span class="o">-</span><span class="k">grid</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="行和列">行和列</h3>
+<blockquote>
+<p>类似 table 表格（grid 被称为新时代的表格）</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span>
+	<span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
+  <span class="n">grid-tamplate-columns</span><span class="p">:</span> <span class="mi">40</span><span class="kt">px</span> <span class="mi">50</span><span class="kt">px</span> <span class="kc">auto</span> <span class="mi">50</span><span class="kt">px</span> <span class="mi">40</span><span class="kt">px</span><span class="p">;</span>   <span class="c">/* 每列宽度（有n个值对应生成n列） */</span>
+    			         <span class="c">/*  第1列 第2列 第3列 第4列 第5列  */</span>
+  
+  <span class="n">grid-tamplate-rows</span><span class="p">:</span> <span class="mi">25</span><span class="kt">%</span> <span class="mi">100</span><span class="kt">px</span> <span class="kc">auto</span><span class="p">;</span>   <span class="c">/* 每行高度（有n个值对应生成n行） */</span>
+                 <span class="c">/*  第1行 第2行 第3行  */</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<blockquote>
+<p>[1]  [2]  [3]  …  [6]   指的是线的序号。用于划分 items  的范围（<a href="#%e7%ac%ac%e4%ba%8c%e6%ad%a5" rel="">具体使用见 items 部分 </a>）</p>
+</blockquote>
+<p>​</p>
+<h4 id="缩写--grid-template">缩写  grid-template</h4>
+<blockquote>
+<p><code>grid-template</code>是<code>grid-template-rows</code>（行高）和<code>grid-template-columns</code>（列宽）的缩写形式。</p>
+<p>比如说，<code>grid-template: 50% 50% / 200px;</code>将创建一个具有两行的网格，每一行占据50%，以及一个200像素宽的列。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="c">/* 需要包括你的花园上部的60%，以及左侧的200像素。 */</span>
+<span class="p">#</span><span class="nn">garden</span> <span class="p">{</span>
+  <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
+  <span class="k">grid-template</span><span class="p">:</span> <span class="mi">60</span><span class="kt">%</span> <span class="mi">40</span><span class="kt">%</span> <span class="o">/</span> <span class="mi">200</span><span class="kt">px</span> <span class="nb">calc</span><span class="p">(</span><span class="mi">100</span><span class="kt">%</span> <span class="o">-</span> <span class="mi">200</span><span class="kt">px</span><span class="p">)</span> <span class="p">;</span>
+  			 	<span class="c">/*	行高↑↑       列宽↑↑   */</span>
+<span class="p">}</span>
+
+<span class="p">#</span><span class="nn">water</span> <span class="p">{</span>
+  <span class="k">grid-column</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">grid-row</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="c">/* 你的花园看起来很棒。现在，你在花园的底部留下了50像素的小路，其他的空间用来种植胡萝卜。
+</span><span class="c">不幸的是，胡萝卜地的20%已经杂草丛生了，最后一次用CSS网格布局来规划你的花园吧！ */</span>
+<span class="p">#</span><span class="nn">garden</span> <span class="p">{</span>
+  <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
+  <span class="k">grid-template</span><span class="p">:</span> <span class="nb">calc</span><span class="p">(</span><span class="mi">100</span><span class="kt">%</span> <span class="o">-</span> <span class="mi">50</span><span class="kt">px</span><span class="p">)</span> <span class="mi">50</span><span class="kt">px</span><span class="o">/</span><span class="mi">20</span><span class="kt">%</span> <span class="mi">80</span><span class="kt">%</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>​</p>
+<h3 id="指定-items-布局">指定 items 布局</h3>
+<h4 id="第一步">第一步</h4>
+<blockquote>
+<ul>
+<li>
+<p>搭出大框架：几行几列</p>
+</li>
+<li>
+<p>有几个区域，就建立几个 items</p>
+</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="o">*</span> <span class="p">{</span>
+    <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">box-sizing</span><span class="p">:</span> <span class="kc">border-box</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="p">.</span><span class="nc">container</span> <span class="p">{</span>
+    <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
+    <span class="k">grid-template-columns</span><span class="p">:</span> <span class="mi">40</span><span class="kt">px</span> <span class="mi">50</span><span class="kt">px</span> <span class="kc">auto</span> <span class="mi">50</span><span class="kt">px</span> <span class="mi">40</span><span class="kt">px</span><span class="p">;</span>   <span class="c">/* 5列（auto会撑满该行余下空间） */</span>
+    <span class="k">grid-template-rows</span><span class="p">:</span> <span class="mi">100</span><span class="kt">px</span> <span class="mi">300</span><span class="kt">px</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* 3行（每行高度累加，成为container的总高度） */</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">3</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="p">.</span><span class="nc">a</span><span class="o">,</span> <span class="p">.</span><span class="nc">b</span><span class="o">,</span> <span class="p">.</span><span class="nc">c</span><span class="o">,</span> <span class="p">.</span><span class="nc">d</span><span class="o">,</span> <span class="p">.</span><span class="nc">e</span> <span class="p">{</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">3</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">black</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
+  <span class="c">&lt;!-- emmet快捷键: 键入.a+.b+.c+.d ——&gt; tab 创建出5个div，class分别为abcde --&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;a&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>  <span class="c">&lt;!--第1行, 第1列--&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;b&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>  <span class="c">&lt;!--第1行, 第2列--&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;c&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>  <span class="c">&lt;!--第1行, 第3列--&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;d&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>  <span class="c">&lt;!--第1行, 第4列--&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;e&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>  <span class="c">&lt;!--第1行, 第5列--&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>container 中的子元素，<strong>与列数一一对应</strong>。且默认只占据第一行。所以添加 border 后 效果如下图所示</li>
+</ul>
+<p></p>
+<h4 id="第二步">第二步</h4>
+<blockquote>
+<p>给每个 item 指定区域、设置范围</p>
+</blockquote>
+<h5 id="grid-xxx-start--grid-xxx-end">grid-xxx-start / grid-xxx-end</h5>
+<blockquote>
+<p>grid-row-start、grid-row-end</p>
+<p>grid-column-start、grid-column-end</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">a</span><span class="p">{</span>
+  <span class="k">grid-row-start</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>  <span class="c">/* a从哪条线开始 */</span>     
+  <span class="k">grid-row-end</span><span class="p">:</span> <span class="mi">3</span><span class="p">;</span>    <span class="c">/* a到哪条线结束 */</span>         
+  <span class="c">/* 指定的两条【线】的中间区域，就是a所占的【行】 */</span>
+
+  <span class="k">grid-column-start</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>   
+  <span class="k">grid-column-end</span><span class="p">:</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="c">/* 指定的两条【线】的中间区域，就是a所占的【列】 */</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h5 id="grid-row--grid-column">grid-row / grid-column</h5>
+<blockquote>
+<p>grid-row：grid-row-start / grid-row-end;</p>
+<p>grid-column:  grid-column-start / grid-column-end;</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="c">/* 上面写法，可以缩写成 ↓ */</span>
+<span class="p">.</span><span class="nc">a</span><span class="p">{</span>
+  <span class="k">grid-row</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="p">;</span>
+  <span class="k">grid-column</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="p">;</span>   
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h5 id="grid-area">grid-area</h5>
+<blockquote>
+<p>grid-area属性接受4个由&rsquo;/&lsquo;分开的值：grid-row-start, grid-column-start, grid-row-end, 最后是 grid-column-end。</p>
+<p>​																					起始行 ↑↑            起始列 ↑↑           终止行 ↑↑                      终止列 ↑↑</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="c">/* 再进一步缩写 */</span>
+<span class="p">.</span><span class="nc">a</span><span class="p">{</span>
+  <span class="k">grid-area</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="mi">2</span> <span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>最终效果</p>
+<p></p>
+</li>
+</ul>
+<p>​</p>
+<h4 id="可以给线起名字">可以给线起名字</h4>
+<blockquote>
+<p>但没必要，代码太麻烦。就按照序号就很好</p>
+</blockquote>
+<p></p>
+<p>取名结果：如图↘</p>
+<p></p>
+<p>item可以设置范围，直接用线的名称</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">item-a</span><span class="p">{</span> 
+  <span class="k">grid-column-start</span><span class="p">:</span> <span class="mi">2</span><span class="p">;</span> 
+  <span class="k">grid-column-end</span><span class="p">:</span> <span class="n">five</span><span class="p">;</span>
+  <span class="k">grid-row-start</span><span class="p">:</span> <span class="n">rowl-start</span><span class="p">;</span> 
+  <span class="k">grid-row-end</span><span class="p">:</span> <span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>​</p>
+<p>​</p>
+<h3 id="fr-单位份">fr ：单位【份】</h3>
+<blockquote>
+<p>容器属性</p>
+</blockquote>
+<blockquote>
+<p>全称  free space   自由空间</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;a&#34;</span><span class="p">&gt;</span>a<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;b&#34;</span><span class="p">&gt;</span>b<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;c&#34;</span><span class="p">&gt;</span>c<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;d&#34;</span><span class="p">&gt;</span>d<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;e&#34;</span><span class="p">&gt;</span>e<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="c">&lt;!-- &lt;div class=&#34;f&#34;&gt;f&lt;/div&gt; --&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="o">&lt;</span><span class="nt">style</span><span class="o">&gt;</span>
+<span class="o">*</span> <span class="p">{</span><span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span><span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span><span class="k">box-sizing</span><span class="p">:</span> <span class="kc">border-box</span><span class="p">;}</span>
+<span class="p">.</span><span class="nc">container</span> <span class="p">{</span>
+  <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
+  <span class="k">grid-template-columns</span><span class="p">:</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span><span class="p">;</span>   <span class="c">/* fr=份，与flex的份类似：共3列每列占1份，也就是均分 */</span>
+  <span class="k">grid-template-rows</span><span class="p">:</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span><span class="p">;</span>  <span class="c">/* 共2行，每行占1份，均分 */</span>
+  <span class="k">border</span><span class="p">:</span> <span class="mi">3</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
+  <span class="k">min-height</span><span class="p">:</span> <span class="mi">500</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">a</span><span class="o">,</span> <span class="p">.</span><span class="nc">b</span><span class="o">,</span> <span class="p">.</span><span class="nc">c</span><span class="o">,</span> <span class="p">.</span><span class="nc">d</span><span class="o">,</span> <span class="p">.</span><span class="nc">e</span> <span class="p">{</span>
+  <span class="k">border</span><span class="p">:</span> <span class="mi">3</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">black</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">e</span><span class="p">{</span>
+  <span class="k">grid-column-start</span><span class="p">:</span> <span class="mi">2</span><span class="p">;</span>    <span class="c">/* 再单独定义e版块占两列空间 */</span>
+  <span class="k">grid-column-end</span><span class="p">:</span> <span class="mi">4</span><span class="p">;</span>
+  <span class="k">background-color</span><span class="p">:</span> <span class="mh">#ccc</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="o">&lt;/</span><span class="nt">style</span><span class="o">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>​</p>
+<h4 id="变形">变形</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span> <span class="p">{</span>
+  <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
+  <span class="k">grid-template-rows</span><span class="p">:</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">3</span><span class="n">fr</span><span class="p">;</span>   <span class="c">/* 2行：第2行占3份 */</span>
+  <span class="k">grid-template-columns</span><span class="p">:</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">2</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span><span class="p">;</span>   <span class="c">/* 3列：第2列占2份 */</span>
+  <span class="err">...</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>​</p>
+<h4 id="平均布局-grid-gap">平均布局 grid-gap</h4>
+<blockquote>
+<p>fr 主要用于实现平均布局</p>
+</blockquote>
+<blockquote>
+<p>容器属性：grid-gap  用于控制间距</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="c">&lt;!-- 应用下面grid布局样式，可实现任意添加.image，都可以实现一排4个、间距12px的布局 --&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="o">*</span><span class="p">{</span>
+    <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">box-sizing</span><span class="p">:</span> <span class="kc">border-box</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="p">.</span><span class="nc">container</span><span class="p">{</span>
+    <span class="k">margin-right</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+    <span class="k">margin-left</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+    <span class="k">margin-top</span><span class="p">:</span> <span class="mi">30</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">outline</span><span class="p">:</span> <span class="mi">5</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">800</span><span class="kt">px</span><span class="p">;</span>
+    <span class="c">/* 开启grid布局 */</span>
+    <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
+    <span class="k">grid-template-columns</span><span class="p">:</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span><span class="p">;</span>  <span class="c">/* 格子布局：1排4个 */</span>
+    <span class="k">grid-template-rows</span><span class="p">:</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span><span class="p">;</span>   
+    <span class="k">grid-gap</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* 计算每项边距，自动计算位置，四边上的会紧贴 */</span>
+  <span class="p">}</span>
+  <span class="p">.</span><span class="nc">container</span><span class="o">&gt;</span><span class="nt">div</span><span class="p">{</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">2</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">black</span><span class="p">;</span>
+    <span class="k">background-color</span><span class="p">:</span> <span class="mh">#ccc</span><span class="p">;</span>
+    <span class="k">height</span><span class="p">:</span> <span class="mi">191</span><span class="kt">px</span><span class="p">;</span> <span class="c">/* 宽800px，1排4个产品，计算得出：每个产品可占宽191px，则间距为12px */</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">191</span><span class="kt">px</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>​</p>
+<h3 id="分区-grid-template-areas">分区 grid template-areas</h3>
+<blockquote>
+<p>名字很长，但非常好用</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">header</span><span class="p">&gt;</span>header<span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">aside</span><span class="p">&gt;</span>aside<span class="p">&lt;/</span><span class="nt">aside</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">main</span><span class="p">&gt;</span>main<span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;ad&#34;</span><span class="p">&gt;</span>ad<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">footer</span><span class="p">&gt;</span>footer<span class="p">&lt;/</span><span class="nt">footer</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">.</span><span class="nc">container</span> <span class="p">{</span>
+    <span class="k">min-height</span><span class="p">:</span> <span class="mi">100</span><span class="kt">vh</span><span class="p">;</span>   <span class="c">/* 最小高度为占满整个屏幕 */</span>
+    <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
+    <span class="k">grid-template-rows</span><span class="p">:</span> <span class="mi">60</span><span class="kt">px</span> <span class="kc">auto</span> <span class="mi">60</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* 行高 */</span>
+    <span class="k">grid-template-columns</span><span class="p">:</span> <span class="mi">190</span><span class="kt">px</span> <span class="kc">auto</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>    <span class="c">/* 列宽 */</span>
+    <span class="c">/* 布局：以版块名称直接写出布局、位置 */</span>
+    <span class="k">grid-template-areas</span><span class="p">:</span>  
+      <span class="s2">&#34;header header header&#34;</span>
+      <span class="s2">&#34;aside main ad&#34;</span>
+      <span class="s2">&#34;. footer .&#34;</span><span class="p">;</span>  <span class="c">/* 空格通常会写一个不存在的名称，如【.】点 */</span>
+    <span class="k">grid-gap</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* 设置空隙 */</span>
+  <span class="p">}</span>
+  <span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="o">*</span> <span class="p">{</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">2</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span>
+  <span class="p">}</span>
+  <span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="nt">header</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">header</span><span class="p">;}</span>   <span class="c">/* 版块命名 */</span>
+  <span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="nt">aside</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">aside</span><span class="p">;}</span>
+  <span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="nt">aside</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">aside</span><span class="p">;}</span>
+  <span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="nt">main</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">main</span><span class="p">;}</span>
+  <span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">ad</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">ad</span><span class="p">;}</span>
+  <span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="nt">footer</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">footer</span><span class="p">;}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<h4 id="grid-gap-设置间距">grid-gap 设置间距</h4>
+<blockquote>
+<p>grid-gap：通用间距</p>
+<p>grid-row-gap :   行间距</p>
+<p>grid-column-gap： 列间距</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span>
+  <span class="err">...</span>
+  <span class="k">grid-gap</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span>
+  <span class="err">...</span>
+  <span class="k">grid-row-gap</span><span class="p">:</span> <span class="mi">20</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* 行间距 */</span>
+  <span class="k">grid-column-gap</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>   <span class="c">/* 列间距 */</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>​</p>
+<p>​</p>
+<h2 id="实践">实践</h2>
+<h3 id="布局">布局</h3>
+<blockquote>
+<p>Grid 尤其适合不规则布局</p>
+</blockquote>
+<h3 id="经验">经验</h3>
+<blockquote>
+<ul>
+<li>等到 Grid 普及了，前端对CSS的要求会进一步降低</li>
+<li>目前你简单尝试一下 Grid 就可以了</li>
+</ul>
+</blockquote>
+<h3 id="示例">示例</h3>
+<h4 id="第一步根据设计图划分行列需求给每块区域命名">第一步：根据设计图，划分行列需求，给每块区域命名</h4>
+<p></p>
+<h4 id="第二步书写容器样式">第二步：书写【容器】样式</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">header</span><span class="p">&gt;</span>header<span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image bigImage&#34;</span><span class="p">&gt;</span>big<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image smallImage&#34;</span><span class="p">&gt;</span>small<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image smallImage&#34;</span><span class="p">&gt;</span>small<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image smallImage&#34;</span><span class="p">&gt;</span>small<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image middleImage&#34;</span><span class="p">&gt;</span>middle<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image middleImage&#34;</span><span class="p">&gt;</span>middle<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image middleImage&#34;</span><span class="p">&gt;</span>middle<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="o">*</span> <span class="p">{</span>
+    <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">box-sizing</span><span class="p">:</span> <span class="kc">border-box</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="p">.</span><span class="nc">container</span> <span class="p">{</span>
+    <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
+    <span class="k">grid-template-rows</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span> <span class="mi">200</span><span class="kt">px</span> <span class="nf">repeat</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">100</span><span class="kt">px</span><span class="p">);</span> <span class="c">/* 重复4个120px，可以使用repeat()缩写语法 */</span>
+    <span class="k">grid-template-columns</span><span class="p">:</span> <span class="mi">240</span><span class="kt">px</span> <span class="mi">240</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">grid-template-areas</span><span class="p">:</span>
+      <span class="s2">&#34;header header&#34;</span>
+      <span class="s2">&#34;big mid1&#34;</span>
+      <span class="s2">&#34;big mid2&#34;</span>
+      <span class="s2">&#34;sm1 mid2&#34;</span>
+      <span class="s2">&#34;sm2 mid3&#34;</span>
+      <span class="s2">&#34;sm3 mid3&#34;</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="第三步指定每项的名称所属">第三步：指定每项的名称（所属）</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="o">*</span> <span class="p">{</span>
+  <span class="k">border</span><span class="p">:</span> <span class="mi">2</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">black</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="nt">header</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">header</span><span class="p">;}</span>
+<span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">image</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">2</span><span class="o">)</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">big</span><span class="p">;}</span>
+<span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">image</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">3</span><span class="o">)</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">sm2</span><span class="p">;}</span>
+<span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">image</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">4</span><span class="o">)</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">sm3</span><span class="p">;}</span>
+<span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">image</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">5</span><span class="o">)</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">mid1</span><span class="p">;}</span>
+<span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">image</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">6</span><span class="o">)</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">mid2</span><span class="p">;}</span>
+<span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">image</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">7</span><span class="o">)</span> <span class="p">{</span><span class="k">grid-area</span><span class="p">:</span> <span class="n">mid3</span><span class="p">;}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>​</p>
+<p>​</p>
+<h3 id="游戏">游戏</h3>
+<p><a href="https://cssgridgarden.com/#zh-cn">https://cssgridgarden.com/#zh-cn</a></p>
+<p>忘记用法时，可以通过游戏来快速回忆</p>
+<p>​</p>
+<h4 id="grid-area-1">grid-area</h4>
+<blockquote>
+<p>grid-area属性接受4个由&rsquo;/&lsquo;分开的值：grid-row-start, grid-column-start, grid-row-end, 最后是 grid-column-end。</p>
+<p>​																					起始行 ↑↑            起始列 ↑↑           终止行 ↑↑                      终止列 ↑↑</p>
+</blockquote>
+<p></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">#</span><span class="nn">garden</span> <span class="p">{</span>
+  <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
+  <span class="k">grid-template-columns</span><span class="p">:</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span><span class="p">;</span>
+  <span class="k">grid-template-rows</span><span class="p">:</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">#</span><span class="nn">water-1</span> <span class="p">{</span>
+  <span class="k">grid-area</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">4</span> <span class="o">/</span> <span class="mi">6</span> <span class="o">/</span> <span class="mi">5</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">#</span><span class="nn">water-2</span> <span class="p">{</span>
+  <span class="k">grid-area</span><span class="p">:</span> <span class="mi">2</span> <span class="o">/</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">6</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="order">order</h4>
+<blockquote>
+<p>如果网格项不是以<code>grid-area</code>、<code>grid-column</code>、<code>grid-row</code> 等显示的，它们会自动按照它们在源程序中出现的位置摆放。同样我们也可以使用<code>order</code>属性来重写它的顺序，这也是网格布局优于表格布局的好处之一。</p>
+<p>默认情况下，所有的网格项的<code>order</code>都是0，但是顺序也可以被任意设置为正数或者负数，就像<code>z-index</code>一样。</p>
+</blockquote>
+<p>​</p>
+<h4 id="fr-与-px-结合">fr 与 px 结合</h4>
+<p></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">#</span><span class="nn">garden</span> <span class="p">{</span>
+  <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
+  <span class="k">grid-template-columns</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">grid-template-rows</span><span class="p">:</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">#</span><span class="nn">water</span> <span class="p">{</span>
+  <span class="k">grid-area</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">6</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">#</span><span class="nn">poison</span> <span class="p">{</span>
+  <span class="k">grid-area</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">6</span> <span class="o">/</span> <span class="mi">6</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">#</span><span class="nn">garden</span> <span class="p">{</span>
+  <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
+  <span class="k">grid-template-columns</span><span class="p">:</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span> <span class="mi">20</span><span class="kt">%</span><span class="p">;</span>
+  <span class="k">grid-template-rows</span><span class="p">:</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span> <span class="mi">1</span><span class="n">fr</span> <span class="nb">calc</span><span class="p">(</span><span class="mi">100</span><span class="kt">%</span> <span class="o">-</span> <span class="mi">50</span><span class="kt">px</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">#</span><span class="nn">water</span> <span class="p">{</span>
+  <span class="k">grid-column</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">6</span><span class="p">;</span>
+  <span class="k">grid-row</span><span class="p">:</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">6</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>]]></description>
+</item></channel>
+</rss>

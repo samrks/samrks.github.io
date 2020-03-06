@@ -6,10 +6,10 @@
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
             <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Mon, 07 Sep 2020 23:08:13 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/posts/" rel="self" type="application/rss+xml" /><item>
     <title>【置顶】开博纪念🥰</title>
-    <link>http://samrks.github.io/0-celebration/</link>
+    <link>http://samrks.github.io/celebration/</link>
     <pubDate>Fri, 06 Mar 2020 20:10:04 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/0-celebration/</guid>
+    <guid>http://samrks.github.io/celebration/</guid>
     <description><![CDATA[<p>每一天都是新的开始，Stay Simple，Stay Young 🎉</p>
 <h2 id="yeah">Yeah！🎉🎉</h2>
 <blockquote>
@@ -17,10 +17,10 @@
 </blockquote>]]></description>
 </item><item>
     <title>JS 对象分类——原型 &amp; 类</title>
-    <link>http://samrks.github.io/18-javascript-constructor-prototype-vs-class/</link>
+    <link>http://samrks.github.io/javascript-constructor-prototype-vs-class/</link>
     <pubDate>Mon, 07 Sep 2020 23:08:13 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/18-javascript-constructor-prototype-vs-class/</guid>
+    <guid>http://samrks.github.io/javascript-constructor-prototype-vs-class/</guid>
     <description><![CDATA[<p>「构造函数」「原型」「new 操作符」「类 class」</p>
 <p>​</p>
 <h2 id="对象需要分类吗">对象需要分类吗？</h2>
@@ -1542,10 +1542,10 @@
 </ul>]]></description>
 </item><item>
     <title>JS 对象的基本用法</title>
-    <link>http://samrks.github.io/17-javascript-crud-of-object-prototype/</link>
+    <link>http://samrks.github.io/javascript-crud-of-object-prototype/</link>
     <pubDate>Wed, 02 Sep 2020 21:50:44 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/17-javascript-crud-of-object-prototype/</guid>
+    <guid>http://samrks.github.io/javascript-crud-of-object-prototype/</guid>
     <description><![CDATA[<p>「增」「删」「改」「查」</p>
 <h2 id="回顾">回顾</h2>
 <h3 id="七种数据类型">七种数据类型</h3>
@@ -2493,10 +2493,10 @@ obj.name 不等价于 obj[name]</p>
 </blockquote>]]></description>
 </item><item>
     <title>JS 的数据类型🧐</title>
-    <link>http://samrks.github.io/16-javascript-data-type/</link>
+    <link>http://samrks.github.io/javascript-something-about-data-type/</link>
     <pubDate>Thu, 27 Aug 2020 01:45:54 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/16-javascript-data-type/</guid>
+    <guid>http://samrks.github.io/javascript-something-about-data-type/</guid>
     <description><![CDATA[<p>「如何存数字&amp;字符」「JS 的数据类型」「64位浮点数 」「变量声明 var / let / const」「类型转换」</p>
 <p>​</p>
 <h2 id="数据为什么需要类型">数据为什么需要类型</h2>
@@ -3886,10 +3886,10 @@ obj.name 不等价于 obj[name]</p>
 </blockquote>]]></description>
 </item><item>
     <title>JS 的基本语法⚙️</title>
-    <link>http://samrks.github.io/15-javascript-basic-syntax/</link>
+    <link>http://samrks.github.io/javascript-basic-syntax/</link>
     <pubDate>Mon, 24 Aug 2020 22:15:53 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/15-javascript-basic-syntax/</guid>
+    <guid>http://samrks.github.io/javascript-basic-syntax/</guid>
     <description><![CDATA[<p>内容包括「什么是表达式和语句」「标识符的规则」「 if else 语句」「 while for 语句」「 label 」</p>
 <h2 id="推荐书籍">推荐书籍</h2>
 <ol>
@@ -4934,10 +4934,10 @@ obj.name 不等价于 obj[name]</p>
 </div>]]></description>
 </item><item>
     <title>JavaScript 的发展历史</title>
-    <link>http://samrks.github.io/14-javascript-history/</link>
+    <link>http://samrks.github.io/javascript-history/</link>
     <pubDate>Wed, 12 Aug 2020 21:13:23 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/14-javascript-history/</guid>
+    <guid>http://samrks.github.io/javascript-history/</guid>
     <description><![CDATA[<p>简单了解「学 JS 的基本要求」，重点了解「JS 的诞生与历史」</p>
 <p>​</p>
 <h2 id="一些链接">一些链接</h2>
@@ -5421,10 +5421,10 @@ obj.name 不等价于 obj[name]</p>
 </blockquote>]]></description>
 </item><item>
     <title>前端也得懂点儿 HTTP (下) </title>
-    <link>http://samrks.github.io/13-http-2/</link>
+    <link>http://samrks.github.io/http-2/</link>
     <pubDate>Mon, 10 Aug 2020 18:49:11 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/13-http-2/</guid>
+    <guid>http://samrks.github.io/http-2/</guid>
     <description><![CDATA[<p>🤞🏻 “Nobody knows HTTP better than me !! ” 🤥</p>
 <p>​</p>
 <h2 id="先导">先导</h2>
@@ -6197,10 +6197,10 @@ obj.name 不等价于 obj[name]</p>
 </ul>]]></description>
 </item><item>
     <title>前端也得懂点儿 HTTP (上) ——浅析 URL</title>
-    <link>http://samrks.github.io/12-http-1/</link>
+    <link>http://samrks.github.io/http-1-url/</link>
     <pubDate>Tue, 04 Aug 2020 23:58:43 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/12-http-1/</guid>
+    <guid>http://samrks.github.io/http-1-url/</guid>
     <description><![CDATA[<p>本文主要围绕 URL ，为学 HTTP 做个铺垫。</p>
 <p>​</p>
 <h2 id="先导">先导</h2>
@@ -7027,10 +7027,10 @@ http://ryuuks:8080/index.html
 </ol>]]></description>
 </item><item>
     <title>Re：从零开始の CSS 学习笔记——动画</title>
-    <link>http://samrks.github.io/11-css-animation/</link>
+    <link>http://samrks.github.io/css-animation/</link>
     <pubDate>Sun, 02 Aug 2020 01:19:27 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/11-css-animation/</guid>
+    <guid>http://samrks.github.io/css-animation/</guid>
     <description><![CDATA[<p>浏览器的渲染流程、transform、transition、animation</p>
 <p>​</p>
 <h2 id="动画的原理">动画的原理</h2>
@@ -8063,10 +8063,10 @@ http://ryuuks:8080/index.html
 </div>]]></description>
 </item><item>
     <title>Re：从零开始の CSS 学习笔记——定位</title>
-    <link>http://samrks.github.io/10-css-position/</link>
+    <link>http://samrks.github.io/css-position/</link>
     <pubDate>Wed, 29 Jul 2020 13:01:21 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/10-css-position/</guid>
+    <guid>http://samrks.github.io/css-position/</guid>
     <description><![CDATA[<p>复习盒模型、div 的分层、新属性 position 详解、层叠上下文</p>
 <p>​</p>
 <h2 id="布局和定位的区别">布局和定位的区别</h2>

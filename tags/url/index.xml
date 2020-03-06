@@ -1,0 +1,838 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>URL - 标签 - Sam&#39;s Garage</title>
+        <link>http://samrks.github.io/tags/url/</link>
+        <description>URL - 标签 - Sam&#39;s Garage</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Tue, 04 Aug 2020 23:58:43 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/url/" rel="self" type="application/rss+xml" /><item>
+    <title>前端也得懂点儿 HTTP (上) ——浅析 URL</title>
+    <link>http://samrks.github.io/http-1-url/</link>
+    <pubDate>Tue, 04 Aug 2020 23:58:43 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/http-1-url/</guid>
+    <description><![CDATA[<p>本文主要围绕 URL ，为学 HTTP 做个铺垫。</p>
+<p>​</p>
+<h2 id="先导">先导</h2>
+<h3 id="英语protocol">英语：protocol</h3>
+<blockquote>
+<p>protocol       /ˈproʊtəkɑːl/     协议、礼节、约定</p>
+</blockquote>
+<h3 id="李爵士发明的三样东西">李爵士发明的三样东西</h3>
+<blockquote>
+<p>WWW = URL + HTTP + HTML</p>
+</blockquote>
+<p>HTML 前面已经学了，html + css 本质就是网页</p>
+<p>再认识了 URL 和 HTTP ，那么 WWW 我们就基本了解了（ URL 是为 HTTP 做铺垫）</p>
+<p>​</p>
+<h2 id="什么是-ip">什么是 IP</h2>
+<blockquote>
+<p>要学习 URL 、HTTP，得先从 IP 讲起（⭐剧透：HTTP 的 P  和  IP 的 P 之间有重要联系）</p>
+</blockquote>
+<p>IP：</p>
+<ul>
+<li>
+<p>Internet（因特网==互联网，整个人类组成的网络就叫互联网，比WWW更加底层）protocol（协议）</p>
+</li>
+<li>
+<p>由此可见 IP 也是非常底层的，没有 IP 就不能上网</p>
+</li>
+</ul>
+<p>Internet Protocal 主要约定了两件事：</p>
+<ul>
+<li>一、<strong>如何定位一台设备</strong></li>
+<li>二、如何封装数据报文，以跟其他设备交流
+<ul>
+<li>具体内容我们不关心</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>只要你在互联网中，你就有至少一个独特的IP</p>
+</blockquote>
+<p>​</p>
+<h3 id="ip-分为内网和外网">IP 分为内网和外网</h3>
+<blockquote>
+<p>内网和外网是不能直接相通的，只能通过路由器作为网关，来连通</p>
+</blockquote>
+<p></p>
+<p>路由器：是一个非常重要的设备，连通了内网和外网</p>
+<p>例：比如你在玩 LOL，按了一下Q键（第一个技能），怎么让网线那头的对手被Q到？</p>
+<ul>
+<li>Q 通过键盘传到路由器，路由器通过电信服务器传到 QQ 的游戏服务器， QQ 的游戏服务器接收到 Q 键后，就将 Q 键发送到对手那里，对手就被 Q 到了</li>
+<li>整个过程是非常复杂的，但非常快，按下Q键立马响应，因为这个复杂的过程是以光速的形式来运行的，所以用户感受不到</li>
+</ul>
+<p>​</p>
+<h3 id="如何获取外网-ip">如何获取外网 IP</h3>
+<blockquote>
+<p>必须有 外网IP 才能和小伙伴打 LOL、王者荣耀…</p>
+</blockquote>
+<ol>
+<li>
+<p>首先，你得从电信租用带宽，一年一千多。</p>
+<p>（然后需要有个猫（调制解调器），猫是用来把信号转换成路由器能理解的信号。现在普遍是光猫，把光信号变成电信号，变成路由器能理解的网络信号）</p>
+</li>
+<li>
+<p>你买了一个路由器，然后用电脑和手机分别连接路由器广播出来的无线 WIFl。</p>
+<ul>
+<li>有线连接和无线WiFi在本质上没有不同，但在实际使用中，无线可能慢于有线连接</li>
+<li>有线连接的下载速度可能超过 10M/s，但无线WIFI连接的设备的下载速度可能无法超过 10M/s</li>
+</ul>
+</li>
+<li>
+<p>只要路由器连上电信的服务器，那么路由器就会有一个「外网 IP」 ，比如 [ 14.17.32.211 ] 就是一个外网 IP。这就是你在互联网中的地址。</p>
+<ul>
+<li>访问 <a href="https://ip138.com/">https://ip138.com/</a> 查看当前外网 IP（通常外网IP不要告诉别人，可以准确定位你的位置）</li>
+<li>那么你的所有设备，就全都是这一个 外网 IP</li>
+<li>那么如何区分是手机设备…还是笔记本呢？这就依靠「内网 IP」来区分了</li>
+</ul>
+</li>
+<li>
+<p>但是如果你重启路由器，那么你很有「可能」被重新分配一个「外网 IP」，也就是说你的路由器没有「固定的外网 IP」</p>
+<ul>
+<li>如果想固定外网IP ，需要花钱每个月五六千，可以得到一个固定的外网IP（在国内购买这些网络资源通常贵于国外）</li>
+</ul>
+</li>
+<li>
+<p>但是有个问题，你的路由器的外网 IP 如果是 14.17.32.211，那么你的手机和电脑的 IP 又是什么呢？答案是「内网IP」</p>
+</li>
+</ol>
+<p>​</p>
+<h3 id="内网-ip">内网 IP</h3>
+<ol>
+<li>
+<p>路由器会在你家里创建一个内网，内网中的设备使用内网IP，一般来说这个IP的格式都是192.168.xxx.xxx。</p>
+<ul>
+<li>
+<p>命令行：ipconfig ，查看当前设备的内网 IP  ：192.168.101.10</p>
+<p></p>
+<p>默认网关中的 IP：192.168.101.1  是路由器的 IP</p>
+</li>
+<li>
+<p>如果你家足够大，路由器可能功率不够，覆盖不了整个家，用户可能需要买电力猫或再买一个小路由器做中介器之类的手段，来扩大覆盖范围到整个家。</p>
+</li>
+<li>
+<p>如果家里五六十平米，那路由器基本可以全覆盖。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>一般路由会给自己分配一个好记的内网IP，如 192.168.1.1</p>
+<ul>
+<li>小米路由器的 IP ，一般都是 192.168.31.1，为了让出一个位置给光猫的 IP</li>
+</ul>
+</li>
+<li>
+<p>然后路由会给每一个内网中的设备分配一个不同的内网 IP，如电脑是 192.168.1.2，手机是 192.168.1.3，以此类推。</p>
+</li>
+</ol>
+<p>​</p>
+<h3 id="路由器的功能">路由器的功能</h3>
+<blockquote>
+<p>把内网的请求，路由到外部，把外部的响应，路由到内部。具有双向路由的功能，所以也被称为网关</p>
+</blockquote>
+<ol>
+<li>现在路由器有两个 IP，一个外网 IP（电信分配的）和一个内网 IP（自己分配给自己的）</li>
+<li>内网中的设备可以互相访问，但是不能直接访问外网</li>
+<li>内网设备想要访问外网，就必须经过路由器中转</li>
+<li>外网中的设备可以互相访问，但是无法访问你的内网</li>
+<li>外网设备想要把内容送到内网，也必须通过路由器
+<ul>
+<li>想从网上（外网）下载内容，会先把内容下载到路由器，路由器再把内容下载到用户的设备上</li>
+</ul>
+</li>
+<li>也就是说内网和外网就像两个隔绝的空间，无法互通，唯一的联通点就是路由器</li>
+<li>所以路由器有时候也被叫做「网关]
+<ul>
+<li>一夫当关，万夫莫开。一旦把路由器拔了，那就与网络世界断联了</li>
+</ul>
+</li>
+</ol>
+<p>​</p>
+<blockquote>
+<p>用 http-server 可以创建一个服务</p>
+<ul>
+<li>
+<p>命令行：http-server . -c-1</p>
+<p></p>
+</li>
+<li>
+<p>第一个地址 192.168.xxx.xxx:8080 ，是给手机访问的（需要手机端调试内容时，就可以使用）</p>
+</li>
+<li>
+<p>第二个地址 127.0.0.1:8080 ，是给电脑访问的</p>
+</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h3 id="几个特殊的-ip">几个特殊的 IP</h3>
+<p>分别是</p>
+<ol>
+<li>127.0.0.1 表示自己（规定死的）</li>
+<li>localhost 通过 <a href="C:%5cWindows%5cSystem32%5cdrivers%5cetc" rel="">hosts</a> 指定为自己</li>
+<li>0.0.0.0 不表示任何设备</li>
+</ol>
+<p>​</p>
+<h4 id="问hosts-文件在哪">问：hosts 文件在哪？</h4>
+<blockquote>
+<p>答： 在 Windows 系统中，hosts 位于 C:\Windows\System32\drivers\etc\hosts 。在 macOS / Linux系统中，hosts 位于 /etc/hosts</p>
+</blockquote>
+<p>hosts 文件，用于指定本机 IP （表示自己）</p>
+<ul>
+<li>127.0.0.1 / localhost  是 hosts 中默认的 （表示自己）</li>
+<li>也可以在 hosts 文件中添加自定义 <strong>任何字符串</strong> 来表示自己（文件中的#内容均为注释，可删）
+<ul>
+<li>写法如下，定义后，就可以使用这些字符串来访问本地服务</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html">+ 127.0.0.1 sam
++ 127.0.0.1 ryuuks
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意：需要通过 http-server 开启本地服务后，下述地址才可以使用</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">http://localhost:8080/index.html
+http://127.0.0.1:8080/index.html
+http://sam:8080/index.html
+http://ryuuks:8080/index.html
+</code></pre></td></tr></table>
+</div>
+</div><p>上述地址，均可以访问到 index.html</p>
+<p>​</p>
+<p>​</p>
+<h2 id="端口">端口</h2>
+<blockquote>
+<p>IP 有了，还需要什么？ 端口</p>
+</blockquote>
+<p>WWW（万维网）= URL + HTTP + HTML</p>
+<ul>
+<li>URL 就是用来定位服务器的，例如，定位百度的服务器 baidu.com</li>
+</ul>
+<blockquote>
+<p>一台机器可以提供很多服务</p>
+<p>每个服务一个号码，这个号码就叫端口号port</p>
+</blockquote>
+<h3 id="端口-port">端口 port</h3>
+<h4 id="一个比喻">一个比喻</h4>
+<ul>
+<li>麦当劳提供两个窗口，一号快餐，二号咖啡</li>
+<li>你去快餐窗口点咖啡会被拒绝，让你去另一个窗口</li>
+<li>你去咖啡窗口点快餐结果一样</li>
+</ul>
+<blockquote>
+<p>在计算机世界也是这样，你要提供不同的服务，就需要有不同的窗口。这个窗口，就是端口 port</p>
+</blockquote>
+<h4 id="一台机器可以提供不同服务">一台机器可以提供不同服务</h4>
+<ul>
+<li>要提供 HTTP 服务最好使用 80 端口</li>
+<li>要提供 HTTPS 服务最好使用 443 端口</li>
+<li>要提供 FTP 服务最好使用 21 端口</li>
+<li>一共有 65535 个端口（基本够用）</li>
+</ul>
+<p>​</p>
+<h3 id="我怎么知道应该用什么端口">我怎么知道应该用什么端口</h3>
+<blockquote>
+<p><a href="https://zh.wikipedia.org/wiki/TCP/UDP%E7%AB%AF%E5%8F%A3%E5%88%97%E8%A1%A8#0%E5%88%B01023%E5%8F%B7%E7%AB%AF%E5%8F%A3" target="_blank" rel="noopener noreffer">维基百科</a>一个一个列出来了，需要的时候就对应查找：每个端口用来做什么</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>端口</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>80/TCP,UDP</td>
+<td><a href="https://zh.wikipedia.org/wiki/%e8%b6%85%e6%96%87%e6%9c%ac%e4%bc%a0%e8%be%93%e5%8d%8f%e8%ae%ae" target="_blank" rel="noopener noreffer">超文本传输协议</a>（HTTP）或 <a href="https://zh.wikipedia.org/wiki/%e5%bf%ab%e9%80%9fUDP%e7%bd%91%e7%bb%9c%e8%bf%9e%e6%8e%a5" target="_blank" rel="noopener noreffer">快速UDP网络连接</a>- 用于传输网页</td>
+</tr>
+<tr>
+<td></td>
+<td>例如：百度服务器要给用户传输一个网页，那就必须用80端口，用其他端口会有问题</td>
+</tr>
+<tr>
+<td>443/TCP</td>
+<td><a href="https://zh.wikipedia.org/wiki/%e8%b6%85%e6%96%87%e6%9c%ac%e4%bc%a0%e8%be%93%e5%ae%89%e5%85%a8%e5%8d%8f%e8%ae%ae" target="_blank" rel="noopener noreffer">超文本传输安全协议</a>（HTTPS）或<a href="https://zh.wikipedia.org/wiki/QUIC" target="_blank" rel="noopener noreffer">QUIC</a></td>
+</tr>
+<tr>
+<td></td>
+<td>HTTPS 协议传输就必须用 443 端口，用其他端口也会有问题</td>
+</tr>
+<tr>
+<td>21/TCP,UDP</td>
+<td><a href="https://zh.wikipedia.org/wiki/%e6%96%87%e4%bb%b6%e4%bc%a0%e8%be%93%e5%8d%8f%e8%ae%ae" target="_blank" rel="noopener noreffer">文件传输协议</a>（FTP） - 控制端口</td>
+</tr>
+<tr>
+<td></td>
+<td>80后和早期的90后应该在学校见过FTP协议，传文件都是通过 FTP。95后00后可能没见过FTP了</td>
+</tr>
+</tbody>
+</table>
+<p>​</p>
+<h3 id="端口使用还有什么规则">端口使用还有什么规则</h3>
+<ol>
+<li>0 到 1023（2的10次方减1）号端口是留给系统使用的
+<ul>
+<li>普通用户绝对不能使用</li>
+<li>即使是管理员有使用权限，但也需要输入额外的密码才能使用这些端口，所以也不推荐管理员使用</li>
+<li>通常使用 8080 端口做开发，真正部署服务器时，拥有服务器权限才能用 80 端口…</li>
+</ul>
+</li>
+<li>你只有拥有了管理员权限后，才能使用这 1024 个端口</li>
+<li>其他端口可以给普通用户使用</li>
+<li>比如 http-server 默认使用 8080 端口</li>
+<li>一个端口如果被占用，你就只能换一个端口</li>
+</ol>
+<h4 id="在其他端口开启服务">在其他端口开启服务</h4>
+<ol>
+<li>
+<p>在 1234 端口开启服务</p>
+<p>命令行：<code>hs -c-1 -p 1234</code>（hs：http-server 简写）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">http</span><span class="o">:</span><span class="c1">//192.168.101.10:1234
+</span><span class="c1"></span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:1234
+</span></code></pre></td></tr></table>
+</div>
+</div><p>通过访问 http://localhost:1234/index.html 就可以浏览本地页面</p>
+</li>
+<li>
+<p>可否强行使用 80 端口，开启服务呢？🉑</p>
+<blockquote>
+<p>仅在 windows 上能直接使用这个端口号，在 Linus 和 Mac 中都必须输入密码才能使用，不推荐</p>
+</blockquote>
+<p>命令行：<code>hs -c-1 -p 80</code>  （在 80 端口开启服务）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">http</span><span class="o">:</span><span class="c1">//192.168.101.10:80
+</span><span class="c1"></span><span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:80
+</span></code></pre></td></tr></table>
+</div>
+</div><p>通过访问 http://localhost/index.html 就可以浏览本地页面（80 是默认端口，可省略）</p>
+</li>
+<li>
+<p>端口被占用的情况，会有如下报错，换个其他的端口号即可（六万多个端口）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">hs</span> <span class="o">-</span><span class="nx">c</span><span class="o">-</span><span class="mi">1</span> <span class="o">-</span><span class="nx">p</span> <span class="mi">80</span>
+<span class="p">=&gt;</span>  <span class="nb">Error</span><span class="o">:</span> <span class="nx">listen</span> <span class="nx">EADDRINUSE</span> <span class="mf">0.0.0.0</span><span class="o">:</span><span class="mi">80</span> <span class="c1">// EADDRINUSE: error address in use 错误地址正在使用中
+</span><span class="c1"></span>    
+<span class="nx">hs</span> <span class="o">-</span><span class="nx">c</span><span class="o">-</span><span class="mi">1</span> <span class="o">-</span><span class="nx">p</span> <span class="mi">1234</span>
+<span class="p">=&gt;</span>  <span class="nb">Error</span><span class="o">:</span> <span class="nx">listen</span> <span class="nx">EADDRINUSE</span> <span class="mf">0.0.0.0</span><span class="o">:</span><span class="mi">1234</span> <span class="c1">// error address in use
+</span><span class="c1"></span>    
+<span class="nx">hs</span> <span class="o">-</span><span class="nx">c</span><span class="o">-</span><span class="mi">1</span> <span class="o">-</span><span class="nx">p</span> <span class="mi">2233</span>
+<span class="p">=&gt;</span>  <span class="nx">http</span><span class="o">:</span><span class="c1">//192.168.101.10:2233
+</span><span class="c1"></span><span class="p">=&gt;</span>  <span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:2233
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<p>​</p>
+<p>​</p>
+<h2 id="ip-和端口缺一不可">IP 和端口缺一不可</h2>
+<blockquote>
+<p>总而言之：<strong>IP 和 端口 缺一不可</strong> （记住这句话）</p>
+</blockquote>
+<ul>
+<li>IP 是用来定位一个<strong>设备</strong>。</li>
+<li>端口是用来定位一个设备的<strong>服务。</strong></li>
+<li>有了 IP 和端口，就可以定位一个设备提供的服务了。</li>
+<li>例如：百度设备提供的网页服务。腾讯设备提供的聊天服务。淘宝设备提供的支付服务</li>
+<li>这些服务都可以通过 IP + 端口 ，实现唯一确定</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="域名是什么">域名是什么</h2>
+<blockquote>
+<p>域名就是对 IP 起一个友好的名字。</p>
+<p>域名是以 .com  .net  .org  …  结尾的字符串，仅此而已。需要花钱购买</p>
+<p>如：qq.com</p>
+</blockquote>
+<ul>
+<li>
+<p>在前面搭建个人博客时，已经注册过域名。</p>
+</li>
+<li>
+<p>我没有自己的服务器，而是将这个域名映射到（指向） github 的服务器上</p>
+</li>
+<li>
+<p>github 给我 4 个 IP。用户访问时，会访问到这4台中的任何一台服务器。访问的内容都是一样的</p>
+</li>
+</ul>
+<p>​</p>
+<p>补充：</p>
+<ul>
+<li>.com 域名，比较便宜，一年50-80</li>
+<li>t.tt，曾经是锤子手机的域名，转手价50W。访问 t.tt 跳转至锤子手机官网：smartisan.com</li>
+<li>蔡文胜，2000年抢注十多万个域名，倒手生意。 qiyi.com 是百度旗下爱奇艺的域名</li>
+<li>为什么我们需要向国外的人购买域名？发域名的机构也很赚钱。这就是美国人欧洲人赚钱的思维，我发明一套东西，用户都需要使用的，那使用一次就要交一次钱。
+<ul>
+<li>比如苹果有很多手机专利。谷歌买了摩托罗拉，摩托罗拉也有很多手机专利。谷歌发明了安卓系统，手机厂商用到安卓系统里面的谷歌服务，也需要给谷歌钱。</li>
+<li>中国的 5G 出来了，如果以后世界的 5G 应用是由中国主导，关键技术是中国的，那么中国就可以躺着赚钱。如果中国的 5G 搞起来了，那就不单是 5G，周边的所有产业都会全面超过其他国家（所以川普联合各国抵制）</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>在互联网，每一个新东西出来，都蕴藏着巨大的商机。  如5G</p>
+</blockquote>
+<p>​</p>
+<h3 id="域名就是对-ip-的别称">域名就是对 IP 的别称</h3>
+<p>baidu.com 对应什么 IP</p>
+<ul>
+<li>
+<p>命令行：ping baidu.com</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="mf">220.181.38.148</span>  <span class="c1">// 也有 39.156.69.79
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>qq.com 对应什么 IP</p>
+<ul>
+<li>
+<p>命令行：ping qq.com</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">125.39.52.26
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>知识点</p>
+<blockquote>
+<p>先总结：IP 和 域名 之间，没有什么必然的一对一关系</p>
+</blockquote>
+<ol>
+<li>
+<p>一个域名可以对应不同 IP（这个叫 <strong>负载均衡</strong>）</p>
+<ul>
+<li>这个叫做均衡负载，防止一台机器扛不住</li>
+</ul>
+</li>
+<li>
+<p>一个 IP 可以对应不同域名（这个叫 <strong>共享主机</strong>）</p>
+<ul>
+<li>比如6个人合买一台主机，这台主机服务6个域名</li>
+</ul>
+<ul>
+<li>就叫做共享主机，穷开发者会这么做</li>
+<li>或者一个公司提供不同的网站，但不想买两台服务器，就把两个网站（两个域名）放在同一台主机上</li>
+</ul>
+</li>
+</ol>
+<p>​</p>
+<blockquote>
+<p>通常 ping 同一个域名，不一定会得到同一个 IP。这里涉及 <strong>负载均衡</strong> 的问题。</p>
+<ul>
+<li>假如，一万人同时访问百度，如果只有一个服务器，就要同时接纳一万人。</li>
+<li>如果有100万人同时访问，，即使每人只分配1k内存，也需要 100万 k，那么这台服务器肯定容纳不了</li>
+<li>解决方法，把这个域名绑定到4个不同的 IP 上，4个 IP 分别位于 华中、华南、华东、华北。</li>
+<li>电信有全国服务器，告诉电信，如果用户来自华中，就访问华中服务器…（1/4分流）</li>
+<li>如此实现负载均衡。分散负担，不至于让某个服务器因承受不了而宕机。（网站优化策略）</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>补充：</p>
+<ul>
+<li>
+<p>ping 的作者写的一篇文章：<a href="https://ftp.arl.army.mil/~mike/ping.html" target="_blank" rel="noopener noreffer">The Story of the PING Program</a></p>
+</li>
+<li>
+<p>皮卡丘站起来，是皮卡兵。皮卡丘跑起来是什么？<a href="%e7%9a%ae%e5%8d%a1%e4%b9%92%e3%80%81%e7%9a%ae%e5%8d%a1%e4%b9%93" rel="">答案</a> 😂</p>
+</li>
+</ul>
+<p>​</p>
+<h3 id="域名和-ip-是怎么对应起来的">域名和 IP 是怎么对应起来的</h3>
+<blockquote>
+<p>通过 DNS</p>
+<ul>
+<li>Domain Name System （域名系统、域名服务）</li>
+</ul>
+</blockquote>
+<h4 id="当你输入-baiducom">当你输入 baidu.com</h4>
+<p><strong>过程</strong></p>
+<ol>
+<li>
+<p>你的 Chrome 浏览器会向电信/联通提供的 DNS 服务器询问 baidu.com 对应什么IP</p>
+</li>
+<li>
+<p>电信/联通会回答一个 IP（具体过程很复杂，不研究）</p>
+<ul>
+<li>
+<p>这个过程可以用 nslookup 模拟（ns域名，lookup寻找）命令行：nslookup baidu.com</p>
+<p></p>
+</li>
+</ul>
+</li>
+<li>
+<p>然后 Chrome 才会向对应 IP 的 80 / 443 端口发送请求</p>
+</li>
+<li>
+<p>请求内容是查看 baidu.com 的首页</p>
+<ul>
+<li>baidu 收到请求，就会把你请求的页面的 index.html 发送给你，index.html 中又会请求 css 、js，加载完css、js，就可以看到 baidu.com 的完整页面</li>
+</ul>
+</li>
+</ol>
+<p>​</p>
+<p><strong>在 network 中可以查看全部请求</strong></p>
+<ul>
+<li>
+<p>Request URL:    <a href="https://www.baidu.com/">https://www.baidu.com/</a>（末尾的 / 表示请求的是baidu的根目录）</p>
+<p></p>
+</li>
+<li>
+<p>Response：[得到一个<code>&lt;html&gt;…&lt;/html&gt;</code>]，浏览器就会把这一串 html 渲染出来（中间遇到 link 会请求对应的图片、css、js等文件）</p>
+</li>
+</ul>
+<p>​</p>
+<p><strong>为什么是 80 或 443 端口？</strong></p>
+<blockquote>
+<p>因为这是规定。</p>
+</blockquote>
+<p>我们在地址栏输入 baidu.com 时，为什么不用写端口号？如 <code>baidu.com:443</code> （ IP 和端口不是缺一不可吗！）</p>
+<ul>
+<li>
+<p>服务器默认用 80 提供 http 服务</p>
+</li>
+<li>
+<p>服务器默认用 443 提供 https 服务</p>
+</li>
+<li>
+<p>你可以在开发者工具里看到具体的端口</p>
+<p>61.135.168.125:443  （ 前面就是服务器 IP ，后面就是网页服务的端口）</p>
+<p></p>
+<p>访问 http 就是 80，访问 https 就是 443</p>
+</li>
+</ul>
+<p>​</p>
+<h3 id="题外话">题外话</h3>
+<blockquote>
+<p>前端需要懂点域名知识</p>
+</blockquote>
+<h4 id="www">www</h4>
+<ul>
+<li><a href="http://www.baidu.com">www.baidu.com</a> 和 baidu.com</li>
+<li>是同一个域名吗？不是</li>
+</ul>
+<h4 id="他们是什么关系">他们是什么关系</h4>
+<blockquote>
+<p><a href="http://www.baidu.com">www.baidu.com</a> 和 baidu.com</p>
+</blockquote>
+<ul>
+<li>com 是顶级域名（com 全写 company 公司，org 非营利性组织）</li>
+<li>baidu.com 是二级域名（俗称一级域名）父域名</li>
+<li><a href="http://www.baidu.com">www.baidu.com</a> 是三级域名（俗称二级）子域名</li>
+<li>他们是父子关系</li>
+<li>github.io 把子域名 xxx.github.io 免费给你使用
+<ul>
+<li>所以 github.io（github公司）和 xxx.github.io（个人网站） 可能不是同一家公司，之间没什么关系</li>
+</ul>
+</li>
+<li>所以你应该知道 <a href="http://www.baidu.com">www.baidu.com</a> 和 baidu.com 可以不是同一家公司，也可以是</li>
+<li>www 是多余的吗？是的，非常多余。
+<ul>
+<li>早期人们为了表明自己是 www 而加的，实际上没有必要加，因为所有域名本身就存在与 万维网www中，写上www前缀反倒多此一举</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h2 id="如何请求不同的页面">如何请求不同的页面</h2>
+<p>访问不同的<strong>路径</strong>，就请求到不同的页面，如下（注意：路径后面不加后缀）</p>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML">https://developer.mozilla.org/zh-CN/docs/Web/HTML</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS">https://developer.mozilla.org/zh-CN/docs/Web/CSS</a></li>
+</ul>
+<p>工具</p>
+<ul>
+<li>使用 Chrome 开发者工具 Network 面板看看区别
+<ul>
+<li>只有 Request URL 不同</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h2 id="同一个页面不同内容">同一个页面，不同内容</h2>
+<p>不同的<strong>查询参数</strong>，返回不同的内容</p>
+<ul>
+<li><a href="http://www.baidu.com/s?wd=hi">www.baidu.com/s?wd=hi</a></li>
+<li><a href="http://www.baidu.com/s?wd=hello">www.baidu.com/s?wd=hello</a></li>
+</ul>
+<p>​</p>
+<h2 id="同一个内容不同位置">同一个内容，不同位置</h2>
+<p><strong>锚点</strong>可以做到</p>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS#">https://developer.mozilla.org/zh-CN/docs/Web/CSS#</a>参考书</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS#">https://developer.mozilla.org/zh-CN/docs/Web/CSS#</a>教程</li>
+</ul>
+<p>注意</p>
+<ul>
+<li>锚点看起来有中文，实际不支持中文</li>
+<li><code>#参考书</code> 会变成 <code>#%E5%8F%82%E8%80%83%E4%B9%A6</code>  重新编码</li>
+<li>锚点是无法在 Network 面板看到的，因为锚点不会传给服务器。
+<ul>
+<li># 井号后面的内容会被浏览器直接吃掉，并不会传到服务器中</li>
+<li>锚点仍在当前页面中，只是位置不同而已，并不需要重新请求数据</li>
+<li><strong>注意</strong>：一定不要把用户传参拼接到 # 后面，会被浏览器当做锚点内容直接吃掉，服务器就无法获取到参数</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="一个-url-的完整内容">一个 URL 的完整内容</h2>
+<blockquote>
+<p><strong>协议  +  域名 或 IP  +  端口号  +  路径  +  查询字符串  +  锚点</strong></p>
+</blockquote>
+<ul>
+<li>协议：分 HTTP 和 HTTPS</li>
+<li>域名：用来表示IP对应的名称的字符串</li>
+<li>IP ：用来定位一个设备的字符串（分为4段，最大值255）</li>
+<li>端口号：提供一个服务，就要有对用端口号（有六万多个）</li>
+<li>路径：就是一个字符串，用来判断用户访问什么网页</li>
+<li>查询参数：就是这个网页中，用户要具体看什么内容，可能有分页</li>
+<li>锚点：内容已经获取到了，通过锚点定位到用户想要具体查看的内容的位置（实现文档内部的定位）</li>
+</ul>
+<p>把上述全部加起来，就是 李爵士发明的 URL （统一资源定位符）</p>
+<blockquote>
+<p>URL</p>
+<ul>
+<li>
+<p>U：Uniform 统一。国际化标准的</p>
+</li>
+<li>
+<p>R：Resouce 资源。图片、网页…都是资源</p>
+</li>
+<li>
+<p>L：Locator 定位符。</p>
+</li>
+</ul>
+</blockquote>
+<p>例：</p>
+<ul>
+<li>就算没写，你也应该知道端口
+<ul>
+<li>HTTPS 默认端口 443、HTTP 默认端口 80</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="http协议">HTTP（协议）</h2>
+<blockquote>
+<p>前面讲了 IP 协议：是用于表示每个设备的地址</p>
+<p>而 HTTP 协议：是用来表示如何传输网页的</p>
+<ul>
+<li>HTTP协议，是基于 TCP 和 IP 两个协议</li>
+<li>先有 TCP、IP，李爵士基于前人发明的这两个协议，发明了新的 HTTP 协议</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h2 id="curl-命令">curl 命令</h2>
+<ul>
+<li>curl    /kɜːrl/     使…卷曲</li>
+</ul>
+<blockquote>
+<p>如何用 curl 命令，发出 HTTP 的请求？</p>
+</blockquote>
+<h3 id="用-curl-可以发-http-请求">用 curl 可以发 HTTP 请求</h3>
+<p><strong>示例1：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">curl https://www.baidu.com
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<ul>
+<li>执行命令，获取到整个文档。（中文默认 utf-8 编码，而控制台默认 GBK  所以中文会乱码）</li>
+<li>我们在 Chrome 的地址栏中输入上述网址，Chrome 也是做了同样的事情，获取到这个html文档并解析</li>
+</ul>
+<p>​</p>
+<p><strong>示例2：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">curl -v http://baidu.com    只有域名没有路径
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-v ： verbose   /vɜːrˈboʊs/   啰嗦（效果：会显示更多内容）</li>
+</ul>
+<p></p>
+<blockquote>
+<p>请求的内容</p>
+</blockquote>
+<ol>
+<li>
+<p>我们发出的 HTTP 请求中，只有域名没有路径，则默认请求根路径，会自动补全根路径的斜杠 /</p>
+</li>
+<li>
+<p>开启代理，使用了一些代理的功能（非必须）</p>
+</li>
+<li>
+<p>问了DNS：获取到 baidu.com 的 IP</p>
+</li>
+<li>
+<p>获取到 IP 后，就开始启动 TCP</p>
+</li>
+<li>
+<p>开始连接到 baidu.com（ 220.181.38.148 这个 IP） 的 80 端口</p>
+</li>
+<li>
+<p>连接成功，往 baidu.com 发送了这5行内容</p>
+<ol>
+<li>GET请求，请求/根路径，使用 HTTP 协议 1.1 版本</li>
+<li>因为一个IP（220.181.38.148）可能对应多个域名，说明需要访问的是这个IP上的 baidu.com 这个域名</li>
+<li>说明我是用什么来访问的：用 curl 的 7.61.1 版本来访问的</li>
+<li>期待返回什么内容：*/*    表示所有内容我都接收</li>
+<li>空行（发送一个回车）   表示请求头部分结束</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>返回的内容</p>
+</blockquote>
+<ul>
+<li>
+<p>响应头：先忽略 😂</p>
+</li>
+<li>
+<p><code>&lt;html&gt; &lt;meta …&gt;  &lt;/html&gt;</code> meta 中内容，意为请重新访问 <a href="http://www.baidu.com">http://www.baidu.com</a></p>
+<ul>
+<li>说明 <a href="http://baidu.com">http://baidu.com</a> 这个 URL 被弃用了，只使用这个最早就有的 URL <a href="http://www.baidu.com">www.baidu.com</a></li>
+<li>通常直接使用 baidu.com 访问百度的人，基本都是程序员，将程序员的流量导到 www 上</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>上面请求失败，发起第二次请求   <code>curl -v http://www.baidu.com</code></p>
+</blockquote>
+<p></p>
+<p>​</p>
+<p><strong>示例3：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">curl -s -v -- https://www.baidu.com
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>会比上面显示的内容更详细</li>
+</ul>
+<p>​</p>
+<h3 id="需要理解以下流程">需要理解以下流程</h3>
+<ul>
+<li>url 会被 curl 工具重写，先请求 DNS 获得 IP</li>
+<li>先进行 TCP 连接，TCP 连接成功后，开始发送 HTTP 请求</li>
+<li>请求内容看一眼</li>
+<li>响应内容看一眼</li>
+<li>响应结束后，关闭TCP连接（curl 中没有直接写出来）</li>
+<li>真正结束（只有TCP结束才是真正的结束）</li>
+</ul>
+<p>​</p>
+<h3 id="http">HTTP</h3>
+<blockquote>
+<p>HTTP 到底做了什么</p>
+<ul>
+<li>规定请求的格式是什么，响应的格式是什么</li>
+</ul>
+</blockquote>
+<p>HTTP 规定了请求怎么写： 如何写第6步中的5行请求</p>
+<p>HTTP 规定了响应怎么写： 如何写下面响应的内容</p>
+<p>​</p>
+<blockquote>
+<p>那么 HTTP 到底是怎么规定请求格式和响应格式的？  下回分解 ✋</p>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h2 id="习题">习题</h2>
+<blockquote>
+<p>关于 <a href="http://www.baidu.com">www.baidu.com</a> 和 baidu.com，正确的有（多选）<a href="2,3" rel="">答案</a></p>
+</blockquote>
+<ol>
+<li>是同一个域名</li>
+<li>是不同的域名</li>
+<li>它们还有相同的一级域名 baidu.com</li>
+</ol>
+<blockquote>
+<p>关于 hosts 文件，正确的有（多选） <a href="1,2,4" rel="">答案</a></p>
+</blockquote>
+<ol>
+<li>hosts 文件中以 # 开头的表示注释</li>
+<li>hosts 中可以添加一行 127.0.0.1 sam，让 sam 成为 127.0.0.1 的别称</li>
+<li>hosts 中可以添加一行 sam 127.0.0.1，让 sam 成为 127.0.0.1 的别称</li>
+<li>hosts 一般需要用管理员权限才能编辑</li>
+</ol>
+<blockquote>
+<p>HTTP 的英文全称是 <strong>____</strong>（注意大小写不要错了）</p>
+</blockquote>
+<ul>
+<li>HyperText Transfer Protocol</li>
+</ul>
+<blockquote>
+<p>DNS 的英文全称是 <strong>____</strong>（注意大小写不要错了）</p>
+</blockquote>
+<ul>
+<li>Domain Name System</li>
+</ul>
+<blockquote>
+<p>URL 包含哪些部分？（多选）<a href="1,2,3,4,5,6" rel="">答案</a></p>
+</blockquote>
+<ol>
+<li>协议</li>
+<li>域名或IP</li>
+<li>端口</li>
+<li>路径</li>
+<li>查询参数</li>
+<li>锚点</li>
+<li>get 或 post</li>
+</ol>]]></description>
+</item></channel>
+</rss>

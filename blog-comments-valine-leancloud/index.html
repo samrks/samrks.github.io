@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>博客之路：hugo 添加评论系统 Valine - Sam&#39;s Garage</title><meta name="Description" content="hugo 添加评论系统 Valine"><meta property="og:title" content="博客之路：hugo 添加评论系统 Valine" />
+<meta property="og:description" content="hugo 添加评论系统 Valine" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://samrks.github.io/blog-comments-valine-leancloud/" />
+<meta property="og:image" content="http://samrks.github.io/favicon-32x32.png"/>
+<meta property="article:published_time" content="2020-03-15T22:40:49+08:00" />
+<meta property="article:modified_time" content="2020-03-15T22:40:49+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://samrks.github.io/favicon-32x32.png"/>
+
+<meta name="twitter:title" content="博客之路：hugo 添加评论系统 Valine"/>
+<meta name="twitter:description" content="hugo 添加评论系统 Valine"/>
+<meta name="application-name" content="Sam&#39;s Garage">
+<meta name="apple-mobile-web-app-title" content="Sam&#39;s Garage"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://samrks.github.io/blog-comments-valine-leancloud/" /><link rel="prev" href="http://samrks.github.io/blog-search-algolia/" /><link rel="next" href="http://samrks.github.io/tools-test-markdown/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "博客之路：hugo 添加评论系统 Valine",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/samrks.github.io\/blog-comments-valine-leancloud\/"
+        },"genre": "posts","keywords": "Valine, Leancloud, 评论, 博客","wordcount":  1932 ,
+        "url": "http:\/\/samrks.github.io\/blog-comments-valine-leancloud\/","datePublished": "2020-03-15T22:40:49+08:00","dateModified": "2020-03-15T22:40:49+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Sam"
+            },"description": "hugo 添加评论系统 Valine"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa fa-home fa-fw'></i> 主页 </a><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title=""><i class='fa fa-home fa-fw'></i>主页</a><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">博客之路：hugo 添加评论系统 Valine</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://liubingxuan.xyz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Sam</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B9%8B%E8%B7%AF/"><i class="far fa-folder fa-fw"></i>个人博客的创建之路</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-03-15">2020-03-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1932 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;<span id="/blog-comments-valine-leancloud/" class="leancloud_visitors" data-flag-title="博客之路：hugo 添加评论系统 Valine">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#leancloud相关配置">Leancloud相关配置</a></li>
+        <li><a href="#configtoml-添加参数">config.toml 添加参数</a></li>
+        <li><a href="#完善评论通知--">完善评论通知  ⭐️⭐️</a></li>
+        <li><a href="#参考">参考</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>hugo 博客添加评论系统 Valine</p>
+<blockquote>
+<p>Valine - 一款快速、简洁且高效的无后端评论系统。</p>
+<p>Valine 诞生于2017年8月7日，是一款基于Leancloud的快速、简洁且高效的无后端评论系统。
+理论上支持但不限于静态博客，目前已有Hexo、Jekyll、Typecho等博客程序在使用Valine。</p>
+</blockquote>
+<p>所以，理论上它也是支持 <strong>Hugo</strong> 的， 实践证明，确实如此。其特性如下：</p>
+<ul>
+<li>快速</li>
+<li>安全</li>
+<li>Emoji 😉</li>
+<li>无后端实现</li>
+<li>MarkDown 全语法支持</li>
+<li>轻量易用(~15kb gzipped)</li>
+<li>文章阅读量统计 v1.2.0-beta1+</li>
+</ul>
+<p>下面就讲一下如何一步步添加 <a href="https://valine.js.org/" target="_blank" rel="noopener noreffer">Valine</a> 支持的。</p>
+<p><strong>Tips:</strong></p>
+<ul>
+<li>整个过程，是以Loveit主题为例的，其它主题操作大同小异。</li>
+<li>配置之前应该先阅读<a href="https://valine.js.org/quickstart.html" target="_blank" rel="noopener noreffer">Valine快速开始</a></li>
+</ul>
+<p>​</p>
+<h2 id="leancloud相关配置">Leancloud相关配置</h2>
+<p>评论系统依赖于leancloud，所以需要先在leancloud中进行相关的准备工作。</p>
+<ul>
+<li>
+<p>登录 或 注册 <a href="https://leancloud.app/" target="_blank" rel="noopener noreffer">LeanCloud（国际版）</a>
+必须验证邮箱和手机号</p>
+</li>
+<li>
+<p>成功后，进入后台点击左上角的创建应用：</p>
+<p><img src="https://pichome-1254392422.cos.ap-chengdu.myqcloud.com/20180708153104380829479.png" alt="img" style="zoom: 33%;" /></p>
+</li>
+<li>
+<p>创建好应用，进入应用，点击【组件】</p>
+<p><img src="C:\Users\Sam\AppData\Roaming\Typora\typora-user-images\image-20200909000346264.png" alt="image-20200909000346264" style="zoom: 50%;" /></p>
+</li>
+<li>
+<p>左边栏找到【设置】，然后点击【应用Key】，此时记录出现的 App ID 和 App Key，后面配置文件中会用到：</p>
+<p><img src="https://pichome-1254392422.cos.ap-chengdu.myqcloud.com/20180708153104457148134.png" alt="img" style="zoom: 25%;" /></p>
+</li>
+<li>
+<p>因为评论和文章阅读数统计依赖于存储，所以还需要建立两个新的存储 Class
+左边栏找到并点击【存储】，点击【创建Class】
+创建两个存储Class，分别命名为: <code>Counter</code> 和 <code>Comment</code>；</p>
+<p><strong>仅修改 ACL 的 write 权限</strong></p>
+<p><img src="https://i.loli.net/2020/09/09/q2D9dCorHQ8tx3w.png" alt="image-20200909004906488" style="zoom: 50%;" /></p>
+</li>
+<li>
+<p>还需要为应用添加安全域名，左边栏点击【设置】，找到【安全中心】，点击后会看到【安全域名】设置框，输入博客使用的域名，点击保存即可：</p>
+<p><img src="https://pichome-1254392422.cos.ap-chengdu.myqcloud.com/20180708153104592457270.png" alt="img" style="zoom: 25%;" /></p>
+</li>
+</ul>
+<p>​</p>
+<h2 id="configtoml-添加参数">config.toml 添加参数</h2>
+<p>添加 <strong>Valine</strong> 参数项：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">params</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">comment</span><span class="p">.</span><span class="nx">valine</span><span class="p">]</span>
+  <span class="nx">enable</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">appId</span> <span class="p">=</span> <span class="s2">&#34;xxxxxxxxxxxxxxxxxxxxxx&#34;</span>
+  <span class="nx">appKey</span> <span class="p">=</span> <span class="s2">&#34;xxxxxxxxxxx&#34;</span>
+  <span class="nx">placeholder</span> <span class="p">=</span> <span class="s2">&#34;说点什么吧...（提醒：填写邮箱，若有人回复您，您将及时收到提醒邮件！）&#34;</span>
+  <span class="nx">avatar</span> <span class="p">=</span> <span class="s2">&#34;mp&#34;</span>
+  <span class="nx">meta</span><span class="p">=</span> <span class="s2">&#34;&#34;</span>
+  <span class="nx">pageSize</span> <span class="p">=</span> <span class="mi">10</span>
+  <span class="nx">lang</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+  <span class="nx">visitor</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">recordIP</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">highlight</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">enableQQ</span> <span class="p">=</span> <span class="kc">false</span>
+  <span class="nx">serverURLs</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+  <span class="c"># LoveIt 新增 | 0.2.6 emoji 数据文件名称, 默认是 &#34;google.yml&#34;</span>
+  <span class="c"># (&#34;apple.yml&#34;, &#34;google.yml&#34;, &#34;facebook.yml&#34;, &#34;twitter.yml&#34;)</span>
+  <span class="c"># 位于 &#34;themes/LoveIt/assets/data/emoji/&#34; 目录</span>
+  <span class="c"># 可以在你的项目下相同路径存放你自己的数据文件:</span>
+  <span class="c"># &#34;assets/data/emoji/&#34;</span>
+  <span class="nx">emoji</span> <span class="p">=</span> <span class="s2">&#34;apple.yml&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面几项内容的含义，这里简单一说，具体还是要看 <a href="https://valine.js.org/configuration.html" target="_blank" rel="noopener noreffer">Valine官网中配置相关的内容</a>：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enable</td>
+<td>这是用于主题中配置的，不是官方Valine的参数，<strong>true</strong>时控制开启此评论系统</td>
+</tr>
+<tr>
+<td>appId</td>
+<td>这是在 <a href="https://leancloud.cn/" target="_blank" rel="noopener noreffer">leancloud</a> 后台应用中获取的，也就是上面提到的 <strong>App ID</strong></td>
+</tr>
+<tr>
+<td>appKey</td>
+<td>这是在 <a href="https://leancloud.cn/" target="_blank" rel="noopener noreffer">leancloud</a> 后台应用中获取的，也就是上面提到的 <strong>App Key</strong></td>
+</tr>
+<tr>
+<td>notify</td>
+<td>用于控制是否开启邮件通知功能，具体参考<a href="https://github.com/xCss/Valine/wiki/Valine-%e8%af%84%e8%ae%ba%e7%b3%bb%e7%bb%9f%e4%b8%ad%e7%9a%84%e9%82%ae%e4%bb%b6%e6%8f%90%e9%86%92%e8%ae%be%e7%bd%ae" target="_blank" rel="noopener noreffer">邮件提醒配置</a></td>
+</tr>
+<tr>
+<td>verify</td>
+<td>用于控制是否开启评论验证码功能</td>
+</tr>
+<tr>
+<td>avatar</td>
+<td>用于配置评论项中用户头像样式，有多种选择：mm, identicon, monsterid, wavatar, retro, hide。详细参考：<a href="https://valine.js.org/avatar.html" target="_blank" rel="noopener noreffer">头像配置</a></td>
+</tr>
+<tr>
+<td>placehoder</td>
+<td>评论框的提示符</td>
+</tr>
+<tr>
+<td>visitor</td>
+<td>控制是否开启文章阅读数的统计功能, 详情阅读<a href="https://valine.js.org/visitor.html" target="_blank" rel="noopener noreffer">文章阅读数统计</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="完善评论通知--">完善评论通知  ⭐️⭐️</h2>
+<p><strong>Valine</strong> 评论邮件提醒功能不太健全，通知邮件中没有文章直达链接，<strong>Valine</strong> 官网中提供了评论系统第三方功能扩展<a href="https://github.com/zhaojun1998/Valine-Admin" target="_blank" rel="noopener noreffer">Valine</a>链接，按照链接中的说明，非常详细的步骤，一步步很容易实现完备的评论系统后台管理以及邮件提醒功能，部分高级配置<a href="https://github.com/zhaojun1998/Valine-Admin/blob/master/%e9%ab%98%e7%ba%a7%e9%85%8d%e7%bd%ae.md#%e8%87%aa%e5%ae%9a%e4%b9%89%e9%82%ae%e4%bb%b6%e6%9c%8d%e5%8a%a1%e5%99%a8" target="_blank" rel="noopener noreffer">点我</a>了解，这里简单列举步骤如下：</p>
+<ol>
+<li>进入leancloud，【<strong>云引擎</strong>】【<strong>部署项目</strong>】【<strong>git</strong>】</li>
+</ol>
+<p>填写仓库地址： <a href="https://github.com/zhaojun1998/Valine-Admin">https://github.com/zhaojun1998/Valine-Admin</a></p>
+<p>填写分支： master</p>
+<pre><code>&lt;img src=&quot;https://i.loli.net/2020/09/09/1dgcOzHKBvJV5EP.png&quot; alt=&quot;image-20200909010214580&quot; style=&quot;zoom:50%;&quot; /&gt;
+</code></pre>
+<ol start="2">
+<li>
+<p>此外，你需要设置云引擎的环境变量以提供必要的信息，点击云引擎的设置页，设置如下信息：</p>
+<p><strong>必选参数</strong></p>
+<ul>
+<li>
+<p><code>SITE_NAME</code> : 网站名称。</p>
+</li>
+<li>
+<p><code>SITE_URL</code> : 网站地址, <strong>最后不要加 <code>/</code> 。</strong></p>
+</li>
+<li>
+<p><code>SMTP_USER</code> : SMTP 服务用户名，一般为邮箱地址。</p>
+</li>
+<li>
+<p><code>SMTP_PASS</code> : SMTP 密码，一般为授权码，而不是邮箱的登陆密码，请自行查询对应邮件服务商的获取方式</p>
+</li>
+<li>
+<p><code>SMTP_SERVICE</code> : 邮件服务提供商，支持 <code>QQ</code>、<code>163</code>、<code>126</code>、<code>Gmail</code>、<code>&quot;Yahoo&quot;</code>、<code>......</code> ，全部支持请参考 : <a href="https://nodemailer.com/smtp/well-known/#supported-services" target="_blank" rel="noopener noreffer">Nodemailer Supported services</a>。 &mdash; <em>如这里没有你使用的邮件提供商，请查看<a href="https://github.com/zhaojun1998/Valine-Admin/blob/master/%e9%ab%98%e7%ba%a7%e9%85%8d%e7%bd%ae.md#%e8%87%aa%e5%ae%9a%e4%b9%89%e9%82%ae%e4%bb%b6%e6%9c%8d%e5%8a%a1%e5%99%a8" target="_blank" rel="noopener noreffer">自定义邮件服务器</a></em></p>
+</li>
+<li>
+<p><code>SENDER_NAME</code> : 寄件人名称。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2020/09/09/Yki6BNtXu9VmpEg.png"
+        data-srcset="https://i.loli.net/2020/09/09/Yki6BNtXu9VmpEg.png, https://i.loli.net/2020/09/09/Yki6BNtXu9VmpEg.png 1.5x, https://i.loli.net/2020/09/09/Yki6BNtXu9VmpEg.png 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2020/09/09/Yki6BNtXu9VmpEg.png"
+        title="image-20200909010618828" /></p>
+</li>
+</ul>
+</li>
+<li>
+<p>设置完环境变量，必须<strong>重新部署</strong>，邮件提醒功能才会生效</p>
+</li>
+<li>
+<p><strong>云引擎</strong> —— <strong>设置</strong> —— <strong>云引擎域名</strong>（如：jackma），保存</p>
+<ol>
+<li>然后进入 <strong>存储</strong> —— <strong>_User</strong> 添加一个用户，只需 User，password，email 三个信息即可。（为了安全考虑，此 <code>email</code> 必须为配置中的 <code>SMTP_USER</code> 或 <code>TO_EMAIL</code>， 否则不允许登录）</li>
+<li>此时可以使用定义的主机域名登录<strong>后台管理系统</strong>了，地址为：<a href="" rel="">[云引擎域名jackma].avosapps.us</a>，用户名为刚设置的邮箱。</li>
+</ol>
+</li>
+<li>
+<p>LeanCloud 休眠策略</p>
+</li>
+</ol>
+<pre><code>1.   首先需要添加环境变量，`ADMIN_URL`：`云引擎域名`(如https://jackma.avosapps.us)（重启容器才生效）
+
+2.   然后点击**云引擎** - **定时任务** - **创建定时任务**，按照图片上填写：**`0 0/20 7-23 * * ?`**
+
+    &lt;img src=&quot;https://i.loli.net/2020/09/09/UwKDZ2XPcdWa7oE.png&quot; alt=&quot;image-20200909014721962&quot; style=&quot;zoom:50%;&quot; /&gt;
+
+3.  添加后要记得**点击启用**
+
+    启用成功后，每 20 分钟在云引擎的 - 应用日志中可以看到提示
+
+    ![image-20200909020148474](https://i.loli.net/2020/09/09/fQkMTSKFp5z1mGd.png)
+</code></pre>
+<ol start="6">
+<li>登录上面主机域名进入后台瞅一瞅：</li>
+</ol>
+<p><img src="https://i.loli.net/2020/09/09/SE4c8jlLFw6tZDU.png" alt="img" style="zoom: 33%;" /></p>
+<ol start="7">
+<li>
+<p>我自己沙发了一条评论</p>
+<ol>
+<li>
+<p>日志提示：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2020/09/09/HBxUEh2rif6eCyt.png"
+        data-srcset="https://i.loli.net/2020/09/09/HBxUEh2rif6eCyt.png, https://i.loli.net/2020/09/09/HBxUEh2rif6eCyt.png 1.5x, https://i.loli.net/2020/09/09/HBxUEh2rif6eCyt.png 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2020/09/09/HBxUEh2rif6eCyt.png"
+        title="image-20200909020718733" /></p>
+</li>
+<li>
+<p>进入后台后可以看到：</p>
+<p><img src="C:\Users\Sam\AppData\Roaming\Typora\typora-user-images\image-20200909013907513.png" alt="image-20200909013907513" style="zoom: 50%;" /></p>
+</li>
+<li>
+<p>同时，我也收到了通知邮件：</p>
+<p><img src="https://i.loli.net/2020/09/09/DKmHWPE46Z8sFCf.png" alt="image-20200909012309644" style="zoom:50%;" /></p>
+</li>
+</ol>
+</li>
+</ol>
+<p>至此完成了 <strong>Valine</strong> 评论系统的添加和完善，喝杯咖啡☕️庆祝一下！</p>
+<p>​</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://valine.js.org/" target="_blank" rel="noopener noreffer">Valine</a></li>
+<li><a href="https://github.com/zhaojun1998/Valine-Admin" target="_blank" rel="noopener noreffer">Valine-Admin</a></li>
+<li><a href="https://github.com/zhaojun1998/Valine-Admin/blob/master/%e9%ab%98%e7%ba%a7%e9%85%8d%e7%bd%ae.md#leancloud-%e4%bc%91%e7%9c%a0%e7%ad%96%e7%95%a5" target="_blank" rel="noopener noreffer">leancloud-休眠策略</a></li>
+<li><a href="https://www.smslit.top/2018/07/08/hugo-valine/" target="_blank" rel="noopener noreffer">hugo博客添加评论系统Valine</a></li>
+<li><a href="https://co5.me/2019/190818-valine.html" target="_blank" rel="noopener noreffer">将 Valine 切换至 leancloud 国际版</a></li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-03-15</span>
+            </div>
+            <div class="post-info-license"><span>转载请注明出处</span></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/blog-comments-valine-leancloud/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://samrks.github.io/blog-comments-valine-leancloud/" data-title="博客之路：hugo 添加评论系统 Valine" data-via="ryuukousen2" data-hashtags="Valine,Leancloud,评论,博客"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://samrks.github.io/blog-comments-valine-leancloud/" data-hashtag="Valine"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://samrks.github.io/blog-comments-valine-leancloud/" data-title="博客之路：hugo 添加评论系统 Valine"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://samrks.github.io/blog-comments-valine-leancloud/" data-title="博客之路：hugo 添加评论系统 Valine"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://samrks.github.io/blog-comments-valine-leancloud/" data-title="博客之路：hugo 添加评论系统 Valine"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/valine/">Valine</a>,&nbsp;<a href="/tags/leancloud/">Leancloud</a>,&nbsp;<a href="/tags/%E8%AF%84%E8%AE%BA/">评论</a>,&nbsp;<a href="/tags/%E5%8D%9A%E5%AE%A2/">博客</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/blog-search-algolia/" class="prev" rel="prev" title="博客之路：hugo 搜索功能 Algolia"><i class="fas fa-angle-left fa-fw"></i>博客之路：hugo 搜索功能 Algolia</a>
+            <a href="/tools-test-markdown/" class="next" rel="next" title="测试 Markdown 语法">测试 Markdown 语法<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+    Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+  </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Thanks For Your Watching!</div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2017 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Sam</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":15},"comment":{"valine":{"appId":"M2gdPMfXs30Gw5NNnr2wSxv6-MdYXbMMI","appKey":"9V2iCzlcQbheaaWDXRLTNgec","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-apple@5.0.1/img/apple/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"说点什么吧...（提醒：填写邮箱，若有人回复您，您将及时收到提醒邮件！）","recordIP":true,"visitor":true}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"KAKKI975YQ","algoliaIndex":"blog","algoliaSearchKey":"529eb6b7fa6e4f89bfe1d0043e53bda5","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

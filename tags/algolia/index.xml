@@ -1,0 +1,146 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Algolia - 标签 - Sam&#39;s Garage</title>
+        <link>http://samrks.github.io/tags/algolia/</link>
+        <description>Algolia - 标签 - Sam&#39;s Garage</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Fri, 13 Mar 2020 21:36:27 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/algolia/" rel="self" type="application/rss+xml" /><item>
+    <title>博客之路：hugo 搜索功能 Algolia</title>
+    <link>http://samrks.github.io/blog-search-algolia/</link>
+    <pubDate>Fri, 13 Mar 2020 21:36:27 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/blog-search-algolia/</guid>
+    <description><![CDATA[<p>hugo 搜索功能 Algolia</p>
+<h2 id="前言">前言</h2>
+<p><a href="https://gohugo.io/" target="_blank" rel="noopener noreffer">Hugo</a>是由 Steve Francis 大神(<a href="http://spf13.com/">http://spf13.com/</a>)基于<code>Go</code>语言开发的静态网站构建工具。没错你现在看到的本博客就是基于<code>Hugo</code>的，使用 Hugo 创建一个网站是非常简单的，基本上没有什么门槛，官方还提供了大量的主题供你选择，你只需要专心写的文章就行。不过有个问题是搜索，我们知道搜索属于动态行为了，如何给静态网站增加搜索功能呢？当然我们可以使用<code>Google</code>的站内搜索功能，Hugo 官方也提供了一些开源的和商业的解决方案，今天我们要介绍的就是一个非常优秀的商业解决方案：<a href="https://www.algolia.com/" target="_blank" rel="noopener noreffer">Algolia</a>。</p>
+<h2 id="注册">注册</h2>
+<ol>
+<li>
+<p>前往官方网站https://www.algolia.com/ 使用 GitHub 或 Google 帐号登录。</p>
+</li>
+<li>
+<p>登录完成后根据提示信息填写一些基本的信息即可。</p>
+</li>
+<li>
+<p>注册完成后前往 <a href="https://www.algolia.com/dashboard" target="_blank" rel="noopener noreffer">Dashboard</a>，我们可以发现 Algolia 会默认给我们生成一个 app。</p>
+<ul>
+<li>默认的 app 可以在 settings → Applications 中重命名</li>
+</ul>
+</li>
+<li>
+<p>选择 Indices，添加一个新的索引，我这里命名为<code>blog</code>，创建成功后，我们可以看到提示中还没有任何记录。</p>
+<p></p>
+</li>
+<li>
+<p>Algolia 为我们提供了三种方式来增加记录：手动添加、上传 json 文件、API。</p>
+</li>
+</ol>
+<h2 id="修改-configtoml-配置">修改 config.toml 配置</h2>
+<p>以下内容，基于 Hugo-Loveit 主题测试生效</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">params</span><span class="p">.</span><span class="nx">algolia</span><span class="p">]</span>
+  <span class="nx">appId</span> <span class="p">=</span> <span class="s2">&#34;你的Application ID&#34;</span>
+  <span class="nx">indexName</span> <span class="p">=</span> <span class="s2">&#34;你的索引名字&#34;</span>
+  <span class="nx">searchOnlyKey</span> <span class="p">=</span> <span class="s2">&#34;你的Search-Only API Key&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>执行 hugo，会自动生成 <code>public/index.json</code> 用于索引</p>
+<h2 id="上传索引文件">上传索引文件</h2>
+<p>生成索引文件之后，我们需要上传到 Algolia 的服务器。</p>
+<h3 id="手动上传">手动上传</h3>
+<p>这一步是可选的，不过还是建议跟着做一下。</p>
+<p>点击侧栏 <code>Indices</code> ，点击 <code>Upload record(s)</code> 按钮上传上一步生成的 <code>index.json</code> 文件。
+</p>
+<p>上传成功之后，我们就可以马上尝试搜索了：</p>
+<p></p>
+<p>可以看到搜索的关键词有相应的匹配结果，说明我们生成的索引文件是正确的。</p>
+<h3 id="自动上传">自动上传</h3>
+<p>每次写完博文都手动上传索引文件无疑是痛苦的、无意义的重复劳动。</p>
+<p>因此我们需要把上传索引文件的操作自动化，在自动部署的时候顺便完成即可。</p>
+<p>这里我们采用npm包 <a href="https://www.npmjs.com/package/atomic-algolia" target="_blank" rel="noopener noreffer">atomic-algolia</a> 来完成上传操作。</p>
+<ul>
+<li>
+<p>安装 atomic-algolia 包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">npm</span> <span class="nx">install</span> <span class="nx">atomic</span><span class="o">-</span><span class="nx">algolia</span> <span class="o">--</span><span class="nx">save</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>修改根目录下的 <code>package.json</code> 文件（没有就新建），在 <code>scripts</code> 下添加 <code>&quot;algolia&quot;: &quot;atomic-algolia&quot;</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;scripts&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;test&#34;</span><span class="p">:</span> <span class="s2">&#34;echo \&#34;Error: no test specified\&#34; &amp;&amp; exit 1&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;algolia&#34;</span><span class="p">:</span> <span class="s2">&#34;atomic-algolia&#34;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意 <code>&quot;test&quot;</code> 那一行末尾有个英文逗号，不要漏了。</p>
+</li>
+<li>
+<p>根目录下新建 <code>.env</code> 文件，内容如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">ALGOLIA_APP_ID</span><span class="o">=</span><span class="nx">你的Application</span> <span class="nx">ID</span>
+<span class="nx">ALGOLIA_INDEX_NAME</span><span class="o">=</span><span class="nx">你的索引名字</span>
+<span class="nx">ALGOLIA_INDEX_FILE</span><span class="o">=</span><span class="kr">public</span><span class="o">/</span><span class="nx">index</span><span class="p">.</span><span class="nx">json</span>
+<span class="nx">ALGOLIA_ADMIN_KEY</span><span class="o">=</span><span class="nx">你的Admin</span> <span class="nx">API</span> <span class="nx">Key</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意替换你自己 Algolia 索引的信息。
+另外特别注意 <code>ALGOLIA_ADMIN_KEY</code> 可以用来管理你的索引，所以尽量不要提交到公共仓库。可以添加到 <code>.gitignore</code> 中</p>
+</li>
+<li>
+<p>上传索引的命令
+你可以本地执行 <code>npm run algolia</code> 查看运行效果：
+<a href="https://i.loli.net/2020/02/23/C6u38blAWG7Xnke.png" target="_blank" rel="noopener noreffer"></a>
+可以看到我们成功添加了记录。</p>
+</li>
+<li>
+<p>后续，可以把下面的命令加到你的部署脚本中：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">npm</span> <span class="nx">run</span> <span class="nx">algolia</span> <span class="c1">// 在hugo命令后面执行
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="参考资料">参考资料</h2>
+<ol>
+<li><a href="https://edward852.github.io/post/hugo%E6%B7%BB%E5%8A%A0algolia%E6%90%9C%E7%B4%A2%E6%94%AF%E6%8C%81/#%E4%B8%8A%E4%BC%A0%E7%B4%A2%E5%BC%95%E6%96%87%E4%BB%B6" target="_blank" rel="noopener noreffer">Hugo添加Algolia搜索支持</a></li>
+<li><a href="https://github.com/chrisdmacrae/atomic-algolia" target="_blank" rel="noopener noreffer">atomic-algolia 插件</a></li>
+<li>[Hugo 集成 Algolia 搜索</li>
+</ol>]]></description>
+</item></channel>
+</rss>

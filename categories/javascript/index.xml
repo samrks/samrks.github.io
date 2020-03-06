@@ -6,10 +6,10 @@
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
             <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Mon, 07 Sep 2020 23:08:13 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/categories/javascript/" rel="self" type="application/rss+xml" /><item>
     <title>JS 对象分类——原型 &amp; 类</title>
-    <link>http://samrks.github.io/18-javascript-constructor-prototype-vs-class/</link>
+    <link>http://samrks.github.io/javascript-constructor-prototype-vs-class/</link>
     <pubDate>Mon, 07 Sep 2020 23:08:13 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/18-javascript-constructor-prototype-vs-class/</guid>
+    <guid>http://samrks.github.io/javascript-constructor-prototype-vs-class/</guid>
     <description><![CDATA[<p>「构造函数」「原型」「new 操作符」「类 class」</p>
 <p>​</p>
 <h2 id="对象需要分类吗">对象需要分类吗？</h2>
@@ -1531,10 +1531,10 @@
 </ul>]]></description>
 </item><item>
     <title>JS 对象的基本用法</title>
-    <link>http://samrks.github.io/17-javascript-crud-of-object-prototype/</link>
+    <link>http://samrks.github.io/javascript-crud-of-object-prototype/</link>
     <pubDate>Wed, 02 Sep 2020 21:50:44 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/17-javascript-crud-of-object-prototype/</guid>
+    <guid>http://samrks.github.io/javascript-crud-of-object-prototype/</guid>
     <description><![CDATA[<p>「增」「删」「改」「查」</p>
 <h2 id="回顾">回顾</h2>
 <h3 id="七种数据类型">七种数据类型</h3>
@@ -2482,10 +2482,10 @@ obj.name 不等价于 obj[name]</p>
 </blockquote>]]></description>
 </item><item>
     <title>JS 的数据类型🧐</title>
-    <link>http://samrks.github.io/16-javascript-data-type/</link>
+    <link>http://samrks.github.io/javascript-something-about-data-type/</link>
     <pubDate>Thu, 27 Aug 2020 01:45:54 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/16-javascript-data-type/</guid>
+    <guid>http://samrks.github.io/javascript-something-about-data-type/</guid>
     <description><![CDATA[<p>「如何存数字&amp;字符」「JS 的数据类型」「64位浮点数 」「变量声明 var / let / const」「类型转换」</p>
 <p>​</p>
 <h2 id="数据为什么需要类型">数据为什么需要类型</h2>
@@ -3875,10 +3875,10 @@ obj.name 不等价于 obj[name]</p>
 </blockquote>]]></description>
 </item><item>
     <title>JS 的基本语法⚙️</title>
-    <link>http://samrks.github.io/15-javascript-basic-syntax/</link>
+    <link>http://samrks.github.io/javascript-basic-syntax/</link>
     <pubDate>Mon, 24 Aug 2020 22:15:53 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/15-javascript-basic-syntax/</guid>
+    <guid>http://samrks.github.io/javascript-basic-syntax/</guid>
     <description><![CDATA[<p>内容包括「什么是表达式和语句」「标识符的规则」「 if else 语句」「 while for 语句」「 label 」</p>
 <h2 id="推荐书籍">推荐书籍</h2>
 <ol>
@@ -4923,10 +4923,10 @@ obj.name 不等价于 obj[name]</p>
 </div>]]></description>
 </item><item>
     <title>JavaScript 的发展历史</title>
-    <link>http://samrks.github.io/14-javascript-history/</link>
+    <link>http://samrks.github.io/javascript-history/</link>
     <pubDate>Wed, 12 Aug 2020 21:13:23 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/14-javascript-history/</guid>
+    <guid>http://samrks.github.io/javascript-history/</guid>
     <description><![CDATA[<p>简单了解「学 JS 的基本要求」，重点了解「JS 的诞生与历史」</p>
 <p>​</p>
 <h2 id="一些链接">一些链接</h2>

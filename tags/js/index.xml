@@ -1,0 +1,2484 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>JS - 标签 - Sam&#39;s Garage</title>
+        <link>http://samrks.github.io/tags/js/</link>
+        <description>JS - 标签 - Sam&#39;s Garage</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Mon, 07 Sep 2020 23:08:13 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/js/" rel="self" type="application/rss+xml" /><item>
+    <title>JS 对象分类——原型 &amp; 类</title>
+    <link>http://samrks.github.io/javascript-constructor-prototype-vs-class/</link>
+    <pubDate>Mon, 07 Sep 2020 23:08:13 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/javascript-constructor-prototype-vs-class/</guid>
+    <description><![CDATA[<p>「构造函数」「原型」「new 操作符」「类 class」</p>
+<p>​</p>
+<h2 id="对象需要分类吗">对象需要分类吗？</h2>
+<blockquote>
+<p>这是一个值得思考的问题</p>
+</blockquote>
+<p>我们来做一个小程序</p>
+<ul>
+<li>输出各种形状的面积和周长</li>
+</ul>
+<p>​</p>
+<h2 id="一个正方形--square">一个正方形  Square</h2>
+<p>代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">square</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="nx">width</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span> 
+  <span class="nx">getArea</span><span class="p">(){</span> 
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span>   <span class="c1">// 先简单的把this理解成当前对象，在「函数篇」会重新学习this 
+</span><span class="c1"></span>  <span class="p">}</span><span class="err">，</span> 
+  <span class="nx">getLength</span><span class="p">(){</span> 
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>分析</p>
+<ul>
+<li>声明一个「正方形」对象</li>
+<li>「正方形」拥有三个属性：边长、面积、周长</li>
+</ul>
+<p>​</p>
+<h2 id="一打正方形-">一打正方形 💡</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">square1</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="nx">width</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span> 
+  <span class="nx">getArea</span><span class="p">(){</span> 
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span>
+  <span class="p">}</span><span class="err">，</span> 
+  <span class="nx">getLength</span><span class="p">(){</span> 
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">square2</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="nx">width</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span> 
+  <span class="nx">getArea</span><span class="p">(){</span> 
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span>
+  <span class="p">}</span><span class="err">，</span> 
+  <span class="nx">getLength</span><span class="p">(){</span> 
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">square3</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="p">...</span>
+<span class="kd">let</span> <span class="nx">square12</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>写12遍。这样写代码的，要么是新人，要么是傻子。</p>
+<ul>
+<li>这么写非常累，如果修改，需要逐个修改，非常非常麻烦</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h3 id="用-for-循环实现浪费内存">用 for 循环实现（浪费内存）</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">squareList</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">12</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>  <span class="c1">// &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+</span><span class="c1"></span>  <span class="nx">squareList</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>       <span class="c1">// &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+</span><span class="c1"></span>    <span class="nx">width</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="nx">getArea</span><span class="p">(){</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span>
+    <span class="p">},</span>
+    <span class="nx">getLength</span><span class="p">(){</span> 
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果 width 不全是 5，怎么实现</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">squareList</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="kd">let</span> <span class="nx">widthList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>   <span class="c1">// &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+</span><span class="c1"></span><span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">12</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+  <span class="nx">squareList</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="nx">widthList</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span>  <span class="c1">// &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+</span><span class="c1"></span>    <span class="nx">getArea</span><span class="p">(){</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span>
+    <span class="p">},</span>
+    <span class="nx">getLength</span><span class="p">(){</span> 
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="分析">分析</h4>
+<ul>
+<li>虽然实现了需求，但上面写法仍属于「垃圾代码」，浪费了太多内存，自己画 <strong>内存图</strong> 就知道了</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">squareList</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">getArea</span> <span class="o">===</span> <span class="nx">squareList</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">getArea</span>   <span class="c1">// false
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://i.loli.net/2020/09/03/kQiTnhXL92HNabF.jpg&#34;</span> <span class="nx">alt</span><span class="o">=</span><span class="s2">&#34;内存图-循环过程&#34;</span> <span class="o">/&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>会画内存图的人， 比其他人理解的更好</p>
+<ul>
+<li>内存中，一共创建了 24 个函数，其中 22 个都是多余重复的</li>
+</ul>
+</blockquote>
+<p></p>
+<p>​</p>
+<h3 id="借助原型-">借助原型 √</h3>
+<blockquote>
+<p>将12个正方形对象的共有属性放到原型里</p>
+</blockquote>
+<p>代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">squareList</span> <span class="o">=</span> <span class="p">[]</span> 
+<span class="kd">let</span> <span class="nx">widthList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span> 
+<span class="kd">let</span> <span class="nx">squarePrototype</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="nx">getArea</span><span class="p">(){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="p">},</span> 
+  <span class="nx">getLength</span><span class="p">(){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span> <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">12</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span> 
+  <span class="nx">squareList</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">squarePrototype</span><span class="p">)</span> <span class="c1">// 每一个正方形都以squarePrototype为原型，共享方法
+</span><span class="c1"></span>  <span class="nx">squareList</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">widthList</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+<span class="p">}</span> 
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">squareList</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">getArea</span> <span class="o">===</span> <span class="nx">squareList</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">getArea</span>   <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p></p>
+<h4 id="分析-1">分析</h4>
+<blockquote>
+<p>有人指出创建一个正方形的代码分散在两个地方很不优雅，于是我们用一个函数把这两部分联系起来</p>
+</blockquote>
+<ul>
+<li>还是垃圾代码！创建square的代码太分散了！</li>
+<li>在上面基础上，应该再把代码抽离到一个函数里，实现调用函数 就可以创建正方形 —— 封装函数</li>
+</ul>
+<p>​</p>
+<h3 id="抽离到函数封装">抽离到函数（封装）⭐️</h3>
+<blockquote>
+<ul>
+<li>将创建正方形的代码，整合到一个 function 中</li>
+<li>直接调用 function 即可创建出对应个数的正方形对象</li>
+</ul>
+</blockquote>
+<p>这种过程就叫做「封装」</p>
+<ul>
+<li>把细节写到一个函数里，调用函数、传参，就搞定了</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">squareList</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="kd">let</span> <span class="nx">widthList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span> 
+
+<span class="kd">function</span> <span class="nx">createSquare</span><span class="p">(</span><span class="nx">width</span><span class="p">){</span> <span class="c1">// 此函数叫做「构造函数」详见一下版块
+</span><span class="c1"></span>  <span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">squarePrototype</span><span class="p">)</span>   <span class="c1">// 以 squarePrototype 为原型创建空对象 
+</span><span class="c1"></span>  <span class="nx">obj</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span> 
+  <span class="k">return</span> <span class="nx">obj</span> 
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">squarePrototype</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="nx">getArea</span><span class="p">(){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="p">}</span> 
+  <span class="nx">getLength</span><span class="p">(){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span> <span class="p">}</span> 
+<span class="p">}</span>
+<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">12</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span> 
+  <span class="nx">squareList</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">createSquare</span><span class="p">(</span><span class="nx">widthList</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>  <span class="c1">// 这下创建 square 很简单了吧！
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h2 id="构造函数-">构造函数 ⭐️</h2>
+<ul>
+<li>就是可以构造出对象的函数</li>
+</ul>
+<h3 id="函数和原型结合进一步封装">函数和原型结合（进一步封装）⭐️</h3>
+<blockquote>
+<p>进一步封装</p>
+<ul>
+<li>squarePrototype 原型 和 creatSquare 函数，还是分散的</li>
+<li>能不能组合在一起？</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">squareList</span> <span class="o">=</span> <span class="p">[]</span> 
+<span class="kd">let</span> <span class="nx">widthList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span> 
+<span class="kd">function</span> <span class="nx">createSquare</span><span class="p">(</span><span class="nx">width</span><span class="p">){</span>  <span class="c1">// 构造函数：用于创建 square 对象
+</span><span class="c1"></span>  <span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">createSquare</span><span class="p">.</span><span class="nx">squarePrototype</span><span class="p">)</span> 
+  <span class="c1">// 先使用后定义？NO，这里并未执行，执行时已经定义完了
+</span><span class="c1"></span>  <span class="nx">obj</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span> 
+  <span class="k">return</span> <span class="nx">obj</span> 
+<span class="p">}</span>
+<span class="nx">createSquare</span><span class="p">.</span><span class="nx">squarePrototype</span> <span class="o">=</span> <span class="p">{</span> <span class="c1">// 把原型放到构造函数上，结合够紧密了吗？
+</span><span class="c1"></span>  <span class="nx">getArea</span><span class="p">(){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="p">},</span>
+  <span class="nx">getLength</span><span class="p">(){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span> <span class="p">},</span> 
+  <span class="nx">constructor</span><span class="o">:</span> <span class="nx">createSquare</span> <span class="c1">// 再把构造函数放到原型上，方便通过原型找到构造函数 
+</span><span class="c1"></span>	<span class="c1">// 原型和构造函数互相引用，非常紧密
+</span><span class="c1"></span>  <span class="c1">// 可以通过createSquare函数，找到原型squarePrototype。也可以拿到原型，方便的找到createSquare函数
+</span><span class="c1"></span><span class="p">}</span> 
+<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">12</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span> 
+  <span class="nx">squareList</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">createSquare</span><span class="p">(</span><span class="nx">widthList</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">squareList</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">constructor</span><span class="p">)</span> <span class="c1">// ƒ createSquare(width){...}
+</span><span class="c1"></span>  <span class="c1">// 打印 constructor 可以知道谁构造了 squareList[0→11] 对象：你妈是谁？
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>函数上面也可以用「点 . 」？</p>
+<ul>
+<li>因为函数属于对象</li>
+</ul>
+<blockquote>
+<p>此时，代码已经没有进一步优化的空间了</p>
+<ul>
+<li>这段代码几乎完美</li>
+<li>为什么不固定下来，让每个JS开发者直接用呢?</li>
+<li>这时 JS 就有了 new 操作符 来帮我们实现</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h3 id="new-操作符-">new 操作符 ⭐️</h3>
+<blockquote>
+<p>让我们感受JS之父的爱</p>
+<ul>
+<li>JS 之父创建了 new 关键字，可以让我们可以再少写几行代码</li>
+<li><a href="https://zhuanlan.zhihu.com/p/23987456" target="_blank" rel="noopener noreffer">JS 的 new 到底是干什么的？</a>⚡️⚡️⚡️⚡️（必读！！！）</li>
+</ul>
+</blockquote>
+<h4 id="函数和原型结合重写">函数和原型结合（重写）⭐️⭐️</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">squareList</span> <span class="o">=</span> <span class="p">[]</span> 
+<span class="kd">let</span> <span class="nx">widthList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span> 
+
+<span class="kd">function</span> <span class="nx">Square</span><span class="p">(</span><span class="nx">width</span><span class="p">){</span>  <span class="c1">// 构造函数
+</span><span class="c1"></span>  <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span> 
+<span class="p">}</span>
+
+<span class="nx">Square</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getArea</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="p">}</span> 
+<span class="nx">Square</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getLength</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span> <span class="p">}</span>
+<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">12</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span> 
+  <span class="nx">squareList</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Square</span><span class="p">(</span><span class="nx">widthList</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">squareList</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">constructor</span><span class="p">)</span> 
+<span class="p">}</span>
+<span class="c1">// 多美，几乎没有一句多余的废话 
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>每个函数创建时，都自带有prototype属性，这是JS之父故意的</p>
+</li>
+<li>
+<p>每个prototype都自带有constructor属性，也是故意的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">f1</span><span class="p">(){}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="nx">f1</span><span class="p">)</span>
+<span class="nx">f1</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nx">f1</span>   <span class="c1">// true   // 函数原型上的constructor等于函数本身
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+</li>
+</ul>
+<p>​</p>
+<h4 id="对比">对比</h4>
+<p></p>
+<ul>
+<li>上面的代码被简化为下面的代码</li>
+<li>唯一的区别是要用 new 来调用</li>
+</ul>
+<p></p>
+<h4 id="细节">细节</h4>
+<ul>
+<li>
+<p>creatSquare  =&gt;  Square 函数名变了</p>
+</li>
+<li>
+<p>之前需要创建对象，让对象的原型指向拥有 getArea 和 getLength 的那个对象 。
+现在这句话不用写了，new 会帮我们实现</p>
+</li>
+<li>
+<p>用 this 代表新的对象（this 会指向临时对象）</p>
+</li>
+<li>
+<p>return obj 也不用写了，new 会帮我们实现（函数原本三行，压缩成一行，其他 new 会帮我们实现）</p>
+</li>
+<li>
+<p>现在，把 getArea 和 getLength 通过「点方法」挨个添加到 prototype 上，不能直接给 prototype 赋新值，会导致丢失原本的 constructor（可以用 Object.assign 批量添加）</p>
+</li>
+<li>
+<p>最后，声明新对象时，用 new Square(width)</p>
+</li>
+</ul>
+<p>​</p>
+<h2 id="总结-">总结 ⚡️⚡️⚡️</h2>
+<blockquote>
+<p><a href="https://zhuanlan.zhihu.com/p/23987456" target="_blank" rel="noopener noreffer">JS 的 new 到底是干什么的？</a>⚡️⚡️⚡️⚡️（必读！！！）</p>
+</blockquote>
+<h3 id="new-x-自动做了四件事情">new X() 自动做了四件事情</h3>
+<ol>
+<li>
+<p>自动创建空对象</p>
+</li>
+<li>
+<p>自动为空对象关联原型，原型地址指定为 <code>X.prototype</code></p>
+</li>
+<li>
+<p>自动将空对象作为 this 关键字运行构造函数</p>
+<ul>
+<li>this 就是我们new构造函数创建的对象</li>
+</ul>
+</li>
+<li>
+<p>自动 return this</p>
+</li>
+</ol>
+<p>——这就是 JS 之父的爱</p>
+<h3 id="构造函数-x">构造函数 X</h3>
+<ul>
+<li>X 函数本身负责给对象本身添加属性</li>
+<li><code>X.prototype</code> 对象负责保存对象的共用属性</li>
+</ul>
+<h3 id="原型与共有属性的关系">原型与共有属性的关系</h3>
+<blockquote>
+<p>因为 JS 引擎按照「堆栈」来分配内存、存储数据
+根据「堆栈」的规则，简单类型在「栈区 Stack」存储，复杂类型在「堆区 Heap」存储</p>
+<ul>
+<li>X.prototype 的值是，原型的地址
+<ul>
+<li>因为原型是一个对象，对象是以「堆」的形式存储，所以严格来说，X.prototype的值是：原型的地址</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>这个地址，对应到计算机中的那一坨内存，才是原型本身</li>
+<li>而原型中，有很多属性/方法：toString、valueOf … 它们就是「共有属性」（原创的词）</li>
+<li>共有属性的集合就是原型</li>
+</ul>
+<blockquote>
+<p>如果会画内存图，会理解的更清楚   ↓↓↓</p>
+</blockquote>
+</blockquote>
+<p></p>
+<p>​</p>
+<p>​</p>
+<h2 id="示例">示例</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Dog</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span> 
+	<span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span>  
+	<span class="k">this</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">kind</span> <span class="o">=</span> <span class="s1">&#39;萨摩耶&#39;</span>    <span class="c1">// this 就是我们new构造函数创建的对象
+</span><span class="c1"></span><span class="p">}</span>
+<span class="nx">Dog</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">say</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;汪汪&#39;</span><span class="p">)</span> <span class="p">}</span>    <span class="c1">// 共用函数
+</span><span class="c1"></span><span class="nx">Dog</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">run</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;狗在跑&#39;</span><span class="p">)</span> <span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">dog1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dog</span><span class="p">(</span><span class="s1">&#39;小白&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">Dog</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="s1">&#39;狗&#39;</span>   <span class="c1">// 共用的不一定都是函数, 也可以共用属性。
+</span><span class="c1"></span>
+<span class="kd">let</span> <span class="nx">dog2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dog</span><span class="p">(</span><span class="s1">&#39;小黑&#39;</span><span class="p">)</span>
+<span class="nx">dog1</span><span class="p">.</span><span class="nx">x</span> <span class="c1">// &#39;狗&#39;
+</span><span class="c1"></span><span class="nx">dog2</span><span class="p">.</span><span class="nx">x</span> <span class="c1">// &#39;狗&#39;
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h2 id="题外话代码规范">题外话：代码规范</h2>
+<h3 id="大小写">大小写</h3>
+<ul>
+<li>所有构造函数（专门用于创建对象的函数）首字母大写</li>
+<li>所有被构造出来的对象，首字母小写</li>
+</ul>
+<h3 id="词性">词性</h3>
+<ul>
+<li>new 后面的函数（构造函数），使用名词形式。 如 <code>new Person()</code>、<code>new Object()</code></li>
+<li>普通函数，一般使用动词开头。如 <code>createSquare(5)</code>、<code>createElement('div')</code></li>
+<li>其他规则以后再说</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="总结一个非常重要的公式-">总结一个非常重要的公式 💋</h2>
+<blockquote>
+<p>也是 JS 里唯一的一个公式</p>
+</blockquote>
+<p>很多前端对于原型的理解是通过画图，实际上是可以通过公式来表示的
+只有方方的课才能看到，若愚的课也没有</p>
+<h3 id="如何确定一个对象的原型">如何确定一个对象的原型</h3>
+<p>为什么</p>
+<ul>
+<li><code>let obj = new Object()</code>的原型是 <code>Object.prototype </code></li>
+<li><code>let arr = new Array()</code>的原型是 <code>Array.prototype </code></li>
+<li><code>let square = new Square()</code>的原型是 <code>Square.prototype </code></li>
+<li><code>let fn = new Function()</code>的原型是 <code>Function.prototype</code></li>
+</ul>
+<blockquote>
+<p>可以总结出，一个对象通过 new XXX 创建出来，那么 XXX.prototype 就是这个对象的原型</p>
+</blockquote>
+<p>因为 new 操作故意这么做的</p>
+<p></p>
+<p>​</p>
+<h3 id="结论">结论</h3>
+<blockquote>
+<p>你是谁构造的
+你的原型就是谁的 prototype 属性
+对应的对象</p>
+</blockquote>
+<ul>
+<li>很多前端会说 prototype 就是原型</li>
+<li>实际上、严格来说，prototype 只是存了个地址，不是对象。</li>
+<li>prototype 地址对应的那块内存、内存中所有共有属性的集合，才是原型对象本身</li>
+</ul>
+<blockquote>
+<p>⚡️⚡️⚡️⚡️ 原型公式 ⚡️⚡️⚡️</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">对象</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">其构造函数</span><span class="p">.</span><span class="nx">prototype</span>
+</code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<p>​</p>
+<h3 id="例-">例 💋</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">X</span><span class="p">(</span><span class="nx">width</span><span class="p">){</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span>
+<span class="p">}</span>
+<span class="nx">X</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getArea</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="p">}</span>
+<span class="nx">X</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getLength</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span> <span class="p">}</span>
+<span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">X</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">X</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>构造函数的原型：<code>X.prototype </code> 是 #309</li>
+<li>构造出的对象 a 和 b 的原型 ：<code> a.__proto__</code> 和 <code>b.__proto__</code> 也是 #309</li>
+</ul>
+<p></p>
+<p>补充：#109 结构</p>
+<p></p>
+<p>​</p>
+<h3 id="参考资料">参考资料</h3>
+<p><a href="https://www.zhihu.com/question/56770432/answer/315342130" target="_blank" rel="noopener noreffer">JS 中 <code>__proto__</code> 和 <code>prototype</code> 存在的意义是什么？</a></p>
+<p>​</p>
+<h3 id="做几个题">做几个题</h3>
+<blockquote>
+<p>来理解公式：<strong><code>对象.__proto__ === 其构造函数.prototype</code></strong></p>
+</blockquote>
+<h4 id="难度1">难度1</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="p">{}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>请问：</p>
+<ol>
+<li>
+<p>x的原型是什么？  Object.prototype</p>
+</li>
+<li>
+<p><code>x.__proto__</code>的值是什么？  Object.prototype</p>
+</li>
+<li>
+<p>上面两个问题是等价的吗？</p>
+</li>
+<li>
+<p>请用内存图画出x的所有属性</p>
+</li>
+</ol>
+<p>答：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>  <span class="c1">// x的原型
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>  <span class="c1">// x.__proto__
+</span><span class="c1"></span><span class="nx">x</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>   <span class="c1">// true  二者是等价的
+</span><span class="c1"></span><span class="nx">x</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">window</span><span class="p">.</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>  <span class="c1">// true  「window.」可省略
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>​</p>
+<h4 id="难度2">难度2</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Square</span><span class="p">(</span><span class="nx">width</span><span class="p">){</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">square</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Square</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="err">⚡️⚡️⚡️</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>请问：</p>
+<ol>
+<li>square的原型是什么？</li>
+<li><code>square.__proto__</code>的值是什么？</li>
+<li>请用内存图画出 square 的所有属性</li>
+</ol>
+<p>答：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">Square</span><span class="p">.</span><span class="nx">prototype</span>  <span class="c1">// square的原型
+</span><span class="c1"></span><span class="nx">Square</span><span class="p">.</span><span class="nx">prototype</span>  <span class="c1">// square.__proto__   
+</span><span class="c1">// 1/2两个问题是等价的（带入公式理解）
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>​</p>
+<h4 id="难度3">难度3</h4>
+<p>请问：</p>
+<ol>
+<li>Object.prototype 是哪个函数构造出来的？</li>
+<li>Object.prototype 的原型是什么？</li>
+<li><code>Object.prototype.__proto__</code> 值是什么?</li>
+<li>请用内存图画出上述内容</li>
+</ol>
+<p>答：</p>
+<ol>
+<li>
+<p>未知，Object.prototype 是默认就存在的，没有谁把它构造出来</p>
+</li>
+<li>
+<p>没有原型</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="kc">null</span>   <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<p>​</p>
+<p>​</p>
+<h2 id="构造函数prototypenew">构造函数、prototype、new</h2>
+<blockquote>
+<p>通过 Square 的例子，已经可以基本理解了</p>
+</blockquote>
+<p><strong>构造函数</strong></p>
+<ul>
+<li>用来创建对象的函数，就是构造函数（特点：首字母大写）</li>
+</ul>
+<p>​</p>
+<p><strong>prototype</strong></p>
+<ul>
+<li>
+<p>不论构造函数、还是普通函数，每一个函数（对象）都有一个 prototype，用来存放共有属性</p>
+</li>
+<li>
+<p>每个对象都有原型，但除了「根对象 Object.prototype」比较特殊，Object.prototype 这个对象的原型为空 null</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">){</span><span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span><span class="p">}</span>
+<span class="nx">add</span><span class="p">.</span><span class="nx">prototype</span>  <span class="c1">// 不仅是构造函数，普通函数也有 prototype
+</span><span class="c1"></span><span class="k">delete</span> <span class="nx">add</span><span class="p">.</span><span class="nx">prototype</span>  <span class="c1">// false  而且删不掉，仍然存在
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<p><strong>new</strong>：会帮我们做四件事情（省略了很多代码）</p>
+<ol>
+<li>创建一个临时对象</li>
+<li>把这个对象指向一个原型</li>
+<li>把这个对象作为 this 来运行这个构造函数</li>
+<li>return this</li>
+</ol>
+<p>​</p>
+<h2 id="square-最终版存疑">Square 最终版（存疑）</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Square</span><span class="p">(</span><span class="nx">width</span><span class="p">){</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span>
+<span class="p">}</span>
+<span class="nx">Square</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getArea</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span>
+<span class="p">}</span>
+<span class="nx">Square</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getLength</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">square</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Square</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nx">square</span><span class="p">.</span><span class="nx">width</span>         <span class="c1">// 5
+</span><span class="c1"></span><span class="nx">square</span><span class="p">.</span><span class="nx">getArea</span><span class="p">()</span>     <span class="c1">// 25
+</span><span class="c1"></span><span class="nx">square</span><span class="p">.</span><span class="nx">getLength</span><span class="p">()</span>   <span class="c1">// 20
+</span></code></pre></td></tr></table>
+</div>
+</div><p>为什么说存疑：因为还有一个更简化的版本，后面再讲</p>
+<p>​</p>
+<p>​</p>
+<h2 id="圆形-circle">圆形 Circle</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Circle</span><span class="p">(</span><span class="nx">radius</span><span class="p">){</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">radius</span> <span class="o">=</span> <span class="nx">radius</span>
+<span class="p">}</span>
+<span class="nx">Circle</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getLength</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">radius</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span>
+<span class="p">}</span>
+<span class="nx">Circle</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getArea</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">radius</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">c1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Circle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="nx">c1</span><span class="p">.</span><span class="nx">radius</span>        <span class="c1">// 10
+</span><span class="c1"></span><span class="nx">c1</span><span class="p">.</span><span class="nx">getLength</span><span class="p">()</span>   <span class="c1">// 31.41592653589793
+</span><span class="c1"></span><span class="nx">c1</span><span class="p">.</span><span class="nx">getArea</span><span class="p">()</span>     <span class="c1">// 314.1592653589793
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h2 id="长方形-rectangle">长方形 Rectangle</h2>
+<p>两个参数：宽、高</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Rect</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">){</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span>
+<span class="p">}</span>
+<span class="nx">Rect</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getArea</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span>
+<span class="p">}</span>
+<span class="nx">Rect</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getLength</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">r1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Rect</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="nx">r1</span><span class="p">.</span><span class="nx">width</span>
+<span class="nx">r1</span><span class="p">.</span><span class="nx">height</span>
+<span class="nx">r1</span><span class="p">.</span><span class="nx">getLength</span><span class="p">()</span>
+<span class="nx">r1</span><span class="p">.</span><span class="nx">getArea</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h2 id="对象需要分类吗-1">对象需要分类吗？🧐</h2>
+<blockquote>
+<p>回到最初的问题</p>
+</blockquote>
+<blockquote>
+<h3 id="答案是-需要分类">答案是 需要分类</h3>
+</blockquote>
+<p>因为不同的对象有不同的功能，某些对象具有相同功能，某些对象具有不同功能</p>
+<h3 id="理由一">理由一</h3>
+<ul>
+<li>有很多对象拥有一样的属性和行为</li>
+<li>需要把它们分为同一类</li>
+<li>如 square1 和 square2
+如 圆1、圆2、圆3，都是圆
+如 长方形1、长方形2，都是长方形
+…</li>
+<li>这样创建类似对象的时候就很方便
+<ul>
+<li>直接 new 一个 Square、new Circle、new Rect … 然后传参，就能创建出相应图形的对象</li>
+<li>就不需要【 <code>let square1 = {…}; let square2 = {…} </code> 然后把所有属性写一遍】，这样会很麻烦</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h3 id="理由二">理由二</h3>
+<ul>
+<li>
+<p>但是还有很多对象拥有其他的属性和行为</p>
+</li>
+<li>
+<p>所以就需要不同的分类</p>
+</li>
+<li>
+<p>比如 Square / Circle / Rect 就是不同的分类</p>
+</li>
+<li>
+<p>Array / Function 也是不同的分类</p>
+</li>
+<li>
+<p>而 <strong>Object 创建出来的对象，是最没有特点的对象</strong>（没有什么额外更多的功能，相对比较普通）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="p">{}</span>   <span class="c1">// 等价于  let x = new Object()
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="类型-vs-类">类型 vs. 类</h2>
+<blockquote>
+<p>「 类型  &amp;  类 」有什么区别 ？</p>
+</blockquote>
+<h3 id="类型">类型</h3>
+<ul>
+<li>类型是 JS 数据的分类，有 7 种</li>
+<li>四基两空一对象
+<ol>
+<li>string</li>
+<li>number</li>
+<li>boolean</li>
+<li>symbol</li>
+<li>null</li>
+<li>undefined</li>
+<li>object</li>
+</ol>
+</li>
+</ul>
+<h3 id="类">类</h3>
+<ul>
+<li><strong>类是针对于对象的分类，有无数种</strong>
+<ul>
+<li>Object 创建出来的对象，是最没有特点的对象</li>
+<li>只要觉得需要再创建一个分类，就再写一个 构造函数，new 出来新的分类对象</li>
+</ul>
+</li>
+<li><strong>常见的有 Array、Function、Date(日期)、RegExp(正则) 等</strong></li>
+</ul>
+<p>​</p>
+<h2 id="有特色的类-">有特色的类 ⭐️</h2>
+<blockquote>
+<p>上面提到 Object 创建的的对象，是最没有特色的类</p>
+<p>那什么是有特色的的类？举两个例子：数组对象、函数对象</p>
+<p>（在其他语言中，数组、函数可能都不是对象，但在 JS 中，数组/函数 都属于对象）</p>
+</blockquote>
+<h3 id="数组对象">数组对象</h3>
+<h4 id="定义一个数组">定义一个数组</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="c1">// 简写
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="c1">// 元素为 1,2,3  // arr [1,2,3]
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1">// 长度为 3   // arr [empty×3]
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="数组对象的自身属性">数组对象的自身属性</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="c1">// arr的自身属性有 4 个： &#39;0&#39;/&#39;1&#39;/&#39;2&#39;/&#39;length&#39;
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意，属性名没有数字，只有字符串</p>
+</blockquote>
+<ul>
+<li>属性名：&lsquo;0&rsquo;/&lsquo;1&rsquo;/&lsquo;2&rsquo;  ，都是字符串</li>
+<li>灰色属性，是不能被遍历到的：如 <code>length</code>、<code>__proto__</code></li>
+</ul>
+<p></p>
+<p></p>
+<h4 id="数组对象的共用属性">数组对象的共用属性</h4>
+<blockquote>
+<ol>
+<li>共有属性非常多，都存储在数组对象的 <code>__proto__</code> 中</li>
+</ol>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="s1">&#39;push&#39;</span><span class="o">/</span><span class="s1">&#39;pop&#39;</span><span class="o">/</span><span class="s1">&#39;shift&#39;</span><span class="o">/</span><span class="s1">&#39;unshift&#39;</span><span class="o">/</span><span class="s1">&#39;join&#39;</span>  <span class="p">......</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<blockquote>
+<ol start="2">
+<li>数组对象 比 普通对象，多一层 原型</li>
+</ol>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>            <span class="c1">// true
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span>     <span class="c1">// true
+</span><span class="c1"></span>          
+<span class="nx">arr</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>  <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<blockquote>
+<ol start="3">
+<li>调用共有属性时，采用<strong>就近原则</strong>
+<ul>
+<li>在 arr 自身的原型上找到这个属性时，就不会再去 对象原型 上找</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">arr</span><span class="p">.</span><span class="nx">toString</span> <span class="o">==</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">toString</span>  <span class="c1">// false
+</span><span class="c1"></span><span class="nx">arr</span><span class="p">.</span><span class="nx">toString</span> <span class="o">==</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">toString</span>  <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<blockquote>
+<ol start="4">
+<li>各个【共有属性】，用法都在 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array#" target="_blank" rel="noopener noreffer">MDN</a>，基本与其英文原意相关
+<ul>
+<li>后面会有单独课程 教这些 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array" target="_blank" rel="noopener noreffer">API</a>。所谓的 API  就是【数组有哪些函数、对象有哪些函数】</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<ul>
+<li>推  push() 方法，将一个或多个元素添加到数的末尾，并返回该数组的新长度。</li>
+<li>弹 pop()方法，从数组中删除最后一个元素，并返回该元素的值。此方法更改数组的长度。</li>
+<li>提档 shift() 方法，从数组中删除第一个元素，并返回该元素的值。</li>
+<li>降档 unshift() 方法，将一个或多个元素添加到数组的开头，并返回该数组的新长度。（修改原数组）</li>
+<li>联结 join() 方法，将一个数组（或一个类数组对象）的所有元素连接成一个字符串并返回这个字符串。</li>
+<li>联结 concat() 方法，用于<strong>合并两个或多个数组</strong>。此方法不会更改现有数组，而是<strong>返回一个新数组</strong>。</li>
+<li>…</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> 
+<span class="nx">arr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1">// 4  返回数组的新长度
+</span><span class="c1"></span><span class="nx">arr</span> <span class="c1">// [1,2,3,0]
+</span><span class="c1"></span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span>  <span class="c1">// 0   返回被删除的元素的值
+</span><span class="c1"></span><span class="nx">arr</span> <span class="c1">// [1,2,3]
+</span><span class="c1"></span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>  <span class="c1">// 1   返回被删除的元素的值
+</span><span class="c1"></span><span class="nx">arr</span> <span class="c1">// [2,3]
+</span><span class="c1"></span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">unshift</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1">//  3   返回数组的新长度
+</span><span class="c1"></span><span class="nx">arr</span> <span class="c1">// [0,2,3]
+</span><span class="c1"></span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;哈&#39;</span><span class="p">)</span> <span class="c1">//  &#34;0哈2哈3&#34;  直接返回字符串
+</span><span class="c1"></span>
+<span class="kd">let</span> <span class="nx">arr1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="nx">arr2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="nx">arr3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="nx">arr1</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">arr2</span><span class="p">)</span> <span class="c1">// [1, 1, 2, 2]
+</span><span class="c1"></span><span class="nx">arr1</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">arr2</span><span class="p">,</span> <span class="nx">arr3</span><span class="p">)</span>  <span class="c1">// [1, 1, 2, 2, 3, 3]
+</span><span class="c1"></span>
+<span class="p">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h3 id="函数对象">函数对象</h3>
+<h4 id="定义一个函数">定义一个函数</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fn</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">){</span><span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span><span class="p">}</span>   <span class="c1">// 声明函数 fn
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">fn2</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">fn</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">){</span><span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span><span class="p">}</span>  <span class="c1">// 声明函数 fn，并赋给变量fn2
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">fn3</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span> 
+<span class="kd">let</span> <span class="nx">fn4</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;return x+y&#39;</span><span class="p">)</span>  <span class="c1">// 声明的是匿名函数，并将它赋给 fn4
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fn1</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">){</span><span class="k">return</span> <span class="s1">&#39;fn1&#39;</span><span class="p">}</span>   <span class="c1">// 声明函数 fn
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">fn2</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">fn</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">){</span><span class="k">return</span> <span class="s1">&#39;fn2&#39;</span><span class="p">}</span>  <span class="c1">// 声明函数 fn，并赋给变量fn2
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">fn3</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s1">&#39;fn3&#39;</span>  <span class="c1">// 声明函数 fn3
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">fn4</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;return `fn4`&#39;</span><span class="p">)</span> <span class="c1">// 声明的是匿名函数，并将它赋给 fn4
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<h4 id="函数对象自身属性">函数对象自身属性</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="s1">&#39;name&#39;</span> <span class="o">/</span> <span class="s1">&#39;length&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p></p>
+<p>​</p>
+<h4 id="函数对象共用属性">函数对象共用属性</h4>
+<blockquote>
+<p>共有属性非常多，都存储在函数对象的 <code>__proto__</code> 中</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="s1">&#39;call&#39;</span> <span class="o">/</span> <span class="s1">&#39;apply&#39;</span> <span class="o">/</span> <span class="s1">&#39;bind&#39;</span>    <span class="nx">这三个属性是重点</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>后面会有单独课程介绍函数</p>
+<p>​</p>
+<p>​</p>
+<h2 id="js-终极一问谁构造了ta">JS 终极一问：谁构造了ta</h2>
+<h3 id="window-是谁构造的">window 是谁构造的</h3>
+<ul>
+<li>
+<p>Window</p>
+</li>
+<li>
+<p>可以通过 constructor 属性看出构造者</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nx">Window</span>           <span class="c1">// true
+</span><span class="c1"></span><span class="nb">window</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">Window</span><span class="p">.</span><span class="nx">prototype</span>   <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+</li>
+</ul>
+<h3 id="windowobject-是谁构造的">window.Object 是谁构造的</h3>
+<ul>
+<li>
+<p>window.Function</p>
+</li>
+<li>
+<p>==<strong>因为所有函数都是 window.Function 构造的</strong>==</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nb">Object</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nb">window</span><span class="p">.</span><span class="nb">Function</span>         <span class="c1">// true
+</span><span class="c1"></span><span class="nb">window</span><span class="p">.</span><span class="nb">Object</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">window</span><span class="p">.</span><span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span> <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+</li>
+</ul>
+<h3 id="windowfunction-是谁构造的">window.Function 是谁构造的</h3>
+<ul>
+<li>
+<p>window.Function</p>
+</li>
+<li>
+<p>因为所有函数都是 window.Function 构造的</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nb">Function</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nb">window</span><span class="p">.</span><span class="nb">Function</span>  <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>自己构造的自己？并不是这样，这是「上帝(浏览器)」的安排</p>
+</li>
+<li>
+<p>浏览器构造了 Function，然后指定它的构造者是自己</p>
+</li>
+</ul>
+<h2 id="es6-class-语法-">ES6 ：class 语法 💋</h2>
+<blockquote>
+<p>JS 构造对象目前有两种方式，一种是用【构造函数+prototype】，一种是用【class】</p>
+</blockquote>
+<h3 id="prototype-是过时的-">prototype 是过时的 ？</h3>
+<blockquote>
+<p>非常遗憾，下面代码（构造函数）被某些前端认为是过时的</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Square</span><span class="p">(</span><span class="nx">width</span><span class="p">){</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span>
+<span class="p">}</span>
+<span class="nx">Square</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getArea</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span>
+<span class="p">}</span>
+<span class="nx">Square</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getLength</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>学习资料：<a href="https://zhuanlan.zhihu.com/p/35279244" target="_blank" rel="noopener noreffer">你可以不会 class，但是一定要学会 prototype</a></p>
+</blockquote>
+<h3 id="es6-class-语法">ES6 ：class 语法</h3>
+<blockquote>
+<p>class 是用来声明一个类，类是用来创建对象的，不讲究什么内存共用</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Square</span><span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">width</span><span class="p">){</span>   <span class="c1">// constructor中写对象里的属性
+</span><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span>
+  <span class="p">}</span>
+  <span class="nx">getArea</span><span class="p">(){</span>    <span class="c1">// 对象里的函数
+</span><span class="c1"></span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span>
+  <span class="p">}</span>
+  <span class="nx">getLength</span><span class="p">(){</span>  <span class="c1">// 对象里的函数
+</span><span class="c1"></span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：方法不能写成 <code>getLength: function(){ ... }</code>  这种形式</p>
+<h3 id="class-语法引入了更多概念">class 语法引入了更多概念</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Square</span><span class="p">{</span>
+  <span class="kr">static</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">1</span>   <span class="c1">// static表示x属于Square，调用需采用 Square.x 的写法 &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+</span><span class="c1"></span>  <span class="nx">width</span> <span class="o">=</span> <span class="mi">0</span>      <span class="c1">// 初始化 width 的值 // &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+</span><span class="c1"></span>  <span class="nx">constructor</span><span class="p">(</span><span class="nx">width</span><span class="p">){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span>
+  <span class="p">}</span>
+  <span class="nx">getArea</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span>
+  <span class="p">}</span>
+  <span class="nx">getLength</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mi">4</span>
+  <span class="p">}</span>
+  <span class="nx">get</span> <span class="nx">area2</span><span class="p">(){</span>  <span class="c1">// 只读属性：调用时直接Square.area2就会执行，无需括号 &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+</span><span class="c1"></span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>class 引入更多的语法，这些语法多来自 Java世界 或 c#世界（跟 JS 以前的世界是格格不入的）</p>
+<p>​</p>
+<h3 id="用-class-重写-circle">用 class 重写 Circle</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Circle</span><span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">radius</span><span class="p">){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">radius</span> <span class="o">=</span> <span class="nx">radius</span>
+  <span class="p">}</span>
+  <span class="nx">getArea</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">radius</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span>
+  <span class="p">}</span>
+  <span class="nx">getLength</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">radius</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">circle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Circle</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="nx">circle</span><span class="p">.</span><span class="nx">radius</span>
+<span class="nx">circle</span><span class="p">.</span><span class="nx">getArea</span><span class="p">()</span>
+<span class="nx">circle</span><span class="p">.</span><span class="nx">getLength</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="用-class-重写-rectangle">用 class 重写 Rectangle</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Rectangle</span><span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span>
+  <span class="p">}</span>
+  <span class="nx">getArea</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span>
+  <span class="p">}</span>
+  <span class="nx">getLength</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">neww</span> <span class="nx">Rectangle</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">width</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">height</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">getArea</span><span class="p">()</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">getLenght</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h3 id="易混淆语法">易混淆语法</h3>
+<p><strong>语法1：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Person</span><span class="p">{</span>
+  <span class="nx">sayHi</span><span class="p">(</span><span class="nx">name</span><span class="p">){}</span>
+<span class="p">}</span>
+<span class="c1">// 等价于
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">Person</span><span class="p">(){}</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayHi</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">){}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>语法2：</strong></p>
+<p>注意冒号变成了等于号</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Person</span><span class="p">{</span>
+  <span class="nx">sayHi</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">)=&gt;{}</span> <span class="c1">// 注意，一般我们不在这个语法里使用普通函数，多用箭头函数
+</span><span class="c1"></span><span class="p">}</span>
+<span class="c1">// 等价于
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">Person</span><span class="p">(){</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">sayHi</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">)=&gt;{}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="不要强求完全转换成-es5">不要强求完全转换成 ES5</h3>
+<p>大部分 class 语法都可以转为 ES5 语法，但并不是 100% 能转，有些 class 语法你意思理解就行，不需要强行转换为 ES5。</p>
+<h2 id="原型好还是类好">原型好，还是类好？</h2>
+<blockquote>
+<p>都是用来给对象分类的</p>
+</blockquote>
+<p>目前，先推荐用 class</p>
+<ul>
+<li>
+<p>但是 class 的语法知识比较复杂，还需要再多花点时间学习
+（关于类和对象的新语法有 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes" target="_blank" rel="noopener noreffer">页面1</a>，<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Object_initializer#ECMAScript_6%E6%96%B0%E6%A0%87%E8%AE%B0" target="_blank" rel="noopener noreffer">页面2</a> 和 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment" target="_blank" rel="noopener noreffer">页面3</a>）</p>
+</li>
+<li>
+<p>原型的知识，上面👆已经全部讲过了</p>
+</li>
+</ul>]]></description>
+</item><item>
+    <title>JS 对象的基本用法</title>
+    <link>http://samrks.github.io/javascript-crud-of-object-prototype/</link>
+    <pubDate>Wed, 02 Sep 2020 21:50:44 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/javascript-crud-of-object-prototype/</guid>
+    <description><![CDATA[<p>「增」「删」「改」「查」</p>
+<h2 id="回顾">回顾</h2>
+<h3 id="七种数据类型">七种数据类型</h3>
+<ul>
+<li>number、string、booleansymbol</li>
+<li>undefined、null</li>
+<li>object</li>
+</ul>
+<p>四基(本类型)两空一对象</p>
+<p>(bigInt)</p>
+<h3 id="五个-falsy-值">五个 falsy 值</h3>
+<ul>
+<li>null、undefined</li>
+<li>0、NaN</li>
+<li><code>''</code> （空字符串）</li>
+</ul>
+<p>​</p>
+<h2 id="js-对象">JS 对象</h2>
+<blockquote>
+<p>是学习 JS 的三座大山之一</p>
+<ul>
+<li>
+<p>对象（原型）</p>
+</li>
+<li>
+<p>this</p>
+</li>
+<li>
+<p>AJAX</p>
+</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h2 id="对象-object">对象 object</h2>
+<blockquote>
+<p>对象的基础知识</p>
+</blockquote>
+<blockquote>
+<p>object ，是第七种数据类型，唯一 一种「复杂类型」</p>
+<p>其他六种（numbe、string、boolean、symbol、null、undefined），叫做「简单类型」。因为这六种不包含其他任何东西，而 object 对象包含其他内容</p>
+</blockquote>
+<h3 id="定义">定义</h3>
+<ul>
+<li>无序的数据集合</li>
+<li>键值对的集合</li>
+</ul>
+<h3 id="写法">写法</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">对象名</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">key</span><span class="o">:</span> <span class="nx">value</span>    <span class="c1">// 属性名/键名 :  属性值
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>对象的写法，与 block（代码块）类似，只是碰巧都有 { } 。</li>
+<li>要注意区分 { }  是对象，还是代码块</li>
+</ul>
+<p>例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="o">:</span> <span class="mi">18</span> <span class="p">}</span>   <span class="c1">// 不论&#39;name&#39;/&#39;age&#39;(属性名)是否有引号，它都只能是字符串
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">})</span>    <span class="c1">// 正规写法
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">({</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="o">:</span> <span class="mi">18</span> <span class="p">})</span>  <span class="c1">// 创建匿名对象
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>JS 既然可以通过<strong><code>字面量</code></strong>方式创建对象，为什么还要有第二种 <strong><code>new Object()</code></strong> 的方式创建 ?
+<ul>
+<li>实际上<strong>第二种 <code>new Object()</code> 才是正规创建对象的写法</strong>，第一种属于简化版</li>
+<li>因为简化了代码，所以通常都是用第一种写法</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h3 id="细节">细节</h3>
+<ul>
+<li>
+<p>==<strong>键名是字符串</strong>==，不是标识符，可以包含任意字符</p>
+<blockquote>
+<p>只要是<strong>字符串</strong>就行：空串、空格串、emoji 、数字字符串 … （任何一个 Unicode 能表达的串都 ok ）</p>
+<p>标识符 规则：（变量）不能以数字开头</p>
+</blockquote>
+</li>
+<li>
+<p>属性名的引号可省略，省略之后需按照标识符的规则命名，特例：允许纯数字的键名</p>
+</li>
+<li>
+<p><strong>就算引号省略了，键名也还是字符串（重要）</strong></p>
+</li>
+</ul>
+<p>例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;&#39;</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">2</span><span class="o">:</span> <span class="mi">123</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;fff&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="o">:</span><span class="mi">12</span> <span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj3</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;  &#39;</span><span class="o">:</span> <span class="mi">2</span> <span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj4</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;👍&#39;</span><span class="o">:</span> <span class="s1">&#39;zan&#39;</span> <span class="p">}</span>
+
+
+<span class="c1">// Object.keys(对象名)  获取对象中的 key名 组成的数组
+</span><span class="c1"></span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj1</span><span class="p">)</span>  <span class="c1">// [&#34;&#34;] // 空串也是字符串，合法
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj2</span><span class="p">)</span>  <span class="c1">// [&#34;2&#34;, &#34;name&#34;, &#34;age&#34;]
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj3</span><span class="p">)</span>  <span class="c1">// [&#34;  &#34;]
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj4</span><span class="p">)</span>  <span class="c1">// [&#34;👍&#34;]
+</span><span class="c1"></span>
+<span class="c1">// 所以不论怎么写，key 都是字符串
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="属性名">属性名</h4>
+<blockquote>
+<p>每个 key 都是对象的属性名（property）</p>
+</blockquote>
+<h4 id="属性值">属性值</h4>
+<blockquote>
+<p>每个 value 都是对象的属性值</p>
+</blockquote>
+<p>​</p>
+<h3 id="奇怪的属性名">奇怪的属性名</h3>
+<p>所有属性名会自动变成字符串</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="mi">1</span><span class="o">:</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span>       <span class="c1">// &#34;1&#34;
+</span><span class="c1"></span>  <span class="mf">3.2</span><span class="o">:</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span>     <span class="c1">// &#34;3.2&#34;
+</span><span class="c1"></span>  <span class="mi">1</span><span class="nx">e2</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>    <span class="c1">// &#34;100&#34;
+</span><span class="c1"></span>  <span class="mi">1</span><span class="nx">e</span><span class="o">-</span><span class="mi">2</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>   <span class="c1">// &#34;0.01&#34;
+</span><span class="c1"></span>  <span class="mf">.234</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>   <span class="c1">// &#34;0.234&#34;
+</span><span class="c1"></span>  <span class="mh">0xFF</span><span class="o">:</span> <span class="kc">true</span>    <span class="c1">// &#34;255&#34;
+</span><span class="c1"></span><span class="p">};</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// [&#34;1&#34;, &#34;100&#34;, &#34;255&#34;, &#34;3.2&#34;, &#34;0.01&#34;, &#34;0.234&#34;]
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>JS 可能会自动换算「属性名」，所以如果不想被自动换算，给属性名加上「引号」即可解决</p>
+</blockquote>
+<h4 id="细节-1">细节</h4>
+<ul>
+<li><strong><code>Object.keys(obj)</code></strong> 可以得到 obj 的所有 key 组成的数组</li>
+<li>这个 API 需要会使用</li>
+</ul>
+<h4 id="变量作属性名">「变量」作属性名</h4>
+<p>如何用变量做属性名</p>
+<ul>
+<li>
+<p>之前都是用<strong>常量</strong>做属性名（所有不是变量的都是常量）</p>
+</li>
+<li>
+<p><strong><code>let p1 = 'name'</code></strong></p>
+</li>
+<li>
+<p><strong><code>let obj = { p1 : 'sam'}</code></strong> 这样写，属性名为 <strong><code>'p1'</code></strong></p>
+</li>
+<li>
+<p><strong><code>let obj = { [p1] : 'sam' }</code></strong> 这样写，属性名为 <strong><code>'name'</code></strong>    （ ES 6 ）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">aa</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span>  <span class="c1">// 想用变量a作为属性名
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">aa</span><span class="o">:</span> <span class="mi">1111</span> <span class="p">}</span>     <span class="c1">// {aa: 1111}
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;aa&#39;</span><span class="o">:</span> <span class="mi">1111</span> <span class="p">}</span>   <span class="c1">// {aa: 1111}
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="p">[</span><span class="nx">aa</span><span class="p">]</span><span class="o">:</span> <span class="mi">1111</span> <span class="p">}</span>   <span class="c1">// {xxx: 1111}  // ES6之后
+</span></code></pre></td></tr></table>
+</div>
+</div><p>ES6之前，实现变量作属性名  ↓↓ ，需两行代码实现。ES6之后一行 ↑↑ 即可</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">aa</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span> 
+<span class="nx">obj</span><span class="p">[</span><span class="nx">aa</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1111</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// {xxx: 1111}
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>对比</p>
+<ul>
+<li>
+<p>不加 <i class="far fa-square fa-fw"></i> 的属性名会自动变成字符串</p>
+</li>
+<li>
+<p>加了 <i class="far fa-square fa-fw"></i> 则会当做变量求值</p>
+</li>
+<li>
+<p>值如果不是字符串，则会自动变成字符串</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span><span class="o">:</span> <span class="s1">&#39;十&#39;</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// { 10: &#34;十&#34; }
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// [ &#34;10&#34; ]
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<h3 id="对象的隐藏属性原型-">对象的隐藏属性（原型 💡）</h3>
+<p>隐藏属性</p>
+<ul>
+<li>JS 中，每一个对象 都有一个 隐藏属性  <code>__proto__</code></li>
+<li>这个隐藏属性，储存着其 <strong>共有属性组成的对象</strong>的地址</li>
+<li>这个<strong>共有属性组成的对象</strong>，叫做原型</li>
+<li>也就是说，隐藏属性 储存着 原型的地址
+<ul>
+<li><code>__proto__</code> 存储了一个地址，这个地址所代表的内存空间中的对象，叫做原型 / 共有属性</li>
+</ul>
+</li>
+</ul>
+<p>代码示例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="c1">// 居然不报错
+</span></code></pre></td></tr></table>
+</div>
+</div><p>因为 obj 的隐藏属性<strong>对应的对象</strong>（原型 / 共有属性）上有 toString()</p>
+<p>​</p>
+<blockquote>
+<p>举个栗子：什么叫共有属性</p>
+<ul>
+<li>将共有的属性，提取出来单独存储成一个对象。最大的好处，就是<strong>省内存</strong></li>
+<li>每次声明一个 chinese 时，无需重复写入：国籍、肤色、发色 … 等 chinese 公共的属性，直接用一个<strong>特定属性</strong>（–proto–），<strong>存储</strong>共有属性所在的<strong>内存地址</strong>即可</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">chinese1</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;小兰&#39;</span> <span class="p">}</span>
+<span class="kd">var</span> <span class="nx">chinese2</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;小红&#39;</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>​</p>
+<p>​</p>
+<h3 id="超纲知识">超纲知识</h3>
+<blockquote>
+<p>前面提到，对象中所有的 key 都是字符串</p>
+</blockquote>
+<blockquote>
+<p>实际上，ES 6 中稍微做了调整：<strong>除了字符串，symbol 也能做属性名</strong></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">Symbol</span><span class="p">()</span>
+<span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="p">[</span><span class="nx">a</span><span class="p">]</span><span class="o">:</span> <span class="s1">&#39;Hello&#39;</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这有什么用呢？</p>
+<ul>
+<li>目前，屁用都没用，很久很久以后可能会有用（方方从没用过）</li>
+<li>在学习「迭代」时会用到（但前端不流行迭代，所以根本没机会用）</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="增删改查">增删改查</h2>
+<blockquote>
+<p>「增删改查」对象的属性</p>
+</blockquote>
+<h3 id="删除属性">删除属性</h3>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/delete" target="_blank" rel="noopener noreffer">delete 操作符</a>：用于删除对象的某个属性</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">delete</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">xxx</span>
+<span class="k">delete</span> <span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;xxx&#39;</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>作用：删除 obj 的 xxx 属性</li>
+<li>请区分「属性值为 undefined」和「不含属性名」</li>
+</ul>
+<h4 id="不含属性名">不含属性名</h4>
+<p>直接删除属性名</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">18</span><span class="p">}</span>
+<span class="k">delete</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">name</span>  <span class="c1">// 或 delete obj[&#39;name&#39;]
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// {age: 18}
+</span><span class="c1">// console.log(obj.name) // undefined
+</span></code></pre></td></tr></table>
+</div>
+</div><p>判断是否删除成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="s1">&#39;xxx&#39;</span> <span class="k">in</span> <span class="nx">obj</span> <span class="o">===</span> <span class="kc">false</span>   <span class="c1">// 返回 true 说明该属性名已被删除 
+</span><span class="c1"></span><span class="err">（</span><span class="nx">不能省略引号</span><span class="err">）</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="含有属性名但是值为-undefined">含有属性名，但是值为 undefined</h4>
+<p>仅删除属性值，保留属性名</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="s1">&#39;xxx&#39;</span> <span class="k">in</span> <span class="nx">obj</span> <span class="o">&amp;&amp;</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">xxx</span> <span class="o">===</span> <span class="kc">undefined</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">18</span><span class="p">}</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="kc">undefined</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// {name: undefined, age: 18}
+</span><span class="c1">// console.log(obj.name) // undefined
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="注意-objxxx--undefined">注意 obj.xxx === undefined</h4>
+<ul>
+<li>
+<p><code>obj.xxx === undefined</code> 不能断定 &lsquo;xxx&rsquo; 是否为 obj 的属性</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="kd">let</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span><span class="kc">undefined</span><span class="p">}</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">x</span> <span class="o">===</span> <span class="kc">undefined</span> <span class="c1">// true
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">x</span> <span class="o">===</span> <span class="kc">undefined</span> <span class="c1">// true   所以说 这句话无法判断出 x 到底是不是 obj 的属性
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>用 in 和 hasOwnProperty 可以判断</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="kd">let</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span><span class="kc">undefined</span><span class="p">}</span>
+<span class="s1">&#39;x&#39;</span> <span class="k">in</span> <span class="nx">obj</span>   <span class="c1">// false
+</span><span class="c1"></span><span class="s1">&#39;x&#39;</span> <span class="k">in</span> <span class="nx">obj2</span>  <span class="c1">// true
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>    <span class="c1">// false
+</span><span class="c1"></span><span class="nx">obj2</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>   <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="类比">类比</h4>
+<ul>
+<li>你有没有卫生纸？</li>
+<li>A: 没有 // 不含属性名</li>
+<li>B: 有，但是没带 // 含有属性名，但是值为 undefined</li>
+</ul>
+<blockquote>
+<h4 id="程序员就是这么严谨">程序员就是这么严谨</h4>
+<ul>
+<li>「没有」和「undefined」是两个概念</li>
+<li>没有就是没有，undefined 就是 undefined</li>
+<li>绝不含糊</li>
+<li>需要细心，发现细微的区别</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h3 id="查看所有属性读属性">查看所有属性（读属性）</h3>
+<p>例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">18</span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="查看自身所有属性">查看自身所有属性</h4>
+<blockquote>
+<p>无法打印【共有属性 <code>__proto__</code>】</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>     <span class="c1">// [&#34;name&#34;, &#34;age&#34;]
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>   <span class="c1">// [&#34;sam&#34;, 18] 
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// [Array(2), Array(2)]  =&gt; 0:[&#34;name&#34;, &#34;sam&#34;]  1:[&#34;age&#34;, 18]
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<h4 id="查看自身共有属性">查看自身+共有属性</h4>
+<blockquote>
+<p>dir 指以目录的形式，可以查看到【共有属性 <code>__proto__</code>】</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>   <span class="c1">// 查看 obj内容 及 共有属性 【推荐】
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span>      
+<span class="c1">// 也可以直接打印共有属性（但不推荐此法，因为隐藏属性的命名是不固定的，不同浏览器可能规定不同）
+</span></code></pre></td></tr></table>
+</div>
+</div><p>或者自己依次用 Object.keys 打印出 <code>obj.__proto__</code></p>
+<h4 id="判断一个属性是自身的还是共有的">判断一个属性是自身的还是共有的</h4>
+<blockquote>
+<p>判断一个属性是否是某个对象的属性，可以用 <code>in</code>  ，但是 in 无法区分是自身的还是共有的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="s2">&#34;name&#34;</span> <span class="k">in</span> <span class="nx">obj</span>      <span class="c1">// true
+</span><span class="c1"></span><span class="s2">&#34;toString&#34;</span> <span class="k">in</span> <span class="nx">obj</span>  <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;toString&#39;</span><span class="p">)</span>   <span class="c1">// false
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>       <span class="c1">// true
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">)</span>        <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h3 id="原型">原型</h3>
+<blockquote>
+<p>原型，就是隐藏属性 所指向的对象</p>
+</blockquote>
+<h4 id="每个对象都有原型">每个对象都有原型</h4>
+<ul>
+<li>原型里存着对象的共有属性</li>
+<li>比如 obj 的原型就是一个对象
+<ul>
+<li><code>obj.__proto__ </code>存着这个原型对象的地址</li>
+<li>这个原型对象里有 toString / constructor / valueOf 等属性</li>
+</ul>
+</li>
+</ul>
+<h4 id="对象的原型也是对象">对象的原型也是对象</h4>
+<blockquote>
+<p>既然每个对象都有原型，且原型也是对象，那么可以推出：原型上也有原型</p>
+</blockquote>
+<ul>
+<li>所以对象的原型上也有原型</li>
+<li>obj = { } 空对象的原型即为所有对象的原型</li>
+<li>这个原型包含所有对象的共有属性，是<strong>对象的根</strong></li>
+<li>这个原型也有原型，<strong>是 null</strong>     【/nʌl/】
+<ul>
+<li>原型为 null 的对象，就是对象的根</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">)</span>  <span class="c1">// 原型对象（根对象）
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">)</span>   <span class="c1">// null  原型上的原型
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h3 id="查看属性">查看属性</h3>
+<h4 id="两种方法查看属性">两种方法查看属性</h4>
+<ul>
+<li>
+<p>**中括号语法：obj[&lsquo;key&rsquo;] **</p>
+</li>
+<li>
+<p>点语法：obj.key</p>
+</li>
+<li>
+<p>坑新人语法：obj[key]      // 中括号里是变量，【变量 key】 值一般不等于【字符串 &lsquo;key&rsquo;】</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">18</span><span class="p">}</span>
+<span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>   <span class="c1">// &#39;sam&#39;
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">name</span>      <span class="c1">// &#39;sam&#39;
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>     <span class="c1">// undefined
+</span><span class="c1"></span>    
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span>   <span class="c1">// &#34;&#34;
+</span><span class="c1"></span><span class="nb">window</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;age&#39;</span>
+<span class="nx">obj</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>    <span class="c1">// 18   // 等同于 obj[&#39;age&#39;]
+</span></code></pre></td></tr></table>
+</div>
+</div><p>变态</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;na&#39;</span><span class="o">+</span><span class="s1">&#39;me&#39;</span><span class="p">]</span>   <span class="c1">// &#39;sam&#39;
+</span><span class="c1"></span>    
+<span class="nx">obj</span><span class="p">[</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)]</span>   
+<span class="c1">// name   // 先执行log命令，打印内容
+</span><span class="c1">// undefined   // log 函数的返回值为 undefined，相当于执行 obj[undefined] =&gt; undefined
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<h4 id="请优先使用中括号语法">请优先使用中括号语法</h4>
+<ul>
+<li>【点语法】会误导你，让你以为 key 不是字符串</li>
+<li>等你确定不会弄混两种语法，再改用点语法</li>
+</ul>
+<blockquote>
+<p>obj.name 等价于 obj[&lsquo;name&rsquo;]
+obj.name 不等价于 obj[name]</p>
+<p>简单来说，obj.name 这里的 <strong>name 是字符串，而不是变量</strong></p>
+</blockquote>
+<blockquote>
+<p>let name = &lsquo;sam&rsquo;
+此时 obj[name] 等价于 obj[&lsquo;sam&rsquo;] ，而不是 obj[&lsquo;name&rsquo;] 和 obj.name</p>
+</blockquote>
+<p>​</p>
+<h4 id="考题">考题</h4>
+<blockquote>
+<p>区分变量<code> name</code> 和 常量字符串 <code>'name'</code></p>
+</blockquote>
+<p>代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">]</span>
+<span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span><span class="mi">18</span><span class="p">,</span> <span class="nx">gender</span><span class="o">:</span><span class="s1">&#39;man&#39;</span><span class="p">}</span>
+
+<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">list</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+  <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">list</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person</span><span class="o">???</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// 使得 person 的所有属性被打印出来
+</span></code></pre></td></tr></table>
+</div>
+</div><p>选项</p>
+<ol>
+<li>console.log(person.name)      ✘          // sam sam sam</li>
+<li><strong>console.log(person[name])</strong>    ✔     // sam 18 man</li>
+</ol>
+<blockquote>
+<p>区分 name 和 &lsquo;name&rsquo; 为什么这么重要</p>
+<ul>
+<li>因为如果你现在不搞清楚，那么你在学 Vue 的时候，会更加迷惑</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h3 id="修改或增加属性写属性">修改或增加属性（写属性）</h3>
+<h4 id="直接赋值">直接赋值</h4>
+<blockquote>
+<p>直接赋值，name 属性已存在，就相当于修改属性值；name 属性不存在，就会新增这个属性，值为 sam</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">}</span> <span class="c1">// name 是字符串
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span> <span class="c1">// name 是字符串 ✔
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span>  <span class="c1">// ✔
+</span><span class="c1"></span>
+<span class="nx">obj</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span> <span class="c1">// 错，因name为变量，值不一定等于&#39;name&#39;
+</span><span class="c1"></span>
+<span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;na&#39;</span><span class="o">+</span><span class="s1">&#39;me&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span>  <span class="c1">// ✔
+</span><span class="c1"></span>
+<span class="kd">let</span> <span class="nx">key</span> <span class="o">=</span> <span class="s1">&#39;name&#39;</span><span class="p">;</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span>
+<span class="kd">let</span> <span class="nx">key</span> <span class="o">=</span> <span class="s1">&#39;name&#39;</span><span class="p">;</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">key</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span> <span class="c1">// 错，因为obj.key等价于obj[&#39;key&#39;]，相当于给obj增加了key属性 值为sam
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="批量赋值">批量赋值</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">}</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;123&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">18</span><span class="p">,</span> <span class="nx">gender</span><span class="o">:</span> <span class="s1">&#39;man&#39;</span><span class="p">})</span> 
+<span class="c1">// name 属性已存在，就相当于修改属性值；name 属性不存在，就会新增这个属性，值为&#39;123&#39;
+</span><span class="c1"></span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// {name:&#39;123&#39;, age: 18, gender: &#39;man&#39;}
+</span></code></pre></td></tr></table>
+</div>
+</div><p>assign ：赋值的意思</p>
+<p>Object.assign() ：是 ES6 新出的 API</p>
+<p>​</p>
+<p>​</p>
+<h3 id="修改或增加共有属性">修改或增加共有属性</h3>
+<blockquote>
+<p>JS 特性：</p>
+<ul>
+<li>读取时，可以读取到（原型上的）共有属性。</li>
+<li>写入时，只写在自己身上，不会影响（原型）共有属性</li>
+</ul>
+</blockquote>
+<h4 id="无法通过自身修改或增加共有属性">无法通过自身修改或增加共有属性</h4>
+<blockquote>
+<p>原型上的属性，无法通过自身直接修改</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{},</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1">// 共有 toString 方法
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">toString</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span>    <span class="c1">// 只会在改 obj 自身属性，不会覆盖共用的 toString 方法
+</span><span class="c1"></span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">toString</span>     <span class="c1">// &#39;xxx&#39;
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>   <span class="c1">// 报错 obj.toString is not a function
+</span><span class="c1"></span>
+<span class="nx">obj2</span><span class="p">.</span><span class="nx">toString</span>    <span class="c1">// ƒ toString() { [native code] }   还是在原型上的方法
+</span><span class="c1"></span><span class="nx">obj2</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>  <span class="c1">// &#34;[object Object]&#34;
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="偏要修改或增加原型上的属性">偏要修改或增加原型上的属性</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">toString</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span> <span class="c1">// 不推荐用 __proto__
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span> 
+<span class="nx">console</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">toString</span><span class="p">)</span>
+
+<span class="c1">// obj.__proto__ 存的地址，等价于 window.Object.prototype 存的地址
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">window</span><span class="p">.</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>  <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>这是 JS 非常危险的特型，一旦修改，会使得原型上的属性非常不可信 —— JS 的脆弱性</li>
+<li><strong>一般来说，不要修改原型</strong>，会引起很多问题：代码崩溃/异常…</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="修改隐藏属性">修改隐藏属性</h3>
+<h4 id="不推荐使用--__proto__-修改原型">不推荐使用 <code> __proto__</code> 修改原型</h4>
+<p>例1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;sam&#39;</span><span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>   <span class="c1">// {name:&#34;sam&#34;, __proto__: Object}
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">=</span> <span class="kc">null</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>   <span class="c1">// {name:&#34;sam&#34;}    没有proto原型了，变成非常纯净的对象，不能调用任何功能
+</span></code></pre></td></tr></table>
+</div>
+</div><p>例2</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;sam&#39;</span><span class="p">}</span>
+<span class="kd">let</span> <span class="nx">person2</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;jack&#39;</span><span class="p">}</span>
+<span class="kd">let</span> <span class="nx">common</span> <span class="o">=</span> <span class="p">{</span><span class="nx">kind</span><span class="o">:</span> <span class="s1">&#39;human&#39;</span><span class="p">,</span> <span class="s1">&#39;国籍&#39;</span><span class="o">:</span> <span class="s1">&#39;中国&#39;</span><span class="err">，</span> <span class="nx">hairColor</span><span class="o">:</span> <span class="s1">&#39;black&#39;</span><span class="p">}</span>
+<span class="nx">person</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">=</span> <span class="nx">common</span>
+<span class="nx">person2</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">=</span> <span class="nx">common</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<blockquote>
+<p>上述，使用 <code> __proto__</code> 直接修改原型，不推荐，性能非常低</p>
+</blockquote>
+<p>​</p>
+<h4 id="推荐使用-objectcreate-修改对象的原型">推荐使用 Object.create 修改对象的原型</h4>
+<blockquote>
+<p>规范的修改对象的原型，使用 Object.create  【功能：用于指定原型】</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;sam&#39;</span><span class="p">})</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// { __proto__:{name:&#39;sam&#39;} } 
+</span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<p>用法 ↓</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">common</span> <span class="o">=</span> <span class="p">{</span><span class="nx">kind</span><span class="o">:</span> <span class="s1">&#39;human&#39;</span><span class="p">,</span> <span class="s1">&#39;国籍&#39;</span><span class="o">:</span> <span class="s1">&#39;中国&#39;</span><span class="err">，</span> <span class="nx">hairColor</span><span class="o">:</span> <span class="s1">&#39;black&#39;</span><span class="p">}</span>
+<span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">common</span><span class="p">)</span>  <span class="c1">// 以common为原型对象，创建obj
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span> <span class="c1">// 点方法，挨个添加属性，或 批量修改/添加属性 Object.assign(obj,{ ... })
+</span><span class="c1"></span><span class="p">...</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>Object.create()  第二个参数，写法比较麻烦</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">common</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="p">{</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span> <span class="p">}</span>
+<span class="p">})</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person</span><span class="p">)</span>  <span class="c1">// {name:&#39;sam&#39;, __proto__: Object}  =&gt; 
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>规范的写法：大概是，要改就一开始就改；别后来再改，如<code>person.__proto__ = common</code>  影响性能</p>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<p>​</p>
+<h2 id="总结">总结</h2>
+<h3 id="删">删</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">delete</span> <span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="s1">&#39;name&#39;</span> <span class="k">in</span> <span class="nx">obj</span> <span class="c1">// false  // in 用于判断某个对象中是否含这个属性，缺点：无法区分是自身的，还是原型上共有的
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>  <span class="c1">// false  // 只有对象自身含有这个属性，才会返回 true
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="查">查</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// 目录形式，详细
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">name</span> <span class="c1">// 记住这里的 name 是字符串
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>  <span class="c1">// 记住这里的 name 是变量
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="改">改</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">改自身</span> <span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;jack&#39;</span>
+<span class="nx">批量改自身</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="p">{</span><span class="nx">age</span><span class="o">:</span><span class="mi">18</span><span class="p">,</span> <span class="p">...})</span>
+                          
+<span class="nx">改某个共有属性</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">[</span><span class="s1">&#39;toString&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span>  <span class="c1">// 强烈不推荐
+</span><span class="c1"></span><span class="nx">改某个共有属性</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">[</span><span class="s1">&#39;toString&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span>
+
+<span class="nx">换原型</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">=</span> <span class="nx">common</span>  <span class="c1">// 强烈不推荐
+</span><span class="c1"></span><span class="nx">换原型</span> <span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">common</span><span class="p">)</span>
+
+<span class="c1">// 注：所有 proto 代码都是强烈不推荐写的。学习时可以用用，但是工作中不要用
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="增">增</h3>
+<p>基本同上，已有属性则改；没有属性则增。</p>
+<blockquote>
+<ul>
+<li>查：属于读，可以读到原型链</li>
+<li>改 和 增：属于写，只能改自身，不能改到原型</li>
+</ul>
+</blockquote>]]></description>
+</item></channel>
+</rss>
