@@ -5,7 +5,7 @@
         <description>Leancloud - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
             <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Sun, 15 Mar 2020 22:40:49 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/leancloud/" rel="self" type="application/rss+xml" /><item>
-    <title>博客之路：hugo 添加评论系统 Valine</title>
+    <title>博客之路4：hugo 添加评论系统 Valine</title>
     <link>http://samrks.github.io/blog-comments-valine-leancloud/</link>
     <pubDate>Sun, 15 Mar 2020 22:40:49 &#43;0800</pubDate>
     <author>作者</author>
@@ -159,13 +159,12 @@
 <h2 id="完善评论通知--">完善评论通知  ⭐️⭐️</h2>
 <p><strong>Valine</strong> 评论邮件提醒功能不太健全，通知邮件中没有文章直达链接，<strong>Valine</strong> 官网中提供了评论系统第三方功能扩展<a href="https://github.com/zhaojun1998/Valine-Admin" target="_blank" rel="noopener noreffer">Valine</a>链接，按照链接中的说明，非常详细的步骤，一步步很容易实现完备的评论系统后台管理以及邮件提醒功能，部分高级配置<a href="https://github.com/zhaojun1998/Valine-Admin/blob/master/%e9%ab%98%e7%ba%a7%e9%85%8d%e7%bd%ae.md#%e8%87%aa%e5%ae%9a%e4%b9%89%e9%82%ae%e4%bb%b6%e6%9c%8d%e5%8a%a1%e5%99%a8" target="_blank" rel="noopener noreffer">点我</a>了解，这里简单列举步骤如下：</p>
 <ol>
-<li>进入leancloud，【<strong>云引擎</strong>】【<strong>部署项目</strong>】【<strong>git</strong>】</li>
-</ol>
+<li>
+<p>进入leancloud，【<strong>云引擎</strong>】【<strong>部署项目</strong>】【<strong>git</strong>】</p>
 <p>填写仓库地址： <a href="https://github.com/zhaojun1998/Valine-Admin">https://github.com/zhaojun1998/Valine-Admin</a></p>
 <p>填写分支： master</p>
-<pre><code>&lt;img src=&quot;https://i.loli.net/2020/09/09/1dgcOzHKBvJV5EP.png&quot; alt=&quot;image-20200909010214580&quot; style=&quot;zoom:50%;&quot; /&gt;
-</code></pre>
-<ol start="2">
+<p></p>
+</li>
 <li>
 <p>此外，你需要设置云引擎的环境变量以提供必要的信息，点击云引擎的设置页，设置如下信息：</p>
 <p><strong>必选参数</strong></p>
@@ -202,26 +201,26 @@
 </ol>
 </li>
 <li>
-<p>LeanCloud 休眠策略</p>
+<p><strong>LeanCloud 休眠策略</strong></p>
+<ol>
+<li>
+<p>首先需要添加环境变量，<code>ADMIN_URL : 云引擎域名</code>，如：https://jackma.avosapps.us（重启生效）</p>
+</li>
+<li>
+<p>然后点击【云引擎】【定时任务】【创建定时任务】，按照图片上填写：<code>0 0/20 7-23 * * ?</code></p>
+<p></p>
+</li>
+<li>
+<p>添加后，要记得<strong>点击启用</strong></p>
+<p>启用成功后，每 20 分钟在【云引擎】的 - 应用【日志】中可以看到提示</p>
+<p></p>
 </li>
 </ol>
-<pre><code>1.   首先需要添加环境变量，`ADMIN_URL`：`云引擎域名`(如https://jackma.avosapps.us)（重启容器才生效）
-
-2.   然后点击**云引擎** - **定时任务** - **创建定时任务**，按照图片上填写：**`0 0/20 7-23 * * ?`**
-
-    &lt;img src=&quot;https://i.loli.net/2020/09/09/UwKDZ2XPcdWa7oE.png&quot; alt=&quot;image-20200909014721962&quot; style=&quot;zoom:50%;&quot; /&gt;
-
-3.  添加后要记得**点击启用**
-
-    启用成功后，每 20 分钟在云引擎的 - 应用日志中可以看到提示
-
-    ![image-20200909020148474](https://i.loli.net/2020/09/09/fQkMTSKFp5z1mGd.png)
-</code></pre>
-<ol start="6">
-<li>登录上面主机域名进入后台瞅一瞅：</li>
-</ol>
+</li>
+<li>
+<p>登录上面主机域名进入后台瞅一瞅：</p>
 <p></p>
-<ol start="7">
+</li>
 <li>
 <p>我自己沙发了一条评论</p>
 <ol>

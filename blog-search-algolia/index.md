@@ -1,4 +1,4 @@
-# 博客之路：hugo 搜索功能 Algolia
+# 博客之路3：hugo 搜索功能 Algolia
 
 
 hugo 搜索功能 Algolia  <!--more-->
@@ -102,8 +102,8 @@ hugo 搜索功能 Algolia  <!--more-->
     ```js
     npm run algolia // 在hugo命令后面执行
     ```
-
-
+    
+    <img src="https://i.loli.net/2020/09/09/W7uLBFGHP2d1Oae.png" alt="image-20200909172756935" style="zoom:50%;" />
 
 ## 参考资料
 

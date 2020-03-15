@@ -5,7 +5,7 @@
         <description>Algolia - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
             <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Fri, 13 Mar 2020 21:36:27 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/algolia/" rel="self" type="application/rss+xml" /><item>
-    <title>博客之路：hugo 搜索功能 Algolia</title>
+    <title>博客之路3：hugo 搜索功能 Algolia</title>
     <link>http://samrks.github.io/blog-search-algolia/</link>
     <pubDate>Fri, 13 Mar 2020 21:36:27 &#43;0800</pubDate>
     <author>作者</author>
@@ -134,7 +134,8 @@
 <pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">npm</span> <span class="nx">run</span> <span class="nx">algolia</span> <span class="c1">// 在hugo命令后面执行
 </span></code></pre></td></tr></table>
 </div>
-</div></li>
+</div><p></p>
+</li>
 </ul>
 <h2 id="参考资料">参考资料</h2>
 <ol>

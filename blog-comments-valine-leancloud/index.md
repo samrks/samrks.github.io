@@ -1,4 +1,4 @@
-# 博客之路：hugo 添加评论系统 Valine
+# 博客之路4：hugo 添加评论系统 Valine
 
 
 hugo 博客添加评论系统 Valine  <!--more-->
@@ -113,12 +113,11 @@ hugo 博客添加评论系统 Valine  <!--more-->
 **Valine** 评论邮件提醒功能不太健全，通知邮件中没有文章直达链接，**Valine** 官网中提供了评论系统第三方功能扩展[Valine](https://github.com/zhaojun1998/Valine-Admin)链接，按照链接中的说明，非常详细的步骤，一步步很容易实现完备的评论系统后台管理以及邮件提醒功能，部分高级配置[点我](https://github.com/zhaojun1998/Valine-Admin/blob/master/高级配置.md#自定义邮件服务器)了解，这里简单列举步骤如下：
 
 1.  进入leancloud，【**云引擎**】【**部署项目**】【**git**】
-  
 
-填写仓库地址： https://github.com/zhaojun1998/Valine-Admin
-    
-填写分支： master 
-    
+    填写仓库地址： https://github.com/zhaojun1998/Valine-Admin
+
+    填写分支： master 
+
     <img src="https://i.loli.net/2020/09/09/1dgcOzHKBvJV5EP.png" alt="image-20200909010214580" style="zoom:50%;" />
 
 2.  此外，你需要设置云引擎的环境变量以提供必要的信息，点击云引擎的设置页，设置如下信息：
@@ -141,23 +140,23 @@ hugo 博客添加评论系统 Valine  <!--more-->
     1.   然后进入 **存储** —— **_User** 添加一个用户，只需 User，password，email 三个信息即可。（为了安全考虑，此 `email` 必须为配置中的 `SMTP_USER` 或 `TO_EMAIL`， 否则不允许登录）
     2.   此时可以使用定义的主机域名登录**后台管理系统**了，地址为：[[云引擎域名jackma].avosapps.us]()，用户名为刚设置的邮箱。
 
-5.   LeanCloud 休眠策略
+5.  **LeanCloud 休眠策略**
 
-    1.   首先需要添加环境变量，`ADMIN_URL`：`云引擎域名`(如https://jackma.avosapps.us)（重启容器才生效）
+    1.   首先需要添加环境变量，`ADMIN_URL : 云引擎域名`，如：https://jackma.avosapps.us（重启生效）
 
-    2.   然后点击**云引擎** - **定时任务** - **创建定时任务**，按照图片上填写：**`0 0/20 7-23 * * ?`**
+    2.   然后点击【云引擎】【定时任务】【创建定时任务】，按照图片上填写：`0 0/20 7-23 * * ?`
 
-        <img src="https://i.loli.net/2020/09/09/UwKDZ2XPcdWa7oE.png" alt="image-20200909014721962" style="zoom:50%;" />
+         <img src="https://i.loli.net/2020/09/09/UwKDZ2XPcdWa7oE.png" alt="image-20200909014721962" style="zoom: 33%;" />
 
-    3.  添加后要记得**点击启用**
+    3.  添加后，要记得**点击启用**
 
-        启用成功后，每 20 分钟在云引擎的 - 应用日志中可以看到提示
+        启用成功后，每 20 分钟在【云引擎】的 - 应用【日志】中可以看到提示
 
-        ![image-20200909020148474](https://i.loli.net/2020/09/09/fQkMTSKFp5z1mGd.png)
+        <img src="https://i.loli.net/2020/09/09/fQkMTSKFp5z1mGd.png" alt="image-20200909020148474" style="zoom:67%;" />
 
 6.  登录上面主机域名进入后台瞅一瞅：
 
-<img src="https://i.loli.net/2020/09/09/SE4c8jlLFw6tZDU.png" alt="img" style="zoom: 33%;" />
+    <img src="https://i.loli.net/2020/09/09/SE4c8jlLFw6tZDU.png" alt="img" style="zoom: 33%;" />
 
 7.  我自己沙发了一条评论
 
@@ -167,7 +166,7 @@ hugo 博客添加评论系统 Valine  <!--more-->
 
     2.  进入后台后可以看到：
 
-        <img src="C:\Users\Sam\AppData\Roaming\Typora\typora-user-images\image-20200909013907513.png" alt="image-20200909013907513" style="zoom: 50%;" />
+        <img src="https://i.loli.net/2020/09/09/5b8Y1fzHWp7DCyc.png" alt="image-20200909171608041.png" style="zoom:50%;" />
 
     3.  同时，我也收到了通知邮件：
 
