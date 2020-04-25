@@ -2103,7 +2103,7 @@
 <span class="nx">a</span> <span class="o">=</span> <span class="p">(</span><span class="nx">b</span> <span class="o">=</span> <span class="p">(</span><span class="nx">c</span> <span class="o">=</span> <span class="p">(</span><span class="nx">d</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)))</span>    <span class="c1">// (d=2)表达式的值就是2，赋给c，c=2表达式的值是2，再赋给 b...
 </span></code></pre></td></tr></table>
 </div>
-</div>]]></description>
+</div><p>1</p>]]></description>
 </item><item>
     <title>JS 函数的执行时机 🚀⌚</title>
     <link>http://samrks.github.io/javascript-timing-of-call-a-function/</link>

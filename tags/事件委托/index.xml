@@ -1,0 +1,1057 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>事件委托 - 标签 - Sam&#39;s Garage</title>
+        <link>http://samrks.github.io/tags/%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/</link>
+        <description>事件委托 - 标签 - Sam&#39;s Garage</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Tue, 27 Oct 2020 20:33:47 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/" rel="self" type="application/rss+xml" /><item>
+    <title>DOM 事件机制 &amp; 事件委托</title>
+    <link>http://samrks.github.io/dom-event-event-delegation/</link>
+    <pubDate>Tue, 27 Oct 2020 20:33:47 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/dom-event-event-delegation/</guid>
+    <description><![CDATA[<p>​</p>
+<h2 id="dom-事件流">DOM 事件流</h2>
+<blockquote>
+<p>为什么有「事件流」？</p>
+</blockquote>
+<p>假如在一个button上注册了一个click事件，又在它的 父元素 div 上注册了一个 click 事件，那么当我们点击 button，是先触发父元素上的事件，还是button上的事件呢，这就需要一种约定去规范事件的执行顺序，就是事件执行的流程。</p>
+<p>浏览器在发展的过程中出现了两种不同的规范</p>
+<ul>
+<li>IE 9（微软） 以下的 IE 浏览器使用的是事件冒泡，先从具体的接收元素，然后逐步向上传播到不具体的元素。</li>
+<li>Netscape（网景） 采用的是事件捕获，先由不具体的元素接收事件，最具体的节点最后才接收到事件。</li>
+<li>而 W3C（万维网）制定的 Web 标准中，是同时采用了两种方案，事件捕获和事件冒泡都可以。</li>
+</ul>
+<p>​</p>
+<h2 id="事件的传播">事件的传播</h2>
+<blockquote>
+<p>又称「事件机制」 或 「事件模型」</p>
+</blockquote>
+<p>一个事件发生后，会在子元素和父元素之间传播（propagation）。这种传播分成三个阶段。</p>
+<blockquote>
+<ul>
+<li>第一阶段：从window对象传导到目标节点（上层传到底层），称为“捕获阶段”（capture phase）。</li>
+<li>第二阶段：在目标节点上触发，称为“目标阶段”（target phase）。</li>
+<li>第三阶段：从目标节点传导回window对象（从底层传回上层），称为“冒泡阶段”（bubbling phase）。</li>
+</ul>
+</blockquote>
+<p>这种三阶段的传播模型，使得同一个事件会在多个节点上触发。</p>
+<h3 id="1事件捕获">1.事件捕获</h3>
+<blockquote>
+<p>捕获是<strong>从上到下</strong>。</p>
+</blockquote>
+<p>事件传播的最上层对象是 window，接着依次是 document，html（document.documentElement）和body（document.body），然后按照普通的 html 结构一层一层往下传，最后到达目标元素。</p>
+<p>我们只需要将 addEventListener 的第三个参数改为 true ，就可以实现事件捕获。</p>
+<h3 id="2事件冒泡">2.事件冒泡</h3>
+<blockquote>
+<p>冒泡是<strong>从下到上</strong>。</p>
+</blockquote>
+<p>所谓事件冒泡就是事件像泡泡一样从最开始生成的地方一层一层往上冒，越来越大。从目标元素开始，一层层往上传，最后经过 body、html 到达 window 结束。</p>
+<p>addEventListener 默认就是把事件绑定在冒泡阶段（第三个参数空着或者传 falsy 值 ）。</p>
+<p></p>
+<h3 id="示例">示例</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>点击<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面代码中，<code>&lt;div&gt;</code> 节点之中有一个<code>&lt;p&gt;</code>节点。</p>
+<p>如果对这两个节点，都设置click事件的监听函数（每个节点的捕获阶段和监听阶段，各设置一个监听函数），共计设置四个监听函数。然后，对<code>&lt;p&gt;</code>点击，click事件会触发四次。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">phases</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="mi">1</span><span class="o">:</span> <span class="s1">&#39;capture&#39;</span><span class="p">,</span>
+  <span class="mi">2</span><span class="o">:</span> <span class="s1">&#39;target&#39;</span><span class="p">,</span>
+  <span class="mi">3</span><span class="o">:</span> <span class="s1">&#39;bubble&#39;</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">div</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="nx">div</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+<span class="nx">p</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+<span class="nx">div</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="kc">false</span><span class="p">)</span>
+<span class="nx">p</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="kc">false</span><span class="p">)</span>
+
+<span class="kd">function</span> <span class="nx">callback</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">tag</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">.</span><span class="nx">tagName</span>
+  <span class="kd">var</span> <span class="nx">phase</span> <span class="o">=</span> <span class="nx">phases</span><span class="p">[</span><span class="nx">event</span><span class="p">.</span><span class="nx">eventPhase</span><span class="p">]</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Tag: &#39;&#34;</span> <span class="o">+</span> <span class="nx">tag</span> <span class="o">+</span> <span class="s2">&#34;&#39;. EventPhase: &#39;&#34;</span> <span class="o">+</span> <span class="nx">phase</span> <span class="o">+</span> <span class="s2">&#34;&#39;&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// 点击以后的结果
+</span><span class="c1">// Tag: &#39;DIV&#39;. EventPhase: &#39;capture&#39;
+</span><span class="c1">// Tag: &#39;P&#39;. EventPhase: &#39;target&#39;
+</span><span class="c1">// Tag: &#39;P&#39;. EventPhase: &#39;target&#39;
+</span><span class="c1">// Tag: &#39;DIV&#39;. EventPhase: &#39;bubble&#39;
+</span></code></pre></td></tr></table>
+</div>
+</div><p>上面代码表示，click事件被触发了四次：<code>&lt;div&gt;</code>节点的捕获阶段和冒泡阶段各1次，<code>&lt;p&gt;</code>节点的目标阶段触发了2次。</p>
+<p>捕获阶段：事件从<code>&lt;div&gt;</code>向<code>&lt;p&gt;</code>传播时，触发<code>&lt;div&gt;</code>的click事件；
+目标阶段：事件从<code>&lt;div</code>&gt;到达<code>&lt;p&gt;</code>时，触发<code>&lt;p&gt;</code>的click事件；
+冒泡阶段：事件从<code>&lt;p&gt;</code>传回<code>&lt;div&gt;</code>时，再次触发<code>&lt;div&gt;</code>的click事件。
+其中，<code>&lt;p&gt;</code>节点有两个监听函数（addEventListener方法第三个参数的不同，会导致绑定两个监听函数），因此它们都会因为click事件触发一次。所以，<code>&lt;p&gt;</code>会在target阶段有两次输出。</p>
+<p>注意，浏览器总是假定click事件的目标节点，就是点击位置嵌套最深的那个节点（本例是<code>&lt;div&gt;</code>节点里面的<code>&lt;p&gt;</code>节点）。所以，<code>&lt;p&gt;</code>节点的捕获阶段和冒泡阶段，都会显示为target阶段。</p>
+<p>事件传播的最上层对象是window，接着依次是document，html（document.documentElement）和body（document.body）。也就是说，上例的事件传播顺序，在捕获阶段依次为window、document、html、body、div、p，在冒泡阶段依次为p、div、body、html、document、window。</p>
+<h3 id="一个特例">一个特例</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">ele</span><span class="p">&gt;</span>点我<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 👇先监听冒泡阶段的点击事件
+</span><span class="c1"></span><span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="p">()=&gt;{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="c1">// 👇再监听捕获阶段的点击事件
+</span><span class="c1"></span><span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="p">()=&gt;{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+<span class="p">},</span> <span class="kc">true</span><span class="p">)</span>
+
+<span class="c1">// 点击div以后的结果
+</span><span class="c1">// 2  （冒泡）
+</span><span class="c1">// 1  （捕获）
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 👇先监听捕获阶段的点击事件
+</span><span class="c1"></span><span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="p">()=&gt;{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+<span class="p">},</span> <span class="kc">true</span><span class="p">)</span>
+<span class="c1">// 👇再监听冒泡阶段的点击事件
+</span><span class="c1"></span><span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="p">()=&gt;{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// 点击div以后的结果
+</span><span class="c1">// 1   （捕获）
+</span><span class="c1">// 2   （冒泡）
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>点击触发后的结果：与点击事件绑定在哪个阶段并无直接关系，而是谁写在前，谁先执行</p>
+</blockquote>
+<p>当只有一个单一的元素被监听时（不存在父子元素关系），分别在捕获和冒泡两个阶段，监听这个元素的点击事件。这种情况下，点击事件被触发后，则不再遵循「先捕获后冒泡」的机制，而是「谁先监听，谁先执行」</p>
+<h2 id="addeventlistener-">addEventListener 👂</h2>
+<h3 id="事件绑定-api">事件绑定 API</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">baba</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">(</span><span class="s1">&#39;onclick&#39;</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span>  <span class="c1">// 微软IE5发明：默认进入冒泡阶段
+</span><span class="c1"></span><span class="nx">baba</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span>  <span class="c1">// 网景发明：默认进入捕获阶段
+</span><span class="c1"></span><span class="nx">baba</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">bool</span><span class="p">)</span><span class="err">·</span><span class="c1">// ❤️W3C标准：加了参数 bool，用于指定让函数运行在哪个阶段
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="如果-bool-不传-或为-falsyhttpsdevelopermozillaorgzh-cndocsglossaryfalsy">如果 bool 不传 （或为 <a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Falsy" target="_blank" rel="noopener noreffer">falsy</a>）</h4>
+<ul>
+<li>默认情况</li>
+<li>就让 fn 走<strong>冒泡</strong>，即当浏览器在冒泡阶段发现 baba 有 fn 监听函数，就会调用 fn，并提供事件信息</li>
+<li>大多数人习惯上都不会传这个参数（可见 W3C 可能更倾向于 IE 的方案：默认把 fn 放在冒泡阶段）</li>
+</ul>
+<h4 id="如果-bool-为-true">如果 bool 为 true</h4>
+<ul>
+<li>就让 fn 走<strong>捕获</strong>，即当浏览器在捕获阶段发现 baba 有 fn 监听函数，就会调用 fn，并提供事件信息</li>
+</ul>
+<p>​</p>
+<h3 id="补充事件移除">补充：事件移除</h3>
+<blockquote>
+<p>removeEventListener</p>
+</blockquote>
+<p>通过 addEventListener() 添加的事件只能用 <strong>removeEventListener()</strong> 来移除</p>
+<ul>
+<li>移除时，传入的参数与添加事件使用的参数相同</li>
+<li>通过 addEventListener() 添加的匿名函数无法删除</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;myBtn&#34;</span><span class="p">)</span>
+<span class="nx">btn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+<span class="p">},</span> <span class="kc">false</span><span class="p">)</span>
+<span class="nx">btn</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="c1">// 匿名函数无法移除
+</span><span class="c1"></span>  <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+<span class="p">},</span> <span class="kc">false</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;myBtn&#34;</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">handler</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">btn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="nx">handler</span><span class="p">,</span> <span class="kc">false</span><span class="p">)</span>
+<span class="nx">btn</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="nx">handler</span><span class="p">,</span> <span class="kc">false</span><span class="p">)</span>  <span class="c1">// 有效！
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h2 id="target--currenttarget">target 🆚 currentTarget</h2>
+<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Event/currentTarget" target="_blank" rel="noopener noreffer">Event.currentTarget</a> 找到事件<strong>绑定</strong>的元素。</p>
+<p>区别与 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Event/target" target="_blank" rel="noopener noreffer">Event.target</a> ，是事件<strong>触发</strong>的元素。</p>
+</blockquote>
+<h3 id="区别">区别</h3>
+<blockquote>
+<p>一个是用户点击的（触发事件的元素），一个是开发者监听的（事件绑定的元素）</p>
+</blockquote>
+<ul>
+<li>e.target ：用户操作的元素</li>
+<li>e.currentTarget ：程序员监听的元素</li>
+<li>this 是 e.currentTarget，非常不推荐在监听代码里使用 this（因为经常会忘记  this 到底指代哪一个）</li>
+</ul>
+<h3 id="举例">举例</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>文字<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>给 div 绑定点击事件，用户点击“文字”</li>
+<li>e.target 就是 span</li>
+<li>e.currentTarget 就是 div</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="阻止默认事件">阻止默认事件</h2>
+<blockquote>
+<p>默认事件，又称「默认动作」「默认行为」</p>
+<p>例如：表单一点击提交按钮(submit)就会刷新页面、点击a标签默认执行页面跳转或是锚点定位等。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果调用这个方法，默认事件行为将不再触发。</p>
+<h3 id="使用场景1">使用场景1</h3>
+<blockquote>
+<p>使用a标签仅仅是想当做一个普通的按钮，点击实现一个功能，不想页面跳转，也不想锚点定位。</p>
+</blockquote>
+<h4 id="方法一">方法一</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;javascript:;&#34;</span><span class="p">&gt;</span>链接<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="方法二">方法二</h4>
+<p>使用 JS 方法来阻止：当我们点击A标签的时候，会先触发click事件，其次才会执行自己的默认行为。所以只需给其 click 事件 return false ，让执行中断</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;test&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;http://www.google.com&#34;</span><span class="p">&gt;</span>链接<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="nx">test</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+    <span class="nx">e</span> <span class="o">=</span> <span class="nx">e</span> <span class="o">||</span> <span class="nb">window</span><span class="p">.</span><span class="nx">event</span>  <span class="c1">// 兼容不同浏览器
+</span><span class="c1"></span>    <span class="k">return</span> <span class="kc">false</span>
+  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="方法三">方法三</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;test&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;http://www.google.com&#34;</span><span class="p">&gt;</span>链接<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="nx">test</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+    <span class="nx">e</span> <span class="o">=</span> <span class="nx">e</span> <span class="o">||</span> <span class="nb">window</span><span class="p">.</span><span class="nx">event</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="使用场景2">使用场景2</h3>
+<blockquote>
+<p>限制输入框最多只能输入六个字符，如何实现？</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#39;tempInp&#39;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="nx">tempInp</span><span class="p">.</span><span class="nx">onkeydown</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ev</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">ev</span> <span class="o">=</span> <span class="nx">ev</span> <span class="o">||</span> <span class="nb">window</span><span class="p">.</span><span class="nx">event</span>
+    <span class="kd">let</span> <span class="nx">val</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">trim</span><span class="p">()</span> <span class="c1">// trim去除字符串首尾空格（不兼容）
+</span><span class="c1"></span>    <span class="c1">// this.value = this.value.replace(/^ +| +$/g,&#39;&#39;) 兼容写法
+</span><span class="c1"></span>    <span class="kd">let</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">val</span><span class="p">.</span><span class="nx">length</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">len</span> <span class="o">&gt;=</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">val</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>
+      <span class="c1">// 阻止默认行为去除特殊按键（DELETE\BACK-SPACE\方向键...）
+</span><span class="c1"></span>      <span class="kd">let</span> <span class="nx">code</span> <span class="o">=</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">which</span> <span class="o">||</span> <span class="nx">ev</span><span class="p">.</span><span class="nx">keyCode</span>  <span class="c1">// 当前按下的按键的code码
+</span><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="sr">/^(46|8|37|38|39|40)$/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">code</span><span class="p">))</span> <span class="p">{</span>  <span class="c1">// 如果按下的是特殊按键，则阻止默认事件（按下无效）
+</span><span class="c1"></span>        <span class="nx">ev</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">()</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h2 id="阻止事件传播">阻止事件传播</h2>
+<blockquote>
+<p>阻止事件进一步的 冒泡 / 捕获</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">()</span> 
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="示例-1">示例</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;level1&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;level2&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;level3&#34;</span><span class="p">&gt;</span>
+			点我
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">level1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;.level1&#39;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">level2</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;.level2&#39;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">level3</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;.level3&#39;</span><span class="p">)</span>
+
+<span class="nx">level1</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)=&gt;{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;1&#34;</span><span class="p">)</span>
+<span class="p">})</span> 
+<span class="nx">level2</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)=&gt;{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;2&#34;</span><span class="p">)</span>
+<span class="p">})</span> 
+<span class="nx">level3</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)=&gt;{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;3&#34;</span><span class="p">)</span>
+  <span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">()</span>  <span class="c1">// 阻止冒泡，输出： 3
+</span><span class="c1"></span><span class="p">})</span>
+
+<span class="c1">// 不阻止冒泡，点击文字，输出顺序： 3  2  1
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">level1</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)=&gt;{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;1&#34;</span><span class="p">)</span>
+<span class="p">},</span> <span class="kc">true</span><span class="p">)</span> 
+<span class="nx">level2</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)=&gt;{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;2&#34;</span><span class="p">)</span>
+  <span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">()</span>  <span class="c1">// 阻止捕获，输出： 1  2
+</span><span class="c1"></span><span class="p">},</span> <span class="kc">true</span><span class="p">)</span> 
+<span class="nx">level3</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)=&gt;{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;3&#34;</span><span class="p">)</span>
+<span class="p">},</span> <span class="kc">true</span><span class="p">)</span>
+
+<span class="c1">// 不阻止捕获，点击文字，输出顺序： 1  2  3
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h2 id="插曲如何阻止滚动-">插曲：如何阻止滚动 🖱️</h2>
+<h3 id="scroll-不支持阻止默认事件">scroll 不支持阻止默认事件</h3>
+<blockquote>
+<p>MDN 搜索 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Document/scroll_event" target="_blank" rel="noopener noreffer">scroll event</a></p>
+<p>滚动事件，不能阻止默认事件。 那怎么让页面无法滚动呢？</p>
+</blockquote>
+<h3 id="解决办法">解决办法</h3>
+<ul>
+<li>要阻止滚动，可阻止 wheel（鼠标滚轮） 和 touchstart（移动端触屏） 的默认动作</li>
+<li>拖拽滚动条，还能实现滚动，所以还需要隐藏滚动条</li>
+</ul>
+<h3 id="代码">代码</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">x</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>1<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>2<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>3<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>4<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  ...  
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>100<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="c">&lt;!-- p标签撑起页面，超出一屏高度，出现滚动条 --&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="c1">// PC 端
+</span><span class="c1"></span>  <span class="nx">x</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;wheel&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)=&gt;{</span>  <span class="c1">// 绑定滚轮事件 wheel，触发滚轮事件，就阻止执行
+</span><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">()</span>
+  <span class="p">})</span>
+  <span class="c1">// 移动端
+</span><span class="c1"></span>  <span class="nx">x</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;touchstart&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)=&gt;{</span>  <span class="c1">// 手机端是触屏拖拽滚动，那就阻止touchstart触屏事件
+</span><span class="c1"></span>    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">()</span>
+  <span class="p">})</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">::</span><span class="nd">-webkit-scrollbar</span> <span class="p">{</span> <span class="k">width</span><span class="p">:</span> <span class="mi">0</span> <span class="cp">!important</span> <span class="p">}</span>   <span class="c">/* 隐藏滚动条 */</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>注意：你需要找准滚动条所在的元素（在 document 上）</li>
+<li>用 overflow: hidden 也可以直接取消滚动条。但此时 JS 依然可以修改 scrollTop</li>
+</ul>
+<p>​</p>
+<h2 id="浏览器自带事件">浏览器自带事件</h2>
+<ul>
+<li>一共 100 多种事件，<a href="https://developer.mozilla.org/zh-CN/docs/Web/Events" target="_blank" rel="noopener noreffer">列表</a> 在MDN上</li>
+<li>用户打印、写字、全屏、复制粘贴、键盘按键、点击鼠标、拖放事件、媒体事件（比如直播：被播放、关闭、暂停、加速）…</li>
+</ul>
+<ul>
+<li>非常多的事件，都可以被监听。</li>
+<li>想一下全部理解，是不可能的。用到再查就可以</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>事件名称</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>error</td>
+<td></td>
+</tr>
+<tr>
+<td>abort</td>
+<td>中止事件</td>
+</tr>
+<tr>
+<td>load</td>
+<td>加载成功事件</td>
+</tr>
+<tr>
+<td>beforeunload</td>
+<td>关闭页面事件</td>
+</tr>
+<tr>
+<td>unload</td>
+<td>关闭页面之后的事件</td>
+</tr>
+<tr>
+<td>online</td>
+<td>网络连上了，触发 online （从没用过）</td>
+</tr>
+<tr>
+<td>offline</td>
+<td>WiFi 网络突然断了，触发 offline（从没用过）</td>
+</tr>
+<tr>
+<td>focus</td>
+<td>一个元素获取焦点</td>
+</tr>
+<tr>
+<td>blur</td>
+<td>一个元素失去焦点</td>
+</tr>
+<tr>
+<td>pageshow</td>
+<td>一个页面显示出来，会触发pageshow （从没用过）</td>
+</tr>
+<tr>
+<td>submit</td>
+<td>提交</td>
+</tr>
+<tr>
+<td>beforeprint</td>
+<td>用户打印</td>
+</tr>
+<tr>
+<td>afterprint</td>
+<td>用户打印</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<p>​</p>
+<h2 id="自定义事件">自定义事件</h2>
+<blockquote>
+<p>开发者可以在【浏览器自带事件】之外，自定义一个事件</p>
+</blockquote>
+<p>HTML</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;div1&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;btn&#34;</span><span class="p">&gt;</span>
+	  点击触发sam事件
+	<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>JS</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">btn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// new出自定义事件，new CustomEvent(&#39;事件名&#39;, 事件信息)
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">event</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CustomEvent</span><span class="p">(</span><span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="p">{</span> 
+    <span class="nx">detail</span><span class="o">:</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">18</span> <span class="p">}</span>
+  <span class="p">})</span>
+  <span class="c1">// EventTarget.dispatchEvent(event) 触发事件
+</span><span class="c1"></span>  <span class="nx">btn</span><span class="p">.</span><span class="nx">dispatchEvent</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> 
+<span class="p">})</span>
+<span class="c1">// 现在效果：点击 btn ，触发 sam 事件
+</span><span class="c1"></span>
+<span class="c1">// 监听 sam 事件
+</span><span class="c1"></span><span class="nx">btn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+  <span class="nx">congsole</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;sam事件触发了&#39;</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="自定义事件会冒泡吗">自定义事件，会冒泡吗？</h3>
+<ul>
+<li>测试：只监听 div1 的点击事件。看看点击 btn，会触发到 div1 的点击事件吗？</li>
+<li>结果：不行，不冒泡。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 监听 div1 的 sam 事件
+</span><span class="c1"></span><span class="nx">div1</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+  <span class="nx">congsole</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;sam事件触发了&#39;</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>如果想实现自定义事件的冒泡，还需额外再给自定义事件 <strong>开启冒泡属性</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">btn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">event</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CustomEvent</span><span class="p">(</span><span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="p">{</span> 
+    <span class="nx">detail</span><span class="o">:</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">18</span> <span class="p">},</span>
+    <span class="nx">bubbles</span><span class="o">:</span> <span class="kc">true</span>  <span class="c1">// &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; 开启冒泡，添加这句就可以了
+</span><span class="c1"></span>    <span class="c1">// cancelable: false  // 是否可以阻止默认事件
+</span><span class="c1"></span>  <span class="p">})</span>
+  <span class="nx">btn</span><span class="p">.</span><span class="nx">dispatchEvent</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> 
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="事件委托">事件委托</h2>
+<blockquote>
+<p>又称「事件代理」</p>
+</blockquote>
+<p>由于事件会在冒泡阶段向上传播到父节点，因此可以把子节点的监听函数定义在父节点上，由父节点的监听函数统一处理多个子元素的事件。这种方法叫做事件委托（代理）。</p>
+<h3 id="使用场景-1">使用场景 1</h3>
+<p>假设有一个列表，列表之中有<strong>大量的子项</strong>，我们需要在点击每个子项的时候响应一个事件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;list&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>item 1<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>item 2<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>item 3<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  ......
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>item n<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">div1</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">tagName</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">===</span> <span class="s1">&#39;li&#39;</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;li 被点击了&#39;</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;li 内容是：&#39;</span> <span class="o">+</span> <span class="nx">t</span><span class="p">.</span><span class="nx">textContent</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>如果给每个子项都绑定一个函数，那对于内存消耗是非常大的，效率上需要消耗很多性能。</li>
+<li>借助事件委托，我们只需要给父容器 ul 绑定方法即可</li>
+<li>这样不管点击的是哪一个后代元素，都会根据冒泡传播的传递机制，把容器的 click 行为触发，然后把对应的方法执行，根据事件源，我们可以知道点击的是谁，从而完成不同的事。</li>
+</ul>
+<h3 id="使用场景-2">使用场景 2</h3>
+<ul>
+<li>在很多时候，我们需要通过用户操作<strong>动态的新增子项元素</strong>。</li>
+<li>在最初并没有新增子项元素时，就无法给还未创建的子项元素绑定事件</li>
+<li>这种情况就可以采用事件委托的形式，给父级元素绑定事件，监听到子项的动态变化。</li>
+</ul>
+<p><a href="http://js.jirengu.com/wuwox/1/edit?html,js,output" target="_blank" rel="noopener noreffer">示例</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;btn&#34;</span><span class="p">&gt;</span>新增按钮<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">ul</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;div1&#34;</span><span class="p">&gt;</span>
+  
+<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">n</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="nx">btn</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">n</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="kr">const</span> <span class="nx">button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;button&#39;</span><span class="p">)</span>
+  <span class="nx">button</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="s1">&#39;按钮&#39;</span> <span class="o">+</span> <span class="nx">n</span>
+  <span class="nx">div1</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">button</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nx">list</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">tagName</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">===</span> <span class="s1">&#39;button&#39;</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;当前点击的是：&#39;</span> <span class="o">+</span> <span class="nx">t</span><span class="p">.</span><span class="nx">innerText</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h3 id="优点">优点</h3>
+<ul>
+<li>减少内存消耗，提高性能  （例1）
+<ul>
+<li>如果要监听100个按钮，需要100个监听器，就是100倍的内存。如果之间一个祖先 div，就是只需要一个监听器，节约了99个</li>
+</ul>
+</li>
+<li>可以监听动态的元素  （例2）
+<ul>
+<li>如果当前元素还不存在，肯定没法直接监听到。只能监听祖先</li>
+</ul>
+</li>
+</ul>
+<h3 id="封装事件委托">封装事件委托</h3>
+<blockquote>
+<p>封装，需要考虑更多边界情况</p>
+<ul>
+<li>
+<p>写出这样一个函数 <code>on('click', '#testDiv', 'li', fn)</code></p>
+</li>
+<li>
+<p>当用户点击 <code>#testDiv</code> 里的 <code>li</code> 元素时，调用 <code>fn</code> 函数</p>
+</li>
+</ul>
+</blockquote>
+<p><a href="http://js.jirengu.com/kuxeg/3/edit?html,js,output" target="_blank" rel="noopener noreffer">示例</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;btn&#34;</span><span class="p">&gt;</span>新增按钮<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">ul</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;div1&#34;</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">n</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="nx">btn</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">n</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="kr">const</span> <span class="nx">button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;button&#39;</span><span class="p">)</span>
+  <span class="kr">const</span> <span class="nx">span</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">)</span>
+  <span class="nx">span</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="s1">&#39;按钮&#39;</span> <span class="o">+</span> <span class="nx">n</span>
+  <span class="nx">button</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">span</span><span class="p">)</span>
+  <span class="nx">div1</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">button</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="s1">&#39;#div1&#39;</span><span class="p">,</span> <span class="s1">&#39;button&#39;</span><span class="p">,</span> <span class="nx">fm</span><span class="p">)</span>
+<span class="kd">function</span> <span class="nx">fm</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span><span class="nx">el</span><span class="p">){</span>  
+  <span class="c1">// 不能用箭头函数，this 会获取不到 el
+</span><span class="c1"></span>  <span class="c1">// 箭头函数中的 this，只能获取到 window
+</span><span class="c1"></span>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">el</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">el</span><span class="p">.</span><span class="nx">innerText</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">on</span><span class="p">(</span><span class="nx">eventType</span><span class="p">,</span> <span class="nx">element</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">fn</span><span class="p">){</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">element</span> <span class="k">instanceof</span> <span class="nx">Element</span><span class="p">)){</span>
+    <span class="nx">element</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="nx">element</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">eventType</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">el</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span>
+    <span class="c1">// 只要el不匹配，就不断获取el的父元素来匹配，直到el获取element，说明容器中压根没有匹配的el，结束循环
+</span><span class="c1"></span>    <span class="c1">// el 为 null，则不执行 fn
+</span><span class="c1"></span>    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="nx">el</span><span class="p">.</span><span class="nx">matches</span><span class="p">(</span><span class="nx">selector</span><span class="p">)){</span> 
+      <span class="k">if</span><span class="p">(</span><span class="nx">el</span> <span class="o">===</span> <span class="nx">element</span><span class="p">){</span>  <span class="c1">// 循环结束条件
+</span><span class="c1"></span>        <span class="nx">el</span> <span class="o">=</span> <span class="kc">null</span>
+        <span class="k">break</span>
+      <span class="p">}</span>
+      <span class="nx">el</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">parentNode</span>
+    <span class="p">}</span>
+    <span class="nx">el</span> <span class="o">&amp;&amp;</span> <span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="nx">e</span><span class="p">,</span> <span class="nx">el</span><span class="p">)</span>
+  <span class="p">})</span>
+  <span class="k">return</span> <span class="nx">element</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="答疑">答疑</h2>
+<h3 id="js-支持事件吗">JS 支持事件吗</h3>
+<h4 id="答">答</h4>
+<blockquote>
+<p>不支持。因为 JS 本身没有「事件」（只是调用了 DOM 提供的 addEventListener）</p>
+</blockquote>
+<ul>
+<li>本节内容的 DOM 事件，不属于JS 的功能。
+<ul>
+<li>术语：本节内容是基于浏览器提供的 DOM 的功能</li>
+<li>JS 是浏览器的功能之一。DOM 事件也是浏览器的功能之一（<strong>二者是平行的关系，没有从属关系</strong>）</li>
+<li>JS 里面没有 DOM 事件， JS 只是调用了 DOM 提供的 addEventListener 而已</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>因为 DOM 提供了 事件的功能，还提供了一整套完整的事件机制（捕获冒泡、默认动作、event 对象…）</p>
+<p>所以 JS 才可以用</p>
+</blockquote>
+<h4 id="追问">追问</h4>
+<blockquote>
+<p>由于 JS 不支持事件，面试官可能问你「能不能手写出一个 JS 事件系统」</p>
+</blockquote>
+<ul>
+<li>如何让JS支持事件？请手写一个事件系统。</li>
+<li>目前大家的水平还写不出来，可以先思考一段时间。
+（可以搜一搜、实际上也不难，用一个「队列」就可以遭到了）</li>
+</ul>
+<blockquote>
+<p>以上。本节就是对 <strong>DOM事件（不是 JS 事件）</strong> 的一个完整了解</p>
+</blockquote>
+<h2 id="参考">参考</h2>
+<p><a href="https://javascript.ruanyifeng.com/dom/event.html#toc10" target="_blank" rel="noopener noreffer">阮一峰：事件模型</a></p>
+<p><a href="https://juejin.im/post/6844903781969166349#heading-19" target="_blank" rel="noopener noreffer">深入理解DOM事件机制</a></p>
+<p><a href="https://www.jianshu.com/p/e8a6fad0f7bc" target="_blank" rel="noopener noreffer">e = e || window.event</a></p>]]></description>
+</item></channel>
+</rss>

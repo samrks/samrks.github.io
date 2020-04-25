@@ -22,21 +22,25 @@
 <p>​</p>
 <h2 id="如何获取和使用--jquery">如何获取和使用  jQuery</h2>
 <ul>
-<li>jQuery 的官方网址是：http://jQuery.com/，从这里可以获取  jQuery  的最新版本。</li>
+<li>jQuery 的官方网址是：http://jQuery.com/，从这里可以获取  jQuery  的最新版本。
+<ul>
+<li>jQuery中文文档：https://www.bootcdn.cn/jquery/</li>
+</ul>
+</li>
 <li>使用的话，就是导入这份 js 文件。</li>
-<li>导入方式是在页面，通过<code>&lt;script&gt;</code>标签导入（路径：本地地址 or 网络地址）</li>
+<li>导入方式是在页面，通过<code>&lt;script&gt;</code>标签导入</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;路径&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;jQuery.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </code></pre></td></tr></table>
 </div>
-</div><ul>
-<li>导入之后，就可以使用  jQuery  的语法了。</li>
-</ul>
+</div><p>导入之后，就可以使用  jQuery  的语法了。</p>
 <p>​</p>
 <h2 id="jquery--版本">jQuery  版本</h2>
 <p>1.x：兼容IE678,使用最为广泛的，官方只做BUG维护，功能不再新增。因此一般项目来说，使用1.x版本就可以了，最终版本：1.12.4 (2016年5月20日)</p>

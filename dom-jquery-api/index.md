@@ -9,19 +9,21 @@
 
 -   《 [jQuery 中文文档](https://www.jquery123.com/)》
 
-​	
+​		
 
 ## 如何获取和使用  jQuery
 
 -    jQuery 的官方网址是：http://jQuery.com/，从这里可以获取  jQuery  的最新版本。
--   使用的话，就是导入这份 js 文件。
--   导入方式是在页面，通过`<script>`标签导入（路径：本地地址 or 网络地址）
+     -    jQuery中文文档：https://www.bootcdn.cn/jquery/  
+-    使用的话，就是导入这份 js 文件。
+-    导入方式是在页面，通过`<script>`标签导入
 
 ```html
-<script type="text/javascript" src="路径"></script>
+<script type="text/javascript" src="jQuery.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 ```
 
-+   导入之后，就可以使用  jQuery  的语法了。
+导入之后，就可以使用  jQuery  的语法了。
 
 ​	
 

@@ -10,7 +10,7 @@
     <pubDate>Tue, 14 Jul 2020 22:20:43 &#43;0800</pubDate>
     <author>作者</author>
     <guid>http://samrks.github.io/blog-start-a-hugo/</guid>
-    <description><![CDATA[<p>第一篇正式博文，我想给大家分享下我的博客的创建过程吧！🥇</p>
+    <description><![CDATA[<p>博客的快速搭建 及 基础配置 🥇</p>
 <p>​</p>
 <blockquote>
 <p>Hugo 是由 Go 语言实现的静态网站生成器。简单、易用、高效、易扩展、快速部署。</p>

@@ -1,0 +1,842 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>MVC - 分类 - Sam&#39;s Garage</title>
+        <link>http://samrks.github.io/categories/mvc/</link>
+        <description>MVC - 分类 - Sam&#39;s Garage</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Sat, 12 Dec 2020 21:03:26 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/categories/mvc/" rel="self" type="application/rss+xml" /><item>
+    <title>浅析 MVC</title>
+    <link>http://samrks.github.io/mvc-what-is-mvc/</link>
+    <pubDate>Sat, 12 Dec 2020 21:03:26 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/mvc-what-is-mvc/</guid>
+    <description><![CDATA[<p>​</p>
+<h2 id="mvc-是啥">MVC 是啥</h2>
+<blockquote>
+<p>MVC 是一种非常出名的架构模式（设计模式）。</p>
+<p>如何设计一个程序的结构，这是一门专门的学问，叫做架构模式（architectural pattern），属于编程的方法论。</p>
+</blockquote>
+<p>MVC，将代码分为三个模块，写成三个对象</p>
+<ul>
+<li>M - Model（数据模型）负责操作所有数据</li>
+<li>V - View（视图）负责所有 UI 界面</li>
+<li>C - Controller（控制器）负责其他</li>
+</ul>
+<p>MVC 没有严格的定义，每个程序员对 MVC 的理解都可能存在分歧，唯一统一的就是对 M / V / C 三个单词的认知</p>
+<blockquote>
+<p>使用 MVC 模式的目的，简单来说就是希望 <strong>通过将代码分离以提高代码的灵活性和复用性</strong>。</p>
+</blockquote>
+<h3 id="mvc-伪代码">MVC 伪代码</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 数据层，关于数据的操作放在这里
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">m</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">data</span><span class="o">:</span> <span class="p">{</span> <span class="c1">// 数据初始化
+</span><span class="c1"></span>    <span class="nx">n</span><span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;number&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="mi">100</span><span class="p">)</span>  
+  <span class="p">},</span>
+  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/*更新数据*/</span> <span class="p">},</span>
+  <span class="k">delete</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/*删除数据*/</span> <span class="p">},</span>
+  <span class="nx">get</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/*获得数据*/</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 视图层，关于视图的操作放在这里
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">v</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="nx">el</span><span class="o">:</span> <span class="s1">&#39;挂载点（容器）&#39;</span><span class="p">,</span>
+  <span class="nx">html</span><span class="o">:</span> <span class="s1">&#39;需要插入元素内的HTML内容&#39;</span><span class="p">,</span>
+  <span class="nx">render</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span> <span class="cm">/*（获取数据）渲染html视图*/</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 控制层，关于事件监听的放到这里
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="c1">// 找到重要的元素绑定事件
+</span><span class="c1"></span>  <span class="c1">// 如果触发事件调用更改数据方法及渲染方法
+</span><span class="c1"></span>  <span class="nx">a</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;找到a&#39;</span><span class="p">),</span>
+  <span class="nx">b</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;找到b&#39;</span><span class="p">),</span>
+  <span class="nx">c</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;找到c&#39;</span><span class="p">),</span>
+  <span class="nx">bindEvents</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>   <span class="c1">// bindEvents 在 render 时执行
+</span><span class="c1"></span>    <span class="nx">a</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="c1">// 调用数据层方法更改数据
+</span><span class="c1"></span>      <span class="c1">// 调用视图层方法渲染页面
+</span><span class="c1"></span>    <span class="p">})</span>
+    <span class="nx">b</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span><span class="cm">/**/</span><span class="p">})</span>
+    <span class="nx">b</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span><span class="cm">/**/</span><span class="p">})</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="为什么用-mvc">为什么用 MVC</h3>
+<blockquote>
+<p>对于「惯用简单、朴素的思想（监听事件、改变DOM元素）来写代码」的人来说，可能认为「改用 MVC 的方式去实现某个功能」会更复杂、麻烦</p>
+</blockquote>
+<ul>
+<li>虽然朴素的代码逻辑没有什么问题，但如果代码量增大，功能相似的代码可能出现大量重复，后期维护会非常麻烦，而且还存在变量污染的可能。这样的代码复用性很低。</li>
+<li>套用 MVC 架构的过程虽然麻烦、需要很多调试，但是后期维护成本低。每一部分代码都以一个对象（模块）的方式储存在一个独立的空间，负责某一项功能，我们更容易找到对应代码，并且在其内部修改不会对外部的代码造成很大影响</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 找到重要的元素
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">$button1</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&#34;#add1&#34;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">$button2</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&#34;#minus1&#34;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">$button3</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&#34;#mul2&#34;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">$button4</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&#34;#divide2&#34;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">$number</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&#34;#number&#34;</span><span class="p">)</span>
+<span class="c1">// 获得数据
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">n</span> <span class="o">=</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s2">&#34;n&#34;</span><span class="p">)</span>
+<span class="nx">$number</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">n</span> <span class="o">||</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1">// 监听事件，改变数据
+</span><span class="c1"></span><span class="nx">$button1</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>  <span class="c1">// 加1
+</span><span class="c1"></span>  <span class="kd">let</span> <span class="nx">n</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">$number</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="nx">n</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span>
+  <span class="nx">$number</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="nx">$button2</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>  <span class="c1">// 减1
+</span><span class="c1"></span>  <span class="kd">let</span> <span class="nx">n</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">$number</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="nx">n</span> <span class="o">-=</span> <span class="mi">1</span>
+  <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span>
+  <span class="nx">$number</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="nx">$button3</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>  <span class="c1">// 乘2
+</span><span class="c1"></span>  <span class="kd">let</span> <span class="nx">n</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">$number</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="nx">n</span> <span class="o">*=</span> <span class="mi">2</span>
+  <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span>
+  <span class="nx">$number</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="nx">$button4</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>  <span class="c1">// 除2
+</span><span class="c1"></span>  <span class="kd">let</span> <span class="nx">n</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">$number</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="nx">n</span> <span class="o">/=</span> <span class="mi">2</span>
+  <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span>
+  <span class="nx">$number</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h2 id="模块化">模块化</h2>
+<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Modules" target="_blank" rel="noopener noreffer">MDN：模块</a></p>
+</blockquote>
+<p>在项目中实现「模块化」，通俗来讲，就是创建多个 js 文件，把相关功能的代码聚集到同一个 js 文件中，这样就实现了模块化。</p>
+<p>随着应用的功能不断增加，业务逻辑越来越复杂，代码也会变得更加复杂。如果仍将所有功能代码放在一个 js 文件中，不同功能的代码散乱一团难以查找辨别，可能起变量名都会变得非常费劲，最终导致代码的可读性、复用性极差，后期难以维护。</p>
+<p>所以，为了保证「代码能有清晰的结构」、「方便查找某个功能对应的代码区」，我们依据功能不同，将代码拆分成不同的模块（文件），使各个模块之间实现「解耦」。</p>
+<ul>
+<li>解耦：每个模块的代码都独立存在，不需要依赖其他模块。（甚至一个模块用 Vue、一个用 React、一个用 jQuery 都没问题。只不过体积会大一点）</li>
+<li>就像我们玩的积木一样，各个积木可以组合在一起形成一个形状，又可以拆分，又可以替换，因为各个积木块都是独立的，只要他们之间的接口（形状）匹配，就可以灵活地组合在一起，解耦就是为了逐渐达到这种理想的状态。</li>
+</ul>
+<p></p>
+<p>划分模块的一个准则是「高内聚、低耦合」</p>
+<ul>
+<li>高内聚，是指一个软件模块是由相关性很强的代码组成，只负责一项任务，也就是常说的单一责任原则。</li>
+<li>低耦合，是指模块之间的联系越少越好，接口越简单越好，实现低耦合，细线通信。</li>
+<li>如果各个模块之间接口很复杂，说明功能划分有不合理之处、模块之间的耦合太高，同时也说明单个模块的内聚不高。</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="eventbus">EventBus</h2>
+<h3 id="通信">通信</h3>
+<blockquote>
+<p>上面我们说了模块化，既然我们把每个功能都分成不同的模块（文件），那么问题来了 —— 如果文件 C 中检查到用户的操作，需要通知文件 M 修改数据，M 修改了数据需要通知文件 V 进行页面渲染怎么办？</p>
+</blockquote>
+<p>「eventBus」用于实现各个模块之间的通信</p>
+<ul>
+<li>eventBus 也是一种设计模式或者框架，主要用于组件/对象间通信的优化简化。</li>
+<li>eventBus 包含很多方法，on 方法可以监听事件，trigger 方法可以触发事件，off 方法可以卸载监听</li>
+<li>不管是 jQuery 还是 Vue 中都有类似于 eventBus 的存在，只不过叫法不一样，不过它们的功能是相似的，都是负责组件（模块）间的通信。</li>
+</ul>
+<blockquote>
+<p>下面演示用 jQuery 生成的 eventBus</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 伪代码
+</span><span class="c1"></span><span class="kr">import</span> <span class="nx">$</span> <span class="nx">from</span> <span class="s1">&#39;jquery&#39;</span>
+<span class="kr">const</span> <span class="nx">eventbus</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">)</span> <span class="c1">// 返回一个包含eventbus的所有方法的对象
+</span><span class="c1"></span>
+<span class="kr">const</span> <span class="nx">model</span> <span class="o">=</span> <span class="p">{</span> <span class="c1">// 数据层
+</span><span class="c1"></span>  <span class="nx">data</span><span class="o">:</span><span class="p">{</span><span class="s1">&#39;数据&#39;</span><span class="o">:</span><span class="mi">1</span><span class="p">},</span>
+  <span class="nx">update</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+    <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">model</span><span class="p">.</span><span class="nx">data</span><span class="p">,</span><span class="nx">data</span><span class="p">)</span> <span class="c1">// 更新数据
+</span><span class="c1"></span>    <span class="nx">eventbus</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;更新数据&#39;</span><span class="p">)</span> <span class="c1">// 触发事件 
+</span><span class="c1"></span>  <span class="p">}</span>
+
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">view</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">el</span><span class="o">:</span> <span class="s1">&#39;挂载点&#39;</span><span class="p">,</span>
+  <span class="nx">html</span><span class="o">:</span> <span class="s1">&#39;&lt;div&gt;{{内容}}&lt;/div&gt;&#39;</span><span class="p">,</span>
+  <span class="nx">init</span><span class="p">(</span><span class="nx">container</span><span class="p">){</span>
+    <span class="nx">view</span><span class="p">.</span><span class="nx">el</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">container</span><span class="p">)</span>
+  <span class="p">},</span>
+  <span class="nx">render</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="nx">view</span><span class="p">.</span><span class="nx">html</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;{{n}}&#39;</span><span class="p">,</span> <span class="nx">n</span><span class="p">)).</span><span class="nx">appendTo</span><span class="p">(</span><span class="nx">view</span><span class="p">.</span><span class="nx">el</span><span class="p">)</span> <span class="c1">// 更换新的(数据)内容，渲染进页面
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">control</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">init</span><span class="p">(</span><span class="nx">container</span><span class="p">){</span>
+    <span class="nx">view</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">container</span><span class="p">)</span>  <span class="c1">// 拿到挂载点（元素容器）
+</span><span class="c1"></span>    <span class="nx">view</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span> <span class="c1">// 初始化页面
+</span><span class="c1"></span>    <span class="nx">autoBindEvents</span><span class="p">()</span>
+    <span class="nx">eventbus</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;更新数据&#39;</span><span class="p">,()</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+      <span class="c1">// 监听数据层的 eventbus.trigger
+</span><span class="c1"></span>      <span class="c1">// 如果有被触发，说明数据有更新，从而进行渲染
+</span><span class="c1"></span>      <span class="nx">view</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span>
+    <span class="p">})</span>
+  <span class="p">},</span>
+  <span class="nx">add</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// 改变数据
+</span><span class="c1"></span>    <span class="nx">m</span><span class="p">.</span><span class="nx">update</span><span class="p">({</span><span class="nx">n</span><span class="o">:</span> <span class="nx">m</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">})</span>
+  <span class="p">},</span>
+  <span class="nx">minus</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// 改变数据
+</span><span class="c1"></span>    <span class="nx">m</span><span class="p">.</span><span class="nx">update</span><span class="p">({</span><span class="nx">n</span><span class="o">:</span> <span class="nx">m</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">})</span>
+  <span class="p">},</span>
+  <span class="nx">autoBindEvents</span><span class="p">()</span> <span class="p">{</span>  <span class="c1">// 监听改变数据的按钮
+</span><span class="c1"></span>    <span class="nx">view</span><span class="p">.</span><span class="nx">el</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="s1">&#39;app1&#39;</span><span class="p">,</span> <span class="s1">&#39;add&#39;</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="eventbus-类">EventBus 类</h3>
+<blockquote>
+<p>当需求更复杂的时候（多个应用功能都须用到 eventBus），我们将 eventBus 单独写成一个类 EventBus.js</p>
+<p>让生成的实例对象继承 EventBus，这样每个实例都拥有了可以触发和监听的功能，相当灵活</p>
+</blockquote>
+<blockquote>
+<p>遵循「事不过三」原则</p>
+<ul>
+<li>同样的代码写三遍，就应该抽成一个函数</li>
+<li>同样的属性写三遍，就应该做成【<strong>共用属性（原型或类）</strong>】</li>
+<li>同样的原型写三遍，就应该用继承</li>
+</ul>
+<p>代价：有的时候会造成继承层级太深，无法一下看懂代码。可以通过写文档、画类图解决</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// EventBus.js
+</span><span class="c1"></span><span class="kr">import</span> <span class="nx">$</span> <span class="nx">from</span> <span class="s2">&#34;jquery&#34;</span>
+
+<span class="kr">class</span> <span class="nx">EventBus</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_eventBus</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="nx">on</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_eventBus</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="nx">trigger</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_eventBus</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="nx">off</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_eventBus</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">EventBus</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// app.js
+</span><span class="c1"></span><span class="kr">import</span> <span class="nx">EventBus</span> <span class="nx">from</span> <span class="s2">&#34;./base/EventBus.js&#34;</span>
+<span class="kr">const</span> <span class="nx">e</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventBus</span><span class="p">()</span>
+<span class="nx">e</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;xxx&#39;</span><span class="p">)</span>          <span class="c1">// 触发 xxx 事件
+</span><span class="c1"></span><span class="nx">e</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;xxx&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{...})</span>  <span class="c1">// 监听 xxx 事件，执行函数
+</span><span class="c1"></span><span class="nx">e</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="s1">&#39;xxx&#39;</span><span class="p">)</span>              <span class="c1">// 删除 xxx 事件
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="类的继承">类的继承</h4>
+<blockquote>
+<p>遵循「事不过三」原则</p>
+<ul>
+<li>同样的代码写三遍，就应该抽成一个函数</li>
+<li>同样的属性写三遍，就应该做成共用属性（原型或类）</li>
+<li>同样的原型写三遍，就应该用【<strong>继承</strong>】</li>
+</ul>
+<p>代价：有的时候会造成继承层级太深，无法一下看懂代码。可以通过写文档、画类图解决</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// Model.js
+</span><span class="c1"></span><span class="kr">import</span> <span class="nx">EventBus</span> <span class="nx">from</span> <span class="s2">&#34;./EventBus&#34;</span>
+<span class="kr">class</span> <span class="nx">Model</span> <span class="kr">extends</span> <span class="nx">EventBus</span> <span class="p">{</span>  <span class="c1">// extends 👈👈👈👈👈
+</span><span class="c1"></span>  <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// app.js
+</span><span class="c1"></span><span class="kr">import</span> <span class="nx">Model</span> <span class="nx">from</span> <span class="s2">&#34;./base/Model.js&#34;</span>
+<span class="kr">const</span> <span class="nx">m</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Model</span><span class="p">()</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">trigger</span><span class="p">)</span>
+<span class="p">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<h3 id="vue-中的-eventbus">Vue 中的 EventBus</h3>
+<blockquote>
+<p>Vue 有没有继承 EventBus  ？ 答：有</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 验证
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">v</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="p">...</span>
+<span class="p">})</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="nx">v</span><span class="p">)</span>
+<span class="c1">// 第一层是 Vue 赋予的属性
+</span><span class="c1">// 第二层里有 $on（事件监听）、$emit（事件触发trigger） 、$off（取消监听）、$once ... 
+</span><span class="c1">// 用 $ 开头，都是 Vue 内置的方法
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>由上可知， Vue 也可以做 eventBus</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// const eventBus = $(window)
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">eventBus</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">()</span>  
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">eventBus</span><span class="p">.</span><span class="nx">$on</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">eventBus</span><span class="p">.</span><span class="nx">$emit</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">eventBus</span><span class="p">.</span><span class="nx">$off</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>​</p>
+<p>​</p>
+<h2 id="view--renderdata">view = render(data)</h2>
+<blockquote>
+<p>这个思维，引导了 React 的诞生</p>
+</blockquote>
+<ul>
+<li>比起操作 DOM 对象，直接 render 更简单</li>
+<li>只要改变 data，就可以得到对应的 view</li>
+</ul>
+<h3 id="代价">代价</h3>
+<blockquote>
+<p>render 粗扩的渲染肯定比 DOM 操作<strong>浪费性能</strong></p>
+</blockquote>
+<ul>
+<li>
+<p>例：用户切换到 tab 1，<strong>DOM 操作</strong>直接找到选中的 tab，添加 class 激活即可。</p>
+<p>但 <strong>render 思维</strong>是在数据修改后，将当前元素容器全部移除，再依据新的数据重新渲染元素，肯定比之前更费性能</p>
+</li>
+<li>
+<p>当然，render 的代价可以通过「虚拟 DOM」来弥补，让 render 只更新该更新的地方</p>
+<ul>
+<li>「虚拟 DOM」render 时，会对比第一次和第二次的区别，只有发生变化的地方才会重新 render</li>
+</ul>
+</li>
+</ul>
+<h3 id="图示-">图示 ⭕️</h3>
+<blockquote>
+<p>对比 DOM 操作和 render 思维</p>
+<ul>
+<li>黑字思路：数据从右边流向左边，最后再渲染回右边</li>
+<li>绿字思路：数据永远保持在左边，最后被渲染到右边  ✔️✔️✔️
+<ul>
+<li>数据的流向更稳定</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p></p>
+<h3 id="例">例</h3>
+<h4 id="初步代码-">初步代码 💩</h4>
+<blockquote>
+<p>操作 DOM</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">init</span><span class="p">(</span><span class="nx">container</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">v</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">container</span><span class="p">)</span>
+    <span class="nx">c</span><span class="p">.</span><span class="nx">bindEvents</span><span class="p">()</span> 
+  <span class="p">},</span>
+  <span class="nx">bindEvents</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">v</span><span class="p">.</span><span class="nx">el</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="s2">&#34;#add1&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">m</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">n</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="nx">v</span><span class="p">.</span><span class="nx">render</span><span class="p">()</span>
+    <span class="p">})</span>
+    <span class="nx">v</span><span class="p">.</span><span class="nx">el</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="s2">&#34;#minus1&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">m</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">n</span> <span class="o">-=</span> <span class="mi">1</span>
+      <span class="nx">v</span><span class="p">.</span><span class="nx">render</span><span class="p">()</span>
+    <span class="p">})</span>
+    <span class="nx">v</span><span class="p">.</span><span class="nx">el</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="s2">&#34;#mul2&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">m</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">n</span> <span class="o">*=</span> <span class="mi">2</span>
+      <span class="nx">v</span><span class="p">.</span><span class="nx">render</span><span class="p">()</span>
+    <span class="p">})</span>
+    <span class="nx">v</span><span class="p">.</span><span class="nx">el</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="s2">&#34;#divide2&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">m</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">n</span> <span class="o">/=</span> <span class="mi">2</span>
+      <span class="nx">v</span><span class="p">.</span><span class="nx">render</span><span class="p">()</span>
+    <span class="p">})</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">c</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// main.js
+</span><span class="c1"></span><span class="kr">import</span> <span class="nx">x</span> <span class="nx">from</span> <span class="s2">&#34;./app1.js&#34;</span>   <span class="c1">// x 就是 c 的地址
+</span><span class="c1"></span><span class="nx">x</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="s2">&#34;#app1&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="c">&lt;!-- index.html --&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;page&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">section</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;app1&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;main.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="转换">转换</h4>
+<blockquote>
+<p>改写为 「 view = render(data) 思维」</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">init</span><span class="p">(</span><span class="nx">container</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">v</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">container</span><span class="p">)</span>
+    <span class="nx">v</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span> <span class="c1">// view = render(data) 第一次渲染
+</span><span class="c1"></span>    <span class="nx">c</span><span class="p">.</span><span class="nx">autoBindEvents</span><span class="p">()</span>
+  <span class="p">},</span>
+  <span class="c1">// ... ,
+</span><span class="c1"></span>  <span class="c1">// ... ,
+</span><span class="c1"></span>  <span class="nx">bindEvents</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 事件委托
+</span><span class="c1"></span>    <span class="nx">v</span><span class="p">.</span><span class="nx">el</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="s2">&#34;#add1&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">m</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">n</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="nx">v</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span> <span class="c1">// view = render(data)
+</span><span class="c1"></span>    <span class="p">})</span>
+    <span class="nx">v</span><span class="p">.</span><span class="nx">el</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="s2">&#34;#minus1&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">m</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">n</span> <span class="o">-=</span> <span class="mi">1</span>
+      <span class="nx">v</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span> <span class="c1">// view = render(data)
+</span><span class="c1"></span>    <span class="p">})</span>
+    <span class="nx">v</span><span class="p">.</span><span class="nx">el</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="s2">&#34;#mul2&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">m</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">n</span> <span class="o">*=</span> <span class="mi">2</span>
+      <span class="nx">v</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span> <span class="c1">// view = render(data)
+</span><span class="c1"></span>    <span class="p">})</span>
+    <span class="nx">v</span><span class="p">.</span><span class="nx">el</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="s2">&#34;#divide2&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="nx">m</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">n</span> <span class="o">/=</span> <span class="mi">2</span>
+      <span class="nx">v</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">n</span><span class="p">)</span> <span class="c1">// view = render(data)
+</span><span class="c1"></span>    <span class="p">})</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="表驱动编程">表驱动编程</h2>
+<p>表驱动编程（Table-Driven Methods）是一种编程模式。</p>
+<p>适用场景：<strong>消除代码中频繁的 if else 或 switch case 的逻辑结构代码</strong>，使代码更加简化</p>
+<ul>
+<li>事实上，任何信息都可以通过表来挑选。在简单情况下用逻辑语句是更简单的，但是一旦判断条件增多，那可能要写大量重复的判断语句，这时候我们通过<strong>遍历</strong>表来实现条件判断，将事半功倍。</li>
+</ul>
+<h3 id="例1">例1</h3>
+<blockquote>
+<p>需求：写一个函数，传入年月，返回对应天数</p>
+<ul>
+<li><a href="https://blog.csdn.net/xuehyunyu/article/details/73556048/" target="_blank" rel="noopener noreffer">闰年</a>满足：（四年一润 且 百年不润） 或 （四百年再润）</li>
+</ul>
+</blockquote>
+<p>常规写法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">getDay</span><span class="p">(</span><span class="nx">year</span><span class="p">,</span> <span class="nx">month</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">isLeapYear</span> <span class="o">=</span> <span class="nx">year</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">year</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">!==</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">year</span> <span class="o">%</span> <span class="mi">400</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">month</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="mi">28</span> <span class="o">+</span> <span class="nx">isLeapYear</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">month</span><span class="o">===</span><span class="mi">1</span><span class="o">||</span><span class="nx">month</span><span class="o">===</span><span class="mi">3</span><span class="o">||</span><span class="nx">month</span><span class="o">===</span><span class="mi">5</span><span class="o">||</span><span class="nx">month</span><span class="o">===</span><span class="mi">7</span><span class="o">||</span><span class="nx">month</span><span class="o">===</span><span class="mi">8</span><span class="o">||</span><span class="nx">month</span><span class="o">===</span><span class="mi">10</span><span class="o">||</span><span class="nx">month</span><span class="o">===</span><span class="mi">12</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="mi">31</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">month</span> <span class="o">===</span> <span class="mi">4</span> <span class="o">||</span> <span class="nx">month</span> <span class="o">===</span> <span class="mi">6</span> <span class="o">||</span> <span class="nx">month</span> <span class="o">===</span> <span class="mi">9</span> <span class="o">||</span> <span class="nx">month</span> <span class="o">===</span> <span class="mi">11</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="mi">30</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getDay</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>  <span class="c1">// 31
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getDay</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>   <span class="c1">// 29
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getDay</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>   <span class="c1">// 28
+</span></code></pre></td></tr></table>
+</div>
+</div><p>表驱动写法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">monthDays</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">[</span><span class="mi">31</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">31</span><span class="p">],</span>
+  <span class="p">[</span><span class="mi">31</span><span class="p">,</span><span class="mi">29</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">31</span><span class="p">]</span>
+<span class="p">]</span>
+<span class="kd">function</span> <span class="nx">getDay</span><span class="p">(</span><span class="nx">year</span><span class="p">,</span> <span class="nx">month</span><span class="p">){</span>
+  <span class="kd">let</span> <span class="nx">isLeapYear</span> <span class="o">=</span> <span class="nx">year</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">year</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">!==</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">year</span> <span class="o">%</span> <span class="mi">400</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span>
+  <span class="k">return</span> <span class="nx">monthDays</span><span class="p">[</span><span class="nx">isLeapYear</span><span class="p">][</span><span class="nx">month</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getDay</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span> <span class="c1">// 31
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getDay</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1">// 29
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getDay</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1">// 28
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="例2">例2</h3>
+<blockquote>
+<p>监听元素绑定事件</p>
+</blockquote>
+<p>常规写法</p>
+<ul>
+<li>常规写法，看起来逻辑直白，。如果监听事件有10个… 100个，那么代码量将非常之大</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">add1</span><span class="p">(){</span> <span class="p">...</span> <span class="p">}</span>
+<span class="nx">min1</span><span class="p">(){</span> <span class="p">...</span> <span class="p">}</span>
+<span class="nx">mul2</span><span class="p">(){</span> <span class="p">...</span> <span class="p">}</span>
+<span class="nx">div2</span><span class="p">(){</span> <span class="p">...</span> <span class="p">}</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;#add1&#39;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">add1</span><span class="p">)</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;#min1&#39;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">min1</span><span class="p">)</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;#mul2&#39;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">mul2</span><span class="p">)</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;#div2&#39;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">div2</span><span class="p">)</span>
+<span class="nb">document</span><span class="p">........</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>表驱动写法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">controller</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">add1</span><span class="p">(){</span>  <span class="p">},</span>
+  <span class="nx">min1</span><span class="p">(){</span>  <span class="p">},</span>
+  <span class="nx">mul2</span><span class="p">(){</span>  <span class="p">},</span>
+  <span class="nx">div2</span><span class="p">(){</span>  <span class="p">},</span>
+  <span class="nx">events</span><span class="o">:</span> <span class="p">{</span> <span class="c1">// 表驱动编程（对象）
+</span><span class="c1"></span>    <span class="s2">&#34;click #add1&#34;</span><span class="o">:</span> <span class="s2">&#34;add1&#34;</span><span class="p">,</span> <span class="c1">// key 的前半为要监听的事件，后半为监听的元素，value 为要执行的方法
+</span><span class="c1"></span>    <span class="s2">&#34;click #min1&#34;</span><span class="o">:</span> <span class="s2">&#34;min1&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;click #mul2&#34;</span><span class="o">:</span> <span class="s2">&#34;mul2&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;click #div2&#34;</span><span class="o">:</span> <span class="s2">&#34;div2&#34;</span>
+  <span class="p">},</span>
+  <span class="nx">autoBindEvents</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">key</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">){</span> <span class="c1">// 遍历对象获得对应的 key 去做赋值操作
+</span><span class="c1"></span>      <span class="kr">const</span> <span class="nx">handler</span> <span class="o">=</span> <span class="k">this</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">key</span><span class="p">]]</span>
+      <span class="kr">const</span> <span class="p">[</span><span class="nx">event</span><span class="p">,</span> <span class="nx">selector</span><span class="p">]</span> <span class="o">=</span> <span class="nx">key</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&#34; &#34;</span><span class="p">)</span>  <span class="c1">// [&#34;click&#34;, &#34;#min1&#34;]
+</span><span class="c1"></span>      <span class="nx">$</span><span class="p">(</span><span class="s2">&#34;容器&#34;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">handler</span><span class="p">)</span> <span class="c1">// 将提取出来的值去监听事件
+</span><span class="c1"></span>    <span class="p">})</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>「常规写法」的代码虽然更简单直白，但代码过于重复。随着数据规模的增大，如果监听事件有10个100个，那么这种写法的代码量也在加剧</p>
+<p>「表驱动编程」让代码具有一个<strong>稳定的复杂度</strong>，不论数据规模多大，都能保持简单。</p>
+<ul>
+<li>拒绝重复，保持<strong>稳定的简单</strong>，这才是程序员所追求的</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h2 id="参考文章">参考文章</h2>
+<p><a href="https://efe.baidu.com/blog/mvc-deformation/" target="_blank" rel="noopener noreffer">前端MVC变形记</a>：https://www.techug.com/post/mvc-deformation.html</p>
+<p><a href="https://juejin.cn/post/6844904030825611278#heading-3" target="_blank" rel="noopener noreffer">MVC浅析</a></p>]]></description>
+</item></channel>
+</rss>
