@@ -1,12 +1,10 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Sam&#39;s Garage</title>
-        <link>http://samrks.github.io/</link>
-        <description>这是我的全新 Hugo 网站</description>
+        <title>所有文章 - Sam&#39;s Garage</title>
+        <link>http://samrks.github.io/posts/</link>
+        <description>所有文章 | Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Fri, 13 Jul 2018 20:10:04 &#43;0800</lastBuildDate>
-            <atom:link href="http://samrks.github.io/index.xml" rel="self" type="application/rss+xml" />
-        <item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Fri, 13 Jul 2018 20:10:04 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/posts/" rel="self" type="application/rss+xml" /><item>
     <title>third</title>
     <link>http://samrks.github.io/third/</link>
     <pubDate>Fri, 13 Jul 2018 20:10:04 &#43;0800</pubDate>
