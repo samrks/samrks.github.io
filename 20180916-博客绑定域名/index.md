@@ -1,4 +1,4 @@
-# 个人博客绑定域名
+# 博客之路02：个人博客绑定域名
 
 
 买个域名玩玩！ :moneybag::moneybag::moneybag:    <!--more-->
