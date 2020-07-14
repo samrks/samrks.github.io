@@ -1,10 +1,11 @@
 # 开博纪念
 
 
-## 开博纪念
+<!--more-->
 
-> 新的开始
+## Yeah！
 
+> 每一天都是新的开始，Stay Simple，Stay Young
 
 
 

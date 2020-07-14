@@ -4,23 +4,23 @@
         <link>http://samrks.github.io/posts/</link>
         <description>所有文章 | Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Fri, 13 Jul 2018 20:10:04 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>我的第一篇文章</title>
-    <link>http://samrks.github.io/second/</link>
-    <pubDate>Fri, 13 Jul 2018 20:10:04 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://samrks.github.io/second/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="https://gitee.com/samrks/PicGo-Img/raw/master/img/featured-image.jpg" referrerpolicy="no-referrer">
-            </div><p>这里作为文章摘要，尽量不要包含代码块、图片、表格等模块</p>]]></description>
-</item><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Thu, 13 Sep 2018 20:10:04 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/posts/" rel="self" type="application/rss+xml" /><item>
     <title>开博纪念</title>
     <link>http://samrks.github.io/%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/</link>
-    <pubDate>Thu, 13 Jul 2017 20:10:04 &#43;0800</pubDate>
+    <pubDate>Thu, 13 Sep 2018 20:10:04 &#43;0800</pubDate>
     <author>作者</author>
     <guid>http://samrks.github.io/%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="https://gitee.com/samrks/PicGo-Img/raw/master/img/12312312.jpg" referrerpolicy="no-referrer">
-            </div>开博纪念 新的开始]]></description>
+                <img src="https://gitee.com/samrks/PicGo-Img/raw/master/img/spiderman--.jpg" referrerpolicy="no-referrer">
+            </div>每一天都是新的开始，Stay Simple，Stay Young]]></description>
+</item><item>
+    <title>测试</title>
+    <link>http://samrks.github.io/%E6%B5%8B%E8%AF%95/</link>
+    <pubDate>Thu, 13 Sep 2018 20:10:04 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/%E6%B5%8B%E8%AF%95/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="https://gitee.com/samrks/PicGo-Img/raw/master/img/featured-image.jpg" referrerpolicy="no-referrer">
+            </div><p>`</p>]]></description>
 </item></channel>
 </rss>
