@@ -1,10 +1,10 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>第一篇博客 - 标签 - Sam&#39;s Garage</title>
-        <link>http://samrks.github.io/tags/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</link>
-        <description>第一篇博客 - 标签 - Sam&#39;s Garage</description>
+        <title>Point - 分类 - Sam&#39;s Garage</title>
+        <link>http://samrks.github.io/categories/point/</link>
+        <description>Point - 分类 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Thu, 13 Sep 2018 20:10:04 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Thu, 13 Sep 2018 20:10:04 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/categories/point/" rel="self" type="application/rss+xml" /><item>
     <title>开博纪念</title>
     <link>http://samrks.github.io/20180913-%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/</link>
     <pubDate>Thu, 13 Sep 2018 20:10:04 &#43;0800</pubDate>

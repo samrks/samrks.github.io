@@ -4,25 +4,34 @@
         <link>http://samrks.github.io/</link>
         <description>Stay Simple, Stay Young</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Thu, 13 Sep 2018 20:10:04 &#43;0800</lastBuildDate>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Fri, 14 Sep 2018 12:58:21 &#43;0800</lastBuildDate>
             <atom:link href="http://samrks.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>开博纪念</title>
-    <link>http://samrks.github.io/%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/</link>
-    <pubDate>Thu, 13 Sep 2018 20:10:04 &#43;0800</pubDate>
+    <title>如何用 hugo 搭建个人博客</title>
+    <link>http://samrks.github.io/20180915-%E6%90%AD%E5%BB%BAhugo%E5%8D%9A%E5%AE%A2/</link>
+    <pubDate>Fri, 14 Sep 2018 12:58:21 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/</guid>
+    <guid>http://samrks.github.io/20180915-%E6%90%AD%E5%BB%BAhugo%E5%8D%9A%E5%AE%A2/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="https://gitee.com/samrks/PicGo-Img/raw/master/img/spiderman--.jpg" referrerpolicy="no-referrer">
-            </div>每一天都是新的开始，Stay Simple，Stay Young]]></description>
+                <img src="https://hbimg.huabanimg.com/76d560bb1d87cf8a176526a6e8d3e27fcbd0f2d210290-w5mdW4" referrerpolicy="no-referrer">
+            </div>既然博客已经上线了，就写篇文档记录一下吧!]]></description>
 </item><item>
-    <title>测试</title>
-    <link>http://samrks.github.io/%E6%B5%8B%E8%AF%95/</link>
+    <title>Markdown 语法测试</title>
+    <link>http://samrks.github.io/20180914-%E6%B5%8B%E8%AF%95/</link>
     <pubDate>Thu, 13 Sep 2018 20:10:04 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/%E6%B5%8B%E8%AF%95/</guid>
+    <guid>http://samrks.github.io/20180914-%E6%B5%8B%E8%AF%95/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="https://gitee.com/samrks/PicGo-Img/raw/master/img/featured-image.jpg" referrerpolicy="no-referrer">
-            </div><p>`</p>]]></description>
+                <img src="https://hbimg.huabanimg.com/7b3b6dbc87ec74ccd3e798006923b0f1f9b3858829ddc-ZEGYvB" referrerpolicy="no-referrer">
+            </div><p>more 之前的内容，会作为文章摘要显示在主页。尽量不要包含代码块、图片、表格等模块。如果 more 之前的内容为空，则将自动添加 description 内容为文章摘要，显示在主页中。</p>]]></description>
+</item><item>
+    <title>开博纪念</title>
+    <link>http://samrks.github.io/20180913-%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/</link>
+    <pubDate>Thu, 13 Sep 2018 20:10:04 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/20180913-%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="https://hbimg.huabanimg.com/2e862dfaf0703e73bfb9d2c9501de5305b383878e4910-rCsCil" referrerpolicy="no-referrer">
+            </div>每一天都是新的开始，Stay Simple，Stay Young]]></description>
 </item></channel>
 </rss>

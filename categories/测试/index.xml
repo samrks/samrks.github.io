@@ -5,13 +5,13 @@
         <description>测试 - 分类 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
             <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Thu, 13 Sep 2018 20:10:04 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/categories/%E6%B5%8B%E8%AF%95/" rel="self" type="application/rss+xml" /><item>
-    <title>测试</title>
-    <link>http://samrks.github.io/%E6%B5%8B%E8%AF%95/</link>
+    <title>Markdown 语法测试</title>
+    <link>http://samrks.github.io/20180914-%E6%B5%8B%E8%AF%95/</link>
     <pubDate>Thu, 13 Sep 2018 20:10:04 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/%E6%B5%8B%E8%AF%95/</guid>
+    <guid>http://samrks.github.io/20180914-%E6%B5%8B%E8%AF%95/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="https://gitee.com/samrks/PicGo-Img/raw/master/img/featured-image.jpg" referrerpolicy="no-referrer">
-            </div><p>`</p>]]></description>
+                <img src="https://hbimg.huabanimg.com/7b3b6dbc87ec74ccd3e798006923b0f1f9b3858829ddc-ZEGYvB" referrerpolicy="no-referrer">
+            </div><p>more 之前的内容，会作为文章摘要显示在主页。尽量不要包含代码块、图片、表格等模块。如果 more 之前的内容为空，则将自动添加 description 内容为文章摘要，显示在主页中。</p>]]></description>
 </item></channel>
 </rss>

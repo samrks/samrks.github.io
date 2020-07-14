@@ -2,13 +2,18 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>http://samrks.github.io/categories/</loc><lastmod>2020-07-14T15:58:26&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://samrks.github.io/categories/life/</loc><lastmod>2018-09-14T15:58:26&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>http://samrks.github.io/posts/</loc><lastmod>2020-07-14T15:58:26&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://samrks.github.io/</loc><lastmod>2020-07-14T15:58:26&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://samrks.github.io/tags/</loc><lastmod>2020-07-14T15:58:26&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://samrks.github.io/categories/</loc><lastmod>2020-07-14T18:54:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://samrks.github.io/tags/hugo/</loc><lastmod>2020-07-14T18:54:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://samrks.github.io/posts/</loc><lastmod>2020-07-14T18:54:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://samrks.github.io/</loc><lastmod>2020-07-14T18:54:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://samrks.github.io/tags/</loc><lastmod>2020-07-14T18:54:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://samrks.github.io/categories/%E5%85%A5%E9%97%A8/</loc><lastmod>2020-07-14T18:54:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://samrks.github.io/tags/%E5%9F%9F%E5%90%8D/</loc><lastmod>2020-07-14T18:54:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://samrks.github.io/20180915-%E6%90%AD%E5%BB%BAhugo%E5%8D%9A%E5%AE%A2/</loc><lastmod>2020-07-14T18:54:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://samrks.github.io/tags/%E6%90%AD%E5%BB%BA/</loc><lastmod>2020-07-14T18:54:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://samrks.github.io/20180914-%E6%B5%8B%E8%AF%95/</loc><lastmod>2020-07-14T15:58:26&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://samrks.github.io/categories/point/</loc><lastmod>2018-09-14T15:58:26&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://samrks.github.io/tags/test/</loc><lastmod>2020-07-14T15:58:26&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://samrks.github.io/%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/</loc><lastmod>2018-09-14T15:58:26&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://samrks.github.io/20180913-%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/</loc><lastmod>2018-09-14T15:58:26&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://samrks.github.io/categories/%E6%B5%8B%E8%AF%95/</loc><lastmod>2020-07-14T15:58:26&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://samrks.github.io/%E6%B5%8B%E8%AF%95/</loc><lastmod>2020-07-14T15:58:26&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://samrks.github.io/tags/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</loc><lastmod>2018-09-14T15:58:26&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>
