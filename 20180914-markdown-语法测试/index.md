@@ -131,17 +131,15 @@ body{
 
 ### 图片
 
-{{< figure src="https://hbimg.huabanimg.com/c9cf14bc56fa58565aae5d7ca5fa568e9c791b572e18a-AWOkh2" title="Iceland (figure)" >}}
+{{< figure src="https://i.loli.net/2020/07/15/jPkMZdGYfaoB7Ne.jpg" title="Iceland (figure)" >}}
 
 ​	
 
 点击图片放大，点击空白缩小↘
 
-{{< image src="https://hbimg.huabanimg.com/20c21bc3f0f4c0f9cb10844c3411270bb890f2cc2e76c-pQpnYD" caption="Iceland (`image`)"   >}}
+{{< image src="https://i.loli.net/2020/07/15/Q2dnHSgxCcbfhZW.jpg" caption="Iceland (`image`)"   >}}
 
 
-
-​	
 
 ​	
 
