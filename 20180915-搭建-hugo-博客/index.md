@@ -1,7 +1,7 @@
 # 博客之路01：如何用 hugo 搭建个人博客
 
 
-第一篇博文，我想给大家分享下我的博客的创建过程吧！:1st_place_medal:<!--more--> 
+第一篇正式博文，我想给大家分享下我的博客的创建过程吧！:1st_place_medal:<!--more--> 
 
 ​	
 
@@ -62,7 +62,7 @@
 
     D:\blog\xxx.github.io-generator\content\posts\开博纪念.md created
 
-6.  编辑文章后，修改 **`draft: false`**。draft 表示处于草稿状态，Hugo不会真正发布它
+6.  编辑文章后，修改 **`draft: false`**。draft : true 表示处于草稿状态，此时Hugo不会真正发布它
 
 7.  初次创建博客或修改主题，需将主题文档中给出的配置，粘贴到 **`config.toml`** 文件中。
 

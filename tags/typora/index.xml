@@ -1,0 +1,17 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Typora - 标签 - Sam&#39;s Garage</title>
+        <link>http://samrks.github.io/tags/typora/</link>
+        <description>Typora - 标签 - Sam&#39;s Garage</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Wed, 26 Feb 2020 21:08:40 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/typora/" rel="self" type="application/rss+xml" /><item>
+    <title>Typora 如何上传图片？（图床功能）</title>
+    <link>http://samrks.github.io/20200226-typora%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</link>
+    <pubDate>Wed, 26 Feb 2020 21:08:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/20200226-typora%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="https://i.loli.net/2020/07/15/F7VE1qjsW6TAmx4.jpg" referrerpolicy="no-referrer">
+            </div>最近 Typora 有了更新，终于支持图床功能了，新增了原生对 PicGo-Core 的调用，可以自动上传 markdown 内的图片，赶紧尝鲜一波。]]></description>
+</item></channel>
+</rss>
