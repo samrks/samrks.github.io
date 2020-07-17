@@ -4,50 +4,59 @@
         <link>http://samrks.github.io/</link>
         <description>Stay Simple, Stay Young</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Wed, 26 Feb 2020 21:08:40 &#43;0800</lastBuildDate>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Fri, 17 Jul 2020 18:52:43 &#43;0800</lastBuildDate>
             <atom:link href="http://samrks.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>【置顶】开博纪念🥰</title>
-    <link>http://samrks.github.io/20170713-%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/</link>
-    <pubDate>Thu, 13 Jul 2017 20:10:04 &#43;0800</pubDate>
+    <link>http://samrks.github.io/20200306-%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/</link>
+    <pubDate>Fri, 06 Mar 2020 20:10:04 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20170713-%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/</guid>
+    <guid>http://samrks.github.io/20200306-%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="https://i.loli.net/2020/07/15/zWZkPie9yjmgvdX.jpg" referrerpolicy="no-referrer">
             </div>每一天都是新的开始，Stay Simple，Stay Young]]></description>
 </item><item>
-    <title>Typora 如何上传图片？（图床功能）</title>
-    <link>http://samrks.github.io/20200226-typora%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</link>
-    <pubDate>Wed, 26 Feb 2020 21:08:40 &#43;0800</pubDate>
+    <title>HTML 入门笔记1</title>
+    <link>http://samrks.github.io/20200717-html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/</link>
+    <pubDate>Fri, 17 Jul 2020 18:52:43 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200226-typora%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</guid>
+    <guid>http://samrks.github.io/20200717-html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="https://i.loli.net/2020/07/15/F7VE1qjsW6TAmx4.jpg" referrerpolicy="no-referrer">
+                <img src="https://i.loli.net/2020/07/17/hLNSX5pKfWbDZBV.png" referrerpolicy="no-referrer">
+            </div><p><a href="https://developer.mozilla.org/zh-CN/docs/Glossary/HTML" target="_blank" rel="noopener noreffer">HTML</a> (HyperText Markup Language) 不是一门编程语言，而是一种用来告知浏览器如何组织页面的<strong>标记语言</strong>。HTML 可复杂、可简单，一切取决于开发者。😎</p>]]></description>
+</item><item>
+    <title>Typora 如何上传图片？（图床功能）</title>
+    <link>http://samrks.github.io/20200716-typora%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</link>
+    <pubDate>Thu, 16 Jul 2020 21:08:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/20200716-typora%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="https://i.loli.net/2020/07/17/JzUKrHG6qACfLM7.jpg" referrerpolicy="no-referrer">
             </div>最近 Typora 有了更新，终于支持图床功能了，新增了原生对 PicGo-Core 的调用，可以自动上传 markdown 内的图片，赶紧尝鲜一波。]]></description>
 </item><item>
     <title>博客之路02：个人博客绑定域名</title>
-    <link>http://samrks.github.io/20180916-%E5%8D%9A%E5%AE%A2%E7%BB%91%E5%AE%9A%E5%9F%9F%E5%90%8D/</link>
-    <pubDate>Sun, 16 Sep 2018 12:58:21 &#43;0800</pubDate>
+    <link>http://samrks.github.io/20200715-%E5%8D%9A%E5%AE%A2%E7%BB%91%E5%AE%9A%E5%9F%9F%E5%90%8D/</link>
+    <pubDate>Wed, 15 Jul 2020 12:58:21 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20180916-%E5%8D%9A%E5%AE%A2%E7%BB%91%E5%AE%9A%E5%9F%9F%E5%90%8D/</guid>
+    <guid>http://samrks.github.io/20200715-%E5%8D%9A%E5%AE%A2%E7%BB%91%E5%AE%9A%E5%9F%9F%E5%90%8D/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="https://i.loli.net/2020/07/15/ptz3os8ZTdX4WKx.jpg" referrerpolicy="no-referrer">
             </div><p>买个域名玩玩！ 💰💰💰</p>]]></description>
 </item><item>
     <title>博客之路01：如何用 hugo 搭建个人博客</title>
-    <link>http://samrks.github.io/20180915-%E6%90%AD%E5%BB%BA-hugo-%E5%8D%9A%E5%AE%A2/</link>
-    <pubDate>Sat, 15 Sep 2018 12:58:21 &#43;0800</pubDate>
+    <link>http://samrks.github.io/20200714-%E6%90%AD%E5%BB%BA-hugo-%E5%8D%9A%E5%AE%A2/</link>
+    <pubDate>Tue, 14 Jul 2020 18:54:01 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20180915-%E6%90%AD%E5%BB%BA-hugo-%E5%8D%9A%E5%AE%A2/</guid>
+    <guid>http://samrks.github.io/20200714-%E6%90%AD%E5%BB%BA-hugo-%E5%8D%9A%E5%AE%A2/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="https://i.loli.net/2020/07/15/4BCMpuQXe3fDYx1.jpg" referrerpolicy="no-referrer">
             </div><p>第一篇正式博文，我想给大家分享下我的博客的创建过程吧！🥇</p>]]></description>
 </item><item>
     <title>测试 Markdown 语法</title>
-    <link>http://samrks.github.io/20180914-markdown-%E8%AF%AD%E6%B3%95%E6%B5%8B%E8%AF%95/</link>
-    <pubDate>Fri, 14 Sep 2018 20:10:04 &#43;0800</pubDate>
+    <link>http://samrks.github.io/20200713-markdown-%E8%AF%AD%E6%B3%95%E6%B5%8B%E8%AF%95/</link>
+    <pubDate>Mon, 13 Jul 2020 20:10:04 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20180914-markdown-%E8%AF%AD%E6%B3%95%E6%B5%8B%E8%AF%95/</guid>
+    <guid>http://samrks.github.io/20200713-markdown-%E8%AF%AD%E6%B3%95%E6%B5%8B%E8%AF%95/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="https://i.loli.net/2020/07/15/QY8Ac1ojVqtl9XB.png" referrerpolicy="no-referrer">
             </div>这里是文章描述，本文用于测试一些 Markdown 语法和样式展现]]></description>

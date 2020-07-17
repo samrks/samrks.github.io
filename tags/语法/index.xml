@@ -4,12 +4,12 @@
         <link>http://samrks.github.io/tags/%E8%AF%AD%E6%B3%95/</link>
         <description>语法 - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Fri, 14 Sep 2018 20:10:04 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/%E8%AF%AD%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Mon, 13 Jul 2020 20:10:04 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/%E8%AF%AD%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
     <title>测试 Markdown 语法</title>
-    <link>http://samrks.github.io/20180914-markdown-%E8%AF%AD%E6%B3%95%E6%B5%8B%E8%AF%95/</link>
-    <pubDate>Fri, 14 Sep 2018 20:10:04 &#43;0800</pubDate>
+    <link>http://samrks.github.io/20200713-markdown-%E8%AF%AD%E6%B3%95%E6%B5%8B%E8%AF%95/</link>
+    <pubDate>Mon, 13 Jul 2020 20:10:04 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20180914-markdown-%E8%AF%AD%E6%B3%95%E6%B5%8B%E8%AF%95/</guid>
+    <guid>http://samrks.github.io/20200713-markdown-%E8%AF%AD%E6%B3%95%E6%B5%8B%E8%AF%95/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="https://i.loli.net/2020/07/15/QY8Ac1ojVqtl9XB.png" referrerpolicy="no-referrer">
             </div>这里是文章描述，本文用于测试一些 Markdown 语法和样式展现]]></description>

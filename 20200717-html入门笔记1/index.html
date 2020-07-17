@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>HTML 入门笔记1 - Sam&#39;s Garage</title><meta name="Description" content="HTML 入门笔记1😎"><meta property="og:title" content="HTML 入门笔记1" />
+<meta property="og:description" content="HTML 入门笔记1😎" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://samrks.github.io/20200717-html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" />
+<meta property="og:image" content="http://samrks.github.io/favicon-32x32.png"/>
+<meta property="article:published_time" content="2020-07-17T18:52:43+08:00" />
+<meta property="article:modified_time" content="2020-07-17T18:52:43+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://samrks.github.io/favicon-32x32.png"/>
+
+<meta name="twitter:title" content="HTML 入门笔记1"/>
+<meta name="twitter:description" content="HTML 入门笔记1😎"/>
+<meta name="application-name" content="Sam&#39;s Garage">
+<meta name="apple-mobile-web-app-title" content="Sam&#39;s Garage"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://samrks.github.io/20200717-html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" /><link rel="prev" href="http://samrks.github.io/20200716-typora%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/" /><link rel="next" href="http://samrks.github.io/20200306-%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "HTML 入门笔记1",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/samrks.github.io\/20200717-html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01\/"
+        },"genre": "posts","keywords": "","wordcount":  2351 ,
+        "url": "http:\/\/samrks.github.io\/20200717-html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01\/","datePublished": "2020-07-17T18:52:43+08:00","dateModified": "2020-07-17T18:52:43+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Sam"
+            },"description": "HTML 入门笔记1😎"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa fa-home fa-fw'></i> 主页 </a><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title=""><i class='fa fa-home fa-fw'></i>主页</a><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">HTML 入门笔记1</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://liubingxuan.xyz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Sam</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%B7%A5%E5%85%B7%E7%B1%BB/"><i class="far fa-folder fa-fw"></i>工具类</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-07-17">2020-07-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2351 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2020/07/17/hLNSX5pKfWbDZBV.png"
+        data-srcset="https://i.loli.net/2020/07/17/hLNSX5pKfWbDZBV.png, https://i.loli.net/2020/07/17/hLNSX5pKfWbDZBV.png 1.5x, https://i.loli.net/2020/07/17/hLNSX5pKfWbDZBV.png 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2020/07/17/hLNSX5pKfWbDZBV.png"
+        title="HTML 入门笔记1😎" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#html-是谁发明的">HTML 是谁发明的</a>
+          <ul>
+            <li><a href="#1990年左右诞生">1990年左右诞生</a></li>
+            <li><a href="#李爵士做了啥">李爵士做了啥？</a></li>
+          </ul>
+        </li>
+        <li><a href="#html-起手式怎么写">HTML 起手式怎么写</a></li>
+        <li><a href="#章节标签">章节标签</a></li>
+        <li><a href="#全局属性">全局属性</a>
+          <ul>
+            <li><a href="#class--类名">class ： 类名</a></li>
+            <li><a href="#contenteditable-让标签可以被编辑">contenteditable ：让标签可以被编辑</a></li>
+            <li><a href="#hidden-让标签隐藏">hidden ：让标签隐藏</a></li>
+            <li><a href="#id-全局唯一">id ：全局唯一</a></li>
+            <li><a href="#style-行内样式">style ：行内样式</a></li>
+            <li><a href="#tabindex-顺序">tabindex ：顺序</a></li>
+            <li><a href="#title-鼠标指向时显示的内容">title ：鼠标指向时显示的内容</a></li>
+          </ul>
+        </li>
+        <li><a href="#内容标签">内容标签</a>
+          <ul>
+            <li><a href="#olli">ol+li</a></li>
+            <li><a href="#ulli">ul+li</a></li>
+            <li><a href="#dldtdd">dl+dt+dd</a></li>
+            <li><a href="#pre">pre</a></li>
+            <li><a href="#code">code</a></li>
+            <li><a href="#hr">hr</a></li>
+            <li><a href="#br">br</a></li>
+            <li><a href="#a">a</a></li>
+            <li><a href="#em">em</a></li>
+            <li><a href="#strong">strong</a></li>
+            <li><a href="#q">q</a></li>
+            <li><a href="#blockquote">blockquote</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><a href="https://developer.mozilla.org/zh-CN/docs/Glossary/HTML" target="_blank" rel="noopener noreffer">HTML</a> (HyperText Markup Language) 不是一门编程语言，而是一种用来告知浏览器如何组织页面的<strong>标记语言</strong>。HTML 可复杂、可简单，一切取决于开发者。😎</p>
+<p>它由一系列的**元素（<a href="https://developer.mozilla.org/zh-CN/docs/Glossary/%e5%85%83%e7%b4%a0" target="_blank" rel="noopener noreffer">elements</a>）**组成，这些元素可以用来包围不同部分的内容，使其以某种方式呈现或者工作。 一对标签（ <a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Tag" target="_blank" rel="noopener noreffer">tags</a>）可以为一段文字或者一张图片添加超链接，将文字设置为斜体，改变字号，等等。</p>
+<p>​</p>
+<h2 id="html-是谁发明的">HTML 是谁发明的</h2>
+<blockquote>
+<p>HTML 之父</p>
+</blockquote>
+<h3 id="1990年左右诞生">1990年左右诞生</h3>
+<ul>
+<li>Tim Berners-Lee，称之为<strong>李爵士</strong></li>
+<li>2004年，英女皇他颁发大英帝国爵级司令勋章</li>
+<li>2017年，被颁发图灵奖</li>
+</ul>
+<h3 id="李爵士做了啥">李爵士做了啥？</h3>
+<ul>
+<li>自己写了第一个浏览器</li>
+<li>自己写了第一个服务器</li>
+<li>用自己写的浏览器访问了自己写的服务器</li>
+<li>发明了WWW，同时发明了HTML、HTTP和URL</li>
+</ul>
+<p>​</p>
+<h2 id="html-起手式怎么写">HTML 起手式怎么写</h2>
+<blockquote>
+<p>快捷键：感叹号 !</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>   ← 文档类型              
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>	← 页面根标签
+
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">&gt;</span>    ← 文件的字符编码
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, initial-scale=1.0&#34;</span><span class="p">&gt;</span> ← 防止页面缩放
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="err">&#34;</span><span class="na">X-UA-Compatible</span><span class="err">&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;ie=edge&#34;</span><span class="p">&gt;</span> ← 如果在IE打开，告诉IE使用最新内核（IE11）
+  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Document<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>DOCTYPE：文档类型
+<ul>
+<li>浏览器支持很多种文档类型（HTML、XHTML…）。</li>
+<li><code>&lt;!DOCTYPE html&gt;</code> 表示告诉浏览器开始写HTML了。</li>
+</ul>
+</li>
+<li>html 标签是根标签
+<ul>
+<li>必须要写（如果没写也会自动加上）</li>
+<li>可以把 lang 的属性值改为 zh-CN</li>
+</ul>
+</li>
+<li>head 和 body 标签，虽然是 html 的子元素，但一般格式上不缩进</li>
+<li>head 标签里面存放看不见的元素</li>
+<li>viewport 视口、视窗</li>
+</ul>
+<p>​</p>
+<h2 id="章节标签">章节标签</h2>
+<blockquote>
+<p>章节标签，通常用于表示文章、书的层级（就是内容框架）</p>
+</blockquote>
+<ul>
+<li>
+<p>标题 h1~h6</p>
+</li>
+<li>
+<p>章节 section</p>
+</li>
+<li>
+<p>文章 article</p>
+</li>
+<li>
+<p>段落 p</p>
+</li>
+<li>
+<p>头部 header</p>
+</li>
+<li>
+<p>脚部 footer</p>
+</li>
+<li>
+<p>主要内容 main</p>
+</li>
+<li>
+<p>旁支内容 aside</p>
+</li>
+<li>
+<p>划分 div</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">header</span><span class="p">&gt;</span>顶部广告<span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">main</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>文章标题<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">section</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>第一章<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+          一段话一段话一段话一段话一段话一段话一段话一段话一段话一段话一段话
+        <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">section</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>1.1 节<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>一段话<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">section</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>1.2 节<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>一段话<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">aside</span><span class="p">&gt;</span>
+      参考资料 1 2 3
+    <span class="p">&lt;/</span><span class="nt">aside</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">footer</span><span class="p">&gt;</span><span class="ni">&amp;copy;</span> xxx版权所有<span class="p">&lt;/</span><span class="nt">footer</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h2 id="全局属性">全局属性</h2>
+<blockquote>
+<p>任何标签都可以有的属性</p>
+</blockquote>
+<p>​</p>
+<h3 id="class--类名">class ： 类名</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>   <span class="err">←</span> <span class="nt">style标签也有contenteditable</span> <span class="nt">属性</span><span class="err">，</span><span class="nt">可以被编辑</span>
+  <span class="o">[</span><span class="nt">class</span><span class="o">=</span><span class="nt">middle</span><span class="o">]</span><span class="p">{</span>  <span class="c">/* 早期写法--缺点：当一个标签存在多个类名，就无法通过匹配单个类名来找到这个标签 */</span>
+    <span class="k">background</span><span class="p">:</span> <span class="kc">black</span><span class="p">;</span>
+    <span class="k">color</span><span class="p">:</span> <span class="kc">white</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="p">.</span><span class="nc">middle</span><span class="p">{</span>  <span class="c">/* 简写 */</span>
+    <span class="k">background</span><span class="p">:</span> <span class="kc">black</span><span class="p">;</span>
+    <span class="k">color</span><span class="p">:</span> <span class="kc">white</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h3 id="contenteditable-让标签可以被编辑">contenteditable ：让标签可以被编辑</h3>
+<ul>
+<li>style标签，也有 contenteditable 属性，可以被编辑
+<ul>
+<li>可以将 style 标签放到 body里面，然后添加 <strong><code>style { display : block; }</code></strong> ，style 标签中的样式内容就会显示在浏览器中，然后给style标签添加contenteditable 属性，就可以在浏览器总直接修改样式，并实时刷新</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">style</span> <span class="na">contenteditable</span><span class="p">&gt;</span>
+    <span class="nt">style</span><span class="p">{</span>
+      <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="p">.</span><span class="nc">xxx</span><span class="p">{</span>
+      <span class="k">border</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">orange</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;xxx&#34;</span> <span class="na">contenteditable</span><span class="p">&gt;</span>这段话可以直接在浏览器中编辑修改内容<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><figure><a class="lightgallery" href="https://i.loli.net/2020/07/17/4PDCUkJ8R15VBjz.gif" title="https://i.loli.net/2020/07/17/4PDCUkJ8R15VBjz.gif" data-thumbnail="https://i.loli.net/2020/07/17/4PDCUkJ8R15VBjz.gif" data-sub-html="<h2>contenteditable</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://i.loli.net/2020/07/17/4PDCUkJ8R15VBjz.gif"
+            data-srcset="https://i.loli.net/2020/07/17/4PDCUkJ8R15VBjz.gif, https://i.loli.net/2020/07/17/4PDCUkJ8R15VBjz.gif 1.5x, https://i.loli.net/2020/07/17/4PDCUkJ8R15VBjz.gif 2x"
+            data-sizes="auto"
+            alt="https://i.loli.net/2020/07/17/4PDCUkJ8R15VBjz.gif" />
+    </a><figcaption class="image-caption">contenteditable</figcaption>
+    </figure>
+<p>​</p>
+<h3 id="hidden-让标签隐藏">hidden ：让标签隐藏</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;title&#34;</span> <span class="na">hidden</span><span class="p">&gt;&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+.title{
+	display: block   /* 直接添加属性hidden而隐藏的元素，可以通过设置样式 display: block，再显示回来 */
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h3 id="id-全局唯一">id ：全局唯一</h3>
+<ul>
+<li>
+<p>id 用来表示【全局唯一的标签】</p>
+</li>
+<li>
+<p>id 的全局唯一性没有保障，就算有两个重复的 id，HTML 也不会提示我写错了</p>
+<ul>
+<li>class足够了，不到万不得已不要用 id ，因为 id 重复使用也不会报错，可能误导开发者</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">header</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;xxx&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;xxx&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+#xxx{
+    /* 此时设置的样式会同时对两个id=xxx元素生效，id被重复使用不会报错，那id的唯一性就毫无意义了 */
+}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>id 中有很多不能使用的词：parent、self、top …   控制台输入 <strong><code>window.</code></strong>  弹出属性列表中所有的词都不能用，因为这些词是 window 已经有的全局属性</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">header</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;top&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="nx">top</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">border</span><span class="o">=</span><span class="s2">&#34;10px solid red&#34;</span>  <span class="c1">// 直接调用不能获取到top元素，与window对象中的全局属性重名
+</span><span class="c1"></span>  <span class="kd">var</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;top&#34;</span><span class="p">)</span> <span class="c1">// 通过这种方式可以获取到 top 元素，但单词略复杂
+</span><span class="c1"></span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<h3 id="style-行内样式">style ：行内样式</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;border: 10px solid red&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;a&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>js 中写 <code>a.style.border = &quot;100px solid green&quot;</code>  会覆盖 div元素中的行内样式</li>
+</ul>
+<p>​</p>
+<h3 id="tabindex-顺序">tabindex ：顺序</h3>
+<ul>
+<li>
+<p>在浏览页面时，网页中按钮都只通过键盘 tab 控制切换选中。而这里的 tabindex 属性就是控制，切换的顺序</p>
+<ul>
+<li>被选中的会有一圈不明显的蓝色边框</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">1</span><span class="p">&gt;</span>首页<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">3</span><span class="p">&gt;</span>一段话<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">footer</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">2</span><span class="p">&gt;</span><span class="ni">&amp;copy;</span>版权所有<span class="p">&lt;/</span><span class="nt">footer</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>tabindex 可以是正数，不必是连续的</p>
+</li>
+<li>
+<p>tabindex 可以是 0，表示最后才被 tab 访问</p>
+</li>
+<li>
+<p>tabindex 可以是 -1，表示不可被 tab 访问</p>
+</li>
+</ul>
+<p>​</p>
+<h3 id="title-鼠标指向时显示的内容">title ：鼠标指向时显示的内容</h3>
+<ul>
+<li>
+<p>单行文字溢出，使用省略号</p>
+<ul>
+<li>将鼠标移动到这段文字上时，应该能展示出全部文字内容，包括溢出隐藏的部分</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;xxx&#34;</span> <span class="na">title</span><span class="o">=</span><span class="s">&#34;显示一段超长的话&#34;</span><span class="p">&gt;</span>一段超长的话<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">.</span><span class="nc">xxx</span> <span class="p">{</span>
+    <span class="k">text-overflow</span><span class="p">:</span> <span class="kc">ellipsis</span><span class="p">;</span>   <span class="c">/* 超出部分用省略号 */</span>
+    <span class="k">overflow</span><span class="p">:</span> <span class="kc">hidden</span><span class="p">;</span>     <span class="c">/* 超出隐藏 */</span>
+    <span class="k">white-space</span><span class="p">:</span> <span class="kc">nowrap</span><span class="p">;</span>   <span class="c">/* 不换行 */</span>
+  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="内容标签">内容标签</h2>
+<h3 id="olli">ol+li</h3>
+<blockquote>
+<p>ordered list + list item</p>
+</blockquote>
+<ul>
+<li>
+<p>ol ：有序列表</p>
+</li>
+<li>
+<p>ol 不能含有 li 之外的任何元素、字符</p>
+<figure>
+    <img src="https://i.loli.net/2020/07/17/sbHl2ftTAOdVcZn.png"/> 
+</figure>
+
+</li>
+</ul>
+<h3 id="ulli">ul+li</h3>
+<blockquote>
+<p>unordered list + list item</p>
+</blockquote>
+<ul>
+<li>
+<p>ul ：无序列表</p>
+<figure>
+    <img src="https://i.loli.net/2020/07/17/7PwEHXYce3y5vFL.png"/> 
+</figure>
+
+</li>
+</ul>
+<h3 id="dldtdd">dl+dt+dd</h3>
+<blockquote>
+<p>description list + term + data</p>
+</blockquote>
+<ul>
+<li>
+<p>dl ：description list —— 描述列表</p>
+</li>
+<li>
+<p>dt ：description term —— 描述项</p>
+</li>
+<li>
+<p>dd ：猜测是 description data —— 描述信息</p>
+<figure>
+    <img src="https://i.loli.net/2020/07/17/ZngFrGO1fwaBW8M.png"/> 
+</figure>
+
+</li>
+</ul>
+<h3 id="pre">pre</h3>
+<blockquote>
+<p>preview 的缩写</p>
+</blockquote>
+<ul>
+<li>
+<p>用的较少</p>
+</li>
+<li>
+<p>html 特点：HTML 代码里的多处空格、回车、tab 等内容，默认会被转化为一个空格</p>
+</li>
+<li>
+<p>pre 的作用是，可以保留开发者键入的空白位置（pre 有默认样式，很丑，如下）</p>
+<figure><a class="lightgallery" href="https://i.loli.net/2020/07/17/wymCdUX19EaAojn.png" title="https://i.loli.net/2020/07/17/wymCdUX19EaAojn.png" data-thumbnail="https://i.loli.net/2020/07/17/wymCdUX19EaAojn.png" data-sub-html="<h2>pre</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://i.loli.net/2020/07/17/wymCdUX19EaAojn.png"
+            data-srcset="https://i.loli.net/2020/07/17/wymCdUX19EaAojn.png, https://i.loli.net/2020/07/17/wymCdUX19EaAojn.png 1.5x, https://i.loli.net/2020/07/17/wymCdUX19EaAojn.png 2x"
+            data-sizes="auto"
+            alt="https://i.loli.net/2020/07/17/wymCdUX19EaAojn.png" />
+    </a><figcaption class="image-caption">pre</figcaption>
+    </figure>
+</li>
+</ul>
+<h3 id="code">code</h3>
+<blockquote>
+<p>等宽字体</p>
+</blockquote>
+<ul>
+<li>
+<p>用 code 标签包裹的内容，字符是等宽的。但默认内容在同行展示，无法换行</p>
+</li>
+<li>
+<p>使用 pre 可以让 code 的内容换行</p>
+<figure><a class="lightgallery" href="https://i.loli.net/2020/07/17/NwKaXSdYMHJgqs8.png" title="https://i.loli.net/2020/07/17/NwKaXSdYMHJgqs8.png" data-thumbnail="https://i.loli.net/2020/07/17/NwKaXSdYMHJgqs8.png" data-sub-html="<h2>code &amp; pre&#43;code</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://i.loli.net/2020/07/17/NwKaXSdYMHJgqs8.png"
+            data-srcset="https://i.loli.net/2020/07/17/NwKaXSdYMHJgqs8.png, https://i.loli.net/2020/07/17/NwKaXSdYMHJgqs8.png 1.5x, https://i.loli.net/2020/07/17/NwKaXSdYMHJgqs8.png 2x"
+            data-sizes="auto"
+            alt="https://i.loli.net/2020/07/17/NwKaXSdYMHJgqs8.png" />
+    </a><figcaption class="image-caption">code &amp; pre+code</figcaption>
+    </figure>
+</li>
+</ul>
+<h3 id="hr">hr</h3>
+<blockquote>
+<p>水平分割线</p>
+</blockquote>
+<ul>
+<li>
+<p>horizontal</p>
+<figure>
+    <img src="https://i.loli.net/2020/07/17/u6BMqOD92pSowFI.png"/> 
+</figure>
+
+</li>
+</ul>
+<h3 id="br">br</h3>
+<blockquote>
+<p>break 的缩写</p>
+</blockquote>
+<ul>
+<li>换行</li>
+</ul>
+<p>​</p>
+<h3 id="a">a</h3>
+<blockquote>
+<p>anchor 的缩写</p>
+</blockquote>
+<ul>
+<li>超链接
+<ul>
+<li>href</li>
+<li>target
+<ul>
+<li>国内开发习惯使用 _blank 在新标签打开链接。</li>
+<li>国外开发通常不写 target，他们觉得会让浏览器网页越开越多（他们习惯：通过鼠标中间点击打开新标签页，默认左键点击同屏跳转）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="em">em</h3>
+<blockquote>
+<p>emphasis 的缩写</p>
+</blockquote>
+<ul>
+<li>emphasis 意为强调，效果字体斜体</li>
+</ul>
+<p>​</p>
+<h3 id="strong">strong</h3>
+<ul>
+<li>字体加粗</li>
+<li>表示重要</li>
+</ul>
+<p>​</p>
+<h3 id="q">q</h3>
+<blockquote>
+<p>quote 的缩写</p>
+</blockquote>
+<ul>
+<li>quote 意为引用</li>
+<li>quote标签：内联，行内，不换行</li>
+</ul>
+<p>​</p>
+<h3 id="blockquote">blockquote</h3>
+<ul>
+<li>
+<p>引用</p>
+</li>
+<li>
+<p>块级，换行</p>
+<figure><a class="lightgallery" href="https://i.loli.net/2020/07/17/wYSfjvtP7DTgmzC.png" title="https://i.loli.net/2020/07/17/wYSfjvtP7DTgmzC.png" data-thumbnail="https://i.loli.net/2020/07/17/wYSfjvtP7DTgmzC.png" data-sub-html="<h2>quote &amp; blockquote</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://i.loli.net/2020/07/17/wYSfjvtP7DTgmzC.png"
+            data-srcset="https://i.loli.net/2020/07/17/wYSfjvtP7DTgmzC.png, https://i.loli.net/2020/07/17/wYSfjvtP7DTgmzC.png 1.5x, https://i.loli.net/2020/07/17/wYSfjvtP7DTgmzC.png 2x"
+            data-sizes="auto"
+            alt="https://i.loli.net/2020/07/17/wYSfjvtP7DTgmzC.png" />
+    </a><figcaption class="image-caption">quote &amp; blockquote</figcaption>
+    </figure>
+</li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-07-17</span>
+            </div>
+            <div class="post-info-license"><span>转载请注明出处</span></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/20200717-html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://samrks.github.io/20200717-html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" data-title="HTML 入门笔记1" data-via="ryuukousen2" data-hashtags=""><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://samrks.github.io/20200717-html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" data-hashtag=""><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Pinterest" data-sharer="pinterest" data-url="http://samrks.github.io/20200717-html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" data-description="HTML 入门笔记1😎" data-image="https://i.loli.net/2020/07/17/hLNSX5pKfWbDZBV.png"><i class="fab fa-pinterest fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://samrks.github.io/20200717-html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" data-title="HTML 入门笔记1" data-image="https://i.loli.net/2020/07/17/hLNSX5pKfWbDZBV.png"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=""></a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/20200716-typora%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/" class="prev" rel="prev" title="Typora 如何上传图片？（图床功能）"><i class="fas fa-angle-left fa-fw"></i>Typora 如何上传图片？（图床功能）</a>
+            <a href="/20200306-%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/" class="next" rel="next" title="【置顶】开博纪念🥰">【置顶】开博纪念🥰<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Thanks For Your Watching!</div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2017 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Sam</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":15},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

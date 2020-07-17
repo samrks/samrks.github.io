@@ -4,14 +4,23 @@
         <link>http://samrks.github.io/categories/%E5%B7%A5%E5%85%B7%E7%B1%BB/</link>
         <description>工具类 - 分类 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Wed, 26 Feb 2020 21:08:40 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/categories/%E5%B7%A5%E5%85%B7%E7%B1%BB/" rel="self" type="application/rss+xml" /><item>
-    <title>Typora 如何上传图片？（图床功能）</title>
-    <link>http://samrks.github.io/20200226-typora%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</link>
-    <pubDate>Wed, 26 Feb 2020 21:08:40 &#43;0800</pubDate>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Fri, 17 Jul 2020 18:52:43 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/categories/%E5%B7%A5%E5%85%B7%E7%B1%BB/" rel="self" type="application/rss+xml" /><item>
+    <title>HTML 入门笔记1</title>
+    <link>http://samrks.github.io/20200717-html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/</link>
+    <pubDate>Fri, 17 Jul 2020 18:52:43 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200226-typora%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</guid>
+    <guid>http://samrks.github.io/20200717-html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="https://i.loli.net/2020/07/15/F7VE1qjsW6TAmx4.jpg" referrerpolicy="no-referrer">
+                <img src="https://i.loli.net/2020/07/17/hLNSX5pKfWbDZBV.png" referrerpolicy="no-referrer">
+            </div><p><a href="https://developer.mozilla.org/zh-CN/docs/Glossary/HTML" target="_blank" rel="noopener noreffer">HTML</a> (HyperText Markup Language) 不是一门编程语言，而是一种用来告知浏览器如何组织页面的<strong>标记语言</strong>。HTML 可复杂、可简单，一切取决于开发者。😎</p>]]></description>
+</item><item>
+    <title>Typora 如何上传图片？（图床功能）</title>
+    <link>http://samrks.github.io/20200716-typora%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</link>
+    <pubDate>Thu, 16 Jul 2020 21:08:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/20200716-typora%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="https://i.loli.net/2020/07/17/JzUKrHG6qACfLM7.jpg" referrerpolicy="no-referrer">
             </div>最近 Typora 有了更新，终于支持图床功能了，新增了原生对 PicGo-Core 的调用，可以自动上传 markdown 内的图片，赶紧尝鲜一波。]]></description>
 </item></channel>
 </rss>
