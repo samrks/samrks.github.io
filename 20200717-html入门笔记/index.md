@@ -1,4 +1,4 @@
-# HTML 入门笔记1
+# HTML 入门笔记
 
 
 [HTML](https://developer.mozilla.org/zh-CN/docs/Glossary/HTML) (HyperText Markup Language) 不是一门编程语言，而是一种用来告知浏览器如何组织页面的**标记语言**。HTML 可复杂、可简单，一切取决于开发者。😎💋<!--more-->
