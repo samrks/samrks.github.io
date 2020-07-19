@@ -1,7 +1,7 @@
 # HTML 入门笔记
 
 
- (HyperText Markup Language) 不是一门编程语言，而是一种用来告知浏览器如何组织页面的**标记语言**。😎💋<!--more-->
+HTML (HyperText Markup Language) 不是一门编程语言，而是一种用来告知浏览器如何组织页面的**标记语言**。😎💋<!--more-->
 
 HTML 可复杂、可简单，一切取决于开发者。
 
