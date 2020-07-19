@@ -1,7 +1,7 @@
 # 博客之路02：💰个人博客绑定域名
 
 
-买个域名玩玩！ :moneybag::moneybag::moneybag:    <!--more-->
+买个域名玩玩！  <!--more-->
 
 
 
@@ -19,16 +19,15 @@
 
     <img src="https://i.loli.net/2020/07/15/4DgPxfCA2FK5O8k.png" alt="image-2"  />
 
-+   支付，使用支付宝，需设置[支付宝邮箱](https://custweb.alipay.com/account/index.htm)
 
+
++   支付，使用支付宝，需设置[支付宝邮箱](https://custweb.alipay.com/account/index.htm)
 +   购买成功后，等待跳转。邮箱也会收到购买成功的邮件。
 
     +   每年需要续费，不续费，会有一个保护期，保护期过了，域名就重新开放购买
-
 +   点击 **`Manage my Domains `**【管理我的域名】。
 
     +   初次进入可能需要填写基本信息。点击 create my new account。只要保证当前账户邮箱是真实的即可
-
 +   在域名管理页面，点击蓝色圆形按钮，可以进入 【Manage DNS】 管理DNS页面
 
 

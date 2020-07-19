@@ -1,9 +1,11 @@
 # HTML 入门笔记
 
 
-[HTML](https://developer.mozilla.org/zh-CN/docs/Glossary/HTML) (HyperText Markup Language) 不是一门编程语言，而是一种用来告知浏览器如何组织页面的**标记语言**。HTML 可复杂、可简单，一切取决于开发者。😎💋<!--more-->
+ (HyperText Markup Language) 不是一门编程语言，而是一种用来告知浏览器如何组织页面的**标记语言**。😎💋<!--more-->
 
-它由一系列的**元素（[elements](https://developer.mozilla.org/zh-CN/docs/Glossary/元素)）**组成，这些元素可以用来包围不同部分的内容，使其以某种方式呈现或者工作。 一对标签（ [tags](https://developer.mozilla.org/zh-CN/docs/Glossary/Tag)）可以为一段文字或者一张图片添加超链接，将文字设置为斜体，改变字号，等等。
+HTML 可复杂、可简单，一切取决于开发者。
+
+它由一系列的**元素**（[elements](https://developer.mozilla.org/zh-CN/docs/Glossary/元素)）组成，这些元素可以用来包围不同部分的内容，使其以某种方式呈现或者工作。 一对标签（ [tags](https://developer.mozilla.org/zh-CN/docs/Glossary/Tag)）可以为一段文字或者一张图片添加超链接，将文字设置为斜体，改变字号，等等。
 
 ​	
 

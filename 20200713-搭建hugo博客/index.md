@@ -58,9 +58,9 @@
 
 4.  然后，将主题添加到站点配置中：**`echo 'theme = "LoveIt"' >> config.toml`**   // 主题目录的名称
 
-5.  创建新文章：**`hugo new  posts/开博纪念.md `**
+5.  创建新文章：**`hugo new  posts/first_post.md `**
 
-    D:\blog\xxx.github.io-generator\content\posts\开博纪念.md created
+    `D:\blog\xxx.github.io-generator\content\posts\first_post.md` created
 
 6.  编辑文章后，修改 **`draft: false`**。draft : true 表示处于草稿状态，此时Hugo不会真正发布它
 
@@ -85,7 +85,7 @@
 1.  登录 github，创建博客专用仓库，仓库名必须为 ： **`[用户名].github.io`** 。
 2.  进入 public 目录，**`git remote add origin xxx`**
 3.  **`git push -u origin master`**   
-4.  进入 github 博客仓库的 [Settings](https://github.com/samrks/samrks.github.io/settings)，找到 GitHub Pages ，选择 master ，保存
+4.  进入 github 博客仓库的 [Settings](https://github.com/xxx/xxx.github.io/settings)，找到 GitHub Pages ，选择 master ，保存
 5.  通过 [http://[用户名].github.io](http://xxx.github.io) 就能访问博客 
 
 
@@ -96,12 +96,13 @@
 
 1.  在 xxx.github.io-creator 目录（注意确保自己不在 public 目录）里运行 `hugo new posts/第二篇博客.md`
 2.  运行 `code posts/第二篇博客.md` 对文件进行编辑，注意不要把文件原本的内容 front matter 给删了，直接在后面另起一行写新内容。
-3.  运行 **`hugo -D`**，得到新的 public 目录
-4.  进入 public 目录 **`cd public`**，执行一下操作
+3.  **`hugo server -D`**  建立本地访问 https://localhost:1313 预览博客 
+4.  运行 **`hugo -D`**，得到新的 public 目录
+5.  进入 public 目录 **`cd public`**，执行一下操作
     1.  **`git add .`** 注意有一个点
     2.  **`git commit -m update`**
     3.  **`git push -f`** 其中 -f 是强制上传的意思
-5.  等待几分钟后，你的博客就会出现第二篇文章了！
+6.  等待几分钟后，你的博客就会出现第二篇文章了！
     +   通过 [http://[用户名].github.io](http://xxx.github.io) 访问博客 
 
 
@@ -115,7 +116,7 @@
 +   新建仓库 xxx.github.io-generator
 
 +   将本地 xxx.github.io-generator 目录，`git init`，`git add .` ，`git commit -m backup`，`git remote add origin xxx`，`git push -u origin master`  即可
-    +   如果在 add 时提示执行  rm 操作，可能是主题目录下已经存在 .git 文件，主题目录本身就是一个本地仓库了，那和 generator 目录会形成一个嵌套子目录的关系，这个是非常不好的。需要把主题目录下的 .git 文件删除
+    +   如果在执行 add 时，提示我们需要执行 rm 操作，可能是因为主题目录下已经存在 .git 文件，主题目录本身就是一个本地仓库了，那和 generator 目录会形成一个嵌套子目录的关系，that's not good . 我们需要把主题目录下的 .git 文件删除
 
 
 
