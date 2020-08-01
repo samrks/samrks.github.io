@@ -2533,14 +2533,10 @@
 <p>文档流的英文名称叫做  Normal Flow</p>
 <p>文档流方向：默认，内联元素从左到右，块级元素从上到下</p>
 </blockquote>
-<figure><a class="lightgallery" href="https://i.loli.net/2020/07/21/DM2CyaNgR7bGQUs.png" title="文档流动方向" data-thumbnail="https://i.loli.net/2020/07/21/DM2CyaNgR7bGQUs.png" data-sub-html="<h2>文档流动方向</h2>">
-        
-    </a><figcaption class="image-caption">文档流动方向</figcaption>
-    </figure>
-<figure><a class="lightgallery" href="https://i.loli.net/2020/07/21/X13ZmegalSqOA6y.png" title="emmet:  span{第$个span元素}*6 &#43; tab" data-thumbnail="https://i.loli.net/2020/07/21/X13ZmegalSqOA6y.png" data-sub-html="<h2>emmet:  span{第$个span元素}*6 &#43; tab</h2>">
-        
-    </a><figcaption class="image-caption">emmet:  <code>span{第$个span元素}*6</code> + tab</figcaption>
-    </figure>
+<p></p>
+<p></p>
+<p>emmet:  <code>span{第$个span元素}*6</code> + tab</p>
+<p>​</p>
 <h3 id="块内联内联块">块、内联、内联块</h3>
 <blockquote>
 <ul>

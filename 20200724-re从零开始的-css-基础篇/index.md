@@ -463,11 +463,13 @@
 >
 >   文档流方向：默认，内联元素从左到右，块级元素从上到下
 
-{{<image src="https://i.loli.net/2020/07/21/DM2CyaNgR7bGQUs.png" alt="文档流动方向" caption="文档流动方向">}}
+![文档流动方向](https://i.loli.net/2020/07/21/DM2CyaNgR7bGQUs.png)
 
-{{<image src="https://i.loli.net/2020/07/21/X13ZmegalSqOA6y.png" alt="emmet:  `span{第$个span元素}*6` + tab" caption="emmet:  `span{第$个span元素}*6` + tab">}}
+![emmet](https://i.loli.net/2020/07/21/X13ZmegalSqOA6y.png)
 
+emmet:  `span{第$个span元素}*6` + tab
 
+​	
 
 ### 块、内联、内联块
 
