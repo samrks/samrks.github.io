@@ -10,6 +10,76 @@
     <pubDate>Thu, 16 Jul 2020 21:08:40 &#43;0800</pubDate>
     <author>作者</author>
     <guid>http://samrks.github.io/20200716-typora%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</guid>
-    <description><![CDATA[最近 Typora 有了更新，终于支持图床功能了 🎉！新增了原生对 PicGo-Core 的调用，可以自动上传 markdown 内的图片，尝鲜一波！]]></description>
+    <description><![CDATA[<p>​</p>
+<p>Typora 是一款简单、高效而且优雅的 Markdown 编辑器，它提供了一种所见即所得的全新的 Markdown 写作体验。它把<strong>源码编辑和效果预览</strong>两者合二为一，在输入 Markdown 代码的时候即时生成预览效果。Typora 的一切都围绕纯粹的生产效率而设计。</p>
+<p>Typora一直是我最喜欢的 markdown 编辑器，写博客、记笔记的首选软件。相信大部分朋友也在使用 Typora 这款软件。</p>
+<p>但是 Typora 之前是不支持图床功能的，只能通过第三方插件实现图片自动上传的功能。不过最近 Typora 有了更新，终于支持图床功能了，新增了原生对 PicGo-Core 的调用，可以自动上传 markdown 内的图片，赶紧尝鲜一波。</p>
+<p>​</p>
+<h2 id="1-安装-picgo-core">1. 安装 PicGo-Core</h2>
+<p>因为Typora已经原生支持PicGo-Core, 所以只需要在软件内下载一下就可以了(PS: 下面这张图就是用的自动上传, 很方便)</p>
+<a class="lightgallery" href="https://i.loli.net/2020/07/15/Cc4bTxA9mEaojZr.png" title="https://i.loli.net/2020/07/15/Cc4bTxA9mEaojZr.png" data-thumbnail="https://i.loli.net/2020/07/15/Cc4bTxA9mEaojZr.png">
+        
+    </a>
+<p>首先点击上面红色1的位置，选择 PicGo-Core，再点3（不要问我2去哪儿了&hellip;.就当他不存在），并等待下载完成。</p>
+<p>​</p>
+<h2 id="2-安装-smms-插件">2. 安装 smms 插件</h2>
+<p>直接点击红色5的位置，根据文本内容找到 PicGo-Core 的程序目录</p>
+<a class="lightgallery" href="https://i.loli.net/2020/07/15/mfJ7g9GLxShQcPE.png" title="https://i.loli.net/2020/07/15/mfJ7g9GLxShQcPE.png" data-thumbnail="https://i.loli.net/2020/07/15/mfJ7g9GLxShQcPE.png">
+        
+    </a>
+<p><strong>注意，上图中我们只需关心红框中的路径下的 picgo.exe 文件，其他信息都不管</strong></p>
+<p>找到目录后，我们<strong>在picgo的目录下启动命令行</strong>，执行如下命令，并等待安装成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="p">.\</span><span class="n">picgo</span><span class="p">.</span><span class="n">exe</span> <span class="n">install</span> <span class="n">smms-user</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h2 id="3-配置-picgo-core">3. 配置 PicGo-Core</h2>
+<p>安装完成之后点击红色4的位置（红标顺序不代表点击顺序），打开 PicGo-Core 的配置文件，按照下面的格式无脑全选替换就行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;picBed&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;current&#34;</span><span class="p">:</span> <span class="s2">&#34;smms-user&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;uploader&#34;</span><span class="p">:</span> <span class="s2">&#34;smms-user&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;smms-user&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;Authorization&#34;</span><span class="p">:</span> <span class="s2">&#34;这里替换成你自己的&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;transformer&#34;</span><span class="p">:</span> <span class="s2">&#34;path&#34;</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;picgoPlugins&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;picgo-plugin-smms-user&#34;</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>没有 Authorization 的自己去这里申请一个： <a href="https://links.jianshu.com/go?to=https%3A%2F%2Fsm.ms%2Fhome%2Fapitoken" target="_blank" rel="noopener noreffer">https://sm.ms/home/apitoken</a></p>
+<p>申请前需要注册一个账号，这个没啥难度，就不细说了。</p>
+<p>​</p>
+<h2 id="4-体验效果">4. 体验效果</h2>
+<p>保存配置之后，我们直接在 Typora 内粘贴一张图片，就会自动提示上传中</p>
+<a class="lightgallery" href="https://i.loli.net/2020/07/15/davDboUKiGqzMpP.gif" title="https://i.loli.net/2020/07/15/davDboUKiGqzMpP.gif" data-thumbnail="https://i.loli.net/2020/07/15/davDboUKiGqzMpP.gif">
+        
+    </a>
+<p>或者在已有的本地图片上面按右键，也可以弹出上传图片的按钮，整个操作非常便捷。</p>]]></description>
 </item></channel>
 </rss>

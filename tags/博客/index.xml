@@ -10,6 +10,153 @@
     <pubDate>Mon, 13 Jul 2020 18:54:01 &#43;0800</pubDate>
     <author>作者</author>
     <guid>http://samrks.github.io/20200713-%E6%90%AD%E5%BB%BAhugo%E5%8D%9A%E5%AE%A2/</guid>
-    <description><![CDATA[<p>第一篇正式博文，我想给大家分享下我的博客的创建过程吧！🥇</p>]]></description>
+    <description><![CDATA[<p>第一篇正式博文，我想给大家分享下我的博客的创建过程吧！🥇</p>
+<p>​</p>
+<blockquote>
+<p>Hugo 是由 Go 语言实现的静态网站生成器。简单、易用、高效、易扩展、快速部署。</p>
+</blockquote>
+<p>​</p>
+<h2 id="安装-hugo">安装 Hugo</h2>
+<ul>
+<li>
+<p><a href="https://gohugo.io/getting-started/installing" target="_blank" rel="noopener noreffer">官方教程</a>  英文</p>
+</li>
+<li>
+<p>Mac 安装方式</p>
+<ul>
+<li>
+<p>brew install hugo</p>
+</li>
+<li>
+<p>hugo version</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Windows 安装方式</p>
+<ul>
+<li>去 <a href="https://github.com/gohugoio/hugo/releases" target="_blank" rel="noopener noreffer">Hugo releases 页面</a> 下载 hugo_xxx_Windows- 64bit.zip</li>
+<li>解压，把 hugo.exe 放到 D:\Software\hugo\hugo.exe</li>
+<li>把 D:\Software\hugo\ 加到 PATH</li>
+<li>重启终端，运行 <strong><code>hugo version</code></strong> 查看版本</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h2 id="快速搭建博客">快速搭建博客</h2>
+<blockquote>
+<p><a href="https://gohugo.io/getting-started/quick-start/" target="_blank" rel="noopener noreffer">官方文档教程</a>，必看！</p>
+</blockquote>
+<h3 id="准备提交">准备、提交</h3>
+<ol>
+<li>
+<p>新建 blog 目录，运行 <strong><code>hugo new site xxx.github.io-generator </code></strong>  ， xxx 为 github 用户名 。会在当前目录中创建 xxx.github.io-generator 文件夹（博客生成器）</p>
+</li>
+<li>
+<p>进入博客生成器目录，<strong><code>git init</code></strong></p>
+</li>
+<li>
+<p>选择并下载<a href="https://themes.gohugo.io/" target="_blank" rel="noopener noreffer">主题</a> ，放到 themes 目录下 <strong><code>git clone https://github.com/dillonzq/LoveIt.git themes/LoveIt</code></strong></p>
+<ul>
+<li>
+<p>遇到报错 ↘</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">fatal</span><span class="o">:</span> <span class="nx">unable</span> <span class="nx">to</span> <span class="nx">access</span> <span class="s1">&#39;https://github.com/dillonzq/LoveIt.git/&#39;</span><span class="o">:</span> <span class="nx">error</span> <span class="nx">setting</span> <span class="nx">certificate</span> <span class="nx">verify</span> <span class="nx">locations</span><span class="o">:</span>
+  <span class="nx">CAfile</span><span class="o">:</span> <span class="nx">D</span><span class="o">:</span><span class="err">/Software/Git/mingw64/ssl/certs/ca-bundle.crt</span>
+  <span class="nx">CApath</span><span class="o">:</span> <span class="nx">none</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>解决办法：使用 git clone 出现 <code>fatal: unable to access 'https://github.com/...'</code> ，执行代码 ​↓</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">git</span> <span class="nx">config</span> <span class="o">--</span><span class="nx">system</span> <span class="nx">http</span><span class="p">.</span><span class="nx">sslverify</span> <span class="kc">false</span>   <span class="c1">// 把证书校验禁用 
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>然后，将主题添加到站点配置中：<strong><code>echo 'theme = &quot;LoveIt&quot;' &gt;&gt; config.toml</code></strong>   // 主题目录的名称</p>
+</li>
+<li>
+<p>创建新文章：<strong><code>hugo new  posts/first_post.md </code></strong></p>
+<p><code>D:\blog\xxx.github.io-generator\content\posts\first_post.md</code> created</p>
+</li>
+<li>
+<p>编辑文章后，修改 <strong><code>draft: false</code></strong>。draft : true 表示处于草稿状态，此时Hugo不会真正发布它</p>
+</li>
+<li>
+<p>初次创建博客或修改主题，需将主题文档中给出的配置，粘贴到 <strong><code>config.toml</code></strong> 文件中。</p>
+<p>baseURL 配置成 <strong><code>http://[用户名].github.io/</code></strong></p>
+</li>
+<li>
+<p><strong><code>hugo server -D</code></strong>  建立本地访问 https://localhost:1313 预览博客</p>
+</li>
+<li>
+<p><strong><code>hugo</code></strong>   创建一个新的目录  public/，这就是需要提交到 github，最终生成线上博客的目录</p>
+</li>
+<li>
+<p>根目录下，新建 <strong><code>.gitignore</code></strong> 文件，添加 <strong><code>/public/</code></strong>。使得 /public 可以自成一个仓库</p>
+</li>
+<li>
+<p>进入public <strong><code>cd public</code></strong>，<strong><code>git init</code></strong>   <strong><code>git add .</code></strong>    <strong><code>git commit</code></strong></p>
+</li>
+</ol>
+<p>​</p>
+<h3 id="第一次部署">第一次部署</h3>
+<ol>
+<li>登录 github，创建博客专用仓库，仓库名必须为 ： <strong><code>[用户名].github.io</code></strong> 。</li>
+<li>进入 public 目录，<strong><code>git remote add origin xxx</code></strong></li>
+<li><strong><code>git push -u origin master</code></strong></li>
+<li>进入 github 博客仓库的 <a href="https://github.com/xxx/xxx.github.io/settings" target="_blank" rel="noopener noreffer">Settings</a>，找到 GitHub Pages ，选择 master ，保存</li>
+<li>通过 <a href="http://xxx.github.io" target="_blank" rel="noopener noreffer">http://[用户名].github.io</a> 就能访问博客</li>
+</ol>
+<p>​</p>
+<h3 id="以后的部署">以后的部署</h3>
+<ol>
+<li>在 xxx.github.io-creator 目录（注意确保自己不在 public 目录）里运行 <code>hugo new posts/第二篇博客.md</code></li>
+<li>运行 <code>code posts/第二篇博客.md</code> 对文件进行编辑，注意不要把文件原本的内容 front matter 给删了，直接在后面另起一行写新内容。</li>
+<li><strong><code>hugo server -D</code></strong>  建立本地访问 https://localhost:1313 预览博客</li>
+<li>运行 <strong><code>hugo -D</code></strong>，得到新的 public 目录</li>
+<li>进入 public 目录 <strong><code>cd public</code></strong>，执行一下操作
+<ol>
+<li><strong><code>git add .</code></strong> 注意有一个点</li>
+<li><strong><code>git commit -m update</code></strong></li>
+<li><strong><code>git push -f</code></strong> 其中 -f 是强制上传的意思</li>
+</ol>
+</li>
+<li>等待几分钟后，你的博客就会出现第二篇文章了！
+<ul>
+<li>通过 <a href="http://xxx.github.io" target="_blank" rel="noopener noreffer">http://[用户名].github.io</a> 访问博客</li>
+</ul>
+</li>
+</ol>
+<p>​</p>
+<h2 id="备份博客生成器-generator">备份博客生成器 generator</h2>
+<blockquote>
+<p>程序员永远都会留备份</p>
+</blockquote>
+<ul>
+<li>
+<p>新建仓库 xxx.github.io-generator</p>
+</li>
+<li>
+<p>将本地 xxx.github.io-generator 目录，<code>git init</code>，<code>git add .</code> ，<code>git commit -m backup</code>，<code>git remote add origin xxx</code>，<code>git push -u origin master</code>  即可</p>
+<ul>
+<li>如果在执行 add 时，提示我们需要执行 rm 操作，可能是因为主题目录下已经存在 .git 文件，主题目录本身就是一个本地仓库了，那和 generator 目录会形成一个嵌套子目录的关系，that&rsquo;s not good . 我们需要把主题目录下的 .git 文件删除</li>
+</ul>
+</li>
+</ul>]]></description>
 </item></channel>
 </rss>

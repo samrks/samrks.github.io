@@ -10,13 +10,1455 @@
     <pubDate>Sat, 18 Jul 2020 18:55:45 &#43;0800</pubDate>
     <author>作者</author>
     <guid>http://samrks.github.io/20200718-html%E6%A0%87%E7%AD%BE%E3%81%AE%E7%AE%80%E5%8D%95%E8%AE%B0%E5%BD%95/</guid>
-    <description><![CDATA[<p>记录几个标签的简单用法，然后忘掉  🤪</p>]]></description>
+    <description><![CDATA[<p>记录几个标签的简单用法，然后忘掉  🤪</p>
+<p>​</p>
+<h2 id="a-标签">a 标签</h2>
+<blockquote>
+<p>特别常用，但很多人不会用 😳😳</p>
+</blockquote>
+<ul>
+<li>属性
+<ul>
+<li><a href="#href" rel="">href</a></li>
+<li><a href="#target" rel="">target</a></li>
+<li><a href="#download" rel="">download</a></li>
+<li><a href="#rel=noopener" rel="">rel=noopener</a>   面试可能会问</li>
+</ul>
+</li>
+<li>作用
+<ul>
+<li>跳转外部页面</li>
+<li>跳转内部锚点</li>
+<li>跳转到邮箱或电话等</li>
+</ul>
+</li>
+</ul>
+<h3 id="href">href</h3>
+<blockquote>
+<p>href 是 <strong>H</strong>ypertext <strong>REF</strong>erence 超链接</p>
+<p><a href="https://zh.forvo.com/word/href/" target="_blank" rel="noopener noreffer">发音</a> ：应该读 H-Ref <code>/ˈeit∫.rɛf/</code></p>
+</blockquote>
+<h4 id="href-的取值">href 的取值</h4>
+<h5 id="网址">网址</h5>
+<ul>
+<li><a href="https://google.com">https://google.com</a></li>
+<li><a href="http://google.com">http://google.com</a></li>
+<li><a href="//google.com" target="_blank" rel="noopener noreffer">//google.com</a>   【推荐写这种形式】
+<ul>
+<li>network 会先请求 <a href="http://google.com">http://google.com</a> → <a href="http://www.google.com">http://www.google.com</a> → <a href="https://www.google.com">https://www.google.com</a> 结束</li>
+</ul>
+</li>
+</ul>
+<h5 id="路径">路径</h5>
+<blockquote>
+<p>使用 hs 开启服务的目录，就是 /a/b/c  的根目录</p>
+<p>双击打开文件，访问的路径是硬盘的根目录 file</p>
+</blockquote>
+<ul>
+<li>
+<p>/a/b/c  以及 a/b/c</p>
+</li>
+<li>
+<p>index.html 以及 ./index.html</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;/a/b/c.html&#34;</span><span class="p">&gt;</span>c.html<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;./index.html&#34;</span><span class="p">&gt;</span>index.html<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h5 id="伪协议">伪协议</h5>
+<ul>
+<li>
+<p>javascript:代码;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;javascript:alert(1);&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>   <span class="c">&lt;!--执行js操作：弹出1--&gt;</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;javascript:;&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>   <span class="c">&lt;!--只有这种是什么都不做--&gt;</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;&#34;</span><span class="p">&gt;</span>href为空，页面会刷新<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>   <span class="c">&lt;!--如果有input会被清空--&gt;</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;#&#34;</span><span class="p">&gt;</span>#不刷新，但页面会滚动到顶部<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>补充：编译器中 <code>p{$}*30</code> + tab ，会生成 30 个 p 标签，内容 1-30</p>
+</li>
+<li>
+<p>mailto:邮箱</p>
+<ul>
+<li>移动端，通常会直接呼出发邮件的界面，并自动填写收件人邮箱</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;mailto:ryuukousen@gmail.com&#34;</span><span class="p">&gt;</span>给他发邮件<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>tel:手机号</p>
+<ul>
+<li>移动端，直接呼出拨号盘，并自动填写号码</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;tel:13912345678&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h5 id="id--锚点">id  锚点</h5>
+<blockquote>
+<p>跳转到指定标签      href=#xxx</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;#xxx&#34;</span><span class="p">&gt;</span>查看aaa<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+...
+<span class="p">&lt;</span><span class="nt">p</span> <span class="na">id</span><span class="o">=</span><span class="s">&#39;xxx&#39;</span><span class="p">&gt;</span>aaa<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+...
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h3 id="target">target</h3>
+<blockquote>
+<p>在哪个页面打开窗口</p>
+</blockquote>
+<h4 id="内置名字">内置名字</h4>
+<ul>
+<li>_blank ：新窗口</li>
+<li>_top ：顶级窗口（结合 iframe）</li>
+<li>_parent  ：父级窗口（结合 iframe）</li>
+<li>_self ：当前窗口（默认值）</li>
+</ul>
+<h4 id="程序员命名">程序员命名</h4>
+<h5 id="window-的-name">window 的 name</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;//google.com&#34;</span> <span class="na">target</span><span class="o">=</span><span class="s">&#34;asdf&#34;</span><span class="p">&gt;</span>google<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;//baidu.com&#34;</span> <span class="na">target</span><span class="o">=</span><span class="s">&#34;asdf&#34;</span><span class="p">&gt;</span>baidu<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>target=asdf</code>，表示如果有这个<code>asdf</code>窗口就在这个窗口打开google，如果没有就创建一个新的窗口命名为<code>asdf</code></li>
+<li>控制台输出 window.name  可知当前窗口的名称</li>
+</ul>
+<h5 id="iframe-的-name">iframe 的 name</h5>
+<blockquote>
+<p>可以写一个搜索引擎的集合或切换，goodbai</p>
+<p>谷歌已经禁用了在 iframe 中引入</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;//google.com&#34;</span> <span class="na">target</span><span class="o">=</span><span class="s">&#34;asd&#34;</span><span class="p">&gt;</span>google<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;//baidu.com&#34;</span> <span class="na">target</span><span class="o">=</span><span class="s">&#34;qwe&#34;</span><span class="p">&gt;</span>baidu<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">asd</span><span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">qwe</span><span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h3 id="download">download</h3>
+<blockquote>
+<p>绝大多数浏览器不支持，chrome 不支持</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;//google.com&#34;</span> <span class="na">download</span><span class="p">&gt;</span>下载页面<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="作用">作用</h4>
+<p>不是打开页面，而是下载页面</p>
+<h4 id="问题">问题</h4>
+<p>不是所有浏览器都支持，尤其是手机浏览器可能不支持</p>
+<p>​</p>
+<h2 id="iframe">iframe</h2>
+<blockquote>
+<p>内嵌窗口</p>
+<p>已经很少使用了，还有些老系统再用。新的方式是通过 ajax 实现</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;a&#34;</span>  <span class="na">src</span><span class="o">=</span><span class="s">&#34;a-target-iframe.html&#34;</span> <span class="na">frameborder</span><span class="o">=</span><span class="s">&#34;0&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h2 id="table">table</h2>
+<h3 id="相关标签">相关标签</h3>
+<blockquote>
+<p>thead、tbody、tfoot，即使开发时换了顺序，浏览器识别时仍会按照 head  body  foot 的顺序解析渲染</p>
+</blockquote>
+<ul>
+<li>
+<p>table</p>
+</li>
+<li>
+<p>thead</p>
+</li>
+<li>
+<p>tbody</p>
+</li>
+<li>
+<p>tfoot</p>
+</li>
+<li>
+<p>tr</p>
+</li>
+<li>
+<p>td</p>
+</li>
+<li>
+<p>th</p>
+</li>
+</ul>
+<h4 id="一个表头的表格">一个表头的表格</h4>
+<figure>
+     
+</figure>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html">  <span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;</span>
+      <span class="c">&lt;!-- tr: table row 行--&gt;</span>
+      <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+        <span class="c">&lt;!-- th: table head 表头--&gt;</span>
+        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>英语<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>翻译<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+         <span class="c">&lt;!-- td: table data 数据 --&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>hyper<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>超级<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>target<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>目标<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>reference<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>引用、链接<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tfoot</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>空<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>空<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tfoot</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="两个表头的表格">两个表头的表格</h4>
+<figure>
+     
+</figure>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>小红<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>小明<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>小颖<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>数学<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>61<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>85<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>92<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>语文<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>61<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>85<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>92<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>英语<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>61<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>85<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>92<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">tfoot</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>总分<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>200<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>200<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>200<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">tfoot</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="相关样式">相关样式</h3>
+<h4 id="table-layout">table-layout</h4>
+<ul>
+<li>auto【默认】：根据单元格中的内容数量，计算单元格宽度</li>
+<li>fixed：单元格宽度尽量平均</li>
+<li>inherit</li>
+<li>initial</li>
+<li>unset</li>
+</ul>
+<h4 id="border-spacing">border-spacing</h4>
+<blockquote>
+<p>设定每个单元格的间隙</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="nt">table</span><span class="p">{</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">600</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">table-layout</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+    <span class="n">border-spaceing</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nt">td</span><span class="o">,</span><span class="nt">th</span><span class="p">{</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">blue</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="border-collapse">border-collapse</h4>
+<blockquote>
+<p>通常用于 去掉单元格间隙</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="nt">table</span><span class="p">{</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">600</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">table-layout</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+    <span class="k">border-collapse</span><span class="p">:</span> <span class="kc">collapse</span><span class="p">;</span>   <span class="c">/* 去掉单元格间隙 */</span>
+    <span class="n">border-spaceing</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>   <span class="c">/* 去掉单元格间隙 */</span>
+  <span class="p">}</span>
+  <span class="nt">td</span><span class="o">,</span><span class="nt">th</span><span class="p">{</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">blue</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>下面这两句常被写进 reset.css 中</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="nt">border-collapse</span><span class="o">:</span> <span class="nt">collapse</span><span class="o">;</span>   <span class="c">/* 去掉单元格间隙 */</span>
+<span class="nt">border-spaceing</span><span class="o">:</span> <span class="nt">0</span><span class="o">;</span>   <span class="c">/* 去掉单元格间隙 */</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h2 id="img-标签">img 标签</h2>
+<h3 id="作用-1">作用</h3>
+<p>发出 get 请求，展示一张图片</p>
+<h3 id="属性">属性</h3>
+<ul>
+<li>
+<p>alt：全称是可替换的，当图片加载失败，会显示 alt 的值<figure>
+     
+</figure>
+</p>
+</li>
+<li>
+<p>height：只设置 height  ，宽度自适应</p>
+</li>
+<li>
+<p>width：只设置 width  ，高度自适应</p>
+<ul>
+<li>
+<p>同时设定，height 和 width，图片可能变形</p>
+<blockquote>
+<p>永远不要让图片变形</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>src：全称 source</p>
+</li>
+</ul>
+<h3 id="事件">事件</h3>
+<ul>
+<li>onload/onerror</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">img</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;xxx&#34;</span> <span class="na">width</span><span class="o">=</span><span class="s">&#34;400&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;dog.jpg&#34;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&#34;一只狗子&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+	<span class="nx">xxx</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;图片加载成功&#34;</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nx">xxx</span><span class="p">.</span><span class="nx">onerror</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;图片加载失败&#34;</span><span class="p">);</span>
+    <span class="nx">xxx</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">&#34;/404.jpg&#34;</span><span class="p">;</span>  <span class="c1">// 挽救：图片加载失败，展示404图，放在项目中
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="响应式">响应式</h3>
+<ul>
+<li>max-width:100%</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="o">*</span><span class="p">{</span>
+    <span class="k">margin</span><span class="p">:</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">padding</span><span class="p">:</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">box-sizing</span><span class="p">:</span> <span class="kc">border-box</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nt">img</span><span class="p">{</span>
+    <span class="k">max-width</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>   <span class="c">/* 图片是响应式的，尺寸永远满足各种窗口大小 */</span>
+  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="可替换元素">可替换元素</h3>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Replaced_element">https://developer.mozilla.org/zh-CN/docs/Web/CSS/Replaced_element</a></p>
+<p>考试可能会问，被问概率30%</p>
+<p>​</p>
+<h2 id="form-标签">form 标签</h2>
+<h3 id="作用-2">作用</h3>
+<p>发 get 或 post 请求，然后刷新页面</p>
+<h3 id="属性-1">属性</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;/xxx&#34;</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;POST&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">text</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">submit</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="action">action</h4>
+<blockquote>
+<ul>
+<li>
+<p>默认需要给一个 action ，就是发送请求的目标地址（HTTP相关）、请求某一个页面的页面地址</p>
+</li>
+<li>
+<p>需要有后台给我们提供这个地址</p>
+</li>
+</ul>
+</blockquote>
+<h4 id="method">method</h4>
+<blockquote>
+<p>method 属性控制用 GET 还是 POST 来发送请求</p>
+</blockquote>
+<h4 id="autocomplete">autocomplete</h4>
+<blockquote>
+<p>自动填写</p>
+<ul>
+<li>autocomplete: on / off</li>
+</ul>
+</blockquote>
+<h4 id="target-1">target</h4>
+<blockquote>
+<p>提交到哪个页面：新开页面、当前页面、iframe</p>
+<ul>
+<li>与 a 标签写法一致
+<ul>
+<li><code>_blank </code></li>
+<li><code>top </code>：顶级窗口（结合 iframe）</li>
+<li><code>_parent </code> ：父级窗口（结合 iframe）</li>
+<li><code>_self</code> ：当前窗口（默认值）</li>
+<li><code>window.name</code></li>
+<li><code>&lt;iframe name=xxx&gt;&lt;/iframe&gt;</code></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;/xxx&#34;</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;POST&#34;</span> <span class="na">autocomplete</span><span class="o">=</span><span class="s">&#34;off&#34;</span> <span class="na">target</span><span class="o">=</span><span class="s">&#34;a&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">text</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">submit</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;a&#34;</span>  <span class="na">src</span><span class="o">=</span><span class="s">&#34;a-target-iframe.html&#34;</span> <span class="na">frameborder</span><span class="o">=</span><span class="s">&#34;0&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h3 id="事件-1">事件</h3>
+<p>onsubmit：用户点击提交会触发这个事件</p>
+<p>​</p>
+<h3 id="typesubmit">type=submit</h3>
+<blockquote>
+<p>form 中的 button 如果没有指定 type 类型，默认是 type=submit 的，点击 button 就会提交 form 表单。如果指定了其他类型，例如 type=button，按钮就不能提交表单。</p>
+<ul>
+<li>一个 form 表单中，必须要有一个 type=submit 的 input 或 button ，才能提交表单。</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h4 id="修改submit按钮文字">修改submit按钮文字</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="p">/&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;搞起&#34;</span> <span class="p">/&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><figure>
+     
+</figure>
+
+<p>​</p>
+<h4 id="submit-按钮的-input-和-button-的区别">submit 按钮的 input 和 button 的区别</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;搞起&#34;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span><span class="p">&gt;</span>搞起<span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>区别是：</p>
+<ul>
+<li>
+<p>input按钮中，不能再添加内容</p>
+</li>
+<li>
+<p>button按钮中还可以再添加标签内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>搞起<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;dog.jpg&#34;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&#34;狗子&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><figure>
+     
+</figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="input-标签">input 标签</h2>
+<h3 id="作用-3">作用</h3>
+<p>让用户输入内容</p>
+<h3 id="属性-2">属性</h3>
+<h4 id="类型">类型</h4>
+<blockquote>
+<p>type: button/checkbox/email/file/hidden/ number/password/radio/ search/submit/tel/text</p>
+</blockquote>
+<figure>
+     
+</figure>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="p">/&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;color&#34;</span> <span class="p">/&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;password&#34;</span> <span class="p">/&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;radio&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;gender&#34;</span> <span class="p">/&gt;</span>男        <span class="c">&lt;!--同一组，取相同的name--&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;radio&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;gender&#34;</span> <span class="p">/&gt;</span>女
+
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;checkbox&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;hobby&#34;</span> <span class="p">/&gt;</span>唱      <span class="c">&lt;!--同一组，取相同的name--&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;checkbox&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;hobby&#34;</span> <span class="p">/&gt;</span>跳
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;checkbox&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;hobby&#34;</span> <span class="p">/&gt;</span>rap
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;checkbox&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;hobby&#34;</span> <span class="p">/&gt;</span>篮球
+
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;file&#34;</span> <span class="na">multiple</span><span class="p">/&gt;</span>
+
+看不见我吧：<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;hidden&#34;</span><span class="p">&gt;</span>    <span class="c">&lt;!-- 通常用于js自动获取并填入 --&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">textarea</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;resize: none;width:50%;height:50px&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">textarea</span><span class="p">&gt;</span>   <span class="c">&lt;!--禁止改变大小--&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">select</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;&#34;</span><span class="p">&gt;</span>-请选择-<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;1&#34;</span><span class="p">&gt;</span>星期一<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;2&#34;</span><span class="p">&gt;</span>星期二<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="其他">其他</h4>
+<p>（js内容）</p>
+<blockquote>
+<p>name/autofocus/checked/disabled/ maxlength/pattern/value/placeholder</p>
+</blockquote>
+<h3 id="事件-2">事件</h3>
+<p>（js内容）</p>
+<p>onchange ：用户改变内容触发</p>
+<p>onfocus：用户聚焦时触发</p>
+<p>onblur ：用户失焦时触发</p>
+<h3 id="验证器">验证器</h3>
+<p>（js内容）</p>
+<p>HTML5新增功能：自带验证</p>
+<p>例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">require</span><span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;password&#34;</span> <span class="na">require</span><span class="p">/&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><figure>
+     
+</figure>
+
+<p>​</p>
+<p>​</p>
+<h2 id="其他输入标签">其他输入标签</h2>
+<h3 id="标签">标签</h3>
+<p>（js内容）</p>
+<ul>
+<li>select + option</li>
+<li>textarea</li>
+<li>label</li>
+</ul>
+<h3 id="注意事项">注意事项</h3>
+<ul>
+<li>一般不监听 input 的 click 事件</li>
+<li>form 里面的 input 都要有 name</li>
+<li>form 里要放一个 type=submit 才能触发 submit 事件</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="补充工具开启-http-服务">补充工具：开启 http 服务</h2>
+<h3 id="http-server">http-server</h3>
+<ol>
+<li>
+<p>安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">yarn</span> <span class="nx">global</span> <span class="nx">add</span> <span class="nx">http</span><span class="o">-</span><span class="nx">server</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">http</span><span class="o">-</span><span class="nx">server</span> <span class="p">.</span> <span class="o">-</span><span class="nx">c</span><span class="o">-</span><span class="mi">1</span>
+<span class="nx">http</span><span class="o">-</span><span class="nx">server</span> <span class="o">-</span><span class="nx">c</span><span class="o">-</span><span class="mi">1</span>
+<span class="nx">hs</span> <span class="o">-</span><span class="nx">c</span><span class="o">-</span><span class="mi">1</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>-c 缓存，-c-1 不要缓存</p>
+<p>. 可以省略</p>
+<p>http-server 可缩写成 hs</p>
+<figure>
+     
+</figure>
+
+</li>
+<li>
+<p>按住ctrl + 点击打开任意链接。地址栏追加 html 文件名，即可浏览</p>
+</li>
+<li>
+<p>ctrl + C 中断服务器</p>
+</li>
+</ol>
+<p>​</p>
+<h3 id="parcel">parcel</h3>
+<blockquote>
+<p>操作更简便</p>
+<p>好像有bug ：ctrl + c 无法中断</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">yarn</span> <span class="nx">global</span> <span class="nx">add</span> <span class="nx">parcel</span> <span class="c1">// 安装
+</span><span class="c1"></span><span class="nx">parcel</span> <span class="nx">a</span><span class="o">-</span><span class="nx">href</span><span class="p">.</span><span class="nx">html</span> <span class="c1">// 使用
+</span></code></pre></td></tr></table>
+</div>
+</div><figure>
+     
+</figure>]]></description>
 </item><item>
     <title>HTML 入门笔记</title>
     <link>http://samrks.github.io/20200717-html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</link>
     <pubDate>Fri, 17 Jul 2020 18:52:43 &#43;0800</pubDate>
     <author>作者</author>
     <guid>http://samrks.github.io/20200717-html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</guid>
-    <description><![CDATA[<p>HTML (HyperText Markup Language) 不是一门编程语言，而是一种用来告知浏览器如何组织页面的<strong>标记语言</strong>。😎💋</p>]]></description>
+    <description><![CDATA[<p>HTML (HyperText Markup Language) 不是一门编程语言，而是一种用来告知浏览器如何组织页面的<strong>标记语言</strong>。😎💋</p>
+<p>HTML 可复杂、可简单，一切取决于开发者。</p>
+<p>它由一系列的<strong>元素</strong>（<a href="https://developer.mozilla.org/zh-CN/docs/Glossary/%e5%85%83%e7%b4%a0" target="_blank" rel="noopener noreffer">elements</a>）组成，这些元素可以用来包围不同部分的内容，使其以某种方式呈现或者工作。 一对标签（ <a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Tag" target="_blank" rel="noopener noreffer">tags</a>）可以为一段文字或者一张图片添加超链接，将文字设置为斜体，改变字号，等等。</p>
+<p>​</p>
+<h2 id="html-是谁发明的">HTML 是谁发明的</h2>
+<blockquote>
+<p>HTML 之父</p>
+</blockquote>
+<h3 id="1990年左右诞生">1990年左右诞生</h3>
+<ul>
+<li>Tim Berners-Lee，称之为<strong>李爵士</strong></li>
+<li>2004年，英女皇他颁发大英帝国爵级司令勋章</li>
+<li>2017年，被颁发图灵奖</li>
+</ul>
+<h3 id="李爵士做了啥">李爵士做了啥？</h3>
+<ul>
+<li>自己写了第一个浏览器</li>
+<li>自己写了第一个服务器</li>
+<li>用自己写的浏览器访问了自己写的服务器</li>
+<li>发明了WWW，同时发明了HTML、HTTP和URL</li>
+</ul>
+<p>​</p>
+<h2 id="html-起手式怎么写">HTML 起手式怎么写</h2>
+<blockquote>
+<p>快捷键：感叹号 ! + tab</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>   ← 文档类型              
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>	← 页面根标签
+
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">&gt;</span>    ← 文件的字符编码
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, initial-scale=1.0&#34;</span><span class="p">&gt;</span> ← 防止页面缩放
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="err">&#34;</span><span class="na">X-UA-Compatible</span><span class="err">&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;ie=edge&#34;</span><span class="p">&gt;</span> ← 如果在IE打开，告诉IE使用最新内核（IE11）
+  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Document<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>DOCTYPE：文档类型
+<ul>
+<li>浏览器支持很多种文档类型（HTML、XHTML…）。</li>
+<li><code>&lt;!DOCTYPE html&gt;</code> 表示告诉浏览器开始写HTML了。</li>
+</ul>
+</li>
+<li>html 标签是根标签
+<ul>
+<li>必须要写（如果没写也会自动加上）</li>
+<li>可以把 lang 的属性值改为 zh-CN</li>
+</ul>
+</li>
+<li>head 和 body 标签，虽然是 html 的子元素，但一般格式上不缩进</li>
+<li>head 标签里面存放看不见的元素</li>
+<li>viewport 视口、视窗</li>
+</ul>
+<p>​</p>
+<h2 id="章节标签">章节标签</h2>
+<blockquote>
+<p>章节标签，通常用于表示文章、书的层级（就是内容框架）</p>
+</blockquote>
+<ul>
+<li>
+<p>标题 h1~h6</p>
+</li>
+<li>
+<p>章节 section</p>
+</li>
+<li>
+<p>文章 article</p>
+</li>
+<li>
+<p>段落 p</p>
+</li>
+<li>
+<p>头部 header</p>
+</li>
+<li>
+<p>脚部 footer</p>
+</li>
+<li>
+<p>主要内容 main</p>
+</li>
+<li>
+<p>旁支内容 aside</p>
+</li>
+<li>
+<p>划分 div</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">header</span><span class="p">&gt;</span>顶部广告<span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">main</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>文章标题<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">section</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>第一章<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+          一段话一段话一段话一段话一段话一段话一段话一段话一段话一段话一段话
+        <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">section</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>1.1 节<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>一段话<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">section</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>1.2 节<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>一段话<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">aside</span><span class="p">&gt;</span>
+      参考资料 1 2 3
+    <span class="p">&lt;/</span><span class="nt">aside</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">footer</span><span class="p">&gt;</span><span class="ni">&amp;copy;</span> xxx版权所有<span class="p">&lt;/</span><span class="nt">footer</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h2 id="全局属性">全局属性</h2>
+<blockquote>
+<p>任何标签都可以有的属性</p>
+</blockquote>
+<p>​</p>
+<h3 id="class--类名">class ： 类名</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>   <span class="err">←</span> <span class="nt">style标签也有contenteditable</span> <span class="nt">属性</span><span class="err">，</span><span class="nt">可以被编辑</span>
+  <span class="o">[</span><span class="nt">class</span><span class="o">=</span><span class="nt">middle</span><span class="o">]</span><span class="p">{</span>  <span class="c">/* 早期写法--缺点：当一个标签存在多个类名，就无法通过匹配单个类名来找到这个标签 */</span>
+    <span class="k">background</span><span class="p">:</span> <span class="kc">black</span><span class="p">;</span>
+    <span class="k">color</span><span class="p">:</span> <span class="kc">white</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="p">.</span><span class="nc">middle</span><span class="p">{</span>  <span class="c">/* 简写 */</span>
+    <span class="k">background</span><span class="p">:</span> <span class="kc">black</span><span class="p">;</span>
+    <span class="k">color</span><span class="p">:</span> <span class="kc">white</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h3 id="contenteditable-让标签可以被编辑">contenteditable ：让标签可以被编辑</h3>
+<ul>
+<li>style标签，也有 contenteditable 属性，可以被编辑
+<ul>
+<li>可以将 style 标签放到 body里面，然后添加 <strong><code>style { display : block; }</code></strong> ，style 标签中的样式内容就会显示在浏览器中，然后给style标签添加contenteditable 属性，就可以在浏览器总直接修改样式，并实时刷新</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">style</span> <span class="na">contenteditable</span><span class="p">&gt;</span>
+    <span class="nt">style</span><span class="p">{</span>
+      <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="p">.</span><span class="nc">xxx</span><span class="p">{</span>
+      <span class="k">border</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">orange</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;xxx&#34;</span> <span class="na">contenteditable</span><span class="p">&gt;</span>这段话可以直接在浏览器中编辑修改内容<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><figure><a class="lightgallery" href="https://i.loli.net/2020/07/17/4PDCUkJ8R15VBjz.gif" title="https://i.loli.net/2020/07/17/4PDCUkJ8R15VBjz.gif" data-thumbnail="https://i.loli.net/2020/07/17/4PDCUkJ8R15VBjz.gif" data-sub-html="<h2>contenteditable</h2>">
+        
+    </a><figcaption class="image-caption">contenteditable</figcaption>
+    </figure>
+<p>​</p>
+<h3 id="hidden-让标签隐藏">hidden ：让标签隐藏</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;title&#34;</span> <span class="na">hidden</span><span class="p">&gt;&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+.title{
+	display: block   /* 直接添加属性hidden而隐藏的元素，可以通过设置样式 display: block，再显示回来 */
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h3 id="id-全局唯一">id ：全局唯一</h3>
+<ul>
+<li>
+<p>id 用来表示【全局唯一的标签】</p>
+</li>
+<li>
+<p>id 的全局唯一性没有保障，就算有两个重复的 id，HTML 也不会提示我写错了</p>
+<ul>
+<li>class足够了，不到万不得已不要用 id ，因为 id 重复使用也不会报错，可能误导开发者</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">header</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;xxx&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;xxx&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+#xxx{
+    /* 此时设置的样式会同时对两个id=xxx元素生效，id被重复使用不会报错，那id的唯一性就毫无意义了 */
+}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>id 中有很多不能使用的词：parent、self、top …   控制台输入 <strong><code>window.</code></strong>  弹出属性列表中所有的词都不能用，因为这些词是 window 已经有的全局属性</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">header</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;top&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="nx">top</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">border</span><span class="o">=</span><span class="s2">&#34;10px solid red&#34;</span>  <span class="c1">// 直接调用不能获取到top元素，与window对象中的全局属性重名
+</span><span class="c1"></span>  <span class="kd">var</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;top&#34;</span><span class="p">)</span> <span class="c1">// 通过这种方式可以获取到 top 元素，但单词略复杂
+</span><span class="c1"></span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<h3 id="style-行内样式">style ：行内样式</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;border: 10px solid red&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;a&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>js 中写 <code>a.style.border = &quot;100px solid green&quot;</code>  会覆盖 div元素中的行内样式</li>
+</ul>
+<p>​</p>
+<h3 id="tabindex-顺序">tabindex ：顺序</h3>
+<ul>
+<li>
+<p>在浏览页面时，网页中按钮都只通过键盘 tab 控制切换选中。而这里的 tabindex 属性就是控制，切换的顺序</p>
+<ul>
+<li>被选中的会有一圈不明显的蓝色边框</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">1</span><span class="p">&gt;</span>首页<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">3</span><span class="p">&gt;</span>一段话<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">footer</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">2</span><span class="p">&gt;</span><span class="ni">&amp;copy;</span>版权所有<span class="p">&lt;/</span><span class="nt">footer</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>tabindex 可以是正数，不必是连续的</p>
+</li>
+<li>
+<p>tabindex 可以是 0，表示最后才被 tab 访问</p>
+</li>
+<li>
+<p>tabindex 可以是 -1，表示不可被 tab 访问</p>
+</li>
+</ul>
+<p>​</p>
+<h3 id="title-鼠标指向时显示的内容">title ：鼠标指向时显示的内容</h3>
+<ul>
+<li>
+<p>单行文字溢出，使用省略号</p>
+<ul>
+<li>将鼠标移动到这段文字上时，应该能展示出全部文字内容，包括溢出隐藏的部分</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;xxx&#34;</span> <span class="na">title</span><span class="o">=</span><span class="s">&#34;显示一段超长的话&#34;</span><span class="p">&gt;</span>一段超长的话<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">.</span><span class="nc">xxx</span> <span class="p">{</span>
+    <span class="k">text-overflow</span><span class="p">:</span> <span class="kc">ellipsis</span><span class="p">;</span>   <span class="c">/* 超出部分用省略号 */</span>
+    <span class="k">overflow</span><span class="p">:</span> <span class="kc">hidden</span><span class="p">;</span>     <span class="c">/* 超出隐藏 */</span>
+    <span class="k">white-space</span><span class="p">:</span> <span class="kc">nowrap</span><span class="p">;</span>   <span class="c">/* 不换行 */</span>
+  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="内容标签">内容标签</h2>
+<h3 id="olli">ol+li</h3>
+<blockquote>
+<p>ordered list + list item</p>
+</blockquote>
+<ul>
+<li>
+<p>ol ：有序列表</p>
+</li>
+<li>
+<p>ol 不能含有 li 之外的任何元素、字符</p>
+<figure>
+     
+</figure>
+
+</li>
+</ul>
+<h3 id="ulli">ul+li</h3>
+<blockquote>
+<p>unordered list + list item</p>
+</blockquote>
+<ul>
+<li>
+<p>ul ：无序列表</p>
+<figure>
+     
+</figure>
+
+</li>
+</ul>
+<h3 id="dldtdd">dl+dt+dd</h3>
+<blockquote>
+<p>description list + term + data</p>
+</blockquote>
+<ul>
+<li>
+<p>dl ：description list —— 描述列表</p>
+</li>
+<li>
+<p>dt ：description term —— 描述项</p>
+</li>
+<li>
+<p>dd ：猜测是 description data —— 描述信息</p>
+<figure>
+     
+</figure>
+
+</li>
+</ul>
+<h3 id="pre">pre</h3>
+<blockquote>
+<p>preview 的缩写</p>
+</blockquote>
+<ul>
+<li>
+<p>用的较少</p>
+</li>
+<li>
+<p>html 特点：HTML 代码里的多处空格、回车、tab 等内容，默认会被转化为一个空格</p>
+</li>
+<li>
+<p>pre 的作用是，可以保留开发者键入的空白位置（pre 有默认样式，很丑，如下）</p>
+<figure><a class="lightgallery" href="https://i.loli.net/2020/07/17/wymCdUX19EaAojn.png" title="https://i.loli.net/2020/07/17/wymCdUX19EaAojn.png" data-thumbnail="https://i.loli.net/2020/07/17/wymCdUX19EaAojn.png" data-sub-html="<h2>pre</h2>">
+        
+    </a><figcaption class="image-caption">pre</figcaption>
+    </figure>
+</li>
+</ul>
+<h3 id="code">code</h3>
+<blockquote>
+<p>等宽字体</p>
+</blockquote>
+<ul>
+<li>
+<p>用 code 标签包裹的内容，字符是等宽的。但默认内容在同行展示，无法换行</p>
+</li>
+<li>
+<p>使用 pre 可以让 code 的内容换行</p>
+<figure><a class="lightgallery" href="https://i.loli.net/2020/07/17/NwKaXSdYMHJgqs8.png" title="https://i.loli.net/2020/07/17/NwKaXSdYMHJgqs8.png" data-thumbnail="https://i.loli.net/2020/07/17/NwKaXSdYMHJgqs8.png" data-sub-html="<h2>code &amp; pre&#43;code</h2>">
+        
+    </a><figcaption class="image-caption">code &amp; pre+code</figcaption>
+    </figure>
+</li>
+</ul>
+<h3 id="hr">hr</h3>
+<blockquote>
+<p>水平分割线</p>
+</blockquote>
+<ul>
+<li>
+<p>horizontal</p>
+<figure>
+     
+</figure>
+
+</li>
+</ul>
+<h3 id="br">br</h3>
+<blockquote>
+<p>break 的缩写</p>
+</blockquote>
+<ul>
+<li>换行</li>
+</ul>
+<p>​</p>
+<h3 id="a">a</h3>
+<blockquote>
+<p>anchor 的缩写</p>
+</blockquote>
+<ul>
+<li>超链接
+<ul>
+<li>href</li>
+<li>target
+<ul>
+<li>国内开发习惯使用 _blank 在新标签打开链接。</li>
+<li>国外开发通常不写 target，他们觉得会让浏览器网页越开越多（他们习惯：通过鼠标中间点击打开新标签页，默认左键点击同屏跳转）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="em">em</h3>
+<blockquote>
+<p>emphasis 的缩写</p>
+</blockquote>
+<ul>
+<li>emphasis 意为强调，效果字体斜体</li>
+</ul>
+<p>​</p>
+<h3 id="strong">strong</h3>
+<ul>
+<li>字体加粗</li>
+<li>表示重要</li>
+</ul>
+<p>​</p>
+<h3 id="q">q</h3>
+<blockquote>
+<p>quote 的缩写</p>
+</blockquote>
+<ul>
+<li>quote 意为引用</li>
+<li>quote标签：内联，行内，不换行</li>
+</ul>
+<p>​</p>
+<h3 id="blockquote">blockquote</h3>
+<ul>
+<li>
+<p>引用</p>
+</li>
+<li>
+<p>块级，换行</p>
+<figure><a class="lightgallery" href="https://i.loli.net/2020/07/17/wYSfjvtP7DTgmzC.png" title="https://i.loli.net/2020/07/17/wYSfjvtP7DTgmzC.png" data-thumbnail="https://i.loli.net/2020/07/17/wYSfjvtP7DTgmzC.png" data-sub-html="<h2>quote &amp; blockquote</h2>">
+        
+    </a><figcaption class="image-caption">quote &amp; blockquote</figcaption>
+    </figure>
+</li>
+</ul>]]></description>
 </item></channel>
 </rss>

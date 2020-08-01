@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Re：从零开始の CSS 学习笔记——布局（上） - Sam&#39;s Garage</title><meta name="Description" content="CSS is A*s***e!! 🥴 🤢 🤮"><meta property="og:title" content="Re：从零开始の CSS 学习笔记——布局（上）" />
+<meta property="og:description" content="CSS is A*s***e!! 🥴 🤢 🤮" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://samrks.github.io/202000725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8A/" />
+<meta property="og:image" content="http://samrks.github.io/202000725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8A/featured-image.jpg"/>
+<meta property="article:published_time" content="2020-07-25T16:16:55+08:00" />
+<meta property="article:modified_time" content="2020-07-25T16:16:55+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://samrks.github.io/202000725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8A/featured-image.jpg"/>
+<meta name="twitter:title" content="Re：从零开始の CSS 学习笔记——布局（上）"/>
+<meta name="twitter:description" content="CSS is A*s***e!! 🥴 🤢 🤮"/>
+<meta name="application-name" content="Sam&#39;s Garage">
+<meta name="apple-mobile-web-app-title" content="Sam&#39;s Garage"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://samrks.github.io/202000725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8A/" /><link rel="prev" href="http://samrks.github.io/202000724-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%9F%BA%E7%A1%80%E7%AF%87/" /><link rel="next" href="http://samrks.github.io/202000726-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8B/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Re：从零开始の CSS 学习笔记——布局（上）",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/samrks.github.io\/202000725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8A\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "http:\/\/samrks.github.io\/202000725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8A\/featured-image.jpg",
+                            "width":  1280 ,
+                            "height":  564 
+                        }],"genre": "posts","keywords": "CSS, 笔记","wordcount":  4470 ,
+        "url": "http:\/\/samrks.github.io\/202000725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8A\/","datePublished": "2020-07-25T16:16:55+08:00","dateModified": "2020-07-25T16:16:55+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Sam"
+            },"description": "CSS is A*s***e!! 🥴 🤢 🤮"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa fa-home fa-fw'></i> 主页 </a><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title=""><i class='fa fa-home fa-fw'></i>主页</a><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Re：从零开始の CSS 学习笔记——布局（上）</h1><h2 class="single-subtitle">CSS 布局篇（上）</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://liubingxuan.xyz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Sam</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%85%A5%E9%97%A8/"><i class="far fa-folder fa-fw"></i>入门</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-07-25">2020-07-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4470 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/202000725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8A/featured-image.jpg"
+        data-srcset="/202000725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8A/featured-image.jpg, /202000725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8A/featured-image.jpg 1.5x, /202000725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8A/featured-image.jpg 2x"
+        data-sizes="auto"
+        alt="/202000725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8A/featured-image.jpg"
+        title="CSS is A*s***e!! 🥴 🤢 🤮" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#布局是什么">布局是什么</a>
+          <ul>
+            <li><a href="#布局分类">布局分类</a>
+              <ul>
+                <li><a href="#两种">两种</a></li>
+                <li><a href="#还记得吗">还记得吗</a></li>
+                <li><a href="#第三种布局">第三种布局</a></li>
+              </ul>
+            </li>
+            <li><a href="#布局的两种思路">布局的两种思路</a>
+              <ul>
+                <li><a href="#从大到小">从大到小</a></li>
+                <li><a href="#从小到大">从小到大</a></li>
+                <li><a href="#两种均可">两种均可</a></li>
+              </ul>
+            </li>
+            <li><a href="#布局需要用到哪些属性">布局需要用到哪些属性</a></li>
+          </ul>
+        </li>
+        <li><a href="#float-布局">Float 布局</a>
+          <ul>
+            <li><a href="#步骤">步骤</a></li>
+            <li><a href="#经验">经验</a></li>
+            <li><a href="#实践">实践</a>
+              <ul>
+                <li><a href="#不同布局">不同布局</a></li>
+                <li><a href="#经验-1">经验</a></li>
+                <li><a href="#技术总结">技术总结</a>
+                  <ul>
+                    <li><a href="#outline">outline</a></li>
+                    <li><a href="#居中">居中</a></li>
+                    <li><a href="#float实现平均布局">float实现平均布局</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#缩写">缩写</a></li>
+        <li><a href="#flex-布局">Flex 布局</a>
+          <ul>
+            <li><a href="#容器-container-有哪些属性">容器 container 有哪些属性</a>
+              <ul>
+                <li><a href="#让一个元素变成-flex-容器">让一个元素变成 flex 容器</a></li>
+                <li><a href="#改变-items-流动方向主轴">改变 items 流动方向（主轴）</a></li>
+                <li><a href="#改变折行">改变折行</a></li>
+                <li><a href="#主轴对齐方式">主轴对齐方式</a></li>
+                <li><a href="#次轴对齐">次轴对齐</a></li>
+                <li><a href="#多行分布">多行分布</a></li>
+              </ul>
+            </li>
+            <li><a href="#flex-item-有哪些属性">flex item 有哪些属性</a>
+              <ul>
+                <li><a href="#item-上加-order">item 上加 order</a></li>
+                <li><a href="#item-上加-flex-grow">item 上加 flex-grow</a>
+                  <ul>
+                    <li><a href="#经验-2">经验</a></li>
+                  </ul>
+                </li>
+                <li><a href="#flex-shrink-控制如何变瘦">flex-shrink 控制如何变瘦</a></li>
+                <li><a href="#flex-basis-控制基准宽度">flex-basis 控制基准宽度</a></li>
+                <li><a href="#缩写成-flex">缩写成 flex</a></li>
+                <li><a href="#align-self-定制-align-items">align-self 定制 align-items</a></li>
+              </ul>
+            </li>
+            <li><a href="#重点">重点</a></li>
+            <li><a href="#实践-1">实践</a>
+              <ul>
+                <li><a href="#不同布局-1">不同布局</a></li>
+                <li><a href="#经验-3">经验</a></li>
+                <li><a href="#什么叫写死">什么叫写死</a>
+                  <ul>
+                    <li><a href="#写死">写死</a></li>
+                    <li><a href="#不写死">不写死</a></li>
+                  </ul>
+                </li>
+                <li><a href="#技术总结-1">技术总结</a>
+                  <ul>
+                    <li><a href="#左右布局">左右布局</a></li>
+                    <li><a href="#产品展示格子布局">产品展示格子布局</a>
+                      <ul>
+                        <li><a href="#失败方案">失败方案</a></li>
+                        <li><a href="#负margin方案">负margin方案</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>CSS 布局篇（上）： Float 布局、Flex 布局 。</p>
+<p>​</p>
+<p>​</p>
+<p>Float 示例代码  <a href="http://js.jirengu.com/wiwuh/3/edit?html,css,output">http://js.jirengu.com/wiwuh/3/edit?html,css,output</a></p>
+<p>Flex 示例代码  <a href="http://js.jirengu.com/pakez/2/edit?html,css,output">http://js.jirengu.com/pakez/2/edit?html,css,output</a></p>
+<p>Flex 青蛙游戏  <a href="https://flexboxfroggy.com/#zh-cn">https://flexboxfroggy.com/#zh-cn</a></p>
+<p>​</p>
+<h2 id="布局是什么">布局是什么</h2>
+<blockquote>
+<p>把页面分成一块一块，按左中右、上中下等排列</p>
+</blockquote>
+<h3 id="布局分类">布局分类</h3>
+<h4 id="两种">两种</h4>
+<ul>
+<li>固定宽度布局，一般宽度为960/1000/1024px （淘宝pc）</li>
+<li>不固定宽度布局，主要靠文档流的原理来布局（常用在移动端、响应式，会跟随设备宽度变化）</li>
+</ul>
+<h4 id="还记得吗">还记得吗</h4>
+<ul>
+<li>文档流本来就是自适应的，不需要加额外的样式</li>
+</ul>
+<h4 id="第三种布局">第三种布局</h4>
+<ul>
+<li>响应式布局
+<ul>
+<li>意思就是PC上固定宽度，手机上不固定宽度</li>
+<li>也就是一种混合布局</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h3 id="布局的两种思路">布局的两种思路</h3>
+<h4 id="从大到小">从大到小</h4>
+<ul>
+<li>先定下大局</li>
+<li>然后完善每个部分的小布局</li>
+</ul>
+<h4 id="从小到大">从小到大</h4>
+<ul>
+<li>先完成小布局</li>
+<li>然后组合成大布局</li>
+</ul>
+<h4 id="两种均可">两种均可</h4>
+<ul>
+<li>新人推荐用第二种，因为小的简单</li>
+<li>老手一般用第一种，因为熟练有大局观</li>
+</ul>
+<p>​</p>
+<h3 id="布局需要用到哪些属性">布局需要用到哪些属性</h3>
+<blockquote>
+<p>不多哗哗，直接给你所有套路</p>
+</blockquote>
+<p>以前经常说 DIV+CSS 布局，但是现在已经无意于用 DIV 了，就说用 CSS 布局</p>
+<ul>
+<li>main、header、footer、nav、aside … 这些标签的出现，已经可以代替 div 了</li>
+</ul>
+<p>需要兼容 IE9 吗</p>
+<ul>
+<li>不用，只做手机页面（闲鱼），阿里巴巴在顺序手机时代</li>
+<li>很老的手机产品要兼容吗、兼容最新浏览器吗？</li>
+</ul>
+<p><img src="https://i.loli.net/2020/07/22/9luaMYvVUFhitP5.png" alt="image-20200722180851787" style="zoom: 67%;" /></p>
+<p>​</p>
+<p>​</p>
+<h2 id="float-布局">Float 布局</h2>
+<blockquote>
+<p>float 主要是针对 IE 的，而现在公司基本不需要兼容 IE6789。</p>
+</blockquote>
+<h3 id="步骤">步骤</h3>
+<ol>
+<li>
+<p>子元素上加 <code> float: left</code>  和 <code> width</code></p>
+</li>
+<li>
+<p>在父元素上加  <code>.clearfix</code>（清除浮动的影响）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="c">&lt;!-- header中没有文档流元素，子元素都浮动了(脱离文档流) ，所以header的高度为0 --&gt;</span>
+<span class="c">&lt;!-- 添加 clearfix 后，可以清除浮动的影响 --&gt;</span>
+<span class="p">&lt;</span><span class="nt">header</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;clearfix&#34;</span><span class="p">&gt;</span>    
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;logo&#34;</span><span class="p">&gt;</span>XDML<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+   <span class="p">&lt;</span><span class="nt">nav</span><span class="p">&gt;</span>导航<span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+     
+<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+   <span class="p">.</span><span class="nc">logo</span><span class="p">{</span><span class="k">float</span><span class="p">:</span> <span class="kc">left</span><span class="p">;</span><span class="err">...</span><span class="p">}</span>   <span class="c">/* 脱离文档流 */</span>
+   <span class="nt">nav</span><span class="p">{</span><span class="k">float</span><span class="p">:</span> <span class="kc">left</span><span class="p">;</span><span class="err">...</span><span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">clearfix</span><span class="p">:</span><span class="nd">after</span><span class="p">{</span>    
+  <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+  <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
+  <span class="k">clear</span><span class="p">:</span> <span class="kc">both</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c">/* 背过 clearfix 的写法 */</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h3 id="经验">经验</h3>
+<ul>
+<li>
+<p>有经验者会留一些空间或者最后一个不设 width （或者可以给个 <code>max-width: xxxpx;</code>）</p>
+</li>
+<li>
+<p>不需要做响应式，因为手机上没有IE，而<strong>这个布局是专门为 IE 准备的</strong></p>
+</li>
+<li>
+<p>IE6/7 存在双倍 margin bug（给浮动元素设置 margin: 10px 在 IE6/7 中实际距离会变成 margin: 20px 的效果）</p>
+<ul>
+<li>
+<p>解决办法有两个</p>
+<ul>
+<li>
+<p>一是将错就错，针对 IE6/7 把 margin 减半</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">logo</span><span class="p">{</span>
+  <span class="k">float</span><span class="p">:</span> <span class="kc">left</span><span class="p">;</span>
+  <span class="k">margin-top</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* 其他浏览器 只能识别这句，无法识别下面属性 */</span>
+  <span class="n">_margin-top</span><span class="p">:</span> <span class="mi">5</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* IE6/7在属性前加 下划线 或 星号 都能识别 */</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>二是神来一笔，再加一个 <code>display: inline-block</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">logo</span><span class="p">{</span>
+  <span class="k">float</span><span class="p">:</span> <span class="kc">left</span><span class="p">;</span>
+  <span class="k">margin-top</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span> 
+  <span class="k">display</span><span class="p">:</span> <span class="kc">inline</span><span class="o">-</span><span class="kc">block</span><span class="p">;</span>  <span class="c">/* 微软说：IE6/7遇到margin乘2的bug，就添加这句 */</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>为什么可以这样？你问我，我问谁…</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h3 id="实践">实践</h3>
+<h4 id="不同布局">不同布局</h4>
+<ul>
+<li>用 float 做两栏布局（如顶部条）</li>
+<li>用 float 做三栏布局（如内容区）</li>
+<li>用 float 做四栏布局（如导航）</li>
+<li><a href="#float%e5%ae%9e%e7%8e%b0%e5%b9%b3%e5%9d%87%e5%b8%83%e5%b1%80" rel="">用 float 做平均布局</a>（如产品列表展示区）—— <strong>负margin</strong></li>
+<li>曾经淘宝的前端发明了双飞翼布局，不要学，已过时代码</li>
+</ul>
+<h4 id="经验-1">经验</h4>
+<ul>
+<li>加上头尾，即可满足所有PC页面需求</li>
+<li>手机页面傻子才用float</li>
+<li>float要程序员自己计算宽度，不灵活</li>
+<li>float用来应付IE足以</li>
+</ul>
+<h4 id="技术总结">技术总结</h4>
+<blockquote>
+<p><a href="https://jsbin.com/xihinip/edit?html,css,output" target="_blank" rel="noopener noreffer">JSbin 演示</a>，总结如下</p>
+</blockquote>
+<h5 id="outline">outline</h5>
+<blockquote>
+<p>现象描述：计算宽度时，内部3个元素的宽度和=300，外层容器=300，但是还会把最后一个元素挤下去，说明子元素的宽度超出容器的宽度。</p>
+</blockquote>
+<ul>
+<li>原因可能是，虽然设定容器宽度为 300，但是容器添加了<strong>边框</strong> border : 1像素，所以容器的内容区域的宽度实际只有 298 px。(仅限 border-box 情况)</li>
+<li>解决：
+<ul>
+<li>把容器的边框删了</li>
+<li>改用 <code> outline: 1px solid red;</code>  outline 是在外侧的，不占内部区域，但是outline 样式上会有点奇怪</li>
+<li>改用 背景颜色 标识区域</li>
+</ul>
+</li>
+</ul>
+<h5 id="居中">居中</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="c">/* margin: 0 auto;  下面两句的写法更好，这句还覆盖了margin上下的距离，css原则是不要写多余的 */</span>    
+<span class="nt">margin-left</span><span class="o">:</span> <span class="nt">auto</span><span class="o">;</span>
+<span class="nt">margin-right</span><span class="o">:</span> <span class="nt">auto</span><span class="o">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>只有==块级元素==，才能使用 margin … auto，实现居中。</p>
+</blockquote>
+<h5 id="float实现平均布局">float实现平均布局</h5>
+<blockquote>
+<p>添加一个 父元素 x ，进行 ==负margin== 操作（这个词基本都是高手才懂，面试说道这几个字，平均布局这块就一定能过）</p>
+<p>注意：添加 父元素后，clearfix 的位置也需要相应移动到，浮动元素的直属父级上</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;imageList&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;x clearfix&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="c">&lt;!--&lt;div class=&#34;image&#34;&gt;&lt;/div&gt;--&gt;</span>
+    <span class="c">&lt;!--&lt;div class=&#34;image&#34;&gt;&lt;/div&gt;--&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">.</span><span class="nc">imageList</span> <span class="p">{</span>
+    <span class="k">outline</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">green</span><span class="p">;</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">800</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">margin-left</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+    <span class="k">margin-right</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+    <span class="k">margin-top</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="p">.</span><span class="nc">imageList</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">x</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">image</span> <span class="p">{</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">191</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">height</span><span class="p">:</span> <span class="mi">191</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">background-color</span><span class="p">:</span> <span class="mh">#555</span><span class="p">;</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
+    <span class="k">float</span><span class="p">:</span> <span class="kc">left</span><span class="p">;</span>
+    <span class="k">margin-bottom</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">margin-right</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="p">.</span><span class="nc">imageList</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">x</span> <span class="p">{</span>
+    <span class="k">margin-right</span><span class="p">:</span> <span class="mi">-12</span><span class="kt">px</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/07/22/M1EroiTwDPnmkdv.png" alt="image-20200722210338975" style="zoom:80%;" /></p>
+<p>​</p>
+<p>​</p>
+<h2 id="缩写">缩写</h2>
+<blockquote>
+<p>html、css  （√）</p>
+<p>navigator  &mdash;&gt;   nav   （√）</p>
+<ul>
+<li>不能缩写未经约定、达成统一的单词
+<ul>
+<li>content   —&gt;  cnt    （x）     container 也可以缩写成 cnt  容易误会，所以不要用</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h2 id="flex-布局">Flex 布局</h2>
+<ul>
+<li>教程（来自 <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="noopener noreffer">CSS Tricks</a>)</li>
+<li>把教程过一遍，然后忘掉</li>
+<li>完成 <a href="https://flexboxfroggy.com/" target="_blank" rel="noopener noreffer">Flex青蛙游戏</a></li>
+<li>开始用flex！</li>
+</ul>
+<h3 id="容器-container-有哪些属性">容器 container 有哪些属性</h3>
+<ul>
+<li>container ：表示容器，一般用于做父元素</li>
+<li>items ：表示容器里面的、直接的子元素，就称为 items（项）</li>
+</ul>
+<p><img src="https://i.loli.net/2020/07/22/3KpAR2JtcGZ61w8.png" alt="image-20200722214411075" style="zoom:50%;" /></p>
+<blockquote>
+<p>以下都是 container 的样式</p>
+</blockquote>
+<p>​</p>
+<h4 id="让一个元素变成-flex-容器">让一个元素变成 flex 容器</h4>
+<p>只有下面两种写法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span>
+  <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>     <span class="c">/* 或 display: inline-flex; */</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="改变-items-流动方向主轴">改变 items 流动方向（主轴）</h4>
+<blockquote>
+<p>默认，所有项都会挤在主轴，主轴占满会平均压缩每项宽度，以保证在主轴存放下所有项</p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/07/22/ibdjLPJTMXuHgF1.png" alt="image-20200722220930275" style="zoom: 67%;" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span>
+  <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
+  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
+  <span class="k">flex-direction</span><span class="p">:</span> <span class="kc">row</span><span class="p">;</span>  <span class="c">/* 【默认值】横向（从左到右） */</span>
+  <span class="k">flex-direction</span><span class="p">:</span> <span class="kc">column</span><span class="p">;</span>  <span class="c">/* 纵向（从上到下） */</span>
+  <span class="k">flex-direction</span><span class="p">:</span> <span class="kc">row</span><span class="o">-</span><span class="kc">reverse</span><span class="p">;</span> <span class="c">/* 横向反向（从右到左） */</span>
+  <span class="k">flex-direction</span><span class="p">:</span> <span class="kc">column</span><span class="o">-</span><span class="kc">reverse</span><span class="p">;</span> <span class="c">/* 纵向反向（从上到下） */</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="改变折行">改变折行</h4>
+<p><img src="https://i.loli.net/2020/07/22/3LuoRTPUEdCzAbN.png" alt="image-20200722221103546" style="zoom: 67%;" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span>
+  <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
+  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
+  <span class="k">flex-direction</span><span class="p">:</span> <span class="kc">row</span><span class="p">;</span>  <span class="c">/* 默认横向 */</span>
+  <span class="k">flex-wrap</span><span class="p">:</span> <span class="kc">wrap</span><span class="o">-</span><span class="kc">reverse</span><span class="p">;</span>  <span class="c">/* 反向折行, 效果如下图，基本没用 */</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2020/07/22/w4bGQOn61JiczFu.png"
+        data-srcset="https://i.loli.net/2020/07/22/w4bGQOn61JiczFu.png, https://i.loli.net/2020/07/22/w4bGQOn61JiczFu.png 1.5x, https://i.loli.net/2020/07/22/w4bGQOn61JiczFu.png 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2020/07/22/w4bGQOn61JiczFu.png"
+        title="image-20200722221520477" /></p>
+<blockquote>
+<p><code>flex-direction</code>和<code>flex-wrap</code>两个属性经常会一起使用，所以有缩写属性<code>flex-flow</code>。这个缩写属性接受两个属性的值，两个值中间以空格隔开。</p>
+<p>举个例子，你可以用<code>flex-flow: row wrap</code>去设置行并自动换行。</p>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h4 id="主轴对齐方式">主轴对齐方式</h4>
+<blockquote>
+<p>默认主轴是 横轴</p>
+<p>除非你改变了 flex-direction 方向</p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/07/22/YeMQbNduPcE3kOr.png" alt="image-20200722222730578" style="zoom:53%;" /><img src="https://i.loli.net/2020/07/22/pTDLlXEoeV5SWPr.png" alt="image-20200722222746237" style="zoom:50%;" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html">.container {
+  justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;
+}
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>space-around： 每项左右两边的空间一样</li>
+<li>space-evenly：每项间距一样</li>
+<li>space-between：把空间放到中间，元素分布两边</li>
+</ul>
+<p>​</p>
+<h4 id="次轴对齐">次轴对齐</h4>
+<blockquote>
+<p>默认次轴是 纵轴</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span>
+  <span class="k">align-items</span><span class="p">:</span> <span class="kc">stretch</span> <span class="p">[</span><span class="err">默认值</span><span class="p">]</span> <span class="o">|</span> <span class="kc">flex</span><span class="o">-</span><span class="kc">start</span> <span class="o">|</span> <span class="kc">flex</span><span class="o">-</span><span class="kc">end</span> <span class="o">|</span> <span class="kc">center</span> <span class="o">|</span> <span class="kc">baseline</span><span class="err">（不需要）</span> 
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/07/22/jtJ5sOHKZuv7bVf.png" alt="image-20200722224320410" style="zoom: 50%;" /></p>
+<ul>
+<li>
+<p>stretch【默认值】</p>
+<ul>
+<li>默认所有 items 的高度 与 高度最高的 item 保持一致</li>
+<li>如下图，3个 item 都与 2 号 item 一样高</li>
+</ul>
+<p><img src="https://i.loli.net/2020/07/22/APYu5qhUCQaHKT3.png" alt="image-20200722223835192" style="zoom: 67%;" /></p>
+</li>
+<li>
+<p>flex-start</p>
+<p><img src="https://i.loli.net/2020/07/22/5D3ACg9KILYpZWV.png" alt="image-20200722223941301" style="zoom:67%;" /></p>
+</li>
+<li>
+<p>flex-end</p>
+<p><img src="https://i.loli.net/2020/07/22/ZdtvSzK4gYhVsEO.png" alt="image-20200722224034230" style="zoom:67%;" /></p>
+</li>
+<li>
+<p>center</p>
+<p><img src="https://i.loli.net/2020/07/22/Zy7TOKQ4rxJuV6B.png" alt="image-20200722224101576" style="zoom:67%;" /></p>
+</li>
+</ul>
+<p>​</p>
+<h4 id="多行分布">多行分布</h4>
+<blockquote>
+<p>很少用到</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>
+<p>默认平均分  ：  <code>align-content: stretch</code> (如图)</p>
+<p><img src="https://i.loli.net/2020/07/22/NKhIu6SznsiMoC2.png" alt="image-20200722225018920" style="zoom:80%;" /></p>
+</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span>
+  <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
+  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
+  <span class="k">flex-wrap</span><span class="p">:</span> <span class="kc">wrap</span><span class="p">;</span>
+  <span class="err">height：400px；</span>
+  <span class="k">align-content</span><span class="p">:</span> <span class="kc">flex</span><span class="o">-</span><span class="kc">start</span><span class="p">;</span>   <span class="c">/* 全部集中到顶部 */</span>
+  <span class="k">align-content</span><span class="p">:</span> <span class="kc">flex</span><span class="o">-</span><span class="kc">end</span><span class="p">;</span>   <span class="c">/* 全部集中到底部 */</span>
+  <span class="k">align-content</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>   <span class="c">/* 全部集中到中间 */</span>
+  <span class="k">align-content</span><span class="p">:</span> <span class="kc">space</span><span class="o">-</span><span class="n">between</span><span class="p">;</span>
+  <span class="k">align-content</span><span class="p">:</span> <span class="kc">space</span><span class="o">-</span><span class="n">around</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/08/02/gtqQKAMBvWUfDwY.png" alt="image-20200722224538109" style="zoom:50%;" /></p>
+<p>​</p>
+<p>​</p>
+<h3 id="flex-item-有哪些属性">flex item 有哪些属性</h3>
+<blockquote>
+<p>以下都是 item 的属性</p>
+</blockquote>
+<h4 id="item-上加-order">item 上加 order</h4>
+<ul>
+<li>
+<p><strong>默认 order 为 0</strong></p>
+</li>
+<li>
+<p>指定 order 后，item 会按照 order 顺序从小到大排列（可以指定为负数）</p>
+<p><img src="https://i.loli.net/2020/07/23/92hZAYkyrN4Pd6j.png" alt="image-20200723102111806" style="zoom: 33%;" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;item&#34;</span><span class="p">&gt;</span>1<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;item&#34;</span><span class="p">&gt;</span>2<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>  
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;item&#34;</span><span class="p">&gt;</span>3<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;item&#34;</span><span class="p">&gt;</span>4<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    
+<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">.</span><span class="nc">container</span><span class="p">{</span>
+    <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="p">.</span><span class="nc">item</span><span class="p">{</span>
+    <span class="k">width</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">height</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">green</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">first-child</span><span class="p">{</span> <span class="k">order</span><span class="p">:</span> <span class="mi">100</span><span class="p">;</span> <span class="p">}</span>    <span class="c">/* 最后 */</span>
+  <span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">2</span><span class="o">)</span><span class="p">{</span> <span class="k">order</span><span class="p">:</span> <span class="mi">2</span><span class="p">;</span> <span class="p">}</span>			
+  <span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">3</span><span class="o">)</span><span class="p">{</span> <span class="k">order</span><span class="p">:</span> <span class="mi">3</span><span class="p">;</span> <span class="p">}</span>
+  <span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">last-child</span><span class="p">{</span> <span class="k">order</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span>    <span class="c">/* 最前 */</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/07/23/cSiPkYbCKuVWaMx.png" alt="image-20200723125610356" style="zoom:67%;" /></p>
+</li>
+</ul>
+<p>​</p>
+<h4 id="item-上加-flex-grow">item 上加 flex-grow</h4>
+<blockquote>
+<p>用于分配多余的空间（控制变胖）</p>
+<ul>
+<li>flex-grow： 默认为 0.   就是 item 宽度由内容撑开，没内容的话宽度就是0，不会占用多余的空间</li>
+<li>给 item 设置 flex-grow  值为 n （&gt;0），就是将分配多余空间给当前 item 占 n 份。
+<ul>
+<li>如果一共有3个item，那就平均分配多余空间，每个 item 占 n/3.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p><img src="https://i.loli.net/2020/07/23/RlIrbfMAQzu7Ej5.png" alt="image-20200723125746083" style="zoom: 33%;" /></p>
+<ul>
+<li>
+<p>当我们不给 item 设置宽度时，item 的宽度是能有多窄有多窄（宽度由内容撑开）</p>
+<p><img src="https://i.loli.net/2020/07/23/v1BTm7x6Wyz3kGp.png" alt="image-20200723130130864" style="zoom: 67%;" /></p>
+</li>
+<li>
+<p>实现宽度能有多宽有多宽，就给 item 添加 flex-grow</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">item</span><span class="p">{</span>
+  <span class="k">flex-grow</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>    <span class="c">/* 每一个 item 平均分配宽度，来占满多余的空间（不是占满整行空间） */</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/07/23/oOfiFTV7zcPualp.png" alt="image-20200723130354832" style="zoom: 67%;" /></p>
+</li>
+<li>
+<p>需求：从多余的空间中，给2,3 的宽度占 2 份;   给 1,4 占 1 份 空间</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span>
+  <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
+  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">item</span><span class="p">{</span>
+  <span class="k">height</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">green</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">first-child</span><span class="p">{</span> <span class="k">flex-grow</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">2</span><span class="o">)</span><span class="p">{</span> <span class="k">flex-grow</span><span class="p">:</span> <span class="mi">2</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">3</span><span class="o">)</span><span class="p">{</span> <span class="k">flex-grow</span><span class="p">:</span> <span class="mi">2</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">last-child</span><span class="p">{</span> <span class="k">flex-grow</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/07/23/pVKP5kSAimgU1eF.png" alt="image-20200723130902817" style="zoom: 67%;" /></p>
+</li>
+</ul>
+<h5 id="经验-2">经验</h5>
+<ul>
+<li>当 3 栏布局，如下
+<ul>
+<li>只给【导航】设置<strong><code> flex-grow: 1</code></strong>（实现导航宽度的响应式），logo、头像固定宽度</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;item&#34;</span><span class="p">&gt;</span>logo<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;item&#34;</span><span class="p">&gt;</span>导航<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>  
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;item&#34;</span><span class="p">&gt;</span>头像<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">.</span><span class="nc">container</span><span class="p">{</span>
+    <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="p">.</span><span class="nc">item</span><span class="p">{</span>
+    <span class="k">height</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">green</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">2</span><span class="o">)</span><span class="p">{</span>   
+    <span class="k">flex-grow</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span> 
+  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/07/23/XSOihn8bzDWPjfI.gif" alt="flex-grow" style="zoom:50%;" /></p>
+<p>​</p>
+<h4 id="flex-shrink-控制如何变瘦">flex-shrink 控制如何变瘦</h4>
+<blockquote>
+<p>当界面不断变窄，无法存放每项的给定宽度时，每项都需要变窄，flex-shrink 就控制谁瘦的多，谁瘦的少</p>
+<ul>
+<li>默认是1（所有item平均收缩，要缩一起缩）</li>
+<li>一般写 <strong><code>flex-shrink: 0;</code></strong>  防止变瘦（被设置为 0 的这一项，就算空间不够时，也不会收缩。要缩别找我）</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">item</span><span class="p">{</span>
+  <span class="k">width</span><span class="p">:</span> <span class="mi">150</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* 合计宽度最小450px */</span>
+  <span class="k">height</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">green</span><span class="p">;</span>
+  <span class="k">flex-grow</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>  <span class="c">/* 每项会均分多余空间 */</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">first-child</span><span class="p">{</span>
+  <span class="k">flex-shrink</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">2</span><span class="o">)</span><span class="p">{</span> 
+  <span class="k">flex-shrink</span><span class="p">:</span> <span class="mi">50</span><span class="p">;</span>   <span class="c">/* 2 的收缩比例较大 */</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">last-child</span><span class="p">{</span>
+  <span class="k">flex-shrink</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>当宽度缩小达到450px以内，每项宽度不足，此时每项会开始收缩， flex-shrink 值越大，则收缩的越大，flex-shrink 值越小，越不会受到收缩的影响
+<ul>
+<li>如下图，宽度收缩450px以内，【导航】最先开始发生了较大的收缩，因为设定了较大的 flex-shrink 值</li>
+<li>【logo】和【头像】版块，基本不收缩</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2020/07/23/i2kQOVLXDHPygrh.gif" alt="flex-shrink" style="zoom: 67%;" /></p>
+<p>​</p>
+<h4 id="flex-basis-控制基准宽度">flex-basis 控制基准宽度</h4>
+<blockquote>
+<p>用法：</p>
+<ul>
+<li>默认是 auto（与 item 的 width 值保持一致）</li>
+<li>指定宽度：<code>flex-basis: 100px;</code>  相当于指定了 width 值</li>
+</ul>
+</blockquote>
+<p>这个属性方方也比较迷：不是很重要的属性</p>
+<ul>
+<li>可以直接用 width 来代替这个属性</li>
+</ul>
+<p>​</p>
+<h4 id="缩写成-flex">缩写成 flex</h4>
+<blockquote>
+<p>flex  相当于  flex-grow  flex-shrink   flex-basis</p>
+<p>方方一般不写缩写，容易记错位置</p>
+</blockquote>
+<ul>
+<li>flex  只有以下 4 种形式的写法</li>
+</ul>
+<p><img src="https://i.loli.net/2020/08/02/d3olkwf4AvPcQUp.png" alt="image-20200723135453043" style="zoom:67%;" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">first-child</span><span class="p">{</span>
+  <span class="k">flex</span><span class="p">:</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>    <span class="c">/* grow-1，shrink-1，宽100px */</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">2</span><span class="o">)</span><span class="p">{</span>
+  <span class="k">flex</span><span class="p">:</span> <span class="mi">1</span> <span class="mi">100</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>    <span class="c">/* grow-1，shrink-100，宽100px */</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">last-child</span><span class="p">{</span>
+  <span class="k">flex</span><span class="p">:</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>    <span class="c">/* grow-1，shrink-1，宽100px */</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>上述，3个item，宽度为100px
+<ul>
+<li>grow撑开时每个item平均占满所有多余空间</li>
+<li>宽度不足时，2 号主要进行收缩</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h4 id="align-self-定制-align-items">align-self 定制 align-items</h4>
+<blockquote>
+<p>用的很少</p>
+<ul>
+<li>默认在垂直方向上，都是顶端对齐的</li>
+<li>align-self  可以让某一个 item，在垂直方向上，特例独行的展示（指定一个特别的对齐方式）</li>
+</ul>
+</blockquote>
+<p><img src="https://i.loli.net/2020/07/23/RdDKx3glnpVvi5B.png" alt="image-20200723140835156" style="zoom: 33%;" /></p>
+<p>实现：单独设置，最后一个 item 底部对齐</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2020/07/23/QZ5KnmLkF3zpUMB.png"
+        data-srcset="https://i.loli.net/2020/07/23/QZ5KnmLkF3zpUMB.png, https://i.loli.net/2020/07/23/QZ5KnmLkF3zpUMB.png 1.5x, https://i.loli.net/2020/07/23/QZ5KnmLkF3zpUMB.png 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2020/07/23/QZ5KnmLkF3zpUMB.png"
+        title="image-20200723140535900" /></p>
+<p>​</p>
+<p>​</p>
+<h3 id="重点">重点</h3>
+<ul>
+<li>记住这些代码</li>
+<li><strong><code>display: flex</code></strong>     开启flex布局</li>
+<li><strong><code>flex-direction: row / column </code></strong>   主轴是横向还是纵向</li>
+<li><strong><code>flex-wrap: wrap </code></strong>   空间不足时是否换行</li>
+<li><strong><code>just-content: center / space-between</code></strong>   主轴方向上的对齐方式：居中/分开</li>
+<li><strong><code>align-items: center  </code></strong>    次轴方向上的对齐方式：居中，顶，底</li>
+<li>工作中基本只用这些</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="实践-1">实践</h3>
+<blockquote>
+<p><a href="https://jsbin.com/yoguyuh/edit?html,css,output" target="_blank" rel="noopener noreffer">JSBin 演示</a></p>
+</blockquote>
+<h4 id="不同布局-1">不同布局</h4>
+<ul>
+<li>用 flex 做两栏布局</li>
+<li>用 flex 做三栏布局</li>
+<li>用 flex 做四栏布局</li>
+<li>用 flex 做平均布局 —— <a href="#%e8%b4%9fmargin%e6%96%b9%e6%a1%88" rel="">负 margin</a></li>
+<li>用 flex 组合使用，做更复杂的布局</li>
+<li><a href="https://jsbin.com/hehekod/edit?html,css,output" target="_blank" rel="noopener noreffer">JSBin 代码</a></li>
+</ul>
+<h4 id="经验-3">经验</h4>
+<ul>
+<li>永远不要把 width 和 height 写死，除非特殊说明
+<ul>
+<li>PC端通常可以写死。移动端不能写死，需要适配各种尺寸：平板/手机…</li>
+</ul>
+</li>
+<li>用  min-width  /  max-width  /  min-height  /  max-height</li>
+<li>flex 可以基本满足所有需求</li>
+<li>flex  和  <code>margin-xxx : auto</code>  配合有意外的效果——例：<a href="#%e5%b7%a6%e5%8f%b3%e5%b8%83%e5%b1%80" rel="">左右布局</a></li>
+</ul>
+<p>​</p>
+<h4 id="什么叫写死">什么叫写死</h4>
+<h5 id="写死">写死</h5>
+<ul>
+<li>width:100px</li>
+</ul>
+<h5 id="不写死">不写死</h5>
+<ul>
+<li>width: 50%</li>
+<li>max-width: 100px</li>
+<li>width: 30vw   （屏幕宽度的百分之30）</li>
+<li>min-width: 80%</li>
+<li>特点：不使用 px，或者加 min max 前缀</li>
+</ul>
+<blockquote>
+<p>css 最忌讳把宽高写死</p>
+</blockquote>
+<p>​</p>
+<h4 id="技术总结-1">技术总结</h4>
+<h5 id="左右布局">左右布局</h5>
+<ul>
+<li>表示两栏布局-贴左、贴右：可通过以下两句中的任意一句来实现</li>
+<li>margin-xxx:  auto 更灵活</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">.</span><span class="nc">header</span> <span class="p">{</span>
+    <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
+    <span class="k">border</span><span class="p">:</span><span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">black</span><span class="p">;</span>
+    <span class="c">/*justify-content: space-between; ---------------二者任选其一----------------------*/</span>
+  <span class="p">}</span>
+  <span class="nt">ul</span> <span class="p">{</span>
+    <span class="c">/* margin-left: auto; -------------------------二者任选其一【推荐】------------------*/</span>
+    <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">green</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nt">ul</span> <span class="o">&gt;</span> <span class="nt">li</span> <span class="p">{</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">header</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;header&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;logo&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">alt</span><span class="o">=</span><span class="s">&#34;&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;./logo.png&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>首页<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>课程<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>优惠<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>关于<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h5 id="产品展示格子布局">产品展示格子布局</h5>
+<h6 id="失败方案">失败方案</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;imageList&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">imageList</span><span class="p">{</span>
+  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
+  <span class="k">width</span><span class="p">:</span> <span class="mi">800</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">margin-right</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+  <span class="k">margin-left</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+  <span class="k">margin-top</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
+  <span class="k">flex-wrap</span><span class="p">:</span> <span class="kc">wrap</span><span class="p">;</span>
+  <span class="k">justify-content</span><span class="p">:</span> <span class="kc">space</span><span class="o">-</span><span class="n">between</span><span class="p">;</span>  <span class="c">/* 会导致产品不足数的行 --&gt; 错位 */</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">image</span><span class="p">{</span>
+  <span class="k">width</span><span class="p">:</span> <span class="mi">191</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">height</span><span class="p">:</span> <span class="mi">191</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">background-color</span><span class="p">:</span> <span class="mh">#ccc</span><span class="p">;</span>
+  <span class="k">margin-bottom</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">green</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/07/23/Su3ExfocXphtwbr.png" alt="image-20200723171736064" style="zoom:50%;" /></p>
+<p>​</p>
+<h6 id="负margin方案">负margin方案</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;imageList&#34;</span><span class="p">&gt;</span>
+  <span class="c">&lt;!-- 可以命名为 inner 或者 wrapper --&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;x&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">imageList</span> <span class="p">{</span>
+  <span class="k">outline</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>   <span class="c">/* 注意：边框去掉或者放在外面，否则占据宽度 */</span>
+  <span class="k">width</span><span class="p">:</span> <span class="mi">800</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">margin-right</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+  <span class="k">margin-left</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+  <span class="k">margin-top</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">imageList</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">x</span> <span class="p">{</span>
+  <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
+  <span class="k">flex-wrap</span><span class="p">:</span> <span class="kc">wrap</span><span class="p">;</span>
+  <span class="k">margin-right</span><span class="p">:</span> <span class="mi">-12</span><span class="kt">px</span><span class="p">;</span>    <span class="c">/* 负margin */</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">image</span> <span class="p">{</span>
+  <span class="k">width</span><span class="p">:</span> <span class="mi">191</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">height</span><span class="p">:</span> <span class="mi">191</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">background-color</span><span class="p">:</span> <span class="mh">#ccc</span><span class="p">;</span>
+  <span class="k">margin-bottom</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">green</span><span class="p">;</span>
+  <span class="k">margin-right</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* 每个的间距 */</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2020/07/23/Egd4TOSG1ce2o7q.png"
+        data-srcset="https://i.loli.net/2020/07/23/Egd4TOSG1ce2o7q.png, https://i.loli.net/2020/07/23/Egd4TOSG1ce2o7q.png 1.5x, https://i.loli.net/2020/07/23/Egd4TOSG1ce2o7q.png 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2020/07/23/Egd4TOSG1ce2o7q.png"
+        title="image-20200723172847224" /></p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-07-25</span>
+            </div>
+            <div class="post-info-license"><span>转载请注明出处</span></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/202000725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8A/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://samrks.github.io/202000725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8A/" data-title="Re：从零开始の CSS 学习笔记——布局（上）" data-via="ryuukousen2" data-hashtags="CSS,笔记"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://samrks.github.io/202000725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8A/" data-hashtag="CSS"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Pinterest" data-sharer="pinterest" data-url="http://samrks.github.io/202000725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8A/" data-description="CSS is A*s***e!! 🥴 🤢 🤮"><i class="fab fa-pinterest fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://samrks.github.io/202000725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8A/" data-title="Re：从零开始の CSS 学习笔记——布局（上）"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/css/">CSS</a>,&nbsp;<a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/202000724-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%9F%BA%E7%A1%80%E7%AF%87/" class="prev" rel="prev" title="Re：从零开始の CSS 学习笔记——基础篇"><i class="fas fa-angle-left fa-fw"></i>Re：从零开始の CSS 学习笔记——基础篇</a>
+            <a href="/202000726-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8B/" class="next" rel="next" title="Re：从零开始の CSS 学习笔记——布局（下）">Re：从零开始の CSS 学习笔记——布局（下）<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Thanks For Your Watching!</div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2017 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Sam</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":15},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
