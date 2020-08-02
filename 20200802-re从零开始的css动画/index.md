@@ -473,6 +473,71 @@ https://csstriggers.com/  这个网站已经把所有属性全试过了
 -   CSS需要你有想象力，而不是逻辑
 -   CSS给出的属性都很简单，但是可以组合得很复杂
 
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>beating heart</title>
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      #heart{
+        margin: 100px;
+        position: relative;
+        /*border: 1px solid black;*/
+        display: inline-block;
+        transition: all .5s ease;
+      }
+      #heart:hover{
+        transform: scale(1.5);
+      }
+      #heart>.bottom{
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        /*border: 1px solid red;*/
+        transform: rotate(45deg);
+      }
+      #heart>.left{
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        /*border: 1px solid red;*/
+        border-radius: 50% 0 0 50%;
+        transform: rotate(45deg) translateX(31px);
+        position: absolute;
+        bottom:100%;
+        right: 100%;
+      }
+      #heart > .right {
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        /*border: 1px solid red;*/
+        border-radius: 50% 50% 0 0;
+        transform: rotate(45deg) translate(0,30px);
+        position: absolute;
+        bottom: 100%;
+        left: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="heart">
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="bottom"></div>
+    </div>
+  </body>
+</html>
+```
+
 
 
 ​	
@@ -696,3 +761,76 @@ animation: 时长 | 过渡方式 | 延迟 | 次数 | 方向 | 填充模式 | 是
 ## 实践：用 animation 做红心
 
 >   [JSBin 示例](http://js.jirengu.com/hosug/1/edit?html,css,output)
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>beating heart-animation</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      @keyframes beating {
+        0% {transform: scale(1)}
+        /*25% {transform: scale(1.25)}*/
+        /*50% {transform: scale(1.5)}*/
+        /*75% {transform: scale(1.25)}*/
+        100% {transform: scale(1.5)}
+      }
+      #heart {
+        /*border: 1px solid black;*/
+        display: inline-block;
+        position: relative;
+        margin: 100px;
+      }
+      #heart:hover {
+        animation: beating .5s ease infinite alternate;
+      }
+      #heart > .left {
+        position: absolute;
+        bottom: 50px;
+        left: -50px;
+        width: 50px;
+        height: 50px;
+        /*border: 1px solid red;*/
+        background: red;
+        border-radius: 50%;
+        transform: rotate(45deg) translateX(43px);
+      }
+      #heart > .right {
+        position: absolute;
+        bottom: 50px;
+        right: -50px;
+        width: 50px;
+        height: 50px;
+        /*border: 1px solid red;*/
+        background: red;
+        border-radius: 50%;
+        transform: rotate(45deg) translateY(45px);
+      }
+      #heart > .bottom {
+        width: 50px;
+        height: 50px;
+        /*border: 1px solid red;*/
+        background: red;
+        transform: rotate(45deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="heart">
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="bottom"></div>
+    </div>
+  </body>
+</html>
+```
+
+
