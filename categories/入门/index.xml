@@ -4,12 +4,1413 @@
         <link>http://samrks.github.io/categories/%E5%85%A5%E9%97%A8/</link>
         <description>入门 - 分类 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Sun, 26 Jul 2020 13:26:52 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/categories/%E5%85%A5%E9%97%A8/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Sun, 02 Aug 2020 01:19:27 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/categories/%E5%85%A5%E9%97%A8/" rel="self" type="application/rss+xml" /><item>
+    <title>Re：从零开始の CSS 学习笔记——动画</title>
+    <link>http://samrks.github.io/20200802-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%8A%A8%E7%94%BB/</link>
+    <pubDate>Sun, 02 Aug 2020 01:19:27 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/20200802-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%8A%A8%E7%94%BB/</guid>
+    <description><![CDATA[<p>浏览器的渲染流程、transform、transition、animation</p>
+<p>​</p>
+<h2 id="动画的原理">动画的原理</h2>
+<blockquote>
+<p>人脑的 bug</p>
+</blockquote>
+<h3 id="动画">动画</h3>
+<h4 id="定义">定义</h4>
+<ul>
+<li>由许多静止的画面（帧），</li>
+<li>以一定的速度（如每秒30张）连续播放时，</li>
+<li>肉眼因视觉残象产生错觉，</li>
+<li>而误以为是活动的画面。</li>
+</ul>
+<h4 id="概念">概念</h4>
+<ul>
+<li>帧：每个静止的画面都叫做帧</li>
+<li>播放速度：每秒24帧（影视）或者每秒30帧（游戏）</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="一个最简单的例子">一个最简单的例子</h2>
+<h3 id="将div从左往右移动">将div从左往右移动</h3>
+<blockquote>
+<p><a href="http://js.jirengu.com/bagow/1/edit?html,css,js,output">http://js.jirengu.com/bagow/1/edit?html,css,js,output</a></p>
+</blockquote>
+<ul>
+<li><a href="http://js.jirengu.com/wotud/3/edit" target="_blank" rel="noopener noreffer">JSBin 示例1</a>  通过循环定时器 + 定位 + left 实现动画。控制每隔一小段时间增加 left 值，实现位移</li>
+<li><a href="http://js.jirengu.com/rogot/1/edit" target="_blank" rel="noopener noreffer">JSBin 示例2</a>  通过延时器 + 添加类名 + transition / transform 实现动画。控制添加类名</li>
+</ul>
+<h4 id="原理">原理</h4>
+<ul>
+<li>每过一段时间（用setlnterval做到），</li>
+<li>将div移动一小段距离，</li>
+<li>直到移动到目标地点。</li>
+</ul>
+<h4 id="注意性能">注意性能</h4>
+<blockquote>
+<p>需要先搞懂：<a href="#%e6%b5%8f%e8%a7%88%e5%99%a8%e6%b8%b2%e6%9f%93%e8%bf%87%e7%a8%8b" rel="">浏览器的渲染步骤</a>，以及 <a href="#%e6%af%8f%e4%b8%aa%e5%b1%9e%e6%80%a7%e8%a7%a6%e5%8f%91%e4%bb%80%e4%b9%88%e6%b5%81%e7%a8%8b" rel="">每个属性会触发什么流程</a></p>
+</blockquote>
+<ul>
+<li>
+<p>绿色表示重新绘制（repaint）了</p>
+</li>
+<li>
+<p>CSS渲染过程依次包含布局、绘制、合成</p>
+</li>
+<li>
+<p>其中布局和绘制有可能被省略</p>
+</li>
+</ul>
+<p>​</p>
+<h3 id="前端高手不用-left-做动画">前端高手不用 left 做动画</h3>
+<h4 id="用-transform变形">用 transform（变形）</h4>
+<ul>
+<li><a href="http://js.jirengu.com/lojiz/1/edit?html,css,js,output" target="_blank" rel="noopener noreffer">JSBin 演示</a></li>
+</ul>
+<h4 id="原理-1">原理</h4>
+<ul>
+<li><code>transform: translateX(0=&gt;300px)</code></li>
+<li>直接修改会被合成，需要等一会修改</li>
+<li>transition 过渡属性可以自动脑补中间帧</li>
+</ul>
+<h4 id="注意性能-1">注意性能</h4>
+<blockquote>
+<p>需要先搞懂：<a href="#%e6%b5%8f%e8%a7%88%e5%99%a8%e6%b8%b2%e6%9f%93%e8%bf%87%e7%a8%8b" rel="">浏览器的渲染步骤</a>，以及 <a href="#%e6%af%8f%e4%b8%aa%e5%b1%9e%e6%80%a7%e8%a7%a6%e5%8f%91%e4%bb%80%e4%b9%88%e6%b5%81%e7%a8%8b" rel="">每个属性会触发什么流程</a></p>
+</blockquote>
+<ul>
+<li>transform 优势在于，并没有 relayout（重新布局） 和 repaint（重新绘制）过程</li>
+<li>transform 比 left 性能好很多（ 因为 left 会依次经过 relayout、 repaint、composite 3个过程）</li>
+</ul>
+<p>​</p>
+<h3 id="如何查看性能">如何查看性能</h3>
+<blockquote>
+<p>上述 JSBin 示例1/2两种方式，在性能上有什么区别 ？</p>
+</blockquote>
+<h4 id="查看性能的方式">查看性能的方式</h4>
+<ul>
+<li>开启浏览器的【渲染 Rendering 】&gt;  【画图闪烁 Paint flashing】：突出显示需要重新绘制的页面区域（绿色）
+<ul>
+<li><strong>如果元素发生的重新渲染（绿）的次数多，则更耗性能</strong></li>
+</ul>
+</li>
+</ul>
+<p></p>
+<ul>
+<li>
+<p>示例1：使用 setInterval ，控制 left 实现动画</p>
+<p>（位移全程 demo元素 都呈绿色：说明全程都在进行demo元素的重新渲染绘制）</p>
+</li>
+</ul>
+<p></p>
+<ul>
+<li>
+<p>示例2：添加类名，通过 transition + transform 实现动画</p>
+<p>（刷新后，初次渲染呈绿色，移动过程没有发生重新渲染，移动结束的位置重新渲染一次）</p>
+<p></p>
+</li>
+<li>
+<p><strong>总结</strong>：<strong>显然 ，示例1 更耗性能，全程都需要重新渲染</strong></p>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="浏览器的渲染原理">浏览器的渲染原理</h2>
+<blockquote>
+<ul>
+<li>既然讲到这里，提到了性能、渲染，那就深入了解一下</li>
+<li>了解浏览器的渲染流程后，再回头看前面2个示例，可能会更好理解它们的不同</li>
+</ul>
+</blockquote>
+<h3 id="参考文章">参考文章</h3>
+<h4 id="google-团队写的文章右上角中文">Google 团队写的文章（右上角中文）</h4>
+<ul>
+<li><a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction" target="_blank" rel="noopener noreffer">渲染树构建、布局及绘制</a></li>
+<li><a href="https://developers.google.com/web/fundamentals/performance/rendering/" target="_blank" rel="noopener noreffer">渲染性能</a></li>
+<li><a href="https://developers.google.com/web/fundamentals/performance/rendering/stick-to-compositor-only-properties-and-manage-layer-count" target="_blank" rel="noopener noreffer">使用 transform 来实现动画</a></li>
+</ul>
+<h4 id="查看css各属性触发什么">查看CSS各属性触发什么</h4>
+<ul>
+<li><a href="https://csstriggers.com/" target="_blank" rel="noopener noreffer">CSSTriggers.com</a></li>
+</ul>
+<p>​</p>
+<h3 id="浏览器渲染过程">浏览器渲染过程</h3>
+<blockquote>
+<p>浏览器在获取到 html 和 css 后做了什么？</p>
+</blockquote>
+<h4 id="步骤">步骤</h4>
+<ol>
+<li>根据 HTML 构建 HTML 树（DOM）</li>
+<li>根据 CSS 构建 CSS 树（CSSOM）</li>
+<li>将两棵树合并成一颗渲染树（render tree）</li>
+<li>根据渲染树，进行 Layout 布局（<strong>文档流</strong>、盒模型、计算大小和位置）
+<ul>
+<li>先定位：某个标签是否在文档流中…<strong>（文档流的概念非常重要！！）</strong></li>
+<li>定位后，要知道这个标签多高多宽、样式如何…</li>
+</ul>
+</li>
+<li>Paint 绘制（填色：把边框颜色、文字颜色、阴影等画出来）</li>
+<li>Composite 合成（根据层叠关系展示画面）</li>
+</ol>
+<h4 id="三棵树">三棵树</h4>
+<blockquote>
+<p>render tree 就是最终用户看到的树</p>
+</blockquote>
+<p></p>
+<p>​</p>
+<h2 id="如何更新样式">如何更新样式</h2>
+<h3 id="一般我们用-js-来更新样式">一般我们用 JS 来更新样式</h3>
+<ul>
+<li>比如 <code>div.style.background='red'</code>  让内联背景变红色</li>
+<li>比如 <code>div.style.display='none'</code>  让div消失</li>
+<li>比如 <code>div.classList.add('red')</code>  （小白才直接加样式，高手从来只加类名）</li>
+<li>比如 <code>div.remove()</code>直接删掉节点</li>
+</ul>
+<h3 id="那么这些方法有什么不同吗">那么这些方法有什么不同吗</h3>
+<ul>
+<li>有三种不同的渲染方式</li>
+<li>详细看下面  ↓↓</li>
+</ul>
+<h3 id="三种更新方式">三种更新方式</h3>
+<blockquote>
+<p>使用 JS 来更新样式，要经过哪些步骤 ？</p>
+<ul>
+<li>
+<p>下面有3种代码示例，配合开启浏览器渲染功能，清晰看到执行重新绘制（Paint）的元素</p>
+</li>
+<li>
+<p>注意 JSBin 中最好<strong>全屏</strong>查看效果，在 iframe 里看可能有问题</p>
+</li>
+</ul>
+</blockquote>
+<p></p>
+<h5 id="第一种流程全走一遍">第一种，流程全走一遍</h5>
+<ul>
+<li><a href="http://js.jirengu.com/jagel/1/edit?html,css,js,output" target="_blank" rel="noopener noreffer">div.remove()</a> 会触发当前消失，其他元素 relayout 重新布局</li>
+</ul>
+<h5 id="第二种跳过-layout">第二种，跳过 layout</h5>
+<ul>
+<li>说明没有改变元素的位置和大小，不需要变动布局</li>
+</ul>
+<ul>
+<li>比如说：只<a href="http://js.jirengu.com/jidam/1/edit?html,css,js,output" target="_blank" rel="noopener noreffer">改变背景颜色</a>，直接 repaint + composite</li>
+</ul>
+<h5 id="第三种跳过-layout-和-paint">第三种，跳过 layout 和 paint</h5>
+<ul>
+<li>没有改变位置、大小，也没有改颜色，只需要合成</li>
+</ul>
+<ul>
+<li>例如：只<a href="http://js.jirengu.com/wusew/1" target="_blank" rel="noopener noreffer">改变 transform</a>，则只需 composite 合成</li>
+<li>注意必须全屏查看效果，在 iframe 里看有问题</li>
+</ul>
+<p>​</p>
+<h3 id="每个属性触发什么流程">每个属性触发什么流程</h3>
+<blockquote>
+<p>CSS变态之处来了：挨个尝试吧</p>
+</blockquote>
+<p>还好，程序员喜欢分享</p>
+<p><a href="https://csstriggers.com/">https://csstriggers.com/</a>  这个网站已经把所有属性全试过了</p>
+<p></p>
+<ul>
+<li>Blink：谷歌 Chrome 浏览器的内核（一般只看 Chrome 性能渲染）</li>
+<li>Gecko：火狐浏览器 Firefox</li>
+<li>WebKit：苹果 Safari 浏览器</li>
+<li>EdgeHTML：微软 Edge 浏览器</li>
+</ul>
+<blockquote>
+<p>现在可以解释 <a href="#%e4%b8%80%e4%b8%aa%e6%9c%80%e7%ae%80%e5%8d%95%e7%9a%84%e4%be%8b%e5%ad%90" rel="">为什么</a> <strong>前端高手不用 left 做动画</strong>，而用 transform 做动画了</p>
+<ul>
+<li>因为执行 left 会触发3个流程：先布局、再绘制、最后合成</li>
+<li>而执行 transform 只会触发 1个流程：只合成</li>
+</ul>
+</blockquote>
+<p></p>
+<p></p>
+<p>​</p>
+<p>​</p>
+<h2 id="css动画优化">CSS动画优化</h2>
+<blockquote>
+<p>可以自己总结一篇博客。面试背不出来，可以让面试官去看博客</p>
+</blockquote>
+<blockquote>
+<p>CSS 性能优化，除了把 left 变成 transform ，还有什么？</p>
+<ul>
+<li>面试可能考察，但这个问题<strong>没什么技术含量</strong>，就是背</li>
+</ul>
+</blockquote>
+<h3 id="没什么技术含量">没什么技术含量</h3>
+<p>答案都在 <a href="https://developers.google.com/web/fundamentals/performance/rendering/stick-to-compositor-only-properties-and-manage-layer-count" target="_blank" rel="noopener noreffer">Google写的文章</a> 里，谁看完谁牛 X</p>
+<p></p>
+<ul>
+<li>
+<p><a href="https://developers.google.com/web/fundamentals/performance/rendering/optimize-javascript-execution" target="_blank" rel="noopener noreffer">优化 JS 的执行</a> （JavaScript）</p>
+</li>
+<li>
+<p><a href="https://developers.google.com/web/fundamentals/performance/rendering/reduce-the-scope-and-complexity-of-style-calculations" target="_blank" rel="noopener noreffer">缩小样式计算的范围并降低其复杂性</a> （优化 Style 过程）</p>
+</li>
+<li>
+<p><a href="https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing" target="_blank" rel="noopener noreffer">避免大型、复杂的布局和布局抖动</a>（优化 Layout 布局过程）</p>
+</li>
+<li>
+<p><a href="https://developers.google.com/web/fundamentals/performance/rendering/simplify-paint-complexity-and-reduce-paint-areas" target="_blank" rel="noopener noreffer">简化绘制的复杂度、减小绘制区域</a>（优化 Paint 绘制过程）</p>
+</li>
+<li>
+<p><a href="https://developers.google.com/web/fundamentals/performance/rendering/stick-to-compositor-only-properties-and-manage-layer-count" target="_blank" rel="noopener noreffer">坚持仅合成器的属性和管理层计数</a>（优化 Composite 合成过程）</p>
+</li>
+</ul>
+<blockquote>
+<p>上述每篇文章中的优化方法，都总结在【==TL;DR==（too long don&rsquo;t read 太长不看）】部分</p>
+<p>每条优化点之间，都没什么规律，就依靠死记硬背（面试问到，可能这些点，如果能答出1个，就得满分）</p>
+</blockquote>
+<h3 id="js优化">JS优化</h3>
+<p>使用 requestAnimationFrame 代替 setTimeout 或 setInterval</p>
+<h3 id="css优化">CSS优化</h3>
+<p>使用 will-change 或 translate（transform）</p>
+<h3 id="没错">没错</h3>
+<blockquote>
+<p>没错，完全就是死记硬背！</p>
+</blockquote>
+<blockquote>
+<p>如果面试官问，“ CSS 怎么优化 ”？（通常就是问动画怎么优化，性能上更低耗）</p>
+<ul>
+<li>动画尽量使用 will-change 或 translate（transform），不直接使用 left</li>
+<li>JS 控制的动画中，尽量不使用 setTimeout 和 setInterval，而使用 requestAnimationFrame</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h2 id="transform-全解">transform 全解</h2>
+<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform" target="_blank" rel="noopener noreffer">MDN</a> 上讲的非常详细</p>
+</blockquote>
+<h3 id="transform">transform</h3>
+<h4 id="四个常用功能">四个常用功能</h4>
+<ul>
+<li><a href="#transform%e4%b9%8btranslate" rel="">位移 translate</a>（常用）</li>
+<li><a href="#transform%e4%b9%8bscale" rel="">缩放 scale</a>（常用）</li>
+<li><a href="#transform%e4%b9%8brotate" rel="">旋转 rotate</a>（做加载动画可能用到）</li>
+<li><a href="#transform%e4%b9%8bskew" rel="">倾斜 skew</a>（不常用）</li>
+</ul>
+<h4 id="经验">经验</h4>
+<ul>
+<li>一般都需要配合 transition 过渡</li>
+<li>inline 元素不支持 transform，需要先变成 block</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="transform之translate">transform之translate</h3>
+<h4 id="常用写法">常用写法</h4>
+<blockquote>
+<p>可以写长度length和百分号percentage， ?表示可省略值</p>
+</blockquote>
+<ul>
+<li>
+<p><code>translateX(&lt;length-percentage&gt;)</code>   （横向）</p>
+</li>
+<li>
+<p><code>translateY（&lt;length-percentage&gt;)</code>    （纵向）</p>
+</li>
+<li>
+<p><code>translate(&lt;length-percentage&gt;,&lt;length-percentage&gt;?) </code></p>
+<ul>
+<li>可省略第二个值，只写第一个值，默认x轴</li>
+</ul>
+</li>
+<li>
+<p><code>translateZ(&lt;length&gt;)</code> （垂直于屏幕的方向）</p>
+<ul>
+<li>
+<p>在三维世界中，才能看出 Z 的变化。</p>
+<ul>
+<li>需要配合 perspective 属性，告知浏览器<strong>视点</strong>的位置 来形成三维。</li>
+<li>例：<strong><code>perspective: 1000px</code></strong> 指视点在（位于画面中心）距离屏幕 1000 像素的位置上。</li>
+</ul>
+</li>
+<li>
+<p>注意：是给父容器设置 perspective</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;wrapper&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;demo&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">#</span><span class="nn">demo</span><span class="p">{</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">height</span><span class="p">:</span> <span class="mi">200</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
+    <span class="k">margin</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="p">#</span><span class="nn">demo</span><span class="p">:</span><span class="nd">hover</span><span class="p">{</span>
+    <span class="k">transform</span><span class="p">:</span> <span class="nb">translateZ</span><span class="p">(</span><span class="mi">50</span><span class="kt">px</span><span class="p">);</span>  <span class="c">/* 元素在z轴（默认垂直屏幕方向）上的位置 */</span>
+  <span class="p">}</span>
+  <span class="p">.</span><span class="nc">wrapper</span><span class="p">{</span>
+    <span class="k">perspective</span><span class="p">:</span> <span class="mi">1000</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* 形成三维构图，标注视点位置 */</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">black</span><span class="p">;</span>
+  <span class="p">}</span> 
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>translate3d(x,y,z)</p>
+<ul>
+<li><strong><code>translate3d(50px,50px,200px);</code></strong>  同时设定3个轴上的位置</li>
+</ul>
+</li>
+<li>
+<p><a href="http://js.jirengu.com/xidiy/1/edit?html,css,output" target="_blank" rel="noopener noreffer">JSBin 演示</a></p>
+</li>
+</ul>
+<h4 id="经验-1">经验</h4>
+<ul>
+<li>
+<p>要学会看懂 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform" target="_blank" rel="noopener noreffer">MDN 的语法格式</a></p>
+</li>
+<li>
+<p>translate(-50%，-50%) 可做绝对定位元素的<strong>居中</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">#</span><span class="nn">demo</span><span class="p">{</span>
+  <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+  <span class="k">left</span><span class="p">:</span> <span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+  <span class="k">top</span><span class="p">:</span> <span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+  <span class="k">transform</span><span class="p">:</span> <span class="nb">translate</span><span class="p">(</span><span class="mi">-50</span><span class="kt">%</span><span class="p">,</span> <span class="mi">-50</span><span class="kt">%</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="transform之scale">transform之scale</h3>
+<h4 id="常用写法-1">常用写法</h4>
+<ul>
+<li><code>scaleX(&lt;number&gt;) </code></li>
+<li><code>scaleY(&lt;number&gt;) </code></li>
+<li><code>scale(&lt;number&gt;,&lt;number&gt;?)</code></li>
+<li><a href="http://js.jirengu.com/jucal/1/edit?html,css,output" target="_blank" rel="noopener noreffer">JSBin 演示</a></li>
+</ul>
+<h4 id="经验-2">经验</h4>
+<ul>
+<li>用得较少，因为缩放容易出现模糊
+<ul>
+<li>border 也会跟随缩放</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="transform之rotate">transform之rotate</h3>
+<h4 id="常用写法-2">常用写法</h4>
+<blockquote>
+<p>rotate 默认以 Z轴为中心轴，进行转动</p>
+</blockquote>
+<ul>
+<li><code>rotate（[&lt;angle&gt;|&lt;zero&gt;]) </code>   以Z轴为中心旋转</li>
+<li><code>rotateZ([&lt;angle&gt;|&lt;zero&gt;]) </code>   以Z轴为中心旋转</li>
+<li><code>rotateX([&lt;angle&gt;|&lt;zero&gt;])  </code> 以X轴为中心旋转</li>
+<li><code>rotateY（[&lt;angle&gt;|&lt;zero&gt;]) </code>   以Y轴为中心旋转</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-function/rotate3d" target="_blank" rel="noopener noreffer">rotate3d</a> 太复杂，无法用语言表述</li>
+<li><a href="http://js.jirengu.com/jiquq/1/edit?html,css,output" target="_blank" rel="noopener noreffer">JSBin 演示</a></li>
+</ul>
+<h4 id="经验-3">经验</h4>
+<ul>
+<li>一般用于360度旋转制作 loading</li>
+<li>用到时再搜索 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-function/rotate" target="_blank" rel="noopener noreffer">rotate MDN</a> 看文档</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="transform之skew">transform之skew</h3>
+<h4 id="常用写法-3">常用写法</h4>
+<ul>
+<li><code>skewX([&lt;angle&gt;|&lt;zero&gt;]) </code></li>
+<li><code>skewY（[&lt;angle&gt;|&lt;zero&gt;]) </code></li>
+<li><code>skew([&lt;angle&gt;I&lt;zero&gt;],[&lt;angle&gt;|&lt;zero&gt;]?) </code></li>
+<li><a href="http://js.jirengu.com/tazer/1/edit?html,css,output" target="_blank" rel="noopener noreffer">JSBin 演示</a></li>
+</ul>
+<h4 id="经验-4">经验</h4>
+<ul>
+<li>用得较少</li>
+<li>用到时再搜 skew MDN 文档</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="transform-多重效果">transform 多重效果</h3>
+<h4 id="组合使用">组合使用</h4>
+<ul>
+<li>
+<p><strong><code>transform: scale(0.5) translate(-100%, -100%);</code></strong></p>
+</li>
+<li>
+<p><strong><code>transform: none;</code></strong> 取消所有</p>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="实践用-transform-做红心">实践：用 transform 做红心</h2>
+<h3 id="跳动的心">跳动的心</h3>
+<ul>
+<li><a href="http://js.jirengu.com/nonud/1/edit?html,css,output" target="_blank" rel="noopener noreffer">JSBin</a></li>
+</ul>
+<h3 id="心得">心得</h3>
+<ul>
+<li>CSS需要你有想象力，而不是逻辑</li>
+<li>CSS给出的属性都很简单，但是可以组合得很复杂</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="transition-过渡">transition 过渡</h2>
+<blockquote>
+<p>学习资料：<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition" target="_blank" rel="noopener noreffer">MDN</a>、<a href="D:%5cBufan%5c[%e7%ac%94%e8%ae%b0]%5c%e9%98%b6%e6%ae%b5%e4%b8%80%5c03-H5&#43;CSS3%5ch5&#43;css3.md" rel="">bufan 文档</a></p>
+</blockquote>
+<h3 id="作用">作用</h3>
+<ul>
+<li>补充中间帧
+<ul>
+<li>已知开头位置，结尾位置，中间运动轨迹自动补齐</li>
+</ul>
+</li>
+</ul>
+<h3 id="语法">语法</h3>
+<blockquote>
+<p><strong><code>transition</code></strong> CSS 属性是 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition-property" target="_blank" rel="noopener noreffer"><code>transition-property</code></a>，<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition-duration" target="_blank" rel="noopener noreffer"><code>transition-duration</code></a>，<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition-timing-function" target="_blank" rel="noopener noreffer"><code>transition-timing-function</code></a> 和 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition-delay" target="_blank" rel="noopener noreffer"><code>transition-delay</code></a> 的一个<a href="https://developer.mozilla.org/en-US/docs/CSS/Shorthand_properties" target="_blank" rel="noopener noreffer">简写属性</a>。</p>
+<blockquote>
+<p><a href="http://js.jirengu.com/wasiv/1/edit?html,css,js,output" target="_blank" rel="noopener noreffer">JSBin 示例</a></p>
+</blockquote>
+</blockquote>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="nt">transition</span><span class="o">:</span> <span class="nt">属性名</span> <span class="nt">时长</span> <span class="nt">过渡方式</span> <span class="nt">延迟</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong><code>transition: left 200ms linear </code></strong>   属性名是指要给哪个属性添加过渡效果</p>
+</li>
+<li>
+<p>可以用 all 代表所有属性：width | height | left | right | margin-right  ……</p>
+<p><strong><code>transition: all 200ms </code></strong></p>
+</li>
+<li>
+<p>可以用逗号分隔两个不同属性</p>
+<p><strong><code>transition: left 200ms, top 400ms </code></strong></p>
+</li>
+<li>
+<p>时长 ：支持 秒 s  和  毫秒 ms 单位。0.5s 可以写成  .5s</p>
+</li>
+<li>
+<p>过渡方式有：linear（线性匀速） | ease（默认值：缓动） | ease-in | ease-out | ease- in-out | cubic-bezier | step-start | step-end | steps</p>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/timing-function" target="_blank" rel="noopener noreffer">具体含义</a>要靠数学知识</li>
+<li><a href="https://cubic-bezier.com/">https://cubic-bezier.com/</a>   测试运动曲线</li>
+</ul>
+</li>
+</ul>
+<h3 id="注意">注意</h3>
+<blockquote>
+<p>不学常态，学变态</p>
+</blockquote>
+<h4 id="并不是所有属性都能过渡">并不是所有属性都能过渡</h4>
+<ul>
+<li>
+<p>一个元素，切换可见状态</p>
+<ul>
+<li>
+<p>使用 display: none &lt;=&gt; display: block 没法过渡，会闪现、闪隐【元素消失，不占位置】</p>
+</li>
+<li>
+<p>使用 opacity: 0 &lt;=&gt;  opacity: 1   透明度控制可见状态【可实现过渡效果，<strong>缺点</strong>是元素消失仍占位置】</p>
+</li>
+<li>
+<p><strong>推荐</strong>使用 <strong><code>visibility: hidden</code></strong> &lt;=&gt; <strong><code>visibility: visible</code></strong> （不要问为什么）【缺点没法过渡、元素消失仍占位置】</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">button</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">demo</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">);</span>
+  <span class="cm">/* 解决隐藏后仍占位问题：延迟1s后，将元素删除 */</span>
+  <span class="cm">/* 方法一：使用延时器 */</span>
+  <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="nx">demo</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span> <span class="p">}</span> <span class="p">,</span><span class="mi">1000</span><span class="p">)</span>  
+  <span class="cm">/* 方法二: on事件可能有bug，推荐使用事件监听器 */</span>
+  <span class="nx">demo</span><span class="p">.</span><span class="nx">ontransitionend</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="nx">demo</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span> <span class="p">}</span>  <span class="cm">/* on事件 */</span>
+  <span class="nx">demo</span><span class="p">.</span><span class="nx">addEventLisener</span><span class="p">(</span><span class="s1">&#39;transitionend&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="nx">demo</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span> <span class="p">})</span>   <span class="cm">/* 事件监听器 */</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>display 和 visibility 的区别</p>
+<ul>
+<li>
+<p><a href="https://www.cnblogs.com/zrenj/p/9785835.html">https://www.cnblogs.com/zrenj/p/9785835.html</a></p>
+<p></p>
+</li>
+</ul>
+</li>
+<li>
+<p>background 颜色可以过渡吗？可以 。</p>
+<ul>
+<li><a href="http://js.jirengu.com/wasiv/3/edit?html,css,js,output" target="_blank" rel="noopener noreffer">查看示例</a></li>
+</ul>
+</li>
+<li>
+<p>opacity 透明度可以过渡吗？ 可以 。</p>
+<ul>
+<li><a href="http://js.jirengu.com/wasiv/5/edit?html,css,js,output" target="_blank" rel="noopener noreffer">查看示例</a></li>
+<li><strong>不推荐用透明度控制显示隐藏，推荐 visibility</strong></li>
+<li>opacity: 0 &lt;=&gt;  opacity: 1   可实现过渡效果，<strong>缺点</strong>是元素消失仍占位置，可通过 js 控制 remove() 该元素</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h3 id="过渡必须要有起始">过渡必须要有起始</h3>
+<blockquote>
+<p>起始：指一个属性的开始是一个值，该属性的结尾也有一个值。这样才能实现某属性的属性值的变化过渡，中间过渡的效果浏览器会自动补充</p>
+</blockquote>
+<ul>
+<li>一般只有一次动画，或者两次
+<ul>
+<li>一次：指只有进入动画</li>
+<li>两次：①进入动画、②离开动画</li>
+</ul>
+</li>
+<li>比如 hover 和 非 hover 状态的过渡，就是两次动画</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="如果除了起始还有中间点怎么办">如果除了起始，还有中间点，怎么办</h2>
+<blockquote>
+<p>例如：从红色，先变黄色，最后再变绿色，怎么实现</p>
+</blockquote>
+<p>有如下两种办法</p>
+<h3 id="方法-使用两次-transform">方法① 使用两次 transform</h3>
+<ul>
+<li>
+<p>流程：   .a === transform ===&gt; .b    然后   .b === transform ===&gt; .c</p>
+</li>
+<li>
+<p>如何知道到了中间点呢？</p>
+<ul>
+<li>
+<p>用 setTimeout 或者监听 transitionend 事件。</p>
+<blockquote>
+<p>给元素添加新的类名：执行第二段 transform 效果。</p>
+<ul>
+<li>注意：第二段 transform 中必须包含第一段动画效果，不然执行第二段动画可能还原初始位置，有 bug，可自行测试。</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p><a href="http://js.jirengu.com/vehuz/2/edit" target="_blank" rel="noopener noreffer">JSBin 示例</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="方法-使用-animation">方法② 使用 animation</h3>
+<ul>
+<li>声明关键帧</li>
+<li>添加动画</li>
+<li><a href="http://js.jirengu.com/peran/1/edit?html,css,output" target="_blank" rel="noopener noreffer">JSBin 示例</a></li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="animation-动画">animation 动画</h2>
+<h3 id="提问">提问</h3>
+<blockquote>
+<p>如何让动画停在最后一帧？</p>
+</blockquote>
+<ul>
+<li>
+<p>搜索 css animation stop at end</p>
+<ul>
+<li>
+<p>网友给出的答案是：加个 forwards</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="nt">animation</span><span class="o">:</span> <span class="nt">xxx</span> <span class="nt">1</span><span class="p">.</span><span class="nc">5s</span> <span class="nt">forwards</span><span class="o">;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p><a href="http://js.jirengu.com/lodoy/1/edit?html,css,output" target="_blank" rel="noopener noreffer">JSBin 演示</a></p>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="keyframes-完整语法">@keyframes 完整语法</h3>
+<h4 id="标准写法">标准写法</h4>
+<ul>
+<li>搜索 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes" target="_blank" rel="noopener noreffer">keyframes MDN</a> 讲得很清楚
+<ul>
+<li>一种写法是 from to ：只支持两种状态</li>
+<li>另一种写法是百分数：支持添加 n 个帧状态</li>
+</ul>
+</li>
+</ul>
+<p></p>
+<p></p>
+<p>​</p>
+<h3 id="animation-缩写语法">animation 缩写语法</h3>
+<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation" target="_blank" rel="noopener noreffer">animation MDN</a></p>
+</blockquote>
+<blockquote>
+<p><strong>animation</strong> 属性是 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-name" target="_blank" rel="noopener noreffer"><code>animation-name</code></a>，<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-duration" target="_blank" rel="noopener noreffer"><code>animation-duration</code></a>, <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-timing-function" target="_blank" rel="noopener noreffer"><code>animation-timing-function</code></a>，<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-delay" target="_blank" rel="noopener noreffer"><code>animation-delay</code></a>，<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-iteration-count" target="_blank" rel="noopener noreffer"><code>animation-iteration-count</code></a>，<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-direction" target="_blank" rel="noopener noreffer"><code>animation-direction</code></a>，<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-fill-mode" target="_blank" rel="noopener noreffer"><code>animation-fill-mode</code></a> 和 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation-play-state" target="_blank" rel="noopener noreffer"><code>animation-play-state</code></a> 属性的一个简写属性形式。</p>
+<p><a href="https://xiedaimala.com/tasks/597dbc7b-15e1-4f27-b814-d2151a63c34b/video_tutorials/046dd8ef-8f6f-4051-a233-d4c997113e24" target="_blank" rel="noopener noreffer">Jirengu 视频讲解</a></p>
+<p><a href="http://js.jirengu.com/gaxed/2/edit?html,css,js,output" target="_blank" rel="noopener noreffer">JSBin 演示</a></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="nt">animation</span><span class="o">:</span> <span class="nt">时长</span> <span class="o">|</span> <span class="nt">过渡方式</span> <span class="o">|</span> <span class="nt">延迟</span> <span class="o">|</span> <span class="nt">次数</span> <span class="o">|</span> <span class="nt">方向</span> <span class="o">|</span> <span class="nt">填充模式</span> <span class="o">|</span> <span class="nt">是否暂停</span> <span class="o">|</span> <span class="nt">动画名</span> <span class="o">;</span>  <span class="c">/* 位置任意 */</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>时长：1s 或者 1000ms</p>
+</li>
+<li>
+<p>过渡方式：跟 transition 取值一样，如 linear 。默认是 ease 先快后慢</p>
+</li>
+<li>
+<p>延迟时间：1s 或 1000ms</p>
+</li>
+<li>
+<p>次数：3 或者 2.4 或者 <a href="" rel="">infinite</a>（无限次）</p>
+</li>
+<li>
+<p>方向：reverse | <strong><a href="" rel="">alternate</a></strong>（交替，非常适合做加载动画） | alternate-reverse</p>
+</li>
+<li>
+<p>填充模式：none | <a href="" rel="">forwards</a>（保持在动画终点位置） | backwards | both</p>
+</li>
+<li>
+<p>是否暂停：paused | running</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">pauseBtn</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="nx">demo</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">animationPlayState</span> <span class="o">=</span> <span class="s1">&#39;paused&#39;</span> <span class="p">}</span> 
+<span class="cm">/* 点击按钮，暂停demo元素的动画 */</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>更多属性值的效果，需要自己尝试。<a href="http://js.jirengu.com/gaxed/3/edit" target="_blank" rel="noopener noreffer">JSBin 演示</a></p>
+</li>
+<li>
+<p>以上所有属性都有对应的单独属性</p>
+<ul>
+<li>
+<pre><code>**animation** 只是这些单独属性的**缩写**，上述效果可以通过单独的属性设置
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="实践用-animation-做红心">实践：用 animation 做红心</h2>
+<blockquote>
+<p><a href="http://js.jirengu.com/hosug/1/edit?html,css,output" target="_blank" rel="noopener noreffer">JSBin 示例</a></p>
+</blockquote>]]></description>
+</item><item>
+    <title>Re：从零开始の CSS 学习笔记——定位</title>
+    <link>http://samrks.github.io/20200729-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%AE%9A%E4%BD%8D/</link>
+    <pubDate>Wed, 29 Jul 2020 13:01:21 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/20200729-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%AE%9A%E4%BD%8D/</guid>
+    <description><![CDATA[<p>复习盒模型、div 的分层、新属性 position 详解、层叠上下文</p>
+<p>​</p>
+<h2 id="布局和定位的区别">布局和定位的区别</h2>
+<p>区别大了</p>
+<ul>
+<li>布局是<strong>屏幕平面</strong>上的</li>
+<li>定位是<strong>垂直于屏幕</strong>的</li>
+</ul>
+<p>​</p>
+<h2 id="css-定位">CSS 定位</h2>
+<blockquote>
+<p>还得从<strong>文档流</strong>和<strong>盒模型</strong>说起（两个非常重要的概念）</p>
+</blockquote>
+<p>​</p>
+<h2 id="复习盒模型">复习盒模型</h2>
+<p>margin 外边距、border 边框、padding 内边距、content 内容</p>
+<p>background 背景</p>
+<p></p>
+<h3 id="问两个问题">问两个问题</h3>
+<h4 id="背景的范围是从哪到哪">背景的范围是从哪到哪？</h4>
+<ul>
+<li>【A】border 内边沿围成的区域 ？【B】border 外边沿围成的区域 ？</li>
+</ul>
+<ul>
+<li>如何验证自己的猜想？
+<ul>
+<li>border 半透明试试，答案是【B】</li>
+<li>注意：在浏览器的元素样式中，可通过 【alt + 上下方向键】，对半透明数值进行 0.1 的 ± 调整</li>
+</ul>
+</li>
+</ul>
+<h4 id="从左边看一个-div是什么样子">从左边看一个 div，是什么样子？</h4>
+<blockquote>
+<p>元素是有层叠关系的，脑内模拟一个三维立体结构，从左边看一个 div，是什么样子？</p>
+</blockquote>
+<ul>
+<li>background 在文字后面然后呢？</li>
+<li>如何验证自己的猜想？用代码证明即可。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;demo&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">text</span><span class="p">&gt;</span>你好<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">.</span><span class="nc">demo</span><span class="p">{</span>
+    <span class="k">box-sizing</span><span class="p">:</span> <span class="kc">border-box</span><span class="p">;</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">5</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">height</span><span class="p">:</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">background</span><span class="p">:</span> <span class="kc">blue</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="p">.</span><span class="nc">text</span><span class="p">{</span>
+    <span class="k">font-size</span><span class="p">:</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* 让字足够大，测试字能否覆盖住border */</span>
+    <span class="k">color</span><span class="p">:</span> <span class="kc">green</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>结论：</p>
+<ul>
+<li>文字在最上层，中间是 border，最底层是 background 背景</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="代码验证一个-div-的分层">代码验证：一个 div 的分层</h2>
+<blockquote>
+<p>三维立体模型 （SketchUp）</p>
+</blockquote>
+<ul>
+<li>先给出结论（三维图），再在下面进行代码验证</li>
+</ul>
+<p></p>
+<p></p>
+<p>​</p>
+<h3 id="块级子元素与内联子元素的分层位置">块级子元素与内联子元素的分层位置</h3>
+<blockquote>
+<p>让块级元素与内联元素，出现重叠，就可以判断哪个层级更高</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">.</span><span class="nc">demo</span><span class="p">{</span>
+    <span class="k">background</span><span class="p">:</span> <span class="nb">rgb</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span><span class="mi">184</span><span class="p">,</span><span class="mi">211</span><span class="p">);</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">200</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">height</span><span class="p">:</span> <span class="mi">200</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">15</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
+    <span class="k">padding</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="p">.</span><span class="nc">childDiv</span><span class="p">{</span>
+    <span class="k">background</span><span class="p">:</span> <span class="kc">white</span><span class="p">;</span>
+    <span class="k">height</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">margin-top</span><span class="p">:</span> <span class="mi">-10</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* 测试块级元素与文字的分层位置，将div向上移动，与文字重叠，看是否会遮挡文字 */</span>
+  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;demo&#34;</span><span class="p">&gt;</span>
+  文字内容
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;childDiv&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>如上，<code>“文字内容”</code> 和 <code>div.childDiv</code> 属于同级关系</p>
+</li>
+<li>
+<p>结论：</p>
+<ul>
+<li>
+<p>块级元素位于文字下层</p>
+<p></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h3 id="浮动子元素与内联子元素的分层位置">浮动子元素与内联子元素的分层位置</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">.</span><span class="nc">demo</span><span class="p">{</span> <span class="err">...</span> <span class="p">}</span>
+  <span class="p">.</span><span class="nc">float</span><span class="p">{</span>
+    <span class="k">float</span><span class="p">:</span> <span class="kc">left</span><span class="p">;</span>
+    <span class="k">background</span><span class="p">:</span> <span class="kc">white</span><span class="p">;</span>
+    <span class="k">height</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">margin-right</span><span class="p">:</span> <span class="mi">-10</span><span class="kt">px</span><span class="p">;</span>  
+  	<span class="c">/* 测试浮动元素与文字的分层位置，将浮动元素向右移动，与文字重叠，看是否会遮挡文字 */</span>
+  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;demo&#34;</span><span class="p">&gt;</span>
+  文字内容
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;float&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>结论：</p>
+<ul>
+<li>
+<p>浮动元素位于文字下层</p>
+<p></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h3 id="浮动子元素与块级子元素的分层位置">浮动子元素与块级子元素的分层位置</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="p">.</span><span class="nc">demo</span><span class="p">{</span><span class="err">...</span><span class="p">}</span>
+  <span class="p">.</span><span class="nc">float</span><span class="p">{</span><span class="err">...</span><span class="p">}</span>
+  <span class="p">.</span><span class="nc">childDiv</span><span class="p">{</span>
+    <span class="k">height</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">background</span><span class="p">:</span> <span class="kc">orange</span><span class="p">;</span>
+    <span class="k">margin-top</span><span class="p">:</span> <span class="mi">-10</span><span class="kt">px</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;demo&#34;</span><span class="p">&gt;</span>
+  文字内容
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;float&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;childDiv&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>结论：
+<ul>
+<li>
+<p>浮动内容（脱离文档流），高于 childDiv（普通文档流元素），低于文字</p>
+</li>
+<li>
+<p>所以，==脱离文档流==，实际上就是从普通文档流中跳出，<strong>比文档流的层级稍微高一点</strong></p>
+<p></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h3 id="结论">结论</h3>
+<ul>
+<li>
+<p>文字内容层级最高，代码写在下面的文字内容，会覆盖上面的</p>
+</li>
+<li>
+<p>只有浮动元素会<strong>脱离文档流</strong>（从普通文档流中跳出），比普通文档流的层级稍高</p>
+<p></p>
+<p></p>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="新属性-position">新属性 position</h2>
+<h3 id="position-取值">position 取值</h3>
+<ul>
+<li>
+<p>static 默认值，当前元素待在文档流里</p>
+</li>
+<li>
+<p>relative 相对定位，升起来，但不脱离文档流</p>
+</li>
+<li>
+<p>absolute 绝对定位，定位基准是相对于祖先里的非 static 祖先进行定位</p>
+</li>
+<li>
+<p>fixed 固定定位，定位基准是 viewport 视口</p>
+<ul>
+<li>有诈：后来 css 出的 transform 属性，使 fixed 无法相对 viewport 视口定位，这就是 CSS 的不正交</li>
+</ul>
+</li>
+<li>
+<p>sticky 粘滞定位，不好描述直接举例 ↓↓</p>
+<ul>
+<li>
+<p>特别适合做导航：正常状态会存在于文档流中，当向下滚动到 sticky 元素且 sticky 元素即将移出视口时，sticky 元素会始终保持在视口顶部，不会随文档流继续滚动。</p>
+</li>
+<li>
+<p>兼容性特别差，可以在 <a href="https://caniuse.com/#search=sticky" target="_blank" rel="noopener noreffer">caniuse</a> 中查询。 （黄色是需要加前缀or部分支持）</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="经验">经验</h3>
+<ul>
+<li>如果你写了 absolute，一般都得补一个 relative</li>
+<li>如果你写了 absolute 或 fixed，一定要补 top 和 left</li>
+<li>sticky 兼容性很差，主要用于<strong>面试装逼</strong></li>
+</ul>
+<p>​</p>
+<h3 id="position-relative">position: relative</h3>
+<h4 id="使用场景">使用场景</h4>
+<ul>
+<li>用于做位移（很少用），将两个元素对齐</li>
+<li>用于给 absolute 元素做爸爸</li>
+</ul>
+<h4 id="配合-z-index">配合 z-index</h4>
+<ul>
+<li><code>z-index: auto</code> 默认值，不创建新<a href="#%e4%bb%80%e4%b9%88%e6%98%af%e5%b1%82%e5%8f%a0%e4%b8%8a%e4%b8%8b%e6%96%87" rel="">层叠上下文</a></li>
+<li><code>z-index: 0/1/2</code></li>
+<li><code>z-index: -1/-2</code></li>
+</ul>
+<h4 id="经验-1">经验</h4>
+<ul>
+<li>写 <code>z-index: 9999</code> 的都是 菜B</li>
+<li>要学会管理 z-index</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="position-absolute">position: absolute</h3>
+<h4 id="使用场景-1">使用场景</h4>
+<ul>
+<li>
+<p>脱离原来的位置，另起一层，比如<strong>对话框的关闭按钮</strong>，通常是通过绝对定位实现的</p>
+</li>
+<li>
+<p>鼠标提示</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;height:100px;&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>
+  点击
+  <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;tips&#34;</span><span class="p">&gt;</span>提示内容<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    
+<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+  <span class="nt">button</span><span class="p">{</span> <span class="k">position</span><span class="p">:</span> <span class="kc">relative</span><span class="p">;</span> <span class="p">}</span>
+  <span class="nt">button</span> <span class="nt">span</span><span class="p">{</span>
+    <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
+    <span class="k">white-space</span><span class="p">:</span> <span class="kc">nowrap</span><span class="p">;</span>
+    <span class="k">bottom</span><span class="p">:</span> <span class="nb">calc</span><span class="p">(</span><span class="mi">100</span><span class="kt">%</span> <span class="o">+</span> <span class="mi">10</span><span class="kt">px</span><span class="p">);</span>
+    <span class="k">left</span><span class="p">:</span> <span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+    <span class="k">transform</span><span class="p">:</span> <span class="nb">translateX</span><span class="p">(</span><span class="mi">-50</span><span class="kt">%</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nt">button</span> <span class="nt">span</span><span class="p">{</span> <span class="k">display</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span> <span class="p">}</span>
+  <span class="nt">button</span><span class="p">:</span><span class="nd">hover</span> <span class="nt">span</span><span class="p">{</span> <span class="k">display</span><span class="p">:</span> <span class="kc">inline</span><span class="o">-</span><span class="kc">block</span><span class="p">;</span> <span class="p">}</span>   <span class="c">/* 鼠标悬浮时，显示span */</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="配合-z-index-1">配合 z-index</h4>
+<h4 id="经验-2">经验</h4>
+<ul>
+<li>
+<p>很多 菜B 都以为 absolute 是相对于 relative 定位的</p>
+<ul>
+<li><strong>absolute 是相对于 祖先元素中最近的一个定位元素</strong>
+<ul>
+<li>只要 position 属性值不是 static 的元素，就是定位元素</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>某些浏览器上，如果写了 absolute，不写 top / left / bottom / right 会位置错乱  （4个至少写2个）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">demo</span><span class="p">{</span>
+  <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+  <span class="k">top</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">left</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>善用 <code>left: 100%</code> （效果通常是该元素会出现在定位元素的最右边）</p>
+</li>
+<li>
+<p>善用 <code>left: 50%;</code> + 加负 margin （负宽度的一半）：实现居中</p>
+<ul>
+<li>也可以用  <code>left: 50%;</code> + <code>transform: translateX(-50%);</code>  实现，优点是不需要自己计算宽度的一半</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="position-fixed">position: fixed</h3>
+<blockquote>
+<p>fixed 是相对于【视口】定位的</p>
+<ul>
+<li>视口，就是浏览器中普通用户能看到的部分（不包括滚动条）</li>
+</ul>
+</blockquote>
+<h4 id="使用场景-2">使用场景</h4>
+<ul>
+<li>烦人的广告</li>
+<li>回到顶部按钮</li>
+</ul>
+<h4 id="配合-z-index-2">配合 z-index</h4>
+<h4 id="经验-3">经验</h4>
+<ul>
+<li>
+<p>如果 fixed 元素所在的容器，具有某些属性，可能会导致 fixed 元素不再相对于视口定位。</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span> <span class="k">position</span><span class="p">:</span> <span class="kc">relative</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">fixed</span><span class="p">{</span> <span class="k">position</span><span class="p">:</span> <span class="kc">fixed</span><span class="p">;</span> <span class="k">left</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span> <span class="k">bottom</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span> <span class="p">}</span>  
+<span class="p">.</span><span class="nc">container</span><span class="p">{</span> <span class="k">transform</span><span class="p">:</span> <span class="nb">scale</span><span class="p">(</span><span class="mf">0.9</span><span class="p">);</span> <span class="p">}</span> <span class="c">/* 此时fixed元素就不再相对于视口定位 */</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>总结：<strong>不要把 fixed 元素放到 具有 transform 属性的容器中</strong>，可能会产生奇怪的bug（不正交：调这个元素却影响了另一个元素）</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>手机上尽量不要用这个属性</strong>，坑很多，无穷无尽的bug。不信你搜索一下「 移动端 fixed 」
+<ul>
+<li>用了，可能就开始996了。一个bug可能引出10个bug</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="层叠上下文">层叠上下文</h2>
+<h3 id="div分层-与-position">div分层 与 position</h3>
+<blockquote>
+<ul>
+<li>任意一个元素的 position 取值非 static 时，就成为了定位元素。定位元素的层级，立马超越内联文字，成为最上层元素（跑到所有元素最上层）</li>
+<li>z-index，默认是 auto
+<ul>
+<li>所有定位元素，会以内联文字层为底层，随着 z-index 递增，层级也会递增</li>
+<li>如果 z-index 为负值，则层级比 background 还低</li>
+<li>（可以无限向下，但是不能低于层叠上下文，也就是不能低于 html ，低于html还有什么意义）</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p></p>
+<h3 id="什么是层叠上下文">什么是层叠上下文</h3>
+<blockquote>
+<p>也叫堆叠上下文</p>
+<p>层叠上下文，会把所有元素包起来。</p>
+<ul>
+<li>
+<p>默认的层叠上下文，是 html 元素，html 就是会把所有元素包起来</p>
+</li>
+<li>
+<p>其他元素，也会因为拥有某些属性而变成层叠上下文（导致 z-index 需要重新计算）</p>
+</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h4 id="比喻">比喻</h4>
+<blockquote>
+<p>层叠上下文对 z-index 的影响</p>
+</blockquote>
+<ul>
+<li>每个层叠上下文就是一个新的小世界（作用域）</li>
+<li>这个小世界里面的 z-index 跟外界无关</li>
+<li><strong>处在同一个小世界的 z-index 才能比较</strong></li>
+<li><a href="http://js.jirengu.com/gewob/1/edit?html,css,output" target="_blank" rel="noopener noreffer">JSBin 示例</a>
+<ul>
+<li>a 和 b2 处于同一个层叠小世界，由 container 创造的，如果 container 没有设定 z-index，那么 a 和 b2 就同处于 html 的作用域里面，是具有可比性的。</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h4 id="哪些不正交的属性可以创建层叠上下文">哪些不正交的属性可以创建层叠上下文</h4>
+<blockquote>
+<p>最简单的就是定位元素设置 z-index = 0 ，就会创建一个层叠上下文</p>
+</blockquote>
+<ul>
+<li>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Understanding_z_index/The_stacking_context" target="_blank" rel="noopener noreffer">MDN文档</a>有写</p>
+<ol>
+<li>文档根元素 html 自成一个层叠上下文</li>
+<li>z-index 不为 auto 的定位元素，会开启一个小世界（作用域）</li>
+<li>元素的 opacity 小于1，就会创建一个层叠上下文（因为 opacity 会影响内部所有元素）</li>
+<li><code>position: fixed;</code> 一定会创建层叠上下文</li>
+<li>…</li>
+</ol>
+<ul>
+<li>需要记忆的有：
+<ul>
+<li>z-index=0时会创建层叠上下文</li>
+<li>flex元素内部会形成层叠上下文</li>
+<li>opacity 不为1 ，就会创建层叠上下文</li>
+<li>具有 transform 的元素，会形成一个 层叠上下文</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>知道这些知识的面试官也不太多，不用花时间背</strong></p>
+</li>
+<li>
+<p>忘了就搜「 层叠上下文 MDN 」</p>
+</li>
+<li>
+<p>你说 CSS 为什么不单独创建一个属性做这个事</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="nt">例如</span><span class="err">：</span> <span class="nt">xxxdisabled</span><span class="o">:</span> <span class="nt">true</span><span class="o">;</span> <span class="c">/* true就创建层叠上下文，false就不创建；css并没有这种直接功能开关*/</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>这就是css的难学之处，互相交叉影响，错综复杂（不正交）</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="负-z-index-与层叠上下文的关系">负 z-index 与层叠上下文的关系</h3>
+<blockquote>
+<p><a href="http://js.jirengu.com/modez/1/edit?html,css,output" target="_blank" rel="noopener noreffer">JSBin 示例</a></p>
+<ul>
+<li>.demo 的 z-index = -1，会使 demo 出现在文档流的 bg 的后面</li>
+<li>z-index 是默认 auto 时，不具有层叠上下文</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>记住 ：负 z-index 逃不出 层叠上下文的小世界</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;demo&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span>
+  <span class="k">background</span><span class="p">:</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mf">0.5</span><span class="p">);</span>
+  <span class="k">height</span><span class="p">:</span> <span class="mi">200</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">position</span><span class="p">:</span> <span class="kc">relative</span><span class="p">;</span>
+  <span class="c">/* z-index 是默认 auto 时，不具有层叠上下文，所以添加z-index=0，创建层叠上下文 */</span>
+  <span class="k">z-index</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span> <span class="c">/* 注释这行看看 */</span>    
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">container</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">demo</span><span class="p">{</span>
+  <span class="k">width</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">height</span><span class="p">:</span> <span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">background</span><span class="p">:</span> <span class="kc">red</span><span class="p">;</span>
+  <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+  <span class="k">z-index</span><span class="p">:</span> <span class="mi">-1</span><span class="p">;</span> <span class="c">/* 因为上面z-index:0创建了层叠上下文，所以demo无法逃出这个小世界，不可能比container低 */</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>图一：当 container 不是层叠上下文（也就是没有 z-index: 0; ）时，demo 是 <code>z-index = -1</code> 存在于容器bg之下</p>
+<p>图二：当 container 创建层叠上下文，demo 就无法跳出容器之外</p>
+<p>​</p>
+<p>总结：</p>
+<blockquote>
+<p>z-index = -1  不一定存在于容器的背景之下。当这个容器是一个层叠上下文时，就不可能存在于容器之外</p>
+</blockquote>]]></description>
+</item><item>
     <title>Re：从零开始の CSS 学习笔记——布局（下）</title>
-    <link>http://samrks.github.io/20200726-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8B/</link>
+    <link>http://samrks.github.io/20200726-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%B8%83%E5%B1%80-%E4%B8%8B/</link>
     <pubDate>Sun, 26 Jul 2020 13:26:52 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200726-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8B/</guid>
+    <guid>http://samrks.github.io/20200726-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%B8%83%E5%B1%80-%E4%B8%8B/</guid>
     <description><![CDATA[<p>CSS 布局篇（下）：Grid 布局。</p>
 <p>​</p>
 <h2 id="如何在两套布局中切换">如何在两套布局中切换</h2>
@@ -835,10 +2236,10 @@
 </div>]]></description>
 </item><item>
     <title>Re：从零开始の CSS 学习笔记——布局（上）</title>
-    <link>http://samrks.github.io/20200725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8A/</link>
+    <link>http://samrks.github.io/20200725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%B8%83%E5%B1%80-%E4%B8%8A/</link>
     <pubDate>Sat, 25 Jul 2020 16:16:55 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%B8%83%E5%B1%80-%E4%B8%8A/</guid>
+    <guid>http://samrks.github.io/20200725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%B8%83%E5%B1%80-%E4%B8%8A/</guid>
     <description><![CDATA[<p>CSS 布局篇（上）： Float 布局、Flex 布局 。</p>
 <p>​</p>
 <p>​</p>
@@ -1940,10 +3341,10 @@
 </div><p></p>]]></description>
 </item><item>
     <title>Re：从零开始の CSS 学习笔记——基础篇</title>
-    <link>http://samrks.github.io/20200724-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%9F%BA%E7%A1%80%E7%AF%87/</link>
+    <link>http://samrks.github.io/20200724-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%9F%BA%E7%A1%80%E7%AF%87/</link>
     <pubDate>Sat, 25 Jul 2020 02:12:24 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200724-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84-css-%E5%9F%BA%E7%A1%80%E7%AF%87/</guid>
+    <guid>http://samrks.github.io/20200724-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%9F%BA%E7%A1%80%E7%AF%87/</guid>
     <description><![CDATA[<p>熬夜总结 – CSS 基础篇 。🤞🏻 Nobody knows CSS than me !! 🤗</p>
 <p></p>
 <h2 id="css-的历史">CSS 的历史</h2>
