@@ -620,7 +620,7 @@
 <p>​</p>
 <h2 id="transition-过渡">transition 过渡</h2>
 <blockquote>
-<p>学习资料：<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition" target="_blank" rel="noopener noreffer">MDN</a>、<a href="D:%5cBufan%5c[%e7%ac%94%e8%ae%b0]%5c%e9%98%b6%e6%ae%b5%e4%b8%80%5c03-H5&#43;CSS3%5ch5&#43;css3.md" rel="">bufan 文档</a></p>
+<p>学习资料：<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition" target="_blank" rel="noopener noreffer">MDN</a></p>
 </blockquote>
 <h3 id="作用">作用</h3>
 <ul>
@@ -3703,7 +3703,7 @@
 <td>添加定位、z-index、media，不用管</td>
 </tr>
 <tr>
-<td>CSS  2.1  ==</td>
+<td>**CSS  2.1 **</td>
 <td>2004~2011年</td>
 <td>使用最广泛的版本（IE支持）</td>
 </tr>
@@ -3818,7 +3818,7 @@
 </ul>
 </blockquote>
 <blockquote>
-<p>体系化学习 CSS 和 HTML 的过程完全一致（可以查看html概览.md）</p>
+<p>体系化学习 CSS 和 HTML 的过程完全一致</p>
 </blockquote>
 <h3 id="学一门语言必须学会什么">学一门语言必须学会什么</h3>
 <ul>
@@ -4436,7 +4436,7 @@
 <blockquote>
 <p>脱离文档流的元素，那么它所在的容器，就不会把它计算进高度中</p>
 <ul>
-<li><strong>脱离文档流</strong>，就是从普通文档流中跳出，比普通文档流的层级稍高 <a href="D:%5cJirengu%5c%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c3-CSS%e5%85%a8%e8%a7%a3%5c04-CSS%e5%ae%9a%e4%bd%8d.md" rel="">查看详解</a></li>
+<li><strong>脱离文档流</strong>，就是从普通文档流中跳出，比普通文档流的层级稍高</li>
 </ul>
 </blockquote>
 <ul>

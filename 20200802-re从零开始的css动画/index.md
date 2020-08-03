@@ -546,7 +546,7 @@ https://csstriggers.com/  这个网站已经把所有属性全试过了
 
 ## transition 过渡
 
->   学习资料：[MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition)、[bufan 文档](D:\Bufan\[笔记]\阶段一\03-H5+CSS3\h5+css3.md)
+>   学习资料：[MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition)
 
 ### 作用
 
