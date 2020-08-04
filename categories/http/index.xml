@@ -5,12 +5,12 @@
         <description>HTTP - 分类 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
             <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Tue, 04 Aug 2020 23:58:43 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/categories/http/" rel="self" type="application/rss+xml" /><item>
-    <title>前端也得懂点儿 HTTP（上）</title>
+    <title>前端也得懂点儿的 HTTP —— 浅析 URL</title>
     <link>http://samrks.github.io/20200804-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8A/</link>
     <pubDate>Tue, 04 Aug 2020 23:58:43 &#43;0800</pubDate>
     <author>作者</author>
     <guid>http://samrks.github.io/20200804-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8A/</guid>
-    <description><![CDATA[<p>本文主要内容围绕 URL ，为后面学 HTTP 做个铺垫</p>
+    <description><![CDATA[<p>本文主要围绕 URL ，为了解 HTTP 做个铺垫</p>
 <p>​</p>
 <h1 id="url-是什么">URL 是什么</h1>
 <h2 id="先导">先导</h2>
@@ -32,9 +32,14 @@
 <blockquote>
 <p>要学习 URL 、HTTP，得先从 IP 讲起（⭐剧透：HTTP 的 P  和  IP 的 P 之间有重要联系）</p>
 </blockquote>
-<p>IP：Internet（因特网==互联网，整个人类组成的网络就叫互联网，比WWW更加底层）protocol（协议）</p>
+<p>IP：</p>
 <ul>
-<li>由此可见 IP 也是非常底层的，没有 IP 就不能上网</li>
+<li>
+<p>Internet（因特网==互联网，整个人类组成的网络就叫互联网，比WWW更加底层）protocol（协议）</p>
+</li>
+<li>
+<p>由此可见 IP 也是非常底层的，没有 IP 就不能上网</p>
+</li>
 </ul>
 <p>Internet Protocal 主要约定了两件事：</p>
 <ul>
@@ -126,6 +131,9 @@
 </ol>
 <p>​</p>
 <h3 id="路由器的功能">路由器的功能</h3>
+<blockquote>
+<p>把内网的请求，路由到外部，把外部的响应，路由到内部。具有双向路由的功能，所以也被称为网关</p>
+</blockquote>
 <ol>
 <li>现在路由器有两个 IP，一个外网 IP（电信分配的）和一个内网 IP（自己分配给自己的）</li>
 <li>内网中的设备可以互相访问，但是不能直接访问外网</li>
@@ -168,7 +176,7 @@
 <li>0.0.0.0 不表示任何设备</li>
 </ol>
 <p>​</p>
-<p>问：hosts 文件在哪？</p>
+<h4 id="问hosts-文件在哪">问：hosts 文件在哪？</h4>
 <blockquote>
 <p>答： 在 Windows 系统中，hosts 位于 C:\Windows\System32\drivers\etc\hosts 。在 macOS / Linux系统中，hosts 位于 /etc/hosts</p>
 </blockquote>
@@ -243,7 +251,7 @@ http://ryuuks:8080/index.html
 <p>​</p>
 <h3 id="我怎么知道应该用什么端口">我怎么知道应该用什么端口</h3>
 <blockquote>
-<p><a href="https://zh.wikipedia.org/wiki/TCP/UDP%E7%AB%AF%E5%8F%A3%E5%88%97%E8%A1%A8#0%E5%88%B01023%E5%8F%B7%E7%AB%AF%E5%8F%A3" target="_blank" rel="noopener noreffer">维基百科</a>一个一个列出来了，需要的时候就对应查找</p>
+<p><a href="https://zh.wikipedia.org/wiki/TCP/UDP%E7%AB%AF%E5%8F%A3%E5%88%97%E8%A1%A8#0%E5%88%B01023%E5%8F%B7%E7%AB%AF%E5%8F%A3" target="_blank" rel="noopener noreffer">维基百科</a>一个一个列出来了，需要的时候就对应查找：每个端口用来做什么</p>
 </blockquote>
 <table>
 <thead>
@@ -374,6 +382,7 @@ http://ryuuks:8080/index.html
 <p>​</p>
 <h2 id="域名是什么">域名是什么</h2>
 <blockquote>
+<p>域名就是对 IP 起一个友好的名字。</p>
 <p>域名是以 .com  .net  .org  …  结尾的字符串，仅此而已。需要花钱购买</p>
 <p>如：qq.com</p>
 </blockquote>
@@ -440,13 +449,13 @@ http://ryuuks:8080/index.html
 </blockquote>
 <ol>
 <li>
-<p>一个域名可以对应不同 IP</p>
+<p>一个域名可以对应不同 IP（这个叫 <strong>负载均衡</strong>）</p>
 <ul>
-<li>这个叫做<strong>均衡负载</strong>，防止一台机器扛不住</li>
+<li>这个叫做均衡负载，防止一台机器扛不住</li>
 </ul>
 </li>
 <li>
-<p>一个 IP 可以对应不同域名</p>
+<p>一个 IP 可以对应不同域名（这个叫 <strong>共享主机</strong>）</p>
 <ul>
 <li>比如6个人合买一台主机，这台主机服务6个域名</li>
 </ul>
@@ -552,6 +561,9 @@ http://ryuuks:8080/index.html
 <li>是同一个域名吗？不是</li>
 </ul>
 <h4 id="他们是什么关系">他们是什么关系</h4>
+<blockquote>
+<p><a href="http://www.baidu.com">www.baidu.com</a> 和 baidu.com</p>
+</blockquote>
 <ul>
 <li>com 是顶级域名（com 全写 company 公司，org 非营利性组织）</li>
 <li>baidu.com 是二级域名（俗称一级域名）父域名</li>
@@ -781,6 +793,50 @@ http://ryuuks:8080/index.html
 <p>​</p>
 <blockquote>
 <p>那么 HTTP 到底是怎么规定请求格式和响应格式的？  下回分解 ✋</p>
-</blockquote>]]></description>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h2 id="习题">习题</h2>
+<blockquote>
+<p>关于 <a href="http://www.baidu.com">www.baidu.com</a> 和 baidu.com，正确的有（多选）<a href="2,3" rel="">答案</a></p>
+</blockquote>
+<ol>
+<li>是同一个域名</li>
+<li>是不同的域名</li>
+<li>它们还有相同的一级域名 baidu.com</li>
+</ol>
+<blockquote>
+<p>关于 hosts 文件，正确的有（多选） <a href="1,2,4" rel="">答案</a></p>
+</blockquote>
+<ol>
+<li>hosts 文件中以 # 开头的表示注释</li>
+<li>hosts 中可以添加一行 127.0.0.1 frank，让 frank 成为 127.0.0.1 的别称</li>
+<li>hosts 中可以添加一行 frank 127.0.0.1，让 frank 成为 127.0.0.1 的别称</li>
+<li>hosts 一般需要用管理员权限才能编辑</li>
+</ol>
+<blockquote>
+<p>HTTP 的英文全称是 <strong>____</strong>（注意大小写不要错了）</p>
+</blockquote>
+<ul>
+<li>HyperText Transfer Protocol</li>
+</ul>
+<blockquote>
+<p>DNS 的英文全称是 <strong>____</strong>（注意大小写不要错了）</p>
+</blockquote>
+<ul>
+<li>Domain Name System</li>
+</ul>
+<blockquote>
+<p>URL 包含哪些部分？（多选）<a href="1,2,3,4,5,6" rel="">答案</a></p>
+</blockquote>
+<ol>
+<li>协议</li>
+<li>域名或IP</li>
+<li>端口</li>
+<li>路径</li>
+<li>查询参数</li>
+<li>锚点</li>
+<li>get 或 post</li>
+</ol>]]></description>
 </item></channel>
 </rss>
