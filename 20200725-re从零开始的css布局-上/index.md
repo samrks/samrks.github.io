@@ -7,9 +7,9 @@ CSS 布局篇（上）： Float 布局、Flex 布局 。  <!--more-->
 
 ​		
 
-Float 示例代码  http://js.jirengu.com/wiwuh/3/edit?html,css,output
+Float 示例代码  https://jsbin.com/vobenim/edit?html,css,output
 
-Flex 示例代码  http://js.jirengu.com/pakez/2/edit?html,css,output
+Flex 示例代码  https://jsbin.com/biluwan/edit?html,css,output
 
 Flex 青蛙游戏  https://flexboxfroggy.com/#zh-cn
 
@@ -65,7 +65,7 @@ Flex 青蛙游戏  https://flexboxfroggy.com/#zh-cn
 
 ### 布局需要用到哪些属性
 
->   不多哗哗，直接给你所有套路
+>   不多哔哔，直接给你所有套路
 
 以前经常说 DIV+CSS 布局，但是现在已经无意于用 DIV 了，就说用 CSS 布局
 
@@ -73,8 +73,8 @@ Flex 青蛙游戏  https://flexboxfroggy.com/#zh-cn
 
 需要兼容 IE9 吗
 
-  +   不用，只做手机页面（闲鱼），阿里巴巴在顺序手机时代
-  +   很老的手机产品要兼容吗、兼容最新浏览器吗？
+  +   不用，只做手机页面（闲鱼），阿里巴巴在顺应手机时代
+  +   很老的手机产品要兼容吗？兼容最新浏览器吗？
 
 <img src="https://i.loli.net/2020/07/22/9luaMYvVUFhitP5.png" alt="image-20200722180851787" style="zoom: 67%;" />
 
@@ -114,7 +114,7 @@ Flex 青蛙游戏  https://flexboxfroggy.com/#zh-cn
        display: block;
        clear: both;
      }
-     /* 背过 clearfix 的写法 */
+     /* 请背过 clearfix 的写法 */
      ```
 
      
@@ -178,7 +178,7 @@ Flex 青蛙游戏  https://flexboxfroggy.com/#zh-cn
 
 #### 技术总结
 
->   [JSbin 演示](https://jsbin.com/xihinip/edit?html,css,output)，总结如下
+>   [JSbin 演示](https://jsbin.com/vobenim/edit?html,css,output)，总结如下
 
 ##### outline
 
@@ -206,7 +206,7 @@ margin-right: auto;
 
 ##### float实现平均布局
 
->   添加一个 父元素 x ，进行 ==负margin== 操作（这个词基本都是高手才懂，面试说道这几个字，平均布局这块就一定能过）
+>   添加一个 父元素 x ，进行 ==负margin== 操作（这个词基本都是高手才懂）
 >
 >   注意：添加 父元素后，clearfix 的位置也需要相应移动到，浮动元素的直属父级上
 
@@ -600,7 +600,7 @@ margin-right: auto;
 >   +   默认是 auto（与 item 的 width 值保持一致）
 >   +   指定宽度：`flex-basis: 100px;`  相当于指定了 width 值
 
-这个属性方方也比较迷：不是很重要的属性
+这个属性比较迷：不是很重要的属性
 
 +   可以直接用 width 来代替这个属性
 
@@ -612,7 +612,7 @@ margin-right: auto;
 
 >    flex  相当于  flex-grow  flex-shrink   flex-basis
 >
->    方方一般不写缩写，容易记错位置
+>    习惯上我一般不写缩写，容易记错位置
 
 +   flex  只有以下 4 种形式的写法
 
@@ -673,8 +673,6 @@ margin-right: auto;
 
 ### 实践
 
->   [JSBin 演示](https://jsbin.com/yoguyuh/edit?html,css,output)
-
 #### 不同布局
 
 -   用 flex 做两栏布局
@@ -682,7 +680,7 @@ margin-right: auto;
 -   用 flex 做四栏布局
 -   用 flex 做平均布局 —— [负 margin](#负margin方案)
 -   用 flex 组合使用，做更复杂的布局
--   [JSBin 代码](https://jsbin.com/hehekod/edit?html,css,output)
+-   [JSBin 代码](https://jsbin.com/biluwan/edit?html,css,output)
 
 #### 经验
 
