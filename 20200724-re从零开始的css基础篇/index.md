@@ -1,7 +1,7 @@
 # Re：从零开始の CSS 学习笔记——基础篇
 
 
-熬夜总结 – CSS 基础篇 。🤞🏻 Nobody knows CSS than me !! 🤗  <!--more-->
+熬夜总结 – CSS 基础篇 。<!--more-->
 
 ![Family Guy Css GIF - FamilyGuy Css OpenWindow - Discover & Share GIFs](https://i.loli.net/2020/07/22/Nue4qvXzsQpbcAF.gif)
 
