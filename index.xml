@@ -12,20 +12,19 @@
     <pubDate>Fri, 06 Mar 2020 20:10:04 &#43;0800</pubDate>
     <author>作者</author>
     <guid>http://samrks.github.io/20200306-%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/</guid>
-    <description><![CDATA[<p>每一天都是新的开始，Stay Simple，Stay Young</p>
-<h2 id="yeah">Yeah！</h2>
+    <description><![CDATA[<p>每一天都是新的开始，Stay Simple，Stay Young 🎉</p>
+<h2 id="yeah">Yeah！🎉🎉</h2>
 <blockquote>
-<p>每一天都是新的开始，Stay Simple，Stay Young</p>
+<p>这人在尝试成为 段子手/键盘侠/杠精，却均因胸无笔墨、无fà可suō而失败告终后，终于自省，老老实实的回来敲敲学习笔记了~</p>
 </blockquote>]]></description>
 </item><item>
-    <title>前端也得懂点儿的 HTTP —— 浅析 URL</title>
+    <title>前端也得懂点儿 HTTP (上) ——浅析 URL</title>
     <link>http://samrks.github.io/20200804-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8A/</link>
     <pubDate>Tue, 04 Aug 2020 23:58:43 &#43;0800</pubDate>
     <author>作者</author>
     <guid>http://samrks.github.io/20200804-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8A/</guid>
-    <description><![CDATA[<p>本文主要围绕 URL ，为了解 HTTP 做个铺垫</p>
+    <description><![CDATA[<p>本文主要围绕 URL ，为学 HTTP 做个铺垫</p>
 <p>​</p>
-<h1 id="url-是什么">URL 是什么</h1>
 <h2 id="先导">先导</h2>
 <h3 id="英语protocol">英语：protocol</h3>
 <blockquote>
@@ -35,11 +34,8 @@
 <blockquote>
 <p>WWW = URL + HTTP + HTML</p>
 </blockquote>
-<p>HTML 前面已经学习了，html + css 本质就是网页</p>
-<p>再了解了 URL 和 HTTP ，那么 WWW 我们就基本认识了</p>
-<ul>
-<li>本节内容：URL，为后面学习 HTTP 做一下铺垫</li>
-</ul>
+<p>HTML 前面已经学了，html + css 本质就是网页</p>
+<p>再认识了 URL 和 HTTP ，那么 WWW 我们就基本了解了（ URL 是为 HTTP 做铺垫）</p>
 <p>​</p>
 <h2 id="什么是-ip">什么是 IP</h2>
 <blockquote>
@@ -823,8 +819,8 @@ http://ryuuks:8080/index.html
 </blockquote>
 <ol>
 <li>hosts 文件中以 # 开头的表示注释</li>
-<li>hosts 中可以添加一行 127.0.0.1 frank，让 frank 成为 127.0.0.1 的别称</li>
-<li>hosts 中可以添加一行 frank 127.0.0.1，让 frank 成为 127.0.0.1 的别称</li>
+<li>hosts 中可以添加一行 127.0.0.1 sam，让 sam 成为 127.0.0.1 的别称</li>
+<li>hosts 中可以添加一行 sam 127.0.0.1，让 sam 成为 127.0.0.1 的别称</li>
 <li>hosts 一般需要用管理员权限才能编辑</li>
 </ol>
 <blockquote>

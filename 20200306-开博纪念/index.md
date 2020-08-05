@@ -3,11 +3,11 @@
 
 
 
-每一天都是新的开始，Stay Simple，Stay Young<!--more-->
+每一天都是新的开始，Stay Simple，Stay Young 🎉<!--more-->
 
-## Yeah！
+## Yeah！🎉🎉
 
-> 每一天都是新的开始，Stay Simple，Stay Young
+> 这人在尝试成为 段子手/键盘侠/杠精，却均因胸无笔墨、无fà可suō而失败告终后，终于自省，老老实实的回来敲敲学习笔记了~
 
 
 
