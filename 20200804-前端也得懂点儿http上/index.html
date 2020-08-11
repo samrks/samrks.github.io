@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>前端也得懂点儿 HTTP (上) ——浅析 URL - Sam&#39;s Garage</title><meta name="Description" content="URL 懂？！😵🤞🏻 Nobody knows HTTP better than me !! 🤗"><meta property="og:title" content="前端也得懂点儿 HTTP (上) ——浅析 URL" />
-<meta property="og:description" content="URL 懂？！😵🤞🏻 Nobody knows HTTP better than me !! 🤗" />
+        <title>前端也得懂点儿 HTTP (上) ——浅析 URL - Sam&#39;s Garage</title><meta name="Description" content="URL 懂？！😵"><meta property="og:title" content="前端也得懂点儿 HTTP (上) ——浅析 URL" />
+<meta property="og:description" content="URL 懂？！😵" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://samrks.github.io/20200804-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8A/" />
 <meta property="og:image" content="http://samrks.github.io/20200804-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8A/featured-image.jpg"/>
@@ -15,11 +15,11 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="http://samrks.github.io/20200804-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8A/featured-image.jpg"/>
 <meta name="twitter:title" content="前端也得懂点儿 HTTP (上) ——浅析 URL"/>
-<meta name="twitter:description" content="URL 懂？！😵🤞🏻 Nobody knows HTTP better than me !! 🤗"/>
+<meta name="twitter:description" content="URL 懂？！😵"/>
 <meta name="application-name" content="Sam&#39;s Garage">
 <meta name="apple-mobile-web-app-title" content="Sam&#39;s Garage"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://samrks.github.io/20200804-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8A/" /><link rel="prev" href="http://samrks.github.io/20200802-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%8A%A8%E7%94%BB/" /><link rel="next" href="http://samrks.github.io/20200306-%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://samrks.github.io/20200804-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8A/" /><link rel="prev" href="http://samrks.github.io/20200802-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%8A%A8%E7%94%BB/" /><link rel="next" href="http://samrks.github.io/20200810-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8B/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -39,7 +39,7 @@
             "name": ""},"author": {
                 "@type": "Person",
                 "name": "Sam"
-            },"description": "URL 懂？！😵🤞🏻 Nobody knows HTTP better than me !! 🤗"
+            },"description": "URL 懂？！😵"
     }
     </script></head>
     <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
@@ -121,7 +121,7 @@
         data-srcset="/20200804-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8A/featured-image.jpg, /20200804-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8A/featured-image.jpg 1.5x, /20200804-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8A/featured-image.jpg 2x"
         data-sizes="auto"
         alt="/20200804-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8A/featured-image.jpg"
-        title="URL 懂？！😵🤞🏻 Nobody knows HTTP better than me !! 🤗" /></div><div class="details toc" id="toc-static"  kept="">
+        title="URL 懂？！😵" /></div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
@@ -1048,7 +1048,7 @@ http://ryuuks:8080/index.html
     </div>
 
     <div class="post-nav"><a href="/20200802-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%8A%A8%E7%94%BB/" class="prev" rel="prev" title="Re：从零开始の CSS 学习笔记——动画"><i class="fas fa-angle-left fa-fw"></i>Re：从零开始の CSS 学习笔记——动画</a>
-            <a href="/20200306-%E5%BC%80%E5%8D%9A%E7%BA%AA%E5%BF%B5/" class="next" rel="next" title="【置顶】开博纪念🥰">【置顶】开博纪念🥰<i class="fas fa-angle-right fa-fw"></i></a></div>
+            <a href="/20200810-%E5%89%8D%E7%AB%AF%E4%B9%9F%E5%BE%97%E6%87%82%E7%82%B9%E5%84%BFhttp%E4%B8%8B/" class="next" rel="next" title="前端也得懂点儿 HTTP (下) ">前端也得懂点儿 HTTP (下) <i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="valine" class="comment"></div><noscript>
     Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
