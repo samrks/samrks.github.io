@@ -258,7 +258,7 @@
 </li>
 </ul>
 <blockquote>
-<p>上述每篇文章中的优化方法，都总结在【==TL;DR==（too long don&rsquo;t read 太长不看）】部分</p>
+<p>上述每篇文章中的优化方法，都总结在【<strong>TL;DR</strong>（too long don&rsquo;t read 太长不看）】部分</p>
 <p>每条优化点之间，都没什么规律，就依靠死记硬背（面试问到，可能这些点，如果能答出1个，就得满分）</p>
 </blockquote>
 <h3 id="js优化">JS优化</h3>

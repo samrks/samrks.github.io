@@ -1,0 +1,495 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>JavaScript - 标签 - Sam&#39;s Garage</title>
+        <link>http://samrks.github.io/tags/javascript/</link>
+        <description>JavaScript - 标签 - Sam&#39;s Garage</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Wed, 12 Aug 2020 21:13:23 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/javascript/" rel="self" type="application/rss+xml" /><item>
+    <title>JavaScript 的发展历史</title>
+    <link>http://samrks.github.io/20200812-javascript%E6%A6%82%E8%A7%88/</link>
+    <pubDate>Wed, 12 Aug 2020 21:13:23 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/20200812-javascript%E6%A6%82%E8%A7%88/</guid>
+    <description><![CDATA[<p>简单了解「学 JS 的基本要求」，重点了解「JS 的诞生与历史」</p>
+<p>​</p>
+<h2 id="一些链接">一些链接</h2>
+<ul>
+<li>《<a href="https://www.bilibili.com/video/av15989846/" target="_blank" rel="noopener noreffer">Code Rush</a>》纪录片，记录了 Firefox 开源的过程，里面有 JS 之父的采访</li>
+<li><a href="https://www.bilibili.com/video/av3745910/" target="_blank" rel="noopener noreffer">Chrome 的广告</a>，让你了解 Chrome 有多快</li>
+<li><a href="https://www.jianshu.com/p/4eb60e47b4bf" target="_blank" rel="noopener noreffer">淘宝天猫不再支持 IE 6/7</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/24091492" target="_blank" rel="noopener noreffer">淘宝天猫不再支持 IE 8</a></li>
+<li><a href="http://index.baidu.com/v2/main/index.html#/trend/%e5%89%8d%e7%ab%af?words=%e5%89%8d%e7%ab%af" target="_blank" rel="noopener noreffer">百度指数</a></li>
+</ul>
+<p>【JavaScript 诞生】相关文章：</p>
+<ol>
+<li><a href="https://zh.wikipedia.org/wiki/JavaScript#%e5%8e%86%e5%8f%b2" target="_blank" rel="noopener noreffer">JavaScript 的历史</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2011/06/birth_of_javascript.html" target="_blank" rel="noopener noreffer">JavaScript 诞生记</a>⭐</li>
+<li><a href="http://www.ruanyifeng.com/blog/2011/06/10_design_defects_in_javascript.html" target="_blank" rel="noopener noreffer">JavaScript 的10个设计缺陷</a></li>
+</ol>
+<p>​</p>
+<h2 id="前端的门槛">前端的门槛</h2>
+<blockquote>
+<p>从 JavaScript 开始，你需要绞尽脑汁了</p>
+</blockquote>
+<p>​</p>
+<h2 id="学-js-的基本要求">学 JS 的基本要求</h2>
+<h3 id="软要求">软要求</h3>
+<blockquote>
+<p>对大脑的要求</p>
+</blockquote>
+<h4 id="一逻辑能力">一、逻辑能力</h4>
+<p>逻辑分很多种：抽象逻辑、符号逻辑、三段论逻辑（最常用）…</p>
+<p><strong>三段论逻辑</strong></p>
+<p>示例</p>
+<ul>
+<li>JS的数据类型有 number / string / null / undefined / bool / symbol / object 【大前提】</li>
+<li>JS的函数不是  number / string / null / undefined / bool / symbol 中的任意一种</li>
+<li>所以，JS的函数是object 【根据前两句话，能推出第三句】</li>
+</ul>
+<p>好处</p>
+<ul>
+<li>写代码基本就是在<strong>编写逻辑</strong></li>
+</ul>
+<p>​</p>
+<h4 id="二质疑自己的能力">二、质疑自己的能力</h4>
+<blockquote>
+<p>程序员不要相信人类，包括你自己</p>
+</blockquote>
+<p>质疑自己、推翻自己</p>
+<p></p>
+<ul>
+<li>出现 bug ，先质疑自己、再质疑机器</li>
+<li>大脑中有6个知识点，通过这6个知识点，写出一个bug，可能某个知识点记错了，不要纠结，不要认死理，懂得质疑和推翻自己。直接把错误的知识点从大脑中擦掉，灌入正确的知识点，来更新你的知识</li>
+</ul>
+<p><strong>回想一下</strong></p>
+<p>你犯了多少错误</p>
+<ul>
+<li>拼错单词</li>
+<li>多写了空格、少写了空格</li>
+<li>把 O 看成 0，把 0 写成 O</li>
+<li>把 iOS 写成 IOS 或者 ios</li>
+</ul>
+<blockquote>
+<p>这不是粗心大意，这是人类不可克服的问题，通过 <strong>double check</strong> 可以缓解</p>
+<ul>
+<li>正着核对一遍，再反着核对一遍</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h4 id="三抽象思维">三、抽象思维</h4>
+<blockquote>
+<p>高级程序员必备能力</p>
+</blockquote>
+<p><strong>什么是抽象能力</strong></p>
+<p>举例</p>
+<ul>
+<li>
+<p>你订了一份报纸</p>
+</li>
+<li>
+<p>你关注了偶像明星蔡徐坤的微博</p>
+</li>
+<li>
+<p>你用JS监听了一个按钮的点击事件</p>
+<blockquote>
+<p>对程序员来说，这三件事是一件事，拥有共同的模式：发布订阅模式。</p>
+<p>这就是抽象，<strong>把事物的特征进行快速总结</strong>。</p>
+<p>多练，初级程序员至少锻炼1年，才能具备这种抽象思维。</p>
+<p>具备看到一个事物，就能把它抽离成代码示例的能力。</p>
+</blockquote>
+</li>
+</ul>
+<p>好处</p>
+<ul>
+<li>抽象思维，使你的代码能解决更多的问题</li>
+<li>而不是兵来将挡、水来土掩，一个一个解决
+<ul>
+<li>新手程序员，遇到一个问题就写一段代码</li>
+<li>高级程序员，将所有可能问题汇总，写一大坨代码解决全部问题</li>
+<li>比如 Vue 和 React 的作者（一套框架解决问题）</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h3 id="硬要求">硬要求</h3>
+<blockquote>
+<p>客观上的要求</p>
+</blockquote>
+<h4 id="一足够的代码量">一、足够的代码量</h4>
+<ul>
+<li>达到 1000 行 - 新手</li>
+<li>达到 10000 行 - 熟手（至少做过1个比较复杂的项目，常规项目都能做）</li>
+<li>达到 50000 行 - 专业选手（至少做过2-3个比较复杂的项目，可能3-5年，看996时间积累）</li>
+<li><strong>只能靠时间积累</strong></li>
+</ul>
+<p><strong>如何统计自己的代码行数</strong></p>
+<ul>
+<li>安装 <code>yarn global add cloc</code></li>
+<li><code>cloc --vcs=git .</code></li>
+<li>可以用来统计一个仓库里的有效代码</li>
+</ul>
+<p>注意</p>
+<ul>
+<li>如果仓库里有 node_modules 目录等不相关内容</li>
+<li>需要把 /node_modules/ 写入 .gitignore 文件</li>
+</ul>
+<p>​</p>
+<h4 id="二了解足够多的概念">二、了解足够多的概念</h4>
+<blockquote>
+<p>不仅要会写，还要会<del>扯</del>说（面试）</p>
+</blockquote>
+<p><strong>概览</strong></p>
+<p>常用常考</p>
+<ul>
+<li>
+<p>闭包、原型类、继承、MVC、Flux、高阶函数、前端工程化</p>
+<blockquote>
+<p>只会用，不会说，面试就完了</p>
+</blockquote>
+</li>
+</ul>
+<p>如何积累</p>
+<ul>
+<li>在课程中提炼
+<ul>
+<li>就是记笔记</li>
+<li>面试如果能完整说出来，就是满分。新手能说出一般也达到要求了，面试新手就看思路对不对，不需要百分百实现</li>
+</ul>
+</li>
+<li>在大脑中思考
+<ul>
+<li>JS需要思考清楚，这些代码到底是在做什么。为什么这样设计、为什么这样用</li>
+<li>学JS，必须把疑问直接搞定，不能一直留着，不然会有越来越多的 bug</li>
+</ul>
+</li>
+<li>在博客上总结
+<ul>
+<li>思考清楚了，一定要总结、记下来</li>
+<li>用于面试</li>
+</ul>
+</li>
+<li>在代码中实践</li>
+</ul>
+<p>​</p>
+<h4 id="三有足够的踩坑经验">三、有足够的踩坑经验</h4>
+<blockquote>
+<p>你以为是工作经验吗？</p>
+</blockquote>
+<p><strong>踩坑经验</strong></p>
+<p>何谓专家</p>
+<ul>
+<li>**“ 该领域内所有的错误都犯完的人，就是专家 ” **</li>
+</ul>
+<p>如何踩坑</p>
+<ul>
+<li>做项目，而且是个人项目</li>
+<li>个人项目的意思是<strong>所有代码都是你一个人写的</strong>
+<ul>
+<li>团队合作的大项目，基本上只有两个人做，其他人都是打酱油的</li>
+</ul>
+</li>
+<li>这样你才能<strong>全方位踩坑</strong></li>
+</ul>
+<p>​</p>
+<h3 id="总结">总结</h3>
+<p>软要求</p>
+<ul>
+<li>逻辑能力</li>
+<li>质疑自己的能力</li>
+<li>抽象能力</li>
+</ul>
+<p>硬要求</p>
+<ul>
+<li>足够多的代码（至少5000行，大项目1000-2000行，小项目200行左右）</li>
+<li>足够多的概念</li>
+<li>足够多的踩坑经验（记下来自己遇到过什么坑）</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="javascript-的历史">JavaScript 的历史</h2>
+<blockquote>
+<p>历史和特点</p>
+</blockquote>
+<h3 id="发明人">发明人</h3>
+<p>李爵士发明 HTML</p>
+<p>赖先生发明 CSS</p>
+<p><strong>布兰登发明 JS</strong></p>
+<p>​</p>
+<h4 id="布兰登的生平">布兰登的生平</h4>
+<p></p>
+<ul>
+<li>生平1961年生于美国</li>
+<li>物理学转数学与计算机学位</li>
+<li>工作七年，负责操作系统与网络开发</li>
+<li>又工作三年，负责微内核与电子信号处理相关工作</li>
+<li>1995年进入网景公司，为其浏览器开发了 JS 功能</li>
+<li>1998年协助成立 Mozilla.org，担任首席架构师</li>
+<li>网景死亡（被收购）后，他成立了 Mozilla 基金会，Firefox 就是这个基金会维护的，有<a href="https://www.bilibili.com/video/av15989846/" target="_blank" rel="noopener noreffer">纪录片</a>记录了这一过程</li>
+<li>2014年晋升为 Mozilla 的 CEO，十天后，被赶下台
+<ul>
+<li>原因是他曾捐助过反同性恋的法案（只有异性可结婚）</li>
+</ul>
+</li>
+<li>2015年成立 Brave 公司，开发保护用户隐私的浏览器</li>
+</ul>
+<p>​</p>
+<h3 id="总结-1">总结</h3>
+<p>牛逼的程序员</p>
+<ul>
+<li>从来不会只学一门编程语言</li>
+<li>不怕被辞退，总能找到事做</li>
+<li>很容易创业，比外行人靠谱得多</li>
+<li>可以干到 50 岁以上（基本上都是创办公司或很有钱了）</li>
+</ul>
+<p>JavaScript</p>
+<ul>
+<li>诞生之初，只是一个不起眼的小功能</li>
+<li>同时 JS 有很多 bug，我们学习的时候要注意辨别</li>
+</ul>
+<p>​</p>
+<h3 id="javascript-的诞生">JavaScript 的诞生</h3>
+<p>布莱登临危受命</p>
+<ul>
+<li>公司要求给浏览器添加一个脚本功能</li>
+<li>公司要求这个脚本必须蹭 Java 的流量</li>
+<li>布莱登花十天设计了 JS 的最初版本（不是实现）</li>
+</ul>
+<p>JS的命名</p>
+<ul>
+<li>Mocha 摩卡 =&gt; LiveScript =&gt; JavaScript</li>
+<li>Java 既是编程语言，也是一种咖啡</li>
+<li>浏览器一开始同时就支持 Java 和 JavaScript</li>
+<li>后来，JS 胜了（在浏览器上），Java就逐渐退出了浏览器平台</li>
+</ul>
+<p>​</p>
+<h3 id="浏览器大战">浏览器大战</h3>
+<blockquote>
+<p>背景：1995年，网景推出 JS 功能，用户纷纷叫好，因为可以在页面上节省流量。</p>
+<ul>
+<li>当时的网速非常慢 2~3k/s，用户填写一个表单，点击提交按钮，等待一分钟才刷新页面，反馈结果。</li>
+<li>有了 JS 功能之后，点击按钮，马上反馈用户表单信息是否正确，所以用户非常喜欢。</li>
+<li>注意：此时的 JavaScript 只是网景提供的一个<strong>功能</strong>，并不是语言</li>
+</ul>
+</blockquote>
+<p>微软的跟进</p>
+<ul>
+<li>1996年8月 IE 3 发布，支持 JScript（微软实现的JS）</li>
+<li>浏览器大战开始，每家浏览器的脚本不太一样</li>
+</ul>
+<p>网景的反击</p>
+<ul>
+<li>1996年11月，网景向 ECMA 提交语言标准，由于版权问题，JS 语言标准不叫 JavaScript，叫 ECMAScript</li>
+<li>ECMA 发音：ai ke ma</li>
+</ul>
+<p>​</p>
+<h3 id="网景之死">网景之死</h3>
+<p>被收购</p>
+<ul>
+<li>微软的 IE 浏览器由于捆绑进了 Windows，很快超越</li>
+<li>1998年，网景浏览器节节败退，公司陷入内忧外患</li>
+<li>同年，公司打算搏一搏，将浏览器<strong>开源</strong>（Firefox）</li>
+<li>最终，市场并没有因为开源而重新青睐网景</li>
+<li>年底，[美国在线 AOL] 宣布开始收购网景</li>
+<li>收购后，网景团队里的程序员纷纷被解雇</li>
+<li>布莱登在之后一直协助维护 Firefox 的运营</li>
+</ul>
+<p>​</p>
+<h3 id="ie-6-如日中天">IE 6 如日中天</h3>
+<p>你想象不到 IE 6 多么火</p>
+<ul>
+<li>2001年，IE 6 随着 Windows XP 一起发布</li>
+<li>2004年，IE 6 全球市场占用率 80% 以上</li>
+<li>然而，这款浏览器却不兼容 W3C 标准（主要是 CSS)</li>
+<li>IE 6 也不断爆出安全漏洞</li>
+<li>Firefox 打算涅槃重生，重新打败 IE</li>
+<li>2005年，IE 7 发布，但打不过 IE 6</li>
+<li>2006年，主流浏览器为 IE 6 和 Firefox</li>
+<li>2010年，中国的大部分浏览器还是 IE 6</li>
+<li>由于盗版 Windows XP 在中国的风行，在很多年里，IE 6 始终占据中国浏览器市场，是前端开发者的恶魔</li>
+</ul>
+<p>​</p>
+<h3 id="ie-6-神奇的-bug">IE 6 神奇的 bug</h3>
+<p>下面代码会让 IE 6 直接崩溃，当场死机</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span> 
+  <span class="o">*</span> <span class="p">{</span> <span class="k">position</span><span class="p">:</span> <span class="kc">relative</span> <span class="p">}</span> 
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span> 
+<span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span> 
+  <span class="p">&lt;</span><span class="nt">input</span><span class="p">&gt;</span> 
+<span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>补充：</p>
+<ul>
+<li>「<code>*{  }</code> 星号性能低下」的谣言，就是从 IE6 这个 bug ，开始传出来的</li>
+<li>实际上星号没有这个问题，这是 IE6 自己有问题</li>
+<li>如果现在还有人说「星号性能低下」，不要反驳他，八九年前的事情现在还在说
+<ul>
+<li>星号套星号…可能有问题，但是<strong>一个星号，是绝对不会有问题的</strong></li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h3 id="chrome-横空出世">Chrome 横空出世</h3>
+<p>微软的懈怠</p>
+<ul>
+<li>由于 IE6 的巨大成功，微软觉得再花费精力不值得，而且没有竞争对手，所以直接解散了 IE6 开发团队</li>
+<li>Firefox 的出现让微软重新组建 IE 团队，但不是同一队人，造成 IE7、8 一直问题不断</li>
+</ul>
+<p>谷歌抓住机会</p>
+<ul>
+<li>2004年，谷歌雇用了一些 Firefox 和 IE 的开发者</li>
+<li><strong>2008年</strong>，Chrome 终于发布，迅速拿下 1% 份额</li>
+<li>2011年，Chrome 份额超过 Firefox</li>
+<li><strong>2016年</strong>，Chrome 全球份额 62%</li>
+<li>欣赏一支 <a href="https://www.bilibili.com/video/av3745910/" target="_blank" rel="noopener noreffer">Chrome 的广告</a></li>
+</ul>
+<p>​</p>
+<h3 id="移动市场兴起">移动市场兴起</h3>
+<p>智能手机崛起</p>
+<ul>
+<li>2010年，iPhone 4 发布</li>
+<li>2011年，微软 和 Nokia 联合起来，打算搞一波事情</li>
+<li>后来的事情大家都知道，Nokia 手机业务完了</li>
+<li>也就是说，手机上基本没有 IE 了</li>
+<li>前端程序员表示欣喜若狂，IE 终于快要死了</li>
+<li>2016年，淘宝天猫宣布<a href="https://www.jianshu.com/p/4eb60e47b4bf" target="_blank" rel="noopener noreffer">不再支持 IE6、IE7</a></li>
+<li>同年年底，宣布<a href="https://zhuanlan.zhihu.com/p/24091492" target="_blank" rel="noopener noreffer">不再支持 IE 8</a></li>
+<li>移动市场的兴起，让中国前端摆脱 IE 十年的恐怖支配</li>
+<li>从此，前端快速，不对，是极速发展</li>
+</ul>
+<p>​</p>
+<h3 id="ecmascript-标准的制定">ECMAScript 标准的制定</h3>
+<p>时间</p>
+<ul>
+<li>1997年6月，第一版 ECMAScript 发布</li>
+<li>1999年12月，<strong>第三版</strong>发布，这个版本使用最广（IE6支持）</li>
+<li>第四版，流产。</li>
+<li>2009年12月，第五版发布，增加了一些功能</li>
+<li><strong>2015年</strong>6月，<strong>第六版</strong>发布，新浏览器都支持这一版</li>
+<li>之后每年发布一版，版本号以年份命名</li>
+</ul>
+<h4 id="js-与-ecmascript-的关系">JS 与 ECMAScript 的关系</h4>
+<ul>
+<li>ECMAScript 是纸上的标准，JS 是浏览器的实现</li>
+<li>纸上标准往往落后于浏览器，先实现，再写进标准
+<ul>
+<li>ECMA 只总结，不预演，这样就不会再导致标准流产（写进标准但没浏览器使用的情况）</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h3 id="javascript-兴起">JavaScript 兴起</h3>
+<h4 id="杀手级应用-gmail">杀手级应用 Gmail</h4>
+<ul>
+<li>2004年愚人节，谷歌发布 Gmail 在线网页</li>
+<li>当时的人们认为网页只能用来看新闻和图片</li>
+<li>Gmail 的发布让用户和开发者（后端、客户端）眼前一亮</li>
+<li>2005年，Jesse 将谷歌用到的技术命名为 AJAX</li>
+<li><strong>从此，前端技术正式出现</strong></li>
+<li>在此之前的网页开发，都是由 后端 和 设计师 完成</li>
+<li>2006年，jQuery 发布，是目前最长寿的 JS 库</li>
+<li>后来的十年，jQuery 大发异彩，直到 IE 不行了，jQuery 才稍微没有那么火</li>
+</ul>
+<p>​</p>
+<h3 id="中国前端的发展">中国前端的发展</h3>
+<p>正式出现时间</p>
+<ul>
+<li>
+<p>2010年左右，中国才有专门的前端岗位</p>
+<p><a href="http://index.baidu.com/v2/main/index.html#/trend/%E5%89%8D%E7%AB%AF?words=%E5%89%8D%E7%AB%AF,java,python,php" target="_blank" rel="noopener noreffer">百度搜索指数</a></p>
+<p></p>
+<p></p>
+</li>
+</ul>
+<p>前端的来源</p>
+<ul>
+<li>一部分来自自学的<strong>后端</strong>程序员，他们把 Java 的思想代入 JavaScript，<strong>面向对象</strong>成了JS的主流思想</li>
+<li>一部分来自<strong>设计师</strong>，他们开始学习 CSS，并独创了「重构工程师」岗位（现已没落）
+<ul>
+<li>比如张鑫旭，专门研究CSS</li>
+</ul>
+</li>
+<li>上面这两种来源，一种赶鸭子上架，一种不够专业，导致前端特别缺人</li>
+</ul>
+<p>缺人</p>
+<ul>
+<li>最应该产出前端人才的大学，迟迟没有相关课程</li>
+<li>由于早期前端工资比不上后端，所以大部分人选后者</li>
+<li>就如同现在很多高材生选择机器学习一样</li>
+<li>一些不小心进入前端领域的科班生成长非常迅速</li>
+</ul>
+<p>​</p>
+<h3 id="javascript-爆发">JavaScript 爆发</h3>
+<p>V8 快如闪电</p>
+<ul>
+<li>
+<p>Chrome 的 JS 引擎叫做 V8（V1到V7是啥)</p>
+</li>
+<li>
+<p>2009年，Ryan 基于 V8 创建了 Node.js</p>
+</li>
+<li>
+<p>2010年，Isaac 基于 Node.js 写出了 npm</p>
+</li>
+<li>
+<p>前端工程师可以在浏览器之外执行 JS 了，Node.js 快速风靡</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">例：node demo.js
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>同年，TJ 受 Sinatra 启发，发布了 Express.js</p>
+</li>
+<li>
+<p>从此，前端工程师可以愉快地写后端应用了！</p>
+</li>
+</ul>
+<p>爆发</p>
+<ul>
+<li>这期间出来的技术太多，以后慢慢介绍：gulp、grunt、yeoman、requirejs、webpack、Angular、React、Vue等</li>
+<li>这些技术很多也已经过时了</li>
+</ul>
+<p>​</p>
+<h3 id="总结-2">总结</h3>
+<h4 id="js-是历史的选择">JS 是历史的选择</h4>
+<ul>
+<li>一开始浏览器支持很多东西：Java、Flash、VBScript</li>
+<li>只有 JS 活到最后</li>
+</ul>
+<h4 id="js-的低开高走">JS 的低开高走</h4>
+<ul>
+<li>一开始 JS 就是一个玩具语言</li>
+<li>但是 JS 每次都走对了风口
+<ol>
+<li>JS 推出标准</li>
+<li>Gmail 的出现（当时的网站只能看新闻，用户第一次体验到输入网址就能打开一个工具）</li>
+<li>移动端</li>
+<li>node.js</li>
+</ol>
+</li>
+</ul>
+<h4 id="学习-js-时需要注意">学习 JS 时需要注意</h4>
+<ul>
+<li>JS 最初也很混乱，旧的、过时的东西了解就好，考前记忆一些</li>
+<li>跟 IE 相关的知识一律忽略</li>
+</ul>
+<blockquote>
+<p>前端是进入互联网行业的捷径</p>
+</blockquote>]]></description>
+</item></channel>
+</rss>

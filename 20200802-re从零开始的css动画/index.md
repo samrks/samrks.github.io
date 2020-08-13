@@ -261,7 +261,7 @@ https://csstriggers.com/  这个网站已经把所有属性全试过了
 +   [简化绘制的复杂度、减小绘制区域](https://developers.google.com/web/fundamentals/performance/rendering/simplify-paint-complexity-and-reduce-paint-areas)（优化 Paint 绘制过程）
 +   [坚持仅合成器的属性和管理层计数](https://developers.google.com/web/fundamentals/performance/rendering/stick-to-compositor-only-properties-and-manage-layer-count)（优化 Composite 合成过程）
 
->   上述每篇文章中的优化方法，都总结在【==TL;DR==（too long don't read 太长不看）】部分
+>   上述每篇文章中的优化方法，都总结在【**TL;DR**（too long don't read 太长不看）】部分
 >
 >   每条优化点之间，都没什么规律，就依靠死记硬背（面试问到，可能这些点，如果能答出1个，就得满分）
 
