@@ -4,7 +4,7 @@
         <link>http://samrks.github.io/</link>
         <description>Stay Simple, Stay Young</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Wed, 12 Aug 2020 21:13:23 &#43;0800</lastBuildDate>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Mon, 24 Aug 2020 22:15:53 &#43;0800</lastBuildDate>
             <atom:link href="http://samrks.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>【置顶】开博纪念🥰</title>
@@ -18,11 +18,1059 @@
 <p>996之余，想尝试成为段子手/键盘侠/杠精，均因胸无笔墨、无fà可suō而失败告终后，终于老老实实的回来敲敲学习笔记了~</p>
 </blockquote>]]></description>
 </item><item>
+    <title>JS 的基本语法⚙️</title>
+    <link>http://samrks.github.io/20200824-js%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</link>
+    <pubDate>Mon, 24 Aug 2020 22:15:53 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/20200824-js%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</guid>
+    <description><![CDATA[<p>内容包括「什么是表达式和语句」「标识符的规则」「 if else 语句」「 while for 语句」「 label 」</p>
+<h2 id="推荐书籍">推荐书籍</h2>
+<ol>
+<li>适合入门《<a href="https://wangdoc.com/javascript/" target="_blank" rel="noopener noreffer">网道 JavaScript 教程</a>》</li>
+<li>适合进阶《<a href="https://book.douban.com/subject/26351021/" target="_blank" rel="noopener noreffer">你不知道的 JavaScript（上卷）</a>》</li>
+</ol>
+<h2 id="js-语法-">JS 语法 ⭐️</h2>
+<blockquote>
+<p>开始学习</p>
+</blockquote>
+<h3 id="表达式与语句">表达式与语句</h3>
+<p>表达式</p>
+<ul>
+<li>1+2 表达式的值为 3</li>
+<li>add(1,2) 表达式的值为函数的<strong>返回值</strong></li>
+<li>console.log 表达式的值为函数本身（因为没加括号）</li>
+<li>console.log(3) 表达式的值为多少？（<strong>面试</strong>)
+<ul>
+<li>表达式的值就是函数的返回值 ，log函数的返回值为 undefined</li>
+<li>所以 console.log(3) 表达式的值为 undefined</li>
+</ul>
+</li>
+</ul>
+<p>语句</p>
+<ul>
+<li>var a=1 是一个语句</li>
+</ul>
+<p>二者的区别</p>
+<ul>
+<li>表达式一般都有值，语句可能有也可能没有</li>
+<li>语句一般会改变环境（声明、赋值）</li>
+<li>上面两句话并不是绝对的</li>
+</ul>
+<h3 id="大小写敏感">大小写敏感</h3>
+<p>不要写错</p>
+<ul>
+<li>var a 和 var A 是不同的</li>
+<li>object 和 Object 是不同的</li>
+<li>function 和 Function 是不同的</li>
+<li>具体含义后面说</li>
+</ul>
+<h3 id="空格">空格</h3>
+<p>大部分空格没有实际意义</p>
+<ul>
+<li>
+<p><code>var    a    =    1</code> 和 <code>var a=1</code> 没有区别</p>
+</li>
+<li>
+<p>加回车，大部分时候也不影响</p>
+</li>
+<li>
+<p>只有一个地方不能加回车，那就是 return 后面</p>
+<ul>
+<li>
+<p>return 后面不加东西，js 会自动补充成  return undefined</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fn</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="mi">3</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">fn</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="p">[</span><span class="kc">undefined</span><span class="p">]</span>    <span class="c1">// return 和 3 之间加了一个回车，js会自动补充为 return undefined
+</span><span class="c1"></span>  <span class="mi">3</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>  </p>
+</li>
+</ul>
+<ul>
+<li>唯独 return 后面不能加回车，其他多离谱的回车都没问题</li>
+</ul>
+</li>
+</ul>
+<h3 id="标识符">标识符</h3>
+<h4 id="规则">规则</h4>
+<ul>
+<li>
+<p>第一个字符，可以是 <code>Unicode 字母</code> /  <code>$</code> / <code>_</code>  /  <code>中文</code></p>
+</li>
+<li>
+<p>后面的字符，除了上面所说，还可以有数字</p>
+</li>
+<li>
+<p>注意，首位不能是数字</p>
+<p></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="mi">9</span><span class="nx">$</span>
+<span class="nx">Uncaught</span> <span class="nx">SyntaxError</span><span class="o">:</span> <span class="nx">Invalid</span> <span class="nx">or</span> <span class="nx">unexpected</span> <span class="nx">token</span> <span class="c1">// SyntaxError意为语法错误，token理解成字符串
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="变量名是标识符">变量名是标识符</h4>
+<p>以下都是合法的标识符用法</p>
+<ul>
+<li><code>var _ = 1 </code></li>
+<li><code>var $ = 2 </code></li>
+<li><code>var ______= 6 </code></li>
+<li><code>var 你好 = 'hi'</code></li>
+<li>其他标识符用到再说</li>
+</ul>
+<h3 id="注释">注释</h3>
+<blockquote>
+<p>谣言：“ 写代码要多写注释。”</p>
+<p>注释，分为：好的注释、不好的注释</p>
+</blockquote>
+<h4 id="不好的注释">不好的注释</h4>
+<blockquote>
+<p>不好的注释：告诉别人我写了什么</p>
+</blockquote>
+<ol>
+<li>
+<p>把代码翻译成中文</p>
+<p>可能埋没了重要的注释。有用的信息和噪音的比例（信噪比）要低</p>
+<p></p>
+</li>
+<li>
+<p>过时的注释</p>
+</li>
+<li>
+<p>发泄不满的注释</p>
+</li>
+</ol>
+<h4 id="好的注释">好的注释</h4>
+<blockquote>
+<p>好的注释：告诉别人为什么我要这么写</p>
+</blockquote>
+<ol>
+<li>
+<p>踩坑注解</p>
+</li>
+<li>
+<p>为什么代码会写得这么奇怪，遇到什么 bug</p>
+<ul>
+<li>遇到某个 bug，代码非得这么奇怪的写，才能避开这个 bug（这种也需要注释出来）</li>
+</ul>
+</li>
+</ol>
+<h3 id="区块-block">区块 block</h3>
+<ul>
+<li>
+<p>把代码包在一起</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">a</span><span class="o">=</span><span class="mi">1</span>
+  <span class="kd">let</span> <span class="nx">b</span><span class="o">=</span><span class="mi">2</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>常常与 if / for / while 合用</p>
+</li>
+</ul>
+<h2 id="if-语句">if 语句</h2>
+<blockquote>
+<p>如果 … 那么 …</p>
+</blockquote>
+<h3 id="语法">语法</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">if</span><span class="p">(</span><span class="nx">表达式</span><span class="p">){</span><span class="nx">语句1</span><span class="p">}</span><span class="k">else</span><span class="p">{</span><span class="nx">语句2</span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>{ } 在语句只有一句的时候可以省略，不建议这样做</li>
+</ul>
+<h3 id="变态情况">变态情况</h3>
+<ul>
+<li>
+<p>(表达式) 里可以非常变态，如 a=1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">a</span><span class="o">=</span><span class="mi">2</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">a</span><span class="o">=</span><span class="mi">1</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;a是1&#39;</span><span class="p">)</span>   <span class="c1">// 最终打印这句，因为 = 是赋值，=== 才是判断是否相等
+</span><span class="c1"></span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+  <span class="nx">console</span><span class="mf">.1</span><span class="nx">og</span><span class="p">(</span><span class="s1">&#39;a不是1&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>语句1 里可以非常变态，如嵌套的 if else</p>
+</li>
+<li>
+<p>语句2 里可以非常变态，如嵌套的 if else</p>
+</li>
+<li>
+<p>缩进也可以很变态，如面试题常常下套</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">a</span><span class="o">=</span><span class="mi">1</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">a</span><span class="o">===</span><span class="mi">2</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;a等于2&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上述代码执行结果为：</p>
+<p>因为不写 { } 时，只默认<strong>第一个语句</strong>是跟随 if 条件的，有一个**无形的 { } **括住了第一句，相当于下面效果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">a</span><span class="o">=</span><span class="mi">1</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">a</span><span class="o">===</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;a等于2&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注：<strong>js 中是没有【行】的概念</strong>，即使两句写在一行，结果不变，仍是只括住<strong>第一个语句</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">a</span><span class="o">=</span><span class="mi">1</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">a</span><span class="o">===</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">);</span> <span class="p">}</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;a等于2&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果用 逗号分隔呢？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">a</span><span class="o">=</span><span class="mi">1</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">a</span><span class="o">===</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">),</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;a等于2&#39;</span><span class="p">)</span> <span class="p">}</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;a???&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<ul>
+<li>逗号，表示这句话没结束。所以默认两个 console 就变成一个语句了（效果如上）</li>
+<li>分号；表示这句话结束了。</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用最没有歧义的写法">使用最没有歧义的写法</h3>
+<h4 id="最推荐使用的写法">最推荐使用的写法</h4>
+<blockquote>
+<p>永远不要省略花括号 { }，即使只有一个语句。这是最不会产生歧义的写法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">if</span><span class="p">(</span><span class="nx">表达式</span><span class="p">){</span>
+	<span class="nx">语句</span>
+<span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">表达式</span><span class="p">){</span>
+  <span class="nx">语句</span>
+<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+  <span class="nx">语句</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="次推荐使用的写法">次推荐使用的写法</h4>
+<blockquote>
+<p>该写法，只在函数里有用</p>
+<p>基于函数 return 的特点：执行 return ，函数就结束了，不再往下执行</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fn</span><span class="p">(){</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">表达式</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">表达式</span>
+  <span class="p">}</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">表达式</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">表达式</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">表达式</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="switch-语句">switch 语句</h2>
+<blockquote>
+<p>if…else…升级版</p>
+<p>JS 的 switch 语句设计的不算精致，但确实在某些情况时，比 if…else… 好用</p>
+</blockquote>
+<h3 id="语法-1">语法</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">switch</span><span class="p">(</span><span class="nx">fruit</span><span class="p">){</span> 
+  <span class="k">case</span> <span class="s2">&#34;banana&#34;</span><span class="err">：</span>
+    <span class="c1">//...
+</span><span class="c1"></span>    <span class="k">break</span><span class="err">；</span> 
+  <span class="k">case</span> <span class="s2">&#34;apple&#34;</span><span class="o">:</span>
+    <span class="c1">//...
+</span><span class="c1"></span>    <span class="k">break</span><span class="err">；</span> 
+  <span class="k">default</span><span class="o">:</span>
+    <span class="c1">//...
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="break">break</h3>
+<ol>
+<li>
+<p>**大部分时候，省略 break 你就完蛋了 **</p>
+<ul>
+<li>当条件符合 banana 时，执行某些语句 …  ，遇到 break 跳出 switch</li>
+<li>如果没有 break，就会向下跳过<code>case 'apple'</code>，直接执行 apple 的语句 …</li>
+<li>看起来很鸡肋</li>
+</ul>
+</li>
+<li>
+<p><strong>少部分时候，可以利用 break</strong></p>
+<ul>
+<li>
+<p>最早为什么这么设计 break 呢？</p>
+</li>
+<li>
+<p>是为了方便「 满足多个条件（case）时 」的判断</p>
+<ul>
+<li>如下，case 1 可以默认贯穿到 case 3  （初衷是好的）</li>
+</ul>
+<p>​       </p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://docs.swift.org/swift-book/LanguageGuide/ControlFlow.html" target="_blank" rel="noopener noreffer">Swift</a> 的 switch case 语句设计，完爆 JS 的 switch case  （apple 出的语言）</p>
+<ul>
+<li>执行完一个 case，默认跳出，无需 break</li>
+<li>多条件判断：可以直接在一个 case 下写多个条件句 ，无需去掉 break 来表示贯穿</li>
+<li>综上，JS 出现的太早了，没有抄到一个好的 switch case</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">switch</span> <span class="nx">some</span> <span class="nx">value</span> <span class="nx">to</span> <span class="nx">consider</span> <span class="p">{</span>
+<span class="k">case</span> <span class="nx">value</span> <span class="mi">1</span><span class="o">:</span>
+    <span class="nx">respond</span> <span class="nx">to</span> <span class="nx">value</span> <span class="mi">1</span>
+<span class="k">case</span> <span class="nx">value</span> <span class="mi">2</span><span class="p">,</span>
+     <span class="nx">value</span> <span class="mi">3</span><span class="o">:</span>
+    <span class="nx">respond</span> <span class="nx">to</span> <span class="nx">value</span> <span class="mi">2</span> <span class="nx">or</span> <span class="mi">3</span>
+<span class="k">default</span><span class="o">:</span>
+    <span class="nx">otherwise</span><span class="p">,</span> <span class="k">do</span> <span class="nx">something</span> <span class="k">else</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+</li>
+</ol>
+<h2 id="问号冒号三元表达式">问号冒号（三元）表达式</h2>
+<blockquote>
+<p><strong><code>表达式1 ? 表达式2 : 表达式3 </code></strong>    表达式</p>
+<p>最简单的 if…else… 的写法，能用问号冒号就不用 if…else…</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 求两个数的最大值
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">max</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">){</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">a</span><span class="o">&gt;</span><span class="nx">b</span><span class="p">)</span> <span class="k">return</span> <span class="nx">a</span><span class="p">;</span>
+  <span class="k">else</span> <span class="k">return</span> <span class="nx">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">max</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nx">a</span><span class="o">&gt;</span><span class="nx">b</span> <span class="o">?</span> <span class="nx">a</span><span class="o">:</span> <span class="nx">b</span>
+<span class="p">}</span>
+
+<span class="c1">// 求绝对值
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">abs</span><span class="p">(</span><span class="nx">n</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nx">n</span><span class="o">&gt;</span><span class="mi">0</span> <span class="o">?</span> <span class="nx">n</span><span class="o">:</span> <span class="o">-</span><span class="nx">n</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="-短路逻辑">&amp;&amp; 短路逻辑</h2>
+<p>与运算</p>
+<blockquote>
+<ul>
+<li>A &amp;&amp; B &amp;&amp; C &amp;&amp; D
+<ul>
+<li>取第一个假值，后面就不看了</li>
+<li>如果ABC都为真，就取 D。</li>
+</ul>
+</li>
+<li>一般整句表达式的值，不会出现取 true / false，而是取 ABCD 中的一个</li>
+<li>只要整个表达式中，有一个是假，整个式子就是假</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">a</span><span class="o">&amp;&amp;</span><span class="nx">b</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">a</span><span class="p">){</span>  <span class="c1">// 理解：a&amp;&amp;b 等价于，如果a是真，就执行b，否则就什么都不执行
+</span><span class="c1"></span>  <span class="nx">b</span>
+<span class="p">}</span><span class="k">else</span><span class="p">{</span> 
+  
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="mi">3</span><span class="o">&gt;</span><span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="mi">2</span><span class="o">&gt;</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="mi">4</span><span class="o">&gt;</span><span class="mi">5</span> <span class="o">&amp;&amp;</span> <span class="mi">5</span>
+<span class="kc">false</span>
+<span class="mi">3</span><span class="o">&gt;</span><span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="mi">2</span><span class="o">&gt;</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="mi">4</span><span class="o">&gt;</span><span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="mi">5</span>
+<span class="mi">5</span>
+<span class="mi">3</span><span class="o">&gt;</span><span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="mi">2</span><span class="o">&gt;</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="mi">4</span><span class="o">&gt;</span><span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;前面全对了&#39;</span><span class="p">)</span>
+<span class="nx">前面全对了</span>
+<span class="mi">3</span><span class="o">&gt;</span><span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="mi">2</span><span class="o">&gt;</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="mi">4</span><span class="o">&gt;</span><span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="mi">5</span><span class="o">&lt;</span><span class="mi">0</span>
+<span class="kc">false</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">f1</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;f1存在&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// 上下效果等价：如果 window.f1为 true ，就会执行 conosole.log(&#39;f1存在&#39;)
+</span><span class="c1"></span><span class="nb">window</span><span class="p">.</span><span class="nx">f1</span> <span class="o">&amp;&amp;</span> <span class="nx">conosole</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;f1存在&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>前端中，如果能写成 &amp;&amp; 的语句，就不写 if…else… 语句</p>
+</blockquote>
+<h3 id="最常见的用法">最常见的用法</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">fn</span> <span class="o">&amp;&amp;</span> <span class="nx">fn</span><span class="p">()</span>  <span class="c1">// 如果 fn 存在就执行 fn
+</span></code></pre></td></tr></table>
+</div>
+</div><p>例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">console</span> <span class="o">&amp;&amp;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="o">&amp;&amp;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>  
+<span class="c1">// 如果console存在，就判断console.log是否存在，也存在，就执行打印 hi
+</span><span class="c1"></span><span class="cm">/* 这么写有什么意义？
+</span><span class="cm">   因为 IE 没有 console，如果用 IE 就不执行 console，不然 IE 会报错 */</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="-短路逻辑-1">|| 短路逻辑</h2>
+<p>或运算</p>
+<blockquote>
+<ul>
+<li>
+<p>A || B || C || D</p>
+<ul>
+<li>
+<p>取第一个真值，后面就都不看了。</p>
+</li>
+<li>
+<p>如果ABC都为假，就取 D</p>
+</li>
+</ul>
+</li>
+<li>
+<p>一般整句表达式的值，不会出现取 true / false，而是取 ABCD 中的一个</p>
+</li>
+<li>
+<p>只要整个表达式中，有一个是真，整个式子就是 真</p>
+</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">a</span><span class="o">||</span><span class="nx">b</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">a</span><span class="p">){</span>  <span class="c1">// 理解：a||b 等价于，如果a不是真，就执行b，否则就什么都不执行
+</span><span class="c1"></span>  <span class="nx">b</span>
+<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+  
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>如果能写成 || 的语句，就不写 if…else…</p>
+</blockquote>
+<h3 id="最常见的用法-1">最常见的用法</h3>
+<p>例：前端中经常有一个种写法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">a</span> <span class="o">=</span> <span class="nx">a</span> <span class="o">||</span> <span class="mi">100</span> 
+
+<span class="c1">// 理解：如果a存在就什么都不做，否则 a=100
+</span><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="nx">a</span><span class="p">){</span>
+  <span class="nx">a</span> <span class="o">=</span> <span class="nx">a</span>  <span class="c1">// 自己赋给自己，相当于什么都不做
+</span><span class="c1"></span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+  <span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1">// 保底值
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="总结条件语句">总结：条件语句</h2>
+<ul>
+<li>if … else…
+<ul>
+<li>if…else…的逻辑是最常用的，但是很多情况并不使用它。代码简短时，会用更简便的代码替代这种写法</li>
+</ul>
+</li>
+<li>switch case
+<ul>
+<li>不能少了 break</li>
+</ul>
+</li>
+<li>A ? B : C
+<ul>
+<li>相当常用（A若为真，执行B，A若为假，执行C）</li>
+</ul>
+</li>
+<li>A &amp;&amp; B
+<ul>
+<li>相当常用，举例：fn &amp;&amp; fn()    （ fn 存在就执行 fn ）</li>
+</ul>
+</li>
+<li>A || B
+<ul>
+<li>相当常用，举例： A = A || B    （A 存在时就什么都不执行，A 不存在时 B 就是 A 的保底值）</li>
+</ul>
+</li>
+</ul>
+<h2 id="while-循环">while 循环</h2>
+<blockquote>
+<p>用的不多</p>
+</blockquote>
+<h3 id="语法-2">语法</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">while</span> <span class="p">(</span><span class="nx">表达式</span><span class="p">)</span> <span class="p">{</span> <span class="nx">语句</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>判断表达式的真假</li>
+<li>当表达式为真，执行语句，执行完再判断表达式的真假</li>
+<li>直到遇到表达式为假，跳出循环，执行后面的语句</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">// 初始化
+</span><span class="c1"></span><span class="k">while</span><span class="p">(</span><span class="nx">a</span> <span class="o">!==</span> <span class="mi">10</span><span class="p">){</span>   <span class="c1">// 判断条件
+</span><span class="c1"></span>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>   <span class="c1">// 循环体
+</span><span class="c1"></span>  <span class="nx">a</span> <span class="o">=</span> <span class="nx">a</span><span class="o">+</span><span class="mi">1</span>  <span class="c1">// 增长(为最终能跳出循环)
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>共需要四部分： 1. 初始化  2. 判断条件  3. 循环体  4. 增长</li>
+</ul>
+<h3 id="其他">其他</h3>
+<ul>
+<li>do &hellip; while 用得不多，自行了解</li>
+</ul>
+<h3 id="while-变态情况死循环">while 变态情况：死循环</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">while</span><span class="p">(</span><span class="nx">a</span><span class="o">!==</span><span class="mi">1</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+  <span class="nx">a</span> <span class="o">=</span> <span class="nx">a</span> <span class="o">+</span> <span class="mf">0.1</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>原因：浮点数不精确，导致死循环</p>
+<p></p>
+<h2 id="for-循环">for 循环</h2>
+<blockquote>
+<p>for循环 是 while循环 的语法糖</p>
+</blockquote>
+<h3 id="语法糖">语法糖</h3>
+<ul>
+<li>for 是 while 循环的方便写法
+<ul>
+<li>写 while 时需要四部分： 1. 初始化  2. 判断条件  3. 循环体  4. 增长</li>
+<li>for 将 while 的写法升级、整合，如下
+<ol>
+<li>语句1 是用来初始化的</li>
+<li>表达式2  是判断条件</li>
+<li>语句3 是自增</li>
+<li>循环体</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="语法-3">语法</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="nx">语句1</span><span class="p">;</span><span class="nx">表达式2</span><span class="p">;</span><span class="nx">语句3</span><span class="p">){</span>
+  <span class="nx">循环体</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>先执行语句1</li>
+<li>然后判断表达式2
+<ul>
+<li>如果为真，执行循环体，然后再执行语句3</li>
+<li>如果为假，直接退出循环，执行后面的语句</li>
+</ul>
+</li>
+</ol>
+<p>例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>   <span class="c1">// 0 1 2 3 4
+</span><span class="c1"></span><span class="p">}</span>
+<span class="c1">// i 5
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="变态">变态</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+  <span class="nx">setTimeout</span><span class="p">(()=&gt;{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="c1">// 5 5 5 5 5
+</span><span class="c1"></span>    <span class="c1">// console.log(i + &#39;随机数&#39; + Math.random())  
+</span><span class="c1"></span>  <span class="p">},</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// i 5
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>9 是 Chrome 的 bug。</p>
+<p>5个5是正解。</p>
+<p>每轮循环触发 setTimeout 相当于设置一个闹钟命令：过一会再执行 setTimeout 中的语句。而过一会之后，for循环已经走完，i 变为 5。然后闹钟到点，依次执行每轮触发的 setTimeout 中的语句，也就是执行 5轮 <code>console.log( i )</code> ，就会打印 5 个 5</p>
+<h4 id="解决">解决</h4>
+<p>把 var 替换成 let</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+  <span class="nx">setTimeout</span><span class="p">(()=&gt;{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="c1">// 0 1 2 3 4 
+</span><span class="c1"></span>  <span class="p">},</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<h3 id="语法变形">语法变形</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="nx">语句1</span><span class="p">;</span><span class="nx">表达式2</span><span class="p">;</span><span class="nx">语句3</span><span class="p">){</span>
+  <span class="nx">循环体</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>省略 语句 1 ，可在 for 循环外面定义变量</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span><span class="p">(;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">5</span> <span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>    <span class="c1">// 0 1 2 3 4
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>省略 表达式 2 ，会进入死循环</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span><span class="p">(;</span> <span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>    <span class="c1">// 0 1 2 3 4 5 6...
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>省略 语句 2 &amp; 3 ，会进入死循环</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span><span class="p">(;</span> <span class="p">;</span> <span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>    <span class="c1">// 0 0 0 0 0 0 0...
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="break-和-continue">break 和 continue</h3>
+<blockquote>
+<p>break 退出所有循环</p>
+<p>continue 退出当前一次循环</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">i</span><span class="o">%</span><span class="mi">2</span><span class="o">===</span><span class="mi">1</span><span class="p">){</span> <span class="c1">// 遇到奇数轮次，退出整个for循环
+</span><span class="c1"></span>    <span class="k">break</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>  <span class="c1">// 1
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">i</span><span class="o">%</span><span class="mi">2</span><span class="o">===</span><span class="mi">1</span><span class="p">){</span> <span class="c1">// 遇到奇数轮次，跳过当次循环
+</span><span class="c1"></span>    <span class="k">continue</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>  <span class="c1">// 0 2 4 6 8
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="label-语法">label 语法</h2>
+<blockquote>
+<p>用的很少，面试会考（概率5%）</p>
+<p>这个知识点，除了用来做面试题之外，毫无用处</p>
+</blockquote>
+<h3 id="语法-4">语法</h3>
+<p>label 语法：在任何情况下，写一个[标识符](# 标识符)，后面写一个代码块 { }（通常包含多句代码），或一句代码</p>
+<h4 id="代码块">代码块</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">foo</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="k">break</span> <span class="nx">foo</span><span class="p">;</span>   <span class="c1">// 跳出foo这个代码块
+</span><span class="c1"></span>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;本行不会输出&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<h4 id="一句代码">一句代码</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">foo</span><span class="o">:</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<h3 id="面试">面试</h3>
+<p>1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="p">{</span>
+  <span class="nx">foo</span><span class="o">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>2</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">foo</span><span class="o">:</span> <span class="mi">1</span>   <span class="c1">// 表示代码块只有一行，叫做 1
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>3</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="p">{</span>
+  <span class="nx">foo</span><span class="o">:</span> <span class="mi">1</span>  <span class="c1">// 一个代码块，第一行是一个标签，标签内容是 1，没有什么实际意义
+</span><span class="c1"></span>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>问上面是什么</p>
+<p>答： 是一个代码块（属于 label 语法），里面有一个标签 foo，语句就是一个 1</p>
+<p>为什么不是一个对象？</p>
+<p>答：如果写成下面形式，a 就是对象了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">foo</span><span class="o">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果单纯写一个代码块（如下），那就是一个 label，语句为 1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="p">{</span>
+  <span class="nx">foo</span><span class="o">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>]]></description>
+</item><item>
     <title>JavaScript 的发展历史</title>
-    <link>http://samrks.github.io/20200812-javascript%E6%A6%82%E8%A7%88/</link>
+    <link>http://samrks.github.io/20200812-javascript%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2/</link>
     <pubDate>Wed, 12 Aug 2020 21:13:23 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://samrks.github.io/20200812-javascript%E6%A6%82%E8%A7%88/</guid>
+    <guid>http://samrks.github.io/20200812-javascript%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2/</guid>
     <description><![CDATA[<p>简单了解「学 JS 的基本要求」，重点了解「JS 的诞生与历史」</p>
 <p>​</p>
 <h2 id="一些链接">一些链接</h2>
@@ -6864,911 +7912,5 @@ http://ryuuks:8080/index.html
 </code></pre></td></tr></table>
 </div>
 </div><p></p>]]></description>
-</item><item>
-    <title>HTML 标签の简单记录</title>
-    <link>http://samrks.github.io/20200718-html%E6%A0%87%E7%AD%BE%E3%81%AE%E7%AE%80%E5%8D%95%E8%AE%B0%E5%BD%95/</link>
-    <pubDate>Sat, 18 Jul 2020 18:55:45 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://samrks.github.io/20200718-html%E6%A0%87%E7%AD%BE%E3%81%AE%E7%AE%80%E5%8D%95%E8%AE%B0%E5%BD%95/</guid>
-    <description><![CDATA[<p>记录几个标签的简单用法，然后忘掉  🤪</p>
-<p>​</p>
-<h2 id="a-标签">a 标签</h2>
-<blockquote>
-<p>特别常用，但很多人不会用 😳😳</p>
-</blockquote>
-<ul>
-<li>属性
-<ul>
-<li><a href="#href" rel="">href</a></li>
-<li><a href="#target" rel="">target</a></li>
-<li><a href="#download" rel="">download</a></li>
-<li><a href="#rel=noopener" rel="">rel=noopener</a>   面试可能会问</li>
-</ul>
-</li>
-<li>作用
-<ul>
-<li>跳转外部页面</li>
-<li>跳转内部锚点</li>
-<li>跳转到邮箱或电话等</li>
-</ul>
-</li>
-</ul>
-<h3 id="href">href</h3>
-<blockquote>
-<p>href 是 <strong>H</strong>ypertext <strong>REF</strong>erence 超链接</p>
-<p><a href="https://zh.forvo.com/word/href/" target="_blank" rel="noopener noreffer">发音</a> ：应该读 H-Ref <code>/ˈeit∫.rɛf/</code></p>
-</blockquote>
-<h4 id="href-的取值">href 的取值</h4>
-<h5 id="网址">网址</h5>
-<ul>
-<li><a href="https://google.com">https://google.com</a></li>
-<li><a href="http://google.com">http://google.com</a></li>
-<li><a href="//google.com" target="_blank" rel="noopener noreffer">//google.com</a>   【推荐写这种形式】
-<ul>
-<li>network 会先请求 <a href="http://google.com">http://google.com</a> → <a href="http://www.google.com">http://www.google.com</a> → <a href="https://www.google.com">https://www.google.com</a> 结束</li>
-</ul>
-</li>
-</ul>
-<h5 id="路径">路径</h5>
-<blockquote>
-<p>使用 hs 开启服务的目录，就是 /a/b/c  的根目录</p>
-<p>双击打开文件，访问的路径是硬盘的根目录 file</p>
-</blockquote>
-<ul>
-<li>
-<p>/a/b/c  以及 a/b/c</p>
-</li>
-<li>
-<p>index.html 以及 ./index.html</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;/a/b/c.html&#34;</span><span class="p">&gt;</span>c.html<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;./index.html&#34;</span><span class="p">&gt;</span>index.html<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div></li>
-</ul>
-<h5 id="伪协议">伪协议</h5>
-<ul>
-<li>
-<p>javascript:代码;</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;javascript:alert(1);&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>   <span class="c">&lt;!--执行js操作：弹出1--&gt;</span>
-<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;javascript:;&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>   <span class="c">&lt;!--只有这种是什么都不做--&gt;</span>
-<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;&#34;</span><span class="p">&gt;</span>href为空，页面会刷新<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>   <span class="c">&lt;!--如果有input会被清空--&gt;</span>
-<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;#&#34;</span><span class="p">&gt;</span>#不刷新，但页面会滚动到顶部<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>补充：编译器中 <code>p{$}*30</code> + tab ，会生成 30 个 p 标签，内容 1-30</p>
-</li>
-<li>
-<p>mailto:邮箱</p>
-<ul>
-<li>移动端，通常会直接呼出发邮件的界面，并自动填写收件人邮箱</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;mailto:ryuukousen@gmail.com&#34;</span><span class="p">&gt;</span>给他发邮件<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div></li>
-<li>
-<p>tel:手机号</p>
-<ul>
-<li>移动端，直接呼出拨号盘，并自动填写号码</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;tel:13912345678&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div></li>
-</ul>
-<h5 id="id--锚点">id  锚点</h5>
-<blockquote>
-<p>跳转到指定标签      href=#xxx</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;#xxx&#34;</span><span class="p">&gt;</span>查看aaa<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-...
-<span class="p">&lt;</span><span class="nt">p</span> <span class="na">id</span><span class="o">=</span><span class="s">&#39;xxx&#39;</span><span class="p">&gt;</span>aaa<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-...
-</code></pre></td></tr></table>
-</div>
-</div><p>​</p>
-<h3 id="target">target</h3>
-<blockquote>
-<p>在哪个页面打开窗口</p>
-</blockquote>
-<h4 id="内置名字">内置名字</h4>
-<ul>
-<li>_blank ：新窗口</li>
-<li>_top ：顶级窗口（结合 iframe）</li>
-<li>_parent  ：父级窗口（结合 iframe）</li>
-<li>_self ：当前窗口（默认值）</li>
-</ul>
-<h4 id="程序员命名">程序员命名</h4>
-<h5 id="window-的-name">window 的 name</h5>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;//google.com&#34;</span> <span class="na">target</span><span class="o">=</span><span class="s">&#34;asdf&#34;</span><span class="p">&gt;</span>google<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;//baidu.com&#34;</span> <span class="na">target</span><span class="o">=</span><span class="s">&#34;asdf&#34;</span><span class="p">&gt;</span>baidu<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li><code>target=asdf</code>，表示如果有这个<code>asdf</code>窗口就在这个窗口打开google，如果没有就创建一个新的窗口命名为<code>asdf</code></li>
-<li>控制台输出 window.name  可知当前窗口的名称</li>
-</ul>
-<h5 id="iframe-的-name">iframe 的 name</h5>
-<blockquote>
-<p>可以写一个搜索引擎的集合或切换，goodbai</p>
-<p>谷歌已经禁用了在 iframe 中引入</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;//google.com&#34;</span> <span class="na">target</span><span class="o">=</span><span class="s">&#34;asd&#34;</span><span class="p">&gt;</span>google<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;//baidu.com&#34;</span> <span class="na">target</span><span class="o">=</span><span class="s">&#34;qwe&#34;</span><span class="p">&gt;</span>baidu<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">asd</span><span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">qwe</span><span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>​</p>
-<h3 id="download">download</h3>
-<blockquote>
-<p>绝大多数浏览器不支持，chrome 不支持</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;//google.com&#34;</span> <span class="na">download</span><span class="p">&gt;</span>下载页面<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h4 id="作用">作用</h4>
-<p>不是打开页面，而是下载页面</p>
-<h4 id="问题">问题</h4>
-<p>不是所有浏览器都支持，尤其是手机浏览器可能不支持</p>
-<p>​</p>
-<h2 id="iframe">iframe</h2>
-<blockquote>
-<p>内嵌窗口</p>
-<p>已经很少使用了，还有些老系统再用。新的方式是通过 ajax 实现</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;a&#34;</span>  <span class="na">src</span><span class="o">=</span><span class="s">&#34;a-target-iframe.html&#34;</span> <span class="na">frameborder</span><span class="o">=</span><span class="s">&#34;0&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>​</p>
-<h2 id="table">table</h2>
-<h3 id="相关标签">相关标签</h3>
-<blockquote>
-<p>thead、tbody、tfoot，即使开发时换了顺序，浏览器识别时仍会按照 head  body  foot 的顺序解析渲染</p>
-</blockquote>
-<ul>
-<li>
-<p>table</p>
-</li>
-<li>
-<p>thead</p>
-</li>
-<li>
-<p>tbody</p>
-</li>
-<li>
-<p>tfoot</p>
-</li>
-<li>
-<p>tr</p>
-</li>
-<li>
-<p>td</p>
-</li>
-<li>
-<p>th</p>
-</li>
-</ul>
-<h4 id="一个表头的表格">一个表头的表格</h4>
-<figure>
-     
-</figure>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html">  <span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;</span>
-      <span class="c">&lt;!-- tr: table row 行--&gt;</span>
-      <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
-        <span class="c">&lt;!-- th: table head 表头--&gt;</span>
-        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>英语<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>翻译<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-      <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
-         <span class="c">&lt;!-- td: table data 数据 --&gt;</span>
-        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>hyper<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>超级<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-      <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>target<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>目标<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-      <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>reference<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>引用、链接<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-      <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">tfoot</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>空<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>空<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-      <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">tfoot</span><span class="p">&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h4 id="两个表头的表格">两个表头的表格</h4>
-<figure>
-     
-</figure>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>小红<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>小明<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>小颖<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>数学<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>61<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>85<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>92<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>语文<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>61<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>85<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>92<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>英语<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>61<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>85<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>92<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">tfoot</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>总分<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>200<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>200<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>200<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">tfoot</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="相关样式">相关样式</h3>
-<h4 id="table-layout">table-layout</h4>
-<ul>
-<li>auto【默认】：根据单元格中的内容数量，计算单元格宽度</li>
-<li>fixed：单元格宽度尽量平均</li>
-<li>inherit</li>
-<li>initial</li>
-<li>unset</li>
-</ul>
-<h4 id="border-spacing">border-spacing</h4>
-<blockquote>
-<p>设定每个单元格的间隙</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-  <span class="nt">table</span><span class="p">{</span>
-    <span class="k">width</span><span class="p">:</span> <span class="mi">600</span><span class="kt">px</span><span class="p">;</span>
-    <span class="k">table-layout</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
-    <span class="n">border-spaceing</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="nt">td</span><span class="o">,</span><span class="nt">th</span><span class="p">{</span>
-    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">blue</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h4 id="border-collapse">border-collapse</h4>
-<blockquote>
-<p>通常用于 去掉单元格间隙</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-  <span class="nt">table</span><span class="p">{</span>
-    <span class="k">width</span><span class="p">:</span> <span class="mi">600</span><span class="kt">px</span><span class="p">;</span>
-    <span class="k">table-layout</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
-    <span class="k">border-collapse</span><span class="p">:</span> <span class="kc">collapse</span><span class="p">;</span>   <span class="c">/* 去掉单元格间隙 */</span>
-    <span class="n">border-spaceing</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>   <span class="c">/* 去掉单元格间隙 */</span>
-  <span class="p">}</span>
-  <span class="nt">td</span><span class="o">,</span><span class="nt">th</span><span class="p">{</span>
-    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">blue</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><blockquote>
-<p>下面这两句常被写进 reset.css 中</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="nt">border-collapse</span><span class="o">:</span> <span class="nt">collapse</span><span class="o">;</span>   <span class="c">/* 去掉单元格间隙 */</span>
-<span class="nt">border-spaceing</span><span class="o">:</span> <span class="nt">0</span><span class="o">;</span>   <span class="c">/* 去掉单元格间隙 */</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>​</p>
-<h2 id="img-标签">img 标签</h2>
-<h3 id="作用-1">作用</h3>
-<p>发出 get 请求，展示一张图片</p>
-<h3 id="属性">属性</h3>
-<ul>
-<li>
-<p>alt：全称是可替换的，当图片加载失败，会显示 alt 的值<figure>
-     
-</figure>
-</p>
-</li>
-<li>
-<p>height：只设置 height  ，宽度自适应</p>
-</li>
-<li>
-<p>width：只设置 width  ，高度自适应</p>
-<ul>
-<li>
-<p>同时设定，height 和 width，图片可能变形</p>
-<blockquote>
-<p>永远不要让图片变形</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>
-<p>src：全称 source</p>
-</li>
-</ul>
-<h3 id="事件">事件</h3>
-<ul>
-<li>onload/onerror</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">img</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;xxx&#34;</span> <span class="na">width</span><span class="o">=</span><span class="s">&#34;400&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;dog.jpg&#34;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&#34;一只狗子&#34;</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-	<span class="nx">xxx</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;图片加载成功&#34;</span><span class="p">);</span>
-  <span class="p">}</span>
-  <span class="nx">xxx</span><span class="p">.</span><span class="nx">onerror</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;图片加载失败&#34;</span><span class="p">);</span>
-    <span class="nx">xxx</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">&#34;/404.jpg&#34;</span><span class="p">;</span>  <span class="c1">// 挽救：图片加载失败，展示404图，放在项目中
-</span><span class="c1"></span>  <span class="p">}</span>
-<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="响应式">响应式</h3>
-<ul>
-<li>max-width:100%</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-  <span class="o">*</span><span class="p">{</span>
-    <span class="k">margin</span><span class="p">:</span><span class="mi">0</span><span class="p">;</span>
-    <span class="k">padding</span><span class="p">:</span><span class="mi">0</span><span class="p">;</span>
-    <span class="k">box-sizing</span><span class="p">:</span> <span class="kc">border-box</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="nt">img</span><span class="p">{</span>
-    <span class="k">max-width</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>   <span class="c">/* 图片是响应式的，尺寸永远满足各种窗口大小 */</span>
-  <span class="p">}</span>
-<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="可替换元素">可替换元素</h3>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Replaced_element">https://developer.mozilla.org/zh-CN/docs/Web/CSS/Replaced_element</a></p>
-<p>考试可能会问，被问概率30%</p>
-<p>​</p>
-<h2 id="form-标签">form 标签</h2>
-<h3 id="作用-2">作用</h3>
-<p>发 get 或 post 请求，然后刷新页面</p>
-<h3 id="属性-1">属性</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;/xxx&#34;</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;POST&#34;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">text</span> <span class="p">/&gt;</span>
-  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">submit</span> <span class="p">/&gt;</span>
-<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h4 id="action">action</h4>
-<blockquote>
-<ul>
-<li>
-<p>默认需要给一个 action ，就是发送请求的目标地址（HTTP相关）、请求某一个页面的页面地址</p>
-</li>
-<li>
-<p>需要有后台给我们提供这个地址</p>
-</li>
-</ul>
-</blockquote>
-<h4 id="method">method</h4>
-<blockquote>
-<p>method 属性控制用 GET 还是 POST 来发送请求</p>
-</blockquote>
-<h4 id="autocomplete">autocomplete</h4>
-<blockquote>
-<p>自动填写</p>
-<ul>
-<li>autocomplete: on / off</li>
-</ul>
-</blockquote>
-<h4 id="target-1">target</h4>
-<blockquote>
-<p>提交到哪个页面：新开页面、当前页面、iframe</p>
-<ul>
-<li>与 a 标签写法一致
-<ul>
-<li><code>_blank </code></li>
-<li><code>top </code>：顶级窗口（结合 iframe）</li>
-<li><code>_parent </code> ：父级窗口（结合 iframe）</li>
-<li><code>_self</code> ：当前窗口（默认值）</li>
-<li><code>window.name</code></li>
-<li><code>&lt;iframe name=xxx&gt;&lt;/iframe&gt;</code></li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;/xxx&#34;</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;POST&#34;</span> <span class="na">autocomplete</span><span class="o">=</span><span class="s">&#34;off&#34;</span> <span class="na">target</span><span class="o">=</span><span class="s">&#34;a&#34;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">text</span> <span class="p">/&gt;</span>
-  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">submit</span> <span class="p">/&gt;</span>
-<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;a&#34;</span>  <span class="na">src</span><span class="o">=</span><span class="s">&#34;a-target-iframe.html&#34;</span> <span class="na">frameborder</span><span class="o">=</span><span class="s">&#34;0&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>​</p>
-<h3 id="事件-1">事件</h3>
-<p>onsubmit：用户点击提交会触发这个事件</p>
-<p>​</p>
-<h3 id="typesubmit">type=submit</h3>
-<blockquote>
-<p>form 中的 button 如果没有指定 type 类型，默认是 type=submit 的，点击 button 就会提交 form 表单。如果指定了其他类型，例如 type=button，按钮就不能提交表单。</p>
-<ul>
-<li>一个 form 表单中，必须要有一个 type=submit 的 input 或 button ，才能提交表单。</li>
-</ul>
-</blockquote>
-<p>​</p>
-<h4 id="修改submit按钮文字">修改submit按钮文字</h4>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="p">/&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;搞起&#34;</span> <span class="p">/&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><figure>
-     
-</figure>
-
-<p>​</p>
-<h4 id="submit-按钮的-input-和-button-的区别">submit 按钮的 input 和 button 的区别</h4>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;搞起&#34;</span> <span class="p">/&gt;</span>
-<span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span><span class="p">&gt;</span>搞起<span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>
-<p>区别是：</p>
-<ul>
-<li>
-<p>input按钮中，不能再添加内容</p>
-</li>
-<li>
-<p>button按钮中还可以再添加标签内容</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>搞起<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;dog.jpg&#34;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&#34;狗子&#34;</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><figure>
-     
-</figure>
-
-</li>
-</ul>
-</li>
-</ul>
-<p>​</p>
-<p>​</p>
-<h2 id="input-标签">input 标签</h2>
-<h3 id="作用-3">作用</h3>
-<p>让用户输入内容</p>
-<h3 id="属性-2">属性</h3>
-<h4 id="类型">类型</h4>
-<blockquote>
-<p>type: button/checkbox/email/file/hidden/ number/password/radio/ search/submit/tel/text</p>
-</blockquote>
-<figure>
-     
-</figure>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="p">/&gt;</span>
-
-<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;color&#34;</span> <span class="p">/&gt;</span>
-
-<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;password&#34;</span> <span class="p">/&gt;</span>
-
-<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;radio&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;gender&#34;</span> <span class="p">/&gt;</span>男        <span class="c">&lt;!--同一组，取相同的name--&gt;</span>
-<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;radio&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;gender&#34;</span> <span class="p">/&gt;</span>女
-
-<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;checkbox&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;hobby&#34;</span> <span class="p">/&gt;</span>唱      <span class="c">&lt;!--同一组，取相同的name--&gt;</span>
-<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;checkbox&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;hobby&#34;</span> <span class="p">/&gt;</span>跳
-<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;checkbox&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;hobby&#34;</span> <span class="p">/&gt;</span>rap
-<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;checkbox&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;hobby&#34;</span> <span class="p">/&gt;</span>篮球
-
-<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;file&#34;</span> <span class="na">multiple</span><span class="p">/&gt;</span>
-
-看不见我吧：<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;hidden&#34;</span><span class="p">&gt;</span>    <span class="c">&lt;!-- 通常用于js自动获取并填入 --&gt;</span>
-
-<span class="p">&lt;</span><span class="nt">textarea</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;resize: none;width:50%;height:50px&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">textarea</span><span class="p">&gt;</span>   <span class="c">&lt;!--禁止改变大小--&gt;</span>
-
-<span class="p">&lt;</span><span class="nt">select</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;&#34;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;&#34;</span><span class="p">&gt;</span>-请选择-<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;1&#34;</span><span class="p">&gt;</span>星期一<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;2&#34;</span><span class="p">&gt;</span>星期二<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h4 id="其他">其他</h4>
-<p>（js内容）</p>
-<blockquote>
-<p>name/autofocus/checked/disabled/ maxlength/pattern/value/placeholder</p>
-</blockquote>
-<h3 id="事件-2">事件</h3>
-<p>（js内容）</p>
-<p>onchange ：用户改变内容触发</p>
-<p>onfocus：用户聚焦时触发</p>
-<p>onblur ：用户失焦时触发</p>
-<h3 id="验证器">验证器</h3>
-<p>（js内容）</p>
-<p>HTML5新增功能：自带验证</p>
-<p>例：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">require</span><span class="p">/&gt;</span>
-<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;password&#34;</span> <span class="na">require</span><span class="p">/&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><figure>
-     
-</figure>
-
-<p>​</p>
-<p>​</p>
-<h2 id="其他输入标签">其他输入标签</h2>
-<h3 id="标签">标签</h3>
-<p>（js内容）</p>
-<ul>
-<li>select + option</li>
-<li>textarea</li>
-<li>label</li>
-</ul>
-<h3 id="注意事项">注意事项</h3>
-<ul>
-<li>一般不监听 input 的 click 事件</li>
-<li>form 里面的 input 都要有 name</li>
-<li>form 里要放一个 type=submit 才能触发 submit 事件</li>
-</ul>
-<p>​</p>
-<p>​</p>
-<h2 id="补充工具开启-http-服务">补充工具：开启 http 服务</h2>
-<h3 id="http-server">http-server</h3>
-<ol>
-<li>
-<p>安装</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">yarn</span> <span class="nx">global</span> <span class="nx">add</span> <span class="nx">http</span><span class="o">-</span><span class="nx">server</span>
-</code></pre></td></tr></table>
-</div>
-</div></li>
-<li>
-<p>使用</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">http</span><span class="o">-</span><span class="nx">server</span> <span class="p">.</span> <span class="o">-</span><span class="nx">c</span><span class="o">-</span><span class="mi">1</span>
-<span class="nx">http</span><span class="o">-</span><span class="nx">server</span> <span class="o">-</span><span class="nx">c</span><span class="o">-</span><span class="mi">1</span>
-<span class="nx">hs</span> <span class="o">-</span><span class="nx">c</span><span class="o">-</span><span class="mi">1</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>-c 缓存，-c-1 不要缓存</p>
-<p>. 可以省略</p>
-<p>http-server 可缩写成 hs</p>
-<figure>
-     
-</figure>
-
-</li>
-<li>
-<p>按住ctrl + 点击打开任意链接。地址栏追加 html 文件名，即可浏览</p>
-</li>
-<li>
-<p>ctrl + C 中断服务器</p>
-</li>
-</ol>
-<p>​</p>
-<h3 id="parcel">parcel</h3>
-<blockquote>
-<p>操作更简便</p>
-<p>好像有bug ：ctrl + c 无法中断</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">yarn</span> <span class="nx">global</span> <span class="nx">add</span> <span class="nx">parcel</span> <span class="c1">// 安装
-</span><span class="c1"></span><span class="nx">parcel</span> <span class="nx">a</span><span class="o">-</span><span class="nx">href</span><span class="p">.</span><span class="nx">html</span> <span class="c1">// 使用
-</span></code></pre></td></tr></table>
-</div>
-</div><figure>
-     
-</figure>]]></description>
 </item></channel>
 </rss>
