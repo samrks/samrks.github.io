@@ -4,7 +4,958 @@
         <link>http://samrks.github.io/tags/javascript/</link>
         <description>JavaScript - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Thu, 27 Aug 2020 01:45:54 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/javascript/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Wed, 02 Sep 2020 21:50:44 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/javascript/" rel="self" type="application/rss+xml" /><item>
+    <title>JS 对象的基本用法</title>
+    <link>http://samrks.github.io/20200902-js%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</link>
+    <pubDate>Wed, 02 Sep 2020 21:50:44 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/20200902-js%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</guid>
+    <description><![CDATA[<p>「增」「删」「改」「查」</p>
+<h2 id="回顾">回顾</h2>
+<h3 id="七种数据类型">七种数据类型</h3>
+<ul>
+<li>number、string、booleansymbol</li>
+<li>undefined、null</li>
+<li>object</li>
+</ul>
+<p>四基(本类型)两空一对象</p>
+<p>(bigInt)</p>
+<h3 id="五个-falsy-值">五个 falsy 值</h3>
+<ul>
+<li>null、undefined</li>
+<li>0、NaN</li>
+<li><code>''</code> （空字符串）</li>
+</ul>
+<p>​</p>
+<h2 id="js-对象">JS 对象</h2>
+<blockquote>
+<p>是学习 JS 的三座大山之一</p>
+<ul>
+<li>
+<p>对象（原型）</p>
+</li>
+<li>
+<p>this</p>
+</li>
+<li>
+<p>AJAX</p>
+</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h2 id="对象-object">对象 object</h2>
+<blockquote>
+<p>对象的基础知识</p>
+</blockquote>
+<blockquote>
+<p>object ，是第七种数据类型，唯一 一种「复杂类型」</p>
+<p>其他六种（numbe、string、boolean、symbol、null、undefined），叫做「简单类型」。因为这六种不包含其他任何东西，而 object 对象包含其他内容</p>
+</blockquote>
+<h3 id="定义">定义</h3>
+<ul>
+<li>无序的数据集合</li>
+<li>键值对的集合</li>
+</ul>
+<h3 id="写法">写法</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">对象名</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">key</span><span class="o">:</span> <span class="nx">value</span>    <span class="c1">// 属性名/键名 :  属性值
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>对象的写法，与 block（代码块）类似，只是碰巧都有 { } 。</li>
+<li>要注意区分 { }  是对象，还是代码块</li>
+</ul>
+<p>例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="o">:</span> <span class="mi">18</span> <span class="p">}</span>   <span class="c1">// 不论&#39;name&#39;/&#39;age&#39;(属性名)是否有引号，它都只能是字符串
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">})</span>    <span class="c1">// 正规写法
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">({</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="o">:</span> <span class="mi">18</span> <span class="p">})</span>  <span class="c1">// 创建匿名对象
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>JS 既然可以通过<strong><code>字面量</code></strong>方式创建对象，为什么还要有第二种 <strong><code>new Object()</code></strong> 的方式创建 ?
+<ul>
+<li>实际上<strong>第二种 <code>new Object()</code> 才是正规创建对象的写法</strong>，第一种属于简化版</li>
+<li>因为简化了代码，所以通常都是用第一种写法</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h3 id="细节">细节</h3>
+<ul>
+<li>
+<p>==<strong>键名是字符串</strong>==，不是标识符，可以包含任意字符</p>
+<blockquote>
+<p>只要是<strong>字符串</strong>就行：空串、空格串、emoji 、数字字符串 … （任何一个 Unicode 能表达的串都 ok ）</p>
+<p>标识符 规则：（变量）不能以数字开头</p>
+</blockquote>
+</li>
+<li>
+<p>属性名的引号可省略，省略之后需按照标识符的规则命名，特例：允许纯数字的键名</p>
+</li>
+<li>
+<p><strong>就算引号省略了，键名也还是字符串（重要）</strong></p>
+</li>
+</ul>
+<p>例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;&#39;</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">2</span><span class="o">:</span> <span class="mi">123</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;fff&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="o">:</span><span class="mi">12</span> <span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj3</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;  &#39;</span><span class="o">:</span> <span class="mi">2</span> <span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj4</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;👍&#39;</span><span class="o">:</span> <span class="s1">&#39;zan&#39;</span> <span class="p">}</span>
+
+
+<span class="c1">// Object.keys(对象名)  获取对象中的 key名 组成的数组
+</span><span class="c1"></span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj1</span><span class="p">)</span>  <span class="c1">// [&#34;&#34;] // 空串也是字符串，合法
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj2</span><span class="p">)</span>  <span class="c1">// [&#34;2&#34;, &#34;name&#34;, &#34;age&#34;]
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj3</span><span class="p">)</span>  <span class="c1">// [&#34;  &#34;]
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj4</span><span class="p">)</span>  <span class="c1">// [&#34;👍&#34;]
+</span><span class="c1"></span>
+<span class="c1">// 所以不论怎么写，key 都是字符串
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="属性名">属性名</h4>
+<blockquote>
+<p>每个 key 都是对象的属性名（property）</p>
+</blockquote>
+<h4 id="属性值">属性值</h4>
+<blockquote>
+<p>每个 value 都是对象的属性值</p>
+</blockquote>
+<p>​</p>
+<h3 id="奇怪的属性名">奇怪的属性名</h3>
+<p>所有属性名会自动变成字符串</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="mi">1</span><span class="o">:</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span>       <span class="c1">// &#34;1&#34;
+</span><span class="c1"></span>  <span class="mf">3.2</span><span class="o">:</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span>     <span class="c1">// &#34;3.2&#34;
+</span><span class="c1"></span>  <span class="mi">1</span><span class="nx">e2</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>    <span class="c1">// &#34;100&#34;
+</span><span class="c1"></span>  <span class="mi">1</span><span class="nx">e</span><span class="o">-</span><span class="mi">2</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>   <span class="c1">// &#34;0.01&#34;
+</span><span class="c1"></span>  <span class="mf">.234</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>   <span class="c1">// &#34;0.234&#34;
+</span><span class="c1"></span>  <span class="mh">0xFF</span><span class="o">:</span> <span class="kc">true</span>    <span class="c1">// &#34;255&#34;
+</span><span class="c1"></span><span class="p">};</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// [&#34;1&#34;, &#34;100&#34;, &#34;255&#34;, &#34;3.2&#34;, &#34;0.01&#34;, &#34;0.234&#34;]
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>JS 可能会自动换算「属性名」，所以如果不想被自动换算，给属性名加上「引号」即可解决</p>
+</blockquote>
+<h4 id="细节-1">细节</h4>
+<ul>
+<li><strong><code>Object.keys(obj)</code></strong> 可以得到 obj 的所有 key 组成的数组</li>
+<li>这个 API 需要会使用</li>
+</ul>
+<h4 id="变量作属性名">「变量」作属性名</h4>
+<p>如何用变量做属性名</p>
+<ul>
+<li>
+<p>之前都是用<strong>常量</strong>做属性名（所有不是变量的都是常量）</p>
+</li>
+<li>
+<p><strong><code>let p1 = 'name'</code></strong></p>
+</li>
+<li>
+<p><strong><code>let obj = { p1 : 'sam'}</code></strong> 这样写，属性名为 <strong><code>'p1'</code></strong></p>
+</li>
+<li>
+<p><strong><code>let obj = { [p1] : 'sam' }</code></strong> 这样写，属性名为 <strong><code>'name'</code></strong>    （ ES 6 ）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">aa</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span>  <span class="c1">// 想用变量a作为属性名
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">aa</span><span class="o">:</span> <span class="mi">1111</span> <span class="p">}</span>     <span class="c1">// {aa: 1111}
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;aa&#39;</span><span class="o">:</span> <span class="mi">1111</span> <span class="p">}</span>   <span class="c1">// {aa: 1111}
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="p">[</span><span class="nx">aa</span><span class="p">]</span><span class="o">:</span> <span class="mi">1111</span> <span class="p">}</span>   <span class="c1">// {xxx: 1111}  // ES6之后
+</span></code></pre></td></tr></table>
+</div>
+</div><p>ES6之前，实现变量作属性名  ↓↓ ，需两行代码实现。ES6之后一行 ↑↑ 即可</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">aa</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span> 
+<span class="nx">obj</span><span class="p">[</span><span class="nx">aa</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1111</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// {xxx: 1111}
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>对比</p>
+<ul>
+<li>
+<p>不加 <i class="far fa-square fa-fw"></i> 的属性名会自动变成字符串</p>
+</li>
+<li>
+<p>加了 <i class="far fa-square fa-fw"></i> 则会当做变量求值</p>
+</li>
+<li>
+<p>值如果不是字符串，则会自动变成字符串</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span><span class="o">:</span> <span class="s1">&#39;十&#39;</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// { 10: &#34;十&#34; }
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// [ &#34;10&#34; ]
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<h3 id="对象的隐藏属性原型-">对象的隐藏属性（原型 💡）</h3>
+<p>隐藏属性</p>
+<ul>
+<li>JS 中，每一个对象 都有一个 隐藏属性  <code>__proto__</code></li>
+<li>这个隐藏属性，储存着其 <strong>共有属性组成的对象</strong>的地址</li>
+<li>这个<strong>共有属性组成的对象</strong>，叫做原型</li>
+<li>也就是说，隐藏属性 储存着 原型的地址
+<ul>
+<li><code>__proto__</code> 存储了一个地址，这个地址所代表的内存空间中的对象，叫做原型 / 共有属性</li>
+</ul>
+</li>
+</ul>
+<p>代码示例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="c1">// 居然不报错
+</span></code></pre></td></tr></table>
+</div>
+</div><p>因为 obj 的隐藏属性<strong>对应的对象</strong>（原型 / 共有属性）上有 toString()</p>
+<p>​</p>
+<blockquote>
+<p>举个栗子：什么叫共有属性</p>
+<ul>
+<li>将共有的属性，提取出来单独存储成一个对象。最大的好处，就是<strong>省内存</strong></li>
+<li>每次声明一个 chinese 时，无需重复写入：国籍、肤色、发色 … 等 chinese 公共的属性，直接用一个<strong>特定属性</strong>（–proto–），<strong>存储</strong>共有属性所在的<strong>内存地址</strong>即可</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">chinese1</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;小兰&#39;</span> <span class="p">}</span>
+<span class="kd">var</span> <span class="nx">chinese2</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;小红&#39;</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>​</p>
+<p>​</p>
+<h3 id="超纲知识">超纲知识</h3>
+<blockquote>
+<p>前面提到，对象中所有的 key 都是字符串</p>
+</blockquote>
+<blockquote>
+<p>实际上，ES 6 中稍微做了调整：<strong>除了字符串，symbol 也能做属性名</strong></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">Symbol</span><span class="p">()</span>
+<span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="p">[</span><span class="nx">a</span><span class="p">]</span><span class="o">:</span> <span class="s1">&#39;Hello&#39;</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这有什么用呢？</p>
+<ul>
+<li>目前，屁用都没用，很久很久以后可能会有用（方方从没用过）</li>
+<li>在学习「迭代」时会用到（但前端不流行迭代，所以根本没机会用）</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="增删改查">增删改查</h2>
+<blockquote>
+<p>「增删改查」对象的属性</p>
+</blockquote>
+<h3 id="删除属性">删除属性</h3>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/delete" target="_blank" rel="noopener noreffer">delete 操作符</a>：用于删除对象的某个属性</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">delete</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">xxx</span>
+<span class="k">delete</span> <span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;xxx&#39;</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>作用：删除 obj 的 xxx 属性</li>
+<li>请区分「属性值为 undefined」和「不含属性名」</li>
+</ul>
+<h4 id="不含属性名">不含属性名</h4>
+<p>直接删除属性名</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">18</span><span class="p">}</span>
+<span class="k">delete</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">name</span>  <span class="c1">// 或 delete obj[&#39;name&#39;]
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// {age: 18}
+</span><span class="c1">// console.log(obj.name) // undefined
+</span></code></pre></td></tr></table>
+</div>
+</div><p>判断是否删除成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="s1">&#39;xxx&#39;</span> <span class="k">in</span> <span class="nx">obj</span> <span class="o">===</span> <span class="kc">false</span>   <span class="c1">// 返回 true 说明该属性名已被删除 
+</span><span class="c1"></span><span class="err">（</span><span class="nx">不能省略引号</span><span class="err">）</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="含有属性名但是值为-undefined">含有属性名，但是值为 undefined</h4>
+<p>仅删除属性值，保留属性名</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="s1">&#39;xxx&#39;</span> <span class="k">in</span> <span class="nx">obj</span> <span class="o">&amp;&amp;</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">xxx</span> <span class="o">===</span> <span class="kc">undefined</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">18</span><span class="p">}</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="kc">undefined</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// {name: undefined, age: 18}
+</span><span class="c1">// console.log(obj.name) // undefined
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="注意-objxxx--undefined">注意 obj.xxx === undefined</h4>
+<ul>
+<li>
+<p><code>obj.xxx === undefined</code> 不能断定 &lsquo;xxx&rsquo; 是否为 obj 的属性</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="kd">let</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span><span class="kc">undefined</span><span class="p">}</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">x</span> <span class="o">===</span> <span class="kc">undefined</span> <span class="c1">// true
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">x</span> <span class="o">===</span> <span class="kc">undefined</span> <span class="c1">// true   所以说 这句话无法判断出 x 到底是不是 obj 的属性
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>用 in 和 hasOwnProperty 可以判断</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="kd">let</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span><span class="kc">undefined</span><span class="p">}</span>
+<span class="s1">&#39;x&#39;</span> <span class="k">in</span> <span class="nx">obj</span>   <span class="c1">// false
+</span><span class="c1"></span><span class="s1">&#39;x&#39;</span> <span class="k">in</span> <span class="nx">obj2</span>  <span class="c1">// true
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>    <span class="c1">// false
+</span><span class="c1"></span><span class="nx">obj2</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>   <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="类比">类比</h4>
+<ul>
+<li>你有没有卫生纸？</li>
+<li>A: 没有 // 不含属性名</li>
+<li>B: 有，但是没带 // 含有属性名，但是值为 undefined</li>
+</ul>
+<blockquote>
+<h4 id="程序员就是这么严谨">程序员就是这么严谨</h4>
+<ul>
+<li>「没有」和「undefined」是两个概念</li>
+<li>没有就是没有，undefined 就是 undefined</li>
+<li>绝不含糊</li>
+<li>需要细心，发现细微的区别</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h3 id="查看所有属性读属性">查看所有属性（读属性）</h3>
+<p>例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">18</span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="查看自身所有属性">查看自身所有属性</h4>
+<blockquote>
+<p>无法打印【共有属性 <code>__proto__</code>】</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>     <span class="c1">// [&#34;name&#34;, &#34;age&#34;]
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>   <span class="c1">// [&#34;sam&#34;, 18] 
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// [Array(2), Array(2)]  =&gt; 0:[&#34;name&#34;, &#34;sam&#34;]  1:[&#34;age&#34;, 18]
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<h4 id="查看自身共有属性">查看自身+共有属性</h4>
+<blockquote>
+<p>dir 指以目录的形式，可以查看到【共有属性 <code>__proto__</code>】</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>   <span class="c1">// 查看 obj内容 及 共有属性 【推荐】
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span>      
+<span class="c1">// 也可以直接打印共有属性（但不推荐此法，因为隐藏属性的命名是不固定的，不同浏览器可能规定不同）
+</span></code></pre></td></tr></table>
+</div>
+</div><p>或者自己依次用 Object.keys 打印出 <code>obj.__proto__</code></p>
+<h4 id="判断一个属性是自身的还是共有的">判断一个属性是自身的还是共有的</h4>
+<blockquote>
+<p>判断一个属性是否是某个对象的属性，可以用 <code>in</code>  ，但是 in 无法区分是自身的还是共有的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="s2">&#34;name&#34;</span> <span class="k">in</span> <span class="nx">obj</span>      <span class="c1">// true
+</span><span class="c1"></span><span class="s2">&#34;toString&#34;</span> <span class="k">in</span> <span class="nx">obj</span>  <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;toString&#39;</span><span class="p">)</span>   <span class="c1">// false
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>       <span class="c1">// true
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">)</span>        <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h3 id="原型">原型</h3>
+<blockquote>
+<p>原型，就是隐藏属性 所指向的对象</p>
+</blockquote>
+<h4 id="每个对象都有原型">每个对象都有原型</h4>
+<ul>
+<li>原型里存着对象的共有属性</li>
+<li>比如 obj 的原型就是一个对象
+<ul>
+<li><code>obj.__proto__ </code>存着这个原型对象的地址</li>
+<li>这个原型对象里有 toString / constructor / valueOf 等属性</li>
+</ul>
+</li>
+</ul>
+<h4 id="对象的原型也是对象">对象的原型也是对象</h4>
+<blockquote>
+<p>既然每个对象都有原型，且原型也是对象，那么可以推出：原型上也有原型</p>
+</blockquote>
+<ul>
+<li>所以对象的原型上也有原型</li>
+<li>obj = { } 空对象的原型即为所有对象的原型</li>
+<li>这个原型包含所有对象的共有属性，是<strong>对象的根</strong></li>
+<li>这个原型也有原型，<strong>是 null</strong>     【/nʌl/】
+<ul>
+<li>原型为 null 的对象，就是对象的根</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">)</span>  <span class="c1">// 原型对象（根对象）
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">)</span>   <span class="c1">// null  原型上的原型
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h3 id="查看属性">查看属性</h3>
+<h4 id="两种方法查看属性">两种方法查看属性</h4>
+<ul>
+<li>
+<p>**中括号语法：obj[&lsquo;key&rsquo;] **</p>
+</li>
+<li>
+<p>点语法：obj.key</p>
+</li>
+<li>
+<p>坑新人语法：obj[key]      // 中括号里是变量，【变量 key】 值一般不等于【字符串 &lsquo;key&rsquo;】</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">18</span><span class="p">}</span>
+<span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>   <span class="c1">// &#39;sam&#39;
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">name</span>      <span class="c1">// &#39;sam&#39;
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>     <span class="c1">// undefined
+</span><span class="c1"></span>    
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span>   <span class="c1">// &#34;&#34;
+</span><span class="c1"></span><span class="nb">window</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;age&#39;</span>
+<span class="nx">obj</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>    <span class="c1">// 18   // 等同于 obj[&#39;age&#39;]
+</span></code></pre></td></tr></table>
+</div>
+</div><p>变态</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;na&#39;</span><span class="o">+</span><span class="s1">&#39;me&#39;</span><span class="p">]</span>   <span class="c1">// &#39;sam&#39;
+</span><span class="c1"></span>    
+<span class="nx">obj</span><span class="p">[</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)]</span>   
+<span class="c1">// name   // 先执行log命令，打印内容
+</span><span class="c1">// undefined   // log 函数的返回值为 undefined，相当于执行 obj[undefined] =&gt; undefined
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<h4 id="请优先使用中括号语法">请优先使用中括号语法</h4>
+<ul>
+<li>【点语法】会误导你，让你以为 key 不是字符串</li>
+<li>等你确定不会弄混两种语法，再改用点语法</li>
+</ul>
+<blockquote>
+<p>obj.name 等价于 obj[&lsquo;name&rsquo;]
+obj.name 不等价于 obj[name]</p>
+<p>简单来说，obj.name 这里的 <strong>name 是字符串，而不是变量</strong></p>
+</blockquote>
+<blockquote>
+<p>let name = &lsquo;sam&rsquo;
+此时 obj[name] 等价于 obj[&lsquo;sam&rsquo;] ，而不是 obj[&lsquo;name&rsquo;] 和 obj.name</p>
+</blockquote>
+<p>​</p>
+<h4 id="考题">考题</h4>
+<blockquote>
+<p>区分变量<code> name</code> 和 常量字符串 <code>'name'</code></p>
+</blockquote>
+<p>代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">]</span>
+<span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span><span class="mi">18</span><span class="p">,</span> <span class="nx">gender</span><span class="o">:</span><span class="s1">&#39;man&#39;</span><span class="p">}</span>
+
+<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">list</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+  <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">list</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person</span><span class="o">???</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// 使得 person 的所有属性被打印出来
+</span></code></pre></td></tr></table>
+</div>
+</div><p>选项</p>
+<ol>
+<li>console.log(person.name)      ✘          // sam sam sam</li>
+<li><strong>console.log(person[name])</strong>    ✔     // sam 18 man</li>
+</ol>
+<blockquote>
+<p>区分 name 和 &lsquo;name&rsquo; 为什么这么重要</p>
+<ul>
+<li>因为如果你现在不搞清楚，那么你在学 Vue 的时候，会更加迷惑</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h3 id="修改或增加属性写属性">修改或增加属性（写属性）</h3>
+<h4 id="直接赋值">直接赋值</h4>
+<blockquote>
+<p>直接赋值，name 属性已存在，就相当于修改属性值；name 属性不存在，就会新增这个属性，值为 sam</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">}</span> <span class="c1">// name 是字符串
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span> <span class="c1">// name 是字符串 ✔
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span>  <span class="c1">// ✔
+</span><span class="c1"></span>
+<span class="nx">obj</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span> <span class="c1">// 错，因name为变量，值不一定等于&#39;name&#39;
+</span><span class="c1"></span>
+<span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;na&#39;</span><span class="o">+</span><span class="s1">&#39;me&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span>  <span class="c1">// ✔
+</span><span class="c1"></span>
+<span class="kd">let</span> <span class="nx">key</span> <span class="o">=</span> <span class="s1">&#39;name&#39;</span><span class="p">;</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span>
+<span class="kd">let</span> <span class="nx">key</span> <span class="o">=</span> <span class="s1">&#39;name&#39;</span><span class="p">;</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">key</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span> <span class="c1">// 错，因为obj.key等价于obj[&#39;key&#39;]，相当于给obj增加了key属性 值为sam
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="批量赋值">批量赋值</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">}</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;123&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">18</span><span class="p">,</span> <span class="nx">gender</span><span class="o">:</span> <span class="s1">&#39;man&#39;</span><span class="p">})</span> 
+<span class="c1">// name 属性已存在，就相当于修改属性值；name 属性不存在，就会新增这个属性，值为&#39;123&#39;
+</span><span class="c1"></span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// {name:&#39;123&#39;, age: 18, gender: &#39;man&#39;}
+</span></code></pre></td></tr></table>
+</div>
+</div><p>assign ：赋值的意思</p>
+<p>Object.assign() ：是 ES6 新出的 API</p>
+<p>​</p>
+<p>​</p>
+<h3 id="修改或增加共有属性">修改或增加共有属性</h3>
+<blockquote>
+<p>JS 特性：</p>
+<ul>
+<li>读取时，可以读取到（原型上的）共有属性。</li>
+<li>写入时，只写在自己身上，不会影响（原型）共有属性</li>
+</ul>
+</blockquote>
+<h4 id="无法通过自身修改或增加共有属性">无法通过自身修改或增加共有属性</h4>
+<blockquote>
+<p>原型上的属性，无法通过自身直接修改</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{},</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1">// 共有 toString 方法
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">toString</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span>    <span class="c1">// 只会在改 obj 自身属性，不会覆盖共用的 toString 方法
+</span><span class="c1"></span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">toString</span>     <span class="c1">// &#39;xxx&#39;
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>   <span class="c1">// 报错 obj.toString is not a function
+</span><span class="c1"></span>
+<span class="nx">obj2</span><span class="p">.</span><span class="nx">toString</span>    <span class="c1">// ƒ toString() { [native code] }   还是在原型上的方法
+</span><span class="c1"></span><span class="nx">obj2</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>  <span class="c1">// &#34;[object Object]&#34;
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="偏要修改或增加原型上的属性">偏要修改或增加原型上的属性</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">toString</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span> <span class="c1">// 不推荐用 __proto__
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span> 
+<span class="nx">console</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">toString</span><span class="p">)</span>
+
+<span class="c1">// obj.__proto__ 存的地址，等价于 window.Object.prototype 存的地址
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">window</span><span class="p">.</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>  <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>这是 JS 非常危险的特型，一旦修改，会使得原型上的属性非常不可信 —— JS 的脆弱性</li>
+<li><strong>一般来说，不要修改原型</strong>，会引起很多问题：代码崩溃/异常…</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="修改隐藏属性">修改隐藏属性</h3>
+<h4 id="不推荐使用--__proto__-修改原型">不推荐使用 <code> __proto__</code> 修改原型</h4>
+<p>例1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;sam&#39;</span><span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>   <span class="c1">// {name:&#34;sam&#34;, __proto__: Object}
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">=</span> <span class="kc">null</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>   <span class="c1">// {name:&#34;sam&#34;}    没有proto原型了，变成非常纯净的对象，不能调用任何功能
+</span></code></pre></td></tr></table>
+</div>
+</div><p>例2</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;sam&#39;</span><span class="p">}</span>
+<span class="kd">let</span> <span class="nx">person2</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;jack&#39;</span><span class="p">}</span>
+<span class="kd">let</span> <span class="nx">common</span> <span class="o">=</span> <span class="p">{</span><span class="nx">kind</span><span class="o">:</span> <span class="s1">&#39;human&#39;</span><span class="p">,</span> <span class="s1">&#39;国籍&#39;</span><span class="o">:</span> <span class="s1">&#39;中国&#39;</span><span class="err">，</span> <span class="nx">hairColor</span><span class="o">:</span> <span class="s1">&#39;black&#39;</span><span class="p">}</span>
+<span class="nx">person</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">=</span> <span class="nx">common</span>
+<span class="nx">person2</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">=</span> <span class="nx">common</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<blockquote>
+<p>上述，使用 <code> __proto__</code> 直接修改原型，不推荐，性能非常低</p>
+</blockquote>
+<p>​</p>
+<h4 id="推荐使用-objectcreate-修改对象的原型">推荐使用 Object.create 修改对象的原型</h4>
+<blockquote>
+<p>规范的修改对象的原型，使用 Object.create  【功能：用于指定原型】</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;sam&#39;</span><span class="p">})</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// { __proto__:{name:&#39;sam&#39;} } 
+</span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<p>用法 ↓</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">common</span> <span class="o">=</span> <span class="p">{</span><span class="nx">kind</span><span class="o">:</span> <span class="s1">&#39;human&#39;</span><span class="p">,</span> <span class="s1">&#39;国籍&#39;</span><span class="o">:</span> <span class="s1">&#39;中国&#39;</span><span class="err">，</span> <span class="nx">hairColor</span><span class="o">:</span> <span class="s1">&#39;black&#39;</span><span class="p">}</span>
+<span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">common</span><span class="p">)</span>  <span class="c1">// 以common为原型对象，创建obj
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span> <span class="c1">// 点方法，挨个添加属性，或 批量修改/添加属性 Object.assign(obj,{ ... })
+</span><span class="c1"></span><span class="p">...</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>Object.create()  第二个参数，写法比较麻烦</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">common</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="p">{</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span> <span class="p">}</span>
+<span class="p">})</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person</span><span class="p">)</span>  <span class="c1">// {name:&#39;sam&#39;, __proto__: Object}  =&gt; 
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>规范的写法：大概是，要改就一开始就改；别后来再改，如<code>person.__proto__ = common</code>  影响性能</p>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<p>​</p>
+<h2 id="总结">总结</h2>
+<h3 id="删">删</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">delete</span> <span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="s1">&#39;name&#39;</span> <span class="k">in</span> <span class="nx">obj</span> <span class="c1">// false  // in 用于判断某个对象中是否含这个属性，缺点：无法区分是自身的，还是原型上共有的
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>  <span class="c1">// false  // 只有对象自身含有这个属性，才会返回 true
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="查">查</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// 目录形式，详细
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">name</span> <span class="c1">// 记住这里的 name 是字符串
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>  <span class="c1">// 记住这里的 name 是变量
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="改">改</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">改自身</span> <span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;jack&#39;</span>
+<span class="nx">批量改自身</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="p">{</span><span class="nx">age</span><span class="o">:</span><span class="mi">18</span><span class="p">,</span> <span class="p">...})</span>
+                          
+<span class="nx">改某个共有属性</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">[</span><span class="s1">&#39;toString&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span>  <span class="c1">// 强烈不推荐
+</span><span class="c1"></span><span class="nx">改某个共有属性</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">[</span><span class="s1">&#39;toString&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span>
+
+<span class="nx">换原型</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">=</span> <span class="nx">common</span>  <span class="c1">// 强烈不推荐
+</span><span class="c1"></span><span class="nx">换原型</span> <span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">common</span><span class="p">)</span>
+
+<span class="c1">// 注：所有 proto 代码都是强烈不推荐写的。学习时可以用用，但是工作中不要用
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="增">增</h3>
+<p>基本同上，已有属性则改；没有属性则增。</p>
+<blockquote>
+<ul>
+<li>查：属于读，可以读到原型链</li>
+<li>改 和 增：属于写，只能改自身，不能改到原型</li>
+</ul>
+</blockquote>]]></description>
+</item><item>
     <title>JS 的数据类型🧐</title>
     <link>http://samrks.github.io/20200827-js%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
     <pubDate>Thu, 27 Aug 2020 01:45:54 &#43;0800</pubDate>

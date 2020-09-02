@@ -4,7 +4,7 @@
         <link>http://samrks.github.io/</link>
         <description>Stay Simple, Stay Young</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Thu, 27 Aug 2020 01:45:54 &#43;0800</lastBuildDate>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Wed, 02 Sep 2020 21:50:44 &#43;0800</lastBuildDate>
             <atom:link href="http://samrks.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>【置顶】开博纪念🥰</title>
@@ -15,7 +15,958 @@
     <description><![CDATA[<p>每一天都是新的开始，Stay Simple，Stay Young 🎉</p>
 <h2 id="yeah">Yeah！🎉🎉</h2>
 <blockquote>
-<p>996之余，想尝试成为段子手/键盘侠/杠精，均因胸无笔墨、无fà可suō而失败告终后，终于老老实实的回来敲敲学习笔记了~</p>
+<p>Life is simply about getting hit over and over :)</p>
+</blockquote>]]></description>
+</item><item>
+    <title>JS 对象的基本用法</title>
+    <link>http://samrks.github.io/20200902-js%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</link>
+    <pubDate>Wed, 02 Sep 2020 21:50:44 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/20200902-js%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</guid>
+    <description><![CDATA[<p>「增」「删」「改」「查」</p>
+<h2 id="回顾">回顾</h2>
+<h3 id="七种数据类型">七种数据类型</h3>
+<ul>
+<li>number、string、booleansymbol</li>
+<li>undefined、null</li>
+<li>object</li>
+</ul>
+<p>四基(本类型)两空一对象</p>
+<p>(bigInt)</p>
+<h3 id="五个-falsy-值">五个 falsy 值</h3>
+<ul>
+<li>null、undefined</li>
+<li>0、NaN</li>
+<li><code>''</code> （空字符串）</li>
+</ul>
+<p>​</p>
+<h2 id="js-对象">JS 对象</h2>
+<blockquote>
+<p>是学习 JS 的三座大山之一</p>
+<ul>
+<li>
+<p>对象（原型）</p>
+</li>
+<li>
+<p>this</p>
+</li>
+<li>
+<p>AJAX</p>
+</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h2 id="对象-object">对象 object</h2>
+<blockquote>
+<p>对象的基础知识</p>
+</blockquote>
+<blockquote>
+<p>object ，是第七种数据类型，唯一 一种「复杂类型」</p>
+<p>其他六种（numbe、string、boolean、symbol、null、undefined），叫做「简单类型」。因为这六种不包含其他任何东西，而 object 对象包含其他内容</p>
+</blockquote>
+<h3 id="定义">定义</h3>
+<ul>
+<li>无序的数据集合</li>
+<li>键值对的集合</li>
+</ul>
+<h3 id="写法">写法</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">对象名</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">key</span><span class="o">:</span> <span class="nx">value</span>    <span class="c1">// 属性名/键名 :  属性值
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>对象的写法，与 block（代码块）类似，只是碰巧都有 { } 。</li>
+<li>要注意区分 { }  是对象，还是代码块</li>
+</ul>
+<p>例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="o">:</span> <span class="mi">18</span> <span class="p">}</span>   <span class="c1">// 不论&#39;name&#39;/&#39;age&#39;(属性名)是否有引号，它都只能是字符串
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">})</span>    <span class="c1">// 正规写法
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">({</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="o">:</span> <span class="mi">18</span> <span class="p">})</span>  <span class="c1">// 创建匿名对象
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>JS 既然可以通过<strong><code>字面量</code></strong>方式创建对象，为什么还要有第二种 <strong><code>new Object()</code></strong> 的方式创建 ?
+<ul>
+<li>实际上<strong>第二种 <code>new Object()</code> 才是正规创建对象的写法</strong>，第一种属于简化版</li>
+<li>因为简化了代码，所以通常都是用第一种写法</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h3 id="细节">细节</h3>
+<ul>
+<li>
+<p>==<strong>键名是字符串</strong>==，不是标识符，可以包含任意字符</p>
+<blockquote>
+<p>只要是<strong>字符串</strong>就行：空串、空格串、emoji 、数字字符串 … （任何一个 Unicode 能表达的串都 ok ）</p>
+<p>标识符 规则：（变量）不能以数字开头</p>
+</blockquote>
+</li>
+<li>
+<p>属性名的引号可省略，省略之后需按照标识符的规则命名，特例：允许纯数字的键名</p>
+</li>
+<li>
+<p><strong>就算引号省略了，键名也还是字符串（重要）</strong></p>
+</li>
+</ul>
+<p>例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;&#39;</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">2</span><span class="o">:</span> <span class="mi">123</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;fff&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="o">:</span><span class="mi">12</span> <span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj3</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;  &#39;</span><span class="o">:</span> <span class="mi">2</span> <span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj4</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;👍&#39;</span><span class="o">:</span> <span class="s1">&#39;zan&#39;</span> <span class="p">}</span>
+
+
+<span class="c1">// Object.keys(对象名)  获取对象中的 key名 组成的数组
+</span><span class="c1"></span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj1</span><span class="p">)</span>  <span class="c1">// [&#34;&#34;] // 空串也是字符串，合法
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj2</span><span class="p">)</span>  <span class="c1">// [&#34;2&#34;, &#34;name&#34;, &#34;age&#34;]
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj3</span><span class="p">)</span>  <span class="c1">// [&#34;  &#34;]
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj4</span><span class="p">)</span>  <span class="c1">// [&#34;👍&#34;]
+</span><span class="c1"></span>
+<span class="c1">// 所以不论怎么写，key 都是字符串
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="属性名">属性名</h4>
+<blockquote>
+<p>每个 key 都是对象的属性名（property）</p>
+</blockquote>
+<h4 id="属性值">属性值</h4>
+<blockquote>
+<p>每个 value 都是对象的属性值</p>
+</blockquote>
+<p>​</p>
+<h3 id="奇怪的属性名">奇怪的属性名</h3>
+<p>所有属性名会自动变成字符串</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="mi">1</span><span class="o">:</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span>       <span class="c1">// &#34;1&#34;
+</span><span class="c1"></span>  <span class="mf">3.2</span><span class="o">:</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span>     <span class="c1">// &#34;3.2&#34;
+</span><span class="c1"></span>  <span class="mi">1</span><span class="nx">e2</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>    <span class="c1">// &#34;100&#34;
+</span><span class="c1"></span>  <span class="mi">1</span><span class="nx">e</span><span class="o">-</span><span class="mi">2</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>   <span class="c1">// &#34;0.01&#34;
+</span><span class="c1"></span>  <span class="mf">.234</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>   <span class="c1">// &#34;0.234&#34;
+</span><span class="c1"></span>  <span class="mh">0xFF</span><span class="o">:</span> <span class="kc">true</span>    <span class="c1">// &#34;255&#34;
+</span><span class="c1"></span><span class="p">};</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// [&#34;1&#34;, &#34;100&#34;, &#34;255&#34;, &#34;3.2&#34;, &#34;0.01&#34;, &#34;0.234&#34;]
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>JS 可能会自动换算「属性名」，所以如果不想被自动换算，给属性名加上「引号」即可解决</p>
+</blockquote>
+<h4 id="细节-1">细节</h4>
+<ul>
+<li><strong><code>Object.keys(obj)</code></strong> 可以得到 obj 的所有 key 组成的数组</li>
+<li>这个 API 需要会使用</li>
+</ul>
+<h4 id="变量作属性名">「变量」作属性名</h4>
+<p>如何用变量做属性名</p>
+<ul>
+<li>
+<p>之前都是用<strong>常量</strong>做属性名（所有不是变量的都是常量）</p>
+</li>
+<li>
+<p><strong><code>let p1 = 'name'</code></strong></p>
+</li>
+<li>
+<p><strong><code>let obj = { p1 : 'sam'}</code></strong> 这样写，属性名为 <strong><code>'p1'</code></strong></p>
+</li>
+<li>
+<p><strong><code>let obj = { [p1] : 'sam' }</code></strong> 这样写，属性名为 <strong><code>'name'</code></strong>    （ ES 6 ）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">aa</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span>  <span class="c1">// 想用变量a作为属性名
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">aa</span><span class="o">:</span> <span class="mi">1111</span> <span class="p">}</span>     <span class="c1">// {aa: 1111}
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;aa&#39;</span><span class="o">:</span> <span class="mi">1111</span> <span class="p">}</span>   <span class="c1">// {aa: 1111}
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="p">[</span><span class="nx">aa</span><span class="p">]</span><span class="o">:</span> <span class="mi">1111</span> <span class="p">}</span>   <span class="c1">// {xxx: 1111}  // ES6之后
+</span></code></pre></td></tr></table>
+</div>
+</div><p>ES6之前，实现变量作属性名  ↓↓ ，需两行代码实现。ES6之后一行 ↑↑ 即可</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">aa</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span> 
+<span class="nx">obj</span><span class="p">[</span><span class="nx">aa</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1111</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// {xxx: 1111}
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>对比</p>
+<ul>
+<li>
+<p>不加 <i class="far fa-square fa-fw"></i> 的属性名会自动变成字符串</p>
+</li>
+<li>
+<p>加了 <i class="far fa-square fa-fw"></i> 则会当做变量求值</p>
+</li>
+<li>
+<p>值如果不是字符串，则会自动变成字符串</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span><span class="o">:</span> <span class="s1">&#39;十&#39;</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// { 10: &#34;十&#34; }
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// [ &#34;10&#34; ]
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<h3 id="对象的隐藏属性原型-">对象的隐藏属性（原型 💡）</h3>
+<p>隐藏属性</p>
+<ul>
+<li>JS 中，每一个对象 都有一个 隐藏属性  <code>__proto__</code></li>
+<li>这个隐藏属性，储存着其 <strong>共有属性组成的对象</strong>的地址</li>
+<li>这个<strong>共有属性组成的对象</strong>，叫做原型</li>
+<li>也就是说，隐藏属性 储存着 原型的地址
+<ul>
+<li><code>__proto__</code> 存储了一个地址，这个地址所代表的内存空间中的对象，叫做原型 / 共有属性</li>
+</ul>
+</li>
+</ul>
+<p>代码示例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="c1">// 居然不报错
+</span></code></pre></td></tr></table>
+</div>
+</div><p>因为 obj 的隐藏属性<strong>对应的对象</strong>（原型 / 共有属性）上有 toString()</p>
+<p>​</p>
+<blockquote>
+<p>举个栗子：什么叫共有属性</p>
+<ul>
+<li>将共有的属性，提取出来单独存储成一个对象。最大的好处，就是<strong>省内存</strong></li>
+<li>每次声明一个 chinese 时，无需重复写入：国籍、肤色、发色 … 等 chinese 公共的属性，直接用一个<strong>特定属性</strong>（–proto–），<strong>存储</strong>共有属性所在的<strong>内存地址</strong>即可</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">chinese1</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;小兰&#39;</span> <span class="p">}</span>
+<span class="kd">var</span> <span class="nx">chinese2</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;小红&#39;</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>​</p>
+<p>​</p>
+<h3 id="超纲知识">超纲知识</h3>
+<blockquote>
+<p>前面提到，对象中所有的 key 都是字符串</p>
+</blockquote>
+<blockquote>
+<p>实际上，ES 6 中稍微做了调整：<strong>除了字符串，symbol 也能做属性名</strong></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">Symbol</span><span class="p">()</span>
+<span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="p">[</span><span class="nx">a</span><span class="p">]</span><span class="o">:</span> <span class="s1">&#39;Hello&#39;</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这有什么用呢？</p>
+<ul>
+<li>目前，屁用都没用，很久很久以后可能会有用（方方从没用过）</li>
+<li>在学习「迭代」时会用到（但前端不流行迭代，所以根本没机会用）</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="增删改查">增删改查</h2>
+<blockquote>
+<p>「增删改查」对象的属性</p>
+</blockquote>
+<h3 id="删除属性">删除属性</h3>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/delete" target="_blank" rel="noopener noreffer">delete 操作符</a>：用于删除对象的某个属性</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">delete</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">xxx</span>
+<span class="k">delete</span> <span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;xxx&#39;</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>作用：删除 obj 的 xxx 属性</li>
+<li>请区分「属性值为 undefined」和「不含属性名」</li>
+</ul>
+<h4 id="不含属性名">不含属性名</h4>
+<p>直接删除属性名</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">18</span><span class="p">}</span>
+<span class="k">delete</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">name</span>  <span class="c1">// 或 delete obj[&#39;name&#39;]
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// {age: 18}
+</span><span class="c1">// console.log(obj.name) // undefined
+</span></code></pre></td></tr></table>
+</div>
+</div><p>判断是否删除成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="s1">&#39;xxx&#39;</span> <span class="k">in</span> <span class="nx">obj</span> <span class="o">===</span> <span class="kc">false</span>   <span class="c1">// 返回 true 说明该属性名已被删除 
+</span><span class="c1"></span><span class="err">（</span><span class="nx">不能省略引号</span><span class="err">）</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="含有属性名但是值为-undefined">含有属性名，但是值为 undefined</h4>
+<p>仅删除属性值，保留属性名</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="s1">&#39;xxx&#39;</span> <span class="k">in</span> <span class="nx">obj</span> <span class="o">&amp;&amp;</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">xxx</span> <span class="o">===</span> <span class="kc">undefined</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">18</span><span class="p">}</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="kc">undefined</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// {name: undefined, age: 18}
+</span><span class="c1">// console.log(obj.name) // undefined
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="注意-objxxx--undefined">注意 obj.xxx === undefined</h4>
+<ul>
+<li>
+<p><code>obj.xxx === undefined</code> 不能断定 &lsquo;xxx&rsquo; 是否为 obj 的属性</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="kd">let</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span><span class="kc">undefined</span><span class="p">}</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">x</span> <span class="o">===</span> <span class="kc">undefined</span> <span class="c1">// true
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">x</span> <span class="o">===</span> <span class="kc">undefined</span> <span class="c1">// true   所以说 这句话无法判断出 x 到底是不是 obj 的属性
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>用 in 和 hasOwnProperty 可以判断</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="kd">let</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span><span class="kc">undefined</span><span class="p">}</span>
+<span class="s1">&#39;x&#39;</span> <span class="k">in</span> <span class="nx">obj</span>   <span class="c1">// false
+</span><span class="c1"></span><span class="s1">&#39;x&#39;</span> <span class="k">in</span> <span class="nx">obj2</span>  <span class="c1">// true
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>    <span class="c1">// false
+</span><span class="c1"></span><span class="nx">obj2</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>   <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="类比">类比</h4>
+<ul>
+<li>你有没有卫生纸？</li>
+<li>A: 没有 // 不含属性名</li>
+<li>B: 有，但是没带 // 含有属性名，但是值为 undefined</li>
+</ul>
+<blockquote>
+<h4 id="程序员就是这么严谨">程序员就是这么严谨</h4>
+<ul>
+<li>「没有」和「undefined」是两个概念</li>
+<li>没有就是没有，undefined 就是 undefined</li>
+<li>绝不含糊</li>
+<li>需要细心，发现细微的区别</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h3 id="查看所有属性读属性">查看所有属性（读属性）</h3>
+<p>例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">18</span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="查看自身所有属性">查看自身所有属性</h4>
+<blockquote>
+<p>无法打印【共有属性 <code>__proto__</code>】</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>     <span class="c1">// [&#34;name&#34;, &#34;age&#34;]
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>   <span class="c1">// [&#34;sam&#34;, 18] 
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// [Array(2), Array(2)]  =&gt; 0:[&#34;name&#34;, &#34;sam&#34;]  1:[&#34;age&#34;, 18]
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<h4 id="查看自身共有属性">查看自身+共有属性</h4>
+<blockquote>
+<p>dir 指以目录的形式，可以查看到【共有属性 <code>__proto__</code>】</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>   <span class="c1">// 查看 obj内容 及 共有属性 【推荐】
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span>      
+<span class="c1">// 也可以直接打印共有属性（但不推荐此法，因为隐藏属性的命名是不固定的，不同浏览器可能规定不同）
+</span></code></pre></td></tr></table>
+</div>
+</div><p>或者自己依次用 Object.keys 打印出 <code>obj.__proto__</code></p>
+<h4 id="判断一个属性是自身的还是共有的">判断一个属性是自身的还是共有的</h4>
+<blockquote>
+<p>判断一个属性是否是某个对象的属性，可以用 <code>in</code>  ，但是 in 无法区分是自身的还是共有的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="s2">&#34;name&#34;</span> <span class="k">in</span> <span class="nx">obj</span>      <span class="c1">// true
+</span><span class="c1"></span><span class="s2">&#34;toString&#34;</span> <span class="k">in</span> <span class="nx">obj</span>  <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;toString&#39;</span><span class="p">)</span>   <span class="c1">// false
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>       <span class="c1">// true
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">)</span>        <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h3 id="原型">原型</h3>
+<blockquote>
+<p>原型，就是隐藏属性 所指向的对象</p>
+</blockquote>
+<h4 id="每个对象都有原型">每个对象都有原型</h4>
+<ul>
+<li>原型里存着对象的共有属性</li>
+<li>比如 obj 的原型就是一个对象
+<ul>
+<li><code>obj.__proto__ </code>存着这个原型对象的地址</li>
+<li>这个原型对象里有 toString / constructor / valueOf 等属性</li>
+</ul>
+</li>
+</ul>
+<h4 id="对象的原型也是对象">对象的原型也是对象</h4>
+<blockquote>
+<p>既然每个对象都有原型，且原型也是对象，那么可以推出：原型上也有原型</p>
+</blockquote>
+<ul>
+<li>所以对象的原型上也有原型</li>
+<li>obj = { } 空对象的原型即为所有对象的原型</li>
+<li>这个原型包含所有对象的共有属性，是<strong>对象的根</strong></li>
+<li>这个原型也有原型，<strong>是 null</strong>     【/nʌl/】
+<ul>
+<li>原型为 null 的对象，就是对象的根</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">)</span>  <span class="c1">// 原型对象（根对象）
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">)</span>   <span class="c1">// null  原型上的原型
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h3 id="查看属性">查看属性</h3>
+<h4 id="两种方法查看属性">两种方法查看属性</h4>
+<ul>
+<li>
+<p>**中括号语法：obj[&lsquo;key&rsquo;] **</p>
+</li>
+<li>
+<p>点语法：obj.key</p>
+</li>
+<li>
+<p>坑新人语法：obj[key]      // 中括号里是变量，【变量 key】 值一般不等于【字符串 &lsquo;key&rsquo;】</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">18</span><span class="p">}</span>
+<span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>   <span class="c1">// &#39;sam&#39;
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">name</span>      <span class="c1">// &#39;sam&#39;
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>     <span class="c1">// undefined
+</span><span class="c1"></span>    
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span>   <span class="c1">// &#34;&#34;
+</span><span class="c1"></span><span class="nb">window</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;age&#39;</span>
+<span class="nx">obj</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>    <span class="c1">// 18   // 等同于 obj[&#39;age&#39;]
+</span></code></pre></td></tr></table>
+</div>
+</div><p>变态</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;na&#39;</span><span class="o">+</span><span class="s1">&#39;me&#39;</span><span class="p">]</span>   <span class="c1">// &#39;sam&#39;
+</span><span class="c1"></span>    
+<span class="nx">obj</span><span class="p">[</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)]</span>   
+<span class="c1">// name   // 先执行log命令，打印内容
+</span><span class="c1">// undefined   // log 函数的返回值为 undefined，相当于执行 obj[undefined] =&gt; undefined
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<h4 id="请优先使用中括号语法">请优先使用中括号语法</h4>
+<ul>
+<li>【点语法】会误导你，让你以为 key 不是字符串</li>
+<li>等你确定不会弄混两种语法，再改用点语法</li>
+</ul>
+<blockquote>
+<p>obj.name 等价于 obj[&lsquo;name&rsquo;]
+obj.name 不等价于 obj[name]</p>
+<p>简单来说，obj.name 这里的 <strong>name 是字符串，而不是变量</strong></p>
+</blockquote>
+<blockquote>
+<p>let name = &lsquo;sam&rsquo;
+此时 obj[name] 等价于 obj[&lsquo;sam&rsquo;] ，而不是 obj[&lsquo;name&rsquo;] 和 obj.name</p>
+</blockquote>
+<p>​</p>
+<h4 id="考题">考题</h4>
+<blockquote>
+<p>区分变量<code> name</code> 和 常量字符串 <code>'name'</code></p>
+</blockquote>
+<p>代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">]</span>
+<span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;sam&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span><span class="mi">18</span><span class="p">,</span> <span class="nx">gender</span><span class="o">:</span><span class="s1">&#39;man&#39;</span><span class="p">}</span>
+
+<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">list</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+  <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">list</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person</span><span class="o">???</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// 使得 person 的所有属性被打印出来
+</span></code></pre></td></tr></table>
+</div>
+</div><p>选项</p>
+<ol>
+<li>console.log(person.name)      ✘          // sam sam sam</li>
+<li><strong>console.log(person[name])</strong>    ✔     // sam 18 man</li>
+</ol>
+<blockquote>
+<p>区分 name 和 &lsquo;name&rsquo; 为什么这么重要</p>
+<ul>
+<li>因为如果你现在不搞清楚，那么你在学 Vue 的时候，会更加迷惑</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h3 id="修改或增加属性写属性">修改或增加属性（写属性）</h3>
+<h4 id="直接赋值">直接赋值</h4>
+<blockquote>
+<p>直接赋值，name 属性已存在，就相当于修改属性值；name 属性不存在，就会新增这个属性，值为 sam</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">}</span> <span class="c1">// name 是字符串
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span> <span class="c1">// name 是字符串 ✔
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span>  <span class="c1">// ✔
+</span><span class="c1"></span>
+<span class="nx">obj</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span> <span class="c1">// 错，因name为变量，值不一定等于&#39;name&#39;
+</span><span class="c1"></span>
+<span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;na&#39;</span><span class="o">+</span><span class="s1">&#39;me&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span>  <span class="c1">// ✔
+</span><span class="c1"></span>
+<span class="kd">let</span> <span class="nx">key</span> <span class="o">=</span> <span class="s1">&#39;name&#39;</span><span class="p">;</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span>
+<span class="kd">let</span> <span class="nx">key</span> <span class="o">=</span> <span class="s1">&#39;name&#39;</span><span class="p">;</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">key</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span> <span class="c1">// 错，因为obj.key等价于obj[&#39;key&#39;]，相当于给obj增加了key属性 值为sam
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="批量赋值">批量赋值</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">}</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;123&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">18</span><span class="p">,</span> <span class="nx">gender</span><span class="o">:</span> <span class="s1">&#39;man&#39;</span><span class="p">})</span> 
+<span class="c1">// name 属性已存在，就相当于修改属性值；name 属性不存在，就会新增这个属性，值为&#39;123&#39;
+</span><span class="c1"></span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// {name:&#39;123&#39;, age: 18, gender: &#39;man&#39;}
+</span></code></pre></td></tr></table>
+</div>
+</div><p>assign ：赋值的意思</p>
+<p>Object.assign() ：是 ES6 新出的 API</p>
+<p>​</p>
+<p>​</p>
+<h3 id="修改或增加共有属性">修改或增加共有属性</h3>
+<blockquote>
+<p>JS 特性：</p>
+<ul>
+<li>读取时，可以读取到（原型上的）共有属性。</li>
+<li>写入时，只写在自己身上，不会影响（原型）共有属性</li>
+</ul>
+</blockquote>
+<h4 id="无法通过自身修改或增加共有属性">无法通过自身修改或增加共有属性</h4>
+<blockquote>
+<p>原型上的属性，无法通过自身直接修改</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{},</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1">// 共有 toString 方法
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">toString</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span>    <span class="c1">// 只会在改 obj 自身属性，不会覆盖共用的 toString 方法
+</span><span class="c1"></span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">toString</span>     <span class="c1">// &#39;xxx&#39;
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>   <span class="c1">// 报错 obj.toString is not a function
+</span><span class="c1"></span>
+<span class="nx">obj2</span><span class="p">.</span><span class="nx">toString</span>    <span class="c1">// ƒ toString() { [native code] }   还是在原型上的方法
+</span><span class="c1"></span><span class="nx">obj2</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>  <span class="c1">// &#34;[object Object]&#34;
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="偏要修改或增加原型上的属性">偏要修改或增加原型上的属性</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">toString</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span> <span class="c1">// 不推荐用 __proto__
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span> 
+<span class="nx">console</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">toString</span><span class="p">)</span>
+
+<span class="c1">// obj.__proto__ 存的地址，等价于 window.Object.prototype 存的地址
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">window</span><span class="p">.</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>  <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>这是 JS 非常危险的特型，一旦修改，会使得原型上的属性非常不可信 —— JS 的脆弱性</li>
+<li><strong>一般来说，不要修改原型</strong>，会引起很多问题：代码崩溃/异常…</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="修改隐藏属性">修改隐藏属性</h3>
+<h4 id="不推荐使用--__proto__-修改原型">不推荐使用 <code> __proto__</code> 修改原型</h4>
+<p>例1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;sam&#39;</span><span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>   <span class="c1">// {name:&#34;sam&#34;, __proto__: Object}
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">=</span> <span class="kc">null</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>   <span class="c1">// {name:&#34;sam&#34;}    没有proto原型了，变成非常纯净的对象，不能调用任何功能
+</span></code></pre></td></tr></table>
+</div>
+</div><p>例2</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;sam&#39;</span><span class="p">}</span>
+<span class="kd">let</span> <span class="nx">person2</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;jack&#39;</span><span class="p">}</span>
+<span class="kd">let</span> <span class="nx">common</span> <span class="o">=</span> <span class="p">{</span><span class="nx">kind</span><span class="o">:</span> <span class="s1">&#39;human&#39;</span><span class="p">,</span> <span class="s1">&#39;国籍&#39;</span><span class="o">:</span> <span class="s1">&#39;中国&#39;</span><span class="err">，</span> <span class="nx">hairColor</span><span class="o">:</span> <span class="s1">&#39;black&#39;</span><span class="p">}</span>
+<span class="nx">person</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">=</span> <span class="nx">common</span>
+<span class="nx">person2</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">=</span> <span class="nx">common</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<blockquote>
+<p>上述，使用 <code> __proto__</code> 直接修改原型，不推荐，性能非常低</p>
+</blockquote>
+<p>​</p>
+<h4 id="推荐使用-objectcreate-修改对象的原型">推荐使用 Object.create 修改对象的原型</h4>
+<blockquote>
+<p>规范的修改对象的原型，使用 Object.create  【功能：用于指定原型】</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;sam&#39;</span><span class="p">})</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// { __proto__:{name:&#39;sam&#39;} } 
+</span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<p>用法 ↓</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">common</span> <span class="o">=</span> <span class="p">{</span><span class="nx">kind</span><span class="o">:</span> <span class="s1">&#39;human&#39;</span><span class="p">,</span> <span class="s1">&#39;国籍&#39;</span><span class="o">:</span> <span class="s1">&#39;中国&#39;</span><span class="err">，</span> <span class="nx">hairColor</span><span class="o">:</span> <span class="s1">&#39;black&#39;</span><span class="p">}</span>
+<span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">common</span><span class="p">)</span>  <span class="c1">// 以common为原型对象，创建obj
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span> <span class="c1">// 点方法，挨个添加属性，或 批量修改/添加属性 Object.assign(obj,{ ... })
+</span><span class="c1"></span><span class="p">...</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>Object.create()  第二个参数，写法比较麻烦</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">common</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="p">{</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span> <span class="p">}</span>
+<span class="p">})</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person</span><span class="p">)</span>  <span class="c1">// {name:&#39;sam&#39;, __proto__: Object}  =&gt; 
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>规范的写法：大概是，要改就一开始就改；别后来再改，如<code>person.__proto__ = common</code>  影响性能</p>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<p>​</p>
+<h2 id="总结">总结</h2>
+<h3 id="删">删</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">delete</span> <span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="s1">&#39;name&#39;</span> <span class="k">in</span> <span class="nx">obj</span> <span class="c1">// false  // in 用于判断某个对象中是否含这个属性，缺点：无法区分是自身的，还是原型上共有的
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>  <span class="c1">// false  // 只有对象自身含有这个属性，才会返回 true
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="查">查</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>  <span class="c1">// 目录形式，详细
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">name</span> <span class="c1">// 记住这里的 name 是字符串
+</span><span class="c1"></span><span class="nx">obj</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>  <span class="c1">// 记住这里的 name 是变量
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="改">改</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">改自身</span> <span class="nx">obj</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;jack&#39;</span>
+<span class="nx">批量改自身</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="p">{</span><span class="nx">age</span><span class="o">:</span><span class="mi">18</span><span class="p">,</span> <span class="p">...})</span>
+                          
+<span class="nx">改某个共有属性</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">[</span><span class="s1">&#39;toString&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span>  <span class="c1">// 强烈不推荐
+</span><span class="c1"></span><span class="nx">改某个共有属性</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">[</span><span class="s1">&#39;toString&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span>
+
+<span class="nx">换原型</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">=</span> <span class="nx">common</span>  <span class="c1">// 强烈不推荐
+</span><span class="c1"></span><span class="nx">换原型</span> <span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">common</span><span class="p">)</span>
+
+<span class="c1">// 注：所有 proto 代码都是强烈不推荐写的。学习时可以用用，但是工作中不要用
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="增">增</h3>
+<p>基本同上，已有属性则改；没有属性则增。</p>
+<blockquote>
+<ul>
+<li>查：属于读，可以读到原型链</li>
+<li>改 和 增：属于写，只能改自身，不能改到原型</li>
+</ul>
 </blockquote>]]></description>
 </item><item>
     <title>JS 的数据类型🧐</title>
@@ -7051,1107 +8002,5 @@ http://ryuuks:8080/index.html
 </code></pre></td></tr></table>
 </div>
 </div>]]></description>
-</item><item>
-    <title>Re：从零开始の CSS 学习笔记——布局（上）</title>
-    <link>http://samrks.github.io/20200725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%B8%83%E5%B1%80-%E4%B8%8A/</link>
-    <pubDate>Sat, 25 Jul 2020 16:16:55 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://samrks.github.io/20200725-re%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84css%E5%B8%83%E5%B1%80-%E4%B8%8A/</guid>
-    <description><![CDATA[<p>CSS 布局篇（上）： Float 布局、Flex 布局 。</p>
-<p>​</p>
-<p>​</p>
-<p>Float 示例代码  <a href="https://jsbin.com/vobenim/edit?html,css,output">https://jsbin.com/vobenim/edit?html,css,output</a></p>
-<p>Flex 示例代码  <a href="https://jsbin.com/biluwan/edit?html,css,output">https://jsbin.com/biluwan/edit?html,css,output</a></p>
-<p>Flex 青蛙游戏  <a href="https://flexboxfroggy.com/#zh-cn">https://flexboxfroggy.com/#zh-cn</a></p>
-<p>​</p>
-<h2 id="布局是什么">布局是什么</h2>
-<blockquote>
-<p>把页面分成一块一块，按左中右、上中下等排列</p>
-</blockquote>
-<h3 id="布局分类">布局分类</h3>
-<h4 id="两种">两种</h4>
-<ul>
-<li>固定宽度布局，一般宽度为960/1000/1024px （淘宝pc）</li>
-<li>不固定宽度布局，主要靠文档流的原理来布局（常用在移动端、响应式，会跟随设备宽度变化）</li>
-</ul>
-<h4 id="还记得吗">还记得吗</h4>
-<ul>
-<li>文档流本来就是自适应的，不需要加额外的样式</li>
-</ul>
-<h4 id="第三种布局">第三种布局</h4>
-<ul>
-<li>响应式布局
-<ul>
-<li>意思就是PC上固定宽度，手机上不固定宽度</li>
-<li>也就是一种混合布局</li>
-</ul>
-</li>
-</ul>
-<p>​</p>
-<h3 id="布局的两种思路">布局的两种思路</h3>
-<h4 id="从大到小">从大到小</h4>
-<ul>
-<li>先定下大局</li>
-<li>然后完善每个部分的小布局</li>
-</ul>
-<h4 id="从小到大">从小到大</h4>
-<ul>
-<li>先完成小布局</li>
-<li>然后组合成大布局</li>
-</ul>
-<h4 id="两种均可">两种均可</h4>
-<ul>
-<li>新人推荐用第二种，因为小的简单</li>
-<li>老手一般用第一种，因为熟练有大局观</li>
-</ul>
-<p>​</p>
-<h3 id="布局需要用到哪些属性">布局需要用到哪些属性</h3>
-<blockquote>
-<p>不多哔哔，直接给你所有套路</p>
-</blockquote>
-<p>以前经常说 DIV+CSS 布局，但是现在已经无意于用 DIV 了，就说用 CSS 布局</p>
-<ul>
-<li>main、header、footer、nav、aside … 这些标签的出现，已经可以代替 div 了</li>
-</ul>
-<p>需要兼容 IE9 吗</p>
-<ul>
-<li>不用，只做手机页面（闲鱼），阿里巴巴在顺应手机时代</li>
-<li>很老的手机产品要兼容吗？兼容最新浏览器吗？</li>
-</ul>
-<p></p>
-<p>​</p>
-<p>​</p>
-<h2 id="float-布局">Float 布局</h2>
-<blockquote>
-<p>float 主要是针对 IE 的，而现在公司基本不需要兼容 IE6789。</p>
-</blockquote>
-<h3 id="步骤">步骤</h3>
-<ol>
-<li>
-<p>子元素上加 <code> float: left</code>  和 <code> width</code></p>
-</li>
-<li>
-<p>在父元素上加  <code>.clearfix</code>（清除浮动的影响）</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="c">&lt;!-- header中没有文档流元素，子元素都浮动了(脱离文档流) ，所以header的高度为0 --&gt;</span>
-<span class="c">&lt;!-- 添加 clearfix 后，可以清除浮动的影响 --&gt;</span>
-<span class="p">&lt;</span><span class="nt">header</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;clearfix&#34;</span><span class="p">&gt;</span>    
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;logo&#34;</span><span class="p">&gt;</span>XDML<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-   <span class="p">&lt;</span><span class="nt">nav</span><span class="p">&gt;</span>导航<span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
-     
-<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-   <span class="p">.</span><span class="nc">logo</span><span class="p">{</span><span class="k">float</span><span class="p">:</span> <span class="kc">left</span><span class="p">;</span><span class="err">...</span><span class="p">}</span>   <span class="c">/* 脱离文档流 */</span>
-   <span class="nt">nav</span><span class="p">{</span><span class="k">float</span><span class="p">:</span> <span class="kc">left</span><span class="p">;</span><span class="err">...</span><span class="p">}</span>
-<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">clearfix</span><span class="p">:</span><span class="nd">after</span><span class="p">{</span>    
-  <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
-  <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
-  <span class="k">clear</span><span class="p">:</span> <span class="kc">both</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="c">/* 请背过 clearfix 的写法 */</span>
-</code></pre></td></tr></table>
-</div>
-</div></li>
-</ol>
-<h3 id="经验">经验</h3>
-<ul>
-<li>
-<p>有经验者会留一些空间或者最后一个不设 width （或者可以给个 <code>max-width: xxxpx;</code>）</p>
-</li>
-<li>
-<p>不需要做响应式，因为手机上没有IE，而<strong>这个布局是专门为 IE 准备的</strong></p>
-</li>
-<li>
-<p>IE6/7 存在双倍 margin bug（给浮动元素设置 margin: 10px 在 IE6/7 中实际距离会变成 margin: 20px 的效果）</p>
-<ul>
-<li>
-<p>解决办法有两个</p>
-<ul>
-<li>
-<p>一是将错就错，针对 IE6/7 把 margin 减半</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">logo</span><span class="p">{</span>
-  <span class="k">float</span><span class="p">:</span> <span class="kc">left</span><span class="p">;</span>
-  <span class="k">margin-top</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* 其他浏览器 只能识别这句，无法识别下面属性 */</span>
-  <span class="n">_margin-top</span><span class="p">:</span> <span class="mi">5</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* IE6/7在属性前加 下划线 或 星号 都能识别 */</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div></li>
-<li>
-<p>二是神来一笔，再加一个 <code>display: inline-block</code></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">logo</span><span class="p">{</span>
-  <span class="k">float</span><span class="p">:</span> <span class="kc">left</span><span class="p">;</span>
-  <span class="k">margin-top</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span> 
-  <span class="k">display</span><span class="p">:</span> <span class="kc">inline</span><span class="o">-</span><span class="kc">block</span><span class="p">;</span>  <span class="c">/* 微软说：IE6/7遇到margin乘2的bug，就添加这句 */</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div></li>
-</ul>
-</li>
-<li>
-<p>为什么可以这样？你问我，我问谁…</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>​</p>
-<h3 id="实践">实践</h3>
-<h4 id="不同布局">不同布局</h4>
-<ul>
-<li>用 float 做两栏布局（如顶部条）</li>
-<li>用 float 做三栏布局（如内容区）</li>
-<li>用 float 做四栏布局（如导航）</li>
-<li><a href="#float%e5%ae%9e%e7%8e%b0%e5%b9%b3%e5%9d%87%e5%b8%83%e5%b1%80" rel="">用 float 做平均布局</a>（如产品列表展示区）—— <strong>负margin</strong></li>
-<li>曾经淘宝的前端发明了双飞翼布局，不要学，已过时代码</li>
-</ul>
-<h4 id="经验-1">经验</h4>
-<ul>
-<li>加上头尾，即可满足所有PC页面需求</li>
-<li>手机页面傻子才用float</li>
-<li>float要程序员自己计算宽度，不灵活</li>
-<li>float用来应付IE足以</li>
-</ul>
-<h4 id="技术总结">技术总结</h4>
-<blockquote>
-<p><a href="https://jsbin.com/vobenim/edit?html,css,output" target="_blank" rel="noopener noreffer">JSbin 演示</a>，总结如下</p>
-</blockquote>
-<h5 id="outline">outline</h5>
-<blockquote>
-<p>现象描述：计算宽度时，内部3个元素的宽度和=300，外层容器=300，但是还会把最后一个元素挤下去，说明子元素的宽度超出容器的宽度。</p>
-</blockquote>
-<ul>
-<li>原因可能是，虽然设定容器宽度为 300，但是容器添加了<strong>边框</strong> border : 1像素，所以容器的内容区域的宽度实际只有 298 px。(仅限 border-box 情况)</li>
-<li>解决：
-<ul>
-<li>把容器的边框删了</li>
-<li>改用 <code> outline: 1px solid red;</code>  outline 是在外侧的，不占内部区域，但是outline 样式上会有点奇怪</li>
-<li>改用 背景颜色 标识区域</li>
-</ul>
-</li>
-</ul>
-<h5 id="居中">居中</h5>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="c">/* margin: 0 auto;  下面两句的写法更好，这句还覆盖了margin上下的距离，css原则是不要写多余的 */</span>    
-<span class="nt">margin-left</span><span class="o">:</span> <span class="nt">auto</span><span class="o">;</span>
-<span class="nt">margin-right</span><span class="o">:</span> <span class="nt">auto</span><span class="o">;</span>
-</code></pre></td></tr></table>
-</div>
-</div><blockquote>
-<p>只有==块级元素==，才能使用 margin … auto，实现居中。</p>
-</blockquote>
-<h5 id="float实现平均布局">float实现平均布局</h5>
-<blockquote>
-<p>添加一个 父元素 x ，进行 ==负margin== 操作（这个词基本都是高手才懂）</p>
-<p>注意：添加 父元素后，clearfix 的位置也需要相应移动到，浮动元素的直属父级上</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;imageList&#34;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;x clearfix&#34;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="c">&lt;!--&lt;div class=&#34;image&#34;&gt;&lt;/div&gt;--&gt;</span>
-    <span class="c">&lt;!--&lt;div class=&#34;image&#34;&gt;&lt;/div&gt;--&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-  <span class="p">.</span><span class="nc">imageList</span> <span class="p">{</span>
-    <span class="k">outline</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">green</span><span class="p">;</span>
-    <span class="k">width</span><span class="p">:</span> <span class="mi">800</span><span class="kt">px</span><span class="p">;</span>
-    <span class="k">margin-left</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
-    <span class="k">margin-right</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
-    <span class="k">margin-top</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="p">.</span><span class="nc">imageList</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">x</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">image</span> <span class="p">{</span>
-    <span class="k">width</span><span class="p">:</span> <span class="mi">191</span><span class="kt">px</span><span class="p">;</span>
-    <span class="k">height</span><span class="p">:</span> <span class="mi">191</span><span class="kt">px</span><span class="p">;</span>
-    <span class="k">background-color</span><span class="p">:</span> <span class="mh">#555</span><span class="p">;</span>
-    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
-    <span class="k">float</span><span class="p">:</span> <span class="kc">left</span><span class="p">;</span>
-    <span class="k">margin-bottom</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
-    <span class="k">margin-right</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="p">.</span><span class="nc">imageList</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">x</span> <span class="p">{</span>
-    <span class="k">margin-right</span><span class="p">:</span> <span class="mi">-12</span><span class="kt">px</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p></p>
-<p>​</p>
-<p>​</p>
-<h2 id="缩写">缩写</h2>
-<blockquote>
-<p>html、css  （√）</p>
-<p>navigator  &mdash;&gt;   nav   （√）</p>
-<ul>
-<li>不能缩写未经约定、达成统一的单词
-<ul>
-<li>content   —&gt;  cnt    （x）     container 也可以缩写成 cnt  容易误会，所以不要用</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<p>​</p>
-<p>​</p>
-<h2 id="flex-布局">Flex 布局</h2>
-<ul>
-<li>教程（来自 <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="noopener noreffer">CSS Tricks</a>)</li>
-<li>把教程过一遍，然后忘掉</li>
-<li>完成 <a href="https://flexboxfroggy.com/" target="_blank" rel="noopener noreffer">Flex青蛙游戏</a></li>
-<li>开始用flex！</li>
-</ul>
-<h3 id="容器-container-有哪些属性">容器 container 有哪些属性</h3>
-<ul>
-<li>container ：表示容器，一般用于做父元素</li>
-<li>items ：表示容器里面的、直接的子元素，就称为 items（项）</li>
-</ul>
-<p></p>
-<blockquote>
-<p>以下都是 container 的样式</p>
-</blockquote>
-<p>​</p>
-<h4 id="让一个元素变成-flex-容器">让一个元素变成 flex 容器</h4>
-<p>只有下面两种写法：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span>
-  <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>     <span class="c">/* 或 display: inline-flex; */</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>​</p>
-<h4 id="改变-items-流动方向主轴">改变 items 流动方向（主轴）</h4>
-<blockquote>
-<p>默认，所有项都会挤在主轴，主轴占满会平均压缩每项宽度，以保证在主轴存放下所有项</p>
-</blockquote>
-<p></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span>
-  <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
-  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
-  <span class="k">flex-direction</span><span class="p">:</span> <span class="kc">row</span><span class="p">;</span>  <span class="c">/* 【默认值】横向（从左到右） */</span>
-  <span class="k">flex-direction</span><span class="p">:</span> <span class="kc">column</span><span class="p">;</span>  <span class="c">/* 纵向（从上到下） */</span>
-  <span class="k">flex-direction</span><span class="p">:</span> <span class="kc">row</span><span class="o">-</span><span class="kc">reverse</span><span class="p">;</span> <span class="c">/* 横向反向（从右到左） */</span>
-  <span class="k">flex-direction</span><span class="p">:</span> <span class="kc">column</span><span class="o">-</span><span class="kc">reverse</span><span class="p">;</span> <span class="c">/* 纵向反向（从上到下） */</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>​</p>
-<h4 id="改变折行">改变折行</h4>
-<p></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span>
-  <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
-  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
-  <span class="k">flex-direction</span><span class="p">:</span> <span class="kc">row</span><span class="p">;</span>  <span class="c">/* 默认横向 */</span>
-  <span class="k">flex-wrap</span><span class="p">:</span> <span class="kc">wrap</span><span class="o">-</span><span class="kc">reverse</span><span class="p">;</span>  <span class="c">/* 反向折行, 效果如下图，基本没用 */</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p></p>
-<blockquote>
-<p><code>flex-direction</code>和<code>flex-wrap</code>两个属性经常会一起使用，所以有缩写属性<code>flex-flow</code>。这个缩写属性接受两个属性的值，两个值中间以空格隔开。</p>
-<p>举个例子，你可以用<code>flex-flow: row wrap</code>去设置行并自动换行。</p>
-</blockquote>
-<p>​</p>
-<p>​</p>
-<h4 id="主轴对齐方式">主轴对齐方式</h4>
-<blockquote>
-<p>默认主轴是 横轴</p>
-<p>除非你改变了 flex-direction 方向</p>
-</blockquote>
-<p></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html">.container {
-  justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;
-}
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>space-around： 每项左右两边的空间一样</li>
-<li>space-evenly：每项间距一样</li>
-<li>space-between：把空间放到中间，元素分布两边</li>
-</ul>
-<p>​</p>
-<h4 id="次轴对齐">次轴对齐</h4>
-<blockquote>
-<p>默认次轴是 纵轴</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span>
-  <span class="k">align-items</span><span class="p">:</span> <span class="kc">stretch</span> <span class="p">[</span><span class="err">默认值</span><span class="p">]</span> <span class="o">|</span> <span class="kc">flex</span><span class="o">-</span><span class="kc">start</span> <span class="o">|</span> <span class="kc">flex</span><span class="o">-</span><span class="kc">end</span> <span class="o">|</span> <span class="kc">center</span> <span class="o">|</span> <span class="kc">baseline</span><span class="err">（不需要）</span> 
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p></p>
-<ul>
-<li>
-<p>stretch【默认值】</p>
-<ul>
-<li>默认所有 items 的高度 与 高度最高的 item 保持一致</li>
-<li>如下图，3个 item 都与 2 号 item 一样高</li>
-</ul>
-<p></p>
-</li>
-<li>
-<p>flex-start</p>
-<p></p>
-</li>
-<li>
-<p>flex-end</p>
-<p></p>
-</li>
-<li>
-<p>center</p>
-<p></p>
-</li>
-</ul>
-<p>​</p>
-<h4 id="多行分布">多行分布</h4>
-<blockquote>
-<p>很少用到</p>
-</blockquote>
-<blockquote>
-<ul>
-<li>
-<p>默认平均分  ：  <code>align-content: stretch</code> (如图)</p>
-<p></p>
-</li>
-</ul>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span>
-  <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
-  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
-  <span class="k">flex-wrap</span><span class="p">:</span> <span class="kc">wrap</span><span class="p">;</span>
-  <span class="err">height：400px；</span>
-  <span class="k">align-content</span><span class="p">:</span> <span class="kc">flex</span><span class="o">-</span><span class="kc">start</span><span class="p">;</span>   <span class="c">/* 全部集中到顶部 */</span>
-  <span class="k">align-content</span><span class="p">:</span> <span class="kc">flex</span><span class="o">-</span><span class="kc">end</span><span class="p">;</span>   <span class="c">/* 全部集中到底部 */</span>
-  <span class="k">align-content</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>   <span class="c">/* 全部集中到中间 */</span>
-  <span class="k">align-content</span><span class="p">:</span> <span class="kc">space</span><span class="o">-</span><span class="n">between</span><span class="p">;</span>
-  <span class="k">align-content</span><span class="p">:</span> <span class="kc">space</span><span class="o">-</span><span class="n">around</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p></p>
-<p>​</p>
-<p>​</p>
-<h3 id="flex-item-有哪些属性">flex item 有哪些属性</h3>
-<blockquote>
-<p>以下都是 item 的属性</p>
-</blockquote>
-<h4 id="item-上加-order">item 上加 order</h4>
-<ul>
-<li>
-<p><strong>默认 order 为 0</strong></p>
-</li>
-<li>
-<p>指定 order 后，item 会按照 order 顺序从小到大排列（可以指定为负数）</p>
-<p></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;item&#34;</span><span class="p">&gt;</span>1<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;item&#34;</span><span class="p">&gt;</span>2<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>  
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;item&#34;</span><span class="p">&gt;</span>3<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;item&#34;</span><span class="p">&gt;</span>4<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    
-<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-  <span class="p">.</span><span class="nc">container</span><span class="p">{</span>
-    <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
-    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="p">.</span><span class="nc">item</span><span class="p">{</span>
-    <span class="k">width</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
-    <span class="k">height</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
-    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">green</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">first-child</span><span class="p">{</span> <span class="k">order</span><span class="p">:</span> <span class="mi">100</span><span class="p">;</span> <span class="p">}</span>    <span class="c">/* 最后 */</span>
-  <span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">2</span><span class="o">)</span><span class="p">{</span> <span class="k">order</span><span class="p">:</span> <span class="mi">2</span><span class="p">;</span> <span class="p">}</span>			
-  <span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">3</span><span class="o">)</span><span class="p">{</span> <span class="k">order</span><span class="p">:</span> <span class="mi">3</span><span class="p">;</span> <span class="p">}</span>
-  <span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">last-child</span><span class="p">{</span> <span class="k">order</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span>    <span class="c">/* 最前 */</span>
-<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p></p>
-</li>
-</ul>
-<p>​</p>
-<h4 id="item-上加-flex-grow">item 上加 flex-grow</h4>
-<blockquote>
-<p>用于分配多余的空间（控制变胖）</p>
-<ul>
-<li>flex-grow： 默认为 0.   就是 item 宽度由内容撑开，没内容的话宽度就是0，不会占用多余的空间</li>
-<li>给 item 设置 flex-grow  值为 n （&gt;0），就是将分配多余空间给当前 item 占 n 份。
-<ul>
-<li>如果一共有3个item，那就平均分配多余空间，每个 item 占 n/3.</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<p></p>
-<ul>
-<li>
-<p>当我们不给 item 设置宽度时，item 的宽度是能有多窄有多窄（宽度由内容撑开）</p>
-<p></p>
-</li>
-<li>
-<p>实现宽度能有多宽有多宽，就给 item 添加 flex-grow</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">item</span><span class="p">{</span>
-  <span class="k">flex-grow</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>    <span class="c">/* 每一个 item 平均分配宽度，来占满多余的空间（不是占满整行空间） */</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p></p>
-</li>
-<li>
-<p>需求：从多余的空间中，给2,3 的宽度占 2 份;   给 1,4 占 1 份 空间</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">container</span><span class="p">{</span>
-  <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
-  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="p">.</span><span class="nc">item</span><span class="p">{</span>
-  <span class="k">height</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
-  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">green</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">first-child</span><span class="p">{</span> <span class="k">flex-grow</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">2</span><span class="o">)</span><span class="p">{</span> <span class="k">flex-grow</span><span class="p">:</span> <span class="mi">2</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">3</span><span class="o">)</span><span class="p">{</span> <span class="k">flex-grow</span><span class="p">:</span> <span class="mi">2</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">last-child</span><span class="p">{</span> <span class="k">flex-grow</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p></p>
-</li>
-</ul>
-<h5 id="经验-2">经验</h5>
-<ul>
-<li>当 3 栏布局，如下
-<ul>
-<li>只给【导航】设置<strong><code> flex-grow: 1</code></strong>（实现导航宽度的响应式），logo、头像固定宽度</li>
-</ul>
-</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;item&#34;</span><span class="p">&gt;</span>logo<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;item&#34;</span><span class="p">&gt;</span>导航<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>  
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;item&#34;</span><span class="p">&gt;</span>头像<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-
-<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-  <span class="p">.</span><span class="nc">container</span><span class="p">{</span>
-    <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
-    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="p">.</span><span class="nc">item</span><span class="p">{</span>
-    <span class="k">height</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
-    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">green</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">2</span><span class="o">)</span><span class="p">{</span>   
-    <span class="k">flex-grow</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span> 
-  <span class="p">}</span>
-<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p></p>
-<p>​</p>
-<h4 id="flex-shrink-控制如何变瘦">flex-shrink 控制如何变瘦</h4>
-<blockquote>
-<p>当界面不断变窄，无法存放每项的给定宽度时，每项都需要变窄，flex-shrink 就控制谁瘦的多，谁瘦的少</p>
-<ul>
-<li>默认是1（所有item平均收缩，要缩一起缩）</li>
-<li>一般写 <strong><code>flex-shrink: 0;</code></strong>  防止变瘦（被设置为 0 的这一项，就算空间不够时，也不会收缩。要缩别找我）</li>
-</ul>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">item</span><span class="p">{</span>
-  <span class="k">width</span><span class="p">:</span> <span class="mi">150</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* 合计宽度最小450px */</span>
-  <span class="k">height</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
-  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">green</span><span class="p">;</span>
-  <span class="k">flex-grow</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>  <span class="c">/* 每项会均分多余空间 */</span>
-<span class="p">}</span>
-<span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">first-child</span><span class="p">{</span>
-  <span class="k">flex-shrink</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">2</span><span class="o">)</span><span class="p">{</span> 
-  <span class="k">flex-shrink</span><span class="p">:</span> <span class="mi">50</span><span class="p">;</span>   <span class="c">/* 2 的收缩比例较大 */</span>
-<span class="p">}</span>
-<span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">last-child</span><span class="p">{</span>
-  <span class="k">flex-shrink</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>当宽度缩小达到450px以内，每项宽度不足，此时每项会开始收缩， flex-shrink 值越大，则收缩的越大，flex-shrink 值越小，越不会受到收缩的影响
-<ul>
-<li>如下图，宽度收缩450px以内，【导航】最先开始发生了较大的收缩，因为设定了较大的 flex-shrink 值</li>
-<li>【logo】和【头像】版块，基本不收缩</li>
-</ul>
-</li>
-</ul>
-<p></p>
-<p>​</p>
-<h4 id="flex-basis-控制基准宽度">flex-basis 控制基准宽度</h4>
-<blockquote>
-<p>用法：</p>
-<ul>
-<li>默认是 auto（与 item 的 width 值保持一致）</li>
-<li>指定宽度：<code>flex-basis: 100px;</code>  相当于指定了 width 值</li>
-</ul>
-</blockquote>
-<p>这个属性比较迷：不是很重要的属性</p>
-<ul>
-<li>可以直接用 width 来代替这个属性</li>
-</ul>
-<p>​</p>
-<h4 id="缩写成-flex">缩写成 flex</h4>
-<blockquote>
-<p>flex  相当于  flex-grow  flex-shrink   flex-basis</p>
-<p>习惯上我一般不写缩写，容易记错位置</p>
-</blockquote>
-<ul>
-<li>flex  只有以下 4 种形式的写法</li>
-</ul>
-<p></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">first-child</span><span class="p">{</span>
-  <span class="k">flex</span><span class="p">:</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>    <span class="c">/* grow-1，shrink-1，宽100px */</span>
-<span class="p">}</span>
-<span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">2</span><span class="o">)</span><span class="p">{</span>
-  <span class="k">flex</span><span class="p">:</span> <span class="mi">1</span> <span class="mi">100</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>    <span class="c">/* grow-1，shrink-100，宽100px */</span>
-<span class="p">}</span>
-<span class="p">.</span><span class="nc">item</span><span class="p">:</span><span class="nd">last-child</span><span class="p">{</span>
-  <span class="k">flex</span><span class="p">:</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>    <span class="c">/* grow-1，shrink-1，宽100px */</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>上述，3个item，宽度为100px
-<ul>
-<li>grow撑开时每个item平均占满所有多余空间</li>
-<li>宽度不足时，2 号主要进行收缩</li>
-</ul>
-</li>
-</ul>
-<p>​</p>
-<h4 id="align-self-定制-align-items">align-self 定制 align-items</h4>
-<blockquote>
-<p>用的很少</p>
-<ul>
-<li>默认在垂直方向上，都是顶端对齐的</li>
-<li>align-self  可以让某一个 item，在垂直方向上，特例独行的展示（指定一个特别的对齐方式）</li>
-</ul>
-</blockquote>
-<p></p>
-<p>实现：单独设置，最后一个 item 底部对齐</p>
-<p></p>
-<p>​</p>
-<p>​</p>
-<h3 id="重点">重点</h3>
-<ul>
-<li>记住这些代码</li>
-<li><strong><code>display: flex</code></strong>     开启flex布局</li>
-<li><strong><code>flex-direction: row / column </code></strong>   主轴是横向还是纵向</li>
-<li><strong><code>flex-wrap: wrap </code></strong>   空间不足时是否换行</li>
-<li><strong><code>just-content: center / space-between</code></strong>   主轴方向上的对齐方式：居中/分开</li>
-<li><strong><code>align-items: center  </code></strong>    次轴方向上的对齐方式：居中，顶，底</li>
-<li>工作中基本只用这些</li>
-</ul>
-<p>​</p>
-<p>​</p>
-<h3 id="实践-1">实践</h3>
-<h4 id="不同布局-1">不同布局</h4>
-<ul>
-<li>用 flex 做两栏布局</li>
-<li>用 flex 做三栏布局</li>
-<li>用 flex 做四栏布局</li>
-<li>用 flex 做平均布局 —— <a href="#%e8%b4%9fmargin%e6%96%b9%e6%a1%88" rel="">负 margin</a></li>
-<li>用 flex 组合使用，做更复杂的布局</li>
-<li><a href="https://jsbin.com/biluwan/edit?html,css,output" target="_blank" rel="noopener noreffer">JSBin 代码</a></li>
-</ul>
-<h4 id="经验-3">经验</h4>
-<ul>
-<li>永远不要把 width 和 height 写死，除非特殊说明
-<ul>
-<li>PC端通常可以写死。移动端不能写死，需要适配各种尺寸：平板/手机…</li>
-</ul>
-</li>
-<li>用  min-width  /  max-width  /  min-height  /  max-height</li>
-<li>flex 可以基本满足所有需求</li>
-<li>flex  和  <code>margin-xxx : auto</code>  配合有意外的效果——例：<a href="#%e5%b7%a6%e5%8f%b3%e5%b8%83%e5%b1%80" rel="">左右布局</a></li>
-</ul>
-<p>​</p>
-<h4 id="什么叫写死">什么叫写死</h4>
-<h5 id="写死">写死</h5>
-<ul>
-<li>width:100px</li>
-</ul>
-<h5 id="不写死">不写死</h5>
-<ul>
-<li>width: 50%</li>
-<li>max-width: 100px</li>
-<li>width: 30vw   （屏幕宽度的百分之30）</li>
-<li>min-width: 80%</li>
-<li>特点：不使用 px，或者加 min max 前缀</li>
-</ul>
-<blockquote>
-<p>css 最忌讳把宽高写死</p>
-</blockquote>
-<p>​</p>
-<h4 id="技术总结-1">技术总结</h4>
-<h5 id="左右布局">左右布局</h5>
-<ul>
-<li>表示两栏布局-贴左、贴右：可通过以下两句中的任意一句来实现</li>
-<li>margin-xxx:  auto 更灵活</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-  <span class="p">.</span><span class="nc">header</span> <span class="p">{</span>
-    <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
-    <span class="k">border</span><span class="p">:</span><span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">black</span><span class="p">;</span>
-    <span class="c">/*justify-content: space-between; ---------------二者任选其一----------------------*/</span>
-  <span class="p">}</span>
-  <span class="nt">ul</span> <span class="p">{</span>
-    <span class="c">/* margin-left: auto; -------------------------二者任选其一【推荐】------------------*/</span>
-    <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
-    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">green</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="nt">ul</span> <span class="o">&gt;</span> <span class="nt">li</span> <span class="p">{</span>
-    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-
-<span class="p">&lt;</span><span class="nt">header</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;header&#34;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;logo&#34;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">alt</span><span class="o">=</span><span class="s">&#34;&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;./logo.png&#34;</span><span class="p">&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>首页<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>课程<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>优惠<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>关于<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h5 id="产品展示格子布局">产品展示格子布局</h5>
-<h6 id="失败方案">失败方案</h6>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;imageList&#34;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">imageList</span><span class="p">{</span>
-  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
-  <span class="k">width</span><span class="p">:</span> <span class="mi">800</span><span class="kt">px</span><span class="p">;</span>
-  <span class="k">margin-right</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
-  <span class="k">margin-left</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
-  <span class="k">margin-top</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
-  <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
-  <span class="k">flex-wrap</span><span class="p">:</span> <span class="kc">wrap</span><span class="p">;</span>
-  <span class="k">justify-content</span><span class="p">:</span> <span class="kc">space</span><span class="o">-</span><span class="n">between</span><span class="p">;</span>  <span class="c">/* 会导致产品不足数的行 --&gt; 错位 */</span>
-<span class="p">}</span>
-<span class="p">.</span><span class="nc">image</span><span class="p">{</span>
-  <span class="k">width</span><span class="p">:</span> <span class="mi">191</span><span class="kt">px</span><span class="p">;</span>
-  <span class="k">height</span><span class="p">:</span> <span class="mi">191</span><span class="kt">px</span><span class="p">;</span>
-  <span class="k">background-color</span><span class="p">:</span> <span class="mh">#ccc</span><span class="p">;</span>
-  <span class="k">margin-bottom</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
-  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">green</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p></p>
-<p>​</p>
-<h6 id="负margin方案">负margin方案</h6>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;imageList&#34;</span><span class="p">&gt;</span>
-  <span class="c">&lt;!-- 可以命名为 inner 或者 wrapper --&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;x&#34;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;image&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-css" data-lang="css"><span class="p">.</span><span class="nc">imageList</span> <span class="p">{</span>
-  <span class="k">outline</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>   <span class="c">/* 注意：边框去掉或者放在外面，否则占据宽度 */</span>
-  <span class="k">width</span><span class="p">:</span> <span class="mi">800</span><span class="kt">px</span><span class="p">;</span>
-  <span class="k">margin-right</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
-  <span class="k">margin-left</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
-  <span class="k">margin-top</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="p">.</span><span class="nc">imageList</span> <span class="o">&gt;</span> <span class="p">.</span><span class="nc">x</span> <span class="p">{</span>
-  <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
-  <span class="k">flex-wrap</span><span class="p">:</span> <span class="kc">wrap</span><span class="p">;</span>
-  <span class="k">margin-right</span><span class="p">:</span> <span class="mi">-12</span><span class="kt">px</span><span class="p">;</span>    <span class="c">/* 负margin */</span>
-<span class="p">}</span>
-<span class="p">.</span><span class="nc">image</span> <span class="p">{</span>
-  <span class="k">width</span><span class="p">:</span> <span class="mi">191</span><span class="kt">px</span><span class="p">;</span>
-  <span class="k">height</span><span class="p">:</span> <span class="mi">191</span><span class="kt">px</span><span class="p">;</span>
-  <span class="k">background-color</span><span class="p">:</span> <span class="mh">#ccc</span><span class="p">;</span>
-  <span class="k">margin-bottom</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
-  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">green</span><span class="p">;</span>
-  <span class="k">margin-right</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span><span class="p">;</span>  <span class="c">/* 每个的间距 */</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p></p>]]></description>
 </item></channel>
 </rss>
