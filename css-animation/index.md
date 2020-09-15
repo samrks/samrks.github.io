@@ -1,4 +1,4 @@
-# Re：从零开始の CSS 学习笔记——动画
+# CSS 学习笔记——动画
 
 
 浏览器的渲染流程、transform、transition、animation<!--more-->

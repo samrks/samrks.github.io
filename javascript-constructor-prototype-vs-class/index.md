@@ -122,7 +122,7 @@ for(let i=0; i<12; i++){
 squareList[0].getArea === squareList[1].getArea   // false
 ```
 
-<img src="C:\Users\Sam\AppData\Roaming\Typora\typora-user-images\image-20200903161514254.png" alt="image-20200903161514254" style="zoom:67%;" />
+<img src="https://i.loli.net/2020/09/15/CtYzvbgywRE1pxZ.png" alt="image-20200903161514254" style="zoom:67%;" />
 
 <img src="https://i.loli.net/2020/09/03/CIS2vNQlDfA5KMi.png" alt="内存图-循环结束后" style="zoom:80%;" />
 
@@ -161,9 +161,9 @@ for(let i=0; i<12; i++){
 squareList[0].getArea === squareList[1].getArea   // true
 ```
 
-<img src="C:\Users\Sam\AppData\Roaming\Typora\typora-user-images\image-20200903161451314.png" alt="image-20200903161451314" style="zoom: 67%;" />
+<img src="https://i.loli.net/2020/09/15/TJbgdDQK56LBSRG.png" alt="image-20200903161451314" style="zoom: 67%;" />
 
-<img src="C:\Users\Sam\AppData\Roaming\Typora\typora-user-images\image-20200903161609247.png" alt="image-20200903161609247" style="zoom:67%;" />
+<img src="https://i.loli.net/2020/09/15/XW2KBfPS4bkH3r6.png" alt="image-20200903161609247" style="zoom:67%;" />
 
 #### 分析
 
