@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>jQuery 的设计思想（下） - Sam&#39;s Garage</title><meta name="Description" content="命名风格、jQuery.prototype、设计模式"><meta property="og:title" content="jQuery 的设计思想（下）" />
+<meta property="og:description" content="命名风格、jQuery.prototype、设计模式" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://samrks.github.io/dom-jquery-prototype/" />
+<meta property="og:image" content="http://samrks.github.io/dom-jquery-prototype/featured-image-preview.jpg"/>
+<meta property="article:published_time" content="2020-10-25T14:20:02+08:00" />
+<meta property="article:modified_time" content="2020-10-25T19:07:09+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://samrks.github.io/dom-jquery-prototype/featured-image-preview.jpg"/>
+<meta name="twitter:title" content="jQuery 的设计思想（下）"/>
+<meta name="twitter:description" content="命名风格、jQuery.prototype、设计模式"/>
+<meta name="application-name" content="Sam&#39;s Garage">
+<meta name="apple-mobile-web-app-title" content="Sam&#39;s Garage"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://samrks.github.io/dom-jquery-prototype/" /><link rel="prev" href="http://samrks.github.io/dom-jquery-handwritten/" /><link rel="next" href="http://samrks.github.io/dom-jquery-api/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "jQuery 的设计思想（下）",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/samrks.github.io\/dom-jquery-prototype\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "http:\/\/samrks.github.io\/dom-jquery-prototype\/featured-image-preview.jpg",
+                            "width":  1280 ,
+                            "height":  384 
+                        }],"genre": "posts","keywords": "jQuery, 设计思想","wordcount":  4480 ,
+        "url": "http:\/\/samrks.github.io\/dom-jquery-prototype\/","datePublished": "2020-10-25T14:20:02+08:00","dateModified": "2020-10-25T19:07:09+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Sam"
+            },"description": "命名风格、jQuery.prototype、设计模式"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa fa-home fa-fw'></i> 主页 </a><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title=""><i class='fa fa-home fa-fw'></i>主页</a><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">jQuery 的设计思想（下）</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://liubingxuan.xyz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Sam</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/js%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3/"><i class="far fa-folder fa-fw"></i>JS编程接口</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-25">2020-10-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4480 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;<span id="/dom-jquery-prototype/" class="leancloud_visitors" data-flag-title="jQuery 的设计思想（下）">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/dom-jquery-prototype/featured-image-preview.jpg"
+        data-srcset="/dom-jquery-prototype/featured-image-preview.jpg, /dom-jquery-prototype/featured-image-preview.jpg 1.5x, /dom-jquery-prototype/featured-image-preview.jpg 2x"
+        data-sizes="auto"
+        alt="/dom-jquery-prototype/featured-image-preview.jpg"
+        title="命名风格、jQuery.prototype、设计模式" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#命名风格">命名风格</a>
+          <ul>
+            <li><a href="#下面的代码令人误解">下面的代码令人误解</a></li>
+            <li><a href="#改成这样">改成这样</a></li>
+          </ul>
+        </li>
+        <li><a href="#jquery-代码">jQuery 代码</a>
+          <ul>
+            <li><a href="#调用">调用</a></li>
+          </ul>
+        </li>
+        <li><a href="#发现问题--api1-和-api2-重复了">发现问题 🎃 api1 和 api2 重复了</a>
+          <ul>
+            <li><a href="#分析-">分析 🎃</a></li>
+            <li><a href="#解决方法-">解决方法 🎃</a>
+              <ul>
+                <li><a href="#套用原型公式">套用原型公式</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#使用原型-改造-jquery-">使用原型 改造 jQuery ⭕️</a>
+          <ul>
+            <li><a href="#第一版-jquery-代码">第一版 jQuery 代码</a></li>
+            <li><a href="#使用原型进行改造-">使用原型进行改造 ⭕️</a>
+              <ul>
+                <li><a href="#-共有属性函数转移到原型上">① 共有属性（函数）转移到原型上</a></li>
+                <li><a href="#-把-prototype-赋予-jquery-创建的对象">② 把 prototype 赋予 jQuery 创建的对象</a></li>
+                <li><a href="#-往-api-上添加-elements-oldapi">③ 往 api 上添加 elements 、oldApi</a></li>
+              </ul>
+            </li>
+            <li><a href="#补充-jqueryfn">补充： jQuery.fn</a></li>
+            <li><a href="#总结">总结</a></li>
+            <li><a href="#完整代码">完整代码</a>
+              <ul>
+                <li><a href="#原型">原型</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#库封装完成">库封装完成</a></li>
+        <li><a href="#jquery-有多牛-x">jQuery 有多牛 X</a>
+          <ul>
+            <li><a href="#设计模式">设计模式？</a></li>
+            <li><a href="#jquery-用到了哪些设计模式">jQuery 用到了哪些设计模式</a></li>
+            <li><a href="#设计模式到底是啥">设计模式到底是啥</a></li>
+            <li><a href="#我应该学习设计模式吗">我应该学习设计模式吗？</a>
+              <ul>
+                <li><a href="#设计模式不是用来学的">设计模式不是用来学的</a></li>
+                <li><a href="#设计模式是用来总结的">设计模式是用来总结的</a></li>
+              </ul>
+            </li>
+            <li><a href="#有人说不用学-jquery">有人说不用学 jQuery</a>
+              <ul>
+                <li><a href="#真相">真相</a></li>
+                <li><a href="#推荐文章">推荐文章</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>​</p>
+<h2 id="命名风格">命名风格</h2>
+<blockquote>
+<p>命名风格：我们在写代码时都会有一些风格，这些风格可能是业界共识、也可能是自己的小技巧</p>
+<ul>
+<li>下面介绍一个命名风格（以前可能是业界共识，但现在已经不太常用了，因为 jQuery 很少人用了）</li>
+</ul>
+</blockquote>
+<h3 id="下面的代码令人误解">下面的代码令人误解</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">div1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;.test&#39;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">div2</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.test&#39;</span><span class="p">)</span>
+<span class="c1">// div2 到底是 DOM 对象，还是 jQuery 对象? 
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>「DOM 对象」只能使用 DOM API，如 querySelector、appendChild …</li>
+<li>「jQuery 对象」只能使用 jQuery 的 API，如 find、 addClass …</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">div</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;div#test&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>我们会误以为 div 是一个 DOM</li>
+<li>实际上 div 是 jQuery 构造的 api 对象</li>
+<li>怎么避免这种误解呢？</li>
+</ul>
+<h3 id="改成这样">改成这样</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">elDiv1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;.test&#39;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">$div2</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.test&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<ul>
+<li>
+<p>声明变量用来表示 DOM 对象，可以变量名可以前置： el  （可选）</p>
+</li>
+<li>
+<p>声明变量用来表示 jQuery 产生的 api 对象，变量名前 + $</p>
+</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">$div</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;div#test&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>$div.appendChild 不存在，因为它不是 DOM 对象</li>
+<li>$div.find 存在，因为它是 jQuery 对象</li>
+</ul>
+<blockquote>
+<p>代码中，所有 $ 开头的变量，都是 jQuery 对象</p>
+<ul>
+<li>这是约定，除非特殊说明</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<p>​</p>
+<h2 id="jquery-代码">jQuery 代码</h2>
+<blockquote>
+<p>当前已经实现的代码</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">$</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">selectorOrArray</span><span class="p">)</span> <span class="p">{</span>
+  <span class="cm">/*
+</span><span class="cm">  * elements 表示通过选择器找到的目标元素组成的伪数组
+</span><span class="cm">  * */</span>
+  <span class="kd">let</span> <span class="nx">elements</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">selectorOrArray</span> <span class="o">===</span> <span class="s2">&#34;string&#34;</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 重载
+</span><span class="c1"></span>    <span class="nx">elements</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="nx">selectorOrArray</span><span class="p">)</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">selectorOrArray</span> <span class="k">instanceof</span> <span class="nb">Array</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">elements</span> <span class="o">=</span> <span class="nx">selectorOrArray</span>
+  <span class="p">}</span>
+  <span class="c1">// ↓ api 可以操作 elements（this 就是 jQuery 返回的 api）
+</span><span class="c1"></span>  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">addClass</span><span class="p">(</span><span class="nx">className</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">elements</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">elements</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">className</span><span class="p">)</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="k">this</span>
+    <span class="p">},</span>
+    <span class="nx">find</span><span class="p">(</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`elements`</span><span class="p">,</span> <span class="nx">elements</span><span class="p">)</span>
+      <span class="kd">let</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[]</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">elements</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">array</span> <span class="o">=</span> <span class="nx">array</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="nx">elements</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="nx">selector</span><span class="p">)))</span>
+      <span class="p">}</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`array`</span><span class="p">,</span> <span class="nx">array</span><span class="p">)</span>
+      <span class="nx">array</span><span class="p">.</span><span class="nx">oldApi</span> <span class="o">=</span> <span class="k">this</span>
+      <span class="k">return</span> <span class="nx">jQuery</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span>
+    <span class="p">},</span>
+    <span class="nx">oldApi</span><span class="o">:</span> <span class="nx">selectorOrArray</span><span class="p">.</span><span class="nx">oldApi</span><span class="p">,</span>  <span class="c1">// 在 find 中，通过 array 保存下来的旧的 api
+</span><span class="c1"></span>    <span class="nx">end</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">oldApi</span>
+    <span class="p">},</span>
+    <span class="nx">each</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">elements</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">elements</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">elements</span><span class="p">)</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="k">this</span> <span class="c1">// this 就是 api !!!
+</span><span class="c1"></span>    <span class="p">},</span>
+    <span class="nx">print</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">elements</span><span class="p">)</span>
+      <span class="k">return</span> <span class="k">this</span>
+    <span class="p">},</span>
+    <span class="nx">parent</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kr">const</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[]</span>
+      <span class="c1">// 遍历父元素 ↓
+</span><span class="c1"></span>      <span class="k">this</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">node</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">array</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">)</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 去重
+</span><span class="c1"></span>          <span class="nx">array</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">)</span>
+        <span class="p">}</span>
+      <span class="p">})</span>
+      <span class="nx">array</span><span class="p">.</span><span class="nx">oldApi</span> <span class="o">=</span> <span class="k">this</span>
+      <span class="k">return</span> <span class="nx">jQuery</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span>
+    <span class="p">},</span>
+    <span class="nx">children</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kr">const</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[]</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">node</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">array</span><span class="p">.</span><span class="nx">push</span><span class="p">(...</span><span class="nx">node</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span>
+        <span class="p">}</span>
+      <span class="p">})</span>
+      <span class="nx">array</span><span class="p">.</span><span class="nx">oldApi</span> <span class="o">=</span> <span class="k">this</span>
+      <span class="k">return</span> <span class="nx">jQuery</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="cm">/******************************************/</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="调用">调用</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">api1</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.red&#39;</span><span class="p">)</span>  <span class="c1">// api1 用来操作 red 元素
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">api2</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.blue&#39;</span><span class="p">)</span>  <span class="c1">// api2 用来操作 blue 元素
+</span><span class="c1"></span><span class="cm">/*
+</span><span class="cm">* 由上，可以发现 api1 和 api2 重复了 （?!! 什么意思）
+</span><span class="cm">* */</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="发现问题--api1-和-api2-重复了">发现问题 🎃 api1 和 api2 重复了</h2>
+<h3 id="分析-">分析 🎃</h3>
+<blockquote>
+<p>api1 和 api2 重复了 （?!! 什么意思）</p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/10/25/NVrI7HihbMPqkYn.png" alt="image-20201025172830173" style="zoom: 50%;" /></p>
+<ul>
+<li>api1 对应一块内存 #101
+<ul>
+<li>在 #101 中，有 find （#201）、each（#209）</li>
+<li>内存 #201 对应一个find函数、内存 #209 对应一个each函数</li>
+</ul>
+</li>
+<li>api2 对应内存 #409
+<ul>
+<li>在 #409 中，有 find （#509）、each（#519）</li>
+<li>内存 #509 对应一个find函数、内存 #519 对应一个each函数</li>
+</ul>
+</li>
+<li>可以比较清楚的发现：
+<ul>
+<li>两个 find 、两个 each 实际上应该是同一个函数的实现</li>
+<li>但 jQuery 每创建一个 api ，这些函数也都被再次创建了一遍</li>
+<li>201和509（209和519）是完全一样的两块内存</li>
+</ul>
+</li>
+<li>这就是前面提到的「 api1 和 api2 重复了」</li>
+</ul>
+<h3 id="解决方法-">解决方法 🎃</h3>
+<ul>
+<li>
+<p>find 和 each 应该作为「共用属性」</p>
+</li>
+<li>
+<p>那为什么不把共用的属性写到一个对象上去呢？</p>
+<ul>
+<li>用一个 __proto__ 属性保存下共有属性的地址，即可</li>
+<li>把这个包含共有属性的对象，放到 jQuery 上，让 jQuery.prototype 等于这个对象</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2020/10/25/5qYbPpcQJHlfyn2.png"
+        data-srcset="https://i.loli.net/2020/10/25/5qYbPpcQJHlfyn2.png, https://i.loli.net/2020/10/25/5qYbPpcQJHlfyn2.png 1.5x, https://i.loli.net/2020/10/25/5qYbPpcQJHlfyn2.png 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2020/10/25/5qYbPpcQJHlfyn2.png"
+        title="image-20201025174554791" /></p>
+</li>
+</ul>
+<h4 id="套用原型公式">套用原型公式</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">对象</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">其构造函数</span><span class="p">.</span><span class="nx">prototype</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">api1</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.red&#39;</span><span class="p">)</span>
+<span class="nx">api1</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">jQuery</span><span class="p">.</span><span class="nx">prototype</span>   <span class="c1">// 原型公式
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">api2</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.blue&#39;</span><span class="p">)</span>
+<span class="nx">api2</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">jQuery</span><span class="p">.</span><span class="nx">prototype</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h2 id="使用原型-改造-jquery-">使用原型 改造 jQuery ⭕️</h2>
+<h3 id="第一版-jquery-代码">第一版 jQuery 代码</h3>
+<blockquote>
+<p>先看看之前的版本</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">$</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">selectorOrArray</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">elements</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">selectorOrArray</span> <span class="o">===</span> <span class="s2">&#34;string&#34;</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 重载
+</span><span class="c1"></span>    <span class="nx">elements</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="nx">selectorOrArray</span><span class="p">)</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">selectorOrArray</span> <span class="k">instanceof</span> <span class="nb">Array</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">elements</span> <span class="o">=</span> <span class="nx">selectorOrArray</span>
+  <span class="p">}</span>
+  <span class="c1">// ↓ api 可以操作 elements（this 就是 jQuery 返回的 api）
+</span><span class="c1"></span>  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">jquery</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">oldApi</span><span class="o">:</span> <span class="nx">selectorOrArray</span><span class="p">.</span><span class="nx">oldApi</span><span class="p">,</span>  <span class="c1">// 通过 array 保存下上一次的api
+</span><span class="c1"></span>    <span class="c1">// 下面是各种功能函数
+</span><span class="c1"></span>    <span class="nx">addClass</span><span class="p">(</span><span class="nx">className</span><span class="p">)</span> <span class="p">{...},</span>
+    <span class="nx">find</span><span class="p">()</span> <span class="p">{...},</span>
+    <span class="nx">each</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{...},</span>
+    <span class="nx">appendTo</span><span class="p">()</span> <span class="p">{...},</span>
+    <span class="p">...</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="使用原型进行改造-">使用原型进行改造 ⭕️</h3>
+<h4 id="-共有属性函数转移到原型上">① 共有属性（函数）转移到原型上</h4>
+<blockquote>
+<p>把所有共有属性，都移到 jQuery 的原型 prototype 上</p>
+<p>别忘了 constructor</p>
+</blockquote>
+<ul>
+<li>这里是直接给 jQuery.prototype 赋新值，这样写很方便，但是会导致原本原型上的 <a href="" rel="">constructor</a> 被覆盖丢失，所以要手动加回去 <a href="" rel="">constructor</a></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">jQuery</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="o">:</span> <span class="nx">jQuery</span><span class="p">,</span>
+  <span class="nx">jquery</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="c1">// 下面是各种功能函数
+</span><span class="c1"></span>  <span class="nx">addClass</span><span class="p">(</span><span class="nx">className</span><span class="p">)</span> <span class="p">{...},</span>
+  <span class="nx">find</span><span class="p">()</span> <span class="p">{...},</span>
+  <span class="nx">each</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{...},</span>
+  <span class="nx">appendTo</span><span class="p">()</span> <span class="p">{...},</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+  
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="-把-prototype-赋予-jquery-创建的对象">② 把 prototype 赋予 jQuery 创建的对象</h4>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create" target="_blank" rel="noopener noreffer">Object.create()</a> ：创建对象，并给对象指定原型 __proto__</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">$</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">selectorOrArray</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">elements</span>
+  <span class="c1">// ...
+</span><span class="c1"></span>  
+  <span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">jQuery</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>  <span class="c1">// &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+</span><span class="c1"></span>  <span class="c1">// 创建 api对象，并指定其原型是 jQuery.prototype
+</span><span class="c1"></span>  <span class="c1">// 相当于 const api = {__proto__: jQuery.prototype}
+</span><span class="c1"></span>  <span class="p">...</span>
+  
+  <span class="k">return</span> <span class="nx">api</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="-往-api-上添加-elements-oldapi">③ 往 api 上添加 elements 、oldApi</h4>
+<blockquote>
+<p>问题分析：</p>
+<p>当我们把所有功能函数都从 api（独立函数） 上拿走，放到原型（独立对象）上之后
+原型上的函数就获取不到 jQuery 里的 elements ，elements 仅作用在在 window.jQuery 函数中</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">p1</span><span class="p">){</span> 
+  <span class="kd">let</span> <span class="nx">elements</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="nx">p1</span><span class="p">)</span>
+  <span class="k">return</span> <span class="nx">api</span>
+<span class="p">};</span>
+<span class="nx">jQuery</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="nx">get</span><span class="p">(</span><span class="nx">index</span><span class="p">){</span> <span class="k">return</span> <span class="nx">elements</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="p">},</span>    <span class="c1">// 这里的elements获取不到上面的 elements
+</span><span class="c1"></span>  <span class="nx">end</span><span class="p">(){</span><span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">oldApi</span><span class="p">},</span>
+  <span class="nx">find</span><span class="p">(){</span> <span class="p">},</span> 
+  <span class="c1">// ...
+</span><span class="c1"></span><span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>那 find、get … 怎么操作 elements 呢？</p>
+<ul>
+<li>
+<p>每生成新的 elements，都会创建、返回新的 api（api 的原型上就是这些功能函数）</p>
+</li>
+<li>
+<p><strong>需要找到它们之间的联系</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.test&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>  
+<span class="c1">// addClass 函数中的 this 指向函数调用者 $(&#39;.test&#39;)
+</span><span class="c1">// 而 $(&#39;.test&#39;) === api ，所以函数中的 this 指向的就是 api
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>所以要想在函数内部，获取到 elements，可以把 elements 放到 api 上</p>
+</li>
+</ul>
+</li>
+<li>
+<p>那就在 api 上添加一个属性 elements，用来保存  jQuery 创建的 elements</p>
+</li>
+<li>
+<p>在原型里的函数中，通过 <a href="" rel="">this.elements</a>，就可以访问到这个【目标元素的数组】，加以操作</p>
+</li>
+</ul>
+<blockquote>
+<p>综上：</p>
+<ul>
+<li>在原型里的函数，要获取到 jQuery 里的变量。必须通过桥梁【 api 、this 】
+<ul>
+<li><strong>桥梁：只要 api 上有 jQuery 里的变量，函数就能通过 this 关键字获取到这个变量</strong></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>注：oldApi 代码如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">end</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">oldApi</span>  
+  <span class="c1">// end 原本就是要操作【调用者api】中的 oldApi
+</span><span class="c1"></span>  <span class="c1">// 所以 this(api) 上必须有 oldApi，end才能操作到，所以同样也需要往 api 上添加 oldApi
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><a href="D:%5cJirengu%5c%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c4-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8b%ef%bc%89%5cdom-2-github-prototype%5csrc" rel="">完整代码</a></p>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/assign" target="_blank" rel="noopener noreffer">Object.assign</a>：把后面对象的属性，复制到前面的对象上（注意是浅复制，JS 本身没有深复制）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">$</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">selectorOrArray</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">elements</span>
+  <span class="c1">// ...  elements = document.querySelectorAll(selectorOrArray)
+</span><span class="c1"></span> 
+  <span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">jQuery</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>
+  <span class="c1">// 把所需变量放到 api 上（两种方式）
+</span><span class="c1"></span>  <span class="c1">// （方式一 👇）
+</span><span class="c1"></span>  <span class="c1">// api.elements = elements 
+</span><span class="c1"></span>  <span class="c1">// api.oldApi = selectorOrArray.oldApi // 等同于 ↓
+</span><span class="c1"></span>  <span class="c1">// （方式二 👇）
+</span><span class="c1"></span>  <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">api</span><span class="p">,</span> <span class="p">{</span>  <span class="c1">// Object.assign（两个参数）把后面对象的属性，复制到前面的对象上
+</span><span class="c1"></span>    <span class="nx">elements</span><span class="o">:</span> <span class="nx">elements</span><span class="p">,</span>
+    <span class="nx">oldApi</span><span class="o">:</span> <span class="nx">selectorOrArray</span><span class="p">.</span><span class="nx">oldApi</span>
+  <span class="p">})</span>
+  
+  <span class="k">return</span> <span class="nx">api</span>
+<span class="p">}</span>
+
+<span class="nx">jQuery</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>  <span class="c1">// &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; 函数在这里
+</span><span class="c1"></span>  <span class="nx">constructor</span><span class="o">:</span> <span class="nx">jQuery</span><span class="p">,</span>
+  <span class="nx">jquery</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+
+  <span class="c1">// 所有对 elements 的调用，都改成 this.elements
+</span><span class="c1"></span>  <span class="nx">get</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">elements</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span>
+  <span class="p">},</span>
+  <span class="nx">addClass</span><span class="p">(</span><span class="nx">className</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">elements</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kr">const</span> <span class="nx">element</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">elements</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+      <span class="nx">element</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">className</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="k">this</span>
+  <span class="p">},</span>
+  <span class="nx">end</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">oldApi</span> <span class="c1">// this 就是新 api
+</span><span class="c1"></span>  <span class="p">}</span>
+  <span class="nx">find</span><span class="p">(</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">elements</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kr">const</span> <span class="nx">elements2</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">elements</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="nx">selector</span><span class="p">))</span>
+      <span class="nx">array</span> <span class="o">=</span> <span class="nx">array</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">elements2</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nx">array</span><span class="p">.</span><span class="nx">oldApi</span> <span class="o">=</span> <span class="k">this</span> <span class="c1">// find 返回值会覆盖原本的 api，所以提取保存下旧的 api（this）
+</span><span class="c1"></span>    <span class="k">return</span> <span class="nx">jQuery</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span>
+  <span class="p">},</span>
+  <span class="nx">each</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{...},</span>
+  <span class="nx">appendTo</span><span class="p">()</span> <span class="p">{...},</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><a href="D:%5cJirengu%5c%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c7-JS%e7%bc%96%e7%a8%8b%e6%8e%a5%e5%8f%a3%5c4-jQuery%e4%b8%ad%e7%9a%84%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%9e%8b%ef%bc%88%e4%b8%8b%ef%bc%89%5cdom-2-github-prototype%5csrc" rel="">完整代码</a></li>
+</ul>
+<h3 id="补充-jqueryfn">补充： jQuery.fn</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">jQuery</span><span class="p">.</span><span class="nx">fn</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{...}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>在 jQuery 的源码中，你会发现还多赋值了一个 jQuery.fn （如上）。用 fn 来表示 prototype 原型
+<ul>
+<li>可能是嫌弃 prototype 这个单词太长了，所以想用 fn 来表示</li>
+<li>也可能是想兼容一些不太理解 prototype 的开发者，所以干脆换一个更短的单词 fn</li>
+<li>总之，就是 jQuery 的源码中，对 jQuery 的 prototype 原型取了一个别名叫： fn</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结">总结</h3>
+<blockquote>
+<p>$  指代 jQuery</p>
+</blockquote>
+<ul>
+<li>
+<p>把共用属性（函数）全都放到  $.prototype</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">fn</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">prototype</span>  <span class="c1">// 名字太长不爽，再起个别名 fn
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>然后让 api.__proto__ 指向 $.fn （也就是让 api.__proto__ 指向了 $.prototype）</p>
+</li>
+</ul>
+<h3 id="完整代码">完整代码</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">$</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">selectorOrArrayOrTemplate</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">elements</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">selectorOrArrayOrTemplate</span> <span class="o">===</span> <span class="s2">&#34;string&#34;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">selectorOrArrayOrTemplate</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">===</span> <span class="s2">&#34;&lt;&#34;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// 创建 div
+</span><span class="c1"></span>      <span class="nx">elements</span> <span class="o">=</span> <span class="p">[</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">selectorOrArrayOrTemplate</span><span class="p">)]</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="c1">// 查找 div
+</span><span class="c1"></span>      <span class="nx">elements</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="nx">selectorOrArrayOrTemplate</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">selectorOrArrayOrTemplate</span> <span class="k">instanceof</span> <span class="nb">Array</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">elements</span> <span class="o">=</span> <span class="nx">selectorOrArrayOrTemplate</span>
+  <span class="p">}</span>
+
+  <span class="kd">function</span> <span class="nx">createElement</span><span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">container</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&#34;template&#34;</span><span class="p">)</span>
+    <span class="nx">container</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">string</span><span class="p">.</span><span class="nx">trim</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nx">container</span><span class="p">.</span><span class="nx">content</span><span class="p">.</span><span class="nx">firstChild</span>
+  <span class="p">}</span>
+
+  <span class="c1">// api 可以操作elements
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">jQuery</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span> <span class="c1">// 创建一个对象，这个对象的 __proto__ 为括号里面的东西
+</span><span class="c1"></span>  <span class="c1">// const api = {__proto__: jQuery.prototype}
+</span><span class="c1"></span>  <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">api</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">elements</span><span class="o">:</span> <span class="nx">elements</span><span class="p">,</span>
+    <span class="nx">oldApi</span><span class="o">:</span> <span class="nx">selectorOrArrayOrTemplate</span><span class="p">.</span><span class="nx">oldApi</span>
+  <span class="p">})</span>
+  <span class="c1">// api.elements = elements
+</span><span class="c1"></span>  <span class="c1">// api.oldApi = selectorOrArrayOrTemplate.oldApi
+</span><span class="c1"></span>  <span class="k">return</span> <span class="nx">api</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="原型">原型</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">jQuery</span><span class="p">.</span><span class="nx">fn</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="o">:</span> <span class="nx">jQuery</span><span class="p">,</span>
+  <span class="nx">jquery</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nx">get</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">elements</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span>
+  <span class="p">},</span>
+  <span class="nx">appendTo</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">node</span> <span class="k">instanceof</span> <span class="nx">Element</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">el</span> <span class="p">=&gt;</span> <span class="nx">node</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">el</span><span class="p">))</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">jquery</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">el</span> <span class="p">=&gt;</span> <span class="nx">node</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">el</span><span class="p">))</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nx">append</span><span class="p">(</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">children</span> <span class="k">instanceof</span> <span class="nx">Element</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">children</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">children</span> <span class="k">instanceof</span> <span class="nx">HTMLCollection</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">children</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">children</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">children</span><span class="p">.</span><span class="nx">jquery</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">children</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">node</span> <span class="p">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">node</span><span class="p">))</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nx">find</span><span class="p">(</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">elements</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kr">const</span> <span class="nx">elements2</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">elements</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="nx">selector</span><span class="p">))</span>
+      <span class="nx">array</span> <span class="o">=</span> <span class="nx">array</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">elements2</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nx">array</span><span class="p">.</span><span class="nx">oldApi</span> <span class="o">=</span> <span class="k">this</span> <span class="c1">// this 就是 旧 api
+</span><span class="c1"></span>    <span class="k">return</span> <span class="nx">jQuery</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span>
+  <span class="p">},</span>
+  <span class="nx">each</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">elements</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">elements</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">i</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="k">this</span>
+  <span class="p">},</span>
+  <span class="nx">parent</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">node</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">array</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">)</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">array</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">)</span>
+      <span class="p">}</span>
+    <span class="p">})</span>
+    <span class="k">return</span> <span class="nx">jQuery</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span>
+  <span class="p">},</span>
+  <span class="nx">children</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">node</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">array</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">)</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">array</span><span class="p">.</span><span class="nx">push</span><span class="p">(...</span><span class="nx">node</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span>
+      <span class="p">}</span>
+    <span class="p">})</span>
+    <span class="k">return</span> <span class="nx">jQuery</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span>
+  <span class="p">},</span>
+  <span class="nx">print</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">elements</span><span class="p">)</span>
+  <span class="p">},</span>
+  <span class="c1">// 闭包：函数访问外部的变量
+</span><span class="c1"></span>  <span class="nx">addClass</span><span class="p">(</span><span class="nx">className</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">elements</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kr">const</span> <span class="nx">element</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">elements</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+      <span class="nx">element</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">className</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="k">this</span>
+  <span class="p">},</span>
+  <span class="nx">end</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">oldApi</span> <span class="c1">// this 就是新 api
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="库封装完成">库封装完成</h2>
+<blockquote>
+<p>可以把代码公开了</p>
+</blockquote>
+<ul>
+<li>
+<p>发布到 GitHub</p>
+</li>
+<li>
+<p>添加文档，告诉别人怎么用</p>
+</li>
+<li>
+<p>获得称赞 ❤️ 🧡 💛 💚 💙 💜 🖤 🤍 🤎</p>
+<ul>
+<li>实现一个封装的库，提供给别人使用，好用的话，别人就会给你点赞</li>
+</ul>
+<ul>
+<li>jQuery 就是早期一个程序员写的库，并提供给所有开发者使用 👍👍</li>
+</ul>
+</li>
+<li>
+<p>这就是程序员的社区。人人为我，我为人人</p>
+</li>
+</ul>
+<blockquote>
+<p>当然现在的水平，肯定不够指导别人。</p>
+<p>就先把代码写完整，自己用成功一次即可</p>
+<p>以后会学习「如何做单元测试」（当然「单元测试」可能比「封装jQuery」的代码还难）</p>
+</blockquote>
+<blockquote>
+<p>现在需要做的就是：自己能动手写成至少 10% 的这么一个轮子</p>
+<ul>
+<li>只要你能完成，那代码水平肯定会显著提高</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<p>​</p>
+<h2 id="jquery-有多牛-x">jQuery 有多牛 X</h2>
+<blockquote>
+<p>它是目前前端<strong>最长寿</strong>的库，2006年发布 （已经14岁了）</p>
+<ul>
+<li>vue 、react 也才四五岁</li>
+<li>在前端历史上，有数以万计的库，最终能够活下来并一直被使用的库，很少很少。</li>
+<li>jQuery 是目前最长寿的一个</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>它是世界上使用<strong>最广泛</strong>的库，<a href="https://trends.builtwith.com/javascript/jQuery" target="_blank" rel="noopener noreffer">全球80%的网站</a>在用</p>
+<ul>
+<li>可能现在新的科技公司不会再用 jQuery</li>
+<li>但是老牌大公司，像是阿里巴巴、淘宝，一直都在用 jQuery</li>
+</ul>
+</blockquote>
+<h3 id="设计模式">设计模式？</h3>
+<blockquote>
+<p>为什么 jQuery 这么牛 X   ？</p>
+<ul>
+<li>因为 jquery 的代码设计，做的 特 ~ 别 ~ 的 好。</li>
+<li>好到没办法改进</li>
+<li>我们今天学习的、很多写代码的套路，都是从 jQuery 的源码中学来的（工作个四五年再去看 jQuery 源码学习，小白直接看无异于自杀）</li>
+</ul>
+</blockquote>
+<h3 id="jquery-用到了哪些设计模式">jQuery 用到了哪些设计模式</h3>
+<ul>
+<li>
+<p><strong>不用 new 的构造函数</strong>（jQuery做到了），这个模式没有专门的名字</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">JQuery</span><span class="p">(</span><span class="s1">&#39;.test&#39;</span><span class="p">)</span>   <span class="p">=&gt;</span>   <span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.test&#39;</span><span class="p">)</span>  <span class="c1">//在jQuery之前没人想到可以这样
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>$(<strong>支持多种参数</strong>)，这个模式叫做<strong>重载</strong></p>
+<ul>
+<li>可以传选择器、传数组、传 html 结构</li>
+</ul>
+</li>
+<li>
+<p><strong>用闭包隐藏细节</strong>，这个模式没有专门的名字</p>
+<ul>
+<li>闭包：在一个函数中，调用了函数外部的变量</li>
+<li><u>用户永远无法直接操作 elements （隐藏细节），必须通过 api 中的函数才能操作到 elements</u></li>
+<li>jQuery 每次生成 elements 后，这个 elements 可以一直存活。因为 jQuery 函数返回的 api 、api 中的函数里仍然在获取 elements 且函数返回值是 api。细想，这就导致 elements 一直在被访问，不断在函数的返回值中被调用。直到 api 消失，elements 才会消失</li>
+</ul>
+</li>
+<li>
+<p>$div.text() 即可读也可写，这个模式叫 <strong>getter/setter</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">getText</span><span class="p">()</span>
+<span class="nx">setText</span><span class="p">(</span><span class="s1">&#39;newValue&#39;</span><span class="p">)</span>  <span class="c1">// 以前都是两个函数来实现读、写
+</span><span class="c1">// 而jQuery中只用一个函数，根据参数个数，区分读写
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>$.fn 是 $.prototype 的别名，这叫<strong>别名</strong></p>
+<ul>
+<li>这的确是设计模式，因为在 jQuery 前并没有人这么干过</li>
+</ul>
+</li>
+<li>
+<p>jQuery <strong>针对不同环境使用不同代码</strong>，这叫<strong>适配器</strong></p>
+<ul>
+<li>电源适配器：你在日本，就调整成 110v，在中国，就调整成220v</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">if</span><span class="p">(){</span>
+    
+<span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(){</span>
+    
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="设计模式到底是啥">设计模式到底是啥</h3>
+<ul>
+<li>老子这个代码写得太漂亮了，别人肯定也用得到（去掉 new、重载、闭包、getter/setter、别名、适配器…）</li>
+<li>那就给这种写法取个名字吧，比如：适配器模式（if else）</li>
+<li>设计模式，就是对通用代码取个名字而已
+<ul>
+<li>实际上就是程序员的黑话、行话</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<blockquote>
+<ul>
+<li><strong>适配器</strong>：就是针对不同环境使用不同代码</li>
+<li><strong>别名</strong>：让一个名字等于另外一个名字、</li>
+<li><strong>getter/setter</strong>：一个函数，既可以get 、也可以 set （可读可写）</li>
+<li><strong>闭包隐藏细节</strong>：生成一个变量（elements），一个函数（addClass）去读这个变量</li>
+<li><strong>重载</strong>：一个函数支持多种形式的参数</li>
+<li><strong>不用 new 的构造函数</strong>：要知道是怎么一回事   <code>const api = new JQuery('.test')   =&gt;   const api = $('.test')</code></li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h3 id="我应该学习设计模式吗">我应该学习设计模式吗？</h3>
+<h4 id="设计模式不是用来学的">设计模式不是用来学的</h4>
+<ul>
+<li>你看了这些代码</li>
+<li>但你并不知道这代码用来解决什么问题</li>
+<li>看了白看</li>
+</ul>
+<h4 id="设计模式是用来总结的">设计模式是用来总结的</h4>
+<ul>
+<li>
+<p>你只管去写代码</p>
+</li>
+<li>
+<p>把你的代码尽量写好，不断重写</p>
+</li>
+<li>
+<p>总结你的代码，把写得好的地方抽象出来</p>
+<ul>
+<li>
+<p>看看符合哪个设计模式</p>
+<p>（并不是知道设计模式才这么写的，而是写完后发现，居然用到了设计模式）</p>
+</li>
+<li>
+<p>你就可以告诉别人你用到了这几个设计模式</p>
+</li>
+<li>
+<p>显得你特别高端</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="有人说不用学-jquery">有人说不用学 jQuery</h3>
+<h4 id="真相">真相</h4>
+<ul>
+<li>jQuery 这么简单、经典的库，为什么不学？</li>
+<li>通过 jQuery 可以学会很多封装技巧，为什么不学？
+<ul>
+<li>把一个变量放到函数里面、暴露出 api，api 可以操作变量，这就是 封装</li>
+</ul>
+</li>
+<li>连 jQuery 都理解不了，Vue / React 肯定学不好</li>
+</ul>
+<h4 id="推荐文章">推荐文章</h4>
+<ul>
+<li>《<a href="https://fangyinghang.com/why-still-jquery/" target="_blank" rel="noopener noreffer">jQuery都过时了，那我还学它干嘛？</a>》</li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-10-25</span>
+            </div>
+            <div class="post-info-license"><span>转载请注明出处</span></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/dom-jquery-prototype/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://samrks.github.io/dom-jquery-prototype/" data-title="jQuery 的设计思想（下）" data-via="ryuukousen2" data-hashtags="jQuery,设计思想"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://samrks.github.io/dom-jquery-prototype/" data-hashtag="jQuery"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://samrks.github.io/dom-jquery-prototype/" data-title="jQuery 的设计思想（下）"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://samrks.github.io/dom-jquery-prototype/" data-title="jQuery 的设计思想（下）"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://samrks.github.io/dom-jquery-prototype/" data-title="jQuery 的设计思想（下）"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/jquery/">jQuery</a>,&nbsp;<a href="/tags/%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/">设计思想</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/dom-jquery-handwritten/" class="prev" rel="prev" title="jQuery 的设计思想（上）"><i class="fas fa-angle-left fa-fw"></i>jQuery 的设计思想（上）</a>
+            <a href="/dom-jquery-api/" class="next" rel="next" title=" jQuery 快速上手"> jQuery 快速上手<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+    Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+  </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Thanks For Your Watching! ❤️</div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2017 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Sam</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":15},"comment":{"valine":{"appId":"M2gdPMfXs30Gw5NNnr2wSxv6-MdYXbMMI","appKey":"9V2iCzlcQbheaaWDXRLTNgec","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-twitter@5.0.1/img/twitter/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"📢 来都来了，说点什么 ~（填写邮箱可以收到回复提醒哦 ~ 😉）","recordIP":true,"visitor":true}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"KAKKI975YQ","algoliaIndex":"blog","algoliaSearchKey":"529eb6b7fa6e4f89bfe1d0043e53bda5","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

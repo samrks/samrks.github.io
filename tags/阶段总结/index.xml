@@ -1,0 +1,533 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>阶段总结 - 标签 - Sam&#39;s Garage</title>
+        <link>http://samrks.github.io/tags/%E9%98%B6%E6%AE%B5%E6%80%BB%E7%BB%93/</link>
+        <description>阶段总结 - 标签 - Sam&#39;s Garage</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Thu, 24 Sep 2020 18:12:52 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/%E9%98%B6%E6%AE%B5%E6%80%BB%E7%BB%93/" rel="self" type="application/rss+xml" /><item>
+    <title>JS 阶段总结</title>
+    <link>http://samrks.github.io/javascript-summary/</link>
+    <pubDate>Thu, 24 Sep 2020 18:12:52 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/javascript-summary/</guid>
+    <description><![CDATA[<p>​</p>
+<h2 id="知识点">知识点</h2>
+<h3 id="基本概念">基本概念</h3>
+<ul>
+<li><strong>内存</strong>：内存图</li>
+<li><strong>变量</strong>：如何声明、哪些类型</li>
+<li><strong>数据类型</strong>：哪7种</li>
+<li><strong>对象</strong>：是什么、有什么属性、如何构造的</li>
+</ul>
+<h3 id="控制语句">控制语句</h3>
+<ul>
+<li>if&hellip;else&hellip;</li>
+<li>for&hellip;</li>
+</ul>
+<h3 id="对象">对象</h3>
+<ul>
+<li>原型、原型链</li>
+<li>对象分类：数 组是什么对象、函数是什么对象</li>
+<li>如何 new 一个新对象：new 做了哪 4 件事情</li>
+<li>构造函数：是什么</li>
+<li>this 的隐式传递和显式传递：普通调用就是隐式传递、推荐用 call 显式传递</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="难点">难点</h2>
+<h3 id="js-三座大山">JS 三座大山</h3>
+<ol>
+<li>原型</li>
+<li>this</li>
+<li>AJAX</li>
+</ol>
+<h3 id="已经遇到了前两座">已经遇到了前两座</h3>
+<ul>
+<li>前端门槛</li>
+<li>反复学反复理解</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="最重要的知识-">最重要的知识 ⭐️</h2>
+<h3 id="第一个重要知识js-公式">第一个重要知识：JS 公式</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">对象</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">其构造函数</span><span class="p">.</span><span class="nx">prototype</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>JS 唯一公式</p>
+</blockquote>
+<p>​</p>
+<h3 id="第二个重要知识根公理">第二个重要知识：根公理</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span> <span class="nx">是根对象</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span> <span class="nx">是所有对象的原型</span> 
+<span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span> <span class="nx">是所有对象的直接或间接的原型</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>加了一个直接或间接，所谓公理就是 JS 规定好的</p>
+</blockquote>
+<p>例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;frank&#39;</span><span class="p">}</span> <span class="nx">的原型</span><span class="o">:</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="err">（</span><span class="nx">直接原型</span><span class="err">）</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="nx">的原型是</span><span class="o">:</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="err">（</span><span class="nx">直接原型</span><span class="err">）</span> <span class="nx">的原型是</span>  <span class="p">=&gt;</span>  <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="err">（</span><span class="nx">间接原型</span><span class="err">）</span>
+<span class="nb">Object</span> <span class="nx">的原型是</span><span class="o">:</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="err">（</span><span class="nx">直接原型</span><span class="err">）</span> <span class="nx">的原型是</span> <span class="p">=&gt;</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="err">（</span><span class="nx">间接原型</span><span class="err">）</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h3 id="第三个重要知识函数公理">第三个重要知识：函数公理</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">所有函数都是由</span> <span class="nb">Function</span> <span class="nx">构造的</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>推出 👇</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">任何函数</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span>
+<span class="nx">任意函数有</span> <span class="nb">Object</span> <span class="o">/</span> <span class="nb">Array</span> <span class="o">/</span> <span class="nb">Function</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">f1</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>
+<span class="nx">f1</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span>  <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h2 id="总结">总结</h2>
+<ul>
+<li>JS 公式、根公理、函数公理</li>
+<li>基于这三个知识和基础知识，可以推出 JS 世界</li>
+</ul>
+<p>（细品）</p>
+<p>​</p>
+<p>​</p>
+<h2 id="拨乱反正误区">拨乱反正（误区）</h2>
+<h3 id="乱一的原型">乱一：「的原型」</h3>
+<h4 id="xxx-的原型">XXX 的原型</h4>
+<blockquote>
+<p>提到 「xxx 的原型」，到底指的是 <code>__proto__</code> 还是 <code>prototype</code></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">-</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;frank&#39;</span><span class="p">}</span> <span class="nx">的原型</span>
+<span class="o">-</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="nx">的原型</span>
+<span class="o">-</span> <span class="nb">Object</span> <span class="nx">的原型</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="解读">解读</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">-</span> <span class="nb">Object</span> <span class="nx">的原型是</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">__proto__</span><span class="err">：</span><span class="nx">对</span>
+<span class="o">-</span> <span class="nb">Object</span> <span class="nx">的原型是</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span> <span class="err">：</span><span class="nx">错</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="分析">分析</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">-</span> <span class="nx">约定只要提到</span><span class="err">「</span><span class="nx">xxx的原型</span><span class="err">」</span><span class="nx">就是指</span><span class="err">「</span><span class="nx">xxx</span><span class="p">.</span><span class="nx">__proto__</span><span class="err">」</span>
+<span class="o">-</span> <span class="nx">中文的</span><span class="err">「</span><span class="nx">原型</span><span class="err">」</span><span class="nx">无法区分</span> <span class="nx">__proto__</span> <span class="nx">和</span> <span class="nx">prototype</span><span class="err">，</span><span class="nx">可以同时代指这俩</span>
+<span class="o">-</span> <span class="nx">所以我们只能约定</span><span class="err">，「</span><span class="nx">原型</span><span class="err">」</span><span class="nx">默认表示</span> <span class="nx">__proto__</span> 
+<span class="o">-</span> <span class="nx">只不过</span> <span class="nx">__proto__</span> <span class="nx">正好等于某个函数的</span> <span class="nx">prototype</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h3 id="乱二直接间接原型">乱二：直接/间接原型</h3>
+<h4 id="矛盾了吗">矛盾了吗？</h4>
+<ul>
+<li>说 [1,2,3] 的原型是 Array.prototype</li>
+<li>又说 Object.prototype 是所有对象的原型</li>
+<li>那为什么 Object.prototype 不是 [1,2,3] 的原型</li>
+</ul>
+<h4 id="怎么理解">怎么理解</h4>
+<ul>
+<li>原型分两种：直接原型 和 间接原型</li>
+<li>对于普通对象来说，Object.prototype 是直接原型</li>
+<li>对于数组、函数来说，Object.prototype 是间接原型</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">-</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;frank&#39;</span><span class="p">}</span> <span class="nx">的原型</span><span class="o">:</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="err">（</span><span class="nx">直接原型</span><span class="err">）</span>
+<span class="o">-</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="nx">的原型是</span><span class="o">:</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="err">（</span><span class="nx">直接原型</span><span class="err">）</span> <span class="nx">的原型是</span>  <span class="p">=&gt;</span>  <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="err">（</span><span class="nx">间接原型</span><span class="err">）</span>
+<span class="o">-</span> <span class="nb">Object</span> <span class="nx">的原型是</span><span class="o">:</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="err">（</span><span class="nx">直接原型</span><span class="err">）</span> <span class="nx">的原型是</span> <span class="p">=&gt;</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="err">（</span><span class="nx">间接原型</span><span class="err">）</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>其实，只要在浏览器中输出一下 [1,2,3]  看看 proto 就能理解 直接原型 和 间接原型</p>
+</blockquote>
+<blockquote>
+<p>比较好理解</p>
+</blockquote>
+<p>​</p>
+<h3 id="乱三objectprototype">乱三：Object.prototype</h3>
+<h4 id="有人认为-objectprototype-不是根对象">有人认为 Object.prototype 不是根对象</h4>
+<p>（质疑公理 😏）</p>
+<h4 id="理由如下">理由如下</h4>
+<ul>
+<li>Object.prototype 是所有对象的原型</li>
+<li>Object 是 Function 构造出来的</li>
+<li>所以，Function 构造了 Object.prototype</li>
+<li>推论，Function 才是万物之源啊！</li>
+<li>（看似无懈可击的推理，实际上是对更基础的知识没有理解好）</li>
+</ul>
+<h4 id="反驳">反驳</h4>
+<blockquote>
+<p>要理解 <font color="red">Object.prototype</font> 和 <font color="red">Object.prototype 对象</font>  的区别</p>
+</blockquote>
+<ul>
+<li>
+<p>实际上，<font color="red">Object.prototype</font> 的值，本身是一个内存地址，指向的内存空间是  <font color="red">Object.prototype 对象</font></p>
+</li>
+<li>
+<p>只是我们日常习惯口头上称 <font color="red">Object.prototype</font> 为原型对象（实际上只是个地址）</p>
+</li>
+<li>
+<p>“Function 构造了 Object.prototype”  是构造出了 Object 上存根地址的属性 <code>prototype: #202</code>，而不是构造出原型对象本身 （结合内存图理解）</p>
+</li>
+<li>
+<p>对象里面从来都不会包含另一个对象，只会包含另一个对象的地址</p>
+</li>
+</ul>
+<p></p>
+<blockquote>
+<p>接下来我们要把 JS 世界的建造顺序理清楚</p>
+</blockquote>
+<p>​</p>
+<h2 id="再画-js-世界">再画 JS 世界</h2>
+<h3 id="js-世界的构造顺序">JS 世界的构造顺序</h3>
+<ol>
+<li>
+<p>创建根对象 #101  (toString)，根对象没有名字</p>
+</li>
+<li>
+<p>创建函数的原型 #208  (call /apply)，原型 __p 为 #101</p>
+</li>
+<li>
+<p>创建数组的原型 #404  (push/pop)，原型 __p 为 #101</p>
+</li>
+<li>
+<p>创建 Function #342，原型 __p 为 #208</p>
+</li>
+<li>
+<p>用 Function.prototype 存储函数的原型，等于 #208</p>
+</li>
+<li>
+<p>此时发现 Function 的 <em>_proto</em>_ 和 prototype 都是 #208</p>
+</li>
+<li>
+<p>用 Function 创建 Object #909</p>
+</li>
+<li>
+<p>用 Object.prototype 存储对象的原型，等于 #101</p>
+</li>
+<li>
+<p>用 Function 创建 Array</p>
+</li>
+<li>
+<p>用 Array.prototype 存储数组的原型，等于 #404</p>
+</li>
+<li>
+<p>创建 window 对象</p>
+</li>
+<li>
+<p>用 window 的 &lsquo;Object&rsquo; &lsquo;Array&rsquo; 属性将 7 和 9 中的函数命名</p>
+</li>
+</ol>
+<blockquote>
+<p>记住一点，JS 创建一个对象时，不会给这个对象名字的</p>
+</blockquote>
+<p></p>
+<h3 id="构造一个新对象的过程">构造一个新对象的过程</h3>
+<ol>
+<li>用 new Object() 创建 obj1</li>
+<li>new 会将 obj1 的原型 __p 设置为 Object.prototype，也就是 #101
+因为创建 JS 世界时，把原型的地址存到了 Object.prototype  上</li>
+<li>用 new Array() 创建 arr1</li>
+<li>new 会将 arr1 的原型 __p 设置为 Array.prototype，也就是 #404</li>
+<li>用 new Function 创建 f1</li>
+<li>new 会将 f1 的原型 __p 设置为 Function.prototype，也就是 #208</li>
+</ol>
+<blockquote>
+<p>总结</p>
+<p><code>new XXX</code>， 就把 new 出来的实例的原型 __p 设为 <code>XXX.prototype</code></p>
+</blockquote>
+<p>​</p>
+<h3 id="自定义构造函数创建过程">自定义构造函数创建过程</h3>
+<ol>
+<li>自己定义构造函数 Person，函数里给 this 加属性</li>
+<li>Person 自动创建 prototype 属性和对应的对象 #502</li>
+<li>在 Person.prototype #502 上面加属性</li>
+<li>用 new Person() 创建对象 p</li>
+<li>new 会将 p 的原型 __p 设为 #502</li>
+</ol>
+<p>​</p>
+<p>​</p>
+<h3 id="漂亮的图示-">漂亮的图示 ⭐️</h3>
+<blockquote>
+<p>需求：清晰的理解下图的每一条线</p>
+</blockquote>
+<blockquote>
+<p>Array、Object、Function 三个都是函数，所以他们本身的原型 __p 都指向「函数的原型」</p>
+<p>而每一个函数都存了其构造出的「(孩子) 新对象」的原型（共有属性） prototype</p>
+</blockquote>
+<p></p>
+<p>​</p>
+<h3 id="prototype-和-__proto__-区别">prototype 和 <em>_proto</em>_ 区别</h3>
+<blockquote>
+<p>细品</p>
+</blockquote>
+<ol>
+<li>
+<p>都存着<strong>原型的地址</strong></p>
+</li>
+<li>
+<p>只不过 <code>prototype</code> 挂在函数上</p>
+<ul>
+<li>Object 是个构造函数，Object.prototype 就存储了 Object构造的新对象 的共有属性</li>
+<li>Array 是个构造函数，Array.prototype 就存储了 Array构造的新对象 的共有属性</li>
+</ul>
+</li>
+<li>
+<p><code>__proto__</code> 挂在每个新生成的对象上</p>
+</li>
+</ol>
+<ul>
+<li>Object构造的新对象 obj1 的共有属性在 obj1.__proto__ 上
+<ul>
+<li>Array构造的新对象 arr1 的共有属性在 arr1.__proto__ 上</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li>
+<p>函数上的 prototype 指向这个函数构造出来的孩子的共有属性</p>
+</li>
+<li>
+<p>孩子上的 <em>_proto</em>_ 指向其父构造函数赋予这个孩子的共有属性</p>
+</li>
+<li>
+<p>每个函数都有 prototype、每个对象都有__proto__ ，而函数也属于对象，所以函数同时有 prototype 和 __proto__</p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span>  
+<span class="nx">等价于</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">()</span>
+
+<span class="c1">// Object 上有 prototype
+</span><span class="c1">// obj 上有 __proto__
+</span><span class="c1"></span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>   <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h2 id="总结-">总结 ⭐️</h2>
+<blockquote>
+<p>必须非常清晰的理解</p>
+</blockquote>
+<blockquote>
+<p>不管怎么绕，都要清楚的理解</p>
+<ul>
+<li>函数的构造函数 Function ，构造出了函数 f1</li>
+<li>对象的构造函数 Object，构造出了对象 obj1</li>
+<li>数组的构造函数 Array ，构造出了数组 array1</li>
+<li>(window.)Function 的构造函数是 Function</li>
+<li>array1 的构造函数是 Array</li>
+<li>obj 的构造函数是 Object</li>
+<li>Object 的构造函数是 Function</li>
+<li>…</li>
+</ul>
+</blockquote>
+<h3 id="构造函数">构造函数</h3>
+<ul>
+<li>是用来构造对象的</li>
+<li>会预先存好对象的原型，原型的原型是根</li>
+<li>new 的时候将对象的 __p 指向原型</li>
+</ul>
+<h3 id="对象-1">对象</h3>
+<ul>
+<li>所有对象都直接或间接指向根对象</li>
+<li>如果对象想要分类，就在原型链上加一环</li>
+<li>用构造函数可以加这一环</li>
+</ul>
+<h3 id="思考">思考</h3>
+<ul>
+<li>如果加了一环之后，想再加一环怎么办 （加两环，要用继承的方式）</li>
+<li>以后会在「继承」里讲</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="例-">例 ⚡️</h2>
+<blockquote>
+<p>把其他知识都忘掉，就记住以下</p>
+<ol>
+<li><strong>JS 公式</strong>：对象.__proto__ === 其构造函数.prototype</li>
+<li><strong>根公理</strong>：Object.prototype 是所有对象的直接或间接的原型</li>
+<li><strong>函数公理</strong>：所有函数都是由 Function 构造的</li>
+</ol>
+</blockquote>
+<ol>
+<li>
+<p>Object.prototype 的原型是什么</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 1.约定只要提到「xxx的原型」就是指「xxx.__proto__」
+</span><span class="c1">// 2.Object.prototype 是所有对象的原型（是根，根就不再往上有原型了）
+</span><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="kc">null</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Function.prototype 的原型是什么</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">//（JS公式）等于问 Function.prototype 的「构造函数」.prototype
+</span><span class="c1">// 重点在 Function.prototype 的构造函数 是 ？？
+</span><span class="c1"></span><span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">==</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">f</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{}</span>  <span class="c1">// 箭头函数的原型是什么  
+</span><span class="c1">// 所有函数都是由 Function 构造的
+</span><span class="c1"></span><span class="nx">f</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Function 的原型是什么</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 所有函数都是由 Function 构造的
+</span><span class="c1"></span><span class="nb">Function</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Array.prototype.toString 的原型是什么</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// toString 是个函数
+</span><span class="c1">// 所有函数都是由 Function 构造的
+</span><span class="c1"></span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Object 的原型是什么</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Object</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Array.prototype 是谁的原型</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 把公式一反过来用
+</span><span class="c1">// 是用 Array 构造的实例的原型
+</span><span class="c1"></span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">===</span> <span class="p">[].</span><span class="nx">__proto__</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>]]></description>
+</item></channel>
+</rss>

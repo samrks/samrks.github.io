@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>算法入门 - Sam&#39;s Garage</title><meta name="Description" content="递归、求任意长度数组的最小值、对任意长度数组进行排序"><meta property="og:title" content="算法入门" />
+<meta property="og:description" content="递归、求任意长度数组的最小值、对任意长度数组进行排序" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://samrks.github.io/algorithm-introduction/" />
+<meta property="og:image" content="http://samrks.github.io/algorithm-introduction/featured-image-preview.jpg"/>
+<meta property="article:published_time" content="2020-10-11T00:36:27+08:00" />
+<meta property="article:modified_time" content="2020-10-15T20:45:50+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://samrks.github.io/algorithm-introduction/featured-image-preview.jpg"/>
+<meta name="twitter:title" content="算法入门"/>
+<meta name="twitter:description" content="递归、求任意长度数组的最小值、对任意长度数组进行排序"/>
+<meta name="application-name" content="Sam&#39;s Garage">
+<meta name="apple-mobile-web-app-title" content="Sam&#39;s Garage"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://samrks.github.io/algorithm-introduction/" /><link rel="prev" href="http://samrks.github.io/algorithm-pseudocode-flowchart/" /><link rel="next" href="http://samrks.github.io/algorithm-sort/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "算法入门",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/samrks.github.io\/algorithm-introduction\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "http:\/\/samrks.github.io\/algorithm-introduction\/featured-image-preview.jpg",
+                            "width":  1280 ,
+                            "height":  384 
+                        }],"genre": "posts","keywords": "算法, 入门, 递归, 排序","wordcount":  4678 ,
+        "url": "http:\/\/samrks.github.io\/algorithm-introduction\/","datePublished": "2020-10-11T00:36:27+08:00","dateModified": "2020-10-15T20:45:50+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Sam"
+            },"description": "递归、求任意长度数组的最小值、对任意长度数组进行排序"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa fa-home fa-fw'></i> 主页 </a><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title=""><i class='fa fa-home fa-fw'></i>主页</a><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">算法入门</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://liubingxuan.xyz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Sam</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw"></i>算法与数据结构</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-11">2020-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4678 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 10 分钟&nbsp;<span id="/algorithm-introduction/" class="leancloud_visitors" data-flag-title="算法入门">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/algorithm-introduction/featured-image-preview.jpg"
+        data-srcset="/algorithm-introduction/featured-image-preview.jpg, /algorithm-introduction/featured-image-preview.jpg 1.5x, /algorithm-introduction/featured-image-preview.jpg 2x"
+        data-sizes="auto"
+        alt="/algorithm-introduction/featured-image-preview.jpg"
+        title="递归、求任意长度数组的最小值、对任意长度数组进行排序" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#前言">前言</a></li>
+        <li><a href="#小试牛刀找-2-个数中的较小值-minof2">⭕️小试牛刀：找 2 个数中的较小值 minOf2</a>
+          <ul>
+            <li><a href="#数据结构">数据结构</a></li>
+            <li><a href="#编程知识">编程知识</a></li>
+            <li><a href="#代码">代码</a></li>
+            <li><a href="#优化代码">优化代码</a></li>
+            <li><a href="#再优化代码">再优化代码</a></li>
+            <li><a href="#调用">调用</a></li>
+            <li><a href="#现成-api">现成 API</a>
+              <ul>
+                <li><a href="#js内置了-mathmin">JS内置了 Math.min</a></li>
+                <li><a href="#关于-math">关于 Math</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#举一反三找-3-个数中的最小值-minof3">⭕️举一反三：找 3 个数中的最小值 minOf3</a>
+          <ul>
+            <li><a href="#代码-1">代码</a></li>
+          </ul>
+        </li>
+        <li><a href="#逐步推理找-4-个数中的最小值-minof4">⭕️逐步推理：找 4 个数中的最小值 minOf4</a></li>
+        <li><a href="#推广求任意长度数组の最小值-min">⭕️推广：求任意长度数组の最小值 min</a>
+          <ul>
+            <li><a href="#细品">细品</a></li>
+            <li><a href="#完整代码添加中止条件">完整代码：添加中止条件</a></li>
+          </ul>
+        </li>
+        <li><a href="#递归">递归</a>
+          <ul>
+            <li><a href="#特点">特点</a></li>
+            <li><a href="#理解">理解</a></li>
+          </ul>
+        </li>
+        <li><a href="#排序算法">排序算法</a>
+          <ul>
+            <li><a href="#用递归实现">用递归实现</a></li>
+            <li><a href="#用循环实现">用循环实现</a></li>
+          </ul>
+        </li>
+        <li><a href="#选择排序">选择排序</a></li>
+        <li><a href="#长度为-2-的数组排序-sort2">🔴长度为 2 的数组排序 sort2</a>
+          <ul>
+            <li><a href="#代码-2">代码</a></li>
+            <li><a href="#优化代码-1">优化代码</a></li>
+          </ul>
+        </li>
+        <li><a href="#长度为-3-的数组排序-sort3">🔴长度为 3 的数组排序 sort3</a>
+          <ul>
+            <li><a href="#代码-3">代码</a></li>
+            <li><a href="#改进代码">改进代码</a>
+              <ul>
+                <li><a href="#补充splice-方法易错点">补充：splice 方法易错点</a></li>
+                <li><a href="#代码-">代码 👇</a></li>
+                <li><a href="#优化-">优化 👇</a></li>
+              </ul>
+            </li>
+            <li><a href="#获取最小值下标-minindex">获取最小值下标 minIndex</a></li>
+            <li><a href="#完整代码">完整代码</a></li>
+          </ul>
+        </li>
+        <li><a href="#长度为-4-的数组排序-sort4">🔴长度为 4 的数组排序 sort4</a></li>
+        <li><a href="#推广任意长度的数组排序-sort">🔴推广：任意长度的数组排序 sort</a>
+          <ul>
+            <li><a href="#思路一">思路一</a></li>
+            <li><a href="#思路二">思路二</a></li>
+          </ul>
+        </li>
+        <li><a href="#代码调试">代码调试</a>
+          <ul>
+            <li><a href="#举例splice易错点">举例：splice易错点</a></li>
+            <li><a href="#consolelog-调试">console.log 调试</a></li>
+            <li><a href="#举例调用-min-报错">举例：调用 min 报错</a></li>
+          </ul>
+        </li>
+        <li><a href="#完整代码-sort">完整代码 sort</a></li>
+        <li><a href="#总结">总结</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#求最小值">求最小值</a></li>
+                <li><a href="#排序">排序</a></li>
+                <li><a href="#用到的东西">用到的东西</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>​</p>
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>前面学习的伪代码和流程图，是用来帮助我们思考的</p>
+</blockquote>
+<blockquote>
+<p>本节是特别简单的算法入门。
+—— 对于没学过算法的人可能觉得算法有点难，但当你学完后再来回顾，也许就会有上述的同感了</p>
+</blockquote>
+<blockquote>
+<p>算法比你想象中简单</p>
+<p>「什么是算法」「算法需要满足什么条件」…  等理论，这里就不讲了 
+直接开始写代码 —— 代码可以是 JS 也可以不是，主要是靠大脑在思考</p>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h2 id="小试牛刀找-2-个数中的较小值-minof2">⭕️小试牛刀：找 2 个数中的较小值 minOf2</h2>
+<blockquote>
+<p>首先应该想：如何表示两个数</p>
+<ul>
+<li>二元组？！ 可以的</li>
+<li>但 JS 中没有二元组，退而求其次，可以使用【长度为 2 的数组】来表示这两个数
+如果能想到这一点，就说明已经知道【什么是数据结构】了 👆</li>
+<li>约定用 [a,b] 表示这两个数</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>必备知识 👇</p>
+</blockquote>
+<h3 id="数据结构">数据结构</h3>
+<ul>
+<li>用数组 [a,b] 表示两个数字</li>
+<li>你能想到这一点，就说明你在使用数据结构</li>
+</ul>
+<h3 id="编程知识">编程知识</h3>
+<ul>
+<li>问号冒号表达式 <code>?   :</code>     或  if … else …</li>
+</ul>
+<blockquote>
+<p>怎么从 [a,b] 中找出较小的呢（逻辑）</p>
+<ul>
+<li>a &lt; b 成立，就返回 a。否则返回 b  （比较大小，并返回较小值）</li>
+</ul>
+</blockquote>
+<h3 id="代码">代码</h3>
+<blockquote>
+<p><a href="" rel="">minOf2 的实现</a></p>
+</blockquote>
+<ul>
+<li>numbers 是数组。
+判断中直接获取 numbers[0] 、 numbers[1]  相当于约定数组长度只能为 2</li>
+<li>虽然约定是长度为 2 的数组，但如果调用时传了长度为 1 的数组，怎么办 （暂时不考虑这种情况）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">minOf2</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+  <span class="k">if</span><span class="p">(</span><span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]){</span> 
+    <span class="k">return</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span> 
+    <span class="k">return</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="优化代码">优化代码</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">minOf2</span> <span class="o">=</span> <span class="nx">numbers</span> <span class="p">=&gt;</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">?</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">:</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="再优化代码">再优化代码</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">minOf2</span> <span class="o">=</span> <span class="p">([</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">])</span> <span class="p">=&gt;</span> <span class="nx">a</span> <span class="o">&lt;</span> <span class="nx">b</span> <span class="o">?</span> <span class="nx">a</span> <span class="o">:</span> <span class="nx">b</span>     <span class="c1">// 最简洁写法
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>这种写法叫做**「析构赋值」**，之后的课程会反复使用（解构）</p>
+</blockquote>
+<h3 id="调用">调用</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">minOf2</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>             <span class="c1">// 1   这是小白调用法
+</span><span class="c1"></span><span class="nx">minOf2</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>  <span class="c1">// 1   这是高手调用法 【推荐使用】（不使用this所以赋空值null）
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<blockquote>
+<p>算法，就是把解决问题的思路，用代码表示出来，不论问题多么的简单（如两个数取最小）</p>
+<p>什么是算法，就是用代码来解决问题</p>
+<p>只不过编程界，有很多固定的问题，只有把这些固定问题都搞清楚，才可以说是会算法。只会一点是不够的</p>
+</blockquote>
+<p>​</p>
+<h3 id="现成-api">现成 API</h3>
+<h4 id="js内置了-mathmin">JS内置了 Math.min</h4>
+<blockquote>
+<p>Math.min 的核心，实际上就是上面我们写的 minOf2 的代码（比较大小，并返回较小值）</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="err">）</span> <span class="c1">// 1  小白调用法
+</span><span class="c1"></span><span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>    <span class="c1">// 高手调用法，不需要this，所以取null
+</span><span class="c1"></span><span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span> <span class="c1">// 高手调用法，区别于call，apply方法的第二个参数是【数组】形式
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="关于-math">关于 Math</h4>
+<ul>
+<li>
+<p>看起来 Math 像 Object 一样，都是首字母大写，难道 Math 也是构造函数 ？？</p>
+</li>
+<li>
+<p>实际上 Math 只是一个（首字母大写的）**普通对象 **</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">Math</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span> 
+<span class="c1">// Math不是函数，不具有函数的共有属性。打开 Math 的原型，就是【根对象】
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>以前接触过的所有对象，都是首字母小写，甚至全局对象 window 都是首字母小写
+<strong>JS 中只有 Math 是唯一一个首字母大写的对象  ⭕️</strong>⚡️🚩</p>
+</li>
+<li>
+<p>这是唯一的特例：首字母大写是构造函数</p>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<p>​</p>
+<h2 id="举一反三找-3-个数中的最小值-minof3">⭕️举一反三：找 3 个数中的最小值 minOf3</h2>
+<blockquote>
+<p>思路：先求前两个数中的较小值，然后拿这个较小值和第三个数进行比较，再得出一个较小值，它就是三个数中的最小值</p>
+</blockquote>
+<h3 id="代码-1">代码</h3>
+<blockquote>
+<p><a href="" rel="">minOf3 的实现</a></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">minOf3</span> <span class="o">=</span> <span class="p">([</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">])</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+  <span class="k">return</span> <span class="nx">minOf2</span><span class="p">([</span><span class="nx">minOf2</span><span class="p">([</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">]),</span> <span class="nx">c</span><span class="p">])</span>   <span class="c1">// 先求 a、b 最小值
+</span><span class="c1"></span><span class="p">}</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>或者</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">minOf3</span> <span class="o">=</span> <span class="p">([</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">])</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+  <span class="k">return</span> <span class="nx">minOf2</span><span class="p">([</span><span class="nx">a</span><span class="p">,</span> <span class="nx">minOf2</span><span class="p">([</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">])])</span>   <span class="c1">// 先求 b、c 的最小值  【推荐写法：形式上更好看😝】
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：</p>
+<ul>
+<li>minOf3  调用了两次 minOf2  ，这并不是「递归」</li>
+<li>如果 minOf3 调用了 minOf3 ，这才是「递归」</li>
+</ul>
+<p>​</p>
+<h2 id="逐步推理找-4-个数中的最小值-minof4">⭕️逐步推理：找 4 个数中的最小值 minOf4</h2>
+<blockquote>
+<p><a href="" rel="">minOf4 的实现</a></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">minOf4</span> <span class="o">=</span> <span class="p">([</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">,</span><span class="nx">d</span><span class="p">])</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+  <span class="k">return</span> <span class="nx">minOf2</span><span class="p">([</span><span class="nx">a</span><span class="p">,</span> <span class="nx">minOf3</span><span class="p">([</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">,</span><span class="nx">d</span><span class="p">])])</span>  <span class="c1">// 用 minOf2 求 a 和 后面三个数中的最小值
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>得出推论：任意长度数组 求最小值，都可以基于 minOf2 并最终实现</p>
+</blockquote>
+<blockquote>
+<p>提问：可否把「求最小值」写作一个函数 min 呢 👇</p>
+</blockquote>
+<p>​</p>
+<h2 id="推广求任意长度数组の最小值-min">⭕️推广：求任意长度数组の最小值 min</h2>
+<blockquote>
+<p><a href="" rel="">min 的实现</a></p>
+</blockquote>
+<h3 id="细品">细品</h3>
+<blockquote>
+<p>把 minOf? 全部用 min 替换</p>
+</blockquote>
+<blockquote>
+<p>思路：先依次求后面所有元素的最小值 … 最后和第一位元素进行比较，最终得出所有元素的最小值
+（不断<strong>拆分</strong>第1个元素和后面所有元素）</p>
+</blockquote>
+<p>代码👇</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">min</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+  <span class="k">return</span> <span class="nx">min</span><span class="p">(</span>
+    <span class="p">[</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">min</span><span class="p">(</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span> <span class="p">]</span>   <span class="c1">// 截取数组中下标为1及1之后的所有元素，组成新数组（也就是去掉数组中下标为0的元素）
+</span><span class="c1"></span>  <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这个代码会死循环不停调用自己，直到报错为止，所有需要添加一个中止条件</p>
+<p><img src="https://i.loli.net/2020/10/09/PrIJV7Mx5WtbFvZ.png" alt="image-20201009174407724" style="zoom:67%;" /></p>
+<h3 id="完整代码添加中止条件">完整代码：添加中止条件</h3>
+<blockquote>
+<p>跳出递归的条件：当 numbers 中只有两个元素时，不再拆分，直接判断两个元素大小，返回较小值</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">min</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+  <span class="k">if</span><span class="p">(</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">){</span>  <span class="c1">// 停止条件
+</span><span class="c1"></span>    <span class="k">return</span> <span class="nx">min</span><span class="p">(</span> 
+      <span class="p">[</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">min</span><span class="p">(</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span> <span class="p">]</span>  <span class="c1">// 递归（拆分出第1个元素和后面所有元素）
+</span><span class="c1"></span>    <span class="p">)</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span> 
+    <span class="c1">// return numbers[0] &lt; numbers[1] ? numbers[0] : numbers[1]  // 👈👇两种写法均可
+</span><span class="c1"></span>    <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">numbers</span><span class="p">)</span> <span class="c1">// 必须用 apply。
+</span><span class="c1"></span>    <span class="c1">// 因为min方法接收的参数必须是一个一个的数字，不接受数组，如果用call就是把整个数组传给min。所以必须用 apply 会把数组给展开成一个一个的数字
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">min</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>   <span class="c1">// 代入法：获取这个数组[2,4,3,1]中的最小值
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/10/10/z5yOrmA8ovWtx74.png" alt="image-20201010172038225" style="zoom:67%;" /></p>
+<p>这就是[递归](# 递归) 👆</p>
+<h2 id="递归">递归</h2>
+<blockquote>
+<p>先递进，再回归</p>
+</blockquote>
+<blockquote>
+<p>一定要用<strong>代入法</strong>来理解，只靠看是看不懂的，眼睛只会欺骗你、</p>
+</blockquote>
+<h3 id="特点">特点</h3>
+<ul>
+<li>函数不停调用自己，每次调用的参数略有不同</li>
+<li>当满足某个简单条件时，则实现一个简单的调用（获取到一个基本值）</li>
+<li>然后将基本值层层代入、回归</li>
+<li>算出最终结果</li>
+</ul>
+<h3 id="理解">理解</h3>
+<ol>
+<li>
+<p>可以用 <strong>代入法</strong> 快速理解递归</p>
+<ul>
+<li>层层剖开</li>
+</ul>
+<p><img src="https://i.loli.net/2020/10/10/z5yOrmA8ovWtx74.png" alt="image-20201010172038225" style="zoom: 33%;" /></p>
+</li>
+<li>
+<p>可以用 **调用栈 **快速理解递归</p>
+<ul>
+<li>
+<p>什么时候 <strong>压栈、弹栈</strong></p>
+</li>
+<li>
+<p>每次进入下一行代码，就是压栈；开始回归后，就是弹栈</p>
+<p><img src="https://i.loli.net/2020/10/10/z5yOrmA8ovWtx74.png" alt="image-20201010172038225" style="zoom: 33%;" /></p>
+</li>
+</ul>
+</li>
+</ol>
+<p>​</p>
+<p>​</p>
+<hr>
+<hr>
+<p>​</p>
+<p>​</p>
+<h2 id="排序算法">排序算法</h2>
+<blockquote>
+<p>将一个正整数数组，从小到大排序</p>
+</blockquote>
+<blockquote>
+<p>思路：递归思路、循环思路</p>
+</blockquote>
+<h3 id="用递归实现">用递归实现</h3>
+<ul>
+<li>代码简单，但不易理解。推荐使用<strong>代入法</strong>，层层剖开理解</li>
+</ul>
+<h3 id="用循环实现">用循环实现</h3>
+<ul>
+<li>代码多，但易于理解</li>
+</ul>
+<p>​</p>
+<h2 id="选择排序">选择排序</h2>
+<blockquote>
+<p>思路：每次选择最小的放到前面，对后面的进行排序（递归）</p>
+</blockquote>
+<h2 id="长度为-2-的数组排序-sort2">🔴长度为 2 的数组排序 sort2</h2>
+<h3 id="代码-2">代码</h3>
+<blockquote>
+<p>析构赋值</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">sort2</span> <span class="o">=</span> <span class="p">([</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">])</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+  <span class="k">if</span><span class="p">(</span><span class="nx">a</span> <span class="o">&lt;</span> <span class="nx">b</span><span class="p">){</span> 
+    <span class="k">return</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">]</span>   
+    <span class="c1">// 注意：return的数组[a,b]是新数组，与原数组[a,b]是不同的内存空间。新数组只是复制了原数组ab的值
+</span><span class="c1"></span>  <span class="p">}</span><span class="k">else</span><span class="p">{</span> 
+    <span class="k">return</span> <span class="p">[</span><span class="nx">b</span><span class="p">,</span><span class="nx">a</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>内存图原理——复制
+<ul>
+<li>变量是对象，就是把对象存的地址复制</li>
+<li>变量是普通值，就是把值复制</li>
+</ul>
+</li>
+</ul>
+<h3 id="优化代码-1">优化代码</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">sort2</span> <span class="o">=</span> <span class="p">([</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">])</span> <span class="p">=&gt;</span> <span class="nx">a</span> <span class="o">&lt;</span> <span class="nx">b</span> <span class="o">?</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">]</span> <span class="o">:</span> <span class="p">[</span><span class="nx">b</span><span class="p">,</span><span class="nx">a</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h2 id="长度为-3-的数组排序-sort3">🔴长度为 3 的数组排序 sort3</h2>
+<h3 id="代码-3">代码</h3>
+<blockquote>
+<p>思路：</p>
+<ul>
+<li>先求三个数的最小值，作为返回数组的第一项</li>
+<li>然后后面两个数字进行 sort2 操作（长度为 2 的数组排序）</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">sort3</span> <span class="o">=</span> <span class="p">([</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">])</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+  <span class="k">return</span> <span class="p">[</span> <span class="nx">min</span><span class="p">([</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">]),</span> <span class="nx">sort2</span><span class="p">([</span><span class="o">???</span><span class="p">])</span> <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>但，**我们发现无法将最小值从数组里删掉 ** 来单独进行sort2其余两个数字的排序</p>
+</blockquote>
+<h3 id="改进代码">改进代码</h3>
+<blockquote>
+<p>思路：如果知道最小数字的下标，就可以把它从数组里删掉</p>
+</blockquote>
+<h4 id="补充splice-方法易错点">补充：splice 方法易错点</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">numbers</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1">// 直接修改原数组 numbers，从中删除下标为 index 的元素
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">rest</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1">// splice的返回值rest是被删除的元素组成的新数组
+</span><span class="c1">// 注意：上面两点经常被混淆，注意区别
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="代码-">代码 👇</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">sort3</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+  <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">minIndex</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">[</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="p">].</span><span class="nx">concat</span><span class="p">(</span> 
+    <span class="nx">sort2</span><span class="p">(</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="p">)</span>  
+  <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>上面代码可忽略，比较复杂 :）</p>
+</blockquote>
+<h4 id="优化-">优化 👇</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">sort3</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+  <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">minIndex</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span>  <span class="c1">// 假设有👇minIndex函数，与min相似，只不过返回的是最小值的下标
+</span><span class="c1"></span>  <span class="kd">let</span> <span class="nx">min</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span>  <span class="c1">// 根据最小值下标index，获取到最小值本身min
+</span><span class="c1"></span>  <span class="nx">numbers</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1">// 从numbers数组的index处删掉1个数字，也就是从numbers中删掉最小值
+</span><span class="c1"></span>  <span class="k">return</span> <span class="p">[</span><span class="nx">min</span><span class="p">].</span><span class="nx">concat</span><span class="p">(</span> <span class="nx">sort2</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">)</span>  <span class="c1">// 返回一个从小到大排序后的数组
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>因为我们需要返回的结果是一个数组</li>
+<li>而这个数组是需要两个部分拼接：最小值、sort2返回排序后的数组</li>
+<li>JS 中使用 concat 可以实现两个数组的拼接（ruby语法中可用+直接相加两个数组）</li>
+<li>所以把最小值放在一个数组中，这样就可以和 sort2 返回的数组，通过 concat 方法进行拼接</li>
+</ul>
+<p>（自己写写这段代码）</p>
+<p>​</p>
+<h3 id="获取最小值下标-minindex">获取最小值下标 minIndex</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">minIndex</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span> <span class="nx">min</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">)</span>   <span class="c1">// 先用min获取最小值，再用indexOf获取数组中当前元素的下标
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>有小 bug：如果最小值有两个（相同值），indexOf 只会返回第一个值得下标（）</p>
+</blockquote>
+<blockquote>
+<p>这是一个取巧的办法，以后会教更好的</p>
+</blockquote>
+<h3 id="完整代码">完整代码</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// min 函数：获取任意数组中最小值
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">min</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+  <span class="k">if</span><span class="p">(</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">){</span> <span class="c1">// 停止条件
+</span><span class="c1"></span>    <span class="k">return</span> <span class="nx">min</span><span class="p">(</span> 
+      <span class="p">[</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">min</span><span class="p">(</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span> <span class="p">]</span>    <span class="c1">// 递归
+</span><span class="c1"></span>    <span class="p">)</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span> 
+    <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">numbers</span><span class="p">)</span> <span class="c1">// 必须用apply，call会传递整个数组。Math.min仅接收单个数字
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// minIndex 函数：获取任意数组中最小值的下标
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">minIndex</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span> <span class="nx">min</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">)</span> 
+<span class="p">}</span>
+
+<span class="c1">// sort3 函数：对长度为3的数组从小到大排序
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">sort3</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+  <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">minIndex</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> 
+  <span class="kd">let</span> <span class="nx">min</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> 
+  <span class="nx">numbers</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">// numbers中仅保存最小值以外的两个元素，就可以使用sort2对numbers进行排序
+</span><span class="c1"></span>  <span class="k">return</span> <span class="p">[</span><span class="nx">min</span><span class="p">].</span><span class="nx">concat</span><span class="p">(</span> <span class="nx">sort2</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">)</span>  <span class="c1">// 返回一个从小到大排序后的数组
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="长度为-4-的数组排序-sort4">🔴长度为 4 的数组排序 sort4</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">sort4</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+  <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">minIndex</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> 
+  <span class="kd">let</span> <span class="nx">min</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> 
+  <span class="nx">numbers</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
+  <span class="k">return</span> <span class="p">[</span><span class="nx">min</span><span class="p">].</span><span class="nx">concat</span><span class="p">(</span> <span class="nx">sort3</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="推广任意长度的数组排序-sort">🔴推广：任意长度的数组排序 sort</h2>
+<blockquote>
+<p>递归</p>
+</blockquote>
+<blockquote>
+<p>回顾：先获取最小值，然后从数组中排除最小值 … 进行大小比较 …</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">sort</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">minIndex</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span>
+  <span class="kd">let</span> <span class="nx">min</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span>
+  <span class="nx">numbers</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">[</span><span class="nx">min</span><span class="p">].</span><span class="nx">concat</span><span class="p">(</span> <span class="nx">sort</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">)</span>    <span class="c1">// 死循环
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="思路一">思路一</h3>
+<blockquote>
+<p>中止条件</p>
+<ul>
+<li><strong>当 numbers 中只有 2 个值时</strong></li>
+<li>直接通过 三元运算符（问好冒号表达式）比较大小</li>
+<li>并返回从小到大排序后的数组</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">sort</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">){</span>
+    <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">minIndex</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span>
+    <span class="kd">let</span> <span class="nx">min</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span>
+    <span class="nx">numbers</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nx">min</span><span class="p">].</span><span class="nx">concat</span><span class="p">(</span> <span class="nx">sort</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">)</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="k">return</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">?</span> <span class="nx">numbers</span> <span class="o">:</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">reverse</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 用代入法看看 sort[12,5,8,7,9]
+</span></code></pre></td></tr></table>
+</div>
+</div><p>代入法 👇</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js">  <span class="nx">sort</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+<span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="nx">sort</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+<span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">+</span> <span class="nx">sort</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span> <span class="p">)</span>
+<span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">+</span> <span class="nx">sort</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span> <span class="p">))</span>  <span class="c1">// 👇 sort([12,9]) 进入停止条件 👇 
+</span><span class="c1"></span><span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="mi">12</span> <span class="o">&lt;</span> <span class="mi">9</span> <span class="o">?</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span> <span class="o">:</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span> <span class="p">)))</span>
+<span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span> <span class="p">)))</span>
+<span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span> <span class="p">))</span>
+<span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span> <span class="p">)</span>
+<span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="思路二">思路二</h3>
+<blockquote>
+<p>开始「递进」，不断提取最小值。进入「回归」，将 每轮提取的最小值 进行逐个拼接</p>
+</blockquote>
+<blockquote>
+<p>中止条件：不断提取最小值，<strong>直到 numbers 长度为 1</strong>，也就是只有一个元素时，直接返回 numbers</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">sort</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">){</span>
+    <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">minIndex</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span>
+    <span class="kd">let</span> <span class="nx">min</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span>
+    <span class="nx">numbers</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nx">min</span><span class="p">].</span><span class="nx">concat</span><span class="p">(</span> <span class="nx">sort</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">)</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="k">return</span> <span class="nx">numbers</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>或</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">sort</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">1</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">numbers</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">minIndex</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span>
+    <span class="kd">let</span> <span class="nx">min</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span>
+    <span class="nx">numbers</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nx">min</span><span class="p">].</span><span class="nx">concat</span><span class="p">(</span> <span class="nx">sort</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>代入法 👇</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js">  <span class="nx">sort</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+<span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="nx">sort</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+<span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">+</span> <span class="nx">sort</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span> <span class="p">)</span>
+<span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">+</span> <span class="nx">sort</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span> <span class="p">))</span>
+<span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">+</span> <span class="nx">sort</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="p">)))</span>  <span class="c1">// sort[12] =&gt; [12]
+</span><span class="c1"></span><span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="p">)))</span>  <span class="c1">// 递进中止，开始回归
+</span><span class="c1"></span><span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span> <span class="p">))</span>
+<span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span> <span class="p">)</span>
+<span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span>
+<span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h2 id="代码调试">代码调试</h2>
+<blockquote>
+<p>如果代码报错，如何调试</p>
+</blockquote>
+<h3 id="举例splice易错点">举例：splice易错点</h3>
+<blockquote>
+<p>[splice易错点](# 补充：splice 方法易错点)</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">sort</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">){</span>
+    <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">minIndex</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span>
+    <span class="kd">let</span> <span class="nx">min</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span>
+    <span class="kd">let</span> <span class="nx">rest</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1">// splice的返回值与原数组，经常被搞混淆
+</span><span class="c1"></span>    <span class="k">return</span> <span class="p">[</span><span class="nx">min</span><span class="p">].</span><span class="nx">concat</span><span class="p">(</span> <span class="nx">sort</span><span class="p">(</span><span class="nx">rest</span><span class="p">)</span> <span class="p">)</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="k">return</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">?</span> <span class="nx">numbers</span> <span class="o">:</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">reverse</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/10/11/CmW3uFPIqTzh6pj.png" alt="image-20201011040929836" style="zoom:80%;" /></p>
+<h3 id="consolelog-调试">console.log 调试</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">min</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+  <span class="k">if</span><span class="p">(</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">min</span><span class="p">(</span> 
+      <span class="p">[</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">min</span><span class="p">(</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span> <span class="p">]</span> 
+    <span class="p">)</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span> 
+    <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">numbers</span><span class="p">)</span> 
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">minIndex</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span> <span class="nx">min</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">)</span> 
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">sort</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">){</span>
+    <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">minIndex</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`index: </span><span class="si">${</span><span class="nx">index</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>  <span class="c1">// console调试大法
+</span><span class="c1"></span>    <span class="kd">let</span> <span class="nx">min</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`min: </span><span class="si">${</span><span class="nx">min</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>   <span class="c1">// console调试大法
+</span><span class="c1"></span>    <span class="kd">let</span> <span class="nx">rest</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`rest: </span><span class="si">${</span><span class="nx">rest</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>   <span class="c1">// console调试大法
+</span><span class="c1"></span>    <span class="k">return</span> <span class="p">[</span><span class="nx">min</span><span class="p">].</span><span class="nx">concat</span><span class="p">(</span> <span class="nx">sort</span><span class="p">(</span><span class="nx">rest</span><span class="p">)</span> <span class="p">)</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="k">return</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">?</span> <span class="nx">numbers</span> <span class="o">:</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">reverse</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/10/11/go1R5Lx4HmpIsnU.png" alt="image-20201011041123739" style="zoom:67%;" /></p>
+<ul>
+<li>打印结果，发现 rest 值有问题（正确的值应该是 <code>rest =&gt; [12,8,7,9]</code> ）</li>
+<li>这时候就可以 mdn 查查 splice 写法是否正确（得知 splice 返回值为被删元素的数组，而非其余元素）</li>
+<li>找到问题，得出正确写法：**无需获取返回值，numbers调用splice方法就会直接删除numbers中的指定元素 **</li>
+<li>修改代码，如下 👇</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">sort</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">){</span>
+    <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">minIndex</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span>
+    <span class="kd">let</span> <span class="nx">min</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`min: </span><span class="si">${</span><span class="nx">min</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>   
+    <span class="nx">numbers</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1">// &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+</span><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`numbers: </span><span class="si">${</span><span class="nx">numbers</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>   
+    <span class="k">return</span> <span class="p">[</span><span class="nx">min</span><span class="p">].</span><span class="nx">concat</span><span class="p">(</span> <span class="nx">sort</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">)</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="k">return</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">?</span> <span class="nx">numbers</span> <span class="o">:</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">reverse</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/10/11/e3ENdRUWbKF1BVY.png" alt="image-20201011042112671" style="zoom: 80%;" /></p>
+<blockquote>
+<p>总结：新人一定要不停的  log 调试，当你把所有可能的问题都发现了，就成长了</p>
+</blockquote>
+<h3 id="举例调用-min-报错">举例：调用 min 报错</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">min</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">min</span><span class="p">(</span> <span class="p">[</span><span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">min</span><span class="p">(</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span> <span class="p">]</span> <span class="p">)</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="k">return</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">?</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">:</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">sort</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">){</span>
+    <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span> <span class="nx">min</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">)</span> <span class="c1">// 报错 Cannot access &#39;min&#39; before initialization
+</span><span class="c1"></span>    <span class="kd">let</span> <span class="nx">min</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span>
+    <span class="nx">numbers</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nx">min</span><span class="p">].</span><span class="nx">concat</span><span class="p">(</span> <span class="nx">sort</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">)</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="k">return</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">?</span> <span class="nx">numbers</span> <span class="o">:</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">reverse</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">sort</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/10/11/CamSjRF7LkyqsKo.png" alt="image-20201011202800422" style="zoom:80%;" /></p>
+<p>原因：</p>
+<ul>
+<li><code>let index = numbers.indexOf( min(numbers) )</code> 目的是获取到最小值的坐标，需要先调用 min函数 获取最小值</li>
+<li>但是因为当前作用域中定义了同名的 min</li>
+<li>JS 优先认为 ①<code>min(numbers)</code> 中的 min 是 ②<code>let min = numbers[index]</code>  中的 min</li>
+<li>而执行 代码① 时，代码②还未执行，所以报错：不能在 min 初始化前访问</li>
+</ul>
+<p>解决</p>
+<ul>
+<li>给 min 变量改名</li>
+</ul>
+<p>​</p>
+<h2 id="完整代码-sort">完整代码 sort</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// min 函数：获取任意数组中最小值
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">min</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+  <span class="k">if</span><span class="p">(</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">){</span> 
+    <span class="k">return</span> <span class="nx">min</span><span class="p">(</span> 
+      <span class="p">[</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">min</span><span class="p">(</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span> <span class="p">]</span>   
+    <span class="p">)</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span> 
+    <span class="c1">// return Math.min.apply(null, numbers) 
+</span><span class="c1"></span>    <span class="k">return</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">?</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">:</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// minIndex 函数：获取任意数组中最小值的下标
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">minIndex</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span> <span class="nx">min</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">)</span> 
+<span class="p">}</span>
+
+<span class="c1">// sort 函数：从小到大排序 ------------------------------------------------
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">sort</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">){</span>
+    <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">minIndex</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span>
+    <span class="kd">let</span> <span class="nx">min</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span>
+    <span class="nx">numbers</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nx">min</span><span class="p">].</span><span class="nx">concat</span><span class="p">(</span> <span class="nx">sort</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">)</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="k">return</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">?</span> <span class="nx">numbers</span> <span class="o">:</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">reverse</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>或</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">min</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">min</span><span class="p">(</span> <span class="p">[</span><span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">min</span><span class="p">(</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span> <span class="p">]</span> <span class="p">)</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="k">return</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">?</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">:</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">sort</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">){</span>
+    <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span> <span class="nx">min</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">)</span>    <span class="c1">// （省略了 minIndex 函数）
+</span><span class="c1"></span>    <span class="kd">let</span> <span class="nx">minNum</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span>
+    <span class="nx">numbers</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nx">minNum</span><span class="p">].</span><span class="nx">concat</span><span class="p">(</span> <span class="nx">sort</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="p">)</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="k">return</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">numbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">?</span> <span class="nx">numbers</span> <span class="o">:</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">reverse</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">sort</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<p>​</p>
+<h2 id="总结">总结</h2>
+<h4 id="求最小值">求最小值</h4>
+<ul>
+<li>2个数</li>
+<li>3个数</li>
+<li>N个数</li>
+</ul>
+<h4 id="排序">排序</h4>
+<ul>
+<li>2个数</li>
+<li>3个数</li>
+<li>N个数</li>
+</ul>
+<h4 id="用到的东西">用到的东西</h4>
+<ul>
+<li>本节只用到一个数据结构 —— 【数组】，提供了三个方法 slice（截取）、concat（连接）、splice（删除）</li>
+<li>递归</li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-10-15</span>
+            </div>
+            <div class="post-info-license"><span>转载请注明出处</span></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/algorithm-introduction/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://samrks.github.io/algorithm-introduction/" data-title="算法入门" data-via="ryuukousen2" data-hashtags="算法,入门,递归,排序"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://samrks.github.io/algorithm-introduction/" data-hashtag="算法"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://samrks.github.io/algorithm-introduction/" data-title="算法入门"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://samrks.github.io/algorithm-introduction/" data-title="算法入门"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://samrks.github.io/algorithm-introduction/" data-title="算法入门"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>,&nbsp;<a href="/tags/%E5%85%A5%E9%97%A8/">入门</a>,&nbsp;<a href="/tags/%E9%80%92%E5%BD%92/">递归</a>,&nbsp;<a href="/tags/%E6%8E%92%E5%BA%8F/">排序</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/algorithm-pseudocode-flowchart/" class="prev" rel="prev" title="伪代码与流程图"><i class="fas fa-angle-left fa-fw"></i>伪代码与流程图</a>
+            <a href="/algorithm-sort/" class="next" rel="next" title="排序算法">排序算法<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+    Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+  </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Thanks For Your Watching! ❤️</div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2017 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Sam</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":15},"comment":{"valine":{"appId":"M2gdPMfXs30Gw5NNnr2wSxv6-MdYXbMMI","appKey":"9V2iCzlcQbheaaWDXRLTNgec","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-twitter@5.0.1/img/twitter/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"📢 来都来了，说点什么 ~（填写邮箱可以收到回复提醒哦 ~ 😉）","recordIP":true,"visitor":true}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"KAKKI975YQ","algoliaIndex":"blog","algoliaSearchKey":"529eb6b7fa6e4f89bfe1d0043e53bda5","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

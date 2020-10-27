@@ -4,10 +4,10 @@
         <link>http://samrks.github.io/tags/hugo/</link>
         <description>Hugo - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
-            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Fri, 14 Jul 2017 22:20:43 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/hugo/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Tue, 14 Jul 2020 22:20:43 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/hugo/" rel="self" type="application/rss+xml" /><item>
     <title>使用 Hugo 搭建个人博客</title>
     <link>http://samrks.github.io/blog-start-a-hugo/</link>
-    <pubDate>Fri, 14 Jul 2017 22:20:43 &#43;0800</pubDate>
+    <pubDate>Tue, 14 Jul 2020 22:20:43 &#43;0800</pubDate>
     <author>作者</author>
     <guid>http://samrks.github.io/blog-start-a-hugo/</guid>
     <description><![CDATA[<p>第一篇正式博文，我想给大家分享下我的博客的创建过程吧！🥇</p>
@@ -128,7 +128,7 @@
 <li>在 xxx.github.io-creator 目录（注意确保自己不在 public 目录）里运行 <code>hugo new posts/第二篇博客.md</code></li>
 <li>运行 <code>code posts/第二篇博客.md</code> 对文件进行编辑，注意不要把文件原本的内容 front matter 给删了，直接在后面另起一行写新内容。</li>
 <li><strong><code>hugo server -D</code></strong>  建立本地访问 https://localhost:1313 预览博客</li>
-<li>运行 <strong><code>hugo -D</code></strong>，得到新的 public 目录</li>
+<li>运行 <strong><code>hugo -D</code></strong>，得到新的 public 目录（-D 是显示草稿文章）</li>
 <li>进入 public 目录 <strong><code>cd public</code></strong>，执行一下操作
 <ol>
 <li><strong><code>git add .</code></strong> 注意有一个点</li>

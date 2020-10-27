@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>数据结构（上） - Sam&#39;s Garage</title><meta name="Description" content="队列 Queue、栈 Stack、链表 Linked List、哈希表 Key-Value Pairs、树 Tree"><meta property="og:title" content="数据结构（上）" />
+<meta property="og:description" content="队列 Queue、栈 Stack、链表 Linked List、哈希表 Key-Value Pairs、树 Tree" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://samrks.github.io/algorithm-data-structures-part.1/" />
+<meta property="og:image" content="http://samrks.github.io/algorithm-data-structures-part.1/featured-image-preview.jpg"/>
+<meta property="article:published_time" content="2020-10-19T00:25:48+08:00" />
+<meta property="article:modified_time" content="2020-10-21T00:54:11+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://samrks.github.io/algorithm-data-structures-part.1/featured-image-preview.jpg"/>
+<meta name="twitter:title" content="数据结构（上）"/>
+<meta name="twitter:description" content="队列 Queue、栈 Stack、链表 Linked List、哈希表 Key-Value Pairs、树 Tree"/>
+<meta name="application-name" content="Sam&#39;s Garage">
+<meta name="apple-mobile-web-app-title" content="Sam&#39;s Garage"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://samrks.github.io/algorithm-data-structures-part.1/" /><link rel="prev" href="http://samrks.github.io/algorithm-sort/" /><link rel="next" href="http://samrks.github.io/dom-dom-manipulate/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "数据结构（上）",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/samrks.github.io\/algorithm-data-structures-part.1\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "http:\/\/samrks.github.io\/algorithm-data-structures-part.1\/featured-image-preview.jpg",
+                            "width":  1280 ,
+                            "height":  384 
+                        }],"genre": "posts","keywords": "数据结构, 入门","wordcount":  7371 ,
+        "url": "http:\/\/samrks.github.io\/algorithm-data-structures-part.1\/","datePublished": "2020-10-19T00:25:48+08:00","dateModified": "2020-10-21T00:54:11+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Sam"
+            },"description": "队列 Queue、栈 Stack、链表 Linked List、哈希表 Key-Value Pairs、树 Tree"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa fa-home fa-fw'></i> 主页 </a><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title=""><i class='fa fa-home fa-fw'></i>主页</a><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">数据结构（上）</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://liubingxuan.xyz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Sam</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw"></i>算法与数据结构</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-19">2020-10-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 7371 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 15 分钟&nbsp;<span id="/algorithm-data-structures-part.1/" class="leancloud_visitors" data-flag-title="数据结构（上）">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/algorithm-data-structures-part.1/featured-image-preview.jpg"
+        data-srcset="/algorithm-data-structures-part.1/featured-image-preview.jpg, /algorithm-data-structures-part.1/featured-image-preview.jpg 1.5x, /algorithm-data-structures-part.1/featured-image-preview.jpg 2x"
+        data-sizes="auto"
+        alt="/algorithm-data-structures-part.1/featured-image-preview.jpg"
+        title="队列 Queue、栈 Stack、链表 Linked List、哈希表 Key-Value Pairs、树 Tree" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#目前用过的数据结构">目前用过的数据结构</a></li>
+        <li><a href="#队列-queue">队列 Queue</a>
+          <ul>
+            <li><a href="#题目">题目</a></li>
+            <li><a href="#分析">分析</a></li>
+            <li><a href="#代码">代码</a></li>
+            <li><a href="#问">问</a></li>
+          </ul>
+        </li>
+        <li><a href="#栈-stack">栈 Stack</a>
+          <ul>
+            <li><a href="#举例">举例</a></li>
+            <li><a href="#代码-1">代码</a></li>
+            <li><a href="#留一个悬念">留一个悬念</a>
+              <ul>
+                <li><a href="#内存图里的栈内存和这个调用栈">内存图里的栈内存和这个调用栈</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#链表-linked-list">链表 Linked List</a>
+          <ul>
+            <li><a href="#实际使用">实际使用</a></li>
+            <li><a href="#链表的好处">链表的好处</a></li>
+            <li><a href="#链表的简单操作-">链表的简单操作 ✅</a>
+              <ul>
+                <li><a href="#添加节点">添加节点</a>
+                  <ul>
+                    <li><a href="#第一次尝试失败-">第一次尝试：失败 ❌</a></li>
+                    <li><a href="#bug分析">BUG分析</a></li>
+                    <li><a href="#代码简化">代码简化</a></li>
+                    <li><a href="#第二次尝试成功-">第二次尝试：成功 ✔️</a></li>
+                  </ul>
+                </li>
+                <li><a href="#删除节点">删除节点</a>
+                  <ul>
+                    <li><a href="#示例分析">示例分析</a></li>
+                    <li><a href="#思路">思路</a></li>
+                    <li><a href="#第一次尝试找规律-">第一次尝试：找规律 ⚠️</a></li>
+                    <li><a href="#第二次尝试有-bug-">第二次尝试：有 bug ⭕️</a></li>
+                    <li><a href="#第三次尝试成功-">第三次尝试：成功 ✅</a></li>
+                  </ul>
+                </li>
+                <li><a href="#遍历节点">遍历节点</a></li>
+                <li><a href="#总结">总结</a></li>
+              </ul>
+            </li>
+            <li><a href="#链表的变形">链表的变形</a>
+              <ul>
+                <li><a href="#双向链表">双向链表</a></li>
+                <li><a href="#循环链表">循环链表</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#哈希表-key-value-pairs">哈希表 key-value pairs</a>
+          <ul>
+            <li><a href="#哈希表">哈希表</a></li>
+            <li><a href="#哈希表的难点">哈希表的难点</a>
+              <ul>
+                <li><a href="#场景">场景</a></li>
+                <li><a href="#解决办法">解决办法</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#树-tree">树 Tree</a>
+          <ul>
+            <li><a href="#实际使用-1">实际使用</a></li>
+            <li><a href="#对树进行增删改查">对「树」进行增删改查</a>
+              <ul>
+                <li><a href="#创建树根节点">创建树（根节点）</a></li>
+                <li><a href="#添加子节点">添加子节点</a></li>
+                <li><a href="#遍历节点-1">遍历节点</a></li>
+                <li><a href="#删除节点-1">删除节点</a></li>
+                <li><a href="#查找节点">查找节点</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#数据结构就这么简单-">数据结构就这么简单 ？</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>​</p>
+<h2 id="目前用过的数据结构">目前用过的数据结构</h2>
+<ul>
+<li>数组
+<ul>
+<li>数组可以分为队列、栈等</li>
+</ul>
+</li>
+<li>哈希表
+<ul>
+<li>用来存储 key - value 对</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="队列-queue">队列 Queue</h2>
+<blockquote>
+<p>队列，是一种特殊的数组 ——**「先进先出 FIFO」的数组 **</p>
+<p>FIFO :  first in ,  first out</p>
+</blockquote>
+<h3 id="题目">题目</h3>
+<ul>
+<li>请实现一个「餐厅叫号」网页</li>
+<li>点击「取号」按钮，生成一个号码</li>
+<li>点击「叫号」按钮，显示「请 X 号就餐]</li>
+</ul>
+<h3 id="分析">分析</h3>
+<ul>
+<li>
+<p>首先，应该选择「队列 queue」作为数据结构</p>
+<ul>
+<li>因为「叫号」遵循的应该是「先到先得」的原则，这点与「队列」的「先进先出」是一致的</li>
+</ul>
+</li>
+<li>
+<p>队列的两个重要的 API ：入队、出队</p>
+<ul>
+<li>在 JS 中，「入队」相当于 queue.push （在叫号数组的最后，添加一个人）</li>
+<li>在 JS 中，「出队」相当于 queue.shift （把叫号数组中第一个人踢走，结束排队、可以去吃饭了）</li>
+</ul>
+</li>
+<li>
+<p>记得练习一下 call 的用法</p>
+</li>
+<li>
+<p>其他的事情就顺其自然了，见<a href="https://codesandbox.io/s/naughty-frost-qkmhd" target="_blank" rel="noopener noreffer">完整代码</a> （<a href="https://codesandbox.io/" target="_blank" rel="noopener noreffer">codesandbox</a>在线编译器）</p>
+</li>
+<li>
+<p>本地编译器中，开启项目，运行 <code>parcel  +（文件路径，如 src/index.html ）</code>  就可以开启本地服务，实时监听</p>
+<p><code>yarn global add parcel</code></p>
+</li>
+</ul>
+<p>​</p>
+<h3 id="代码">代码</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;screen&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;actions&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;createNumber&#34;</span><span class="p">&gt;</span>取号<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;callNumber&#34;</span><span class="p">&gt;</span>叫号<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    当前号码： <span class="p">&lt;</span><span class="nt">span</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;newNumber&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    当前队列： <span class="p">&lt;</span><span class="nt">span</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;queue&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;./main.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 获取到所有页面元素
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">divScreen</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&#34;#screen&#34;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">btnCreateNumber</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&#34;.createNumber&#34;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">btnCallNumber</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&#34;.callNumber&#34;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">spanNewNumber</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&#34;#newNumber&#34;</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">spanQueue</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&#34;#queue&#34;</span><span class="p">)</span>
+
+<span class="c1">// 取号
+</span><span class="c1">// 取号号码n默认从0开始，每次点击后自增1
+</span><span class="c1">// 需要把所有取过的号都记下来，才能实现叫号
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">n</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kd">let</span> <span class="nx">queue</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="nx">btnCreateNumber</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">n</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="nx">queue</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span>  <span class="c1">// 入队
+</span><span class="c1"></span>  <span class="nx">spanNewNumber</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="nx">n</span>
+  <span class="nx">spanQueue</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">queue</span><span class="p">)</span>
+  <span class="cm">/* innerText 只能显示字符串，
+</span><span class="cm">  * 可以用 queue.toString() 显示效果：1,2,3,4
+</span><span class="cm">  * 用 JSON.stringify(..) 会把JS对象转换成外观完全一样的字符串, [1,2,3,4]
+</span><span class="cm">  * */</span>
+<span class="p">}</span>
+
+<span class="c1">// 叫号
+</span><span class="c1"></span><span class="nx">btnCallNumber</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">queue</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 当队列为空，就不再执行叫号操作
+</span><span class="c1"></span>    <span class="k">return</span> <span class="nx">spanQueue</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="sb">`无需排队`</span>
+  <span class="p">}</span>
+  <span class="kr">const</span> <span class="nx">m</span> <span class="o">=</span> <span class="nx">queue</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>  <span class="c1">// 出队
+</span><span class="c1"></span>  <span class="nx">divScreen</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="sb">`请 </span><span class="si">${</span><span class="nx">m</span><span class="si">}</span><span class="sb"> 号就餐`</span>
+  <span class="nx">spanQueue</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">queue</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/10/19/MnkapufqC1PeHGA.png" alt="image-20201019161500437" style="zoom:80%;" /></p>
+<h3 id="问">问</h3>
+<blockquote>
+<p>如果不知道「队列」这个知识点，你会怎么做？</p>
+</blockquote>
+<ul>
+<li>
+<p>懂得「队列」，看到这种实现逻辑（先到先得），能立马知道这符合「队列：入队/出队」（先进先出）
+科班生只需要了解：「入队、出队」在 JS 中对应的 API 形式即可</p>
+</li>
+<li>
+<p>没有「数据结构」相关知识的辅助，只能一步一步推导这种逻辑的实现方法（相对薄弱）</p>
+</li>
+</ul>
+<ul>
+<li>所以「数据结构」很重要</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="栈-stack">栈 Stack</h2>
+<blockquote>
+<p>「后进先出 LIFO」的数组</p>
+<p>LIFO  :  last in ,  first out</p>
+</blockquote>
+<h3 id="举例">举例</h3>
+<blockquote>
+<p>可以以一个不严谨的「坐电梯」的情景来理解 ：
+1层直达88层的电梯，先进电梯的人，会站到电梯最后。而后进电梯的人站在电梯最前，会先出电梯</p>
+</blockquote>
+<blockquote>
+<p>现实生活的运行机制中，这种<strong>不公平</strong>的例子很少
+所以下面就是以一个**「JS 函数调用」**的例子来展开。JS 的「调用栈」就是「栈」的数据结构</p>
+</blockquote>
+<ul>
+<li>
+<p>JS 函数的调用栈 call stack 就是一个栈</p>
+</li>
+<li>
+<p>假设 f1 调用了 f2，f2 有调用了 f3</p>
+</li>
+<li>
+<p>那么 f3 结束后应该回到 f2，f2 结束后应该回到 f1</p>
+</li>
+</ul>
+<h3 id="代码-1">代码</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">f1</span><span class="p">(){</span> <span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">returb</span> <span class="nx">a</span><span class="o">+</span><span class="nx">f2</span><span class="p">()</span> <span class="p">}</span>
+<span class="kd">function</span> <span class="nx">f2</span><span class="p">(){</span> <span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="k">return</span> <span class="nx">b</span><span class="o">+</span><span class="nx">f3</span><span class="p">()</span> <span class="p">}</span>
+<span class="kd">function</span> <span class="nx">f3</span><span class="p">(){</span> <span class="kd">let</span> <span class="nx">c</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="k">return</span> <span class="nx">c</span> <span class="p">}</span>
+<span class="nx">f1</span><span class="p">()</span>
+<span class="c1">// 问：上述代码是 如何压栈和弹栈的 ？
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>画一下压栈、出栈过程，便知这是「后入先出」的栈</p>
+</blockquote>
+<p>首先，栈就是数组</p>
+<p><img src="https://i.loli.net/2020/10/19/j7hi1BW8PkqSdvr.png" alt="image-20201019171828178" style="zoom: 50%;" /></p>
+<ul>
+<li>压栈就是 push（添加到最后）</li>
+<li>弹栈就是 pop（把最前面先弹出来）</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="留一个悬念">留一个悬念</h3>
+<h4 id="内存图里的栈内存和这个调用栈">内存图里的栈内存和这个调用栈</h4>
+<ul>
+<li>它们是什么关系？—— 关系很大</li>
+<li>是同一块内存吗？—— （可以说是同一块内存，因为）有很大的地方是重叠的</li>
+</ul>
+<blockquote>
+<p>这块和 JS 关系不大。【内存图 2.0】</p>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<p>​</p>
+<h2 id="链表-linked-list">链表 Linked List</h2>
+<blockquote>
+<p>只要满足「一个链一个」这样的数据结构，就是「链表」</p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/10/19/wzeJ4pfVljiyaLv.png" alt="image-20201019173954821" style="zoom:67%;" /></p>
+<h3 id="实际使用">实际使用</h3>
+<blockquote>
+<p>举例：**「JS 的原型链」**中的「链」，实际上就是指「链表」</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>  
+<span class="nx">array</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span> 
+<span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>从这个角度看，JS 中任何一个普通对象，都是一个链表（因为有原型的概念）</p>
+<p><img src="https://i.loli.net/2020/10/19/XCvtmQrYbUxwWTc.png" alt="image-20201019180230960" style="zoom: 50%;" /></p>
+<blockquote>
+<p>链表，是一种对数据结构的抽象。这种抽象，是一种很松散的链接关系</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="nx">array</span><span class="p">.</span><span class="nx">push</span> <span class="c1">// array本身没有push，就去数组原型上找
+</span><span class="c1"></span><span class="nx">array</span><span class="p">.</span><span class="nx">hasOwnProperty</span>  <span class="c1">// array本身没有，数组原型上没有，只能从对象原型上找到
+</span></code></pre></td></tr></table>
+</div>
+</div><p>这是非常简洁的、实现继承的一种机制</p>
+<p>​</p>
+<h3 id="链表的好处">链表的好处</h3>
+<blockquote>
+<p>可以随时把中间的链条给断掉</p>
+</blockquote>
+<p>例</p>
+<ul>
+<li>
+<p>任意一个数组 array，要去掉链条中的数组原型</p>
+</li>
+<li>
+<p>实现方式：让 array 的 _<em>proto</em>_ 直接指向对象原型（那么这个 array 就不再具备 push 这些方法了）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="nx">array</span><span class="p">.</span><span class="nx">__proto__</span>  <span class="c1">// 得到数组原型
+</span><span class="c1"></span><span class="nx">array</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span>  <span class="c1">// 得到对象原型
+</span><span class="c1"></span><span class="nx">array</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">__proto__</span>  <span class="c1">// null
+</span><span class="c1"></span>    
+<span class="c1">// 让 array 的 __proto__ 直接指向对象原型 
+</span><span class="c1"></span><span class="nx">array</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>
+<span class="nx">array</span><span class="p">.</span><span class="nx">push</span> <span class="c1">// undefined
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://i.loli.net/2020/10/19/12dMLGHrFk56Xtv.png" alt="image-20201019181136413" style="zoom:50%;" /></p>
+</li>
+</ul>
+<h3 id="链表的简单操作-">链表的简单操作 ✅</h3>
+<blockquote>
+<p>怎么创建链表、怎么在链表上进行增删改查  ——  代码见本地【<a href="D:%5cJirengu%5c%e7%ac%ac1%e9%98%b6%e6%ae%b5%5c6-%e7%ae%97%e6%b3%95%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%5c04-%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%ef%bc%88%e4%b8%8a%ef%bc%89%5clinked_list" rel="">linked_list</a>】项目</p>
+</blockquote>
+<blockquote>
+<p>要在大脑中，能构建出这样的模型</p>
+</blockquote>
+<h4 id="添加节点">添加节点</h4>
+<h5 id="第一次尝试失败-">第一次尝试：失败 ❌</h5>
+<h5 id="bug分析">BUG分析</h5>
+<ul>
+<li>运行下面代码的【appendList 方法】只能实现一种情况：就是在第1个节点后面，添加第2个节点。</li>
+<li>当你想添加多个节点，多次运行【appendList 方法】会发现链表中始终只有两个节点</li>
+<li>多次运行的结果，就是第二个节点在不断的被替换，而不会将每次运行时用户写的节点添加到已有节点的后面</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="cm">/*
+</span><span class="cm">* 如何创建一个链表 ↓
+</span><span class="cm">* 最简单的链表，就是只有一个节点的链表
+</span><span class="cm">* 一个节点，用对象表示。需要包含两个属性：数据、下一个节点(默认是空)
+</span><span class="cm">* */</span>
+<span class="kr">const</span> <span class="nx">createList</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">data</span><span class="o">:</span> <span class="nx">value</span><span class="p">,</span>
+    <span class="nx">next</span><span class="o">:</span> <span class="kc">null</span>   <span class="c1">// 默认下一个节点是空
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
+<span class="cm">/* 添加其他节点 */</span>
+<span class="kr">const</span> <span class="nx">appendList</span> <span class="o">=</span> <span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">node</span> <span class="o">=</span> <span class="p">{</span> 
+    <span class="nx">data</span><span class="o">:</span> <span class="nx">value</span><span class="p">,</span>
+    <span class="nx">next</span><span class="o">:</span> <span class="kc">null</span> 
+  <span class="p">}</span>
+  <span class="nx">list</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">node</span>
+  <span class="k">return</span> <span class="nx">node</span>  <span class="c1">// 往list上添加node节点，并把这个node节点作为函数返回值
+</span><span class="c1"></span><span class="p">}</span>
+<span class="kr">const</span> <span class="nx">list</span> <span class="o">=</span> <span class="nx">createList</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>        <span class="c1">// 创建list链条(只有一个节点)
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">node</span> <span class="o">=</span> <span class="nx">appendList</span><span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1">// 往list链条上，添加node节点。
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`node`</span><span class="p">,</span> <span class="nx">node</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`list`</span><span class="p">,</span> <span class="nx">list</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h5 id="代码简化">代码简化</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="p">{</span>
+  <span class="nx">data</span><span class="o">:</span> <span class="nx">value</span><span class="p">,</span>   <span class="c1">// 形参value
+</span><span class="c1"></span>  <span class="nx">next</span><span class="o">:</span> <span class="kc">null</span>     <span class="c1">// 默认是单节点链表，下一个节点为空
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>上述部分被多次引用。可以提取出来，单独成一个函数 createNode ，来多次调用</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 提取公共部分，独立成一个函数 createNode
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">createNode</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">data</span><span class="o">:</span> <span class="nx">value</span><span class="p">,</span>
+    <span class="nx">next</span><span class="o">:</span> <span class="kc">null</span>  
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="o">--------------------------------------------------------------------------</span>
+<span class="kr">const</span> <span class="nx">createList</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">createNode</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>  <span class="c1">// &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;   多次调用
+</span><span class="c1"></span><span class="p">}</span>
+<span class="kr">const</span> <span class="nx">appendList</span> <span class="o">=</span> <span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">node</span> <span class="o">=</span> <span class="nx">createNode</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>  <span class="c1">// &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;   多次调用
+</span><span class="c1"></span>  <span class="nx">list</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">node</span>
+  <span class="k">return</span> <span class="nx">node</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h5 id="第二次尝试成功-">第二次尝试：成功 ✔️</h5>
+<blockquote>
+<p>我们说「添加节点」实际上是要在当前链条的**最后一个节点的后面，再添加新的节点 **。**而不是在第一个节点的后面，添加新的节点 **</p>
+</blockquote>
+<blockquote>
+<p>👆 上述这点逻辑，必须清晰认识到，这样代码才有可能写对</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">appendList</span> <span class="o">=</span> <span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">node</span> <span class="o">=</span> <span class="nx">createNode</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="c1">// 先生成我们要新添加的节点的内容
+</span><span class="c1"></span>  
+  <span class="c1">// 添加节点：我们需要在当前链条的最后一个节点的后面，添加新的节点。
+</span><span class="c1"></span>  <span class="c1">// 所以必须找到 list 的最后一个节点
+</span><span class="c1"></span>  <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">list</span> 
+  <span class="c1">// 重新赋值给变量x，更保险。直接用list原值，可能会导致问题
+</span><span class="c1"></span>  <span class="c1">// 开局假设：链表只有一个节点，声明变量 x，作为链表的这一个节点（也是最后一个节点）
+</span><span class="c1"></span>  
+  <span class="c1">// 循环遍历
+</span><span class="c1"></span>  <span class="c1">// 如果 x 后面还有节点存在，说明 x 不是最后一个节点，需要给 x 重新赋值为下一个节点
+</span><span class="c1"></span>  <span class="k">while</span> <span class="p">(</span><span class="nx">x</span><span class="p">.</span><span class="nx">next</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">.</span><span class="nx">next</span>
+  <span class="p">}</span>
+  <span class="c1">// x.next === null 
+</span><span class="c1"></span>  <span class="c1">// 遍历结束，x.next如果是null了，说明 x 是最后一个节点
+</span><span class="c1"></span>  <span class="c1">// 此时只需要，把需要添加的节点，赋值给 x.next 即可
+</span><span class="c1"></span>  <span class="nx">x</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">node</span>
+  <span class="k">return</span> <span class="nx">node</span>  <span class="c1">// 把需要添加的节点 node 作为函数返回值
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h4 id="删除节点">删除节点</h4>
+<blockquote>
+<p>现 list 链条上有 3 个节点，每个节点的 data 分别是 10/20/30。需求：从链条中删除 20 的节点</p>
+</blockquote>
+<h5 id="示例分析">示例分析</h5>
+<ol>
+<li>
+<p>这个实现的思路和[前面的例子](# 链表的好处)类似。</p>
+<p>「从链条中删除 20 节点」，实际上就是让 10 节点的 next 不再指向 20，而是直接指向 30</p>
+</li>
+<li>
+<p>删掉 10 和 20 之间的联系后，10 和 20 的 next 仍然分别指向 30。
+但是并没有任何对象指向 20 ，20 就相当于没人用的内存垃圾，浏览器会自动把它回收掉</p>
+</li>
+<li>
+<p>所以最终 10 - 20 - 30，就变成了 10 - 30</p>
+</li>
+</ol>
+<p>（图解 ↘）</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2020/10/19/bm7cnPdCYzHVavs.png"
+        data-srcset="https://i.loli.net/2020/10/19/bm7cnPdCYzHVavs.png, https://i.loli.net/2020/10/19/bm7cnPdCYzHVavs.png 1.5x, https://i.loli.net/2020/10/19/bm7cnPdCYzHVavs.png 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2020/10/19/bm7cnPdCYzHVavs.png"
+        title="image-202010192319538670" /></p>
+<p>问题：怎么找到 20 节点的上一个节点（我们只能通过 next 找到当前节点的下一个节点，并没有属性保存当前节点的上一个节点？？）</p>
+<p>​</p>
+<h5 id="思路">思路</h5>
+<ul>
+<li>通过上图可知，**「删除 X 节点」**可以转嫁成另一个需求 👇</li>
+<li>**「让 X 的上一个节点的 next，直接指向 X 的下一个节点」 **</li>
+<li>跳过了 X 节点，相当于从链条中删除了 X 节点（浏览器还会自动回收）</li>
+</ul>
+<p>​</p>
+<h5 id="第一次尝试找规律-">第一次尝试：找规律 ⚠️</h5>
+<blockquote>
+<p>常规逻辑书写</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="cm">/*
+</span><span class="cm">* 删除节点
+</span><span class="cm">* 参数1：从哪个链条删除
+</span><span class="cm">* 参数2：删除哪个节点
+</span><span class="cm">* */</span>
+<span class="kr">const</span> <span class="nx">removeFromList_Demo</span> <span class="o">=</span> <span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="nx">node</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>   <span class="c1">// 注意：链条的名称 === 第一个节点的名称
+</span><span class="c1"></span>  <span class="c1">// 如果要删除的(node传入的)是第1个节点（那node.next就表示第2个节点）
+</span><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nx">node</span> <span class="o">===</span> <span class="nx">list</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">list</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">next</span>  <span class="c1">// 就将第1个节点list重新赋值为第2个节点（相当于第1节点就不存在了）
+</span><span class="c1"></span>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// 如果要删除的(node传入的)是第2个节点（那node.next就表示第3个节点）
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">node</span> <span class="o">===</span> <span class="nx">list</span><span class="p">.</span><span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">list</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">next</span> <span class="c1">// 就将第1个节点的next，直接指向第3个节点（跳过第2节点，相当于删除）
+</span><span class="c1"></span>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="c1">// 如果要删除的(node传入的)是第3个节点（那node.next就表示第4个节点）
+</span><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">node</span> <span class="o">===</span> <span class="nx">list</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">list</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">next</span>  <span class="c1">// 就将第2个节点的next，直接指向第四个节点（跳过第3节点，相当于删除）
+</span><span class="c1"></span>      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// 如果要删除的是第4个节点 =&gt; 让第3个节点.next，直点接指向第5个节（跳过4）
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">node</span> <span class="o">===</span> <span class="nx">list</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+          <span class="p">(</span><span class="nx">list</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">next</span><span class="p">).</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">next</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="c1">// 找到规律了吗？
+</span><span class="c1"></span>          <span class="c1">// 这是一个循环（递归）呀
+</span><span class="c1"></span>        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>根据需求，写出上述常规代码：非常冗余，全是近似代码、不断重复。【是否说明这其实是有规律可循的】</p>
+</blockquote>
+<blockquote>
+<p>猜想：是否可以用「循环」来解决代码的重复调用、实现规律</p>
+</blockquote>
+<p>​</p>
+<h5 id="第二次尝试有-bug-">第二次尝试：有 bug ⭕️</h5>
+<blockquote>
+<p>利用循环，实现规律</p>
+</blockquote>
+<ul>
+<li>删除X节点：就是让【 X 的上一个节点】的 next，直接指向【 X 的下一个节点】（X.next）
+<ul>
+<li>所以**关键在于： X 的上一个节点怎么找到 **</li>
+<li>要知道 X 的上一个节点，这就与 X 节点联系紧密</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="cm">/*
+</span><span class="cm">* 删除节点
+</span><span class="cm">* 参数1：从哪个链条删除
+</span><span class="cm">* 参数2：删除哪个节点
+</span><span class="cm">* （链条名===第一个节点）
+</span><span class="cm">* */</span>
+<span class="kr">const</span> <span class="nx">removeFromList</span> <span class="o">=</span> <span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="nx">node</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">list</span>   <span class="c1">// x 默认为第一个节点
+</span><span class="c1"></span>  <span class="kd">let</span> <span class="nx">p</span> <span class="o">=</span> <span class="kc">null</span>   <span class="c1">// p 始终表示 x 的上一个节点，默认为空
+</span><span class="c1"></span>
+  <span class="c1">// 传入的 node 表示是要删除的节点。
+</span><span class="c1"></span>  <span class="c1">// 要遍历链条中的每一个节点，用 x 表示当前遍历的节点
+</span><span class="c1"></span>  <span class="c1">// 将 x 与 node 比对，如果当前节点 x 不等于 node 节点，就给 x 重新赋值下一个节点，再次判断是否相等
+</span><span class="c1"></span>  <span class="c1">// 不断循环查找下一个，最终 x 就会找到要删除的那个节点
+</span><span class="c1"></span>  <span class="c1">// 因为【x的上一个节点】是关键，所以循环每轮都要把【当前x的上一个节点】记录下来
+</span><span class="c1"></span>  <span class="k">while</span> <span class="p">(</span><span class="nx">node</span> <span class="o">!==</span> <span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">p</span> <span class="o">=</span> <span class="nx">x</span>      <span class="c1">// 每轮先用 p 把当前 x 记下来 
+</span><span class="c1"></span>    <span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">.</span><span class="nx">next</span> <span class="c1">// 然后再把 x 重新赋值为下一个节点
+</span><span class="c1"></span>    <span class="c1">//（此时x成为x的下一个节点，p就成为x的上一个节点）
+</span><span class="c1"></span>  <span class="p">}</span> 
+  <span class="c1">// while 遍历完，得出当前要删除的节点。如果找不到，说明用户传入的 node 不存在 (╯□╰)
+</span><span class="c1"></span>  <span class="c1">// 综上，遍历完后，x 和 p 的取值各有两种情况 👇 
+</span><span class="c1"></span>  <span class="c1">// console.log(x === node || x === null)  // x 要么找到传入的要删除的节点；要么就是null
+</span><span class="c1"></span>  <span class="c1">// console.log(p === x的上一个节点 || p === null)  // p 要么是 x 的上一个节点；要么就是null（说明要删除的就是第1个节点，所以 p 是 null）
+</span><span class="c1"></span>  <span class="cm">/*
+</span><span class="cm">  * 最后，删除节点，相当于跳过这个节点。
+</span><span class="cm">  * x是要删除的节点，那么跳过x这个节点，就应该是x的上一个节点的next ，直接指向 x 的下一个节点 （跳过x）
+</span><span class="cm">  * x的上一个节点的next ===&gt; p.next
+</span><span class="cm">  * x的下一个节点 ===&gt; x.next
+</span><span class="cm">  * */</span>
+  <span class="nx">p</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">x</span><span class="p">.</span><span class="nx">next</span>   <span class="c1">// ← ←  综上得出
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>通过循环，实现了规律，但有 bug。</p>
+<ul>
+<li>无法删除第一个节点</li>
+<li>缺少很多边界情况的处理</li>
+</ul>
+</blockquote>
+<p>示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">list</span> <span class="o">=</span> <span class="nx">createList</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">node</span> <span class="o">=</span> <span class="nx">list</span> <span class="c1">// node 就是 list 的第一个节点了现在
+</span><span class="c1"></span><span class="nx">removeFromList</span><span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="nx">node</span><span class="p">)</span> <span class="c1">// 你会发现 list 没有任何变化
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">newList</span> <span class="o">=</span> <span class="nx">removeFromList</span><span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="nx">node</span><span class="p">)</span> <span class="c1">// 就算获取返回值也没有用，因为根本就没返回新 list
+</span></code></pre></td></tr></table>
+</div>
+</div><h5 id="第三次尝试成功-">第三次尝试：成功 ✅</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="cm">/*
+</span><span class="cm">* 删除节点
+</span><span class="cm">* 参数1：从哪个链条删除
+</span><span class="cm">* 参数2：删除哪个节点
+</span><span class="cm">* removeFromList_Demo1： 原始代码，用于发现规律
+</span><span class="cm">* removeFromList_Demo2： 最终代码，用于实现规律（循环），未处理边界情况
+</span><span class="cm">* removeFromList：非常抽象，且不是最优方案
+</span><span class="cm">* 关键思路：就是让【 X 的上一个节点】的 next，直接指向【 X 的下一个节点】，跳过x节点
+</span><span class="cm">* */</span>
+<span class="kr">const</span> <span class="nx">removeFromList</span> <span class="o">=</span> <span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="nx">node</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">list</span>
+  <span class="kd">let</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">node</span> <span class="c1">// p 仍然表示x的上一个节点，Demo2中将 p 初始化为 null，这里改为 node
+</span><span class="c1"></span>  <span class="k">while</span> <span class="p">(</span><span class="nx">x</span> <span class="o">!==</span> <span class="nx">node</span> <span class="o">&amp;&amp;</span> <span class="nx">x</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Demo2中忘了对null进行处理，如果node不 list中，x就可能为 null
+</span><span class="c1"></span>    <span class="nx">p</span> <span class="o">=</span> <span class="nx">x</span>
+    <span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">.</span><span class="nx">next</span>
+    <span class="c1">//（此时x被重新赋值为【x的下一个节点】，那么p就成为【x的上一个节点】，稍稍有点抽象，注意理解）
+</span><span class="c1"></span>  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">x</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 若 x 为 null，则不需要删除，直接 return， false 表示无法删除不在list里的节点
+</span><span class="c1"></span>    <span class="k">return</span> <span class="kc">false</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">x</span> <span class="o">===</span> <span class="nx">p</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="c1">// x初值为list，p初值为node。
+</span><span class="c1"></span>    <span class="c1">// 如果node接收传参list，则循环过后x===p，也就是两个参数都是list，说明要删除的节点是第一个节点
+</span><span class="c1"></span>    <span class="nx">p</span> <span class="o">=</span> <span class="nx">x</span><span class="p">.</span><span class="nx">next</span> <span class="c1">// p是list，list重新赋值为list.next，那list原值就不存在，相当于删除原本的list第一个节点
+</span><span class="c1"></span>    <span class="k">return</span> <span class="nx">p</span> 
+    <span class="c1">// 如果删除的是第一个节点，那么就要把新 list 的头节点 p 返回给外面
+</span><span class="c1"></span>    <span class="c1">// 即 newList = removeFromList(list, list)
+</span><span class="c1"></span>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">p</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="nx">x</span><span class="p">.</span><span class="nx">next</span>  <span class="c1">// 赋值跳过x节点
+</span><span class="c1"></span>    <span class="k">return</span> <span class="nx">list</span> <span class="c1">// 如果删除的不是第一个节点，返回原来的 list 即可
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">list</span> <span class="o">=</span> <span class="nx">createList</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">node</span> <span class="o">=</span> <span class="nx">list</span> <span class="c1">// node 就是 list 的第一个节点了现在
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">newList</span> <span class="o">=</span> <span class="nx">removeFromList</span><span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="nx">node</span><span class="p">)</span> <span class="c1">// 必须用 newList 获取返回值才能拿到删除了第一个节点的新 list
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>P.S. 当然还有其他更优雅的实现方法，比如将头指针改为头结点，不过有点超纲，就不说了。。。</p>
+</blockquote>
+<blockquote>
+<p>这个删除节点的代码，华中科技大学里第一次听完链表课的同学也只有 10 % 能写出来。</p>
+<p>逻辑很绕，比较难。所以放轻松，不理解也别太着急</p>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h4 id="遍历节点">遍历节点</h4>
+<blockquote>
+<p>对 list 中的每一个节点，进行一些操作</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="cm">/*
+</span><span class="cm">* 获取节点
+</span><span class="cm">* 参数：要获取第几个节点
+</span><span class="cm">* 返回这个节点 node
+</span><span class="cm">* 思路：遍历一次记1，遍历两次记2，遍历到第index次把这个节点返回出来
+</span><span class="cm">* */</span>
+<span class="kr">const</span> <span class="nx">getNode</span> <span class="o">=</span> <span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">list</span>
+  <span class="kd">let</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="k">while</span> <span class="p">(</span><span class="nx">x</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">count</span> <span class="o">!==</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">count</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">.</span><span class="nx">next</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">x</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="总结">总结</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">list</span> <span class="o">=</span> <span class="nx">create</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>  <span class="c1">// 创建
+</span><span class="c1"></span><span class="nx">node</span> <span class="o">=</span> <span class="nx">get</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span> 
+<span class="nx">append</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span>   <span class="c1">// 添加
+</span><span class="c1"></span><span class="nx">remove</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>          <span class="c1">// 删除
+</span><span class="c1"></span><span class="nx">travel</span><span class="p">(</span><span class="nx">list</span><span class="p">,</span><span class="nx">fn</span><span class="p">)</span>       <span class="c1">// 遍历
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="链表的变形">链表的变形</h3>
+<blockquote>
+<p>这块比较超纲，就只提出个概念，感兴趣可以自己了解一下</p>
+</blockquote>
+<h4 id="双向链表">双向链表</h4>
+<p>每个节点有一个 previous ，指向上一个节点</p>
+<h4 id="循环链表">循环链表</h4>
+<p>最后一个节点的 next ，指向头节点</p>
+<p>​</p>
+<p>​</p>
+<p>​</p>
+<h2 id="哈希表-key-value-pairs">哈希表 key-value pairs</h2>
+<blockquote>
+<p>链表比较复杂，哈希表没有链表复杂</p>
+</blockquote>
+<p>有人说：哈希表看起来就是 JS 对象的简化版，有什么难点吗？</p>
+<ul>
+<li>
+<p>哈希表的难点，不在于「表」这个字</p>
+</li>
+<li>
+<p>难点在于**「哈希」**二字</p>
+</li>
+<li>
+<p>这里有<a href="https://www.zhihu.com/question/330112288/answer/744362539" target="_blank" rel="noopener noreffer">一篇文章</a>（停车场案例），帮助你理解什么是 hash</p>
+</li>
+</ul>
+<p>​</p>
+<h3 id="哈希表">哈希表</h3>
+<blockquote>
+<p>key-value 的组合</p>
+</blockquote>
+<ul>
+<li>就是存 key-value 这种形式的数据</li>
+<li>并没有限制存储容量的上限。但是存的越多，读取就越难</li>
+<li>难点就是如何读取hash表更快</li>
+</ul>
+<p>​</p>
+<h3 id="哈希表的难点">哈希表的难点</h3>
+<h4 id="场景">场景</h4>
+<ul>
+<li>假设哈希表 hashTable 里有10000对 key-value （N=10000）</li>
+<li>如何使得读取任意一个  hashTable[&lsquo;yyy&rsquo;]  速度都很快呢 ？
+<ul>
+<li>可以看<a href="https://www.zhihu.com/question/330112288/answer/744362539" target="_blank" rel="noopener noreffer">一篇文章</a>（与停车场案例，同理）</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">hashTable</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">aaa</span><span class="o">:</span> <span class="nx">value1</span>
+  <span class="nx">aab</span><span class="o">:</span> <span class="nx">value2</span>
+  <span class="nx">aba</span><span class="o">:</span> <span class="nx">value3</span>
+  <span class="nx">abb</span><span class="o">:</span> <span class="nx">value4</span>
+  <span class="p">...</span>  
+  <span class="nx">zzz</span><span class="o">:</span> <span class="nx">value10000</span>  <span class="c1">// 假设共有 10000 对 key-value
+</span><span class="c1"></span><span class="p">}</span>
+<span class="c1">// 找到 hashTable[`yyy`] 的最快方式
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="解决办法">解决办法</h4>
+<blockquote>
+<p>四种读取  hashTable[&lsquo;yyy&rsquo;]  的方式，如下</p>
+</blockquote>
+<ol>
+<li>
+<p>不作任何优化，hash[&lsquo;xxx&rsquo;] 需要遍历所有 key，复杂度为 O(N)    （N表示key的总个数10000）【速度慢】</p>
+<ul>
+<li>一万个需要1秒，十万个10秒 …</li>
+</ul>
+</li>
+<li>
+<p>对 key 排序，使用<strong>二分法</strong>查找，复杂度就是 O(log(2)N)    =&gt;   可简写成（ln N）【速度较快】</p>
+</li>
+<li>
+<p>用字符串对应的 ASCII 数字做索引，复杂度 O(1)  【速度最快，占空间巨大】</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">aaa</span> <span class="p">=&gt;</span> <span class="mi">979797</span>     <span class="p">(</span><span class="nx">a</span><span class="o">:</span> <span class="mi">97</span><span class="p">)</span>
+<span class="nx">yyy</span> <span class="p">=&gt;</span> <span class="mi">121121121</span>  <span class="p">(</span><span class="nx">y</span><span class="o">:</span> <span class="mi">121</span><span class="p">)</span>
+<span class="c1">// 虽然一次就可以直接找到 yyy, 但是就像停车场的案例，这样导致占用的空间太大了（每一个指都对应一个空间）
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>对索引做除法，取余数，O(1)     【速度最快，节省大部分空间】</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">假设要获取的key的ASCII为</span> <span class="mi">979797</span><span class="err">，</span><span class="nx">准备一个长度为</span> <span class="mi">1000</span> <span class="nx">的容器</span>
+<span class="nx">那就用</span> <span class="mi">979797</span> <span class="o">/</span> <span class="mi">1000</span> <span class="nx">余数肯定在</span> <span class="mi">0</span><span class="o">~</span><span class="mi">999</span> <span class="nx">之间</span>
+<span class="nx">这个数组只需要</span> <span class="mi">0</span><span class="o">~</span><span class="mi">999</span> <span class="nx">项</span>
+<span class="p">{</span>
+  <span class="mi">0</span><span class="err">：</span><span class="nx">aaa</span><span class="p">,</span><span class="nx">aab</span><span class="p">,</span><span class="nx">aba</span><span class="p">,</span><span class="nx">abb</span><span class="p">,...</span>
+  <span class="mi">1</span><span class="o">:</span> <span class="nx">bbb</span><span class="p">,</span><span class="nx">bba</span><span class="p">,</span><span class="nx">bab</span><span class="p">,</span><span class="nx">baa</span><span class="p">,...</span>
+  <span class="mi">2</span><span class="o">:</span> <span class="nx">ccc</span><span class="p">,...</span>
+  <span class="p">...</span>
+  <span class="mi">998</span><span class="o">:</span> <span class="nx">yyy</span><span class="p">,...</span>
+  <span class="mi">999</span><span class="o">:</span> <span class="nx">zzz</span><span class="p">,...</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>（同一个号码有两个）冲突了怎么办，冲突了就顺延</p>
+<ul>
+<li>998 满了就存 999，999 满了就存到 0，0 满了就存到 1 …</li>
+<li>反正只有 1000 个位置</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>通过哈希表实现更快的读取到数据</p>
+<ul>
+<li>哈希表解决的就是这个问题（存的很容易，读也得快）</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<p>​</p>
+<h2 id="树-tree">树 Tree</h2>
+<blockquote>
+<p>一个链多个</p>
+<p>是对链表的升级</p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/10/20/JHtDRg9ShmGTVkP.png" alt="image-20201020175659471" style="zoom:67%;" /></p>
+<ul>
+<li>children 是个**数组 **</li>
+<li>data1 节点有两个子节点（数组元素） data2 / data3  ，共同组成一个「树」结构（可以有无限长）</li>
+<li>两个子节点 data2 / data3 可以再向下链接其他的子节点 data4 / 5 / 6 … ，也可不再有其他子节点</li>
+<li>如果子节点不再（分枝杈）有 children，就称这个子节点为「叶子」
+<ul>
+<li>链到头了，最后一个节点</li>
+</ul>
+</li>
+<li>所以 data1 有两个叶子</li>
+</ul>
+<blockquote>
+<p>看起来不像树，像金字塔，倒过来就像树了</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2020/10/20/J52VfO9db3ysMXn.png"
+        data-srcset="https://i.loli.net/2020/10/20/J52VfO9db3ysMXn.png, https://i.loli.net/2020/10/20/J52VfO9db3ysMXn.png 1.5x, https://i.loli.net/2020/10/20/J52VfO9db3ysMXn.png 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2020/10/20/J52VfO9db3ysMXn.png"
+        title="image-20201020180657966" /></p>
+<p>​</p>
+<p>​</p>
+<h3 id="实际使用-1">实际使用</h3>
+<blockquote>
+<p>实际生活中，到处都是「树」结构</p>
+</blockquote>
+<ul>
+<li>中国的省市区，可以看成一棵树</li>
+<li>公司的层级结构，可以看成一棵树</li>
+<li>网页中的节点，可以看成一棵树 
+html &gt; head、body，body &gt; div、span、a、p …，head &gt; link、title、meta</li>
+</ul>
+<p>​</p>
+<h3 id="对树进行增删改查">对「树」进行增删改查</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">tree</span> <span class="o">=</span> <span class="nx">createTree</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="c1">// 创建树
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">node</span> <span class="o">=</span> <span class="nx">createNode</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="c1">// 创建节点
+</span><span class="c1"></span><span class="nx">addChild</span><span class="p">(</span><span class="nx">tree</span><span class="p">,</span><span class="nx">node</span><span class="p">)</span>          <span class="c1">// 添加节点
+</span><span class="c1"></span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">node1</span><span class="p">,</span><span class="nx">node2</span><span class="p">)</span>     <span class="c1">// 删除节点
+</span><span class="c1"></span><span class="nx">travel</span><span class="p">(</span><span class="nx">tree</span><span class="p">)</span>                 <span class="c1">// 遍历树
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="创建树根节点">创建树（根节点）</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">createTree</span> <span class="o">=</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">data</span><span class="o">:</span> <span class="nx">value</span><span class="p">,</span>
+    <span class="nx">children</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>   <span class="c1">// 子节点
+</span><span class="c1"></span>    <span class="nx">parent</span><span class="o">:</span> <span class="kc">null</span>      <span class="c1">// 父节点
+</span><span class="c1"></span>  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="添加子节点">添加子节点</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="cm">/*
+</span><span class="cm">* 添加子节点
+</span><span class="cm">* 参数1：往哪个节点下添加子节点
+</span><span class="cm">* 参数2：要添加的子节点数据是什么
+</span><span class="cm">* */</span>
+<span class="kr">const</span> <span class="nx">addChild</span> <span class="o">=</span> <span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">newNode</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">data</span><span class="o">:</span> <span class="nx">value</span><span class="p">,</span>
+    <span class="nx">children</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">parent</span><span class="o">:</span> <span class="nx">node</span>
+  <span class="p">}</span>
+  <span class="nx">node</span><span class="p">.</span><span class="nx">children</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">children</span> <span class="o">||</span> <span class="p">[]</span> <span class="c1">// 必须保证node.children是数组，才能用push方法
+</span><span class="c1"></span>  <span class="nx">node</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">newNode</span><span class="p">)</span>
+  <span class="k">return</span> <span class="nx">newNode</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="遍历节点-1">遍历节点</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="cm">/*
+</span><span class="cm">* 遍历节点
+</span><span class="cm">* 先fn操作根节点，然后遍历根节点上的所有子节点，分别用fn操作子节点（不断循环）
+</span><span class="cm">* 这种先打印根节点，后处理子节点的遍历方法，称为「先根遍历」法，是比较简单的遍历方法
+</span><span class="cm">* 当然还有其他遍历方法
+</span><span class="cm">* */</span>
+<span class="kr">const</span> <span class="nx">travel</span> <span class="o">=</span> <span class="p">(</span><span class="nx">tree</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">fn</span><span class="p">(</span><span class="nx">tree</span><span class="p">)</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">tree</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">travel</span><span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">children</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">fn</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="删除节点-1">删除节点</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="cm">/*
+</span><span class="cm">* 删除节点
+</span><span class="cm">* 数组只能通过下标删除元素（splice）
+</span><span class="cm">* 所以必须先找到node的兄弟姐妹，遍历兄弟姐妹，看node排行第几（获取下标）
+</span><span class="cm">* */</span>
+<span class="kr">const</span> <span class="nx">removeNode</span> <span class="o">=</span> <span class="p">(</span><span class="nx">tree</span><span class="p">,</span> <span class="nx">node</span><span class="cm">/*要删除的节点*/</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">siblings</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">parent</span><span class="p">.</span><span class="nx">children</span>
+  <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">siblings</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">siblings</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">index</span> <span class="o">=</span> <span class="nx">i</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="nx">siblings</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="查找节点">查找节点</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="cm">/*
+</span><span class="cm">* 查找节点
+</span><span class="cm">* */</span>
+<span class="kr">const</span> <span class="nx">findNode</span> <span class="o">=</span> <span class="p">(</span><span class="nx">tree</span><span class="p">,</span> <span class="nx">node</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">tree</span> <span class="o">===</span> <span class="nx">node</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 要查找的就是根节点
+</span><span class="c1"></span>    <span class="k">return</span> <span class="nx">tree</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">tree</span> <span class="o">!==</span> <span class="nx">node</span> <span class="o">&amp;&amp;</span> <span class="nx">tree</span><span class="p">.</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 非根节点、且存在子节点的情况
+</span><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">tree</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 遍历所有子节点，找到目标node
+</span><span class="c1"></span>      <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">findNode</span><span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">children</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">node</span><span class="p">)</span>  <span class="c1">// 递归
+</span><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">result</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">undefined</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="kc">undefined</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h2 id="数据结构就这么简单-">数据结构就这么简单 ？</h2>
+<blockquote>
+<p>对，数据结构就是这些代码</p>
+<ul>
+<li>难在，看着代码简单，但是写起来非常难（逻辑绕）</li>
+<li>甚至大脑里面想都想不清楚，必须写出来、log、再慢慢推导</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>其实，数据结构必须是**简单的 **</p>
+<ul>
+<li>所有数据结构都可以通过一句话就概况出来
+<ul>
+<li>队列是什么：先进先出</li>
+<li>栈是什么：先进后出</li>
+<li>哈希表是什么： key-value的组合</li>
+<li>链表是什么：一个对象链着另一个对象</li>
+<li>树是什么：一个对象链着多个对象</li>
+</ul>
+</li>
+<li>它不可以复杂，即使复杂了，也会被程序员重新划分成几个简单问题</li>
+</ul>
+<p>因为👇程序员崇尚简洁优雅</p>
+</blockquote>
+<ul>
+<li>程序员崇尚简洁优雅</li>
+<li>如果你觉得某个编程概念真的很难</li>
+<li>那么请相信一定是你哪里理解错了</li>
+<li>请试着重新理解一下</li>
+<li>把细节<strong>自己动手敲一敲</strong>，才找到错误点。
+<ul>
+<li>这个过程中可能会突然意识到「噢！！原来是这样，我之前大脑想的是错的」</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<blockquote>
+<p>「二叉树」</p>
+<ul>
+<li>可能是前端中最难的</li>
+</ul>
+</blockquote></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-10-21</span>
+            </div>
+            <div class="post-info-license"><span>转载请注明出处</span></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/algorithm-data-structures-part.1/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://samrks.github.io/algorithm-data-structures-part.1/" data-title="数据结构（上）" data-via="ryuukousen2" data-hashtags="数据结构,入门"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://samrks.github.io/algorithm-data-structures-part.1/" data-hashtag="数据结构"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://samrks.github.io/algorithm-data-structures-part.1/" data-title="数据结构（上）"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://samrks.github.io/algorithm-data-structures-part.1/" data-title="数据结构（上）"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://samrks.github.io/algorithm-data-structures-part.1/" data-title="数据结构（上）"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>,&nbsp;<a href="/tags/%E5%85%A5%E9%97%A8/">入门</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/algorithm-sort/" class="prev" rel="prev" title="排序算法"><i class="fas fa-angle-left fa-fw"></i>排序算法</a>
+            <a href="/dom-dom-manipulate/" class="next" rel="next" title="DOM 编程 ">DOM 编程 <i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+    Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+  </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Thanks For Your Watching! ❤️</div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2017 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Sam</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":15},"comment":{"valine":{"appId":"M2gdPMfXs30Gw5NNnr2wSxv6-MdYXbMMI","appKey":"9V2iCzlcQbheaaWDXRLTNgec","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-twitter@5.0.1/img/twitter/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"📢 来都来了，说点什么 ~（填写邮箱可以收到回复提醒哦 ~ 😉）","recordIP":true,"visitor":true}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"KAKKI975YQ","algoliaIndex":"blog","algoliaSearchKey":"529eb6b7fa6e4f89bfe1d0043e53bda5","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

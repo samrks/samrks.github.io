@@ -1,0 +1,1583 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>运算符 - 标签 - Sam&#39;s Garage</title>
+        <link>http://samrks.github.io/tags/%E8%BF%90%E7%AE%97%E7%AC%A6/</link>
+        <description>运算符 - 标签 - Sam&#39;s Garage</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Fri, 18 Sep 2020 23:24:12 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="self" type="application/rss+xml" /><item>
+    <title>JS 运算符 </title>
+    <link>http://samrks.github.io/javascript-operators/</link>
+    <pubDate>Fri, 18 Sep 2020 23:24:12 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/javascript-operators/</guid>
+    <description><![CDATA[<p>​</p>
+<h2 id="前言">前言</h2>
+<blockquote>
+<p><a href="https://wangdoc.com/javascript/operators/index.html" target="_blank" rel="noopener noreffer">JavaScript 网道：运算符</a></p>
+</blockquote>
+<p>​</p>
+<h2 id="算数运算符">算数运算符</h2>
+<blockquote>
+<p>数学运算</p>
+</blockquote>
+<h3 id="number-运算">number 运算</h3>
+<h4 id="加减乘除">加减乘除</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="mi">1</span><span class="o">+</span><span class="mi">1</span>    <span class="c1">// 2
+</span><span class="c1"></span><span class="mi">9</span><span class="o">-</span><span class="mi">4</span>    <span class="c1">// 5
+</span><span class="c1"></span><span class="mi">5</span><span class="o">*</span><span class="mi">3</span>    <span class="c1">// 15
+</span><span class="c1"></span><span class="mi">9</span><span class="o">/</span><span class="mi">4</span>    <span class="c1">// 2.25
+</span><span class="c1"></span><span class="mi">9</span><span class="o">/</span><span class="mi">0</span>    <span class="c1">// Infinity  正无穷大
+</span><span class="c1"></span><span class="o">-</span><span class="mi">9</span><span class="o">/-</span><span class="mi">0</span>  <span class="c1">// Infinity  正无穷大
+</span><span class="c1"></span><span class="mi">9</span><span class="o">/-</span><span class="mi">0</span>   <span class="c1">// -Infinity  负无穷大
+</span><span class="c1"></span><span class="o">-</span><span class="mi">9</span><span class="o">/</span><span class="mi">0</span>   <span class="c1">// -Infinity  负无穷大
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="余数-x--7">余数 x % 7</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="mi">10</span> <span class="o">%</span> <span class="mi">7</span>    <span class="c1">// 3
+</span><span class="c1"></span> <span class="mi">7</span> <span class="o">%</span> <span class="mi">7</span>    <span class="c1">// 0   表示没有余数
+</span><span class="c1"></span><span class="o">-</span><span class="mi">1</span> <span class="o">%</span> <span class="mi">7</span>    <span class="c1">// -1  把负号提出来，用1%7=&gt;1，然后合起两部分 =&gt; -1
+</span><span class="c1"></span> <span class="mi">1</span> <span class="o">%</span> <span class="o">-</span><span class="mi">7</span>   <span class="c1">// 1
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>数学逻辑原理上：</p>
+<ul>
+<li>两个数相隔 x ，再分别和 x 取余，其结果应该是相等的</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 10 和 17 相隔 7，分别和 7 取余，结果应该是等价的
+</span><span class="c1"></span><span class="mi">10</span> <span class="o">%</span> <span class="mi">7</span> <span class="o">===</span> <span class="mi">17</span> <span class="o">%</span> <span class="mi">7</span>    <span class="c1">// true
+</span><span class="c1"></span><span class="o">-</span><span class="mi">1</span> <span class="o">%</span> <span class="mi">7</span> <span class="o">===</span>  <span class="mi">6</span> <span class="o">%</span> <span class="mi">7</span>    <span class="c1">// false  // JS 中负数取余有BUG
+</span></code></pre></td></tr></table>
+</div>
+</div><h5 id="变态面试题负数取余">变态面试题：负数取余</h5>
+<blockquote>
+<p>JS 犯错了，在 JS 中</p>
+<ul>
+<li>如果是<strong>负数取余</strong> -x % y ，执行的逻辑是，先把负号提出来，两个正数取余，其结果再加上负号</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">-</span><span class="nx">x</span> <span class="o">%</span> <span class="nx">y</span>    <span class="p">=&gt;</span>  <span class="o">-</span><span class="p">(</span><span class="nx">x</span> <span class="o">%</span> <span class="nx">y</span><span class="p">)</span>
+<span class="o">-</span><span class="nx">x</span> <span class="o">%</span> <span class="o">-</span><span class="nx">y</span>   <span class="p">=&gt;</span>  <span class="o">-</span><span class="p">(</span><span class="nx">x</span> <span class="o">%</span> <span class="nx">y</span><span class="p">)</span>
+ <span class="nx">x</span> <span class="o">%</span> <span class="o">-</span><span class="nx">y</span>   <span class="p">=&gt;</span>  <span class="nx">x</span> <span class="o">%</span> <span class="nx">y</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">-</span><span class="mi">1</span> <span class="o">%</span> <span class="mi">7</span>    <span class="c1">// -1
+</span><span class="c1"></span><span class="o">-</span><span class="mi">7</span> <span class="o">%</span> <span class="mi">8</span>    <span class="c1">// -7
+</span><span class="c1"></span><span class="o">-</span><span class="mi">4</span> <span class="o">%</span> <span class="mi">3</span>    <span class="c1">// -1
+</span><span class="c1"></span><span class="o">-</span><span class="mi">4</span> <span class="o">%</span> <span class="mi">2</span>    <span class="c1">// -0
+</span><span class="c1"></span><span class="o">-</span><span class="mi">4</span> <span class="o">%</span> <span class="mi">8</span>    <span class="c1">// -4
+</span><span class="c1"></span><span class="o">----------------------------------</span>
+<span class="o">-</span><span class="mi">1</span> <span class="o">%</span> <span class="o">-</span><span class="mi">7</span>   <span class="c1">// -1
+</span><span class="c1"></span><span class="o">-</span><span class="mi">7</span> <span class="o">%</span> <span class="o">-</span><span class="mi">8</span>   <span class="c1">// -7
+</span><span class="c1"></span><span class="o">-</span><span class="mi">4</span> <span class="o">%</span> <span class="o">-</span><span class="mi">3</span>   <span class="c1">// -1
+</span><span class="c1"></span><span class="o">-</span><span class="mi">4</span> <span class="o">%</span> <span class="o">-</span><span class="mi">2</span>   <span class="c1">// -0
+</span><span class="c1"></span><span class="o">-</span><span class="mi">4</span> <span class="o">%</span> <span class="o">-</span><span class="mi">8</span>   <span class="c1">// -4
+</span><span class="c1"></span><span class="o">----------------------------------</span>
+ <span class="mi">1</span> <span class="o">%</span> <span class="o">-</span><span class="mi">7</span>   <span class="c1">// 1
+</span><span class="c1"></span> <span class="mi">7</span> <span class="o">%</span> <span class="o">-</span><span class="mi">8</span>   <span class="c1">// 7
+</span><span class="c1"></span> <span class="mi">4</span> <span class="o">%</span> <span class="o">-</span><span class="mi">3</span>   <span class="c1">// 1
+</span><span class="c1"></span> <span class="mi">4</span> <span class="o">%</span> <span class="o">-</span><span class="mi">2</span>   <span class="c1">// 0
+</span><span class="c1"></span> <span class="mi">4</span> <span class="o">%</span> <span class="o">-</span><span class="mi">8</span>   <span class="c1">// 4
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="指数-x--3">指数 x ** 3</h4>
+<blockquote>
+<p>x  的 3次方</p>
+</blockquote>
+<blockquote>
+<p>这是最新的语法，但是 IE6 不支持（谁管它~🙄）</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="mi">7</span> <span class="o">**</span> <span class="mi">2</span>    <span class="c1">// 49
+</span><span class="c1"></span><span class="mi">8</span> <span class="o">**</span> <span class="mi">2</span>    <span class="c1">// 64
+</span><span class="c1"></span><span class="mi">2</span> <span class="o">**</span> <span class="mi">3</span>    <span class="c1">// 8
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="自增自减--x--x--x------x">自增自减 👿 x++ / ++x / x&ndash; / &ndash;x</h4>
+<blockquote>
+<p>面试常考</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nx">a</span><span class="o">++</span>  <span class="c1">// 1 --- 表达式的值
+</span><span class="c1"></span><span class="nx">a</span>    <span class="c1">// 2
+</span><span class="c1"></span><span class="nx">a</span><span class="o">--</span>  <span class="c1">// 2 --- 表达式的值
+</span><span class="c1"></span><span class="nx">a</span>    <span class="c1">// 1
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="o">++</span><span class="nx">a</span>  <span class="c1">// 2 --- 表达式的值
+</span><span class="c1"></span><span class="nx">a</span>    <span class="c1">// 2
+</span><span class="c1"></span><span class="o">--</span><span class="nx">a</span>  <span class="c1">// 1 --- 表达式的值
+</span><span class="c1"></span><span class="nx">a</span>    <span class="c1">// 1
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>规则：</p>
+<ul>
+<li>a 在前，表达式的值就是 ++ 前的值</li>
+<li>a 在后，表达式的值就是 ++ 后的值</li>
+<li>a 在前，表达式的值就是 &ndash; 前的值</li>
+<li>a 在后，表达式的值就是 &ndash; 后的值</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">a</span><span class="o">++</span>   <span class="c1">// 先赋值，后自增
+</span><span class="c1"></span><span class="nx">b</span>  <span class="c1">// 10
+</span><span class="c1"></span><span class="nx">a</span>  <span class="c1">// 11
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="求值运算符-x">求值运算符 +x</h4>
+<blockquote>
+<p>就是单纯的获取一下值，不对值做任何改变</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="o">+</span><span class="nx">a</span>   <span class="c1">// 8
+</span><span class="c1"></span><span class="o">----------------------</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">8</span>
+<span class="o">+</span><span class="nx">a</span>   <span class="c1">// -8
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="负数运算符--x">负数运算符 -x</h4>
+<blockquote>
+<p>求负运算：正数变负数、负数变正数</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="o">-</span><span class="nx">a</span>   <span class="c1">// -8
+</span><span class="c1"></span><span class="o">----------------------</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">8</span>
+<span class="o">-</span><span class="nx">a</span>   <span class="c1">// 8
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h3 id="string-运算">string 运算</h3>
+<blockquote>
+<p>字符串仅支持一种符号运算 ： +    （效果是连接两个字符串）</p>
+</blockquote>
+<h4 id="连接运算--">连接运算  +</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="s1">&#39;123&#39;</span> <span class="o">+</span> <span class="s1">&#39;456&#39;</span>    <span class="c1">// &#34;123456&#34;
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>字符串的 相减、相乘、相除，都会转换成 number 运算。但本质上是错误的计算</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="s1">&#39;2&#39;</span> <span class="o">-</span> <span class="s1">&#39;1&#39;</span>   <span class="c1">// 1
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="变态">变态</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"> <span class="mi">1</span>  <span class="o">+</span> <span class="s1">&#39;2&#39;</span>    <span class="c1">// &#34;12&#34;
+</span><span class="c1"></span><span class="s2">&#34;1&#34;</span> <span class="o">+</span> <span class="s2">&#34;2&#34;</span>    <span class="c1">// &#34;12&#34;
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>本质上：一个数字为什么要和一个字符串相加  ？！</p>
+<ul>
+<li>这从类型上讲就不对。其他语言都不允许不同类型进行相加，会报错</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>JS 中</p>
+<ul>
+<li>
+<p><strong>数字与字符串相加</strong>：JS 默认先把「数字」转为「字符串」，然后拼接字符串</p>
+</li>
+<li>
+<p><strong>数字与字符串相减</strong>：因为字符串不支持减号，JS 默认先把「字符串」转为「数字」，然后进行减法运算</p>
+</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"> <span class="mi">1</span>  <span class="o">+</span> <span class="s1">&#39;2&#39;</span>    <span class="c1">// &#34;12&#34;
+</span><span class="c1"></span><span class="s2">&#34;5&#34;</span> <span class="o">-</span>  <span class="mi">5</span>     <span class="c1">// 0
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h3 id="尽量少用自增自减">尽量少用自增自减</h3>
+<blockquote>
+<p>因为容易你和别人都记错</p>
+<ul>
+<li>
+<p>总有人会分不清  a++ / ++a ，所以你要兼容处理这种可能的情况，想办法避免</p>
+</li>
+<li>
+<p>解决办法，就是不用自增自减</p>
+</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">a</span><span class="o">++</span>  <span class="p">=&gt;</span>   <span class="nx">a</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="什么情况用-a-呢">什么情况用 a++ 呢？</h4>
+<blockquote>
+<p>只在 for 循环用：因为这是一种「约定俗成」的写法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){}</span>   <span class="c1">// 所有程序员都这么写
+</span><span class="c1"></span><span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">+=</span><span class="mi">1</span><span class="p">){}</span>  <span class="c1">// 这么写没问题，但是看着就有点野路子、不正规
+</span><span class="c1"></span><span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="nx">i</span><span class="p">){}</span>   <span class="c1">// 还有处女座程序员喜欢这么写，不管他怎么解释，你听听就好，不必当真
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>可能 20 年前， ++i 更快。但是现在，无脑写 i++ 就可以了，完全没问题 🤪</p>
+</blockquote>
+<p>​</p>
+<h3 id="不同类型不要加起来">不同类型不要加起来</h3>
+<blockquote>
+<p>把 1 和 &lsquo;2&rsquo; 加起来是几个意思</p>
+<p>苹果 + 橘子 是什么？ 苹橘？</p>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<p>​</p>
+<h2 id="比较运算符">比较运算符</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">&gt;</span>
+<span class="o">&lt;</span>
+<span class="o">=</span>
+<span class="o">&lt;=</span>
+<span class="o">==</span>   <span class="c1">// 模糊相等
+</span><span class="c1"></span><span class="o">!=</span>   <span class="c1">// 不模糊相等
+</span><span class="c1"></span><span class="o">===</span>  <span class="c1">// 全等
+</span><span class="c1"></span><span class="o">!==</span>  <span class="c1">// 不全等
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>== 是 JS 的 BUG</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/22745278" target="_blank" rel="noopener noreffer">为什么推荐使用 === 不推荐 ==</a></li>
+<li><a href="https://www.zhihu.com/question/20348948/answer/19601270" target="_blank" rel="noopener noreffer">假设要计算 x == y， 计算的过程很冗长，但是每个步骤都很简单</a></li>
+</ul>
+</blockquote>
+<h3 id="js-的三位一体">JS 的三位一体</h3>
+<p></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="mi">0</span> <span class="o">==</span> <span class="p">[]</span>     <span class="c1">// true
+</span><span class="c1"></span><span class="mi">0</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span>    <span class="c1">// true
+</span><span class="c1"></span><span class="mi">0</span> <span class="o">==</span> <span class="s1">&#39;\t&#39;</span>   <span class="c1">// true   (\t: tab)
+</span><span class="c1">// 上面等式，还可以理解，但是等式右边的三个却互不相等
+</span><span class="c1"></span><span class="p">[]</span>  <span class="o">==</span> <span class="s1">&#39;0&#39;</span>   <span class="c1">// false
+</span><span class="c1"></span><span class="p">[]</span>  <span class="o">==</span> <span class="s1">&#39;\t&#39;</span>  <span class="c1">// false
+</span><span class="c1"></span><span class="s1">&#39;0&#39;</span> <span class="o">==</span> <span class="s1">&#39;\t&#39;</span>  <span class="c1">// false
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h3 id="忠告">忠告：</h3>
+<ul>
+<li>永远不要使用 <code>==</code>，而是使用 <code>===</code></li>
+<li><code>==</code> 的问题在于，它总是自作聪明（自动类型转换）</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h3 id="x--y">x == y</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 令人难以理解
+</span><span class="c1"></span><span class="p">[]</span> <span class="o">==</span> <span class="nx">false但不是</span> <span class="nx">falsy</span>
+<span class="p">[]</span> <span class="o">==</span> <span class="nx">false但</span><span class="p">{}</span><span class="nx">却不是</span> 
+<span class="p">[[]]</span> <span class="o">==</span> <span class="kc">false</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="真值表">真值表</h4>
+<blockquote>
+<p>黄色块，表示两个值是真的相等</p>
+</blockquote>
+<p></p>
+<h4 id="js-的自相矛盾">JS 的自相矛盾</h4>
+<blockquote>
+<p>逻辑 BUG</p>
+</blockquote>
+<p>问：下述代码 if 判断为真吗 ？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="p">{}</span>   <span class="c1">// a是true，可以通过 if ，真
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>只有 5 个 falsy 值是假，其他都是真</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="mi">0</span>  <span class="kc">NaN</span>  <span class="kc">null</span>  <span class="kc">undefined</span>  <span class="s2">&#34;&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>但是</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;判断为真&#34;</span><span class="p">)</span> <span class="p">}</span><span class="k">else</span><span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;判断为假&#34;</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">[]</span> <span class="o">==</span> <span class="kc">true</span>   <span class="c1">// false
+</span><span class="c1"></span><span class="p">[]</span> <span class="o">==</span> <span class="kc">false</span>  <span class="c1">// true
+</span></code></pre></td></tr></table>
+</div>
+</div><p>打印结果：【判断为真】，但 <code>[ ] == true</code> 却为假。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">if</span><span class="p">(</span><span class="nx">a</span><span class="o">==</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;判断为真&#34;</span><span class="p">)</span> <span class="p">}</span><span class="k">else</span><span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;判断为假&#34;</span><span class="p">)</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>打印结果：【判断为假】。</p>
+<blockquote>
+<p>总结：</p>
+<ul>
+<li>if(a)为真，if(a==true)为假。</li>
+</ul>
+<ul>
+<li>
+<p>a 是真的 ，但是却不等于 true</p>
+</li>
+<li>
+<p>那 a 到底是真的假的  ？！</p>
+<p>——  JS 自身矛盾</p>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>解决办法：🤬 永远不要用 ==</p>
+</blockquote>
+<p>​</p>
+<h4 id="空数组--false空对象--true">空数组 == false、空对象 != true</h4>
+<blockquote>
+<p>对照 [== 真值表](# 真值表)</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="p">[]</span> <span class="o">==</span> <span class="kc">true</span>   <span class="c1">// false
+</span><span class="c1"></span><span class="p">[]</span> <span class="o">==</span> <span class="kc">false</span>  <span class="c1">// true
+</span><span class="c1"></span><span class="p">[[]]</span> <span class="o">==</span> <span class="kc">true</span>   <span class="c1">// false   // 如果空数组里有一个空元素，仍是false
+</span><span class="c1"></span><span class="p">[{}]</span> <span class="o">==</span> <span class="kc">true</span>   <span class="c1">// false
+</span><span class="c1"></span><span class="o">--------------------------------------------------------------------------------</span>
+<span class="p">{}</span> <span class="o">==</span> <span class="kc">true</span>   <span class="c1">// false      // chrome 输出要加小括号 ({}) == true 
+</span><span class="c1"></span><span class="p">{}</span> <span class="o">==</span> <span class="kc">false</span>  <span class="c1">// false     // chrome 输出要加小括号 ({}) == false 
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>空对象 != false 、空对象 != true</p>
+</blockquote>
+<p></p>
+<p>​</p>
+<h3 id="x--y-1">x === y</h3>
+<blockquote>
+<p>没有任何费解（仅两个规则）</p>
+</blockquote>
+<ol>
+<li>
+<p>**基本类型看值是否相等 **</p>
+</li>
+<li>
+<p>**对象看地址是否相等 **</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="p">[]</span> <span class="o">!==</span> <span class="p">[]</span>   <span class="c1">// 地址不同
+</span><span class="c1"></span><span class="p">{}</span> <span class="o">!==</span> <span class="p">{}</span>   <span class="c1">// 地址不同
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h4 id="真值表-1">真值表</h4>
+<p></p>
+<h4 id="重点">重点</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="mi">0</span> <span class="o">===</span> <span class="p">[]</span>          <span class="c1">// false
+</span><span class="c1"></span><span class="mi">0</span> <span class="o">===</span> <span class="mi">1</span>           <span class="c1">// false       
+</span><span class="c1"></span><span class="kc">true</span> <span class="o">===</span> <span class="kc">false</span>    <span class="c1">// false     
+</span><span class="c1"></span><span class="kc">true</span> <span class="o">===</span> <span class="kc">true</span>     <span class="c1">// true    
+</span><span class="c1"></span><span class="p">...</span>
+<span class="o">------------------------------------------</span>
+<span class="p">[]</span> <span class="o">===</span> <span class="p">[]</span>    <span class="c1">// false  
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>空数组 和 空数组，不相等。</p>
+</li>
+<li>
+<p>如果会画「内存图」就很清晰了。</p>
+<ul>
+<li>地址不同</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="p">[]</span> <span class="cm">/* #101 */</span>  <span class="o">===</span>  <span class="p">[]</span>  <span class="cm">/* #108 */</span>
+<span class="kc">false</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>数组属于对象类型，只能比较地址，不能比较内容</p>
+</li>
+</ul>
+<p>​</p>
+<h3 id="nan--nan">NaN !== NaN</h3>
+<blockquote>
+<p>唯一特例，强行记忆一下</p>
+</blockquote>
+<p>​</p>
+<h3 id="总结">总结</h3>
+<ul>
+<li>空数组模糊相等 false、空对象模糊相等 true</li>
+<li>空数组不全等于空数组</li>
+<li>空对象不全等于空对象</li>
+<li>NaN 不全等于 NaN</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="布尔运算符">布尔运算符</h2>
+<h3 id="或且非">或、且、非</h3>
+<ul>
+<li>||</li>
+<li>&amp;&amp;</li>
+<li>!   取反</li>
+</ul>
+<h3 id="短路逻辑">短路逻辑</h3>
+<blockquote>
+<p>常用</p>
+</blockquote>
+<p>例1.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">if</span><span class="p">(</span><span class="nx">console</span><span class="p">){</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 简化为 👇
+</span><span class="c1"></span><span class="nx">console</span> <span class="o">&amp;&amp;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="o">&amp;&amp;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>IE 中就没有 console</p>
+</li>
+<li>
+<p>以防 console 不存在报错</p>
+</li>
+<li>
+<p>这种编码方式，叫做**「防御性编程」**</p>
+</li>
+<li>
+<p>最新版 JS 还新增了更简单的写法 ——「<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/%E5%8F%AF%E9%80%89%E9%93%BE" target="_blank" rel="noopener noreffer">可选链语法</a>」</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-JS" data-lang="JS"><span class="c1">// 简化为 👇
+</span><span class="c1"></span><span class="nx">console</span><span class="o">?</span><span class="p">.</span><span class="nx">log</span><span class="o">?</span><span class="p">.(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>     <span class="c1">// 如果console存在，就获取上面的log方法，如果也存在执行、打印 &#39;hi&#39;
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<p>例2.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">a</span><span class="p">){</span>
+  <span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+  <span class="nx">a</span> <span class="o">=</span> <span class="nx">a</span>
+<span class="p">}</span>
+<span class="c1">// 简化为 👇 
+</span><span class="c1"></span><span class="nx">a</span> <span class="o">=</span> <span class="nx">a</span> <span class="o">||</span> <span class="mi">100</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>a 的保底值</p>
+</li>
+<li>
+<p>如果 a 是真值，a 就不变。如果 a 是假值，a 就等于 100</p>
+</li>
+<li>
+<p>但上述方法其实存在一点 bug ：如果 a 是空字符串呢  ?！  5个falsy值都会使得 a 为假值，赋值为100</p>
+</li>
+<li>
+<p>于是，JS 又发 明了新的语法 —— 直接在<strong>函数参数</strong>上写 ✅</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">n</span><span class="p">){</span> 
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">n</span><span class="p">){</span> <span class="nx">n</span><span class="o">=</span><span class="mi">0</span> <span class="p">}</span>   <span class="c1">// n = n || 0
+</span><span class="c1"></span>  <span class="k">return</span> <span class="nx">n</span><span class="o">+</span><span class="mi">1</span>
+<span class="p">}</span>
+<span class="c1">// 新语法 👇
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">n</span><span class="o">=</span><span class="mi">0</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nx">n</span><span class="o">+</span><span class="mi">1</span>
+<span class="p">}</span>
+<span class="nx">add</span><span class="p">(</span><span class="kc">null</span><span class="p">)</span>       <span class="c1">//  1
+</span><span class="c1"></span><span class="nx">add</span><span class="p">(</span><span class="kc">undefined</span><span class="p">)</span>  <span class="c1">//  1
+</span><span class="c1"></span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>         <span class="c1">//  &#34;1&#34;
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<blockquote>
+<h3 id="尽量都是用最新的-js-语法-">尽量都是用最新的 JS 语法 ⭐️</h3>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h2 id="二进制位运算符">二进制位运算符</h2>
+<blockquote>
+<p>这些位运算符直接处理每一个比特位（bit），所以是非常底层的运算，**好处是速度极快，缺点是很不直观，许多场合不能使用它们，否则会使代码难以理解和查错。 **</p>
+<p>有一点需要特别注意，<strong>位运算符只对整数起作用</strong>，如果一个运算子不是整数，会自动转为整数后再执行。另外，虽然在 JavaScript 内部，数值都是以64位浮点数的形式储存，但是做位运算的时候，是<strong>以32位带符号的整数</strong>进行运算的，并且返回值也是一个32位带符号的整数。</p>
+</blockquote>
+<blockquote>
+<p>注：可以使用十进制数进行运算，会先自动转化成二进制，然后再计算</p>
+</blockquote>
+<h3 id="或与否运算符">或、与、否运算符</h3>
+<h4 id="或">或</h4>
+<blockquote>
+<p>0b（零b）开头，表示后面写的是二进制数</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="mb">0b11</span>   <span class="c1">// 3
+</span><span class="c1"></span><span class="mb">0b01</span>   <span class="c1">// 1
+</span><span class="c1"></span><span class="mb">0b10</span>   <span class="c1">// 2
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>或 <code>|</code></p>
+<ul>
+<li>只有两位都为 0，结果才为 0</li>
+<li>否则为 1</li>
+</ul>
+</blockquote>
+<p>运算过程：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="mb">0b1111</span>
+  <span class="o">||||</span>
+<span class="mb">0b1010</span>  
+  <span class="o">||||</span>   
+<span class="mb">0b1111</span>   
+<span class="c1">// 垂直比较对应位置，只要上下两个二进制数中有一位显示的是 1 那么最终结果的当前位置为 1。
+</span><span class="c1">// 都是 0 时，才得出 0
+</span></code></pre></td></tr></table>
+</div>
+</div><p>例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="mb">0b1111</span> <span class="o">|</span> <span class="mb">0b1010</span>    <span class="c1">// 15  // 因为没用二进制显示结果，所以默认被转换为了10进制 （8421）
+</span><span class="c1">// 正确写法 👇
+</span><span class="c1"></span><span class="p">(</span><span class="mb">0b1111</span> <span class="o">|</span> <span class="mb">0b1010</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1">// &#34;1111&#34;   JS变态之处，只能用字符串形式表示二进制数，不能用数字
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="与">与</h4>
+<blockquote>
+<p>与 <code>&amp;</code></p>
+<ul>
+<li>两位都为 1 才是 1</li>
+<li>有一位是 0 ，结果就是 0</li>
+</ul>
+</blockquote>
+<p>例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="p">(</span><span class="mb">0b1111</span> <span class="o">&amp;</span> <span class="mb">0b1010</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>    <span class="c1">// &#34;1010&#34;
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="mb">0b1111</span>
+  <span class="o">&amp;&amp;&amp;&amp;</span>
+<span class="mb">0b1010</span>  
+  <span class="o">||||</span>   
+<span class="mb">0b1010</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="否">否</h4>
+<blockquote>
+<p>否 <code>~</code></p>
+<ul>
+<li>1变成0，0变成1</li>
+<li>它的返回结果有时比较难理解，因为涉及到计算机内部的数值表示机制。</li>
+<li>详解查看 <a href="https://wangdoc.com/javascript/operators/bit.html#%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%90%A6%E8%BF%90%E7%AE%97%E7%AC%A6" target="_blank" rel="noopener noreffer">JavaScript 网道</a></li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="p">(</span><span class="o">~</span><span class="mb">0b1111</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>   <span class="c1">// &#34;-10000&#34;
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h3 id="异或运算符">异或运算符</h3>
+<blockquote>
+<p>异或运算（^）在两个二进制位不同时返回1，相同时返回0。</p>
+<ul>
+<li>两位相同，则返回 0</li>
+<li>两位不同，则返回 1</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="p">(</span><span class="mb">0b1111</span> <span class="o">^</span> <span class="mb">0b1010</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>    <span class="c1">//  0101 省略最前面的 0，结果为  =&gt;   &#34;101&#34; 
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h3 id="左移右移运算符">左移、右移运算符</h3>
+<blockquote>
+<p><code>&lt;&lt;</code> 和 <code>&gt;&gt;</code></p>
+<ul>
+<li><a href="https://wangdoc.com/javascript/operators/bit.html#%E5%B7%A6%E7%A7%BB%E8%BF%90%E7%AE%97%E7%AC%A6" target="_blank" rel="noopener noreffer">左移运算符</a>（&laquo;）表示将一个数的二进制值向左移动指定的位数，尾部补 0</li>
+<li><a href="https://wangdoc.com/javascript/operators/bit.html#%E5%8F%B3%E7%A7%BB%E8%BF%90%E7%AE%97%E7%AC%A6" target="_blank" rel="noopener noreffer">右移运算符</a>（&raquo;）表示将一个数的二进制值向右移动指定的位数。
+如果是正数，头部全部补0；如果是负数，头部全部补1。</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="mb">0b0010</span>         <span class="c1">// 0010（二进制） =&gt;  2（十进制）
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="左移一位-">左移一位 👇</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="mb">0b0010</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>    <span class="c1">// 0001（二进制） =&gt;  1（十进制）
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="右移一位-">右移一位 👇</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="mb">0b0010</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span>    <span class="c1">// 0100（二进制） =&gt;  4（十进制）
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意：结果仍会自动转换为十进制数，调用 .toString(2) 可以得到二进制（会省略开头0）</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="p">(</span><span class="mb">0b0010</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>   <span class="c1">// 0010 =&gt; 0001  =&gt;  &#34;1&#34;  （二进制） 会省略开头0
+</span><span class="c1"></span><span class="p">(</span><span class="mb">0b0010</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>   <span class="c1">// 0010 =&gt; 0100  =&gt;  &#34;100&#34;（二进制） 会省略开头0
+</span></code></pre></td></tr></table>
+</div>
+</div><h5 id="右移得负数情况">右移得负数情况</h5>
+<blockquote>
+<p>如果不懂二进制，这块也不太好理解是怎么转换的  😶</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">-</span><span class="mi">4</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>    <span class="c1">// -2
+</span><span class="c1"></span><span class="cm">/*
+</span><span class="cm">// 因为-4的二进制形式为 11111111111111111111111111111100，
+</span><span class="cm">// 右移一位，头部补1，得到 11111111111111111111111111111110,
+</span><span class="cm">// 即为十进制的 -2
+</span><span class="cm">*/</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="如果有多个-1">如果有多个 1</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="p">(</span><span class="mb">0b0011</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>   <span class="c1">// 0011 =&gt; 0001  =&gt;  &#34;1&#34;  （二进制） 会省略开头0 （吃掉最右边的1）
+</span><span class="c1"></span><span class="p">(</span><span class="mb">0b0011</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>   <span class="c1">// 0011 =&gt; 0110  =&gt;  &#34;110&#34;（二进制） 会省略开头0
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<p>​</p>
+<h3 id="头部补零的右移运算符">头部补零的右移运算符</h3>
+<blockquote>
+<p><code>&gt;&gt;&gt;</code></p>
+<p>在正数的情况下，<code>&gt;&gt;</code> 和 <code>&gt;&gt;&gt;</code>  基本没有区别</p>
+<p>头部补零的右移运算符（&raquo;&gt;）与右移运算符（&raquo;）只有一个差别，就是一个数的二进制形式向右移动时，头部一律补零，而不考虑符号位。所以，该运算总是得到正值。对于正数，该运算的结果与右移运算符（&raquo;）完全一致，区别主要在于负数。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="p">(</span><span class="mb">0b1111</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>   <span class="c1">// 0111  =&gt;  &#34;111&#34;（二进制） 会省略开头0
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<blockquote>
+<p>上面的运算符，看过一遍然后就忘记好了，因为这辈子可能都用不上</p>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h2 id="面试题-">面试题 🙄</h2>
+<blockquote>
+<p>平时工作很少用。只有一种情况可能遇上，就是「面试题」中</p>
+</blockquote>
+<blockquote>
+<p>文章：<a href="https://juejin.im/post/6844903568906911752" target="_blank" rel="noopener noreffer">位运算符在JS中的妙用</a> （仅做参考）</p>
+</blockquote>
+<h3 id="使用与运算符判断奇偶">使用与运算符&amp;判断奇偶</h3>
+<p>先给出结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 方法1.与2取余（最方便的方法、也好理解）
+</span><span class="c1"></span><span class="mi">7</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">1</span>  <span class="c1">// true 奇数
+</span><span class="c1"></span>
+<span class="c1">// 方法2.二进制与运算符：两位都为1才是1
+</span><span class="c1"></span><span class="nx">任意数</span> <span class="o">&amp;</span> <span class="mi">1</span>   <span class="c1">//  =&gt; 0 说明是偶数
+</span><span class="c1"></span><span class="nx">任意数</span> <span class="o">&amp;</span> <span class="mi">1</span>   <span class="c1">//  =&gt; 1 说明是奇数
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="测试">测试</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="p">(</span><span class="mi">7</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">// 把其转换为2进制 =&gt;  &#34;111&#34;  最后一位是 1
+</span><span class="c1"></span><span class="mi">7</span> <span class="o">&amp;</span> <span class="mb">0b001</span>       <span class="c1">// 7和二进制的1进行与运算，规则是二进制中对应的两位都是1结果就是1  =&gt;  1
+</span><span class="c1"></span>
+<span class="p">(</span><span class="mi">7</span> <span class="o">&amp;</span> <span class="mb">0b001</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>   <span class="c1">// 0001 =&gt; &#34;1&#34; 二进制
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>原理</p>
+<ul>
+<li>偶数的二进制位最后一位都是 0 ，而奇数二进制位的最后一位都是 1，所以<strong>可以根据二进制判断奇偶</strong></li>
+</ul>
+</blockquote>
+<blockquote>
+<p>问题转化：**如何获取任意数的二进制数的最后一位值 **</p>
+<p>解决办法：跟二进制的 1 进行**与运算 **</p>
+<ul>
+<li><strong>与运算的规则</strong>：两个二进制数的对应位进行两两比较，**只要有一个是 0，结果就是 0 **，只有对应位都是 1 结果才得 1</li>
+<li>因为二进制 1 的前五位都是 0，所以任意数与二进制 1 进行与运算，必然导致最终结果的前 5 为都是 0</li>
+<li>因为前 5 位都是 0，自然就获取到最后一位，根据最后一位的结果 0 或 1 来判断出「偶 或 奇」</li>
+</ul>
+<blockquote>
+<p>如果最后一位是 0 ，则二进制数为 000000 简写为 0    =&gt;   偶数
+如果最后一位是 1 ，则二进制数为 000001 简写为 1    =&gt;   奇数</p>
+</blockquote>
+</blockquote>
+<p>例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="mi">123</span> <span class="o">&amp;</span> <span class="mi">1</span>    <span class="c1">// 1  奇数
+</span><span class="c1"></span><span class="mi">124</span> <span class="o">&amp;</span> <span class="mi">1</span>    <span class="c1">// 0  偶数
+</span><span class="c1"></span><span class="mi">125</span> <span class="o">&amp;</span> <span class="mi">1</span>    <span class="c1">// 1  奇数
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注：可以使用十进制数进行二进制与运算，会先自动转化成二进制，然后再计算</p>
+</blockquote>
+<blockquote>
+<p>虽然<strong>位运算 <strong>速度极快，但是</strong>模运算</strong>速度也不慢</p>
+<ul>
+<li>“模”是“Mod”的音译，模运算多应用于程序编写中。 Mod的含义为**求余 **。</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h3 id="使用------来取整">使用 ~, &raquo;, &laquo;, &raquo;&gt;, | 来取整</h3>
+<blockquote>
+<p>下列方法都是基于该原理：</p>
+<ul>
+<li>位运算符<strong>只对整数起作用，不支持小数，会自动转为整数后再执行</strong>  （直接抹掉小数位，不是四舍五入）</li>
+<li>正数、负数同理</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nb">parseInt</span><span class="p">(</span><span class="mf">6.83</span><span class="p">)</span>     <span class="c1">// 6  (JS有直接提供取整的 api 呀~~)
+</span><span class="c1"></span><span class="o">-------------------------------------------------------------</span> <span class="c1">// 面试逼得必须会的方式👇 位运算
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">~~</span> <span class="mf">6.83</span><span class="p">)</span>      <span class="c1">// 6
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">6.83</span> <span class="o">&gt;&gt;</span> <span class="mi">0</span><span class="p">)</span>    <span class="c1">// 6
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">6.83</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">)</span>    <span class="c1">// 6
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">6.83</span> <span class="o">|</span> <span class="mi">0</span><span class="p">)</span>     <span class="c1">// 6
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">6.83</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">0</span><span class="p">)</span>   <span class="c1">// 6
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="1-两次取反-">1. 两次取反 ~~</h4>
+<blockquote>
+<p>注意，这是二进制的取反：把 1 变成 0，把 0 变成 1</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">~~</span> <span class="mf">6.83</span><span class="p">)</span> <span class="c1">// 两次取反，相当于负负得正，还是取的原值，但把小数部分抹去了   // 6
+</span></code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="2-右移-0-位---0">2. 右移 0 位  &raquo; 0</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">6.83</span> <span class="o">&gt;&gt;</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1">// 右移零位，就是原地不动，但位运算符会自动取整，所以这番运算会抹掉小数  // 6
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">-</span><span class="mf">6.83</span> <span class="o">&gt;&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">// -6
+</span></code></pre></td></tr></table>
+</div>
+</div><p>运算过程：</p>
+<ol>
+<li>因为是位运算，第一步先转换为整数 6.83 =&gt; 6</li>
+<li>因为 6 的二进制形式是 “0110”   =&gt;  右移 0 位 &ldquo;0110&rdquo;  =&gt; 转换成10进制输出 6</li>
+</ol>
+<blockquote>
+<h4 id="左移-0-位--0-同理可得">左移 0 位 &laquo; 0， 同理可得</h4>
+<h4 id="头部补零的右移---0-同理可得">头部补零的右移  &raquo;&gt; 0 ，同理可得</h4>
+</blockquote>
+<p>​</p>
+<h4 id="3-与-0-进行或运算--0">3. 与 0 进行或运算 | 0</h4>
+<blockquote>
+<p>或运算 <code>|</code>  ：只有两位都为 0，结果才为 0，否则是 1  （位运算符自动转换为整数）</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">6.83</span> <span class="o">|</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1">// 与0进行或运算的本质：还是不改变原二进制数的 （细品）
+</span></code></pre></td></tr></table>
+</div>
+</div><p>运算过程：</p>
+<ol>
+<li>因为是位运算，第一步先转换为整数 6.83 =&gt; 6</li>
+<li>6 的二进制数与 0 的二进制数进行或运算： &ldquo;110&rdquo;  |  &ldquo;000&rdquo;   =&gt;   &ldquo;110&rdquo;</li>
+</ol>
+<p>​</p>
+<h3 id="使用--来交换-a-b-的值">使用 ^ 来交换 a b 的值</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">a</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="kd">let</span> <span class="nx">b</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>
+<span class="p">[</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">b</span><span class="p">,</span><span class="nx">a</span><span class="p">]</span>   <span class="c1">// JS 最新的语法——交换两个值
+</span><span class="c1"></span><span class="nx">a</span>   <span class="c1">// 2
+</span><span class="c1"></span><span class="nx">b</span>   <span class="c1">// 1
+</span></code></pre></td></tr></table>
+</div>
+</div><p>位运算 —— 异或 ^</p>
+<ul>
+<li>两位相同，则返回 0</li>
+<li>两位不同，则返回 1</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="nx">a</span> <span class="o">^=</span> <span class="nx">b</span>    <span class="c1">// 是 a = a ^ b 的简写
+</span><span class="c1"></span><span class="nx">b</span> <span class="o">^=</span> <span class="nx">a</span>
+<span class="nx">a</span> <span class="o">^=</span> <span class="nx">b</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>   <span class="c1">// 8
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>   <span class="c1">// 5
+</span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<h3 id="总结-1">总结</h3>
+<blockquote>
+<p>关于位运算，只要记住下面 3 个问题的解法：</p>
+<ul>
+<li>判断奇偶</li>
+<li>取整</li>
+<li>交换值</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>位运算用得很少容易忘，面试之前重新看看即可</p>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h2 id="其他运算符">其他运算符</h2>
+<blockquote>
+<p>奇葩运算符，一个比一个奇葩</p>
+<p>很多「搞不清楚为什么 JS 可以这样写的」用法，其实是程序员自己发现的</p>
+</blockquote>
+<h3 id="点运算符">点运算符</h3>
+<blockquote>
+<p>点运算符，只能用在对象上。如果遇到其他类型，会有一个特殊逻辑 ，👇</p>
+</blockquote>
+<h4 id="语法">语法</h4>
+<ul>
+<li>对象.属性名 = 属性值</li>
+</ul>
+<h4 id="作用">作用</h4>
+<ul>
+<li>
+<p>读取/设置 对象的属性值</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s1">&#39;sam&#39;</span><span class="p">}</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">name</span>   <span class="c1">// &#34;sam&#34;  读取属性值
+</span><span class="c1"></span><span class="nx">a</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">&#34;jack&#34;</span> <span class="c1">// 设置属性值
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="有个疑问">有个疑问</h4>
+<blockquote>
+<h5 id="问不是对象为什么也可以用点----还能获取到属性--a-b-csplit-">问：不是对象，为什么也可以用点 <code>.</code>   还能获取到属性？  <code>'a-b-c'.split('-')</code></h5>
+</blockquote>
+<ul>
+<li>
+<p>JS 有特殊逻辑，点前面不是对象，就把它封装成对象</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>（内存图）</p>
+<ol>
+<li>
+<p>JS 发现 a 没有 toString，就把 a 封装成对象 a&rsquo;</p>
+</li>
+<li>
+<p>然后调用 封装对象 a‘  的 toString 方法</p>
+</li>
+<li>
+<p>抹掉封装对象  a&rsquo; = null</p>
+</li>
+</ol>
+</li>
+</ul>
+<p>​</p>
+<blockquote>
+<p>每次使用 <code>.</code> 点运算符，都会①<strong>创</strong>建封装对象②调<strong>用</strong>封装对象上的方法③抹掉封装对象**(滚) **</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span> 
+<span class="nx">a</span><span class="p">.</span><span class="nx">xxx</span> <span class="o">=</span> <span class="s1">&#39;sam&#39;</span>  <span class="c1">// 这一行背后过程：创建 a&#39;，然后把 xxx 放到 a&#39;上，值为sam，最后 a’ 被抹掉
+</span><span class="c1"></span><span class="nx">a</span><span class="p">.</span><span class="nx">xxx</span>  <span class="c1">// undefined   // 这一行背后过程：创建a&#39;&#39;，获取a&#39;‘上的xxx属性，找不到xxx，返回 undefined
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>**每次点运算符，都会创建一个新的对象 **，用来容纳你操作的属性信息 （翻脸就不认人🙄）</p>
+</blockquote>
+<p>​</p>
+<p>JS  封装对象</p>
+<ul>
+<li>
+<p>number 会变成 Number 对象</p>
+</li>
+<li>
+<p>string 会变成 String 对象</p>
+</li>
+<li>
+<p>bool 会变成 Boolean 对象</p>
+</li>
+<li>
+<p>程序员从来不用这三种对象👇，只用简单类型</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">new</span> <span class="nb">Number</span><span class="p">()</span>
+<span class="k">new</span> <span class="nb">String</span><span class="p">()</span>
+<span class="k">new</span> <span class="nb">Boolean</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>提醒一下，「永远不要用」的有 👇</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">==</span>
+<span class="o">++</span> <span class="err">（</span><span class="nx">for循环用一下</span><span class="p">)</span>
+<span class="k">new</span> <span class="nb">Number</span><span class="p">()</span> <span class="err">、</span> <span class="k">new</span> <span class="nb">String</span><span class="p">()</span> <span class="err">、</span> <span class="k">new</span> <span class="nb">Boolean</span><span class="p">()</span> <span class="err">（</span><span class="nx">number</span><span class="o">/</span><span class="nx">string</span><span class="o">/</span><span class="nx">布尔的构造函数</span><span class="err">）</span>  
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="void-运算符">void 运算符</h3>
+<h4 id="语法-1">语法</h4>
+<p><code>void 表达式或语句</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">void</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>
+<span class="k">void</span> <span class="mi">1</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h4 id="作用-1">作用</h4>
+<ul>
+<li>求表达式的值，或执行语句</li>
+<li>**void 的值总是为 undefined **</li>
+</ul>
+<p>​</p>
+<h4 id="需求用法">需求/用法</h4>
+<blockquote>
+<p>需求：a 标签不跳转，而是点击 a 就执行 f 方法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 假设👇是 f 方法
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">f</span><span class="p">(){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>方法一</p>
+<p>return 假值可以阻止默认动作（阻止 a 标签跳转）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;http://example.com&#34;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;f(); return false;&#34;</span><span class="p">&gt;</span>点击<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>方法二</p>
+<p>点击 a 执行 js 语句 （改用 void 可以炫技）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;javascript: void(f())&#34;</span><span class="p">&gt;</span>文字<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>方法三</p>
+<p>即使不用 void ，也可以实现同样效果，👇</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&#34;javascript:;&#34;</span> <span class="nx">onclick</span><span class="o">=</span><span class="s2">&#34;f();&#34;</span><span class="o">&gt;</span><span class="nx">文字</span><span class="o">&lt;</span><span class="err">/a&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="逗号运算符">逗号运算符</h3>
+<h4 id="语法-2">语法</h4>
+<p><code>表达式1, 表达式2, ..., 表达式 n</code></p>
+<h4 id="作用-2">作用</h4>
+<ul>
+<li>将表达式 n 的值作为整体的值</li>
+<li>也就是将最后一个表达式 ，作为 return 的内容</li>
+</ul>
+<h4 id="使用">使用</h4>
+<p>例 1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>那么 a 的值就是 5，奇葩吧？</li>
+</ul>
+<p>例 2</p>
+<blockquote>
+<p>箭头函数，不用 { } 和 return，也能写多个语句 👇 ：用 () 和 ,</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">f</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;平方值为&#39;</span><span class="p">),</span> <span class="nx">x</span><span class="o">*</span><span class="nx">x</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>注意上面的括号不能省</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="运算符的优先级">运算符的优先级</h2>
+<blockquote>
+<p>先算什么，后算什么</p>
+</blockquote>
+<h3 id="优先级是什么">优先级是什么</h3>
+<blockquote>
+<p>优先级处理的就是，当一个语句中有多个操作，到底先算哪个</p>
+</blockquote>
+<h4 id="不同运算符">不同运算符</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span> <span class="nx">是</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span> <span class="nx">还是</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>   <span class="c1">// 小学生都知道先算乘法
+</span><span class="c1"></span><span class="o">!</span> <span class="nx">a</span> <span class="o">===</span> <span class="mi">1</span> <span class="nx">是</span> <span class="p">(</span><span class="o">!</span> <span class="nx">a</span><span class="p">)</span> <span class="o">===</span> <span class="mi">1</span> <span class="nx">还是</span> <span class="o">!</span> <span class="p">(</span><span class="nx">a</span> <span class="o">===</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1">// 先求a的反，再与1进行布尔运算
+</span><span class="c1"></span><span class="k">new</span> <span class="nx">Person</span><span class="p">().</span><span class="nx">sayHi</span><span class="p">()</span> <span class="nx">先new还是先</span><span class="p">.</span><span class="nx">sayHi</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="相同运算符">相同运算符</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">从左到右</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span> <span class="o">+</span> <span class="nx">c</span>  
+<span class="nx">从右到左</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">d</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="优先级就是先算什么后算什么">优先级就是先算什么后算什么</h4>
+<blockquote>
+<p>具体规则想知道吗？
+你：想。
+不，你不想！看看<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table" target="_blank" rel="noopener noreffer">这里</a>就知道为什么。—— JS 操作符的优先级，你可能这辈子都记不下来（丧😨）</p>
+</blockquote>
+<p>MDN 总结的非常好</p>
+<ul>
+<li>将所有运算符按照优先级的不同从高（20）到低（1）排列</li>
+</ul>
+<h3 id="学习建议">学习建议</h3>
+<blockquote>
+<p>运算符优先级很难记全，所以<strong>直接 放弃</strong>，不要记</p>
+<p>如果遇到运算符优先级的题，直接猜</p>
+</blockquote>
+<p>​</p>
+<h3 id="优先级汇总">优先级汇总</h3>
+<p>####汇总表位于 MDN</p>
+<ul>
+<li>一共有20个运算符</li>
+<li>怎么记忆呢</li>
+</ul>
+<h4 id="技巧">技巧</h4>
+<ul>
+<li>只记「圆括号优先级最高」</li>
+<li>会用圆括号就行</li>
+<li>其他一律不记</li>
+</ul>
+<blockquote>
+<p>面试官：问为什么不知道 / 没有记 JS 的优先级？</p>
+<p>满分回答：</p>
+<ol>
+<li>
+<p>因为 JS 的优先级太多了，没有一个人能确保把 JS 的优先级记得很清楚</p>
+</li>
+<li>
+<p>就算我记清楚了，也不能确保我的同事记得清楚。所以我就记了「优先级最高的是圆括号」</p>
+</li>
+<li>
+<p>我会在写代码时，非常清楚的用「圆括号」表明我的优先级，这样别人也可以很好的理解我的代码</p>
+</li>
+</ol>
+<p>（从<strong>为了让同事能更好的理解代码</strong>的角度，来反驳面试官/领导）</p>
+</blockquote>
+<h3 id="例-">例 💋</h3>
+<h4 id="不同运算符-1">不同运算符</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">a</span><span class="o">===</span><span class="mi">1</span><span class="p">){}</span>  <span class="c1">// 先算谁呢？
+</span><span class="c1"></span><span class="k">if</span><span class="p">(</span> <span class="p">(</span><span class="o">!</span><span class="nx">a</span><span class="p">)</span> <span class="o">===</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1">// 圆括号优先级最高    // 查一下MDN可知，!高于===
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="相同运算符-1">相同运算符</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span> <span class="o">+</span> <span class="nx">c</span>   <span class="c1">// 从左到右顺序
+</span><span class="c1"></span><span class="nx">a</span> <span class="o">=</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">d</span>   <span class="c1">// 从右到左倒序
+</span></code></pre></td></tr></table>
+</div>
+</div><p>例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">,</span><span class="nx">d</span>
+<span class="nx">a</span> <span class="o">=</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">d</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="nx">相当于</span><span class="err">👇</span>
+<span class="nx">a</span> <span class="o">=</span> <span class="p">(</span><span class="nx">b</span> <span class="o">=</span> <span class="p">(</span><span class="nx">c</span> <span class="o">=</span> <span class="p">(</span><span class="nx">d</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)))</span>    <span class="c1">// (d=2)表达式的值就是2，赋给c，c=2表达式的值是2，再赋给 b...
+</span></code></pre></td></tr></table>
+</div>
+</div>]]></description>
+</item></channel>
+</rss>

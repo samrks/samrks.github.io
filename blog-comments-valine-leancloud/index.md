@@ -40,7 +40,7 @@ hugo 博客添加评论系统 Valine  <!--more-->
 
 -   成功后，进入后台点击左上角的创建应用：
 
-    <img src="https://pichome-1254392422.cos.ap-chengdu.myqcloud.com/20180708153104380829479.png" alt="img" style="zoom: 33%;" />
+    <img src="https://i.loli.net/2020/10/25/B9sZpWHyCuc8zXj.png" alt="img" style="zoom: 33%;" />
 
 -   创建好应用，进入应用，点击【组件】
 
@@ -48,7 +48,7 @@ hugo 博客添加评论系统 Valine  <!--more-->
 
 -   左边栏找到【设置】，然后点击【应用Key】，此时记录出现的 App ID 和 App Key，后面配置文件中会用到：
 
-    <img src="https://pichome-1254392422.cos.ap-chengdu.myqcloud.com/20180708153104457148134.png" alt="img" style="zoom: 25%;" />
+    <img src="https://i.loli.net/2020/10/25/vMW1gdOjFGNhfbe.png" alt="img" style="zoom: 25%;" />
 
 -   因为评论和文章阅读数统计依赖于存储，所以还需要建立两个新的存储 Class
     左边栏找到并点击【存储】，点击【创建Class】
@@ -60,7 +60,7 @@ hugo 博客添加评论系统 Valine  <!--more-->
 
 -   还需要为应用添加安全域名，左边栏点击【设置】，找到【安全中心】，点击后会看到【安全域名】设置框，输入博客使用的域名，点击保存即可：
 
-    <img src="https://pichome-1254392422.cos.ap-chengdu.myqcloud.com/20180708153104592457270.png" alt="img" style="zoom: 25%;" />
+    <img src="https://i.loli.net/2020/10/25/3eQ8yPkHlZO56zV.png" alt="img" style="zoom: 25%;" />
 
 
 

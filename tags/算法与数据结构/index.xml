@@ -1,0 +1,789 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>算法与数据结构 - 标签 - Sam&#39;s Garage</title>
+        <link>http://samrks.github.io/tags/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
+        <description>算法与数据结构 - 标签 - Sam&#39;s Garage</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
+            <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Fri, 25 Sep 2020 15:31:35 &#43;0800</lastBuildDate><atom:link href="http://samrks.github.io/tags/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="self" type="application/rss+xml" /><item>
+    <title>伪代码与流程图</title>
+    <link>http://samrks.github.io/algorithm-pseudocode-flowchart/</link>
+    <pubDate>Fri, 25 Sep 2020 15:31:35 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://samrks.github.io/algorithm-pseudocode-flowchart/</guid>
+    <description><![CDATA[<p>​</p>
+<h2 id="前言">前言</h2>
+<blockquote>
+<ul>
+<li>正式学算法之前，有一个铺垫 ——「伪代码与流程图」</li>
+<li>铺垫，看似不重要，实际上可能会影响非常深远
+<ul>
+<li>我们作为前端，一般学习的第一门编程语言是 Javascript</li>
+<li>根据之前的学习，我们可以看到 JavaScript 这门语言有很多的问题</li>
+<li>这些问题，都会导致学习者的思维上的一些缺陷</li>
+<li>由于你学的第一门语言是一门有问题的语言，所以导致你的编程的一些基础知识是有缺陷的。</li>
+<li>通过「伪代码和流程图」可以很好的弥补这些缺陷</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="js-语法不难难的是抽象概念">JS 语法不难，难的是抽象概念</h2>
+<blockquote>
+<p>有没有发现 JS 语法不难，难的是抽象概念</p>
+</blockquote>
+<blockquote>
+<p>比如，你经常发现每句都懂，加在一起就不懂（就像学英语，每个单词都懂，拼成句子就懵了）</p>
+</blockquote>
+<h3 id="举个栗子">举个栗子</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">t</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span><span class="nx">delay</span><span class="p">){</span> 
+  <span class="kd">let</span> <span class="nx">fn2</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+    <span class="k">if</span><span class="p">(</span><span class="nx">fn2</span><span class="p">.</span><span class="nx">timer</span><span class="p">){</span><span class="k">return</span><span class="p">}</span> 
+    <span class="nx">fn</span><span class="p">()</span> 
+    <span class="nx">fn2</span><span class="p">.</span><span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+      <span class="nx">fn2</span><span class="p">.</span><span class="nx">timer</span> <span class="o">=</span> <span class="kc">null</span> 
+    <span class="p">},</span> <span class="nx">delay</span><span class="p">)</span> 
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">fn2</span> 
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">f</span> <span class="o">=</span> <span class="nx">t</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;火球术&#39;</span><span class="p">)},</span> <span class="mi">5000</span><span class="p">)</span> 
+<span class="c1">// 这个函数在做什么？（防抖节流 ?!）
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>看不懂，是因为对「抽象概念」不了解</p>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h2 id="抽象能力">抽象能力</h2>
+<blockquote>
+<p>越高级的程序员，抽象能力越强</p>
+</blockquote>
+<h3 id="编程语言也能抽象">编程语言也能抽象</h3>
+<blockquote>
+<p>懂得抽象后，JS、Python、Java、PHP 根本就没区别。
+这就是高级程序员，能掌握多种语言的原因</p>
+</blockquote>
+<h4 id="这些语言都有这些共同点">这些语言都有👇这些共同点</h4>
+<ul>
+<li>声明</li>
+<li>if..else&hellip;</li>
+<li>while 循环、for 循环</li>
+<li>函数</li>
+<li>对象</li>
+</ul>
+<h4 id="这意味着">这意味着</h4>
+<ul>
+<li>你没有必要过分关注语言的细节</li>
+<li>你应该首先理解这些语言的[不变之处](# 不变之处)</li>
+<li>然后以不变应万变</li>
+</ul>
+<blockquote>
+<p>对于肤浅的程序员，所有新知识都是全新的。
+而对于理解抽象的程序员，所有新东西只是原本基础知识上的抽象组合而已</p>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h2 id="不变之处">不变之处</h2>
+<blockquote>
+<p>从第一位程序员诞生至今，有什么东西是不变的（也就是，所有程序员都认为这是有用的东西）</p>
+</blockquote>
+<ol>
+<li>[对编程的热爱](# 一、对编程的热爱)</li>
+<li>[逻辑](# 二、逻辑 ⭐️)</li>
+<li>[数据结构](# 三、数据结构)</li>
+</ol>
+<p>（详见👇）</p>
+<h2 id="一对编程的热爱">一、对编程的热爱</h2>
+<blockquote>
+<p>怎么会有人爱这么枯燥的玩意</p>
+</blockquote>
+<p>1</p>
+<p>《Just For Fun》</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Most good programmers do programming not because they expect to get paid or get adulation by the public, but because it is fun to program.
+
+大多数程序员愿意写代码，不是因为他们获得高额的薪水或者他人的赞誉，而是因为写代码很有意思。
+
+—— Linus Torvalds （Linux之父、Git之父）
+</code></pre></td></tr></table>
+</div>
+</div><p>2</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">I&#39;m not a great programmer;
+I&#39;m just a good programmer with great habits.
+我不是一个牛X的程序员；
+我只是一个拥有牛X的习惯的还凑活的程序员。
+—— Kent Beck（极限编程创始人）
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>我想让你知道的是：</p>
+<ul>
+<li>不是所有人都只为工资编程，虽然一开始是为了工资</li>
+<li>（但最后一直坚持下去的人，都是真正热爱编程的人）</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h4 id="人们喜欢编程的原因">人们喜欢编程的原因</h4>
+<blockquote>
+<p>简洁之美</p>
+</blockquote>
+<ul>
+<li>新人可能无法特别好的理解这种「简洁之美」</li>
+<li>随着工作经验的积累，可能几年之后，你会发现，层次越高，代码越简洁。</li>
+<li>代码越少，解决的越多，这就是编程的魅力</li>
+<li>中国可能大部分公司不考虑简洁，只考虑时间、能否解决问题，不行就 996。</li>
+<li>永远处在这种模式下，你会感觉不到任何美，就是单纯堆时间的体力活</li>
+<li>真正的简洁美，是程序员用大脑想到一个方法，来解决一个较为复杂的问题，同时还能带来收益回报</li>
+</ul>
+<blockquote>
+<p>要有追求</p>
+<ul>
+<li>追求简洁的代码</li>
+<li>追求不加班的编程，而不是靠时间堆砌的体力活</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h2 id="二逻辑-">二、逻辑 ⭐️</h2>
+<blockquote>
+<p>所有的编程，都在使用逻辑</p>
+</blockquote>
+<p>我们写代码，实际上就是在写逻辑</p>
+<ul>
+<li>JS 用 JS 的语言来表达逻辑</li>
+<li>Java 用 Java 的语音来表达逻辑</li>
+<li>PHP 用 PHP 的语音来表达逻辑</li>
+<li>…</li>
+</ul>
+<p>​</p>
+<h3 id="逻辑是什么">逻辑是什么</h3>
+<h4 id="三段论逻辑---1">三段论逻辑 - 1</h4>
+<ul>
+<li>命题一：JS 有 7 种数据类型：string、number、bool、symbol、undefined、null、object</li>
+<li>命题二：JS 的函数不属于前六种类型</li>
+<li>如果命题一、二为真，那么我们可以得到</li>
+<li>推论：JS 的函数属于 object 类型</li>
+</ul>
+<blockquote>
+<p>给出命题一、二，能发现它们之间的逻辑关系，并得出推论  ——  这就说明你是懂逻辑的</p>
+</blockquote>
+<h4 id="三段论逻辑---2">三段论逻辑 - 2</h4>
+<ul>
+<li>命题一：JS 中所有函数都是由 Function 构造的</li>
+<li>命题二：Function、Object、Array 是函数</li>
+<li>推论：Function、Object、Array 是由 Function 构造的</li>
+</ul>
+<blockquote>
+<p>逻辑是需要学习的</p>
+<ul>
+<li>中国人比外国人缺乏「逻辑」</li>
+<li>中国人更愿意持有混沌的思维方式，比如，二元对立、辩证统一 …中国人共容易接受这些思维方式</li>
+<li>「逻辑」反而是一个外来的词语</li>
+<li>「逻辑」有时候是「符合直觉」的，但又有的时候「反直觉」</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h3 id="逻辑-vs-直觉">逻辑 V.S. 直觉</h3>
+<h4 id="直觉的好处">直觉的好处</h4>
+<ul>
+<li>直觉能让你快速学会一些东西</li>
+<li>比如数字、字符串、数组、对象都可以靠直觉学会</li>
+</ul>
+<h4 id="直觉的坏处">直觉的坏处</h4>
+<ul>
+<li>直觉却又能阻止你学会另一些东西</li>
+<li>这时你就只能依靠「逻辑」来说服自己</li>
+<li>比如，虽然不知道 Function 是如何构造 Function 的，但是逻辑告诉我们，确实如此（尽管这并不符合直觉）</li>
+</ul>
+<p>​</p>
+<h3 id="如何用代码表示逻辑">如何用代码表示逻辑</h3>
+<h4 id="例1">例1</h4>
+<p>输出两个数中较大的一个数</p>
+<ul>
+<li>如果第1个数大于第2个数，就输出第1个数</li>
+<li>否则输出第2个数</li>
+</ul>
+<blockquote>
+<p>👇 这里只是用<strong>代码</strong>来表示出上述逻辑，**不限定语言/语法  **  —— [伪代码](# 伪代码)</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">a = [12,32]
+if a.get(0) &gt; a.get(1)
+	print a.get(0)
+else
+  print a.get(1)
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>可以得出一个结论</p>
+<ul>
+<li>用 if … else … 可以表示某些逻辑 （发现规律）</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h4 id="例2">例2</h4>
+<p>输出 N 个数中最大的一个数</p>
+<ul>
+<li>找到第 1、2 个数字中较大的那一个，存入 max</li>
+<li>找到 max 和第 3 个数字中较大的那个，存入 max</li>
+<li>找到 max 和第 … 个，存入 max</li>
+<li>max 就是最大的数</li>
+</ul>
+<p>代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">a = [12, 32, 9, 1, 23, 6]
+max = a[0]
+for i from 1 to a.length() - 1 
+	if a.get(i) &gt; max 
+	then max = a.get(i)
+print max
+</code></pre></td></tr></table>
+</div>
+</div><p>依次两两比较，找出最大</p>
+<p></p>
+<p>​</p>
+<blockquote>
+<p>可以得出一个结论</p>
+<ul>
+<li>用 for 循环，也可以表示某些逻辑 （又发现规律）</li>
+<li>引出问题 👇</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h3 id="表示逻辑需要多少种语句">表示逻辑需要多少种语句</h3>
+<blockquote>
+<p>如果要表达所有的逻辑，应该用哪些语句 ？（表示逻辑需要多少种语句）
+掌握了这些语句就能表达所有逻辑 ？！</p>
+</blockquote>
+<ul>
+<li>
+<p>上世纪60-70年代，科学家发明了一种理论 —— 「结构化编程」理论</p>
+</li>
+<li>
+<p>他们说，所有逻辑，只需要 [3 种语句](# 三种语句搞定所有逻辑)就可以表达</p>
+</li>
+<li>
+<p>注：</p>
+<p>结构化编程，在某些情况下，会变得麻烦</p>
+<p>比如，错误处理（这时候可能需要第4种语句：go to ）</p>
+</li>
+</ul>
+<p>​</p>
+<h3 id="三种语句搞定所有逻辑-">三种语句搞定所有逻辑 ⭐️</h3>
+<blockquote>
+<p>所有的复杂算法，都能用这三种语句描述 —— 多么简洁啊</p>
+</blockquote>
+<h4 id="顺序执行语句">顺序执行语句</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">语句1
+语句2
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<h4 id="条件判断语句">条件判断语句</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">if ... then ... else ...
+if ... else if ... else
+</code></pre></td></tr></table>
+</div>
+</div><p>伪代码 👇</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">if x &gt; 10
+	语句1
+else
+	语句2
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<h4 id="循环语句">循环语句</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">while ... do ...
+for i from 1 to n ...
+</code></pre></td></tr></table>
+</div>
+</div><p>伪代码 👇</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">when</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">10</span>
+	<span class="nx">语句1</span>
+  <span class="nx">i</span><span class="o">+=</span><span class="mi">1</span>
+<span class="nx">语句2</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<blockquote>
+<p>JS 的变量提升就是个 BUG  （ 所有编程语言只有 JS 支持变量提升，JS 宛如智障🤪）</p>
+<p>所以[前面](# 前言)说，第一门语言学习 JS 是很不友好的、可能导致学习者思维上的缺陷</p>
+<ul>
+<li>现在要学习另外一种叫「伪代码」的东西，来弥补这块缺陷</li>
+</ul>
+</blockquote>
+<p>​</p>
+<h3 id="伪代码">伪代码</h3>
+<blockquote>
+<p>有没有发现，尽管没有讲解这种语法，我们依旧可以通过「这种代码」来理解这些[例子](# 例1)的逻辑/目的</p>
+</blockquote>
+<ul>
+<li>这种代码就叫  「伪代码」</li>
+<li>伪代码，不属于任何一种标准语言，只是为方便程序员自己理清逻辑</li>
+<li>所以只要便于自己理解，**「伪代码」可以是任意写法 **</li>
+<li>作用：可以锻炼我们的大脑、思维，<u>而不是总需要依靠浏览器去判断正确性</u></li>
+</ul>
+<p>​</p>
+<h3 id="流程图">流程图</h3>
+<blockquote>
+<p>流程图是一种语言，一种标准语言/标准画法</p>
+</blockquote>
+<ul>
+<li>不同的语法逻辑，需使用相对应的某种形状来表达，是具有一定标准的。</li>
+<li>**形状不可乱用，「流程图」不可乱画，必须遵循标准 **</li>
+</ul>
+<p>​</p>
+<blockquote>
+<p>注：「流程图」「伪代码」，只是两种表达形式，用来<strong>阐明逻辑</strong>，看个人喜好使用一种即可</p>
+<ul>
+<li>流程图，可以看到整个逻辑的脉络（可能更适合较为复杂的逻辑 ?! 🤔）</li>
+<li>并不绝对</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h3 id="推荐使用-mindjet-画流程图">推荐使用 Mindjet 画流程图</h3>
+<blockquote>
+<p>也可以用 XMind、百度脑图 等工具代替</p>
+</blockquote>
+<p></p>
+<h3 id="流程图伪代码的好处">流程图、伪代码的好处</h3>
+<h4 id="锻炼你的大脑">锻炼你的大脑</h4>
+<ul>
+<li>你必须自己画出来</li>
+<li>不能运行在计算机里</li>
+</ul>
+<h4 id="整理你的思路">整理你的思路</h4>
+<ul>
+<li>思路乱，则图乱</li>
+<li>伪代码都写不好，则真代码更写不好</li>
+</ul>
+<blockquote>
+<p>帮助提高 应对复杂情况时的分析能力</p>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h3 id="用流程图找到最大数">用流程图找到最大数</h3>
+<h4 id="两个数中找最大数">两个数中找最大数</h4>
+<h4 id="n个数中找最大数">N个数中找最大数</h4>
+<p></p>
+<h3 id="总结">总结</h3>
+<ul>
+<li>
+<p>逻辑很重要</p>
+<ul>
+<li>理解三段论</li>
+<li>逻辑有时符合直觉，有时违反直觉。不论怎样，一定要相信逻辑</li>
+</ul>
+</li>
+<li>
+<p>可以用<strong>三种语句</strong><u>表达所有逻辑</u></p>
+<ol>
+<li>顺序执行语句</li>
+<li>条件判断语句</li>
+<li>循环语句</li>
+</ol>
+</li>
+<li>
+<p>可以用「图 &amp; 伪代码」表示上述**三种语句 **</p>
+<p>推论：用「图 &amp; 伪代码」，可以<u>表达所有逻辑</u></p>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="三数据结构">三、数据结构</h2>
+<blockquote>
+<p>「数据结构」</p>
+<ul>
+<li>**表示数据与数据之间的关系和结构 **。</li>
+<li>是比算法更抽象的东西，**非常抽象 **。</li>
+<li>抽象到甚至无法举出很具体的示例来表示「什么是数据结构」，只能尽量阐述、举例</li>
+</ul>
+</blockquote>
+<h3 id="如何表示两个数据">如何表示两个数据</h3>
+<blockquote>
+<p>两个人之间能有什么关系？基友，师生，父子 …  这就是他们之间的数据结构
+他们之间的关系，就是他们的结构</p>
+<p>两个整数之间能有什么关系？比如，1是2的前一个，2是1的后一个（1和2是前后关系）
+虽然很抽象，但确实是种关系</p>
+</blockquote>
+<h4 id="如果顺序有意义">如果顺序有意义</h4>
+<blockquote>
+<p>可以用下面方法👇来表示</p>
+</blockquote>
+<ul>
+<li>[x, y] 表示第一个是 x，第二个是 y</li>
+<li>[y, x] 表示第一个是 y，第二个是 x
+<ul>
+<li>这就是最简单的数据结构 ——【有序的二元组】</li>
+</ul>
+</li>
+<li>比如，<strong>坐标</strong> 就是这样的数据结构
+<ul>
+<li>前一个数据表示 x 轴位置、后一个数据表示 y 轴位置。</li>
+<li>如果反过来，就是另一个坐标数据了</li>
+</ul>
+</li>
+<li>对于这样的数据结构，**需要提供 first 和 last 操作 **
+<ul>
+<li>（一共两个数据）first 返回第一个数据、last 返回第二个数据</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h4 id="如果顺序无意义">如果顺序无意义</h4>
+<ul>
+<li>(x, y) 和 (y, x) 一样 —— 【无序二元组】</li>
+<li>比如，<strong>血压值</strong>  (120, 80) 和 (80, 120) 没区别。（书写顺序任意，默认较大值是高压、较小值是低压）</li>
+<li>不需要提供 first 和 last 操作
+<ul>
+<li>因为顺序无意义，所以无需区别第一个还是最后一个</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>注：
+上面提到的【xxx二元组】这种数据结构跟 JS 没有任何关系，只是随机一种写法来表示两个数据的关系而已
+目前，在 JS 中只需知道【数组和对象】这两种数据结构</p>
+</blockquote>
+<blockquote>
+<p>上述就是「两个数据能组成的数据结构」的举例</p>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h3 id="如何表示-n-个数据">如何表示 N 个数据</h3>
+<blockquote>
+<p>N个数据，能组成什么样的数据结构</p>
+<p>比如：一串数字，组成全部同学的分数</p>
+</blockquote>
+<h4 id="如果顺序有意义-1">如果顺序有意义</h4>
+<ul>
+<li>
+<p>可以用一个经典的数据结构 —— <strong>数组</strong> 来表示  [ a1, a2, … , aN ]</p>
+</li>
+<li>
+<p>数组需要提供<strong>索引操作</strong> get(i)：给定一个数字 i，返回对应的某项数据</p>
+</li>
+<li>
+<p>还要提供  add / indexOf / delete  操作（增删改查的接口）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// indexOf 在数组中找到一个给定元素的第一个索引，如果不存在，则返回-1
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">beasts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ant&#39;</span><span class="p">,</span> <span class="s1">&#39;bison&#39;</span><span class="p">,</span> <span class="s1">&#39;camel&#39;</span><span class="p">,</span> <span class="s1">&#39;duck&#39;</span><span class="p">,</span> <span class="s1">&#39;bison&#39;</span><span class="p">];</span>
+<span class="nx">beasts</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;bison&#39;</span><span class="p">);</span>  <span class="c1">// 1
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>​</p>
+<h4 id="如果顺序没有意义">如果顺序没有意义</h4>
+<blockquote>
+<p>实际中，很少有数据顺序是无意义的情况</p>
+</blockquote>
+<ul>
+<li><strong>集合</strong> 表示  { a1, a2, … , aN }</li>
+<li>要提供  add / delete / has  操作</li>
+</ul>
+<blockquote>
+<p>注意：当前md中的所有代码，与 JS 无关</p>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h3 id="如何表示-n-对-n-数据">如何表示 N 对 N 数据</h3>
+<p>也就是 2*N 个数据</p>
+<h4 id="比如学号对应名字">比如，学号对应名字</h4>
+<blockquote>
+<p>用「哈希表」表示</p>
+</blockquote>
+<ul>
+<li>哈希表，是一种抽象的数据结构，有 key 和 value</li>
+<li>key 可以是字符串、数字、布尔、甚至对象 … （因为「哈希表」是一种抽象的数据结构）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">hash = { 1001 =&gt; &#39;小芳&#39;, 1002 =&gt; &#39;小红&#39;} 
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>学号1001的同学，名字叫小芳；学号1002的同学，名字叫小红</li>
+<li>这种 key 对应 value 的结构，叫做「哈希表」</li>
+</ul>
+<p>​</p>
+<blockquote>
+<p>JS 对象，区别于「哈希表」</p>
+</blockquote>
+<ul>
+<li>「哈希表」的 key 可以是字符串、数字、布尔、甚至对象 … 因为「哈希表」是一种抽象的数据结构</li>
+<li>**JS 对象的 key 只能是字符串 **。</li>
+<li>可以认为，JS 对象，只是一种对哈希的部分实现而已。</li>
+<li>而且 **JS 对象永远有一个隐藏属性 <em>_proto</em>_，而「哈希表」里没有原型 **</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h3 id="数据结构--数据形式--操作">数据结构 = 数据形式 + 操作</h3>
+<blockquote>
+<p>不同形式的数据暴露不同的操作</p>
+</blockquote>
+<ul>
+<li>
+<p>数据形式</p>
+<ul>
+<li>就是逻辑形式</li>
+</ul>
+</li>
+<li>
+<p>操作</p>
+<ul>
+<li>数组必须提供 add / indexOf / delete 增删改查 的接口</li>
+<li>如果是集合，就不需要提供 indexOF，需要 add / delete / has  操作</li>
+<li>这些接口，都属于操作</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<h2 id="有没有觉得很抽象">有没有觉得很抽象</h2>
+<blockquote>
+<p>数据结构都是抽象的
+数据结构的全名，就叫做「抽象数据结构」</p>
+</blockquote>
+<blockquote>
+<p>前面都属于非常抽象的描述
+下面举一些<strong>具体的例子</strong>，讲讲为什么数据结构这么重要（什么是数据结构，懂数据结构的人有多🐮B）</p>
+</blockquote>
+<h2 id="面试题">面试题</h2>
+<blockquote>
+<pre><code>有一段英文对白，里面只会出现  a-z  A-Z、标点符号和空格，请告诉我**每个字符出现的次数 **
+</code></pre>
+</blockquote>
+<ul>
+<li>例如  Hi, I&rsquo;m Sam</li>
+<li>需求：输出 a 出现 1 次，H 出现 1 次 …</li>
+</ul>
+<blockquote>
+<p>懂「数据结构」的程序员一看完问题，就能抽象的发现，这与「哈希表」的结构形式一样
+key : value</p>
+</blockquote>
+<p>伪代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">str = `Hi, I&#39;m Sam`
+hash = {}
+for i from 0 to str.length-1
+	key = str.get(i)
+	value = hash.get(key,0) + 1      // value是上一次key值加1，如果上一次没有值就默认是0
+	hash.set(key, value)
+for key,value from hash 
+	print `${key} 出现了 ${value} 次`
+</code></pre></td></tr></table>
+</div>
+</div><p>JS 代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">times</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">str</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">obj</span><span class="p">[</span><span class="nx">str</span><span class="p">[</span><span class="nx">i</span><span class="p">]])</span> <span class="p">{</span>
+      <span class="nx">obj</span><span class="p">[</span><span class="nx">str</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">obj</span><span class="p">[</span><span class="nx">str</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">){</span>
+   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb"> 出现了 </span><span class="si">${</span><span class="nx">obj</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span><span class="si">}</span><span class="sb"> 次`</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">times</span><span class="p">(</span><span class="sb">`Hi, I&#39;m Sam`</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>​</p>
+<h2 id="数据结构的作用">数据结构的作用</h2>
+<h3 id="提前记住一些结构">提前记住一些结构</h3>
+<blockquote>
+<p>如果能提前就记住一些数据结构，这是最好的（如，数组、hash … ）</p>
+</blockquote>
+<ul>
+<li>这些结构很常见</li>
+<li>这些结构，能让你很快理清思路</li>
+<li>这些结构，面试经常问</li>
+</ul>
+<h3 id="锻炼你的抽象能力">锻炼你的抽象能力</h3>
+<ul>
+<li>一种数据结构往往能解决很多类似的问题</li>
+<li>如果选错了数据结构，那基本玩完，算法再厉害也没用。因为在错误的数据结构下，压根就得不到正确的思路</li>
+<li>牛逼的程序员更重视数据结构，而不是算法
+<ul>
+<li>能分析出数据是怎样的结构，这是最重要的</li>
+<li>再根据数据结构去想算法</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>想快速有效的理解数据结构，快速入门算法和数据结构</p>
+<ul>
+<li>只推荐一种方式：**搞懂 8 种排序算法 **</li>
+<li>每一种排序算法，都对应不同的数据结构。搞懂8个排序算法，基本学会了 5-6 个数据结构</li>
+</ul>
+</blockquote>
+<p>后面会总结：</p>
+<ul>
+<li>「归并排序」</li>
+<li>「快速排序」</li>
+<li>「计数排序」</li>
+<li>「选择排序 」</li>
+<li>以及「对应的数据结构」</li>
+</ul>
+<p>搞定这 4 种排序算法，基本上也就会了 3-4 个数据结构，可以应付めんせつ了</p>
+<blockquote>
+<p>数据结构在工作中用的多吗？</p>
+<ul>
+<li>这其实是主观上的
+<ul>
+<li>举个例子，在武侠世界里，有内功的人打出的拳肯定比普通人打出的拳更扎实。
+别人打了一拳，很难说他用没用内功。但如果你没有内功，那就只能干打拳。</li>
+</ul>
+</li>
+<li>所以说，对于程序员来说，懂数据结构的人写的代码，质量上一定更高</li>
+<li>但是如果具体问别人：写代码时，有没有回忆起10年前学的数据结构呢？当事人自己可能也不知道</li>
+<li>所以要**把「数据结构」融会到自己的思想中，内化 **（ hash、二元组 … ）</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<p>​</p>
+<h3 id="补充一些走的东西">补充：一些走❤️的东西</h3>
+<blockquote>
+<p>写代码会有种创造世界的成就感（就像 Minecraft）
+写代码的控制感会比玩游戏的控制感更强烈一些，所以有些人可能代码写多了反而不爱玩游戏了</p>
+</blockquote>
+<blockquote>
+<p>数据结构和伪代码，就是让你通过自己的方式和逻辑来解决问题，不要依赖浏览器等工具的调试，而是依靠自己的大脑，看它能不能想出一些东西</p>
+</blockquote>
+<blockquote>
+<p>学习编程、写代码，一定是先定一个目的</p>
+<ul>
+<li>「我要学好编程」这种不是目的</li>
+<li>「今天我要写出一个时钟」这种才是目的</li>
+</ul>
+</blockquote>]]></description>
+</item></channel>
+</rss>

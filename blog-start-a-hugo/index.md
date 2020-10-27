@@ -95,7 +95,7 @@
 1.  在 xxx.github.io-creator 目录（注意确保自己不在 public 目录）里运行 `hugo new posts/第二篇博客.md`
 2.  运行 `code posts/第二篇博客.md` 对文件进行编辑，注意不要把文件原本的内容 front matter 给删了，直接在后面另起一行写新内容。
 3.  **`hugo server -D`**  建立本地访问 https://localhost:1313 预览博客 
-4.  运行 **`hugo -D`**，得到新的 public 目录
+4.  运行 **`hugo -D`**，得到新的 public 目录（-D 是显示草稿文章）
 5.  进入 public 目录 **`cd public`**，执行一下操作
     1.  **`git add .`** 注意有一个点
     2.  **`git commit -m update`**
@@ -138,7 +138,7 @@
 
 可以自定义 `browserconfig.xml ` 和 `site.webmanifest` 文件来设置 theme-color 和 background-color 。
 
-![image-20200910172943321](https://i.loli.net/2020/09/10/Lha8KMu56kXtYCZ.png)
+![image-20200910172943321](https://i.loli.net/2020/10/25/rcYPMHQy1ZwgaGp.png)
 
 
 

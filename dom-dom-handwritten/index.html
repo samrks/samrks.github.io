@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>手写 DOM 库 - Sam&#39;s Garage</title><meta name="Description" content="什么叫封装、库的初始化、封装增删改查"><meta property="og:title" content="手写 DOM 库" />
+<meta property="og:description" content="什么叫封装、库的初始化、封装增删改查" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://samrks.github.io/dom-dom-handwritten/" />
+<meta property="og:image" content="http://samrks.github.io/dom-dom-handwritten/featured-image-preview.jpg"/>
+<meta property="article:published_time" content="2020-10-22T15:49:13+08:00" />
+<meta property="article:modified_time" content="2020-10-25T12:49:10+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://samrks.github.io/dom-dom-handwritten/featured-image-preview.jpg"/>
+<meta name="twitter:title" content="手写 DOM 库"/>
+<meta name="twitter:description" content="什么叫封装、库的初始化、封装增删改查"/>
+<meta name="application-name" content="Sam&#39;s Garage">
+<meta name="apple-mobile-web-app-title" content="Sam&#39;s Garage"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://samrks.github.io/dom-dom-handwritten/" /><link rel="prev" href="http://samrks.github.io/dom-dom-manipulate/" /><link rel="next" href="http://samrks.github.io/dom-jquery-handwritten/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "手写 DOM 库",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/samrks.github.io\/dom-dom-handwritten\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "http:\/\/samrks.github.io\/dom-dom-handwritten\/featured-image-preview.jpg",
+                            "width":  1280 ,
+                            "height":  384 
+                        }],"genre": "posts","keywords": "DOM, 增删改查","wordcount":  2781 ,
+        "url": "http:\/\/samrks.github.io\/dom-dom-handwritten\/","datePublished": "2020-10-22T15:49:13+08:00","dateModified": "2020-10-25T12:49:10+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Sam"
+            },"description": "什么叫封装、库的初始化、封装增删改查"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa fa-home fa-fw'></i> 主页 </a><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sam&#39;s Garage"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>Sam&#39;s Garage</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title=""><i class='fa fa-home fa-fw'></i>主页</a><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">手写 DOM 库</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://liubingxuan.xyz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Sam</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/js%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3/"><i class="far fa-folder fa-fw"></i>JS编程接口</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-22">2020-10-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2781 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;<span id="/dom-dom-handwritten/" class="leancloud_visitors" data-flag-title="手写 DOM 库">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/dom-dom-handwritten/featured-image-preview.jpg"
+        data-srcset="/dom-dom-handwritten/featured-image-preview.jpg, /dom-dom-handwritten/featured-image-preview.jpg 1.5x, /dom-dom-handwritten/featured-image-preview.jpg 2x"
+        data-sizes="auto"
+        alt="/dom-dom-handwritten/featured-image-preview.jpg"
+        title="什么叫封装、库的初始化、封装增删改查" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#前言">前言</a></li>
+        <li><a href="#什么叫封装">什么叫封装</a>
+          <ul>
+            <li><a href="#举例">举例</a></li>
+            <li><a href="#接口">接口</a></li>
+          </ul>
+        </li>
+        <li><a href="#术语">术语</a>
+          <ul>
+            <li><a href="#库">库</a></li>
+            <li><a href="#api">API</a></li>
+            <li><a href="#框架">框架</a></li>
+            <li><a href="#注意">注意</a></li>
+          </ul>
+        </li>
+        <li><a href="#封装技术">封装技术</a></li>
+        <li><a href="#dom-库的初始化-">DOM 库的初始化 ⭕️</a>
+          <ul>
+            <li><a href="#indexhtml">index.html</a></li>
+            <li><a href="#domjs">dom.js</a></li>
+            <li><a href="#举例封装-create-代码">举例：封装 create 代码</a>
+              <ul>
+                <li><a href="#写法-1">写法 1</a></li>
+                <li><a href="#写法-2">写法 2</a>
+                  <ul>
+                    <li><a href="#初版有-bug">初版有 bug</a></li>
+                    <li><a href="#正确代码">正确代码</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#mainjs">main.js</a>
+              <ul>
+                <li><a href="#写法-1-的调用">写法 1 的调用</a></li>
+                <li><a href="#写法-2-的调用">写法 2 的调用</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#对象风格">对象风格</a>
+          <ul>
+            <li><a href="#也叫-命名空间风格">也叫 命名空间风格</a></li>
+            <li><a href="#增">增</a></li>
+            <li><a href="#删">删</a></li>
+            <li><a href="#改">改</a></li>
+            <li><a href="#查">查</a></li>
+          </ul>
+        </li>
+        <li><a href="#总结1">总结1</a></li>
+        <li><a href="#总结2">总结2</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>​</p>
+<h2 id="前言">前言</h2>
+<p><a href="https://github.com/samrks/dom-1" target="_blank" rel="noopener noreffer">本节代码地址</a></p>
+<p>​</p>
+<p>​</p>
+<h2 id="什么叫封装">什么叫封装</h2>
+<blockquote>
+<p>可以理解成「把一些复杂的东西，打包成盒」，通过简单的命令就可使用</p>
+</blockquote>
+<h3 id="举例">举例</h3>
+<ul>
+<li>电脑笔记本就是 CPU、内存、硬盘、主板、显卡 的封装</li>
+<li>用户只需要接触显示器、键盘、鼠标、触控板等设备</li>
+<li>即可操作复杂的计算机</li>
+</ul>
+<h3 id="接口">接口</h3>
+<ul>
+<li>
+<p>被封装的东西需要暴露一些功能给外部</p>
+</li>
+<li>
+<p>这些功能就是<strong>接口</strong>，如 USB 接口、HDMI 接口</p>
+<ul>
+<li>接口都是需要有规范的文档来说明的</li>
+<li>全世界厂商都可以根据 USB 接口文档，来生产具有 USB 接口的硬件</li>
+<li>深圳华强北就是根据各种文档，很快的复制生产出苹果数据线 … （功能差不多、价格更便宜）</li>
+<li>这就是接口的好处，只要知道它的功能和实现细节，所有厂商都能做</li>
+</ul>
+</li>
+<li>
+<p>设备只要支持这些接口，即可与被封装的东西通讯</p>
+<ul>
+<li>比如在键盘上打字，计算机就能接收到我们敲了哪个键</li>
+</ul>
+</li>
+<li>
+<p>比如键盘、鼠标支持 USB 接口</p>
+</li>
+<li>
+<p>显示器支持 HDMI 接口</p>
+<ul>
+<li>全世界所有显示器厂商的产品，都可以连接到任何一台电脑，就是因为有<strong>接口的统一标准</strong>存在</li>
+<li>旧的有：VGA 接口（体积大、传输慢）</li>
+<li>最新的有：雷电接口、HDMI 接口 （都有新的标准）</li>
+</ul>
+</li>
+</ul>
+<p>（示意图）</p>
+<p><img src="https://i.loli.net/2020/10/22/7AkXGVYdCRwqB53.png" alt="image-20201022031151166" style="zoom: 50%;" /></p>
+<p><img src="https://i.loli.net/2020/10/22/xD6BaYXcRmWoe1z.png" alt="image-20201022031203955" style="zoom: 50%;" /></p>
+<p>本节的实现的《我的库》里面就封装了 DOM 的各种奇葩操作</p>
+<ul>
+<li>document.getElementById   单词太长，封装后就叫 get 或者 find</li>
+<li>封装成一个 create 就可以实现创建元素，不需要写 document.createElement … 这么复杂的单词</li>
+<li>封装出来的  get、find、create  这些函数，就是接口</li>
+<li>所有的页面中，都可以调用这些接口</li>
+</ul>
+<h2 id="术语">术语</h2>
+<h3 id="库">库</h3>
+<ul>
+<li>我们把提供给其他人用的工具代码，叫做「库」
+<ul>
+<li>就是把一些好用的函数统一放到一个地方，这个地方就是「库」</li>
+</ul>
+</li>
+<li>比如 jQuery、Underscore 它们就是库（提供了很多函数，供用户调用）</li>
+</ul>
+<h3 id="api">API</h3>
+<ul>
+<li>「库」暴露出来的函数或属性（功能）叫做 API（应用编程接口）</li>
+<li>API： Application Programming Interface</li>
+</ul>
+<h3 id="框架">框架</h3>
+<ul>
+<li>当你的库变得很大，并且<strong>需要学习才能看懂</strong></li>
+<li>那么这个库就叫「框架」，比如 Vue / React</li>
+</ul>
+<h3 id="注意">注意</h3>
+<ul>
+<li>
+<p>编程界的术语大部分都很随便，没有固定的解释</p>
+<ul>
+<li>可能程序员写了套东西，涵盖很多内容，作者本人也搞不清楚应该怎么定性，就随意的称为「库」</li>
+<li>如果遇到有人反驳，那就慢慢讨论、定性</li>
+</ul>
+</li>
+<li>
+<p>所以意会即可</p>
+<ul>
+<li>我们就把「小的功能」叫库，「大的功能」叫框架</li>
+</ul>
+<p>​</p>
+</li>
+</ul>
+<h2 id="封装技术">封装技术</h2>
+<blockquote>
+<p>下面我们开始学习封装技术</p>
+</blockquote>
+<blockquote>
+<p>会用两种不同的风格，封装 DOM 操作</p>
+<ol>
+<li>对象风格（命名空间风格）</li>
+<li>链式风格（ jQuery 风格）</li>
+</ol>
+</blockquote>
+<p>​</p>
+<p>​</p>
+<h2 id="dom-库的初始化-">DOM 库的初始化 ⭕️</h2>
+<blockquote>
+<p>创建 dom-1 项目目录  &gt;  src 目录  &gt;   index.html、main.js、dom.js</p>
+</blockquote>
+<h3 id="indexhtml">index.html</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  示例
+  <span class="c">&lt;!-- 注意：要先引入 dom.js；
+</span><span class="c">       否则 main 中先引用了dom.js的 API 就会报错：dom is not defined --&gt;</span>
+  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;dom.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;main.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="domjs">dom.js</h3>
+<blockquote>
+<p>dom 库（对象） 和 封装的函数（create），有两种呈现关系的形式</p>
+</blockquote>
+<p>1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">dom</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="nx">dom</span><span class="p">.</span><span class="nx">create</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{}</span>   <span class="c1">// window.dom.create 省略前缀 window
+</span></code></pre></td></tr></table>
+</div>
+</div><p>2</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">dom</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{}</span>
+<span class="p">}</span>
+<span class="c1">//  👆可进一步简化：省略 function   // ES6
+</span><span class="c1"></span><span class="nb">window</span><span class="p">.</span><span class="nx">dom</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">create</span><span class="p">()</span> <span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="举例封装-create-代码">举例：封装 create 代码</h3>
+<blockquote>
+<p>更多代码，请直接查看<a href="https://github.com/samrks/dom-1" target="_blank" rel="noopener noreffer">地址</a></p>
+</blockquote>
+<blockquote>
+<p>create  创建节点</p>
+</blockquote>
+<h4 id="写法-1">写法 1</h4>
+<ul>
+<li>调用时填入要创建的标签名</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">dom</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="nx">dom</span><span class="p">.</span><span class="nx">create</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">tagName</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">tagName</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="写法-2">写法 2</h4>
+<h5 id="初版有-bug">初版有 bug</h5>
+<ul>
+<li>调用时直接填入标签结构</li>
+<li>但填入 td / tr / tbody … 这种表格内的标签，就会返回 undefined。</li>
+<li>这些标签不能直接放入 div 中，通常需要外层有 table 标签包裹才行</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">dom</span><span class="p">.</span><span class="nx">create</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">html</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// const container = document.createElement(&#39;div&#39;)  
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">container</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;template&#39;</span><span class="p">)</span>
+  <span class="c1">// 如果容器是 div ，不能容纳 td ... 等
+</span><span class="c1"></span>  <span class="c1">// 使用 &lt;template&gt;&lt;/template&gt; 作为容器，可以容纳任意元素。
+</span><span class="c1"></span>  <span class="nx">container</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">html</span>
+  <span class="k">return</span> <span class="nx">container</span><span class="p">.</span><span class="nx">children</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h5 id="正确代码">正确代码</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">dom</span><span class="p">.</span><span class="nx">create</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">html</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">container</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&#34;template&#34;</span><span class="p">)</span>
+  <span class="nx">container</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">html</span><span class="p">.</span><span class="nx">trim</span><span class="p">()</span>
+  <span class="c1">// trim 去掉字符串的两端空格
+</span><span class="c1"></span>  <span class="c1">// 因为使用firstChild获取元素，如果传入的html前面有空格，就会只获取到空格(文本元素)，而不是标签元素。
+</span><span class="c1"></span>  <span class="c1">// 所以必须提前trim()一下
+</span><span class="c1"></span>  <span class="k">return</span> <span class="nx">container</span><span class="p">.</span><span class="nx">content</span><span class="p">.</span><span class="nx">firstChild</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="mainjs">main.js</h3>
+<h4 id="写法-1-的调用">写法 1 的调用</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">div</span> <span class="o">=</span> <span class="nx">dom</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s2">&#34;div&#34;</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">div</span><span class="p">)</span>   <span class="c1">// (标签) &lt;div&gt;&lt;/div&gt;
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="写法-2-的调用">写法 2 的调用</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">div</span> <span class="o">=</span> <span class="nx">dom</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s2">&#34;&lt;div&gt;&lt;span&gt;123&lt;/span&gt;&lt;/div&gt;&#34;</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">div</span><span class="p">)</span>   <span class="c1">// (标签) &lt;div&gt;&lt;span&gt;123&lt;/span&gt;&lt;/div&gt;
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="对象风格">对象风格</h2>
+<h3 id="也叫-命名空间风格">也叫 命名空间风格</h3>
+<ul>
+<li>window.dom 是我们提供的全局对象</li>
+</ul>
+<blockquote>
+<p>下面从增删改查 4 个方面，来说明 window.dom 是干什么的（代码量很大哦）、</p>
+</blockquote>
+<blockquote>
+<p><a href="https://github.com/samrks/dom-1" target="_blank" rel="noopener noreffer">本节代码地址</a></p>
+</blockquote>
+<h3 id="增">增</h3>
+<blockquote>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/after" target="_blank" rel="noopener noreffer">after()</a>：2020刚出的</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Node/insertBefore" target="_blank" rel="noopener noreffer">insertBefore</a> 语法：<code>父节点.insertBefore(要插入的子节点，插入到哪个子节点的前面)</code></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">dom</span><span class="p">.</span><span class="nx">create</span><span class="err">（</span><span class="s1">&#39;&lt;div&gt;hi&lt;/div&gt;&#39;</span><span class="p">)</span>   <span class="c1">// 用于创建节点
+</span><span class="c1"></span><span class="nx">dom</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span><span class="nx">node2</span><span class="p">)</span>          <span class="c1">// 用于新增弟弟
+</span><span class="c1"></span><span class="nx">dom</span><span class="p">.</span><span class="nx">before</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span><span class="nx">node2</span><span class="p">)</span>         <span class="c1">// 用于新增哥哥
+</span><span class="c1"></span><span class="nx">dom</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span><span class="nx">child</span><span class="p">)</span>       <span class="c1">// 用于新增儿子
+</span><span class="c1"></span><span class="nx">dom</span><span class="p">.</span><span class="nx">wrap</span><span class="p">(</span><span class="sb">`&lt;div&gt;&lt;/div&gt;`</span><span class="p">)</span>        <span class="c1">// 用于新增爸爸
+</span></code></pre></td></tr></table>
+</div>
+</div><p>代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">dom</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="nx">create</span><span class="p">(</span><span class="nx">string</span><span class="p">){</span> <span class="c1">// 创建节点
+</span><span class="c1"></span>    <span class="kr">const</span> <span class="nx">container</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&#34;template&#34;</span><span class="p">)</span>
+    <span class="nx">container</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">string</span><span class="p">.</span><span class="nx">trim</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nx">container</span><span class="p">.</span><span class="nx">content</span><span class="p">.</span><span class="nx">firstChild</span>
+  <span class="p">},</span>
+  <span class="nx">after</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">node2</span><span class="p">){</span> <span class="c1">// 新增兄弟节点
+</span><span class="c1"></span>    <span class="nx">node</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">node2</span><span class="p">,</span> <span class="nx">node</span><span class="p">.</span><span class="nx">nextSibling</span><span class="p">)</span>
+  <span class="p">},</span> 
+  <span class="nx">before</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">node2</span><span class="p">){</span> <span class="c1">// 新增兄弟节点
+</span><span class="c1"></span>    <span class="nx">node</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">node2</span><span class="p">,</span> <span class="nx">node</span><span class="p">)</span>
+  <span class="p">},</span>
+  <span class="nx">append</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">node</span><span class="p">){</span> <span class="c1">// 新增子节点
+</span><span class="c1"></span>    <span class="nx">parent</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
+  <span class="p">},</span> 
+  <span class="nx">wrap</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">parent</span><span class="p">){</span> <span class="c1">// 新增父节点
+</span><span class="c1"></span>    <span class="nx">dom</span><span class="p">.</span><span class="nx">before</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">parent</span><span class="p">)</span> 
+    <span class="nx">dom</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">node</span><span class="p">)</span> 
+  <span class="p">}</span> 
+<span class="p">}</span><span class="err">；</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h3 id="删">删</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">dom</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span><span class="nx">用于删除节点</span> 
+<span class="nx">dom</span><span class="p">.</span><span class="nx">empty</span><span class="p">(</span><span class="nx">parent</span><span class="p">)</span><span class="nx">用于删除后代</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">dom</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">remove</span><span class="p">(</span><span class="nx">node</span><span class="p">){</span>
+    <span class="nx">node</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nx">node</span>
+  <span class="p">},</span>
+  <span class="nx">empty</span><span class="p">(</span><span class="nx">node</span><span class="p">){</span>
+    <span class="kd">let</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">firstChild</span>   
+    <span class="c1">// 这块是讲数据结构时最常用的思路，类似用循环实现的递归（不停找下一个，直到全删完了）
+</span><span class="c1"></span>    <span class="k">while</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">array</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">dom</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">x</span><span class="p">))</span>
+      <span class="nx">x</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">firstChild</span> 
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">array</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h3 id="改">改</h3>
+<blockquote>
+<p>用到了【重载】和【适配】</p>
+<ul>
+<li>重载：传不同个数的参数，执行不同的代码</li>
+<li>适配：做很多判断（js 数据类型），什么情况下执行这句、什么情况下执行那句</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">dom</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="o">?</span><span class="p">)</span>        <span class="c1">// 用于读写属性 
+</span><span class="c1"></span><span class="nx">dom</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="o">?</span><span class="p">)</span>                 <span class="c1">// 用于读写文本内容 
+</span><span class="c1"></span><span class="nx">dom</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="o">?</span><span class="p">)</span>                 <span class="c1">// 用于读写HTML内容 
+</span><span class="c1"></span><span class="nx">dom</span><span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="p">{</span><span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span><span class="p">})</span>   <span class="c1">// 用于修改 
+</span><span class="c1"></span><span class="nx">dom</span><span class="p">.</span><span class="kr">class</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">)</span>       <span class="c1">// 用于添加 
+</span><span class="c1"></span><span class="nx">dom</span><span class="p">.</span><span class="kr">class</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">)</span>    <span class="c1">// 用于删除
+</span><span class="c1"></span><span class="nx">dom</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span>         <span class="c1">// 用于添加事件监听 
+</span><span class="c1"></span><span class="nx">dom</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span>        <span class="c1">// 用于删除事件监听
+</span></code></pre></td></tr></table>
+</div>
+</div><p>代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">dom</span><span class="p">.</span><span class="nx">attr</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">node</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">node</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">dom</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">string</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="k">if</span> <span class="p">(</span><span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="k">if</span> <span class="p">(</span><span class="s2">&#34;innerText&#34;</span> <span class="k">in</span> <span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">node</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="nx">string</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">node</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">string</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="s2">&#34;innerText&#34;</span> <span class="k">in</span> <span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">node</span><span class="p">.</span><span class="nx">innerText</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">node</span><span class="p">.</span><span class="nx">textContent</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">dom</span><span class="p">.</span><span class="nx">html</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">node</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">string</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="k">return</span> <span class="nx">node</span><span class="p">.</span><span class="nx">innerHTML</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">dom</span><span class="p">.</span><span class="nx">style</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 3种调用形式
+</span><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">node</span><span class="p">.</span><span class="nx">style</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">name</span> <span class="o">===</span> <span class="s2">&#34;string&#34;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">node</span><span class="p">.</span><span class="nx">style</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">name</span> <span class="k">instanceof</span> <span class="nb">Object</span><span class="p">)</span> <span class="p">{</span> 
+      <span class="kr">const</span> <span class="nx">object</span> <span class="o">=</span> <span class="nx">name</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">object</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">node</span><span class="p">.</span><span class="nx">style</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">object</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">dom</span><span class="p">.</span><span class="kr">class</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">add</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">className</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">node</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">className</span><span class="p">)</span>
+  <span class="p">},</span>
+  <span class="nx">remove</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">className</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">node</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">className</span><span class="p">)</span>
+  <span class="p">},</span>
+  <span class="nx">has</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">className</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">node</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">className</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">dom</span><span class="p">.</span><span class="nx">on</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">eventName</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">node</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nx">dom</span><span class="p">.</span><span class="nx">off</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">eventName</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">node</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h3 id="查">查</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">dom</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;选择器&#39;</span><span class="p">)</span>    <span class="c1">// 用于获取标签或标签们
+</span><span class="c1"></span><span class="nx">dom</span><span class="p">.</span><span class="nx">parent</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>     <span class="c1">// 用于获取父元素
+</span><span class="c1"></span><span class="nx">dom</span><span class="p">.</span><span class="nx">children</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>   <span class="c1">// 用于获取子元素
+</span><span class="c1"></span><span class="nx">dom</span><span class="p">.</span><span class="nx">siblings</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>   <span class="c1">// 用于获取兄弟姐妹元素
+</span><span class="c1"></span><span class="nx">dom</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>       <span class="c1">// 用于获取弟弟
+</span><span class="c1"></span><span class="nx">dom</span><span class="p">.</span><span class="nx">previous</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>   <span class="c1">// 用于获取哥哥
+</span><span class="c1"></span><span class="nx">dom</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">nodes</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span>  <span class="c1">// 用于遍历所有节点
+</span><span class="c1"></span><span class="nx">dom</span><span class="p">.</span><span class="nx">index</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>      <span class="c1">// 用于获取排行老几
+</span></code></pre></td></tr></table>
+</div>
+</div><p>代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">dom</span><span class="p">.</span><span class="nx">find</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">selector</span><span class="p">,</span> <span class="nx">scope</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span><span class="nx">scope</span> <span class="o">||</span> <span class="nb">document</span><span class="p">).</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="nx">selector</span><span class="p">)</span> 
+<span class="p">}</span>
+
+<span class="nx">dom</span><span class="p">.</span><span class="nx">parent</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">node</span><span class="p">.</span><span class="nx">parentNode</span>
+<span class="p">}</span>
+
+<span class="nx">dom</span><span class="p">.</span><span class="nx">children</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">node</span><span class="p">.</span><span class="nx">children</span>
+<span class="p">}</span>
+
+<span class="nx">dom</span><span class="p">.</span><span class="nx">siblings</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">children</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="nx">n</span> <span class="p">=&gt;</span> <span class="nx">n</span> <span class="o">!==</span> <span class="nx">node</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nx">dom</span><span class="p">.</span><span class="nx">next</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">nextSibling</span>
+  <span class="k">while</span> <span class="p">(</span><span class="nx">x</span> <span class="o">&amp;&amp;</span> <span class="nx">x</span><span class="p">.</span><span class="nx">nodeType</span> <span class="o">===</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">.</span><span class="nx">nextSibling</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">x</span>
+<span class="p">}</span>
+
+<span class="nx">dom</span><span class="p">.</span><span class="nx">previous</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">previousSibling</span>
+  <span class="k">while</span> <span class="p">(</span><span class="nx">x</span> <span class="o">&amp;&amp;</span> <span class="nx">x</span><span class="p">.</span><span class="nx">nodeType</span> <span class="o">===</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">.</span><span class="nx">previousSibling</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">x</span>
+<span class="p">}</span>
+
+<span class="nx">dom</span><span class="p">.</span><span class="nx">each</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">nodeList</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">nodeList</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">nodeList</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">dom</span><span class="p">.</span><span class="nx">index</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">list</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">children</span>
+  <span class="kd">let</span> <span class="nx">i</span>
+  <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">list</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">list</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">break</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">i</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​</p>
+<h2 id="总结1">总结1</h2>
+<ul>
+<li>上面代码，除了「创建节点，用了 template」，其他方法基本都是使用 DOM 的原生 API 来实现</li>
+<li>不管是多么高深的库，最后都是用 if-else、for循环、while循环 就搞定了
+<ul>
+<li>不论什么语言，实现逻辑只需要三种表达形式：顺序执行、if/else、循环</li>
+</ul>
+</li>
+</ul>
+<p>​</p>
+<h2 id="总结2">总结2</h2>
+<ul>
+<li>最好的学习方法，就是去看作者的思路，照着他的思路实现一下。比如，vue的作者，就把所有思路写在 vue 文档里，就去看文档就好了。</li>
+</ul>
+<p>​</p>
+<blockquote>
+<p>这是许多程序员多年摸索出来的经典代码。
+你只需要站在巨人的肩膀上，继续向上探索</p>
+</blockquote>
+<p>​</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-10-25</span>
+            </div>
+            <div class="post-info-license"><span>转载请注明出处</span></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/dom-dom-handwritten/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://samrks.github.io/dom-dom-handwritten/" data-title="手写 DOM 库" data-via="ryuukousen2" data-hashtags="DOM,增删改查"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://samrks.github.io/dom-dom-handwritten/" data-hashtag="DOM"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://samrks.github.io/dom-dom-handwritten/" data-title="手写 DOM 库"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://samrks.github.io/dom-dom-handwritten/" data-title="手写 DOM 库"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://samrks.github.io/dom-dom-handwritten/" data-title="手写 DOM 库"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/dom/">DOM</a>,&nbsp;<a href="/tags/%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/">增删改查</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/dom-dom-manipulate/" class="prev" rel="prev" title="DOM 编程 "><i class="fas fa-angle-left fa-fw"></i>DOM 编程 </a>
+            <a href="/dom-jquery-handwritten/" class="next" rel="next" title="jQuery 的设计思想（上）">jQuery 的设计思想（上）<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+    Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+  </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Thanks For Your Watching! ❤️</div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2017 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Sam</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":15},"comment":{"valine":{"appId":"M2gdPMfXs30Gw5NNnr2wSxv6-MdYXbMMI","appKey":"9V2iCzlcQbheaaWDXRLTNgec","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-twitter@5.0.1/img/twitter/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"📢 来都来了，说点什么 ~（填写邮箱可以收到回复提醒哦 ~ 😉）","recordIP":true,"visitor":true}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"KAKKI975YQ","algoliaIndex":"blog","algoliaSearchKey":"529eb6b7fa6e4f89bfe1d0043e53bda5","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
