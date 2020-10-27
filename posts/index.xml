@@ -10,22 +10,33 @@
     <pubDate>Sun, 25 Oct 2020 14:20:02 &#43;0800</pubDate>
     <author>作者</author>
     <guid>http://samrks.github.io/dom-jquery-api/</guid>
-    <description><![CDATA[<p>​</p>
+    <description><![CDATA[<h2 id="参考">参考</h2>
+<ul>
+<li>
+<p>《<a href="http://www.ruanyifeng.com/blog/2011/07/jquery_fundamentals.html" target="_blank" rel="noopener noreffer">阮一峰：jQuery设计思想</a>》</p>
+</li>
+<li>
+<p>《 <a href="https://www.jquery123.com/" target="_blank" rel="noopener noreffer">jQuery 中文文档</a>》</p>
+</li>
+</ul>
+<p>​</p>
 <h2 id="如何获取和使用--jquery">如何获取和使用  jQuery</h2>
 <ul>
 <li>jQuery 的官方网址是：http://jQuery.com/，从这里可以获取  jQuery  的最新版本。</li>
 <li>使用的话，就是导入这份 js 文件。</li>
-<li>导入方式是在页面，通过<code>&lt;script&gt;</code>标签导入</li>
+<li>导入方式是在页面，通过<code>&lt;script&gt;</code>标签导入（路径：本地地址 or 网络地址）</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;jQuery.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;路径&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>导入之后，就可以使用  jQuery  的语法了。</p>
+</div><ul>
+<li>导入之后，就可以使用  jQuery  的语法了。</li>
+</ul>
 <p>​</p>
 <h2 id="jquery--版本">jQuery  版本</h2>
 <p>1.x：兼容IE678,使用最为广泛的，官方只做BUG维护，功能不再新增。因此一般项目来说，使用1.x版本就可以了，最终版本：1.12.4 (2016年5月20日)</p>
@@ -34,6 +45,7 @@
 <blockquote>
 <p>维护IE678是一件让人头疼的事情，一般我们都会额外加载一个CSS和JS单独处理。值得庆幸的是使用这些浏览器的人也逐步减少，PC端用户已经逐步被移动端用户所取代，如果没有特殊要求的话，一般都会选择放弃对678的支持。</p>
 </blockquote>
+<p>​</p>
 <h2 id="jquery-对象">jQuery 对象</h2>
 <ul>
 <li>jQuery 对象就是通过 jQuery 包装DOM对象后产生的对象。</li>
@@ -461,7 +473,8 @@
 <pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;prev ~ siblings&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="3过滤选择器">3、过滤选择器</h3>
+</div><p>​</p>
+<h3 id="3过滤选择器">3、过滤选择器</h3>
 <blockquote>
 <p>过滤选择器根据某类过滤规则进行元素的匹配，以:开头。过滤选择器又分为：简单过滤选择器、内容过滤选择器、可见性过滤选择器、属性过滤选择器、子元素过滤选择器和表单对象属性过滤选择器。</p>
 </blockquote>
@@ -681,7 +694,8 @@
 <pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;element:selected&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="4表单选择器">4、表单选择器</h3>
+</div><p>​</p>
+<h3 id="4表单选择器">4、表单选择器</h3>
 <blockquote>
 <p>通过它可以在页面中快速定位某表单对象。</p>
 </blockquote>
@@ -929,7 +943,8 @@
 <pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="nx">html</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="6插入节点元素">6、插入节点元素</h3>
+</div><p>​</p>
+<h3 id="6插入节点元素">6、插入节点元素</h3>
 <blockquote>
 <p>按照插入元素的位置区分，可以分为内部和外部两种插入方法。</p>
 </blockquote>
@@ -1001,7 +1016,8 @@
 <span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="7复制节点元素">7、复制节点元素</h3>
+</div><p>​</p>
+<h3 id="7复制节点元素">7、复制节点元素</h3>
 <blockquote>
 <p>将某个元素节点复制到另一个节点之后。</p>
 </blockquote>
@@ -1023,7 +1039,8 @@
 <pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">clone</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="8替换节点元素">8、替换节点元素</h3>
+</div><p>​</p>
+<h3 id="8替换节点元素">8、替换节点元素</h3>
 <p>将所有选择的元素替换成指定的HTML或DOM元素：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1043,6 +1060,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>一旦完成替换，被替换元素中的全部事件将会消失。</p>
+<p>​</p>
 <h3 id="9删除节点元素">9、删除节点元素</h3>
 <p>删除指定的元素：</p>
 <div class="highlight"><div class="chroma">
@@ -1071,7 +1089,8 @@
 <pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">empty</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="10通用操作">10、通用操作</h3>
+</div><p>​</p>
+<h3 id="10通用操作">10、通用操作</h3>
 <blockquote>
 <p>这类操作不需要选择元素就可以直接使用。</p>
 </blockquote>

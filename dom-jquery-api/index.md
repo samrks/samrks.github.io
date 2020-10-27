@@ -3,19 +3,25 @@
 
 <!--more-->
 
+## 参考
+
+-   《[阮一峰：jQuery设计思想](http://www.ruanyifeng.com/blog/2011/07/jquery_fundamentals.html)》
+
+-   《 [jQuery 中文文档](https://www.jquery123.com/)》
+
 ​	
 
 ## 如何获取和使用  jQuery
 
 -    jQuery 的官方网址是：http://jQuery.com/，从这里可以获取  jQuery  的最新版本。
 -   使用的话，就是导入这份 js 文件。
--   导入方式是在页面，通过`<script>`标签导入
+-   导入方式是在页面，通过`<script>`标签导入（路径：本地地址 or 网络地址）
 
 ```html
-<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript" src="路径"></script>
 ```
 
-导入之后，就可以使用  jQuery  的语法了。
++   导入之后，就可以使用  jQuery  的语法了。
 
 ​	
 
@@ -29,7 +35,7 @@
 
 >   维护IE678是一件让人头疼的事情，一般我们都会额外加载一个CSS和JS单独处理。值得庆幸的是使用这些浏览器的人也逐步减少，PC端用户已经逐步被移动端用户所取代，如果没有特殊要求的话，一般都会选择放弃对678的支持。
 
-
+​	
 
 ##  jQuery 对象
 
@@ -332,6 +338,8 @@ $('prev + next')
 $('prev ~ siblings')
 ```
 
+​	
+
 ### 3、过滤选择器
 
 >   过滤选择器根据某类过滤规则进行元素的匹配，以:开头。过滤选择器又分为：简单过滤选择器、内容过滤选择器、可见性过滤选择器、属性过滤选择器、子元素过滤选择器和表单对象属性过滤选择器。
@@ -486,6 +494,8 @@ $('element:checked')
 $('element:selected')
 ```
 
+​	
+
 ### 4、表单选择器
 
 >   通过它可以在页面中快速定位某表单对象。
@@ -586,7 +596,7 @@ $(selector).attr({keyN:valueN})
 $(selector).removeAttr(name)
 ```
 
-​	
+​		
 
 ### 2、元素内容操作
 
@@ -668,7 +678,7 @@ $(selector).removeClass(class)
 $(html)
 ```
 
-
+​	
 
 ### 6、插入节点元素
 
@@ -720,7 +730,7 @@ $(selector).insertAfter(content)
 $(selector).insertBefore(content)
 ```
 
-
+​	
 
 ### 7、复制节点元素
 
@@ -738,7 +748,7 @@ $(selector).clone()
 $(selector).clone(true)
 ```
 
-
+​	
 
 ### 8、替换节点元素
 
@@ -756,7 +766,7 @@ $(selector).replaceAll(selector)
 
 一旦完成替换，被替换元素中的全部事件将会消失。
 
-
+​	
 
 ### 9、删除节点元素
 
@@ -778,7 +788,7 @@ $(selector).detach()
 $(selector).empty()
 ```
 
-
+​	
 
 ### 10、通用操作
 
