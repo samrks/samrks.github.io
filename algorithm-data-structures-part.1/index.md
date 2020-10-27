@@ -1,4 +1,4 @@
-# 数据结构（上）
+# 前端也得懂点算法——数据结构（上）
 
 
 <!--more-->
@@ -41,11 +41,9 @@
 
 -   记得练习一下 call 的用法
 
--   其他的事情就顺其自然了，见[完整代码](https://codesandbox.io/s/naughty-frost-qkmhd) （[codesandbox](https://codesandbox.io/)在线编译器）
+-   其他的事情就顺其自然了，见[完整代码](https://codesandbox.io/s/naughty-frost-qkmhd) 
 
--   本地编译器中，开启项目，运行 `parcel  +（文件路径，如 src/index.html ）`  就可以开启本地服务，实时监听
-
-    `yarn global add parcel`
+    -   本地编译器中，可安装 parcel（`yarn global add parcel`），运行 `parcel  +（文件路径，如 src/index.html ）`  来开启本地服务，实时监听
 
 ​	
 

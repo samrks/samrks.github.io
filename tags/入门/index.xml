@@ -5,7 +5,7 @@
         <description>入门 - 标签 - Sam&#39;s Garage</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>ryuukousen@gmail.com (Sam)</managingEditor>
             <webMaster>ryuukousen@gmail.com (Sam)</webMaster><lastBuildDate>Mon, 19 Oct 2020 00:25:48 &#43;0800</lastBuildDate><atom:link href="https://liubingxuan.xyz/tags/%E5%85%A5%E9%97%A8/" rel="self" type="application/rss+xml" /><item>
-    <title>数据结构（上）</title>
+    <title>前端也得懂点算法——数据结构（上）</title>
     <link>https://liubingxuan.xyz/algorithm-data-structures-part.1/</link>
     <pubDate>Mon, 19 Oct 2020 00:25:48 &#43;0800</pubDate>
     <author>作者</author>
@@ -56,11 +56,10 @@
 <p>记得练习一下 call 的用法</p>
 </li>
 <li>
-<p>其他的事情就顺其自然了，见<a href="https://codesandbox.io/s/naughty-frost-qkmhd" target="_blank" rel="noopener noreffer">完整代码</a> （<a href="https://codesandbox.io/" target="_blank" rel="noopener noreffer">codesandbox</a>在线编译器）</p>
-</li>
-<li>
-<p>本地编译器中，开启项目，运行 <code>parcel  +（文件路径，如 src/index.html ）</code>  就可以开启本地服务，实时监听</p>
-<p><code>yarn global add parcel</code></p>
+<p>其他的事情就顺其自然了，见<a href="https://codesandbox.io/s/naughty-frost-qkmhd" target="_blank" rel="noopener noreffer">完整代码</a></p>
+<ul>
+<li>本地编译器中，可安装 parcel（<code>yarn global add parcel</code>），运行 <code>parcel  +（文件路径，如 src/index.html ）</code>  来开启本地服务，实时监听</li>
+</ul>
 </li>
 </ul>
 <p>​</p>
@@ -1282,7 +1281,7 @@ html &gt; head、body，body &gt; div、span、a、p …，head &gt; link、titl
 </ul>
 </blockquote>]]></description>
 </item><item>
-    <title>算法入门</title>
+    <title>前端也得懂点算法——算法入门</title>
     <link>https://liubingxuan.xyz/algorithm-introduction/</link>
     <pubDate>Sun, 11 Oct 2020 00:36:27 &#43;0800</pubDate>
     <author>作者</author>
@@ -2354,7 +2353,7 @@ html &gt; head、body，body &gt; div、span、a、p …，head &gt; link、titl
 <li>递归</li>
 </ul>]]></description>
 </item><item>
-    <title>伪代码与流程图</title>
+    <title>前端也得懂点算法——铺垫：伪代码与流程图</title>
     <link>https://liubingxuan.xyz/algorithm-pseudocode-flowchart/</link>
     <pubDate>Fri, 25 Sep 2020 15:31:35 &#43;0800</pubDate>
     <author>作者</author>
